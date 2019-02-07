@@ -1,0 +1,37 @@
+$xs: 400px !default;
+$sm: 575px !default;
+$md: 767px !default;
+$lg: 991px !default;
+$xl: 1199px !default;
+
+@mixin respond-to($media) {
+  @if $media==xs {
+    @media (max-width: $xs) {
+      @content;
+    }
+  }
+
+  @else if $media==sm {
+    @media (max-width: $sm) {
+      @content;
+    }
+  }
+
+  @else if $media==md {
+    @media (max-width: $md) {
+      @content;
+    }
+  }
+
+  @else if $media==lg {
+    @media (max-width: $lg) {
+      @content;
+    }
+  }
+
+  @else if $media==xl {
+    @media (max-width: $xl) {
+      @content;
+    }
+  }
+}

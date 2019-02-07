@@ -1,0 +1,31 @@
+.custom-select {
+  position: relative;
+
+  select.form-control {
+    border-radius: 45px;
+    height: 38px;
+    padding-left: 8px;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+
+    &:invalid {
+      color: #aaa;
+    }
+
+    option {
+      color: #333;
+    }
+  }
+
+  &:after {
+    content: '\f0d7';
+    font-family: 'FontAwesome';
+    font-weight: 900;
+    position: absolute;
+    color: #666;
+    left: 14px;
+    top: calc(50% - 8px);
+  }
+}
