@@ -210,7 +210,7 @@
 
     .side-button-sub-title {
       color: #7c79a8;
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
 
     .side-button-title {
@@ -226,21 +226,21 @@
     <div class="intro-title">معرفی خدمات به پزشکان رِسا</div>
     <div class="intro-description">پزشکان گرامی، براحتی تماس های دریافتی خود را مدیریت کنید.</div>
     <div class="intro-buttons">
-      <router-link class="button" :to="{name:'RegisterDoctor'}">ثبت نام رایگان</router-link>
+      <router-link class="button" :to="{name:'doctors-register'}">ثبت نام رایگان</router-link>
       <a @click="openVideo" class="button">نمایش ویدئو</a>
     </div>
     <div class="intro-doctor-image">
       <img src="./doc.png">
       <div class="side-button left">
         <div class="side-button-text">
-          <router-link tag="div" :to="{name:'RegisterDoctor'}">
+          <router-link tag="div" :to="{name:'doctors-register'}">
             <div class="side-button-sub-title">ثبت نام به عنوان پزشک</div>
             <div class="side-button-title">ثبت نام</div>
           </router-link>
         </div>
         <div class="side-button-icon">
           <img src="./mobile.svg">
-          <!-- <router-link tag="div" :to="{name:'RegisterDoctor'}">
+          <!-- <router-link tag="div" :to="{name:'doctors-register'}">
           </router-link>-->
         </div>
       </div>

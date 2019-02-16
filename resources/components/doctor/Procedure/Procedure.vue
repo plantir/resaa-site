@@ -192,7 +192,7 @@
           <div class="item-description-title">ثبت نام رایگان در رِسا</div>
           <div class="item-description">
             - از طریق همین
-            <router-link class="item-description-link" :to="{name:'RegisterDoctor'}">سایت</router-link>و یا
+            <router-link class="item-description-link" :to="{name:'doctors-register'}">سایت</router-link>و یا
             <a
               v-scroll-to="{ el: '#download', offset: -50 }"
               class="item-description-link"
@@ -231,7 +231,7 @@
     </div>
 
     <div class="procedure-button-container">
-      <router-link class="procedure-signup-button" :to="{name:'RegisterDoctor'}">ثبت نام رایگان</router-link>
+      <router-link class="procedure-signup-button" :to="{name:'doctors-register'}">ثبت نام رایگان</router-link>
       <a
         class="procedure-download-button"
         v-scroll-to="{ el: '#download', offset: -50 }"

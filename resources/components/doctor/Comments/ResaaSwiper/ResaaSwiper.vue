@@ -5,11 +5,11 @@
 }
 
 .swiper-container {
-  height: 400px;
+  height: 430px;
 }
 
 .doctor-comment-card {
-  height: 300px;
+  height: 290px;
   background-color: #f9f9f9;
   box-shadow: 0 12px 20px 0 rgba(0, 0, 0, 0.07);
   padding: 25px;
@@ -85,38 +85,43 @@
 }
 </style>
 <template>
-  <swiper :options="swiperOption">
-    <swiper-slide v-for="(comment, index) in comments" :key="index">
-      <div class="doctor-comment-card">
-        <div class="quote-sign">
-          <i class="fa fa-quote-right" aria-hidden="true"></i>
-        </div>
-        <div
-          class="doctor-comment-text"
-        >{{comment.quote.slice(0,220)}}{{comment.quote.length>220?'...':''}}</div>
-        <div class="doctor-comment-name">{{'دکتر ' + comment.firstName + ' '+ comment.lastName}}</div>
-        <div class="doctor-comment-special">{{comment.specialist}}</div>
-        <div class="doctor-comment-avatar">
-          <router-link :to="{name:'Doctor',params:{subscriberNumber:comment.subscriberNumber}}">
-            <img :src="comment.avatar">
-          </router-link>
+  <div v-swiper:mySwiper="swiperOption" dir="rtl">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" v-for="(comment, index) in comments" :key="index">
+        <div class="doctor-comment-card">
+          <div class="quote-sign">
+            <i class="fa fa-quote-right" aria-hidden="true"></i>
+          </div>
+          <div
+            class="doctor-comment-text"
+          >{{comment.quote.slice(0,220)}}{{comment.quote.length>220?'...':''}}</div>
+          <div class="doctor-comment-name">{{'دکتر ' + comment.firstName + ' '+ comment.lastName}}</div>
+          <div class="doctor-comment-special">{{comment.specialist}}</div>
+          <div class="doctor-comment-avatar">
+            <router-link :to="{name:'Doctor',params:{subscriberNumber:comment.subscriberNumber}}">
+              <img :src="comment.avatar">
+            </router-link>
+          </div>
         </div>
       </div>
-    </swiper-slide>
-    <div class="swiper-pagination" slot="pagination"></div>
-  </swiper>
+    </div>
+
+    <div class="swiper-pagination swiper-pagination-bullets"></div>
+  </div>
+  <!-- <div v-swiper:mySwiper="swiperOption">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" v-for="(comment, index) in comments" :key="index">
+        <img :src="comment.avatar">
+      </div>
+    </div>
+    <div class="swiper-pagination swiper-pagination-bullets"></div>
+  </div>-->
 </template>
 
 <script>
-import { swiper, swiperSlide } from "vue-awesome-swiper";
 import comments from "../comments";
-// import "swiper/dist/css/swiper.css";
 export default {
   name: "resaa-swiper",
-  components: {
-    swiper,
-    swiperSlide
-  },
   data() {
     return {
       swiperOption: {

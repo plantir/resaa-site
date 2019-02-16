@@ -1,9 +1,19 @@
 <template>
-  <nuxt/>
+  <section>
+    <app-header></app-header>
+    <nuxt dir="rtl"/>
+    <app-footer></app-footer>
+  </section>
 </template>
 
 <script>
+import appHeader from "~/components/header/header";
+import appFooter from "~/components/footer/footer";
 export default {
+  components: {
+    appHeader,
+    appFooter
+  }
   // data() {
   //   return {
   //     clipped: false,

@@ -366,11 +366,8 @@ section#home {
     <div class="content">
       <div class="phone-icon">
         <img src="~static/img/phone.svg">
-        <!-- <img src="~static/img/phone-pulse-1.svg" alt="">
-        <img src="~static/img/phone-pulse-2.svg" alt="">-->
       </div>
       <div class="line"></div>
-      <!-- <router-link class="fast-charge" :to="{name:'Charge'}">شارژ حساب</router-link> -->
       <section class="patient">
         <div class="image">
           <router-link :to="{name:'LandingPatient'}">
@@ -392,12 +389,12 @@ section#home {
       </section>
       <section class="doctor">
         <div class="image">
-          <router-link :to="{name:'LandingDoctor'}">
+          <router-link to="doctors/landing">
             <img src="~static/img/doctor-edited.png">
           </router-link>
         </div>
         <div class="title">
-          <router-link :to="{name:'LandingDoctor'}">
+          <router-link to="doctors/landing">
             <span>معرفی خدمات به پزشکان رِسا</span>
           </router-link>
         </div>
@@ -405,7 +402,7 @@ section#home {
           <span>پزشکان گرامی، براحتی تماس های دریافتی خود را مدیریت کنید</span>
         </div>
         <div class="button-wrapper">
-          <router-link :to="{name:'LandingDoctor'}">بیشتر بدانید</router-link>
+          <router-link to="doctors/landing">بیشتر بدانید</router-link>
         </div>
       </section>
     </div>
@@ -414,8 +411,10 @@ section#home {
 <script>
 export default {
   name: "home",
+  layout: "landing",
   data: function() {
     return {
+      items: ["armin", "arash"],
       menuActive: false,
       itemsList: [
         {
@@ -441,14 +440,7 @@ export default {
       ]
     };
   },
-  mounted() {
-    let that = this;
-    document.onkeyup = function(e) {
-      if (e.code === "Escape") {
-        that.menuActive = false;
-      }
-    };
-  },
+
   methods: {
     activateMenu: function() {
       this.menuActive = !this.menuActive;

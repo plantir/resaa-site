@@ -6,9 +6,17 @@ const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
 module.exports = {
   mode: 'universal',
-
+  env: {
+    API_URL: 'https://webapi.resaa.net',
+    RECAPTCHA_SITEKEY: '6Le6nngUAAAAAGiIJGJl0rCH5QvquMK0jRcZeBim',
+    BASE_URL: '/',
+    BANK_RETURN_URL: 'http://ressa.armin.pro/charge'
+  },
   srcDir: resolve(__dirname, '..', 'resources'),
-
+  server: {
+    port: 8000, // default: 3000
+    host: '0.0.0.0', // default: localhost
+  },
   /*
    ** Headers of the page
    */
@@ -28,15 +36,15 @@ module.exports = {
       }
     ],
     link: [{
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
-      },
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
-      }
-    ]
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico'
+    }],
+    script: [{
+      src: 'https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit&hl=fa',
+      defer: true,
+      async: true
+    }]
   },
 
   /*
@@ -50,16 +58,38 @@ module.exports = {
    ** Global CSS
    */
   css: [
+    'material-design-icons-iconfont/dist/material-design-icons.css',
     '~/assets/style/app.styl',
-    '~/assets/style/main.scss'
+    '~/assets/style/main.scss',
+    '~/assets/style/vuetify_rtl.scss',
+    'swiper/dist/css/swiper.css'
   ],
 
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '@/plugins/vuetify',
-    '@/plugins/swiper',
+    '~/plugins/vuetify',
+    {
+      src: '~/plugins/global.js',
+      ssr: false
+    },
+    {
+      src: '~/plugins/swiper.js',
+      ssr: false
+    },
+    {
+      src: '~/plugins/scroll.js',
+      ssr: false
+    },
+    {
+      src: '~/plugins/map.js',
+      ssr: false
+    },
+    {
+      src: '~/plugins/resource.js',
+      ssr: false
+    },
   ],
 
   /*
@@ -67,7 +97,12 @@ module.exports = {
    */
   modules: [,
     '@nuxtjs/pwa',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    ['~/modules/nuxt-recaptcha'],
+    ['~/modules/nuxt-validate', {
+      lang: 'fa',
+    }],
+    '~/modules/nuxt-service'
   ],
   styleResources: {
     scss: [

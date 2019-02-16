@@ -164,7 +164,7 @@
             <li>تعیین نرخ هر دقیقه مکالمه توسط شما</li>
           </ul>
           <router-link
-            :to="{name:'RegisterDoctor',query:{subscriptionPlan:2}}"
+            :to="{name:'doctors-register',query:{subscriptionPlan:2}}"
             class="card-button"
           >ثبت نام رایگان</router-link>
         </div>
@@ -182,7 +182,7 @@
             <li>تعیین نرخ هر دقیقه مکالمه توسط شما</li>
           </ul>
           <router-link
-            :to="{name:'RegisterDoctor',query:{subscriptionPlan:1}}"
+            :to="{name:'doctors-register',query:{subscriptionPlan:1}}"
             class="card-button"
           >ثبت نام رایگان</router-link>
         </div>

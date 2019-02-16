@@ -73,12 +73,12 @@
 
       .link-provider-text {
         font-weight: 500;
-        font-size: 1.2rem;
+        font-size: 0.875rem;
       }
 
       .link-provider {
         font-weight: 700;
-        font-size: 1.5rem;
+        font-size: 1.125rem;
       }
     }
 
@@ -179,7 +179,7 @@
 </template>
 
 <script>
-import UnderDevelopment from "@/components/under_development/under_development";
+import UnderDevelopment from "@/components/global/under_development";
 export default {
   components: {
     UnderDevelopment
