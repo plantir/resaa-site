@@ -370,12 +370,12 @@ section#home {
       <div class="line"></div>
       <section class="patient">
         <div class="image">
-          <router-link :to="{name:'LandingPatient'}">
+          <router-link :to="{name:'patient-landing'}">
             <img src="~static/img/patient-edited.png">
           </router-link>
         </div>
         <div class="title">
-          <router-link :to="{name:'LandingPatient'}">
+          <router-link :to="{name:'patient-landing'}">
             <span>ارتباط تلفنی و مستقیم با پزشک</span>
           </router-link>
         </div>
@@ -383,8 +383,8 @@ section#home {
           <span>بیماران عزیز، با سامانه رِسا از هر جایی با پزشک خود مشورت کنید</span>
         </div>
         <div class="button-wrapper">
-          <router-link :to="{name:'LandingPatient'}">بیشتر بدانید</router-link>
-          <router-link :to="{name:'Charge'}">شارژ حساب</router-link>
+          <router-link :to="{name:'patient-landing'}">بیشتر بدانید</router-link>
+          <router-link :to="{name:'charge'}">شارژ حساب</router-link>
         </div>
       </section>
       <section class="doctor">
@@ -419,23 +419,23 @@ export default {
       itemsList: [
         {
           name: "برای بیماران",
-          to: { name: "LandingPatient" }
+          to: { name: "patient-landing" }
         },
         {
           name: "برای پزشکان",
-          to: { name: "LandingDoctor" }
+          to: { name: "doctors-landing" }
         },
         {
           name: "درباره رِسا",
-          to: { name: "About" }
+          to: { name: "about" }
         },
         {
           name: "تماس با ما",
-          to: { name: "ContactUs" }
+          to: { name: "contact-us" }
         },
         {
           name: "خرید شارژ",
-          to: { name: "Charge" }
+          to: { name: "charge" }
         }
       ]
     };

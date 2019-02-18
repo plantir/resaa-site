@@ -36,6 +36,9 @@
   display: flex;
   align-items: center;
   text-align: justify;
+  @include respond-to(md) {
+    padding-right: 40px;
+  }
   @include respond-to(xl) {
     background-size: 100%;
   }
@@ -49,6 +52,9 @@
 }
 .footer-address {
   line-height: 2.675rem;
+  @include respond-to(sm) {
+    padding-left: 40px;
+  }
 }
 .tell-wrapper {
   display: flex;
@@ -58,6 +64,22 @@
     justify-content: flex-start;
     .footer-email {
       margin-right: 16px;
+    }
+  }
+  @include respond-to(sm) {
+    flex-direction: column;
+    padding-left: 40px;
+    font-size: 1.225rem;
+    > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      + div {
+        margin-top: 16px;
+      }
+    }
+    .footer-email {
+      margin-right: 0;
     }
   }
   span {
@@ -71,13 +93,25 @@
 }
 .link-wrapper {
   display: flex;
+  @include respond-to(md) {
+    justify-content: space-between;
+    padding-left: 40px;
+  }
+  @include respond-to(sm) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0;
+    // justify-content: ;
+    // padding-left: 60px;
+  }
   > div {
     padding: 0 3rem;
     @include respond-to(md) {
-      padding: 0 2rem;
+      padding: 0;
+      width: 100%;
     }
-    @include respond-to(sm) {
-      padding: 0 1rem;
+    + div {
+      margin-top: 48px;
     }
   }
   ul {
@@ -113,6 +147,9 @@
     flex-direction: column;
     align-items: center;
   }
+  @include respond-to(md) {
+    padding-left: 40px;
+  }
   .footer-logo {
     width: 40%;
     flex: 0 0 40%;
@@ -139,6 +176,9 @@
     span {
       color: #fff;
       font-size: 1.475rem;
+      @include respond-to(sm) {
+        font-size: 1rem;
+      }
     }
     ul {
       display: inline-flex;
@@ -150,6 +190,9 @@
       a {
         color: #babcbd;
         font-size: 2rem;
+        @include respond-to(sm) {
+          font-size: 1.375rem;
+        }
         &:hover {
           color: #2ee5c4;
         }
@@ -165,6 +208,13 @@
   @include respond-to(lg) {
     margin-top: 16px;
     justify-content: center;
+  }
+  @include respond-to(sm) {
+    height: auto;
+    margin-left: 40px;
+    border-top: 1px solid #71787f;
+    margin-top: 32px;
+    padding-top: 32px;
   }
   img {
     max-height: 100%;
@@ -278,7 +328,7 @@
           <v-flex md4 sm12>
             <div class="link-wrapper">
               <div>
-                <h5 class="title">کاربری</h5>
+                <h5 class="title with-line">کاربری</h5>
                 <ul>
                   <li>
                     <router-link v-if="isPatient" :to="{name:'LoginPatient'}">حساب کاربری</router-link>
@@ -298,7 +348,7 @@
                 </ul>
               </div>
               <div>
-                <h5 class="title">درباره رسا</h5>
+                <h5 class="title with-line">درباره رسا</h5>
                 <ul>
                   <li>
                     <router-link :to="{name:'privacy'}">حریم خصوصی</router-link>
@@ -324,11 +374,11 @@
             </div>
             <div class="tell-wrapper">
               <div class="footer-tel">
-                <i class="fa fa-phone" aria-hidden="true"></i>
+                <v-icon>phone</v-icon>
                 <span>{{contactInfo.phoneNumber}}</span>
               </div>
               <div class="footer-email">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <v-icon>email</v-icon>
                 <span>{{contactInfo.email}}</span>
               </div>
             </div>

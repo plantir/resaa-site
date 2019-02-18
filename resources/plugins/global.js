@@ -2,11 +2,10 @@ import Vue from 'vue';
 import loading from '~/components/global/loading';
 import pagination from '~/components/global/pagination';
 import timeTable from '~/components/global/time_table';
-import VueRecaptcha from "vue-recaptcha";
+import * as moment from 'moment-jalaali';
 Vue.component('v-loading', loading);
 Vue.component('pagination', pagination);
 Vue.component('timeTable', timeTable);
-// Vue.component('VueRecaptcha', VueRecaptcha);
 Vue.filter('currency', value => {
   if (typeof value !== 'number') {
     return value;

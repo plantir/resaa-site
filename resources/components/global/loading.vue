@@ -17,11 +17,13 @@ img {
 }
 </style>
 <template>
-  <section id="loader">
-    <div class="loader-wrapper">
-      <img src="./loader.gif" alt>
-    </div>
-  </section>
+  <no-ssr>
+    <section id="loader">
+      <div class="loader-wrapper">
+        <img src="./loader.gif" alt>
+      </div>
+    </section>
+  </no-ssr>
 </template>
 <script>
 export default {

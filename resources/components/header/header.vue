@@ -379,11 +379,11 @@
                   <i class="fa fa-caret-down"></i>
                 </a>
                 <div v-if="isPatient">
-                  <router-link :to="{name:'PatientProfile'}">پروفایل</router-link>
+                  <router-link :to="{name:'patient-profile'}">پروفایل</router-link>
                   <a @click="logout">خروج</a>
                 </div>
                 <div v-else>
-                  <router-link :to="{name:'PatientProfile'}">پروفایل</router-link>
+                  <router-link :to="{name:'patient-profile'}">پروفایل</router-link>
                   <a @click="logout">خروج</a>
                 </div>
               </div>
@@ -393,11 +393,11 @@
                   <i class="fa fa-caret-down"></i>
                 </a>
                 <div v-if="isPatient">
-                  <router-link :to="{name:'LoginPatient'}">ورود به حساب کاربری</router-link>
-                  <router-link :to="{name:'LandingPatient'}">عضویت در رسا</router-link>
+                  <router-link :to="{name:'patient-login'}">ورود به حساب کاربری</router-link>
+                  <router-link :to="{name:'patient-landing'}">عضویت در رسا</router-link>
                 </div>
                 <div v-else>
-                  <router-link :to="{name:'LoginDoctor'}">ورود به حساب کاربری</router-link>
+                  <router-link :to="{name:'doctors-login'}">ورود به حساب کاربری</router-link>
                   <router-link :to="{name:'doctors-register'}">عضویت در رسا</router-link>
                 </div>
               </div>
@@ -424,21 +424,21 @@
         <!-- <router-link
           class="navigation-bar-download-button"
           v-if="!isLanding"
-          :to="{name:'LandingPatient',hash:'#download'}"
+          :to="{name:'patient-landing',hash:'#download'}"
         >دریافت اپلیکیشن</router-link>-->
         <!-- <router-link
-          :to="{name:'Charge'}"
+          :to="{name:'charge'}"
           v-if="!isLanding"
           class="navigation-bar-button"
         >افزایش اعتبار</router-link>-->
         <div v-if="isLanding !== true">
           <router-link
-            :to="{name:'Charge'}"
+            :to="{name:'charge'}"
             v-if="isPatient === true"
             class="navigation-bar-button"
           >افزایش اعتبار</router-link>
           <router-link
-            :to="{name:'Charge'}"
+            :to="{name:'charge'}"
             v-if="isPatient === true"
             class="navigation-bar-button-mini"
           >
@@ -447,24 +447,24 @@
         </div>
         <div v-else>
           <router-link
-            :to="{name:'Charge'}"
+            :to="{name:'charge'}"
             v-if="isPatient === true"
             class="navigation-bar-button"
           >افزایش اعتبار</router-link>
           <router-link
-            :to="{name:'Charge'}"
+            :to="{name:'charge'}"
             v-if="isPatient === true"
             class="navigation-bar-button-mini"
           >
             <i class="fa fa-money"></i>
           </router-link>
           <router-link
-            :to="{name:'LandingPatient'}"
+            :to="{name:'patient-landing'}"
             v-if="isPatient !== true"
             class="navigation-bar-button"
           >رِسای بیماران</router-link>
           <router-link
-            :to="{name:'LandingPatient'}"
+            :to="{name:'patient-landing'}"
             v-if="isPatient !== true"
             class="navigation-bar-button-mini"
           >
@@ -479,18 +479,18 @@
               <div v-if="user">
                 <a class="drop-down">خوش اومدی {{user.firstName}}</a>
                 <div v-if="isPatient">
-                  <router-link :to="{name:'PatientProfile'}">پروفایل</router-link>
+                  <router-link :to="{name:'patient-profile'}">پروفایل</router-link>
                   <a @click="logout">خروج</a>
                 </div>
                 <div v-else>
-                  <router-link :to="{name:'PatientProfile'}">پروفایل</router-link>
+                  <router-link :to="{name:'patient-profile'}">پروفایل</router-link>
                   <a @click="logout">خروج</a>
                 </div>
               </div>
               <div v-else>
                 <a class="drop-down"></a>
                 <div v-if="isPatient">
-                  <router-link :to="{name:'LandingPatient'}">عضویت در رسا</router-link>
+                  <router-link :to="{name:'patient-landing'}">عضویت در رسا</router-link>
                 </div>
                 <div v-else>
                   <router-link :to="{name:'LoginDoctor'}">ورود به حساب کاربری</router-link>
@@ -502,7 +502,7 @@
               v-if="user"
               class="nav-main__list-item"
               :class="{ 'active' : menuActive }"
-              :to="{name:'PatientProfile'}"
+              :to="{name:'patient-profile'}"
             >خوش اومدی {{user.firstName}}</router-link>
             <router-link
               v-else
@@ -552,48 +552,59 @@ export default {
       itemsListDoctor: [
         {
           name: "لیست پزشکان",
-          path: { name: "Doctors" }
+          path: { name: "doctors" }
         },
         {
           name: "قوانین",
-          path: { name: "Privacy" }
+          path: { name: "privacy" }
         },
         {
           name: "سوالات متداول",
-          path: { name: "Faq" }
+          path: { name: "faq" }
         },
         {
           name: "درباره رسا",
-          path: { name: "About" }
+          path: { name: "about" }
         },
         {
           name: "تماس با ما",
-          path: { name: "ContactUs" }
+          path: { name: "contact-us" }
         }
       ],
       itemsListPatient: [
         {
           name: "لیست پزشکان",
-          path: { name: "Doctors" }
+          path: { name: "doctors" }
         },
         {
           name: "قوانین",
-          path: { name: "Privacy" }
+          path: { name: "privacy" }
         },
         {
           name: "سوالات متداول",
-          path: { name: "Faq" }
+          path: { name: "faq" }
         },
         {
           name: "درباره رسا",
-          path: { name: "About" }
+          path: { name: "about" }
         },
         {
           name: "تماس با ما",
-          path: { name: "ContactUs" }
+          path: { name: "contact-us" }
         }
       ]
     };
+  },
+  created() {
+    console.log(this.$route);
+    if (!this.$route.name) {
+      return;
+    }
+    if (this.$route.name.includes("patient")) {
+      this.isPatient = true;
+    } else {
+      this.isPatient = false;
+    }
   },
   mounted() {
     let that = this;
@@ -602,6 +613,7 @@ export default {
         that.menuActive = false;
       }
     };
+    this.$store.commit("patient/initialize_user");
   },
 
   methods: {
@@ -609,13 +621,14 @@ export default {
       this.menuActive = !this.menuActive;
     },
     logout() {
-      this.$store.commit("logout");
+      this.$store.commit("patient/logout");
+      this.$router.replace({ name: "patient-landing" });
       this.menuActive = false;
     }
   },
   computed: {
     user() {
-      return this.$store.state.user;
+      return this.$store.state.patient.user;
     }
   }
 };
