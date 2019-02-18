@@ -69,6 +69,9 @@ export default {
   background-color: white;
   padding: 45px;
   border-radius: 15px;
+  @include respond-to(md) {
+    padding: 0;
+  }
 }
 
 .faq-title {

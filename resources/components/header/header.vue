@@ -393,29 +393,51 @@
                   <i class="fa fa-caret-down"></i>
                 </a>
                 <div v-if="isPatient">
-                  <router-link :to="{name:'patient-login'}">ورود به حساب کاربری</router-link>
-                  <router-link :to="{name:'patient-landing'}">عضویت در رسا</router-link>
+                  <router-link
+                    @click.native="closeNav"
+                    :to="{name:'patient-login'}"
+                  >ورود به حساب کاربری</router-link>
+                  <router-link @click.native="closeNav" :to="{name:'patient-landing'}">عضویت در رسا</router-link>
                 </div>
                 <div v-else>
-                  <router-link :to="{name:'doctors-login'}">ورود به حساب کاربری</router-link>
-                  <router-link :to="{name:'doctors-register'}">عضویت در رسا</router-link>
+                  <router-link
+                    @click.native="closeNav"
+                    :to="{name:'doctors-login'}"
+                  >ورود به حساب کاربری</router-link>
+                  <router-link @click.native="closeNav" :to="{name:'doctors-register'}">عضویت در رسا</router-link>
                 </div>
               </div>
             </li>
             <li class="nav-item">
-              <router-link :to="{name:'doctors'}" class="navigation-bar-item">لیست پزشکان</router-link>
+              <router-link
+                @click.native="closeNav"
+                :to="{name:'doctors'}"
+                class="navigation-bar-item"
+              >لیست پزشکان</router-link>
             </li>
             <li class="nav-item">
-              <router-link :to="{name:'privacy'}" class="navigation-bar-item">قوانین</router-link>
+              <a @click.native="closeNav" :to="{name:'privacy'}" class="navigation-bar-item">قوانین</a>
             </li>
             <li class="nav-item">
-              <router-link :to="{name:'faq'}" class="navigation-bar-item">سوالات متداول</router-link>
+              <router-link
+                @click.native="closeNav"
+                :to="{name:'faq'}"
+                class="navigation-bar-item"
+              >سوالات متداول</router-link>
             </li>
             <li class="nav-item">
-              <router-link :to="{name:'about'}" class="navigation-bar-item">درباره رسا</router-link>
+              <router-link
+                @click.native="closeNav"
+                :to="{name:'about'}"
+                class="navigation-bar-item"
+              >درباره رسا</router-link>
             </li>
             <li class="nav-item">
-              <router-link :to="{name:'contact-us'}" class="navigation-bar-item">تماس با ما</router-link>
+              <router-link
+                @click.native="closeNav"
+                :to="{name:'contact-us'}"
+                class="navigation-bar-item"
+              >تماس با ما</router-link>
             </li>
           </ul>
         </div>
@@ -499,6 +521,7 @@
               </div>
             </li>-->
             <router-link
+              @click.native="closeNav"
               v-if="user"
               class="nav-main__list-item"
               :class="{ 'active' : menuActive }"
@@ -508,10 +531,11 @@
               v-else
               class="nav-main__list-item"
               :class="{ 'active' : menuActive }"
-              :to="{name:'LoginPatient'}"
+              :to="{name:'patient-login'}"
             >ورود به حساب کاربری</router-link>
             <template v-if="isPatient">
               <router-link
+                @click.native="closeNav"
                 v-for="(item, index) in this.itemsListPatient"
                 :to="item.path"
                 :key="index"
@@ -619,6 +643,9 @@ export default {
   methods: {
     activateMenu: function() {
       this.menuActive = !this.menuActive;
+    },
+    closeNav() {
+      this.menuActive = false;
     },
     logout() {
       this.$store.commit("patient/logout");
