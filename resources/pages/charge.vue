@@ -106,7 +106,7 @@
               </div>
               <p>در صورت وجود هر گونه مشکل و یا سوال میتوانید با پشتیبانی رسا به شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل نمایید.</p>
             </div>
-            <router-link :to="{name:'LandingPatient'}" class="charge-success-return-button">بازگشت</router-link>
+            <router-link :to="{name:'patient-landing'}" class="charge-success-return-button">بازگشت</router-link>
           </div>
         </div>
         <!-- step 3 -->

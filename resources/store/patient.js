@@ -29,7 +29,7 @@ export const mutations = {
     state.user = null;
     localStorage.removeItem('auth');
     // router.push({
-    //   name: 'LandingPatient'
+    //   name: 'patient-landing'
     // })
   },
 

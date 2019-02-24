@@ -20,7 +20,7 @@
             <a href="tel:*500*25#">USSD</a>
           </li>
           <li>شارژ آسان حساب از طریق
-            <router-link :to="{name:'Charge'}">همین سایت</router-link>
+            <router-link :to="{name:'charge'}">همین سایت</router-link>
           </li>
         </ul>
         <div class="benefits-button-container">

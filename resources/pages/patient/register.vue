@@ -55,7 +55,7 @@
         <a>یادآوری کلمه عبور</a>
       </div>-->
       <div class="sign-up">حساب کاربری دارید؟
-        <router-link :to="{name:'LoginPatient'}" class="sign-up-link">وارد شوید</router-link>
+        <router-link :to="{name:'patient-login'}" class="sign-up-link">وارد شوید</router-link>
       </div>
     </div>
   </v-container>
@@ -128,7 +128,7 @@ export default {
         .then(response => {
           if (response.data.status === "OK") {
             alert("ثبت نام با موفقیت انجام شد");
-            this.$router.push({ name: "LoginPatient" });
+            this.$router.push({ name: "patient-login" });
           } else {
             this.errorMessage = "کد وارد شده صحیح نمی باشد";
           }

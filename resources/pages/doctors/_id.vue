@@ -302,7 +302,7 @@
           </div>
           <div v-else class="available-time-container">
             <span>مدت زمان قابل گفتگو: برای دیدن مدت زمان مکالمه ابتدا</span>
-            <router-link :to="{name:'LoginPatient'}">وارد سایت</router-link>شوید
+            <router-link :to="{name:'patient-login'}">وارد سایت</router-link>شوید
           </div>
         </div>
         <div class="available-time-description">
@@ -311,7 +311,7 @@
             <div>
               <span>این زمان براساس میزان</span>
               <router-link v-if="user" :to="{name:'PatientProfile'}">شارژ فعلی</router-link>
-              <router-link v-else :to="{name:'LoginPatient'}">شارژ فعلی</router-link>
+              <router-link v-else :to="{name:'patient-login'}">شارژ فعلی</router-link>
               <span>شما محاسبه شده است.</span>
             </div>
             <div>
