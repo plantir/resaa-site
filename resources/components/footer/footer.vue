@@ -13,12 +13,10 @@
   &.with-line {
     &::after {
       content: "";
-      width: calc(100% - 160px);
+      width: 50px;
       height: 2px;
       background: #71787f;
-      position: absolute;
-      left: 0;
-      bottom: 4px;
+      margin-right: 16px;
     }
   }
 }
@@ -37,7 +35,7 @@
   align-items: center;
   text-align: justify;
   @include respond-to(md) {
-    padding-right: 40px;
+    // padding-right: 40px;
   }
   @include respond-to(xl) {
     background-size: 100%;
@@ -53,34 +51,16 @@
 .footer-address {
   line-height: 2.675rem;
   @include respond-to(sm) {
-    padding-left: 40px;
+    // padding-left: 40px;
   }
 }
 .tell-wrapper {
   display: flex;
-  margin-top: 3rem;
+  margin-top: 5px;
   justify-content: space-between;
-  @include respond-to(lg) {
-    justify-content: flex-start;
-    .footer-email {
-      margin-right: 16px;
-    }
-  }
-  @include respond-to(sm) {
-    flex-direction: column;
-    padding-left: 40px;
-    font-size: 1.225rem;
-    > div {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      + div {
-        margin-top: 16px;
-      }
-    }
-    .footer-email {
-      margin-right: 0;
-    }
+  flex-direction: column;
+  > div {
+    margin: 8px;
   }
   span {
     display: inline-block;
@@ -93,11 +73,11 @@
 }
 .link-wrapper {
   display: flex;
+  // @include respond-to(md) {
+  //   justify-content: space-between;
+  //   padding-left: 40px;
+  // }
   @include respond-to(md) {
-    justify-content: space-between;
-    padding-left: 40px;
-  }
-  @include respond-to(sm) {
     flex-direction: column;
     align-items: flex-start;
     padding-left: 0;
@@ -105,13 +85,14 @@
     // padding-left: 60px;
   }
   > div {
-    padding: 0 3rem;
     @include respond-to(md) {
       padding: 0;
       width: 100%;
     }
     + div {
-      margin-top: 48px;
+      @include respond-to(md) {
+        margin-top: 48px;
+      }
     }
   }
   ul {
@@ -143,18 +124,23 @@
 }
 .about-wrapper {
   display: flex;
-  @include respond-to(sm) {
-    flex-direction: column;
-    align-items: center;
-  }
-  @include respond-to(md) {
-    padding-left: 40px;
-  }
+  flex-direction: column;
+  align-items: center;
+  // @include respond-to(md) {
+  //   flex-direction: column;
+  //   align-items: center;
+  // }
+  // @include respond-to(md) {
+  //   padding-left: 40px;
+  // }
   .footer-logo {
     width: 40%;
     flex: 0 0 40%;
-    margin-top: 60px;
-    @include respond-to(sm) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+    @include respond-to(md) {
       margin-top: 16px;
     }
     img {
@@ -162,59 +148,62 @@
     }
   }
   > div {
-    line-height: 3.5rem;
+    line-height: 2.675rem;
   }
-  .social {
-    display: flex;
+}
+.social {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  height: 80px;
+  align-items: center;
+  width: 50%;
+  @include respond-to(lg) {
+    margin-top: 16px;
+  }
+  @include respond-to(md) {
+    width: 100%;
+  }
+  span {
+    color: #fff;
+    font-size: 1.475rem;
+    @include respond-to(md) {
+      font-size: 1rem;
+    }
+  }
+  ul {
+    display: inline-flex;
+    margin: 0 32px 0 0;
+    padding: 0;
+    width: 40%;
     justify-content: space-between;
-    margin-top: 40px;
-    height: 80px;
-    align-items: center;
-    @include respond-to(lg) {
-      margin-top: 16px;
-    }
-    span {
-      color: #fff;
-      font-size: 1.475rem;
-      @include respond-to(sm) {
-        font-size: 1rem;
-      }
-    }
-    ul {
-      display: inline-flex;
-      margin: 0 32px 0 0;
-      padding: 0;
-      width: 40%;
-      justify-content: space-between;
-      list-style-type: none;
-      a {
-        color: #babcbd;
-        font-size: 2rem;
-        @include respond-to(sm) {
-          font-size: 1.375rem;
-        }
-        &:hover {
-          color: #2ee5c4;
-        }
+    list-style-type: none;
+    a {
+      color: #babcbd;
+      font-size: 1.375rem;
+      &:hover {
+        color: #2ee5c4;
       }
     }
   }
 }
 .e-namad {
   display: flex;
-  margin-top: 80px;
-  height: 80px;
+  justify-content: center;
   align-items: center;
+  margin-top: 10px;
+  height: 80px;
   @include respond-to(lg) {
     margin-top: 16px;
-    justify-content: center;
+    justify-content: flex-start;
   }
-  @include respond-to(sm) {
+  @include respond-to(md) {
     height: auto;
     margin-left: 40px;
     border-top: 1px solid #71787f;
     margin-top: 32px;
     padding-top: 32px;
+    justify-content: center;
   }
   img {
     max-height: 100%;
@@ -287,16 +276,68 @@
     <div :class="[{'patient': isPatient}, 'footer']">
       <v-container>
         <v-layout row wrap>
-          <v-flex md5 sm12>
+          <v-flex pa-4 lg3 md6 order-lg1 order-md1 sm12>
+            <h5 class="title with-line">درباه رِسا</h5>
             <div class="about-wrapper">
-              <div class="footer-logo">
-                <img src="./logo.png">
-              </div>
               <div>
                 <div class="footer-info-text">
                   <strong>رِسا</strong>
                   اولین سامانه ارتباط پزشک با بیمار در کشور است و بیماران عزیز براحتی و بدون نیاز به حضور در مطب پزشک می توانند با پزشک خوب از هر جایی در ارتباط باشند. پزشکان گرامی نیز می توانند تماس های بیماران خود را در سامانه رِسا مدیریت کنند.
                 </div>
+              </div>
+              <div class="footer-logo">
+                <img src="./logo.png">
+              </div>
+            </div>
+          </v-flex>
+          <v-flex pa-4 lg6 md12 order-lg2 order-md3 sm12>
+            <v-layout row wrap>
+              <v-flex md6 sm6 xs12>
+                <h5 class="title with-line">کاربری</h5>
+                <div class="link-wrapper">
+                  <div>
+                    <ul>
+                      <li>
+                        <router-link v-if="isPatient" :to="{name:'patient-login'}">حساب کاربری</router-link>
+                        <router-link v-else :to="{name:'LoginDoctor'}">حساب کاربری</router-link>
+                      </li>
+                      <li>
+                        <router-link :to="{name:'doctors'}">لیست پزشکان</router-link>
+                      </li>
+                      <li>
+                        <router-link :to="{name:'patient-landing'}">رسای بیماران</router-link>
+                      </li>
+                      <li>
+                        <router-link
+                          :to="{name:'patient-landing',hash:'#download'}"
+                        >دریافت برنامه بیماران</router-link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </v-flex>
+              <v-flex md6 sm6 xs12>
+                <h5 class="title with-line">دسترسی سریع</h5>
+                <div class="link-wrapper">
+                  <div>
+                    <ul>
+                      <li>
+                        <router-link :to="{name:'privacy'}">حریم خصوصی</router-link>
+                      </li>
+                      <li>
+                        <router-link :to="{name:'faq'}">سوالات متداول</router-link>
+                      </li>
+                      <li>
+                        <router-link :to="{name:'about'}">درباره رسا</router-link>
+                      </li>
+                      <li>
+                        <router-link :to="{name:'contact-us'}">تماس با ما</router-link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </v-flex>
+              <v-flex md12 xs12>
                 <div class="social">
                   <span>به ما بپیوندید :</span>
                   <ul>
@@ -322,51 +363,10 @@
                     </li>
                   </ul>
                 </div>
-              </div>
-            </div>
+              </v-flex>
+            </v-layout>
           </v-flex>
-          <v-flex md4 sm12>
-            <div class="link-wrapper">
-              <div>
-                <h5 class="title with-line">کاربری</h5>
-                <ul>
-                  <li>
-                    <router-link v-if="isPatient" :to="{name:'LoginPatient'}">حساب کاربری</router-link>
-                    <router-link v-else :to="{name:'LoginDoctor'}">حساب کاربری</router-link>
-                  </li>
-                  <li>
-                    <router-link :to="{name:'doctors'}">لیست پزشکان</router-link>
-                  </li>
-                  <li>
-                    <router-link :to="{name:'LandingPatient'}">رسای بیماران</router-link>
-                  </li>
-                  <li>
-                    <router-link
-                      :to="{name:'LandingPatient',hash:'#download'}"
-                    >دریافت برنامه بیماران</router-link>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h5 class="title with-line">درباره رسا</h5>
-                <ul>
-                  <li>
-                    <router-link :to="{name:'privacy'}">حریم خصوصی</router-link>
-                  </li>
-                  <li>
-                    <router-link :to="{name:'faq'}">سوالات متداول</router-link>
-                  </li>
-                  <li>
-                    <router-link :to="{name:'about'}">درباره رسا</router-link>
-                  </li>
-                  <li>
-                    <router-link :to="{name:'contact-us'}">تماس با ما</router-link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </v-flex>
-          <v-flex md3 sm12>
+          <v-flex pa-4 lg3 md6 order-lg3 order-md2 sm12>
             <h5 class="title with-line">با ما تماس بگیرید</h5>
             <div class="footer-address">
               <!-- <i class="fa fa-map-marker" aria-hidden="true"></i> -->
