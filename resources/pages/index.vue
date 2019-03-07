@@ -412,6 +412,19 @@ section#home {
 export default {
   name: "home",
   layout: "landing",
+  head() {
+    return {
+      title: "تایتل تستی",
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: "description",
+          name: "description",
+          content: "My custom description"
+        }
+      ]
+    };
+  },
   data: function() {
     return {
       items: ["armin", "arash"],

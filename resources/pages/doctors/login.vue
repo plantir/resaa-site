@@ -1,36 +1,3 @@
-<template>
-  <v-container>
-    <div class="login-doctor-container">
-      <div class="section-title">حساب کاربری</div>
-      <div
-        class="section-description"
-      >پزشک گرامی، جهت دسترسی به خدمات برخط سامانه رِسا، لطفا وارد شوید</div>
-      <div class="doctor-username">
-        <i class="fa fa-user"></i>
-        <input id="username" placeholder="کد رسا / شماره همراه">
-      </div>
-      <div class="doctor-password">
-        <i class="fa fa-lock"></i>
-        <input id="password" placeholder="کلمه عبور">
-      </div>
-      <div
-        class="g-recaptcha charge-captcha"
-        data-sitekey="6Ldum2AUAAAAALQrnrey6kthZixJIfe1wQboLGwI"
-      ></div>
-      <div class="login-button">ورود به حساب کاربری</div>
-      <!-- <div class="forgot-password">
-        <a>یادآوری کلمه عبور</a>
-      </div>-->
-      <div class="sign-up">حساب کاربری ندارید؟
-        <router-link :to="{name:'RegisterDoctor'}" class="sign-up-link">رایگان ثبت نام کنید</router-link>
-      </div>
-    </div>
-  </v-container>
-</template>
-
-<script>
-export default {};
-</script>
 
 <style lang="scss" scoped>
 .login-doctor-container {
@@ -183,3 +150,43 @@ export default {};
   }
 }
 </style>
+
+<template>
+  <v-container>
+    <div class="login-doctor-container">
+      <div class="section-title">حساب کاربری</div>
+      <div
+        class="section-description"
+      >پزشک گرامی، جهت دسترسی به خدمات برخط سامانه رِسا، لطفا وارد شوید</div>
+      <div class="doctor-username">
+        <i class="fa fa-user"></i>
+        <input id="username" placeholder="کد رسا / شماره همراه">
+      </div>
+      <div class="doctor-password">
+        <i class="fa fa-lock"></i>
+        <input id="password" placeholder="کلمه عبور">
+      </div>
+      <div
+        class="g-recaptcha charge-captcha"
+        data-sitekey="6Ldum2AUAAAAALQrnrey6kthZixJIfe1wQboLGwI"
+      ></div>
+      <div class="login-button">ورود به حساب کاربری</div>
+      <!-- <div class="forgot-password">
+        <a>یادآوری کلمه عبور</a>
+      </div>-->
+      <div class="sign-up">حساب کاربری ندارید؟
+        <router-link :to="{name:'doctors-register'}" class="sign-up-link">رایگان ثبت نام کنید</router-link>
+      </div>
+    </div>
+  </v-container>
+</template>
+
+<script>
+export default {
+  head() {
+    return {
+      title: "ورود به بخش پزشکان"
+    };
+  }
+};
+</script>

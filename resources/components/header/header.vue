@@ -416,7 +416,11 @@
               >لیست پزشکان</router-link>
             </li>
             <li class="nav-item">
-              <a @click.native="closeNav" :to="{name:'privacy'}" class="navigation-bar-item">قوانین</a>
+              <router-link
+                @click.native="closeNav"
+                :to="{name:'privacy'}"
+                class="navigation-bar-item"
+              >قوانین</router-link>
             </li>
             <li class="nav-item">
               <router-link

@@ -21,6 +21,19 @@ export default {
     DoctorProcedure,
     DoctorDownload,
     DoctorComments
+  },
+  head() {
+    return {
+      title: "چگونه بیماران می توانند خارج از مطب با من در ارتباط باشند؟",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "با استفاده از رسا تماس های غیر ضروری خود از سمت بیماران را حذف کنید و مکالمات غیر مربوط به روند درمانی را کاهش دهید"
+        }
+      ]
+    };
   }
 };
 </script>

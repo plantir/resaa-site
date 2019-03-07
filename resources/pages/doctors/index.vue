@@ -469,6 +469,11 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: "ورود به بخش پزشکان"
+    };
+  },
   data: () => ({
     ajaxLoading: true,
     doctors: [],

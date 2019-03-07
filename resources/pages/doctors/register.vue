@@ -97,6 +97,11 @@ export default {
     StepIndicator
     // VueRecaptcha
   },
+  head() {
+    return {
+      title: "ثبت نام به عنوان پزشک"
+    };
+  },
   data() {
     return {
       currentStep: 1,

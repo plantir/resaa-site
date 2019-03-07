@@ -33,6 +33,10 @@ module.exports = {
         charset: 'utf-8'
       },
       {
+        name: 'google-site-verification',
+        content: 'vT5f4dImWLU1X6AHgqqFniG46MVEcXZYyxoCVLX0jNc'
+      },
+      {
         name: 'viewport',
         content: 'width=device-width, initial-scale=1'
       },
@@ -109,7 +113,10 @@ module.exports = {
     ['~/modules/nuxt-validate', {
       lang: 'fa',
     }],
-    '~/modules/nuxt-service'
+    '~/modules/nuxt-service',
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-135235561-1'
+    }]
   ],
   styleResources: {
     scss: [
