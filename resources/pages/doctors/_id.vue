@@ -378,10 +378,6 @@ export default {
         {
           property: "og:title",
           content: this.title
-        },
-        {
-          property: "og:description",
-          content: this.title
         }
       ]
     };
