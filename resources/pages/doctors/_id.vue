@@ -289,7 +289,7 @@
             <div v-if="doctor.currentlyAvailable" class="doctor-is-available">(در دسترس)</div>
             <div v-else class="doctor-is-unavailable">(در دسترس نمی باشد)</div>
           </div>
-          <div v-if="doctor.specialty" class="doctor-specialty">{{doctor.specialty.title}}</div>
+          <div v-if="doctor.specialty" class="doctor-specialty">تخصص : {{doctor.specialty.title}}</div>
           <div class="specialty-area-container">
             <div v-for="tag in doctor.tags" :key="tag.id" class="specialty-area">{{tag.title}}</div>
           </div>
@@ -372,12 +372,25 @@ export default {
       title: this.title,
       meta: [
         {
+          hid: "og:image",
           property: "og:image",
-          content: this.doctor_image
+          content: this.og.image
         },
         {
+          hid: "og:title",
           property: "og:title",
-          content: this.title
+          content: this.og.title
+        },
+
+        {
+          hid: "og:site_name",
+          property: "og:site_name",
+          content: this.og.site_name
+        },
+        {
+          hid: "og:description",
+          property: "og:description",
+          content: this.og.description
         }
       ]
     };
@@ -387,19 +400,26 @@ export default {
     let { data } = await axios.get(
       `${process.env.API_URL}/Doctors/${
         params.id
-      }?fields=firstName,lastName,image`
+      }?fields=firstName,lastName,image,specialty`
     );
     let title = `دکتر ${data.result.doctor.firstName} ${
       data.result.doctor.lastName
     } - شماره تلفن مستقیم - رسا`;
-    let doctor_image = data.result.doctor.image || "/img/doc-placeholder.png";
+    let og = {
+      image: data.result.doctor.image || "/img/doc-placeholder.png",
+      site_name: `رسا : دکتر ${data.result.doctor.firstName} ${
+        data.result.doctor.lastName
+      }`,
+      title: `تخصص : ${data.result.doctor.specialty.title}`,
+      description: `کد رسا : ${params.id}`
+    };
     return {
       doctor: null,
       ajaxLoading: true,
       duration: null,
       showMap: true,
       title: title,
-      doctor_image
+      og
     };
   },
   beforeCreate() {

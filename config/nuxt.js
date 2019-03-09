@@ -28,7 +28,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: pkg.name,
+    title: 'رسا ، سامانه سلامت ایرانیان',
     meta: [{
         charset: 'utf-8'
       },
@@ -43,7 +43,7 @@ module.exports = {
       {
         hid: 'description',
         name: 'description',
-        content: pkg.description
+        content: "با استفاده از رسا تماس های غیر ضروری خود از سمت بیماران را حذف کنید و مکالمات غیر مربوط به روند درمانی را کاهش رایگان ثبت‌نام کنید و با دسترسی به پزشکان معرفی‌شده در وب‌سایت رسا، تماس مستقیم با بهترین پزشکان متخصص را با صرفه‌جویی در وقت و هزینه خود، تجربه کنید"
       }
     ],
     link: [{

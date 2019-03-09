@@ -1,8 +1,8 @@
 {
   "name": "resaa",
   "version": "1.0.0",
-  "description": "رسا سامانه سلامت ایرانیان",
-  "author": "armin",
+  "description": "resaa",
+  "author": "armin kheirkhahan > vrwebdesign",
   "private": true,
   "scripts": {
     "serve:dev": "npm run dev",
