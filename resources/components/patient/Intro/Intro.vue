@@ -225,7 +225,7 @@
 
 <template>
   <div class="intro-section-patients-container">
-    <div class="intro-title">ارتباط تلفنی و مستقیم با پزشک</div>
+    <div class="intro-title">2ارتباط تلفنی و مستقیم با پزشک</div>
     <div class="intro-description">با سـامانه رِسا از هـر جایی با پـزشـک خـود مـشـورت کنید</div>
     <div class="intro-buttons">
       <a v-scroll-to="{ el: '#register', offset: -50 }" class="button">ثبت نام رایگان</a>

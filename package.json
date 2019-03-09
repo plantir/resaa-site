@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "serve:dev": "npm run dev",
-    "dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x node server.js",
+    "dev": "cross-env ENV_PATH=.env.development nodemon --watch app --watch bootstrap --watch config --watch .env.development -x node server.js",
     "build": "node ./ace nuxtbuild && npm run sitemap",
     "sitemap": "node sitemap_generator.js",
     "start": "cross-env NODE_ENV=production node server.js"
