@@ -28,7 +28,7 @@
   background-image: linear-gradient(10deg, #33e4ea, #00b2ed);
   font-weight: 500;
   text-align: center;
-  font-size: 3.5rem;
+  font-size: 2.675rem;
   -webkit-background-clip: text;
   margin-bottom: 15px;
   -webkit-text-fill-color: transparent;
@@ -38,7 +38,7 @@
   color: #777590;
   text-align: center;
   font-style: normal;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 300;
 }
 
@@ -100,7 +100,7 @@
   color: $dark-blue-grey;
   font-weight: 500;
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .card {

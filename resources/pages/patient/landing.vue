@@ -22,6 +22,19 @@ import PatientTelegram from "~/components/patient/Telegram/Telegram";
 import PatientDownload from "~/components/patient/Download/Download";
 
 export default {
+  head() {
+    return {
+      title: "چگونگی ارتباط تلفنی بیمار با پزشک از طریق رِسا",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "با استفاده از رسا تماس های غیر ضروری خود از سمت بیماران را حذف کنید و مکالمات غیر مربوط به روند درمانی را کاهش رایگان ثبت‌نام کنید و با دسترسی به پزشکان معرفی‌شده در وب‌سایت رسا، تماس مستقیم با بهترین پزشکان متخصص را با صرفه‌جویی در وقت و هزینه خود، تجربه کنید"
+        }
+      ]
+    };
+  },
   components: {
     PatientIntro,
     PatientBenefits,

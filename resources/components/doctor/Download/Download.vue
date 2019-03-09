@@ -22,7 +22,7 @@
 
 .section-title {
   background-image: linear-gradient(240deg, #3de0cb, #0dc9f0);
-  font-size: 3.5rem;
+  font-size: 2.675rem;
   font-weight: 500;
   text-align: center;
   -webkit-background-clip: text;
@@ -35,7 +35,7 @@
   color: #777590;
   text-align: center;
   font-style: normal;
-  font-size: 2rem;
+  font-size: 1.675rem;
   font-weight: 300;
 }
 

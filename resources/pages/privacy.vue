@@ -61,6 +61,19 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: "قوانین رسا درمورد حریم خصوصی و استفاده از اطلاعات",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "یکی از مهمترین ارزش‌های ارائه شده توسط سامانه رسا، حفاظت از اطلاعاتی است که کاربر مستقیما به رسا می‌دهد یا رسا طی استفاده کاربر از سامانه توسط کاربر به آن دسترسی می‌یابد"
+        }
+      ]
+    };
+  },
   computed: {
     privacy() {
       return this.$store.state.privacy.list;

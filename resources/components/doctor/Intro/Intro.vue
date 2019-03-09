@@ -80,7 +80,7 @@
   text-align: center;
   color: white;
   font-weight: 500;
-  font-size: 3rem;
+  font-size: 2.375rem;
 }
 
 .intro-description {
@@ -88,6 +88,7 @@
   color: white;
   font-weight: normal;
   text-align: center;
+  font-size: 1.075rem;
 }
 
 .next-section-button {
@@ -111,7 +112,7 @@
     width: 50px;
     color: white;
     background-color: $light-gold;
-    font-size: 3.5rem;
+    font-size: 2.675rem;
     display: flex;
     justify-content: center;
     align-items: center;

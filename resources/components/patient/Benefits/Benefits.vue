@@ -64,7 +64,7 @@ export default {};
   -webkit-text-fill-color: transparent;
   font-weight: 500;
   text-align: center;
-  font-size: 3.5rem;
+  font-size: 2.675rem;
   margin-bottom: 15px;
 }
 
@@ -107,7 +107,7 @@ export default {};
 .benefits-text-title {
   color: #757779;
   font-weight: 500;
-  font-size: 2rem;
+  font-size: 1.475rem;
   margin-bottom: 10px;
 }
 

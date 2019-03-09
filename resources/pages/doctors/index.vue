@@ -471,7 +471,16 @@
 export default {
   head() {
     return {
-      title: "ورود به بخش پزشکان"
+      title: "لیست پزشکان سامانه رسا",
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "با جستجوی نام پزشک، کد رسای پزشک، تخصص یا استانی که پزشک در آن فعالیت دارد، پزشک مورد نظر خود را بیابید. همچنین می‌توانید همه‌ی پزشکان همکار رسا را در لیست پزشکان بیابید"
+        }
+      ]
     };
   },
   data: () => ({

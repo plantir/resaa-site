@@ -1,83 +1,3 @@
-<template>
-  <div class="procedure-section-patients-container">
-    <div class="procedure-title">روش کار رِسا</div>
-    <div class="procedure-description">چطور با پزشک خود در ارتباط باشم؟</div>
-    <div class="procedure-items-container">
-      <div class="procedure-item item-odd">
-        <div class="item-text">
-          <div class="item-number">۱</div>
-          <div class="item-description-title">ثبت نام رایگان در رِسا</div>
-          <div class="item-description">
-            - با شماره گیری ۷۴۴۷۱۱۱۱-۰۲۱ در سامانه یا از طریق همین
-            <a
-              v-scroll-to="{ el: '#register', offset: -50 }"
-              class="item-description-link"
-            >سایت</a>
-            و یا
-            <a
-              v-scroll-to="{ el: '#download', offset: -50 }"
-              class="item-description-link"
-            >اپلیکیشن رِسا</a>
-            می&#160;توانید اقدام به ثبت نام کنید.
-          </div>
-        </div>
-        <img class="item-image" src="./Item1.png">
-      </div>
-      <div class="procedure-item item-even">
-        <div class="item-text">
-          <div class="item-number">۲</div>
-          <div class="item-description-title">جستجوی کد رِسای پزشک خود</div>
-          <div class="item-description">
-            - برای ارتباط با پزشک به کد رِسای آن نیاز است که از طریق همین
-            <a
-              v-scroll-to="{ el: '#doctors', offset: -50 }"
-              class="item-description-link"
-            >سایت</a>
-            و یا
-            <a
-              v-scroll-to="{ el: '#download', offset: -50 }"
-              class="item-description-link"
-            >اپلیکیشن رِسا</a>
-            می&#160;توانید کد و مشخصات پزشک خود را بیابید.
-          </div>
-        </div>
-        <img class="item-image" src="./Item2P.png">
-      </div>
-      <div class="procedure-item item-odd">
-        <div class="item-text">
-          <div class="item-number">۳</div>
-          <div class="item-description-title">براحتی گفتگو کنید</div>
-          <div class="item-description-list">
-            <div class="item-description">- با پزشک خود بصورت مستقیم گفتگو کنید.</div>
-            <div class="item-description">
-              -
-              هزینه تماس
-              به صورت دقیقه‌ای محاسبه خواهد شد.
-            </div>
-            <div class="item-description">- اولین تماس مهمان رسا هستید.
-              <v-tooltip bottom>
-                <template #activator="data">
-                  <i title class="fa fa-exclamation-circle"></i>
-                </template>
-                <span>به درخواست خود پزشکان، بعضی از آنها از این قاعده مستثنا می باشند</span>
-              </v-tooltip>
-            </div>
-          </div>
-        </div>
-        <img class="item-image" src="./Item3.png">
-      </div>
-    </div>
-
-    <div class="procedure-button-container">
-      <a href="#register" class="procedure-signup-button">ثبت نام رایگان</a>
-      <a href="#download" class="procedure-download-button">دریافت اپلیکیشن</a>
-    </div>
-  </div>
-</template>
-
-<script>
-export default {};
-</script>
 
 <style lang="scss">
 .tooltip {
@@ -95,7 +15,7 @@ export default {};
     text-align: center;
     color: white;
     font-weight: 500;
-    font-size: 3rem;
+    font-size: 2.375rem;
     text-shadow: 0 1px 5px rgba(12, 108, 124, 0.35);
   }
 
@@ -148,11 +68,13 @@ export default {};
   }
 
   .item-description-title {
-    font-size: 1.5rem;
+    font-size: 1.175rem;
     font-weight: 600;
     margin-bottom: 10px;
   }
-
+  .item-description {
+    font-size: 1rem;
+  }
   .item-description-link {
     cursor: pointer;
     color: white;
@@ -267,3 +189,84 @@ export default {};
   }
 }
 </style>
+
+<template>
+  <div class="procedure-section-patients-container">
+    <div class="procedure-title">روش کار رِسا</div>
+    <div class="procedure-description">چطور با پزشک خود در ارتباط باشم؟</div>
+    <div class="procedure-items-container">
+      <div class="procedure-item item-odd">
+        <div class="item-text">
+          <div class="item-number">۱</div>
+          <div class="item-description-title">ثبت نام رایگان در رِسا</div>
+          <div class="item-description">
+            - با شماره گیری ۷۴۴۷۱۱۱۱-۰۲۱ در سامانه یا از طریق همین
+            <a
+              v-scroll-to="{ el: '#register', offset: -50 }"
+              class="item-description-link"
+            >سایت</a>
+            و یا
+            <a
+              v-scroll-to="{ el: '#download', offset: -50 }"
+              class="item-description-link"
+            >اپلیکیشن رِسا</a>
+            می&#160;توانید اقدام به ثبت نام کنید.
+          </div>
+        </div>
+        <img class="item-image" src="./Item1.png">
+      </div>
+      <div class="procedure-item item-even">
+        <div class="item-text">
+          <div class="item-number">۲</div>
+          <div class="item-description-title">جستجوی کد رِسای پزشک خود</div>
+          <div class="item-description">
+            - برای ارتباط با پزشک به کد رِسای آن نیاز است که از طریق همین
+            <a
+              v-scroll-to="{ el: '#doctors', offset: -50 }"
+              class="item-description-link"
+            >سایت</a>
+            و یا
+            <a
+              v-scroll-to="{ el: '#download', offset: -50 }"
+              class="item-description-link"
+            >اپلیکیشن رِسا</a>
+            می&#160;توانید کد و مشخصات پزشک خود را بیابید.
+          </div>
+        </div>
+        <img class="item-image" src="./Item2P.png">
+      </div>
+      <div class="procedure-item item-odd">
+        <div class="item-text">
+          <div class="item-number">۳</div>
+          <div class="item-description-title">براحتی گفتگو کنید</div>
+          <div class="item-description-list">
+            <div class="item-description">- با پزشک خود بصورت مستقیم گفتگو کنید.</div>
+            <div class="item-description">
+              -
+              هزینه تماس
+              به صورت دقیقه‌ای محاسبه خواهد شد.
+            </div>
+            <div class="item-description">- اولین تماس مهمان رسا هستید.
+              <v-tooltip bottom>
+                <template #activator="data">
+                  <i title class="fa fa-exclamation-circle"></i>
+                </template>
+                <span>به درخواست خود پزشکان، بعضی از آنها از این قاعده مستثنا می باشند</span>
+              </v-tooltip>
+            </div>
+          </div>
+        </div>
+        <img class="item-image" src="./Item3.png">
+      </div>
+    </div>
+
+    <div class="procedure-button-container">
+      <a href="#register" class="procedure-signup-button">ثبت نام رایگان</a>
+      <a href="#download" class="procedure-download-button">دریافت اپلیکیشن</a>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {};
+</script>

@@ -414,7 +414,7 @@ export default {
   layout: "landing",
   head() {
     return {
-      title: "تایتل تستی",
+      title: "رِسا، رسانه سلامت ایرانیان",
       meta: [
         // hid is used as unique identifier. Do not use `vmid` for it as it will not work
         {

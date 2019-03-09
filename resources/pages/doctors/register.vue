@@ -87,6 +87,19 @@ import Step5 from "~/components/doctor/register/Step5";
 import Step6 from "~/components/doctor/register/Step6";
 // import VueRecaptcha from "vue-recaptcha";
 export default {
+  head() {
+    return {
+      title: "چرا باید پزشکان عضو سامانه رسا شوند؟",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "با استفاده از رسا تماس های غیر ضروری خود از سمت بیماران را حذف کنید و مکالمات غیر مربوط به روند درمانی را کاهش رایگان ثبت‌نام کنید و با دسترسی به پزشکان معرفی‌شده در وب‌سایت رسا، تماس مستقیم با بهترین پزشکان متخصص را با صرفه‌جویی در وقت و هزینه خود، تجربه پزشکان گرامی، شما می‌توانید با مطالعه خدماتی که رسا به پزشکان می‌دهد، عضو رسا شده و به راحتی تماس‌های دریافتی خود را مدیریت کنید"
+        }
+      ]
+    };
+  },
   components: {
     Step1,
     Step2,
@@ -96,11 +109,6 @@ export default {
     Step6,
     StepIndicator
     // VueRecaptcha
-  },
-  head() {
-    return {
-      title: "ثبت نام به عنوان پزشک"
-    };
   },
   data() {
     return {

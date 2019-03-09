@@ -10,7 +10,7 @@
   text-align: center;
   color: white;
   font-weight: 500;
-  font-size: 3rem;
+  font-size: 2.375rem;
   text-shadow: 0 1px 5px rgba(12, 108, 124, 0.35);
 }
 
@@ -63,11 +63,13 @@
 }
 
 .item-description-title {
-  font-size: 1.5rem;
+  font-size: 1.175rem;
   font-weight: 600;
   margin-bottom: 10px;
 }
-
+.item-description {
+  font-size: 1rem;
+}
 .item-description-link {
   cursor: pointer;
   color: white;

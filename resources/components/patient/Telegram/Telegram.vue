@@ -57,7 +57,7 @@ export default {};
 
 .telegram-title {
   color: #27d3df;
-  font-size: 3rem;
+  font-size: 2.375rem;
   font-weight: 500;
   margin-bottom: 20px;
 }
@@ -65,7 +65,7 @@ export default {};
 .telegram-description {
   margin-bottom: 30px;
   color: #777590;
-  font-size: 1.6rem;
+  font-size: 1.275rem;
 }
 .link-wrapper {
   display: flex;

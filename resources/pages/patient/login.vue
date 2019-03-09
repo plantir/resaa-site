@@ -1,103 +1,3 @@
-<template>
-  <v-container>
-    <v-loading v-if="ajaxLoading" mode="relative"></v-loading>
-    <div class="login-patient-container">
-      <div class="section-title">حساب کاربری</div>
-      <div class="section-description">جهت دسترسی به خدمات برخط سامانه رِسا، لطفا وارد شوید</div>
-      <div class="patient-username">
-        <i class="fa fa-user"></i>
-        <input
-          v-model="user.username"
-          @input="checkNumber"
-          placeholder="پنج رقم آخر شماره کاربری / شماره موبایل"
-          @keyup.enter="login"
-        >
-      </div>
-      <div class="patient-password">
-        <i class="fa fa-lock"></i>
-        <input v-model="user.password" type="password" placeholder="کلمه عبور" @keyup.enter="login">
-      </div>
-      <button :disabled="error" @click="login" class="login-button">ورود به حساب کاربری</button>
-      <div v-if="error" class="error-message">{{error}}</div>
-      <div v-if="erroMessage" class="error-message">{{erroMessage}}</div>
-      <!-- <div class="forgot-password">
-        <a>یادآوری کلمه عبور</a>
-      </div>-->
-      <div class="sign-up">حساب کاربری ندارید؟
-        <router-link :to="{name:'patient-register'}" class="sign-up-link">رایگان ثبت نام کنید</router-link>
-      </div>
-    </div>
-  </v-container>
-</template>
-
-<script>
-import jwtDecode from "jwt-decode";
-export default {
-  data() {
-    return {
-      user: {
-        grant_type: "password"
-      },
-      error: null,
-      erroMessage: null,
-      ajaxLoading: false,
-      mobile_regex: /^[0][9][0-3|9][0-9]{8,8}$/g,
-      subscribe_regex: /^[0-9]{5,5}$/g
-    };
-  },
-  methods: {
-    checkNumber() {
-      this.error = null;
-      let is_mobile = this.mobile_regex.exec(this.user.username);
-      if (is_mobile) {
-        return;
-      }
-      let is_subscribe = this.subscribe_regex.exec(this.user.username);
-      if (is_subscribe) {
-        return;
-      }
-      this.error = "فرمت نام کاربری اشتباه است";
-    },
-    login() {
-      this.ajaxLoading = true;
-      let data = `username=${this.user.username}&password=${
-        this.user.password
-      }&grant_type=${this.user.grant_type}`;
-      this.$http
-        .post("oauth2/token", data, {
-          headers: {
-            "Content-type": "application/x-www-form-urlencoded"
-          }
-        })
-        .then(res => {
-          this.ajaxLoading = false;
-          let decoded_token = jwtDecode(res.body.access_token);
-          let id =
-            decoded_token[
-              "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
-            ];
-
-          this.$http
-            .get(`Accounts/${id}/Profile`, {
-              headers: {
-                Authorization: `Bearer ${res.body.access_token}`
-              }
-            })
-            .then(Response => {
-              res.body.firstName = Response.body.result.profile.firstName;
-              this.ajaxLoading = false;
-              this.$store.commit("patient/login", res.body);
-              this.$router.push({ name: "patient-landing" });
-            });
-        })
-        .catch(() => {
-          this.erroMessage = "نام کاربری یا رمز عبور اشتباه است";
-          this.ajaxLoading = false;
-        });
-    }
-  }
-};
-</script>
 
 <style lang="scss" scoped>
 .login-patient-container {
@@ -266,4 +166,118 @@ export default {
     background-size: contain;
   }
 }
+.forget-password {
+  text-align: center;
+  margin-top: 16px;
+  color: #7e86a6;
+}
 </style>
+<template>
+  <v-container>
+    <v-loading v-if="ajaxLoading" mode="relative"></v-loading>
+    <div class="login-patient-container">
+      <div class="section-title">حساب کاربری</div>
+      <div class="section-description">جهت دسترسی به خدمات برخط سامانه رِسا، لطفا وارد شوید</div>
+      <div class="patient-username">
+        <i class="fa fa-user"></i>
+        <input
+          v-model="user.username"
+          @input="checkNumber"
+          placeholder="پنج رقم آخر شماره کاربری / شماره موبایل"
+          @keyup.enter="login"
+        >
+      </div>
+      <div class="patient-password">
+        <i class="fa fa-lock"></i>
+        <input v-model="user.password" type="password" placeholder="کلمه عبور" @keyup.enter="login">
+      </div>
+      <button :disabled="error" @click="login" class="login-button">ورود به حساب کاربری</button>
+      <div v-if="error" class="error-message">{{error}}</div>
+      <div v-if="erroMessage" class="error-message">{{erroMessage}}</div>
+      <!-- <div class="forgot-password">
+        <a>یادآوری کلمه عبور</a>
+      </div>-->
+      <div class="sign-up">حساب کاربری ندارید؟
+        <router-link :to="{name:'patient-register'}" class="sign-up-link">رایگان ثبت نام کنید</router-link>
+      </div>
+      <div
+        class="forget-password"
+      >در صورتی که کد کاربری و رمز عبور خود را فراموش کرده اید با موبایلی که ثبت نام کردید عدد 1 را به شماره 100074471111 ارسال کنید.</div>
+    </div>
+  </v-container>
+</template>
+
+<script>
+import jwtDecode from "jwt-decode";
+export default {
+  head() {
+    return {
+      title: "ورود به بخش بیماران"
+    };
+  },
+  data() {
+    return {
+      user: {
+        grant_type: "password"
+      },
+      error: null,
+      erroMessage: null,
+      ajaxLoading: false,
+      mobile_regex: /^[0][9][0-3|9][0-9]{8,8}$/g,
+      subscribe_regex: /^[0-9]{5,5}$/g
+    };
+  },
+  methods: {
+    checkNumber() {
+      this.error = null;
+      let is_mobile = this.mobile_regex.exec(this.user.username);
+      if (is_mobile) {
+        return;
+      }
+      let is_subscribe = this.subscribe_regex.exec(this.user.username);
+      if (is_subscribe) {
+        return;
+      }
+      this.error = "فرمت نام کاربری اشتباه است";
+    },
+    login() {
+      this.ajaxLoading = true;
+      let data = `username=${this.user.username}&password=${
+        this.user.password
+      }&grant_type=${this.user.grant_type}`;
+      this.$http
+        .post("oauth2/token", data, {
+          headers: {
+            "Content-type": "application/x-www-form-urlencoded"
+          }
+        })
+        .then(res => {
+          this.ajaxLoading = false;
+          let decoded_token = jwtDecode(res.body.access_token);
+          let id =
+            decoded_token[
+              "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+            ];
+
+          this.$http
+            .get(`Accounts/${id}/Profile`, {
+              headers: {
+                Authorization: `Bearer ${res.body.access_token}`
+              }
+            })
+            .then(Response => {
+              res.body.firstName = Response.body.result.profile.firstName;
+              this.ajaxLoading = false;
+              this.$store.commit("patient/login", res.body);
+              this.$router.push({ name: "patient-landing" });
+            });
+        })
+        .catch(() => {
+          this.erroMessage = "نام کاربری یا رمز عبور اشتباه است";
+          this.ajaxLoading = false;
+        });
+    }
+  }
+};
+</script>
+

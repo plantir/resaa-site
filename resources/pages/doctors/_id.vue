@@ -346,7 +346,7 @@
           <GmapMap
             ref="mapRef"
             :options="{disableDefaultUI: true}"
-            :center="{lat:35.730524, lng:51.414794}"
+            :center="center"
             :zoom="15"
             style="width: 100%; height:300px"
           >
@@ -365,19 +365,37 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  metaInfo() {
+  head() {
     return {
-      title: this.title || "رسا، رسانه سلامت ایرانیان"
+      title: this.title
+      // meta: [
+      //   {
+      //     hid: "description",
+      //     name: "description",
+      //     content:
+      //       "با استفاده از رسا تماس های غیر ضروری خود از سمت بیماران را حذف کنید و مکالمات غیر مربوط به روند درمانی را کاهش دهید"
+      //   }
+      // ]
     };
   },
-  data: () => ({
-    doctor: null,
-    ajaxLoading: true,
-    duration: null,
-    showMap: true,
-    title: null
-  }),
+
+  async asyncData({ store, params }) {
+    let { data } = await axios.get(
+      `${process.env.API_URL}/Doctors/${params.id}?fields=firstName,lastName`
+    );
+    let title = `دکتر ${data.result.doctor.firstName} ${
+      data.result.doctor.lastName
+    } - شماره تلفن مستقیم - رسا`;
+    return {
+      doctor: null,
+      ajaxLoading: true,
+      duration: null,
+      showMap: true,
+      title: title
+    };
+  },
   beforeCreate() {
     this.fields =
       "id,firstName,lastName,image,currentlyAvailable,subscriberNumber,specialty,tags,expertise,timetable,title,workplaces,medicalCouncilNumber";
@@ -392,9 +410,7 @@ export default {
       )
       .then(response => {
         this.ajaxLoading = false;
-        this.title = `دکتر ${response.data.result.doctor.firstName} ${
-          response.data.result.doctor.lastName
-        } - شماره تلفن مستقیم - رسا`;
+
         this.doctor = response.data.result.doctor;
         if (this.doctor.workplaces.lenght > 1) {
           setTimeout(() => {
@@ -410,6 +426,10 @@ export default {
             });
           }, 100);
         } else {
+          this.center = {
+            lat: this.doctor.workplaces[0].latitude,
+            lng: this.doctor.workplaces[0].longitude
+          };
           if (
             this.doctor.workplaces.length == 0 ||
             !this.doctor.workplaces[0].longitude
