@@ -1,13 +1,14 @@
 {
   "name": "resaa",
   "version": "1.0.0",
-  "description": "resaa ssr",
+  "description": "رسا سامانه سلامت ایرانیان",
   "author": "armin",
   "private": true,
   "scripts": {
     "serve:dev": "npm run dev",
     "dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x node server.js",
-    "build": "node ./ace nuxtbuild",
+    "build": "node ./ace nuxtbuild && npm run sitemap",
+    "sitemap": "node sitemap_generator.js",
     "start": "cross-env NODE_ENV=production node server.js"
   },
   "dependencies": {
@@ -39,6 +40,7 @@
     "parallax-js": "^3.1.0",
     "postcss-preset-env": "^6.5.0",
     "sass-loader": "^7.1.0",
+    "sitemap": "^2.1.0",
     "swiper": "^4.4.6",
     "vee-validate": "^2.1.7",
     "vue-awesome-swiper": "^3.1.3",

@@ -6,6 +6,16 @@
   "configurations": [{
       "type": "node",
       "request": "launch",
+      "name": "sitemap",
+      "runtimeExecutable": "nodemon",
+      "program": "${workspaceFolder}/sitemap_generator.js",
+      "restart": true,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "nodemon",
       "runtimeExecutable": "nodemon --watch app --watch bootstrap --watch config --watch .env -x node",
       "program": "${workspaceFolder}/server.js",

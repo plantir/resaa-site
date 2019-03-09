@@ -369,31 +369,33 @@ import axios from "axios";
 export default {
   head() {
     return {
-      title: this.title
-      // meta: [
-      //   {
-      //     hid: "description",
-      //     name: "description",
-      //     content:
-      //       "با استفاده از رسا تماس های غیر ضروری خود از سمت بیماران را حذف کنید و مکالمات غیر مربوط به روند درمانی را کاهش دهید"
-      //   }
-      // ]
+      title: this.title,
+      meta: [
+        {
+          property: "og:image",
+          content: this.doctor_image
+        }
+      ]
     };
   },
 
   async asyncData({ store, params }) {
     let { data } = await axios.get(
-      `${process.env.API_URL}/Doctors/${params.id}?fields=firstName,lastName`
+      `${process.env.API_URL}/Doctors/${
+        params.id
+      }?fields=firstName,lastName,image`
     );
     let title = `دکتر ${data.result.doctor.firstName} ${
       data.result.doctor.lastName
     } - شماره تلفن مستقیم - رسا`;
+    let doctor_image = data.result.doctor.image || "/img/doc-placeholder.png";
     return {
       doctor: null,
       ajaxLoading: true,
       duration: null,
       showMap: true,
-      title: title
+      title: title,
+      doctor_image
     };
   },
   beforeCreate() {
