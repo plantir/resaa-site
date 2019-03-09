@@ -374,6 +374,14 @@ export default {
         {
           property: "og:image",
           content: this.doctor_image
+        },
+        {
+          property: "og:title",
+          content: this.title
+        },
+        {
+          property: "og:description",
+          content: this.title
         }
       ]
     };
