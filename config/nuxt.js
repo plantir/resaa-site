@@ -1,7 +1,6 @@
 const pkg = require('../package')
 const resolve = require('path').resolve
 
-
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
 module.exports = {
@@ -15,21 +14,24 @@ module.exports = {
   srcDir: resolve(__dirname, '..', 'resources'),
   server: {
     port: 8000, // default: 3000
-    host: '0.0.0.0', // default: localhost
+    host: '0.0.0.0' // default: localhost
   },
-  serverMiddleware: [{
-    path: '/patient/profile',
-    handler: (req, res, next) => {
-      res.spa = true;
-      next()
+  serverMiddleware: [
+    {
+      path: '/patient/profile',
+      handler: (req, res, next) => {
+        res.spa = true
+        next()
+      }
     }
-  }],
+  ],
   /*
    ** Headers of the page
    */
   head: {
     title: 'رسا ، سامانه سلامت ایرانیان',
-    meta: [{
+    meta: [
+      {
         charset: 'utf-8'
       },
       {
@@ -43,19 +45,25 @@ module.exports = {
       {
         hid: 'description',
         name: 'description',
-        content: "با استفاده از رسا تماس های غیر ضروری خود از سمت بیماران را حذف کنید و مکالمات غیر مربوط به روند درمانی را کاهش رایگان ثبت‌نام کنید و با دسترسی به پزشکان معرفی‌شده در وب‌سایت رسا، تماس مستقیم با بهترین پزشکان متخصص را با صرفه‌جویی در وقت و هزینه خود، تجربه کنید"
+        content:
+          'با استفاده از رسا تماس های غیر ضروری خود از سمت بیماران را حذف کنید و مکالمات غیر مربوط به روند درمانی را کاهش رایگان ثبت‌نام کنید و با دسترسی به پزشکان معرفی‌شده در وب‌سایت رسا، تماس مستقیم با بهترین پزشکان متخصص را با صرفه‌جویی در وقت و هزینه خود، تجربه کنید'
       }
     ],
-    link: [{
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: '/favicon.ico'
-    }],
-    script: [{
-      src: 'https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit&hl=fa',
-      defer: true,
-      async: true
-    }]
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico'
+      }
+    ],
+    script: [
+      {
+        src:
+          'https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit&hl=fa',
+        defer: true,
+        async: true
+      }
+    ]
   },
 
   /*
@@ -101,6 +109,10 @@ module.exports = {
       src: '~/plugins/resource.js',
       ssr: false
     },
+    {
+      src: '~/plugins/custom-scroll.js',
+      ssr: false
+    }
   ],
 
   /*
@@ -110,18 +122,22 @@ module.exports = {
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
     ['~/modules/nuxt-recaptcha'],
-    ['~/modules/nuxt-validate', {
-      lang: 'fa',
-    }],
+    [
+      '~/modules/nuxt-validate',
+      {
+        lang: 'fa'
+      }
+    ],
     '~/modules/nuxt-service',
-    ['@nuxtjs/google-analytics', {
-      id: 'UA-135235561-1'
-    }]
+    [
+      '@nuxtjs/google-analytics',
+      {
+        id: 'UA-135235561-1'
+      }
+    ]
   ],
   styleResources: {
-    scss: [
-      'assets/style/variables.scss',
-    ]
+    scss: ['assets/style/variables.scss']
   },
   /*
    ** Build configuration
@@ -131,14 +147,14 @@ module.exports = {
     plugins: [new VuetifyLoaderPlugin()],
     loaders: {
       stylus: {
-        //import: ["~assets/style/variables.styl"]
+        // import: ["~assets/style/variables.styl"]
       }
     },
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {
-      console.log(config);
+    extend (config, ctx) {
+      console.log(config)
     }
   }
 }
