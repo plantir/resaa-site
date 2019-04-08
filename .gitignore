@@ -80,3 +80,4 @@ dist
 
 # Service worker
 sw.*
+iisnode/
