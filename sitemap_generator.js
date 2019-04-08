@@ -57,7 +57,10 @@ request.get(
   {
     method: 'GET',
     uri: `${API_URL}/misc/sitemap`,
-    json: true
+    json: true,
+    rejectUnauthorized: true,
+    requestCert: true,
+    agent: false
   },
   (error, response, body) => {
     let temp = {
