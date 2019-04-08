@@ -274,7 +274,7 @@
       <div class="doctor-info">
         <div class="doctor-avatar">
           <div class="doctor-avatar-image">
-            <img v-if="doctor.image" :src="doctor.image">
+            <img v-if="doctor.imagePath" :src="'https://webapi.resaa.net/'+doctor.imagePath">
             <img v-else src="/img/doc-placeholder.png" alt>
           </div>
           <div class="doctor-resaa-info">
@@ -293,10 +293,12 @@
           <div class="specialty-area-container">
             <div v-for="tag in doctor.tags" :key="tag.id" class="specialty-area">{{tag.title}}</div>
           </div>
-          <div class="doctor-np">کد نظام پزشکی:
+          <div class="doctor-np">
+            کد نظام پزشکی:
             <div class="doctor-np-code">{{doctor.medicalCouncilNumber || '-'}}</div>
           </div>
-          <div v-if="user" class="available-time-container">مدت زمان قابل گفتگو:
+          <div v-if="user" class="available-time-container">
+            مدت زمان قابل گفتگو:
             <div class="available-time">{{duration}}</div>
             <div class="available-time-unit">دقیقه</div>
           </div>
@@ -400,13 +402,15 @@ export default {
     let { data } = await axios.get(
       `${process.env.API_URL}/Doctors/${
         params.id
-      }?fields=firstName,lastName,image,specialty`
+      }?fields=firstName,lastName,imagePath,specialty`
     );
     let title = `دکتر ${data.result.doctor.firstName} ${
       data.result.doctor.lastName
     } - شماره تلفن مستقیم - رسا`;
     let og = {
-      image: data.result.doctor.image || "/img/doc-placeholder.png",
+      image:
+        "https://webapi.resaa.net/" + data.result.doctor.imagePath ||
+        "/img/doc-placeholder.png",
       site_name: `رسا : دکتر ${data.result.doctor.firstName} ${
         data.result.doctor.lastName
       }`,
@@ -424,7 +428,7 @@ export default {
   },
   beforeCreate() {
     this.fields =
-      "id,firstName,lastName,image,currentlyAvailable,subscriberNumber,specialty,tags,expertise,timetable,title,workplaces,medicalCouncilNumber";
+      "id,firstName,lastName,imagePath,currentlyAvailable,subscriberNumber,specialty,tags,expertise,timetable,title,workplaces,medicalCouncilNumber";
   },
   created() {
     console.log(this.$route);

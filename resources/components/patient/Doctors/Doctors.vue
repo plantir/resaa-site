@@ -351,7 +351,11 @@
               <div class="doctors-item-info">
                 <div class="item-right-section">
                   <div class="item-avatar">
-                    <img v-if="doctor.image" :src="doctor.image" alt>
+                    <img
+                      v-if="doctor.imagePath"
+                      :src="'https://webapi.resaa.net/'+doctor.imagePath"
+                      alt
+                    >
                     <img v-else src="/img/doc-placeholder.png" alt>
                   </div>
                   <div class="item-right-sub-section">
@@ -419,7 +423,7 @@ export default {
     page: 1,
     totalItems: 0,
     filter: ""
-    // items: "id,specialty,subscriberNumber,firstName,lastName,image"
+    // items: "id,specialty,subscriberNumber,firstName,lastName,imagePath"
   }),
   beforeCreate() {
     let actions = {
@@ -429,7 +433,7 @@ export default {
       }
     };
     this.$doctors = this.$resource("Doctors", {}, actions);
-    this.fields = "id,specialty,subscriberNumber,firstName,lastName,image";
+    this.fields = "id,specialty,subscriberNumber,firstName,lastName,imagePath";
   },
   created() {
     this.getDoctors();

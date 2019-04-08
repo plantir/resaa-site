@@ -406,7 +406,11 @@
                   <div class="doctors-item-info">
                     <div class="item-right-section">
                       <div class="item-avatar">
-                        <img v-if="doctor.image" :src="doctor.image" alt>
+                        <img
+                          v-if="doctor.imagePath"
+                          :src="'https://webapi.resaa.net/'+doctor.imagePath"
+                          alt
+                        >
                         <img v-else src="/img/doc-placeholder.png" alt>
                       </div>
                       <div class="item-right-sub-section">
@@ -525,7 +529,7 @@ export default {
         }
       }
     );
-    this.fields = "id,specialty,subscriberNumber,firstName,lastName,image";
+    this.fields = "id,specialty,subscriberNumber,firstName,lastName,imagePath";
   },
   created() {
     this.getDoctors();
