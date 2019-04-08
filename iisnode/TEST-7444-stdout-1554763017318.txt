@@ -1,0 +1,1 @@
+2019-04-08T22:36:58.417Z - [32minfo[39m: [32mserving app on http://127.0.0.1:\\.\pipe\fda02f1a-26cf-4a19-8879-c92c46accdfb[39m
