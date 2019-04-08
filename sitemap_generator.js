@@ -58,8 +58,8 @@ request.get(
     method: 'GET',
     uri: `${API_URL}/misc/sitemap`,
     json: true,
-    rejectUnauthorized: true,
-    requestCert: true,
+    rejectUnauthorized: false,
+    requestCert: false,
     agent: false
   },
   (error, response, body) => {
