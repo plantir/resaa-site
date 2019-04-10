@@ -367,7 +367,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   head() {
     return {
@@ -399,7 +398,7 @@ export default {
   },
 
   async asyncData({ store, params }) {
-    let { data } = await axios.get(
+    let { data } = await this.$axios.get(
       `${process.env.API_URL}/Doctors/${
         params.id
       }?fields=firstName,lastName,imagePath,specialty`
