@@ -397,11 +397,9 @@ export default {
     };
   },
 
-  async asyncData({ store, params }) {
-    let { data } = await this.$axios.get(
-      `${process.env.API_URL}/Doctors/${
-        params.id
-      }?fields=firstName,lastName,imagePath,specialty`
+  async asyncData({ store, params, $axios }) {
+    let { data } = await $axios.get(
+      `/Doctors/${params.id}?fields=firstName,lastName,imagePath,specialty`
     );
     let title = `دکتر ${data.result.doctor.firstName} ${
       data.result.doctor.lastName

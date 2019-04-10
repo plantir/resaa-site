@@ -134,7 +134,8 @@ module.exports = {
       {
         id: 'UA-135235561-1'
       }
-    ]
+    ],
+    '@nuxtjs/axios',
   ],
   styleResources: {
     scss: ['assets/style/variables.scss']
@@ -153,7 +154,7 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend (config, ctx) {
+    extend(config, ctx) {
       console.log(config)
     }
   }
