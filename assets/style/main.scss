@@ -11,7 +11,11 @@ html {
   font-size: 13px !important;
   overflow: auto;
 }
-
+.application,
+.title,
+.headline {
+  font-family: IRANSans, tahoma !important;
+}
 ul {
   list-style-type: none;
 }
