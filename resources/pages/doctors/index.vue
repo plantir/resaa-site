@@ -584,7 +584,7 @@ export default {
         url += `&cityId=${this.filter.cityId}`;
       }
       this.timeout = setTimeout(() => {
-        this.$http
+        this.$axios
           .get(url, {
             before(request) {
               if (this.previousRequest) {

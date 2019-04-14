@@ -465,7 +465,7 @@ export default {
       if (this.filter) {
         url += `&query=${this.filter}`;
       }
-      this.$http
+      this.$axios
         .get(url, {
           before(request) {
             if (this.previousRequest) {

@@ -512,7 +512,7 @@ export default {
     },
     get_profile() {
       this.ajaxLoading = true;
-      this.$http
+      this.$axios
         .get(`Accounts/${this.user_id}/Profile`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
@@ -526,7 +526,7 @@ export default {
         });
     },
     get_callhistory() {
-      this.$http
+      this.$axios
         .get(`Accounts/${this.user_id}/Calls`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
@@ -541,7 +541,7 @@ export default {
     },
     save() {
       this.saving = true;
-      this.$http
+      this.$axios
         .put(`Accounts/${this.user_id}/Profile`, this.editProfile, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
@@ -579,7 +579,7 @@ export default {
       this.saving = true;
       let data = new FormData();
       data.append("image", file);
-      this.$http
+      this.$axios
         .put(`Accounts/${this.user_id}/Profile/Image`, data, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`,
@@ -592,7 +592,7 @@ export default {
         });
     },
     removeImage() {
-      this.$http
+      this.$axios
         .delete(`Accounts/${this.user_id}/Profile/Image`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`

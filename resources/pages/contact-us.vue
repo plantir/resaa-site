@@ -298,7 +298,7 @@ export default {
   methods: {
     submitForm() {
       this.ajaxLoading = true;
-      this.$http
+      this.$axios
         .post("Inquiries", this.form)
         .then(Response => {
           console.log(Response);

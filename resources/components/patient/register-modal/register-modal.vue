@@ -268,7 +268,8 @@
 <template>
   <div class="register-container">
     <div class="register-message" v-if="$parent.currentStep === 1">
-      <div class="register-message-text">کد تایید به شماره همراه
+      <div class="register-message-text">
+        کد تایید به شماره همراه
         <div id="entered-registration-phone-number">{{ $parent.user.phoneNumber }}</div>پیامک شد.
         <br>کد را در کادر زیر وارد نمایید:
       </div>
@@ -336,7 +337,7 @@ export default {
     },
 
     verifySMSCode() {
-      this.$http
+      this.$axios
         .patch(`Patients/Registration/${this.registrationToken}`, {
           activationKey: this.activationKey
         })
@@ -349,7 +350,7 @@ export default {
         });
     },
     resendSMSCode: function() {
-      this.$http
+      this.$axios
         .post(
           `Patients/Registration/${this.registrationToken}/ResendActivationKey`
         )

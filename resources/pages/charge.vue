@@ -39,9 +39,8 @@
             :sitekey="sitekey"
           ></vue-recaptcha>
           <div class="error-message" v-if="error">{{error}}</div>
-          <div
-            class="charge-followup-description"
-          >در صورت بروز هرگونه مشکل در هنگام تراکنش شماره‌ی تلفن، کد پیگیری و شماره‌ی رِسای خود را
+          <div class="charge-followup-description">
+            در صورت بروز هرگونه مشکل در هنگام تراکنش شماره‌ی تلفن، کد پیگیری و شماره‌ی رِسای خود را
             <br>به شماره‌ی ۱۰۰۰۹۰۹۹۰۹۹۰۹۹ ارسال کنید، کارشناسان ما با شما تماس خواهند گرفت.
             <br>یا با شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل فرمایید.
           </div>
@@ -53,17 +52,20 @@
           <div class="charge-receipt-status">
             <div class="charge-receipt-status-text">پیش فاکتور</div>
             <div class="charge-receipt-status-container">
-              <div class="charge-receipt-amount-container">مبلغ شارژ:
+              <div class="charge-receipt-amount-container">
+                مبلغ شارژ:
                 <div
                   class="charge-receipt-amount"
                 >{{ pre_factor.chargeDenomination.payableAmount | currency | persianDigit }} تومان</div>
               </div>
-              <div class="charge-receipt-resaacode-container">کد رِسا:
+              <div class="charge-receipt-resaacode-container">
+                کد رِسا:
                 <div
                   class="charge-receipt-resaacode"
                 >{{ pre_factor.subscriberNumber | persianDigit }}</div>
               </div>
-              <div class="charge-receipt-phoneNum-container">شماره تلفن:
+              <div class="charge-receipt-phoneNum-container">
+                شماره تلفن:
                 <div
                   class="charge-receipt-phoneNum"
                 >{{ pre_factor.obfuscatedPhoneNumber | persianDigit }}</div>
@@ -74,10 +76,12 @@
                 {{pre_factor.gateway.submissionParameters.token}}
               </div>
               </div>-->
-              <div class="charge-receipt-date-container">تاریخ خرید:
+              <div class="charge-receipt-date-container">
+                تاریخ خرید:
                 <div class="charge-receipt-date">{{pre_factor.issuedAt | persianDate}}</div>
               </div>
-              <div class="charge-receipt-serial-container">شماره پیش‌فاکتور:
+              <div class="charge-receipt-serial-container">
+                شماره پیش‌فاکتور:
                 <div class="charge-receipt-serial">{{pre_factor.paymentRequestId}}</div>
               </div>
             </div>
@@ -92,16 +96,19 @@
         <div v-if="chargeStep === 'success'" class="charge-success">
           <div class="charge-success-container">
             <i class="fa fa-check-circle"></i>
-            <div class="charge-success-message">خرید شارژ
+            <div class="charge-success-message">
+              خرید شارژ
               <div
                 class="charge-success-amount"
               >{{ charge.amount | currency | persianDigit }} تومانی</div>با موفقیت انجام شد.
             </div>
             <div class="charge-success-info">
-              <div class="charge-success-tracking-code-container">کد پیگیری:
+              <div class="charge-success-tracking-code-container">
+                کد پیگیری:
                 <div class="charge-success-tracking-code">{{charge.trackingNumber}}</div>
               </div>
-              <div class="charge-success-credit-container">اعتبار فعلی شما:
+              <div class="charge-success-credit-container">
+                اعتبار فعلی شما:
                 <div class="charge-success-credit">{{ userCredit | currency | persianDigit }} تومان</div>
               </div>
               <p>در صورت وجود هر گونه مشکل و یا سوال میتوانید با پشتیبانی رسا به شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل نمایید.</p>
@@ -115,7 +122,8 @@
             <i class="fa fa-times-circle"></i>
             <div class="charge-failure-message">فرایند پرداخت با خطا روبرو شد.</div>
             <div class="charge-failure-info">
-              <div class="charge-failure-tracking-code-container">کد پیگیری:
+              <div class="charge-failure-tracking-code-container">
+                کد پیگیری:
                 <div class="charge-failure-tracking-code">{{charge.trackingNumber}}</div>
                 <div
                   class="charge-failure-description"
@@ -167,7 +175,7 @@ export default {
   },
   beforeCreate() {
     // if (this.$route.query.request_id) {
-    //   this.$http
+    //   this.$axios
     //     .get(`/Charge/${this.$route.query.request_id}/Receipt`)
     //     .then(response => {
     //       if (response.data.status === "OK") {
@@ -182,7 +190,7 @@ export default {
     // }
     // if (this.$route.query.chargeRequestId) {
     //   this.ajaxLoading = true;
-    //   this.$http
+    //   this.$axios
     //     .get(`Charge/${this.$route.query.chargeRequestId}/Receipt`)
     //     .then(res => {
     //       console.log(res);
@@ -196,7 +204,7 @@ export default {
     // }
   },
   created() {
-    this.$http.get("Charge/Denominations").then(response => {
+    this.$axios.get("Charge/Denominations").then(response => {
       this.chargeMenuItems = response.data.result.denominations;
       this.ajaxLoading = false;
       if (
@@ -214,7 +222,7 @@ export default {
     });
     if (this.$route.query.chargeRequestId) {
       this.ajaxLoading = true;
-      this.$http
+      this.$axios
         .get(`Charge/${this.$route.query.chargeRequestId}/Receipt`)
         .then(res => {
           console.log(res);
@@ -277,7 +285,7 @@ export default {
       } else if (subscriberNumber) {
         data.subscriberNumber = subscriberNumber[0];
       }
-      this.$http
+      this.$axios
         .post("Charge", data)
         .then(response => {
           this.pre_factor = response.data.result.electronicPaymentVoucher;

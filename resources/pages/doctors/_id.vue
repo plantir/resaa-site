@@ -429,7 +429,7 @@ export default {
   },
   created() {
     console.log(this.$route);
-    this.$http
+    this.$axios
       .get(
         `Doctors/${this.$route.params.id}?fields=${
           this.fields
@@ -466,7 +466,7 @@ export default {
         }
       });
     if (this.user) {
-      this.$http
+      this.$axios
         .get(
           `Doctors/${this.$route.params.subscriberNumber}/CommunicationQuote`,
           {

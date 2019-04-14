@@ -94,7 +94,7 @@ export default {
       if (this.query) {
         url += `&query=${this.query}`;
       }
-      this.$http
+      this.$axios
         .get(url, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`

@@ -135,7 +135,8 @@
 <template>
   <div class="register-section-patients-container" id="register">
     <div class="register-title">ثبت نام رایگان</div>
-    <div class="register-description">اولین تماس را مهمان رِسا باشید
+    <div class="register-description">
+      اولین تماس را مهمان رِسا باشید
       <v-tooltip bottom>
         <template #activator="data">
           <i title class="fa fa-exclamation-circle"></i>
@@ -215,7 +216,7 @@ export default {
       this.$refs.invisibleRecaptcha.execute();
     },
     register() {
-      this.$http
+      this.$axios
         .post("Patients/Registration", this.user)
         .then(response => {
           this.$store.commit(

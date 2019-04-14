@@ -167,7 +167,7 @@ export default {
       });
     },
     finish_register() {
-      this.$http
+      this.$axios
         .post("Doctors/Registration", this.doctor)
         .then(Response => {
           console.log(Response);

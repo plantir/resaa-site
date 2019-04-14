@@ -243,7 +243,7 @@ export default {
     };
   },
   created() {
-    this.$http.get("Charge/Denominations").then(response => {
+    this.$axios.get("Charge/Denominations").then(response => {
       this.chargeMenuItems = response.data.result.denominations;
     });
   }

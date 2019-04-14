@@ -29,7 +29,8 @@
       <!-- <div class="forgot-password">
         <a>یادآوری کلمه عبور</a>
       </div>-->
-      <div class="sign-up">حساب کاربری دارید؟
+      <div class="sign-up">
+        حساب کاربری دارید؟
         <router-link :to="{name:'patient-login'}" class="sign-up-link">وارد شوید</router-link>
       </div>
     </div>
@@ -54,7 +55,8 @@
       <!-- <div class="forgot-password">
         <a>یادآوری کلمه عبور</a>
       </div>-->
-      <div class="sign-up">حساب کاربری دارید؟
+      <div class="sign-up">
+        حساب کاربری دارید؟
         <router-link :to="{name:'patient-login'}" class="sign-up-link">وارد شوید</router-link>
       </div>
     </div>
@@ -99,7 +101,7 @@ export default {
       this.error = "فرمت شماره موبایل اشتباه است";
     },
     register() {
-      this.$http
+      this.$axios
         .post("Patients/Registration", this.user)
         .then(response => {
           this.$store.dispatch(
@@ -121,7 +123,7 @@ export default {
         });
     },
     verifySMSCode() {
-      this.$http
+      this.$axios
         .patch(`Patients/Registration/${this.registrationToken}`, {
           activationKey: this.activationKey
         })
@@ -135,7 +137,7 @@ export default {
         });
     },
     resendSMSCode: function() {
-      this.$http
+      this.$axios
         .post(
           `Patients/Registration/${this.registrationToken}/ResendActivationKey`
         )

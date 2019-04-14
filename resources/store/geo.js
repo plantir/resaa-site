@@ -1,5 +1,5 @@
 export const actions = {
   province() {
-    return this.$http.get('Geo/Provinces')
+    return this.$axios.get('Geo/Provinces')
   }
 }

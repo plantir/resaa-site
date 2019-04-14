@@ -197,7 +197,8 @@
       <!-- <div class="forgot-password">
         <a>یادآوری کلمه عبور</a>
       </div>-->
-      <div class="sign-up">حساب کاربری ندارید؟
+      <div class="sign-up">
+        حساب کاربری ندارید؟
         <router-link :to="{name:'patient-register'}" class="sign-up-link">رایگان ثبت نام کنید</router-link>
       </div>
       <div
@@ -245,7 +246,7 @@ export default {
       let data = `username=${this.user.username}&password=${
         this.user.password
       }&grant_type=${this.user.grant_type}`;
-      this.$http
+      this.$axios
         .post("oauth2/token", data, {
           headers: {
             "Content-type": "application/x-www-form-urlencoded"
@@ -259,7 +260,7 @@ export default {
               "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
             ];
 
-          this.$http
+          this.$axios
             .get(`Accounts/${id}/Profile`, {
               headers: {
                 Authorization: `Bearer ${res.body.access_token}`
