@@ -261,7 +261,7 @@ export default {
             ];
 
           this.$axios
-            .get(`Accounts/${id}/Profile`, {
+            .get(`/api/Accounts/${id}/Profile`, {
               headers: {
                 Authorization: `Bearer ${res.body.access_token}`
               }

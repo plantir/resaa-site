@@ -513,7 +513,7 @@ export default {
     get_profile() {
       this.ajaxLoading = true;
       this.$axios
-        .get(`Accounts/${this.user_id}/Profile`, {
+        .get(`/api/Accounts/${this.user_id}/Profile`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }
@@ -527,7 +527,7 @@ export default {
     },
     get_callhistory() {
       this.$axios
-        .get(`Accounts/${this.user_id}/Calls`, {
+        .get(`/api/Accounts/${this.user_id}/Calls`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }
