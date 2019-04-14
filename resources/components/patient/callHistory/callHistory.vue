@@ -88,9 +88,9 @@ export default {
   methods: {
     get_list() {
       this.ajaxLoading = true;
-      let url = `Accounts/${this.user_id}/Calls?limit=${this.limit}&offset=${
-        this.offset
-      }`;
+      let url = `/api/Accounts/${this.user_id}/Calls?limit=${
+        this.limit
+      }&offset=${this.offset}`;
       if (this.query) {
         url += `&query=${this.query}`;
       }

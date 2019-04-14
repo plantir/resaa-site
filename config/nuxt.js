@@ -9,12 +9,18 @@ module.exports = {
     API_URL: 'https://webapi.resaa.net',
     RECAPTCHA_SITEKEY: '6Le6nngUAAAAAGiIJGJl0rCH5QvquMK0jRcZeBim',
     BASE_URL: '/',
-    BANK_RETURN_URL: 'http://ressa.armin.pro/charge'
+    BANK_RETURN_URL: 'https://ressa.net/charge'
   },
   srcDir: resolve(__dirname, '..', 'resources'),
   server: {
     port: 8000, // default: 3000
     host: '0.0.0.0' // default: localhost
+  },
+  axios: {
+    proxy: true // Can be also an object with default options
+  },
+  proxy: {
+    '/api/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'Resa-web-api.bsn.local', pathRewrite: { '^/api/': '' } }
   },
   serverMiddleware: [
     {

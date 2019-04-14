@@ -568,9 +568,9 @@ export default {
     },
     getDoctors() {
       this.ajaxLoading = true;
-      let url = `Doctors?fields=${this.fields}&limit=${this.limit}&offset=${
-        this.offset
-      }`;
+      let url = `/api/Doctors?fields=${this.fields}&limit=${
+        this.limit
+      }&offset=${this.offset}`;
       if (this.filter.name) {
         url += `&name=${this.filter.name}`;
       }

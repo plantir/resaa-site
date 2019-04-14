@@ -204,7 +204,7 @@ export default {
     // }
   },
   created() {
-    this.$axios.get("Charge/Denominations").then(response => {
+    this.$axios.get("/api/Charge/Denominations").then(response => {
       this.chargeMenuItems = response.data.result.denominations;
       this.ajaxLoading = false;
       if (

@@ -453,7 +453,11 @@ export default {
       ]
     };
   },
-
+  created() {
+    this.$axios.get("/api/Charge/Denominations").then(res => {
+      console.log(res);
+    });
+  },
   methods: {
     activateMenu: function() {
       this.menuActive = !this.menuActive;
