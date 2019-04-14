@@ -1,0 +1,20 @@
+[dir=rtl] {
+
+  .v-expansion-panel {
+    text-align: right;
+  }
+
+  .v-text-field {
+
+    .v-label {
+      right: 0px !important;
+      left: auto !important;
+    }
+
+  }
+
+  .v-list__tile__title {
+    text-align: right;
+  }
+
+}
