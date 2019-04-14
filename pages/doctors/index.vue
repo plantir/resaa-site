@@ -525,7 +525,7 @@ export default {
     getCities() {
       this.filter.cityId = null;
       this.$axios
-        .get(`Geo/Provinces/${this.filter.provinceId}/Cities`)
+        .get(`/api/Geo/Provinces/${this.filter.provinceId}/Cities`)
         .then(response => {
           this.cities = response.data.result.cities;
         });
