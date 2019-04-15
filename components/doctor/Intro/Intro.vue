@@ -220,6 +220,10 @@
     }
   }
 }
+.landing-section-doctors-wave {
+  position: absolute;
+  bottom: 0;
+}
 </style>
 
 <template>

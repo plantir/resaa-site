@@ -221,6 +221,10 @@
     }
   }
 }
+.landing-section-patients-wave {
+  position: absolute;
+  bottom: 0;
+}
 </style>
 
 <template>
@@ -280,12 +284,14 @@ export default {
   data() {
     return {
       patientImage,
+      parallax_loaded: false,
       show_video: false
     };
   },
   components: { PatientVideo },
   mounted() {
     new Parallax(this.$refs.parallax);
+    this.parallax_loaded = true;
   },
   methods: {
     openVideo() {
