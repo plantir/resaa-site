@@ -41,7 +41,7 @@
   .preview-text {
     direction: rtl;
     text-align: justify;
-    max-height: 200px;
+    max-height: 400px;
     overflow-y: scroll;
     padding: 20px;
     border-radius: 7.5px;
@@ -72,10 +72,24 @@
 @media print {
   .print-area {
     display: block;
+    direction: rtl;
   }
   .site-area {
     display: none;
   }
+  // @page {
+  //   size: auto; /* auto is the initial value */
+  //   margin: 0mm; /* this affects the margin in the printer settings */
+  // }
+
+  // html {
+  //   background-color: #ffffff;
+  //   margin: 0px; /* this affects the margin on the html before sending to printer */
+  // }
+
+  // body {
+  //   margin: 10mm 15mm 10mm 15mm; /* margin you want for the content */
+  // }
 }
 </style>
 
@@ -189,11 +203,7 @@
               >مرسوله های ارسالی از طرف رِسا، به این آدرس برای شما ارسال می‌شوند.</div>
             </v-flex>
           </v-layout>
-          <div class="preview-section">
-            <div class="section-title">پیش‌نمایش متن قرارداد و شرایط استفاده از سامانه</div>
-            <div class="preview-text">{{gharardad}}</div>
-          </div>
-          <div class="print-button" @click="print">چاپ قرارداد</div>
+          <gharardad></gharardad>
         </div>
         <div class="checkbox-wrapper" :class="{ 'is-invalid': submitted && errors.has('privacy') }">
           <input type="checkbox" v-validate="'required'" name="privacy">
@@ -225,15 +235,14 @@
         </div>
       </div>
     </div>
-    <div ref="printArea" class="print-area"></div>
   </section>
 </template>
 
 <script>
-import gharardad from "./gharadad.js";
+import gharardad from "./gharardad";
 export default {
+  components: { gharardad },
   data: () => ({
-    gharardad,
     provinces: [],
     cities: [],
     submitted: false
@@ -283,10 +292,7 @@ export default {
       });
     },
     print() {
-      document.getElementById("app").classList.add("site-area");
-      this.$refs.printArea.innerHTML = this.gharardad;
-      document.body.appendChild(this.$refs.printArea);
-      window.print();
+      console.log("print");
     }
   },
   computed: {
