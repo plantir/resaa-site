@@ -18,7 +18,9 @@ export default {
     port: port
   },
   proxy: {
-    '/api/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web-api.bsn.local', pathRewrite: { '^/api/': '' } }
+    '/api/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web-api.bsn.local', pathRewrite: { '^/api/': '' } },
+    '/api/mobile': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://api.bsn.local' },
+    '/api/messagecallback': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://api.bsn.local' },
   },
   serverMiddleware: [
     {
