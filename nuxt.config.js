@@ -18,10 +18,12 @@ export default {
     port: port
   },
   proxy: {
-    '/api/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web-api.bsn.local', pathRewrite: { '^/api/': '' } },
-    '/api/mobile/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local' },
+   
+    '/api/Mobile/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local' },
     '/api/messagecallback/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local' },
-    '/api/messagecallback/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local' },
+    '/api/doctorapp/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local' },
+	'/api/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web-api.bsn.local', pathRewrite: { '^/api/': '' } },
+	'/oldsite/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local',pathRewrite: { '^/oldsite/': '' } },
   },
   serverMiddleware: [
     {
