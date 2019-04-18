@@ -20,8 +20,8 @@ export default {
   proxy: {
    
     '/api/Mobile/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local' },
-    '/api/messagecallback/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local' },
-    '/api/doctorapp/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local' },
+    '/api/MessageCallback/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local' },
+    '/api/DoctorApp/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local' },
 	'/api/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web-api.bsn.local', pathRewrite: { '^/api/': '' } },
 	'/oldsite/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local',pathRewrite: { '^/oldsite/': '' } },
   },
