@@ -286,7 +286,7 @@ export default {
         data.subscriberNumber = subscriberNumber[0];
       }
       this.$axios
-        .post("Charge", data)
+        .post("/api/Charge", data)
         .then(response => {
           this.pre_factor = response.data.result.electronicPaymentVoucher;
           this.chargeStep = "receipt";
