@@ -7,7 +7,7 @@ export default {
     API_URL: 'https://webapi.resaa.net',
     RECAPTCHA_SITEKEY: '6Le6nngUAAAAAGiIJGJl0rCH5QvquMK0jRcZeBim',
     BASE_URL: '/',
-    BANK_RETURN_URL: 'https://ressa.net/charge'
+    BANK_RETURN_URL: 'https://resaa.net/charge'
   },
   server: {
     port: port, // default: 3000
@@ -18,29 +18,42 @@ export default {
     port: port
   },
   proxy: {
-   
-    '/api/Mobile/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local' },
-    '/api/MessageCallback/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local' },
-    '/api/DoctorApp/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local' },
-	'/api/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web-api.bsn.local', pathRewrite: { '^/api/': '' } },
-	'/oldsite/': { target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local',pathRewrite: { '^/oldsite/': '' } },
-  },
-  serverMiddleware: [
-    {
-      path: '/patient/profile',
-      handler: (req, res, next) => {
-        res.spa = true
-        next()
+
+    '/api/Mobile/': {
+      target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local'
+    },
+    '/api/MessageCallback/': {
+      target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local'
+    },
+    '/api/DoctorApp/': {
+      target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local'
+    },
+    '/api/': {
+      target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web-api.bsn.local',
+      pathRewrite: {
+        '^/api/': ''
       }
+    },
+    '/oldsite/': {
+      target: process.env.NODE_ENV == 'development' ? 'https://webapi.resaa.net' : 'http://resa-web.bsn.local',
+      pathRewrite: {
+        '^/oldsite/': ''
+      }
+    },
+  },
+  serverMiddleware: [{
+    path: '/patient/profile',
+    handler: (req, res, next) => {
+      res.spa = true
+      next()
     }
-  ],
+  }],
   /*
    ** Headers of the page
    */
   head: {
     title: 'رسا ، سامانه سلامت ایرانیان',
-    meta: [
-      {
+    meta: [{
         charset: 'utf-8'
       },
       {
@@ -54,25 +67,19 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content:
-          'با استفاده از رسا تماس های غیر ضروری خود از سمت بیماران را حذف کنید و مکالمات غیر مربوط به روند درمانی را کاهش رایگان ثبت‌نام کنید و با دسترسی به پزشکان معرفی‌شده در وب‌سایت رسا، تماس مستقیم با بهترین پزشکان متخصص را با صرفه‌جویی در وقت و هزینه خود، تجربه کنید'
+        content: 'با استفاده از رسا تماس های غیر ضروری خود از سمت بیماران را حذف کنید و مکالمات غیر مربوط به روند درمانی را کاهش رایگان ثبت‌نام کنید و با دسترسی به پزشکان معرفی‌شده در وب‌سایت رسا، تماس مستقیم با بهترین پزشکان متخصص را با صرفه‌جویی در وقت و هزینه خود، تجربه کنید'
       }
     ],
-    link: [
-      {
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
-      }
-    ],
-    script: [
-      {
-        src:
-          'https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit&hl=fa',
-        defer: true,
-        async: true
-      }
-    ]
+    link: [{
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico'
+    }],
+    script: [{
+      src: 'https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit&hl=fa',
+      defer: true,
+      async: true
+    }]
   },
 
   /*
