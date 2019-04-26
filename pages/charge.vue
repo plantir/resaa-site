@@ -207,6 +207,9 @@ export default {
     this.$axios.get("/api/Charge/Denominations").then(response => {
       this.chargeMenuItems = response.data.result.denominations;
       this.ajaxLoading = false;
+      if (this.$route.query.chat_id) {
+        localStorage.setItem("chat_id", this.$route.query.chat_id);
+      }
       if (
         this.$route.query.chargeId &&
         this.$route.query.chargeId <= this.chargeMenuItems.length
@@ -225,7 +228,6 @@ export default {
       this.$axios
         .get(`/api/Charge/${this.$route.query.chargeRequestId}/Receipt`)
         .then(res => {
-          console.log(res);
           if (res.body.result.chargeReceipt.status === "Successful") {
             this.chargeStep = "success";
             this.charge.amount =
@@ -233,6 +235,18 @@ export default {
             this.charge.trackingNumber =
               res.body.result.chargeReceipt.trackingNumber;
             this.userCredit = res.body.result.chargeReceipt.currentBalance;
+            let chat_id = localStorage.getItem("chat_item");
+            if (chat_id) {
+              this.$axios
+                .post(`https://telegram.resaa.net/chargeNotify`, {
+                  chat_id,
+                  charge_amount: this.charge.amount,
+                  user_credit: this.userCredit
+                })
+                .then(res => {
+                  localStorage.removeItem("chat_id");
+                });
+            }
           } else {
             this.chargeStep = "fail";
             this.charge.trackingNumber =
