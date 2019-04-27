@@ -254,7 +254,7 @@ export default {
         })
         .then(res => {
           this.ajaxLoading = false;
-          let decoded_token = jwtDecode(res.body.access_token);
+          let decoded_token = jwtDecode(res.data.access_token);
           let id =
             decoded_token[
               "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
@@ -263,13 +263,13 @@ export default {
           this.$axios
             .get(`/api/Accounts/${id}/Profile`, {
               headers: {
-                Authorization: `Bearer ${res.body.access_token}`
+                Authorization: `Bearer ${res.data.access_token}`
               }
             })
             .then(Response => {
-              res.body.firstName = Response.body.result.profile.firstName;
+              res.data.firstName = Response.body.result.profile.firstName;
               this.ajaxLoading = false;
-              this.$store.commit("patient/login", res.body);
+              this.$store.commit("patient/login", res.data);
               this.$router.push({ name: "patient-landing" });
             });
         })

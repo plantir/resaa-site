@@ -194,7 +194,7 @@ export default {
     //     .get(`/api/Charge/${this.$route.query.chargeRequestId}/Receipt`)
     //     .then(res => {
     //       console.log(res);
-    //       if (res.body.result.chargeReceipt.status === "Successful") {
+    //       if (res.data.result.chargeReceipt.status === "Successful") {
     //         this.chargeStep = "success";
     //       } else {
     //         this.chargeStep = "fail";
@@ -228,13 +228,14 @@ export default {
       this.$axios
         .get(`/api/Charge/${this.$route.query.chargeRequestId}/Receipt`)
         .then(res => {
-          if (res.body.result.chargeReceipt.status === "Successful") {
+          debugger;
+          if (res.data.result.chargeReceipt.status === "Successful") {
             this.chargeStep = "success";
             this.charge.amount =
-              res.body.result.chargeReceipt.chargeDenomination.amount;
+              res.data.result.chargeReceipt.chargeDenomination.amount;
             this.charge.trackingNumber =
-              res.body.result.chargeReceipt.trackingNumber;
-            this.userCredit = res.body.result.chargeReceipt.currentBalance;
+              res.data.result.chargeReceipt.trackingNumber;
+            this.userCredit = res.data.result.chargeReceipt.currentBalance;
             let chat_id = localStorage.getItem("chat_item");
             if (chat_id) {
               this.$axios
@@ -250,7 +251,7 @@ export default {
           } else {
             this.chargeStep = "fail";
             this.charge.trackingNumber =
-              res.body.result.chargeReceipt.trackingNumber;
+              res.data.result.chargeReceipt.trackingNumber;
           }
           this.ajaxLoading = false;
         })

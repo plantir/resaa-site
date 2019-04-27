@@ -519,7 +519,7 @@ export default {
           }
         })
         .then(res => {
-          this.user_profile = res.body.result.profile;
+          this.user_profile = res.data.result.profile;
           if (this.user_callhistory) {
             this.ajaxLoading = false;
           }
@@ -533,7 +533,7 @@ export default {
           }
         })
         .then(res => {
-          this.user_callhistory = res.body.result.calls;
+          this.user_callhistory = res.data.result.calls;
           if (this.user_profile) {
             this.ajaxLoading = false;
           }
