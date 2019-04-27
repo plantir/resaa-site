@@ -236,7 +236,7 @@ export default {
             this.charge.trackingNumber =
               res.data.result.chargeReceipt.trackingNumber;
             this.userCredit = res.data.result.chargeReceipt.currentBalance;
-            let chat_id = localStorage.getItem("chat_item");
+            let chat_id = localStorage.getItem("chat_id");
             if (chat_id) {
               this.$axios
                 .post(`https://telegram.resaa.net/chargeNotify`, {
