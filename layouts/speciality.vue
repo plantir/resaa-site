@@ -22,6 +22,7 @@
 </template>
 
 <script>
+require("promise.prototype.finally").shim();
 import appHeader from "~/components/header.vue";
 import appFooter from "~/components/footer.vue";
 export default {
