@@ -267,7 +267,8 @@ export default {
               }
             })
             .then(Response => {
-              res.data.firstName = Response.body.result.profile.firstName;
+              debugger;
+              res.data.firstName = Response.data.result.profile.firstName;
               this.ajaxLoading = false;
               this.$store.commit("patient/login", res.data);
               this.$router.push({ name: "patient-landing" });
