@@ -390,7 +390,7 @@
             <pagination
               class="show-xs"
               v-model="page"
-              :numOfPage="6"
+              :numOfPage="5"
               :limit="limit"
               :totalItems="totalItems"
               @change="changePage"

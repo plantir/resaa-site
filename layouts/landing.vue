@@ -12,6 +12,7 @@
 </template>
 
 <script>
+require("promise.prototype.finally").shim();
 export default {
   // data() {
   //   return {
