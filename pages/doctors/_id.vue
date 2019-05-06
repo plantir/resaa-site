@@ -289,7 +289,7 @@
             <div v-if="doctor.currentlyAvailable" class="doctor-is-available">(در دسترس)</div>
             <div v-else class="doctor-is-unavailable">(در دسترس نمی باشد)</div>
           </div>
-          <div v-if="doctor.specialty" class="doctor-specialty">تخصص : {{doctor.specialty.title}}</div>
+          <div v-if="doctor.specialty" class="doctor-specialty">{{doctor.specialty.title}}</div>
           <div class="specialty-area-container">
             <div v-for="tag in doctor.tags" :key="tag.id" class="specialty-area">{{tag.title}}</div>
           </div>

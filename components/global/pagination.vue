@@ -133,6 +133,7 @@ export default {
       return Math.ceil(this.totalItems / this.limit);
     },
     pages() {
+      debugger;
       let start = 1,
         end = this.page_show;
       if (this.lastPage < this.page_show) {
@@ -140,14 +141,14 @@ export default {
       }
       if (this.page > this.page_show / 2) {
         if (this.lastPage > this.page + this.page_show / 2) {
-          start = this.page - this.page_show / 2 + 1;
-          end = this.page + this.page_show / 2;
+          start = this.page - Math.floor(this.page_show / 2);
+          end = this.page + Math.floor(this.page_show / 2);
         } else {
           start = this.lastPage - this.page_show + 2;
           end = this.lastPage + 1;
         }
       }
-      return _.range(start, end);
+      return _.range(start, end + 1);
     }
   }
 };

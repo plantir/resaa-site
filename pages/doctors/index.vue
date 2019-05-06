@@ -402,7 +402,10 @@
               <v-loading v-if="ajaxLoading" mode="relative"></v-loading>
 
               <div v-for="doctor in doctors" :key="doctor.id" class="doctors-item">
-                <router-link :to="{name:'doctors-id',params:{id:doctor.subscriberNumber}}">
+                <router-link
+                  :to="{name:'doctors-id',params:{id:doctor.subscriberNumber}}"
+                  target="_blank"
+                >
                   <div class="doctors-item-info">
                     <div class="item-right-section">
                       <div class="item-avatar">
@@ -444,7 +447,7 @@
               <div class="hide-xs">
                 <no-ssr>
                   <pagination
-                    :numOfPage="14"
+                    :numOfPage="13"
                     v-model="page"
                     :limit="limit"
                     :totalItems="totalItems"
@@ -455,7 +458,7 @@
               <div class="show-xs">
                 <no-ssr>
                   <pagination
-                    :numOfPage="6"
+                    :numOfPage="5"
                     v-model="page"
                     :limit="limit"
                     :totalItems="totalItems"
