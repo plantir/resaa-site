@@ -247,7 +247,7 @@ export default {
         this.user.password
       }&grant_type=${this.user.grant_type}`;
       this.$axios
-        .post("oauth2/token", data, {
+        .post("/api/oauth2/token", data, {
           headers: {
             "Content-type": "application/x-www-form-urlencoded"
           }
