@@ -10,6 +10,7 @@
     min-height: 300px;
     align-items: center;
     padding: 0 32px;
+    position: relative;
   }
 
   .profile-avatar {
@@ -144,6 +145,7 @@
     min-height: 300px;
     justify-content: center;
     align-items: center;
+    position: relative;
     .v-input__slot {
       box-shadow: none;
       height: 40px;
@@ -329,8 +331,10 @@
   }
   .error-message {
     position: absolute;
-    bottom: 20px;
+    bottom: 50px;
     color: #f00;
+    z-index: 100000009;
+    right: 7px;
   }
   .call-history {
     margin: 13px 0;
@@ -542,7 +546,7 @@ export default {
     save() {
       this.saving = true;
       this.$axios
-        .put(`Accounts/${this.user_id}/Profile`, this.editProfile, {
+        .put(`/api/Accounts/${this.user_id}/Profile`, this.editProfile, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }
