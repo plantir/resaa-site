@@ -580,7 +580,7 @@ export default {
       let data = new FormData();
       data.append("image", file);
       this.$axios
-        .put(`Accounts/${this.user_id}/Profile/Image`, data, {
+        .put(`/api/Accounts/${this.user_id}/Profile/Image`, data, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`,
             "Content-Type": "multipart/form-data"
@@ -593,7 +593,7 @@ export default {
     },
     removeImage() {
       this.$axios
-        .delete(`Accounts/${this.user_id}/Profile/Image`, {
+        .delete(`/api/Accounts/${this.user_id}/Profile/Image`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }

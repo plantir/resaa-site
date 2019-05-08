@@ -217,7 +217,7 @@ export default {
     },
     register() {
       this.$axios
-        .post("Patients/Registration", this.user)
+        .post("/api/Patients/Registration", this.user)
         .then(response => {
           this.$store.commit(
             "patient/register_token",
