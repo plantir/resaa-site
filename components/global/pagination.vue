@@ -133,7 +133,6 @@ export default {
       return Math.ceil(this.totalItems / this.limit);
     },
     pages() {
-      debugger;
       let start = 1,
         end = this.page_show;
       if (this.lastPage < this.page_show) {

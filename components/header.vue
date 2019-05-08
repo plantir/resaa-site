@@ -85,7 +85,7 @@ section#header {
                   <v-list-tile>
                     <v-list-tile-title>
                       <nuxt-link
-                        :to="{name:isPatient?'patient-landing':'doctors-register'}"
+                        :to="{name:isPatient?'patient-register':'doctors-register'}"
                       >عضویت در رسا</nuxt-link>
                     </v-list-tile-title>
                   </v-list-tile>

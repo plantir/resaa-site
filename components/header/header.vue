@@ -397,7 +397,7 @@
                     @click.native="closeNav"
                     :to="{name:'patient-login'}"
                   >ورود به حساب کاربری</router-link>
-                  <router-link @click.native="closeNav" :to="{name:'patient-landing'}">عضویت در رسا</router-link>
+                  <router-link @click.native="closeNav" :to="{name:'patient-register'}">عضویت در رسا</router-link>
                 </div>
                 <div v-else>
                   <router-link

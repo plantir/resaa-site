@@ -102,16 +102,16 @@ export default {
     },
     register() {
       this.$axios
-        .post("Patients/Registration", this.user)
+        .post("/api/Patients/Registration", this.user)
         .then(response => {
-          this.$store.dispatch(
-            "register_token",
+          this.$store.commit(
+            "patient/register_token",
             response.data.result.registrationToken.value
           );
           this.step = 2;
         })
         .catch(err => {
-          if (err.body.code == 409) {
+          if (err.response.data.code == 409) {
             this.errorMessage = "این شماره موبایل در سیستم وجود دارد.";
           }
           setTimeout(() => {
@@ -124,7 +124,7 @@ export default {
     },
     verifySMSCode() {
       this.$axios
-        .patch(`Patients/Registration/${this.registrationToken}`, {
+        .patch(`/api/Patients/Registration/${this.registrationToken}`, {
           activationKey: this.activationKey
         })
         .then(response => {
@@ -139,7 +139,9 @@ export default {
     resendSMSCode: function() {
       this.$axios
         .post(
-          `Patients/Registration/${this.registrationToken}/ResendActivationKey`
+          `/api/Patients/Registration/${
+            this.registrationToken
+          }/ResendActivationKey`
         )
         .then(response => {
           if (response.data.status === "OK") {
