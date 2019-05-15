@@ -208,6 +208,8 @@
   img {
     max-height: 100%;
     cursor: pointer;
+    background: #fff;
+    border-radius: 8px;
   }
 }
 .copy-right {

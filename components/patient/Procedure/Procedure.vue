@@ -246,14 +246,14 @@
               هزینه تماس
               به صورت دقیقه‌ای محاسبه خواهد شد.
             </div>
-            <div class="item-description">- اولین تماس مهمان رسا هستید.
+            <!-- <div class="item-description">- اولین تماس مهمان رسا هستید.
               <v-tooltip bottom>
                 <template #activator="data">
                   <i title class="fa fa-exclamation-circle"></i>
                 </template>
                 <span>به درخواست خود پزشکان، بعضی از آنها از این قاعده مستثنا می باشند</span>
               </v-tooltip>
-            </div>
+            </div> -->
           </div>
         </div>
         <img class="item-image" src="./Item3.png">

@@ -5,7 +5,7 @@
   box-shadow: inset 0 0 12.5px 0 rgba(0, 0, 0, 0.15);
   overflow: hidden;
   width: 100%;
-  min-height: 600px;
+  min-height: 400px;
   padding: 60px;
   text-align: center;
 }
@@ -28,7 +28,7 @@
 }
 
 .register-description-2 {
-  margin: 100px auto 0;
+  margin: 40px auto 0;
   max-width: 400px;
   line-height: 30px;
   direction: rtl;
@@ -64,24 +64,12 @@
   }
 }
 
-.register-button {
-  background-color: #2fc8dd;
-  cursor: pointer;
-  width: 100px;
-  height: 37.5px;
-  border-radius: 18.5px;
-  text-align: center;
-  line-height: 37.5px;
-  color: white;
-  border: none;
-  &[disabled] {
-    opacity: 0.6;
-    cursor: default;
-  }
+.register-btn {
+  color: #35d6c1;
 }
 
 .register-description-3 {
-  margin: 100px auto 0;
+  margin: 10px auto 0;
   max-width: 500px;
   line-height: 30px;
   direction: rtl;
@@ -120,11 +108,6 @@
       padding: 0 5px;
     }
   }
-
-  .register-button {
-    width: 100%;
-    border-radius: 26px;
-  }
 }
 .error-message {
   font-weight: bold;
@@ -135,7 +118,7 @@
 <template>
   <div class="register-section-patients-container" id="register">
     <div class="register-title">ثبت نام رایگان</div>
-    <div class="register-description">
+    <!-- <div class="register-description">
       اولین تماس را مهمان رِسا باشید
       <v-tooltip bottom>
         <template #activator="data">
@@ -143,27 +126,13 @@
         </template>
         <span>به درخواست خود پزشکان، بعضی از آنها از این قاعده مستثنا می باشند</span>
       </v-tooltip>
-    </div>
+    </div>-->
     <div class="register-description-2">
       شماره موبایل خود را وارد کنید تا علاوه بر دریافت لینک دانلود اپلیکیشن
       شماره کاربری و رمز عبور برای شما پیامک شود.
     </div>
-    <div class="register-number-input">
-      <v-loading v-if="ajaxLoading"></v-loading>
-      <input
-        id="registration-phone-number"
-        v-model="user.phoneNumber"
-        placeholder=" شماره موبایل خود را وارد کنید برای مثال: ۰۹۱۲۱۱۱۲۲۳۳"
-        required
-        @keyup.enter="onRegister"
-      >
-      <vue-recaptcha
-        ref="invisibleRecaptcha"
-        @verify="onVerify"
-        size="invisible"
-        :sitekey="sitekey"
-      ></vue-recaptcha>
-      <button :disabled="!validate_phone_number" class="register-button" @click="onRegister">ثبت نام</button>
+    <div>
+      <v-btn class="register-btn" round color="white" :to="{name:'patient-register'}">ثبت نام</v-btn>
     </div>
     <span class="error-message" v-if="errorMessage">{{errorMessage}}</span>
     <span
@@ -216,6 +185,7 @@ export default {
       this.$refs.invisibleRecaptcha.execute();
     },
     register() {
+      debugger;
       this.$axios
         .post("/api/Patients/Registration", this.user)
         .then(response => {
@@ -227,7 +197,7 @@ export default {
           this.currentStep = 1;
         })
         .catch(err => {
-          if (err.body.code == 409) {
+          if (err.response.data.code == 409) {
             this.errorMessage = "این شماره موبایل در سیستم وجود دارد.";
           }
           setTimeout(() => {
