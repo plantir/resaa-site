@@ -454,9 +454,7 @@ export default {
     };
   },
   created() {
-    this.$axios.get("/api/Charge/Denominations").then(res => {
-      console.log(res);
-    });
+    this.$axios.get("/api/Charge/Denominations").then(res => {});
   },
   methods: {
     activateMenu: function() {

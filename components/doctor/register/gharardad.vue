@@ -232,11 +232,9 @@ export default {
   methods: {
     print() {
       let title = document.title;
-      console.log(title);
       document.title = "قرارداد همکاری";
       document.getElementById("__nuxt").classList.add("site-area");
       this.$refs.printArea.innerHTML = this.$refs.gharardad.innerHTML;
-      console.log(this.$refs.printArea);
       document.body.appendChild(this.$refs.printArea);
       window.print();
       setTimeout(() => {

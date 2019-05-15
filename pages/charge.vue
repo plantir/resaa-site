@@ -193,7 +193,6 @@ export default {
     //   this.$axios
     //     .get(`/api/Charge/${this.$route.query.chargeRequestId}/Receipt`)
     //     .then(res => {
-    //       console.log(res);
     //       if (res.data.result.chargeReceipt.status === "Successful") {
     //         this.chargeStep = "success";
     //       } else {

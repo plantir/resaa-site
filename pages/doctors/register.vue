@@ -170,7 +170,6 @@ export default {
       this.$axios
         .post("Doctors/Registration", this.doctor)
         .then(Response => {
-          console.log(Response);
           if (Response.body.status == "OK") {
             this.currentStep = this.currentStep + 1;
             this.$router.push({

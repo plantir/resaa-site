@@ -94,7 +94,6 @@ export default {
   }),
   watch: {
     page() {
-      console.log(this.page);
       this.$emit("change", this.page);
     }
   },

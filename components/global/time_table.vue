@@ -211,7 +211,6 @@ export default {
     this.date = new Date().getDay();
     this.time = (new Date().getHours() + new Date().getMinutes() / 60) * 100;
     for (const item of this.segments) {
-      console.log((item.from / 60) % 24);
       let start_time_hour = Math.floor((item.from / 60) % 24);
       let end_time_hour = Math.floor((item.to / 60) % 24);
       let start_time_minute = Math.round(((item.from / 60) % 1) * 60);

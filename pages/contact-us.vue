@@ -301,7 +301,6 @@ export default {
       this.$axios
         .post("Inquiries", this.form)
         .then(Response => {
-          console.log(Response);
           if (Response.body.status == "OK") {
             alert("درخواست شما با موفقیت ثبت شد");
             this.form = {};
@@ -318,7 +317,6 @@ export default {
           this.submitForm();
         }
       });
-      console.log("object");
     }
   }
 };
