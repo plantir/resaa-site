@@ -120,6 +120,7 @@ export default {
         })
         .finally(() => {
           this.ajaxLoading = false;
+          this.resetRecaptcha();
         });
     },
     verifySMSCode() {
