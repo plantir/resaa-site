@@ -349,7 +349,7 @@
         :center="center"
         :zoom="15"
       -->
-      <div class="doctor-map" v-show="showMap">
+      <div class="doctor-map" v-if="!hideMap">
         <no-ssr>
           <GmapMap
             :center="center"
@@ -359,11 +359,11 @@
             style="width: 100%; height:300px"
           >
             <GmapMarker
-              v-for="(address,index) in doctor.workplaces"
+              v-for="(position,index) in locations"
               :key="index"
-              @click="geo(address)"
+              @click="geo(position)"
               ref="mapMarker"
-              :position="{lat:address.latitude, lng:address.longitude}"
+              :position="position"
             />
           </GmapMap>
         </no-ssr>
@@ -424,9 +424,11 @@ export default {
       doctor: null,
       ajaxLoading: true,
       duration: null,
-      showMap: false,
+      hideMap: false,
       title: title,
-      og
+      center: { lat: 10, lng: 10 },
+      locations: [],
+      og: og
     };
   },
   beforeCreate() {
@@ -441,34 +443,35 @@ export default {
         }&clientTimeZoneOffset=${new Date().getTimezoneOffset()}`
       )
       .then(response => {
-        this.ajaxLoading = false;
-
         this.doctor = response.data.result.doctor;
-        this.center = {
-          lat: this.doctor.workplaces[0].latitude,
-          lng: this.doctor.workplaces[0].longitude
-        };
-        if (this.doctor.workplaces.length > 1) {
+        this.ajaxLoading = false;
+        for (let address of this.doctor.workplaces) {
+          if (address.latitude && address.longitude) {
+            this.locations.push({
+              lat: address.latitude,
+              lng: address.longitude
+            });
+          }
+        }
+        if (this.locations.length == 0) {
+          this.hideMap = true;
+        } else if (this.locations.length == 1) {
+          this.center = this.locations[0];
+        } else {
           setTimeout(() => {
             if (process.client) {
               this.$refs.mapRef.$mapPromise.then(map => {
                 var bounds = new google.maps.LatLngBounds();
-                for (let address of this.doctor.workplaces) {
+                for (let location of this.locations) {
                   bounds.extend({
-                    lat: parseFloat(address.latitude),
-                    lng: parseFloat(address.longitude)
+                    lat: parseFloat(location.lat),
+                    lng: parseFloat(location.lng)
                   });
                 }
                 map.fitBounds(bounds);
               });
             }
           }, 100);
-        }
-        if (
-          this.doctor.workplaces.length !== 0 &&
-          this.doctor.workplaces[0].longitude
-        ) {
-          this.showMap = true;
         }
       });
     if (this.user) {
