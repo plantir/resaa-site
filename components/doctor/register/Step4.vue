@@ -291,9 +291,7 @@ export default {
         }
       });
     },
-    print() {
-      console.log("print");
-    }
+    print() {}
   },
   computed: {
     doctor() {
