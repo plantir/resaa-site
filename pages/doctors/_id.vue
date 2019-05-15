@@ -343,13 +343,19 @@
           <timeTable :segments="doctor.timetable.segments"></timeTable>
         </no-ssr>
       </div>
-      <div class="doctor-map" v-if="showMap">
+      <!--    
+        v-if="showMap"
+        :options="{disableDefaultUI: true}"
+        :center="center"
+        :zoom="15"
+      -->
+      <div class="doctor-map" v-show="showMap">
         <no-ssr>
           <GmapMap
-            ref="mapRef"
-            :options="{disableDefaultUI: true}"
             :center="center"
+            :options="{disableDefaultUI: true}"
             :zoom="15"
+            ref="mapRef"
             style="width: 100%; height:300px"
           >
             <GmapMarker
@@ -418,7 +424,7 @@ export default {
       doctor: null,
       ajaxLoading: true,
       duration: null,
-      showMap: true,
+      showMap: false,
       title: title,
       og
     };
@@ -427,8 +433,7 @@ export default {
     this.fields =
       "id,firstName,lastName,imagePath,currentlyAvailable,subscriberNumber,specialty,tags,expertise,timetable,title,workplaces,medicalCouncilNumber";
   },
-  created() {
-    console.log(this.$route);
+  mounted() {
     this.$axios
       .get(
         `/api/Doctors/${this.$route.params.id}?fields=${
@@ -439,30 +444,31 @@ export default {
         this.ajaxLoading = false;
 
         this.doctor = response.data.result.doctor;
-        if (this.doctor.workplaces.lenght > 1) {
+        this.center = {
+          lat: this.doctor.workplaces[0].latitude,
+          lng: this.doctor.workplaces[0].longitude
+        };
+        if (this.doctor.workplaces.length > 1) {
           setTimeout(() => {
-            this.$refs.mapRef.$mapPromise.then(map => {
-              var bounds = new this.$google.maps.LatLngBounds();
-              for (let address of this.doctor.workplaces) {
-                bounds.extend({
-                  lat: parseFloat(address.latitude),
-                  lng: parseFloat(address.longitude)
-                });
-              }
-              map.fitBounds(bounds);
-            });
+            if (process.client) {
+              this.$refs.mapRef.$mapPromise.then(map => {
+                var bounds = new google.maps.LatLngBounds();
+                for (let address of this.doctor.workplaces) {
+                  bounds.extend({
+                    lat: parseFloat(address.latitude),
+                    lng: parseFloat(address.longitude)
+                  });
+                }
+                map.fitBounds(bounds);
+              });
+            }
           }, 100);
-        } else {
-          this.center = {
-            lat: this.doctor.workplaces[0].latitude,
-            lng: this.doctor.workplaces[0].longitude
-          };
-          if (
-            this.doctor.workplaces.length == 0 ||
-            !this.doctor.workplaces[0].longitude
-          ) {
-            this.showMap = false;
-          }
+        }
+        if (
+          this.doctor.workplaces.length !== 0 &&
+          this.doctor.workplaces[0].longitude
+        ) {
+          this.showMap = true;
         }
       });
     if (this.user) {
@@ -483,15 +489,14 @@ export default {
     }
   },
   computed: {
-    // google: gmapApi,
     user() {
       return this.$store.state.user;
     }
   },
   methods: {
-    // geo(address) {
-    //   window.location.href = `geo:${address.longitude},${address.latitude}`;
-    // }
+    geo(address) {
+      window.location.href = `geo:${address.longitude},${address.latitude}`;
+    }
   }
 };
 </script>
