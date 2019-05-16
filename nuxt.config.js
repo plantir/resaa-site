@@ -172,7 +172,7 @@ export default {
     [
       '@nuxtjs/google-analytics',
       {
-        id: 'UA-135235561-1'
+        id: 'UA-135304047-1'
       }
     ],
     '@nuxtjs/axios'
