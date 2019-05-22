@@ -387,7 +387,7 @@
             <div class="profile-buttons">
               <router-link
                 class="profile-charge-button"
-                :to="{name:'Charge',query:{mobile:user_profile.phoneNumber}}"
+                :to="{name:'charge',query:{mobile:user_profile.phoneNumber}}"
               >افزایش اعتبار</router-link>
               <div class="profile-edit-button" @click="activateEditMode">ویرایش حساب کاربری</div>
             </div>

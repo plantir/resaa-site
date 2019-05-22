@@ -312,13 +312,13 @@
           <div>
             <div>
               <span>این زمان براساس میزان</span>
-              <router-link v-if="user" :to="{name:'PatientProfile'}">شارژ فعلی</router-link>
+              <router-link v-if="user" :to="{name:'patient-profile'}">شارژ فعلی</router-link>
               <router-link v-else :to="{name:'patient-login'}">شارژ فعلی</router-link>
               <span>شما محاسبه شده است.</span>
             </div>
             <div>
               <span>می‌توانید از طریق</span>
-              <router-link :to="{name:'Charge'}">خرید شارژ اینترنتی</router-link>اعتبار خود را افزایش دهید.
+              <router-link :to="{name:'charge'}">خرید شارژ اینترنتی</router-link>اعتبار خود را افزایش دهید.
             </div>
           </div>
         </div>
@@ -476,16 +476,11 @@ export default {
       });
     if (this.user) {
       this.$axios
-        .get(
-          `/api/Doctors/${
-            this.$route.params.subscriberNumber
-          }/CommunicationQuote`,
-          {
-            headers: {
-              Authorization: `Bearer ${this.user.access_token}`
-            }
+        .get(`/api/Doctors/${this.$route.params.id}/CommunicationQuote`, {
+          headers: {
+            Authorization: `Bearer ${this.user.access_token}`
           }
-        )
+        })
         .then(res => {
           this.duration = res.data.result.quote.duration;
         });
@@ -493,7 +488,7 @@ export default {
   },
   computed: {
     user() {
-      return this.$store.state.user;
+      return this.$store.state.patient.user;
     }
   },
   methods: {
