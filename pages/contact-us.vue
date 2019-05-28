@@ -306,7 +306,7 @@ export default {
             this.form = {};
           }
         })
-        .finally(() => {
+        .then(() => {
           this.ajaxLoading = false;
         });
     },

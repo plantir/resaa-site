@@ -185,7 +185,7 @@ export default {
         .catch(() => {
           this.resetRecaptcha();
         })
-        .finally(() => {
+        .then(() => {
           this.ajaxLoading = false;
         });
     }

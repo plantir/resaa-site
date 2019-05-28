@@ -118,7 +118,7 @@ export default {
             this.errorMessage = null;
           }, 5000);
         })
-        .finally(() => {
+        .then(() => {
           this.ajaxLoading = false;
           this.resetRecaptcha();
         });
