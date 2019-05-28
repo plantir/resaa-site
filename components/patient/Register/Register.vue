@@ -185,7 +185,6 @@ export default {
       this.$refs.invisibleRecaptcha.execute();
     },
     register() {
-      debugger;
       this.$axios
         .post("/api/Patients/Registration", this.user)
         .then(response => {
@@ -204,7 +203,7 @@ export default {
             this.errorMessage = null;
           }, 5000);
         })
-        .finally(() => {
+        .then(() => {
           this.ajaxLoading = false;
           this.resetRecaptcha();
         });

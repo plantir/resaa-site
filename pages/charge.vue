@@ -306,10 +306,10 @@ export default {
         })
         .catch(() => {
           this.error = "کاربری با این شماره یافت نشد";
-        })
-        .finally(() => {
-          this.ajaxLoading = false;
           this.resetRecaptcha();
+        })
+        .then(() => {
+          this.ajaxLoading = false;
         });
     },
 

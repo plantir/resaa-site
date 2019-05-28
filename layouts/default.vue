@@ -7,7 +7,6 @@
 </template>
 
 <script>
-require("promise.prototype.finally").shim();
 import appHeader from "~/components/header/header";
 import appFooter from "~/components/footer/footer";
 export default {
