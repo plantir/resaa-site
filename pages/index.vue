@@ -338,6 +338,9 @@ section#home {
     }
   }
 }
+.dialog-notification {
+  padding: 1rem;
+}
 </style>
 <template>
   <section id="home">
@@ -406,6 +409,15 @@ section#home {
         </div>
       </section>
     </div>
+    <v-dialog v-model="dialog" max-width="500px" transition="dialog-transition">
+      <v-card class="dialog-notification">
+        با سلام و عرض ادب
+        متاسفانه به خاطر مشکلات مرکز مخابراتی امروز خطوط سامانه رسا دچار مشکلاتی می باشد. ضمن پوزش از مشکلات به وجود آمده خواهشمند است با شکیبایی خود ما را در حل این مشکل یاری نمایید. متخصصین رسا در حال تعامل مداوم با مخابرات برای حل مشکل پیش آمده می باشند.
+        در صورت وجود مورد خیلی ضروری می توانید از طریق آی دی تلگرام @gsleaves آن را با ما در میان بگذارید.
+        با تشکر و احترام، سامانه رسا
+        <v-btn dark color="info" @click="dialog=false">متوجه شدم</v-btn>
+      </v-card>
+    </v-dialog>
   </section>
 </template>
 <script>
@@ -427,6 +439,7 @@ export default {
   },
   data: function() {
     return {
+      dialog: true,
       items: ["armin", "arash"],
       menuActive: false,
       itemsList: [
