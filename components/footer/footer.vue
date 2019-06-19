@@ -385,11 +385,11 @@
               </div>
             </div>
             <div class="e-namad">
-              <img
+              <!-- <img
                 onclick="window.open('https://trustseal.enamad.ir/Verify.aspx?id=36840&p=fuixhwmbaqgwodshdrfs', 'Popup','toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30')"
                 src="./e-namad.png"
                 alt
-              >
+              >-->
               <!-- <img src="./samandehi.png" alt> -->
             </div>
           </v-flex>
