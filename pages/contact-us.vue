@@ -27,7 +27,7 @@
   direction: rtl;
 }
 
-.phone-number-label {
+.label {
   color: $dark-blue-grey;
   display: inline-block;
   font-weight: 500;
@@ -152,15 +152,19 @@
         <v-flex md6 sm12 pa-3>
           <div class="address-wrapper">
             <div class="address-container">
-              <div class="address-label">آدرس :&nbsp;</div>
+              <div class="label">آدرس :&nbsp;</div>
               <div class="address-text">{{contactInfo.address}}</div>
             </div>
             <div class="phone-number-container">
-              <div class="phone-number-label">تلفن :&nbsp;</div>
+              <div class="label">تلفن دفتر:&nbsp;</div>
               <div class="phone-number-text">{{contactInfo.phoneNumber}}</div>
             </div>
+            <div class="phone-number-container">
+              <div class="label">تلفن پشتیبانی:&nbsp;</div>
+              <div class="phone-number-text">{{contactInfo.support}}</div>
+            </div>
             <div class="email-container">
-              <div class="email-label">ایمیل :&nbsp;</div>
+              <div class="label">ایمیل :&nbsp;</div>
               <div class="email-text">{{contactInfo.email}}</div>
             </div>
           </div>

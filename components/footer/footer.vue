@@ -377,6 +377,10 @@
             <div class="tell-wrapper">
               <div class="footer-tel">
                 <v-icon>phone</v-icon>
+                <span>{{contactInfo.support}}</span>
+              </div>
+              <div class="footer-tel">
+                <v-icon>phone</v-icon>
                 <span>{{contactInfo.phoneNumber}}</span>
               </div>
               <div class="footer-email">
