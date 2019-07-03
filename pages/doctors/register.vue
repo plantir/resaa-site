@@ -4,10 +4,10 @@
       <no-ssr>
         <div class="register-doctor-container">
           <div class="section-title">ثبت‌نام پزشک</div>
-          <step-indicator :numberOfSteps="4" :currentStep="currentStep"/>
+          <step-indicator :numberOfSteps="4" :currentStep="currentStep" />
           <div>
             <v-loading v-if="ajaxLoading" mode="relative"></v-loading>
-            <step1 @goNextStep="goNextStep" v-model="doctor" v-if="currentStep === 1"/>
+            <step1 @goNextStep="goNextStep" v-model="doctor" v-if="currentStep === 1" />
             <step2
               @goNextStep="goNextStep"
               @goPrevStep="goPrevStep"
@@ -22,7 +22,7 @@
               v-else-if="currentStep === 3"
             />
             <!-- <step5 v-model="doctor" v-else-if="currentStep === 5" /> -->
-            <step6 v-model="doctor" v-else-if="currentStep === 4"/>
+            <step6 v-model="doctor" v-else-if="currentStep === 4" />
             <div class="recaptcha" v-if="currentStep == 3">
               <vue-recaptcha
                 ref="invisibleRecaptcha"
@@ -168,7 +168,7 @@ export default {
     },
     finish_register() {
       this.$axios
-        .post("Doctors/Registration", this.doctor)
+        .post("/api/Doctors/Registration", this.doctor)
         .then(Response => {
           if (Response.body.status == "OK") {
             this.currentStep = this.currentStep + 1;
