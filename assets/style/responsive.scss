@@ -9,29 +9,112 @@ $xl: 1199px !default;
     @media (max-width: $xs) {
       @content;
     }
-  }
-
-  @else if $media==sm {
+  } @else if $media==sm {
     @media (max-width: $sm) {
       @content;
     }
-  }
-
-  @else if $media==md {
+  } @else if $media==md {
     @media (max-width: $md) {
       @content;
     }
-  }
-
-  @else if $media==lg {
+  } @else if $media==lg {
     @media (max-width: $lg) {
       @content;
     }
-  }
-
-  @else if $media==xl {
+  } @else if $media==xl {
     @media (max-width: $xl) {
       @content;
     }
   }
 }
+
+$xs: 400px !default;
+$sm: 575px !default;
+$md: 768px !default;
+$lg: 991px !default;
+$xl: 1199px !default;
+$grid-breakpoints: (
+  xs: 0,
+  sm: 600px,
+  md: 960px,
+  lg: (
+    1280px - 16px
+  ),
+  xl: (
+    1920px - 16px
+  )
+) !default;
+
+$display-breakpoints: (
+  print-only: 'only print',
+  screen-only: 'only screen',
+  xs-only:
+    'only screen and (max-width: #{(map-get($grid-breakpoints, sm) - 1)})',
+  sm: 'only screen and (max-width: #{(map-get($grid-breakpoints, md) - 1)})',
+  sm-only: 'only screen and (min-width: #{map-get($grid-breakpoints, sm)}) and ' +
+    '(max-width: #{(map-get($grid-breakpoints, md)  - 1)})',
+  sm-and-down:
+    'only screen and (max-width: #{(map-get($grid-breakpoints, md) - 1)})',
+  sm-and-up: 'only screen and (min-width: #{map-get($grid-breakpoints, sm)})',
+  md: 'only screen and (max-width: #{(map-get($grid-breakpoints, lg) - 1)})',
+  md-only: 'only screen and (min-width: #{map-get($grid-breakpoints, md)}) and ' +
+    '(max-width: #{(map-get($grid-breakpoints, lg)  - 1)})',
+  md-and-down:
+    'only screen and (max-width: #{(map-get($grid-breakpoints, lg) - 1)})',
+  md-and-up: 'only screen and (min-width: #{map-get($grid-breakpoints, md)})',
+  lg: 'only screen and (max-width: #{(map-get($grid-breakpoints, xl) - 1)})',
+  lg-only: 'only screen and (min-width: #{map-get($grid-breakpoints, lg)}) and ' +
+    '(max-width: #{(map-get($grid-breakpoints, xl) - 1)})',
+  lg-and-down:
+    'only screen and (max-width: #{(map-get($grid-breakpoints, xl) - 1)})',
+  lg-and-up: 'only screen and (min-width: #{map-get($grid-breakpoints, lg)})',
+  xl-only: 'only screen and (min-width: #{map-get($grid-breakpoints, xl)})',
+  xl: 'only screen and (min-width: #{map-get($grid-breakpoints, xl)})'
+) !default;
+
+@function breakpoint($value) {
+  $str: '';
+
+  @if map-has-key($display-breakpoints, $value) {
+    $str: map-get($display-breakpoints, $value);
+  } @else {
+    $str: 'only screen and (min-width: #{$value}px)';
+  }
+
+  @return $str;
+}
+
+@mixin media($value) {
+  $str: breakpoint($value);
+
+  @if not $value or $value == '' {
+    @content;
+  } @else {
+    @media #{$str} {
+      @content;
+    }
+  }
+}
+// @mixin media($media) {
+//   @if $media==xs {
+//     @media (max-width: $xs) {
+//       @content;
+//     }
+//   } @else if $media==sm {
+//     @media (max-width: $sm) {
+//       @content;
+//     }
+//   } @else if $media==md {
+//     @media (max-width: $md) {
+//       @content;
+//     }
+//   } @else if $media==lg {
+//     @media (max-width: $lg) {
+//       @content;
+//     }
+//   } @else if $media==xl {
+//     @media (max-width: $xl) {
+//       @content;
+//     }
+//   }
+// }
