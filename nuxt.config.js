@@ -158,7 +158,8 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    ,
+    'nuxt-svg',
+    'nuxt-device-detect',
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
     ['~/modules/nuxt-recaptcha'],

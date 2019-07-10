@@ -1,12 +1,9 @@
 import jwtDecode from 'jwt-decode';
-import {
-  isNull
-} from 'util';
 export const state = () => ({
   registrationToken: null,
   user: null,
   user_id: null
-})
+});
 export const mutations = {
   register_token(state, token) {
     state.registrationToken = token;
@@ -17,9 +14,12 @@ export const mutations = {
       return;
     }
     user = JSON.parse(user);
-    state.user = user
+    state.user = user;
     let decoded_token = jwtDecode(user.access_token);
-    state.user_id = decoded_token['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
+    state.user_id =
+      decoded_token[
+        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'
+      ];
   },
   login(state, user) {
     state.user = user;
@@ -31,6 +31,5 @@ export const mutations = {
     // router.push({
     //   name: 'patient-landing'
     // })
-  },
-
-}
+  }
+};

@@ -49,11 +49,20 @@
   align-self: flex-end;
   direction: rtl;
   width: 100%;
+  position: relative;
   a {
     margin: 0 4px;
   }
 }
-
+.call_button {
+  @include media(md-and-down) {
+    margin: 30px 0;
+    position: relative;
+  }
+  position: absolute;
+  left: 0;
+  top: 0;
+}
 .doctor-name {
   font-size: 1.75rem;
   font-weight: 500;
@@ -267,6 +276,7 @@
 
 <template>
   <v-container>
+    <no-ssr></no-ssr>
     <no-ssr v-if="ajaxLoading">
       <v-loading mode="relative"></v-loading>
     </no-ssr>
@@ -274,8 +284,8 @@
       <div class="doctor-info">
         <div class="doctor-avatar">
           <div class="doctor-avatar-image">
-            <img v-if="doctor.imagePath" :src="'https://webapi.resaa.net/'+doctor.imagePath">
-            <img v-else src="/img/doc-placeholder.png" alt>
+            <img v-if="doctor.imagePath" :src="'https://webapi.resaa.net/'+doctor.imagePath" />
+            <img v-else src="/img/doc-placeholder.png" alt />
           </div>
           <div class="doctor-resaa-info">
             <i class="fa fa-phone-square"></i>
@@ -307,6 +317,7 @@
             <router-link :to="{name:'patient-login'}">وارد سایت</router-link>شوید
           </div>
         </div>
+        <callSection class="call_button" :doctorinformationCall="doctor"></callSection>
         <div class="available-time-description">
           <i class="fa fa-circle"></i>
           <div>
@@ -373,6 +384,7 @@
 </template>
 
 <script>
+import callSection from "~/components/doctor/call_section/index.vue";
 export default {
   head() {
     return {
@@ -402,21 +414,17 @@ export default {
       ]
     };
   },
-
+  components: { callSection },
   async asyncData({ store, params, $axios }) {
     let { data } = await $axios.get(
       `/api/Doctors/${params.id}?fields=firstName,lastName,imagePath,specialty`
     );
-    let title = `دکتر ${data.result.doctor.firstName} ${
-      data.result.doctor.lastName
-    } - شماره تلفن مستقیم - رسا`;
+    let title = `دکتر ${data.result.doctor.firstName} ${data.result.doctor.lastName} - شماره تلفن مستقیم - رسا`;
     let og = {
       image:
         "https://webapi.resaa.net/" + data.result.doctor.imagePath ||
         "/img/doc-placeholder.png",
-      site_name: `رسا : دکتر ${data.result.doctor.firstName} ${
-        data.result.doctor.lastName
-      }`,
+      site_name: `رسا : دکتر ${data.result.doctor.firstName} ${data.result.doctor.lastName}`,
       title: `تخصص : ${data.result.doctor.specialty.title}`,
       description: `کد رسا : ${params.id}`
     };
