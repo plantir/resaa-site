@@ -317,7 +317,7 @@
             <router-link :to="{name:'patient-login'}">وارد سایت</router-link>شوید
           </div>
         </div>
-        <callSection class="call_button" :doctorinformationCall="doctor"></callSection>
+        <callSection class="call_button" :doctor="doctor" :duration="duration"></callSection>
         <div class="available-time-description">
           <i class="fa fa-circle"></i>
           <div>

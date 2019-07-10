@@ -69,7 +69,23 @@ section#phoneDialog {
       width: 100%;
     }
   }
-
+  .add_charge {
+    margin-top: 16px;
+    color: #28db9b;
+    font-size: 0.875rem;
+    .value {
+      color: lighten(#28db9b, 45);
+      font-size: 1.275rem;
+    }
+    a {
+      color: lighten(#28db9b, 45);
+      margin: 0 4px 0 6px;
+      display: inline-block;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
   .link-call {
     // margin-right: 12px;
     @include media(sm) {
@@ -133,7 +149,7 @@ section#phoneDialog {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      height: 200px;
+      min-height: 200px;
       ul {
         display: flex;
         flex-direction: column;
@@ -278,35 +294,45 @@ section#phoneDialog {
             <div class="dialog-header">
               <div class="dialog-information">
                 <div class="doctor-name">
-                  {{ doctorinformationCall.title }} {{ doctorinformationCall.firstName }}
-                  {{ doctorinformationCall.lastName }}
+                  {{ doctor.title }} {{ doctor.firstName }}
+                  {{ doctor.lastName }}
                 </div>
-                <div class="doctor-specialty">{{doctorinformationCall.specialty.title}}</div>
+                <div class="doctor-specialty">{{doctor.specialty.title}}</div>
               </div>
               <div class="dialog-code-ressa">
                 <div class="ressa-code">
                   کدرسا:
-                  <span>{{ doctorinformationCall.subscriberNumber | persianDigit }}</span>
+                  <span>{{ doctor.subscriberNumber | persianDigit }}</span>
                 </div>
                 <v-icon color="#63e1ae" style="font-size: 36px;">fingerprint</v-icon>
               </div>
             </div>
             <div class="content-wrapper">
-              <div>روش برقراری ارتباط با پزشک مورد نظر:</div>
+              <div>مراحل برقراری ارتباط با پزشک مورد نظر:</div>
               <div class="info">
                 <template v-if="user">
                   <ul v-if="$device.isMobile">
                     <li>
                       <span>۱. کلیک بر روی دکمه تماس با پزشک</span>
                     </li>
+                    <li class="add_charge">
+                      شما میتوانید به مدت
+                      <span class="value">{{duration | persianDigit}}</span> دقیقه با این پزشک صحبت کنید در صورت نیاز میتوانید از طریق
+                      <nuxt-link :to="{name:'charge'}">خرید شارژ</nuxt-link>اعتبار خود را افزایش دهید
+                    </li>
                   </ul>
                   <ul v-else>
                     <li>
-                      <span>۱. کلیک بر روی دکمه تماس</span>
+                      <span>۱. کلیک بر روی دکمه رزرو تماس</span>
                     </li>
                     <li>
                       <span>۲. تماس با شماره</span>
-                      <span class="important">{{ '021-74471111' | persianDigit}}</span>
+                      <span class="important">{{ '021-74471402' | persianDigit}}</span>
+                    </li>
+                    <li class="add_charge">
+                      شما میتوانید به مدت
+                      <span class="value">{{duration | persianDigit}}</span> دقیقه با این پزشک صحبت کنید در صورت نیاز میتوانید از طریق
+                      <nuxt-link :to="{name:'charge'}">خرید شارژ</nuxt-link>اعتبار خود را افزایش دهید
                     </li>
                   </ul>
                 </template>
@@ -319,7 +345,7 @@ section#phoneDialog {
                       ۲. وارد نمودن کد
                       <span
                         class="important"
-                      >{{doctorinformationCall.subscriberNumber | persianDigit}}</span>
+                      >{{doctor.subscriberNumber | persianDigit}}</span>
                     </li>
                   </ul>
                   <ul v-else>
@@ -331,22 +357,22 @@ section#phoneDialog {
                       ۲. وارد نمودن کد
                       <span
                         class="important"
-                      >{{doctorinformationCall.subscriberNumber | persianDigit}}</span>
+                      >{{doctor.subscriberNumber | persianDigit}}</span>
                     </li>
                   </ul>
                 </template>
 
                 <span class="hint orange--text text--lighten-2" v-if="!user">
                   در صورتی که در سایت
-                  <nuxt-link :to="{name:'patient-login'}">وارد شوید</nuxt-link>نیاز به وارد کردن کد نیست
+                  <nuxt-link :to="{name:'patient-login'}">وارد شوید</nuxt-link>نیاز به وارد کردن کد نیست و مدت زمانی که میتوانید با این پزشک صحبت کنید را به شما اعلام میکنیم
                 </span>
               </div>
               <div class="button-wrapper">
                 <v-btn
                   v-if="$device.isMobile"
                   @click="reserve_doctor"
-                  href="tel:02174471111"
-                  color="#28db9a"
+                  href="tel:02174471402"
+                  color="#34ccd7"
                   outline
                   round
                   small
@@ -356,18 +382,17 @@ section#phoneDialog {
                 <v-btn
                   v-if="user && $device.isDesktop"
                   @click="reserve_doctor"
-                  color="#28db9a"
+                  color="#34ccd7"
                   outline
                   round
                   small
                 >
                   <!-- <v-icon>fa-phone</v-icon> -->
-                  <span class="link-call">تماس با پزشک</span>
+                  <span class="link-call">رزرو تماس</span>
                 </v-btn>
-                <v-btn :to="{name:'charge'}" color="pink lighten-1" dark outline round small>
-                  <!-- <v-icon>fa-money</v-icon> -->
+                <!-- <v-btn :to="{name:'charge'}" color="#28db9a" dark outline round small>
                   <span class="link-call">شارژ حساب</span>
-                </v-btn>
+                </v-btn>-->
               </div>
             </div>
           </div>
@@ -386,7 +411,7 @@ export default {
       left: 0
     };
   },
-  props: ["doctorinformationCall"],
+  props: ["doctor", "duration"],
   created() {
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
@@ -414,7 +439,7 @@ export default {
         .then(res => {
           this.$axios
             .post(
-              `/api/Doctors/${this.doctorinformationCall.subscriberNumber}/CommunicationBooking?patientPhoneNumber=${res.data.result.profile.phoneNumber}`
+              `/api/Doctors/${this.doctor.subscriberNumber}/CommunicationBooking?patientPhoneNumber=${res.data.result.profile.phoneNumber}`
             )
             .then(res => {
               alert("رزرو پزشک با موفقیت انجام شد");
