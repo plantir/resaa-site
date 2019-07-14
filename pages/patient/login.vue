@@ -185,11 +185,11 @@
           @input="checkNumber"
           placeholder="پنج رقم آخر شماره کاربری / شماره موبایل"
           @keyup.enter="login"
-        >
+        />
       </div>
       <div class="patient-password">
         <i class="fa fa-lock"></i>
-        <input v-model="user.password" type="password" placeholder="کلمه عبور" @keyup.enter="login">
+        <input v-model="user.password" type="password" placeholder="کلمه عبور" @keyup.enter="login" />
       </div>
       <button :disabled="error" @click="login" class="login-button">ورود به حساب کاربری</button>
       <div v-if="error" class="error-message">{{error}}</div>
@@ -228,6 +228,7 @@ export default {
       subscribe_regex: /^[0-9]{5,5}$/g
     };
   },
+  mounted() {},
   methods: {
     checkNumber() {
       this.error = null;
@@ -243,9 +244,7 @@ export default {
     },
     login() {
       this.ajaxLoading = true;
-      let data = `username=${this.user.username}&password=${
-        this.user.password
-      }&grant_type=${this.user.grant_type}`;
+      let data = `username=${this.user.username}&password=${this.user.password}&grant_type=${this.user.grant_type}`;
       this.$axios
         .post("/api/oauth2/token", data, {
           headers: {
@@ -271,7 +270,12 @@ export default {
               this.ajaxLoading = false;
               this.$store.commit("patient/login", res.data);
               this.$store.commit("patient/initialize_user");
-              this.$router.push({ name: "patient-landing" });
+              let return_url = this.$route.query.return_url;
+              if (return_url) {
+                this.$router.push(return_url);
+              } else {
+                this.$router.push({ name: "patient-landing" });
+              }
             });
         })
         .catch(() => {

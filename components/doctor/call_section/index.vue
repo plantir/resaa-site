@@ -364,14 +364,14 @@ section#phoneDialog {
 
                 <span class="hint orange--text text--lighten-2" v-if="!user">
                   در صورتی که در سایت
-                  <nuxt-link :to="{name:'patient-login'}">وارد شوید</nuxt-link>نیاز به وارد کردن کد نیست و مدت زمانی که میتوانید با این پزشک صحبت کنید را به شما اعلام میکنیم
+                  <nuxt-link :to="{name:'patient-login',query:{return_url:$route.path}}">وارد شوید</nuxt-link>نیاز به وارد کردن کد نیست و مدت زمانی که میتوانید با این پزشک صحبت کنید را به شما اعلام میکنیم
                 </span>
               </div>
               <div class="button-wrapper">
                 <v-btn
                   v-if="$device.isMobile"
                   @click="reserve_doctor"
-                  href="tel:02174471402"
+                  :href="user?'tel:02174471402':'tel:02174471111'"
                   color="#34ccd7"
                   outline
                   round
