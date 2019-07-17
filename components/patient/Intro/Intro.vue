@@ -232,18 +232,22 @@
     <div class="intro-title">ارتباط تلفنی و مستقیم با پزشک</div>
     <div class="intro-description">با سـامانه رِسا از هـر جایی با پـزشـک خـود مـشـورت کنید</div>
     <div class="intro-buttons">
-      <a v-scroll-to="{ el: '#register', offset: -50 }" class="button">ثبت نام رایگان</a>
-      <a class="button" @click="openVideo">نمایش ویدئو</a>
+      <a
+        id="introRegister"
+        v-scroll-to="{ el: '#register', offset: -50 }"
+        class="button"
+      >ثبت نام رایگان</a>
+      <a id="showVideo" class="button" @click="openVideo">نمایش ویدئو</a>
     </div>
     <div class="intro-patient-image">
-      <img src="./PAT.png">
+      <img src="./PAT.png" />
       <div class="side-button left">
         <div v-scroll-to="{ el: '#download', offset: -50 }" class="side-button-text">
           <div class="side-button-sub-title">ارتباط با پزشکان</div>
           <a class="side-button-title">دریافت اپلیکیشن رِسا</a>
         </div>
         <div class="side-button-icon">
-          <img src="./mobile.svg">
+          <img src="./mobile.svg" />
         </div>
       </div>
       <div class="side-button right">
@@ -252,7 +256,7 @@
           <div class="side-button-title">تماس با ۷۴۴۷۱۱۱۱ ۰۲۱</div>
         </div>
         <div class="side-button-icon">
-          <img src="./phone.svg">
+          <img src="./phone.svg" />
         </div>
       </div>
     </div>
@@ -260,7 +264,7 @@
       <i class="fa fa-angle-down"></i>
     </div>
     <div class="bottom-curve">
-      <img class="benefits-section-patient-curve" src="./sec-2-bg@2x2.png">
+      <img class="benefits-section-patient-curve" src="./sec-2-bg@2x2.png" />
     </div>
     <div class="parallax">
       <div ref="parallax">

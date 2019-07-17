@@ -170,12 +170,12 @@ export default {
       }
     ],
     //'~/modules/nuxt-service',
-    [
-      '@nuxtjs/google-analytics',
-      {
-        id: 'UA-135304047-1'
-      }
-    ],
+    // [
+    //   '@nuxtjs/google-analytics',
+    //   {
+    //     id: 'UA-135304047-1'
+    //   }
+    // ],
     '@nuxtjs/axios'
   ],
   styleResources: {

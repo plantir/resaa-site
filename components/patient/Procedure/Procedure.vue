@@ -106,8 +106,12 @@
     text-align: center;
     line-height: 33px;
     margin: 10px;
-    border: solid 2px #ffffff;
-    color: #ffffff;
+    box-shadow: 0 5px 7.5px 0 rgba(255, 206, 70, 0.3);
+    border: none;
+    color: #545456;
+    background-color: #febe10;
+    float: right;
+    z-index: 20;
 
     &:hover,
     &:focus,
@@ -125,12 +129,8 @@
     text-align: center;
     line-height: 33px;
     margin: 10px;
-    box-shadow: 0 5px 7.5px 0 rgba(255, 206, 70, 0.3);
-    border: none;
-    color: #545456;
-    background-color: #febe10;
-    float: right;
-    z-index: 20;
+    border: solid 2px #ffffff;
+    color: #ffffff;
 
     &:hover,
     &:focus,
@@ -213,7 +213,7 @@
             می&#160;توانید اقدام به ثبت نام کنید.
           </div>
         </div>
-        <img class="item-image" src="./Item1.png">
+        <img class="item-image" src="./Item1.png" />
       </div>
       <div class="procedure-item item-even">
         <div class="item-text">
@@ -233,7 +233,7 @@
             می&#160;توانید کد و مشخصات پزشک خود را بیابید.
           </div>
         </div>
-        <img class="item-image" src="./Item2P.png">
+        <img class="item-image" src="./Item2P.png" />
       </div>
       <div class="procedure-item item-odd">
         <div class="item-text">
@@ -253,15 +253,15 @@
                 </template>
                 <span>به درخواست خود پزشکان، بعضی از آنها از این قاعده مستثنا می باشند</span>
               </v-tooltip>
-            </div> -->
+            </div>-->
           </div>
         </div>
-        <img class="item-image" src="./Item3.png">
+        <img class="item-image" src="./Item3.png" />
       </div>
     </div>
 
     <div class="procedure-button-container">
-      <a href="#register" class="procedure-signup-button">ثبت نام رایگان</a>
+      <a href="#register" id="procedureRegister" class="procedure-signup-button">ثبت نام رایگان</a>
       <a href="#download" class="procedure-download-button">دریافت اپلیکیشن</a>
     </div>
   </div>
