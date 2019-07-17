@@ -19,12 +19,14 @@
             شارژ آسان حساب از طریق اپلیکیشن رِسا و یا کد
             <a href="tel:*500*25#">USSD</a>
           </li>
-          <li>شارژ آسان حساب از طریق
+          <li>
+            شارژ آسان حساب از طریق
             <router-link :to="{name:'charge'}">همین سایت</router-link>
           </li>
         </ul>
         <div class="benefits-button-container">
           <a
+            id="benefitsRegister"
             v-scroll-to="{ el: '#register', offset: -50 }"
             class="benefits-signup-button"
           >ثبت نام رایگان</a>
@@ -35,7 +37,7 @@
         </div>
       </div>
       <div class="image">
-        <img src="./mockup.jpg">
+        <img src="./mockup.jpg" />
       </div>
     </div>
   </div>
@@ -156,12 +158,12 @@ export default {};
   text-align: center;
   line-height: 33px;
   margin: 10px;
-  box-shadow: 0 5px 7.5px 0 rgba(72, 229, 202, 0.2);
-  border: solid 2px $tealish;
-  color: $tealish;
-  background-color: white;
+  box-shadow: 0 5px 7.5px 0 rgba(255, 206, 70, 0.3);
+  border: none;
+  color: #545456;
+  background-color: #febe10;
   float: right;
-  z-index: 10;
+  z-index: 20;
 
   &:hover,
   &:focus,
@@ -179,12 +181,12 @@ export default {};
   text-align: center;
   line-height: 33px;
   margin: 10px;
-  box-shadow: 0 5px 7.5px 0 rgba(255, 206, 70, 0.3);
-  border: none;
-  color: #545456;
-  background-color: #febe10;
+  box-shadow: 0 5px 7.5px 0 rgba(72, 229, 202, 0.2);
+  border: solid 2px $tealish;
+  color: $tealish;
+  background-color: white;
   float: right;
-  z-index: 20;
+  z-index: 10;
 
   &:hover,
   &:focus,

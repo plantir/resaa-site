@@ -132,7 +132,13 @@
       شماره کاربری و رمز عبور برای شما پیامک شود.
     </div>
     <div>
-      <v-btn class="register-btn" round color="white" :to="{name:'patient-register'}">ثبت نام</v-btn>
+      <v-btn
+        class="register-btn"
+        id="freeRegister"
+        round
+        color="white"
+        :to="{name:'patient-register'}"
+      >ثبت نام</v-btn>
     </div>
     <span class="error-message" v-if="errorMessage">{{errorMessage}}</span>
     <span
@@ -142,11 +148,11 @@
     <div class="register-description-3">
       همچنین می توانید با ارسال پیامک به شماره
       <b>۱۰۰۰۷۴۴۷۱۱۱۱</b>
-      <br>و یا از طریق برقراری تماس با شماره تلفن
+      <br />و یا از طریق برقراری تماس با شماره تلفن
       <b>۰۲۱-۷۴۴۷۱۱۱۱</b>
       در سامانه رِسا ثبت نام کنید.
     </div>
-    <register-modal v-if="registerModal"/>
+    <register-modal v-if="registerModal" />
   </div>
 </template>
 
