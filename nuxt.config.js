@@ -6,15 +6,15 @@ require('dotenv').config({
 // import shrinkRay from 'shrink-ray'
 export default {
   mode: 'universal',
-  env: {
-    PORT: process.env.PORT,
-    HOST: process.env.HOST,
-    SITE_URL: process.env.SITE_URL,
-    API_URL: process.env.API_URL,
-    RECAPTCHA_SITEKEY: process.env.RECAPTCHA_SITEKEY,
-    BASE_URL: process.env.BASE_URL,
-    BANK_RETURN_URL: process.env.BANK_RETURN_URL
-  },
+  // env: {
+  //   PORT: process.env.PORT,
+  //   HOST: process.env.HOST,
+  //   SITE_URL: process.env.SITE_URL,
+  //   API_URL: process.env.API_URL,
+  //   RECAPTCHA_SITEKEY: process.env.RECAPTCHA_SITEKEY,
+  //   BASE_URL: process.env.BASE_URL,
+  //   BANK_RETURN_URL: process.env.BANK_RETURN_URL
+  // },
   server: {
     port: process.env.PORT, // default: 3000
     host: process.env.HOST // default: localhost
