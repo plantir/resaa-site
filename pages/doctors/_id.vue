@@ -410,6 +410,11 @@ export default {
           hid: "og:description",
           property: "og:description",
           content: this.og.description
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: this.og.canonical
         }
       ]
     };
@@ -443,7 +448,8 @@ export default {
         "/img/doc-placeholder.png",
       site_name: `رسا : دکتر ${data.result.doctor.firstName} ${data.result.doctor.lastName}`,
       title: `تخصص : ${data.result.doctor.specialty.title}`,
-      description: `کد رسا : ${params.id}`
+      description: `کد رسا : ${params.id}`,
+      canonical: `${process.env.SITE_URL}/doctors/${doctor.subscriberNumber}`
     };
     return {
       doctor: doctor,
