@@ -366,8 +366,8 @@
       </div>
       <div class="navigation-bar-right">
         <router-link :to="!isPatient?'/':'/'" class="navigation-bar-logo">
-          <img v-if="isPatient" src="./logo-teal.png">
-          <img v-else src="./logo.png">
+          <img alt="سامانه رسا" v-if="isPatient" src="./logo-teal.png" />
+          <img alt="سامانه رسا" v-else src="./logo.png" />
         </router-link>
 
         <div class="navigation-bar-items">
