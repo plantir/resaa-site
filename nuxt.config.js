@@ -1,6 +1,8 @@
 import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin';
 import axios from 'axios';
-
+require('dotenv').config({
+  path: process.env.NODE_ENV == 'development' ? '.env.development' : '.env'
+});
 // import shrinkRay from 'shrink-ray'
 export default {
   mode: 'universal',
@@ -159,7 +161,14 @@ export default {
     //   }
     // ],
     '@nuxtjs/axios',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    '@nuxtjs/dotenv'
+    // [
+    //   {
+    //     filename:
+    //
+    //   }
+    // ]
   ],
 
   // doctors sitemap
