@@ -159,7 +159,8 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/sitemap'
   ],
-  // static page sitemap
+
+  // doctors sitemap
   sitemap: {
     defaults: {
       changefreq: 'weekly',
@@ -179,25 +180,13 @@ export default {
         }
         return route;
       });
-    }
-  },
-  // doctors sitemap
-  sitemap: {
-    defaults: {
-      changefreq: 'weekly',
-      priority: 0.7,
-      lastmod: new Date(),
-      lastmodrealtime: true
     },
-    hostname: process.env.SITE_URL,
-    gzip: true,
-    path: '/sitemap_doctors.xml',
     routes() {
       return axios
         .get(`${process.env.API_URL}/misc/sitemap`)
         .then(res =>
           res.data.result.doctorSubscriberNumbers.map(
-            doctor => '/doctors/' + doctor.id
+            doctor => '/doctors/' + doctor
           )
         );
     }
