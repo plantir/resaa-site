@@ -1,6 +1,7 @@
 import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin';
+import axios from 'axios';
+
 // import shrinkRay from 'shrink-ray'
-const port = process.env.NODE_ENV == 'development' ? 3000 : 80;
 export default {
   mode: 'universal',
   env: {
@@ -10,48 +11,27 @@ export default {
     BANK_RETURN_URL: 'https://resaa.net/charge'
   },
   server: {
-    port: port, // default: 3000
-    host: '0.0.0.0' // default: localhost
+    port: process.env.PORT, // default: 3000
+    host: process.env.HOST // default: localhost
   },
   axios: {
     proxy: true, // Can be also an object with default options
-    port: port
+    port: process.env.PORT
   },
   proxy: {
     '/api/Mobile/': {
-      target:
-        process.env.NODE_ENV == 'development'
-          ? 'https://webapi.resaa.net'
-          : 'http://resa-web.bsn.local'
+      target: 'http://resa-web.bsn.local'
     },
     '/api/MessageCallback/': {
-      target:
-        process.env.NODE_ENV == 'development'
-          ? 'https://webapi.resaa.net'
-          : 'http://resa-web.bsn.local'
+      target: 'http://resa-web.bsn.local'
     },
     '/api/DoctorApp/': {
-      target:
-        process.env.NODE_ENV == 'development'
-          ? 'https://webapi.resaa.net'
-          : 'http://resa-web.bsn.local'
+      target: 'http://resa-web.bsn.local'
     },
     '/api/': {
-      target:
-        process.env.NODE_ENV == 'development'
-          ? 'https://webapi.resaa.net'
-          : 'http://resa-web-api.bsn.local',
+      target: process.env.API_URL,
       pathRewrite: {
         '^/api/': ''
-      }
-    },
-    '/oldsite/': {
-      target:
-        process.env.NODE_ENV == 'development'
-          ? 'https://webapi.resaa.net'
-          : 'http://resa-web.bsn.local',
-      pathRewrite: {
-        '^/oldsite/': ''
       }
     }
   },
@@ -176,8 +156,74 @@ export default {
     //     id: 'UA-135304047-1'
     //   }
     // ],
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/sitemap'
   ],
+  // static page sitemap
+  sitemap: {
+    defaults: {
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+      lastmodrealtime: true
+    },
+    hostname: process.env.SITE_URL,
+    gzip: true,
+    exclude: ['/patient/profile'],
+    path: '/sitemap.xml',
+    filter({ routes, options }) {
+      return routes.map(route => {
+        if (route.url == '/') {
+          route.priority = 1;
+          route.changefreq = 'daily';
+        }
+        return route;
+      });
+    }
+  },
+  // doctors sitemap
+  sitemap: {
+    defaults: {
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+      lastmodrealtime: true
+    },
+    hostname: process.env.SITE_URL,
+    gzip: true,
+    path: '/sitemap_doctors.xml',
+    routes() {
+      return axios
+        .get(`${process.env.API_URL}/misc/sitemap`)
+        .then(res =>
+          res.data.result.doctorSubscriberNumbers.map(
+            doctor => '/doctors/' + doctor.id
+          )
+        );
+    }
+  },
+
+  // sitemap: {
+  //   defaults: {
+  //     changefreq: 'weekly',
+  //     priority: 0.7,
+  //     lastmod: new Date(),
+  //     lastmodrealtime: true
+  //   },
+  //   hostname: process.env.SITE_URL,
+  //   gzip: true,
+  //   exclude: ['//patient/profile'],
+  //   path: '/sitemap_specialities.xml',
+  //   filter({ routes, options }) {
+  //     return routes.map(route => {
+  //       if (route.url == '/') {
+  //         route.priority = 1;
+  //         route.changefreq = 'daily';
+  //       }
+  //       return route;
+  //     });
+  //   }
+  // },
   styleResources: {
     scss: ['assets/style/variables.scss']
   },
