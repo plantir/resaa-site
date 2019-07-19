@@ -14,10 +14,16 @@
 <template>
   <v-app dir="rtl" id="speciality">
     <v-content>
-      <app-header></app-header>
-      <nuxt/>
+      <header>
+        <app-header></app-header>
+      </header>
+      <main>
+        <nuxt />
+      </main>
     </v-content>
-    <app-footer></app-footer>
+    <footer>
+      <app-footer></app-footer>
+    </footer>
   </v-app>
 </template>
 

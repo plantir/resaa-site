@@ -344,22 +344,22 @@
                   <span>به ما بپیوندید :</span>
                   <ul>
                     <li>
-                      <a target="_blank" href="https://t.me/pezeshkepasokhgoo">
+                      <a rel="nofollow" target="_blank" href="https://t.me/pezeshkepasokhgoo">
                         <i class="fa fa-telegram"></i>
                       </a>
                     </li>
                     <li>
-                      <a>
+                      <a rel="nofollow">
                         <i class="fa fa-facebook"></i>
                       </a>
                     </li>
                     <li>
-                      <a target="_blank" href="https://instagram.com/resaanet/">
+                      <a rel="nofollow" target="_blank" href="https://instagram.com/resaanet/">
                         <i class="fa fa-instagram"></i>
                       </a>
                     </li>
                     <li>
-                      <a target="_blank" href="https://twitter.com/resaanet">
+                      <a rel="nofollow" target="_blank" href="https://twitter.com/resaanet">
                         <i class="fa fa-twitter"></i>
                       </a>
                     </li>

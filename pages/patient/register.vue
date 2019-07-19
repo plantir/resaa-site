@@ -11,7 +11,7 @@
           @input="checkNumber"
           placeholder="شماره موبایل"
           @keyup.enter="onRegister"
-        >
+        />
       </div>
       <vue-recaptcha
         ref="invisibleRecaptcha"
@@ -38,7 +38,7 @@
       <div class="section-title">ثبت نام</div>
       <div class="section-description">جهت دسترسی به خدمات برخط سامانه رِسا، لطفا ثبت نام کنید</div>
       <div class="patient-username">
-        <input v-model="activationKey" placeholder="کد تایید" @keyup.enter="verifySMSCode">
+        <input v-model="activationKey" placeholder="کد تایید" @keyup.enter="verifySMSCode" />
       </div>
       <div v-if="resendSMSCode_timeout == 0" class="register-code-resend" @click="resendSMSCode">
         <a>ارسال مجدد کد</a>
@@ -65,6 +65,23 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: "ثبت نام بیمار",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "ثبت نام بیمار"
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: `${process.env.SITE_URL}${this.$route.path}`
+        }
+      ]
+    };
+  },
   data() {
     return {
       user: {
@@ -140,9 +157,7 @@ export default {
     resendSMSCode: function() {
       this.$axios
         .post(
-          `/api/Patients/Registration/${
-            this.registrationToken
-          }/ResendActivationKey`
+          `/api/Patients/Registration/${this.registrationToken}/ResendActivationKey`
         )
         .then(response => {
           if (response.data.status === "OK") {

@@ -181,7 +181,7 @@
                   class="contact-us-input form-control"
                   :class="{ 'is-invalid': submitted && errors.has('fullName') }"
                   placeholder="نام و نام خانوادگی"
-                >
+                />
                 <div
                   v-if="submitted && errors.has('fullName')"
                   class="invalid-feedback"
@@ -195,7 +195,7 @@
                   class="contact-us-input form-control"
                   :class="{ 'is-invalid': submitted && errors.has('phoneNumber') }"
                   placeholder="شماره تماس"
-                >
+                />
                 <div
                   v-if="submitted && errors.has('phoneNumber')"
                   class="invalid-feedback"
@@ -209,7 +209,7 @@
                   class="contact-us-input form-control"
                   :class="{ 'is-invalid': submitted && errors.has('email') }"
                   placeholder="ایمیل"
-                >
+                />
                 <div
                   v-if="submitted && errors.has('email')"
                   class="invalid-feedback"
@@ -242,7 +242,7 @@
                 :zoom="18"
                 style="width: 100%; height:551px"
               >
-                <GmapMarker ref="mapMarker" :position="{lat: 35.717143, lng:51.387869}"/>
+                <GmapMarker ref="mapMarker" :position="{lat: 35.717143, lng:51.387869}" />
               </GmapMap>
             </div>
           </no-ssr>
@@ -263,6 +263,11 @@ export default {
           name: "description",
           content:
             "برای ارسال نظرات خود به سامانه رسا می‌توانید با وارد کردن اطلاعات و متن پیام خود، با ما در تماس باشید. آدرس دفتر شرکت، تلفن تماس و ایمیل رسا را به خاطر بسپارید"
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };

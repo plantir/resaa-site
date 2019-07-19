@@ -413,8 +413,8 @@
                           v-if="doctor.imagePath"
                           :src="'https://webapi.resaa.net/'+doctor.imagePath"
                           alt
-                        >
-                        <img v-else src="/img/doc-placeholder.png" alt>
+                        />
+                        <img v-else src="/img/doc-placeholder.png" alt />
                       </div>
                       <div class="item-right-sub-section">
                         <div class="item-doctor-name">{{doctor.firstName}} {{doctor.lastName}}</div>
@@ -486,6 +486,11 @@ export default {
           name: "description",
           content:
             "با جستجوی نام پزشک، کد رسای پزشک، تخصص یا استانی که پزشک در آن فعالیت دارد، پزشک مورد نظر خود را بیابید. همچنین می‌توانید همه‌ی پزشکان همکار رسا را در لیست پزشکان بیابید"
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };
@@ -544,9 +549,7 @@ export default {
     },
     getDoctors() {
       this.ajaxLoading = true;
-      let url = `/api/Doctors?fields=${this.fields}&limit=${
-        this.limit
-      }&offset=${this.offset}`;
+      let url = `/api/Doctors?fields=${this.fields}&limit=${this.limit}&offset=${this.offset}`;
       if (this.filter.name) {
         url += `&name=${this.filter.name}`;
       }

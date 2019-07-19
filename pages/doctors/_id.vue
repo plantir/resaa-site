@@ -444,7 +444,6 @@ export default {
       "id,firstName,lastName,imagePath,currentlyAvailable,subscriberNumber,specialty,tags,expertise,timetable,title,workplaces,medicalCouncilNumber";
   },
   mounted() {
-    console.log(this.$route);
     this.$axios
       .get(
         `/api/Doctors/${this.$route.params.id}?fields=${

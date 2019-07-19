@@ -14,7 +14,7 @@
               v-model="subscriberNumber"
               placeholder="پنج رقم آخر شماره کاربری / شماره موبایل"
               required
-            >
+            />
           </div>
           <div class="charge-amount" @click="toggleChargeMenu">
             <i class="fa fa-credit-card-alt"></i>
@@ -41,8 +41,8 @@
           <div class="error-message" v-if="error">{{error}}</div>
           <div class="charge-followup-description">
             در صورت بروز هرگونه مشکل در هنگام تراکنش شماره‌ی تلفن، کد پیگیری و شماره‌ی رِسای خود را
-            <br>به شماره‌ی ۱۰۰۰۹۰۹۹۰۹۹۰۹۹ ارسال کنید، کارشناسان ما با شما تماس خواهند گرفت.
-            <br>یا با شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل فرمایید.
+            <br />به شماره‌ی ۱۰۰۰۹۰۹۹۰۹۹۰۹۹ ارسال کنید، کارشناسان ما با شما تماس خواهند گرفت.
+            <br />یا با شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل فرمایید.
           </div>
         </div>
         <!-- step 1 -->
@@ -151,6 +151,11 @@ export default {
           name: "description",
           content:
             "برای خرید شارژ جهت مکالمه با پزشک شماره موبایل و مبلغ کارت اعتباری مورد نیاز خود را وارد کنید و اعتبار حساب خود را افزایش دهید"
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };

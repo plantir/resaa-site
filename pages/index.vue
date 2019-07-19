@@ -345,12 +345,12 @@ section#home {
 <template>
   <section id="home">
     <div class="logo">
-      <img src="~static/img/logo-resaa-blue.png">
+      <img src="~static/img/logo-resaa-blue.png" />
     </div>
     <div class="nav-icon" :class="{'active':menuActive}">
       <div @click="activateMenu" class="icon-wrapper">
-        <img v-if="menuActive" src="~static/img/nav-close-icon.png">
-        <img v-else src="~static/img/nav-icon.png">
+        <img v-if="menuActive" src="~static/img/nav-close-icon.png" />
+        <img v-else src="~static/img/nav-icon.png" />
       </div>
     </div>
     <div class="nav-main" :class="{ 'active' : menuActive }">
@@ -368,13 +368,13 @@ section#home {
     </div>
     <div class="content">
       <div class="phone-icon">
-        <img src="~static/img/phone.svg">
+        <img src="~static/img/phone.svg" />
       </div>
       <div class="line"></div>
       <section class="patient">
         <div class="image">
           <router-link :to="{name:'patient-landing'}">
-            <img src="~static/img/patient-edited.png">
+            <img src="~static/img/patient-edited.png" />
           </router-link>
         </div>
         <div class="title">
@@ -393,7 +393,7 @@ section#home {
       <section class="doctor">
         <div class="image">
           <router-link to="doctors/landing">
-            <img src="~static/img/doctor-edited.png">
+            <img src="~static/img/doctor-edited.png" />
           </router-link>
         </div>
         <div class="title">
@@ -432,12 +432,17 @@ export default {
         {
           hid: "description",
           name: "description",
-          content: "My custom description"
+          content: "رِسا، رسانه سلامت ایرانیان"
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };
   },
-  data: function() {
+  data() {
     return {
       dialog: true,
       items: ["armin", "arash"],
@@ -465,9 +470,6 @@ export default {
         }
       ]
     };
-  },
-  created() {
-    this.$axios.get("/api/Charge/Denominations").then(res => {});
   },
   methods: {
     activateMenu: function() {

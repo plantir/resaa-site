@@ -1,8 +1,14 @@
 <template>
   <section>
-    <app-header></app-header>
-    <nuxt dir="rtl"/>
-    <app-footer></app-footer>
+    <header>
+      <app-header></app-header>
+    </header>
+    <main>
+      <nuxt dir="rtl" />
+    </main>
+    <footer>
+      <app-footer></app-footer>
+    </footer>
   </section>
 </template>
 

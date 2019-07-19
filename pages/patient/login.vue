@@ -213,7 +213,19 @@ import jwtDecode from "jwt-decode";
 export default {
   head() {
     return {
-      title: "ورود به بخش بیماران"
+      title: "ورود به بخش بیماران",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "ورود به بخش بیماران"
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: `${process.env.SITE_URL}${this.$route.path}`
+        }
+      ]
     };
   },
   data() {

@@ -1,10 +1,10 @@
 <template>
   <section>
-    <doctor-intro/>
-    <doctor-benefits/>
-    <doctor-procedure/>
-    <doctor-comments/>
-    <doctor-download/>
+    <doctor-intro />
+    <doctor-benefits />
+    <doctor-procedure />
+    <doctor-comments />
+    <doctor-download />
   </section>
 </template>
 <script>
@@ -31,6 +31,11 @@ export default {
           name: "description",
           content:
             "با استفاده از رسا تماس های غیر ضروری خود از سمت بیماران را حذف کنید و مکالمات غیر مربوط به روند درمانی را کاهش دهید"
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };

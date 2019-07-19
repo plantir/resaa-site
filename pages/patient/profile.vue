@@ -350,8 +350,8 @@
         <div v-if="editMode === false" class="profile-container">
           <div class="profile-avatar">
             <v-loading v-if="saving"></v-loading>
-            <img v-if="user_profile.image" :src="user_profile.image" alt>
-            <img v-else src="/img/user-placeholder.png" alt>
+            <img v-if="user_profile.image" :src="user_profile.image" alt />
+            <img v-else src="/img/user-placeholder.png" alt />
             <div class="profile-avatar-edit-button">
               <label for="image">تغییر تصویر</label>
               <!-- <v-text-field
@@ -369,7 +369,7 @@
                 id="image"
                 name="image"
                 hidden="true"
-              >
+              />
             </div>
           </div>
           <div class="profile-info-container">
@@ -401,8 +401,8 @@
           <div class="profile-edit-input-area-container">
             <div class="profile-edit-avatar">
               <div class="profile-avatar">
-                <img v-if="user_profile.image" :src="user_profile.image">
-                <img v-else src="/img/user-placeholder.png" alt>
+                <img v-if="user_profile.image" :src="user_profile.image" />
+                <img v-else src="/img/user-placeholder.png" alt />
                 <div class="profile-avatar-edit-button">
                   <label for="image">تغییر تصویر</label>
                   <input
@@ -411,7 +411,7 @@
                     id="image"
                     name="image"
                     hidden="true"
-                  >
+                  />
                 </div>
               </div>
               <button v-if="user_profile.image" @click="removeImage">حذف عکس</button>
@@ -482,6 +482,23 @@
 <script>
 import CallHistory from "@/components/patient/callHistory/callHistory";
 export default {
+  head() {
+    return {
+      title: "پروفایل بیمار",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "پروفایل بیمار"
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: `${process.env.SITE_URL}${this.$route.path}`
+        }
+      ]
+    };
+  },
   components: {
     CallHistory
   },

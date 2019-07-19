@@ -5,10 +5,13 @@ import axios from 'axios';
 export default {
   mode: 'universal',
   env: {
-    API_URL: 'https://webapi.resaa.net',
-    RECAPTCHA_SITEKEY: '6Le6nngUAAAAAGiIJGJl0rCH5QvquMK0jRcZeBim',
-    BASE_URL: '/',
-    BANK_RETURN_URL: 'https://resaa.net/charge'
+    PORT: process.env.PORT,
+    HOST: process.env.HOST,
+    SITE_URL: process.env.SITE_URL,
+    API_URL: process.env.API_URL,
+    RECAPTCHA_SITEKEY: process.env.RECAPTCHA_SITEKEY,
+    BASE_URL: process.env.BASE_URL,
+    BANK_RETURN_URL: process.env.BANK_RETURN_URL
   },
   server: {
     port: process.env.PORT, // default: 3000
