@@ -413,17 +413,23 @@ export default {
   },
   props: ["doctor", "duration"],
   created() {
-    window.addEventListener("resize", this.handleResize);
-    this.handleResize();
+    if (process.client) {
+      window.addEventListener("resize", this.handleResize);
+      this.handleResize();
+    }
   },
   destroyed() {
-    window.removeEventListener("resize", this.handleResize);
+    if (process.client) {
+      window.removeEventListener("resize", this.handleResize);
+    }
   },
   methods: {
     handleResize() {
-      let width = window.innerWidth;
-      this.top = width > 959 ? 40 : 70;
-      this.left = width > 959 ? 0 : 120;
+      if (process.client) {
+        let width = window.innerWidth;
+        this.top = width > 959 ? 40 : 70;
+        this.left = width > 959 ? 0 : 120;
+      }
     },
     reserve_doctor() {
       if (!this.user) {

@@ -351,7 +351,7 @@
       <div class="time-table-wrapper">
         <h3>زمان های پاسخگویی</h3>
         <no-ssr>
-          <timeTable :segments="doctor.timetable.segments"></timeTable>
+          <timeTable></timeTable>
         </no-ssr>
       </div>
       <!--    
@@ -416,9 +416,26 @@ export default {
   },
   components: { callSection },
   async asyncData({ store, params, $axios }) {
-    let { data } = await $axios.get(
-      `/api/Doctors/${params.id}?fields=firstName,lastName,imagePath,specialty`
-    );
+    let fields =
+      "id,firstName,lastName,imagePath,currentlyAvailable,subscriberNumber,specialty,tags,expertise,title,workplaces,medicalCouncilNumber";
+    let data = await $axios.$get(`/Doctors/${params.id}?fields=${fields}`);
+    let doctor = data.result.doctor;
+    let locations = [];
+    for (let address of doctor.workplaces) {
+      if (address.latitude && address.longitude) {
+        locations.push({
+          lat: address.latitude,
+          lng: address.longitude
+        });
+      }
+    }
+    let hideMap = false;
+    let center = { lat: 10, lng: 10 };
+    if (locations.length == 0) {
+      hideMap = true;
+    } else if (locations.length == 1) {
+      center = locations[0];
+    }
     let title = `دکتر ${data.result.doctor.firstName} ${data.result.doctor.lastName} - شماره تلفن مستقیم - رسا`;
     let og = {
       image:
@@ -429,59 +446,32 @@ export default {
       description: `کد رسا : ${params.id}`
     };
     return {
-      doctor: null,
-      ajaxLoading: true,
+      doctor: doctor,
+      ajaxLoading: false,
       duration: null,
-      hideMap: false,
+      hideMap: hideMap,
       title: title,
       center: { lat: 10, lng: 10 },
-      locations: [],
+      locations: locations,
       og: og
     };
   },
-  beforeCreate() {
-    this.fields =
-      "id,firstName,lastName,imagePath,currentlyAvailable,subscriberNumber,specialty,tags,expertise,timetable,title,workplaces,medicalCouncilNumber";
-  },
   mounted() {
-    this.$axios
-      .get(
-        `/api/Doctors/${this.$route.params.id}?fields=${
-          this.fields
-        }&clientTimeZoneOffset=${new Date().getTimezoneOffset()}`
-      )
-      .then(response => {
-        this.doctor = response.data.result.doctor;
-        this.ajaxLoading = false;
-        for (let address of this.doctor.workplaces) {
-          if (address.latitude && address.longitude) {
-            this.locations.push({
-              lat: address.latitude,
-              lng: address.longitude
+    // this.$axios.get('/api')
+    setTimeout(() => {
+      if (process.client && !this.hideMap) {
+        this.$refs.mapRef.$mapPromise.then(map => {
+          var bounds = new google.maps.LatLngBounds();
+          for (let location of this.locations) {
+            bounds.extend({
+              lat: parseFloat(location.lat),
+              lng: parseFloat(location.lng)
             });
           }
-        }
-        if (this.locations.length == 0) {
-          this.hideMap = true;
-        } else if (this.locations.length == 1) {
-          this.center = this.locations[0];
-        } else {
-          setTimeout(() => {
-            if (process.client) {
-              this.$refs.mapRef.$mapPromise.then(map => {
-                var bounds = new google.maps.LatLngBounds();
-                for (let location of this.locations) {
-                  bounds.extend({
-                    lat: parseFloat(location.lat),
-                    lng: parseFloat(location.lng)
-                  });
-                }
-                map.fitBounds(bounds);
-              });
-            }
-          }, 100);
-        }
-      });
+          map.fitBounds(bounds);
+        });
+      }
+    }, 100);
     if (this.user) {
       this.$axios
         .get(`/api/Doctors/${this.$route.params.id}/CommunicationQuote`, {
@@ -501,7 +491,9 @@ export default {
   },
   methods: {
     geo(address) {
-      window.location.href = `geo:${address.longitude},${address.latitude}`;
+      if (process.client) {
+        window.location.href = `geo:${address.longitude},${address.latitude}`;
+      }
     }
   }
 };

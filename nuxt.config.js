@@ -112,8 +112,7 @@ export default {
   plugins: [
     '~/plugins/vuetify',
     {
-      src: '~/plugins/global.js',
-      ssr: false
+      src: '~/plugins/global.js'
     },
     {
       src: '~/plugins/swiper.js',
