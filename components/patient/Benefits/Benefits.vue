@@ -1,13 +1,11 @@
 <template>
   <div class="benefits-section-patient-container">
     <!-- <img class="benefits-section-patient-curve" src="./sec-2-bg@2x2.png" /> -->
-    <div class="section-title" id="element">مزایای استفاده از رِسا</div>
-    <!-- <div class="section-description">
-      خدمات و مزایای سامانه رِسا برای بیماران
-    </div>-->
+    <h2 class="section-title" id="element">مزایای استفاده از رِسا</h2>
+    <p class="section-description">استفاده از سامانه رسا چه مزایایی دارد؟</p>
     <div class="benefits-container">
       <div class="benefits-text">
-        <div class="benefits-text-title">معرفی خدمات به بیماران عزیز</div>
+        <h3 class="benefits-text-title">معرفی خدمات به بیماران عزیز</h3>
         <ul class="benefits-list">
           <li>تماس مستقیم با پزشک بدون نیاز به شماره همراه ایشان</li>
           <li>صرفه جویی در وقت و هزینه بدون حضور در مطب</li>
@@ -37,7 +35,7 @@
         </div>
       </div>
       <div class="image">
-        <img src="./mockup.jpg" />
+        <img src="./mockup.jpg" alt="مزایای استفاده از سامانه رسا" />
       </div>
     </div>
   </div>

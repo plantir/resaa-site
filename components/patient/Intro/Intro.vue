@@ -229,8 +229,8 @@
 
 <template>
   <div class="intro-section-patients-container">
-    <div class="intro-title">ارتباط تلفنی و مستقیم با پزشک</div>
-    <div class="intro-description">با سـامانه رِسا از هـر جایی با پـزشـک خـود مـشـورت کنید</div>
+    <h1 class="intro-title">ارتباط تلفنی و مستقیم با پزشک</h1>
+    <p class="intro-description">با سـامانه رِسا از هـر جایی با پـزشـک خـود مـشـورت کنید</p>
     <div class="intro-buttons">
       <a
         id="introRegister"
@@ -240,14 +240,14 @@
       <a id="showVideo" class="button" @click="openVideo">نمایش ویدئو</a>
     </div>
     <div class="intro-patient-image">
-      <img src="./PAT.png" />
+      <img src="./PAT.png" alt="ارتباط تلفنی و مستفیم با پزشک در سامانه رسا" />
       <div class="side-button left">
         <div v-scroll-to="{ el: '#download', offset: -50 }" class="side-button-text">
           <div class="side-button-sub-title">ارتباط با پزشکان</div>
           <a class="side-button-title">دریافت اپلیکیشن رِسا</a>
         </div>
         <div class="side-button-icon">
-          <img src="./mobile.svg" />
+          <img src="./mobile.svg" alt="اپلیکیشن رسا" />
         </div>
       </div>
       <div class="side-button right">
@@ -256,7 +256,7 @@
           <div class="side-button-title">تماس با ۷۴۴۷۱۱۱۱ ۰۲۱</div>
         </div>
         <div class="side-button-icon">
-          <img src="./phone.svg" />
+          <img src="./phone.svg" alt="تماس با رسا" />
         </div>
       </div>
     </div>

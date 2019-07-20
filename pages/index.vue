@@ -12,6 +12,12 @@ section#home {
       max-width: 100%;
     }
   }
+  .custom-btn {
+    box-shadow: 0 5px 7.5px 0 rgba(255, 206, 70, 0.3);
+    color: #545456 !important;
+    background-color: #febe10;
+    border: none !important;
+  }
   .nav-icon {
     position: absolute;
     cursor: pointer;
@@ -207,8 +213,10 @@ section#home {
     font-size: 29px;
     margin-bottom: 8px;
     text-align: center;
-    span {
+    h2 {
       color: #fff;
+      font-weight: 600;
+      font-size: 1.375rem;
     }
   }
   .subtitle {
@@ -345,12 +353,12 @@ section#home {
 <template>
   <section id="home">
     <div class="logo">
-      <img src="~static/img/logo-resaa-blue.png" />
+      <img src="~static/img/logo-resaa-blue.png" alt="سامانه رسا" />
     </div>
     <div class="nav-icon" :class="{'active':menuActive}">
       <div @click="activateMenu" class="icon-wrapper">
-        <img v-if="menuActive" src="~static/img/nav-close-icon.png" />
-        <img v-else src="~static/img/nav-icon.png" />
+        <img alt="منو سامانه رسا" v-if="menuActive" src="~static/img/nav-close-icon.png" />
+        <img alt="منو سامانه رسا" v-else src="~static/img/nav-icon.png" />
       </div>
     </div>
     <div class="nav-main" :class="{ 'active' : menuActive }">
@@ -368,41 +376,41 @@ section#home {
     </div>
     <div class="content">
       <div class="phone-icon">
-        <img src="~static/img/phone.svg" />
+        <img src="~static/img/phone.svg" alt="تماس تلفنی مستقیم با پزشک" />
       </div>
       <div class="line"></div>
       <section class="patient">
         <div class="image">
           <router-link :to="{name:'patient-landing'}">
-            <img src="~static/img/patient-edited.png" />
+            <img src="~static/img/patient-edited.png" alt="معرفی خدمات رسا برای بیماران" />
           </router-link>
         </div>
         <div class="title">
           <router-link :to="{name:'patient-landing'}">
-            <span>ارتباط تلفنی و مستقیم با پزشک</span>
+            <h2>ارتباط تلفنی و مستقیم با پزشک</h2>
           </router-link>
         </div>
         <div class="subtitle">
-          <span>بیماران عزیز، با سامانه رِسا از هر جایی با پزشک خود مشورت کنید</span>
+          <p>بیماران عزیز، با سامانه رِسا از هر جایی با پزشک خود مشورت کنید</p>
         </div>
         <div class="button-wrapper">
-          <router-link :to="{name:'patient-landing'}">بیشتر بدانید</router-link>
+          <router-link class="custom-btn" :to="{name:'patient-landing'}">بیشتر بدانید</router-link>
           <router-link :to="{name:'charge'}">شارژ حساب</router-link>
         </div>
       </section>
       <section class="doctor">
         <div class="image">
           <router-link to="doctors/landing">
-            <img src="~static/img/doctor-edited.png" />
+            <img src="~static/img/doctor-edited.png" alt="معرفی خدمات رسا برای پزشکان" />
           </router-link>
         </div>
         <div class="title">
           <router-link to="doctors/landing">
-            <span>معرفی خدمات به پزشکان رِسا</span>
+            <h2>معرفی خدمات به پزشکان رِسا</h2>
           </router-link>
         </div>
         <div class="subtitle">
-          <span>پزشکان گرامی، براحتی تماس های دریافتی خود را مدیریت کنید</span>
+          <p>پزشکان گرامی، براحتی تماس های دریافتی خود را مدیریت کنید</p>
         </div>
         <div class="button-wrapper">
           <router-link to="doctors/landing">بیشتر بدانید</router-link>

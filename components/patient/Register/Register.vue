@@ -117,7 +117,7 @@
 
 <template>
   <div class="register-section-patients-container" id="register">
-    <div class="register-title">ثبت نام رایگان</div>
+    <h2 class="register-title">ثبت نام رایگان در سامانه رسا</h2>
     <!-- <div class="register-description">
       اولین تماس را مهمان رِسا باشید
       <v-tooltip bottom>
@@ -127,13 +127,13 @@
         <span>به درخواست خود پزشکان، بعضی از آنها از این قاعده مستثنا می باشند</span>
       </v-tooltip>
     </div>-->
-    <div class="register-description-2">
+    <p class="register-description-2">
       شماره موبایل خود را وارد کنید تا علاوه بر دریافت لینک دانلود اپلیکیشن
       شماره کاربری و رمز عبور برای شما پیامک شود.
-    </div>
+    </p>
     <div>
       <v-btn
-        class="register-btn"
+        class="register-btn black--text"
         id="freeRegister"
         round
         color="white"
@@ -145,13 +145,13 @@
       style="color:#fff;display:block;direction:rtl"
       v-if="user.phoneNumber && !validate_phone_number"
     >* شماره موبایل وارد شده صحیح نیست. لطفا شماره را با حروف انگلیسی، به صورت ۱۱ رقم به انضمام صفر اول شماره وارد کنید.</span>
-    <div class="register-description-3">
+    <p class="register-description-3">
       همچنین می توانید با ارسال پیامک به شماره
       <b>۱۰۰۰۷۴۴۷۱۱۱۱</b>
       <br />و یا از طریق برقراری تماس با شماره تلفن
       <b>۰۲۱-۷۴۴۷۱۱۱۱</b>
       در سامانه رِسا ثبت نام کنید.
-    </div>
+    </p>
     <register-modal v-if="registerModal" />
   </div>
 </template>

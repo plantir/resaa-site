@@ -59,8 +59,9 @@
   margin-top: 5px;
   justify-content: space-between;
   flex-direction: column;
-  > div {
+  > a {
     margin: 8px;
+    color: #babcbd;
   }
   span {
     display: inline-block;
@@ -279,23 +280,27 @@
       <v-container>
         <v-layout row wrap>
           <v-flex pa-4 lg3 md6 order-lg1 order-md1 sm12>
-            <h5 class="title with-line">درباه رِسا</h5>
+            <p class="title with-line">
+              <strong>درباه رِسا</strong>
+            </p>
             <div class="about-wrapper">
               <div>
-                <div class="footer-info-text">
+                <p class="footer-info-text">
                   <strong>رِسا</strong>
                   اولین سامانه ارتباط پزشک با بیمار در کشور است و بیماران عزیز براحتی و بدون نیاز به حضور در مطب پزشک می توانند با پزشک خوب از هر جایی در ارتباط باشند. پزشکان گرامی نیز می توانند تماس های بیماران خود را در سامانه رِسا مدیریت کنند.
-                </div>
+                </p>
               </div>
               <div class="footer-logo">
-                <img src="./logo.png" />
+                <img src="./logo.png" alt="سامانه رسا" />
               </div>
             </div>
           </v-flex>
           <v-flex pa-4 lg6 md12 order-lg2 order-md3 sm12>
             <v-layout row wrap>
               <v-flex md6 sm6 xs12>
-                <h5 class="title with-line">کاربری</h5>
+                <p class="title with-line">
+                  <strong>کاربری</strong>
+                </p>
                 <div class="link-wrapper">
                   <div>
                     <ul>
@@ -319,7 +324,9 @@
                 </div>
               </v-flex>
               <v-flex md6 sm6 xs12>
-                <h5 class="title with-line">دسترسی سریع</h5>
+                <p class="title with-line">
+                  <strong>دسترسی سریع</strong>
+                </p>
                 <div class="link-wrapper">
                   <div>
                     <ul>
@@ -344,7 +351,7 @@
                   <span>به ما بپیوندید :</span>
                   <ul>
                     <li>
-                      <a rel="nofollow" target="_blank" href="https://t.me/pezeshkepasokhgoo">
+                      <a rel="nofollow" target="_blank" href="https://t.me/pezeshkeresaa">
                         <i class="fa fa-telegram"></i>
                       </a>
                     </li>
@@ -369,24 +376,26 @@
             </v-layout>
           </v-flex>
           <v-flex pa-4 lg3 md6 order-lg3 order-md2 sm12>
-            <h5 class="title with-line">با ما تماس بگیرید</h5>
+            <p class="title with-line">
+              <strong>با ما تماس بگیرید</strong>
+            </p>
             <div class="footer-address">
               <!-- <i class="fa fa-map-marker" aria-hidden="true"></i> -->
               {{contactInfo.address}}
             </div>
             <div class="tell-wrapper">
-              <div class="footer-tel">
+              <a :href="`tel:${contactInfo.support.value}`" class="footer-tel">
                 <v-icon>phone</v-icon>
-                <span>{{contactInfo.support}}</span>
-              </div>
-              <div class="footer-tel">
+                <span>{{contactInfo.support.text}}</span>
+              </a>
+              <!-- <a :href="`tel:${contactInfo.phoneNumber}`" class="footer-tel">
                 <v-icon>phone</v-icon>
                 <span>{{contactInfo.phoneNumber}}</span>
-              </div>
-              <div class="footer-email">
+              </a>-->
+              <a :href="`mailto:${contactInfo.email}`" class="footer-email">
                 <v-icon>email</v-icon>
                 <span>{{contactInfo.email}}</span>
-              </div>
+              </a>
             </div>
             <div class="e-namad">
               <!-- <img

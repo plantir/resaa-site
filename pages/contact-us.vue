@@ -155,17 +155,20 @@
               <div class="label">آدرس :&nbsp;</div>
               <div class="address-text">{{contactInfo.address}}</div>
             </div>
-            <div class="phone-number-container">
+            <!-- <div class="phone-number-container">
               <div class="label">تلفن دفتر:&nbsp;</div>
               <div class="phone-number-text">{{contactInfo.phoneNumber}}</div>
-            </div>
+            </div>-->
             <div class="phone-number-container">
               <div class="label">تلفن پشتیبانی:&nbsp;</div>
-              <div class="phone-number-text">{{contactInfo.support}}</div>
+              <a
+                :href="`tel:${contactInfo.support.value}`"
+                class="phone-number-text"
+              >{{contactInfo.support.text}}</a>
             </div>
             <div class="email-container">
               <div class="label">ایمیل :&nbsp;</div>
-              <div class="email-text">{{contactInfo.email}}</div>
+              <a :href="`mailto:${contactInfo.email}`" class="email-text">{{contactInfo.email}}</a>
             </div>
           </div>
 

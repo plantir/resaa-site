@@ -321,8 +321,8 @@
 
 <template>
   <div class="doctors-section-patients-container" id="doctors">
-    <div class="doctors-title">پزشکان رِسا</div>
-    <div class="doctors-description">برخی از پزشکان رِسا</div>
+    <h2 class="doctors-title">پزشکان رِسا</h2>
+    <p class="doctors-description">پزشک مورد نظر خود را اینجا پیدا کنید</p>
     <div class="doctors-info-container">
       <div class="doctors-list">
         <div class="search-box">
@@ -331,7 +331,7 @@
             v-model="filter"
             @input="changeFilter($event)"
             placeholder="جستجو براساس نام پزشک، کد رِسا، رشته تخصصی"
-          >
+          />
           <span v-if="!filter" class="icon">
             <i class="fa fa-search fa-rotate-90"></i>
           </span>
@@ -355,8 +355,8 @@
                       v-if="doctor.imagePath"
                       :src="'https://webapi.resaa.net/'+doctor.imagePath"
                       alt
-                    >
-                    <img v-else src="/img/doc-placeholder.png" alt>
+                    />
+                    <img v-else src="/img/doc-placeholder.png" alt="پزشکان سامانه رسا" />
                   </div>
                   <div class="item-right-sub-section">
                     <div class="item-doctor-name">{{doctor.firstName}} {{doctor.lastName}}</div>
@@ -399,7 +399,7 @@
         </no-ssr>
       </div>
       <div class="doctors-image-container">
-        <img class="doctors-image" src="./doctors2.png">
+        <img class="doctors-image" src="./doctors2.png" />
       </div>
     </div>
     <div class="doctors-full-list-container">
@@ -458,9 +458,7 @@ export default {
     },
     getDoctors() {
       this.ajaxLoading = true;
-      let url = `/api/Doctors?fields=${this.fields}&limit=${
-        this.limit
-      }&offset=${this.offset}`;
+      let url = `/api/Doctors?fields=${this.fields}&limit=${this.limit}&offset=${this.offset}`;
       if (this.filter) {
         url += `&query=${this.filter}`;
       }

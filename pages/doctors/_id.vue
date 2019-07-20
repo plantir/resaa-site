@@ -1,4 +1,12 @@
 <style lang="scss" scoped>
+h1 {
+  display: inline-block;
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+p {
+  margin-bottom: 0;
+}
 .doctor-profile-container {
   background: white;
   padding: 60px 90px;
@@ -212,8 +220,9 @@
   color: $dark-blue-grey;
 }
 .time-table-wrapper {
-  h3 {
+  h2 {
     margin-bottom: 1.75rem;
+    font-size: 1.2rem;
   }
   width: 100%;
   margin: 60px 0;
@@ -284,28 +293,39 @@
       <div class="doctor-info">
         <div class="doctor-avatar">
           <div class="doctor-avatar-image">
-            <img v-if="doctor.imagePath" :src="'https://webapi.resaa.net/'+doctor.imagePath" />
-            <img v-else src="/img/doc-placeholder.png" alt />
+            <img
+              v-if="doctor.imagePath"
+              :src="'https://webapi.resaa.net/'+doctor.imagePath"
+              :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+            />
+            <img
+              v-else
+              src="/img/doc-placeholder.png"
+              :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+            />
           </div>
           <div class="doctor-resaa-info">
             <i class="fa fa-phone-square"></i>
             کد رِسا:
-            <div class="doctor-resaa-code">{{doctor.subscriberNumber | persianDigit}}</div>
+            <p class="doctor-resaa-code">{{doctor.subscriberNumber | persianDigit}}</p>
           </div>
         </div>
         <div class="doctor-info-container">
           <div class="doctor-name">
-            {{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}
-            <div v-if="doctor.currentlyAvailable" class="doctor-is-available">(در دسترس)</div>
-            <div v-else class="doctor-is-unavailable">(در دسترس نمی باشد)</div>
+            <h1>{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</h1>
+            <p v-if="doctor.currentlyAvailable" class="doctor-is-available">(در دسترس)</p>
+            <p v-else class="doctor-is-unavailable">(در دسترس نمی باشد)</p>
           </div>
-          <div v-if="doctor.specialty" class="doctor-specialty">{{doctor.specialty.title}}</div>
+          <p v-if="doctor.specialty" class="doctor-specialty">
+            تخصص:
+            <strong>{{doctor.specialty.title}}</strong>
+          </p>
           <div class="specialty-area-container">
             <div v-for="tag in doctor.tags" :key="tag.id" class="specialty-area">{{tag.title}}</div>
           </div>
           <div class="doctor-np">
             کد نظام پزشکی:
-            <div class="doctor-np-code">{{doctor.medicalCouncilNumber || '-'}}</div>
+            <p class="doctor-np-code">{{doctor.medicalCouncilNumber || '-'}}</p>
           </div>
           <div v-if="user" class="available-time-container">
             مدت زمان قابل گفتگو:
@@ -321,35 +341,34 @@
         <div class="available-time-description">
           <i class="fa fa-circle"></i>
           <div>
-            <div>
+            <p>
               <span>این زمان براساس میزان</span>
               <router-link v-if="user" :to="{name:'patient-profile'}">شارژ فعلی</router-link>
               <router-link v-else :to="{name:'patient-login'}">شارژ فعلی</router-link>
               <span>شما محاسبه شده است.</span>
-            </div>
-            <div>
+            </p>
+            <p>
               <span>می‌توانید از طریق</span>
               <router-link :to="{name:'charge'}">خرید شارژ اینترنتی</router-link>اعتبار خود را افزایش دهید.
-            </div>
+            </p>
           </div>
         </div>
       </div>
       <div class="doctor-contact-container">
         <div v-for="(workplace,index) in doctor.workplaces" :key="index">
-          <h4>{{workplace.title}}</h4>
+          <h2>{{workplace.title}}</h2>
           <div class="doctor-address-container">
             <div>آدرس:</div>
             <div class="doctor-address">{{workplace.street}}</div>
           </div>
           <div class="doctor-phone-container">
-            <div>تلفن:</div>
-            <div class="doctor-phone">{{workplace.phoneNumber | persianDigit}}</div>
+            <p class="doctor-phone">تلفن: {{workplace.phoneNumber | persianDigit}}</p>
           </div>
-          <div>{{workplace.description}}</div>
+          <p>{{workplace.description}}</p>
         </div>
       </div>
       <div class="time-table-wrapper">
-        <h3>زمان های پاسخگویی</h3>
+        <h2>زمان های پاسخگویی</h2>
         <no-ssr>
           <timeTable></timeTable>
         </no-ssr>

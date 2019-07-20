@@ -1,15 +1,15 @@
 <template>
   <div class="download-section-patient-container" id="download">
-    <div class="section-title">دریافت اپلیکیشن رِسا</div>
-    <div class="section-description">سازگار با سیستم عامل های اندروید، IOS و ویندوز موبایل</div>
+    <h2 class="section-title">دریافت اپلیکیشن رِسا</h2>
+    <p class="section-description">سازگار با سیستم عامل های اندروید، IOS و ویندوز موبایل</p>
     <div class="image-wrapper">
-      <img src="./mockup.jpg" alt>
+      <img src="./mockup.jpg" alt="دریافت اپلیکیشن سامانه رسا" />
     </div>
     <div class="download-image-container">
       <div class="download-links">
         <div class="link" @click="openModal">
           <div class="link-icon">
-            <img src="./apple.png">
+            <img src="./apple.png" alt="دریافت اپلیکیشن رسا برای ای او اس" />
           </div>
           <div class="link-texts">
             <div class="link-provider-text">Available on The</div>
@@ -18,7 +18,7 @@
         </div>
         <div class="link" @click="openModal">
           <div class="link-icon">
-            <img src="./winmobile.png">
+            <img src="./winmobile.png" alt="دریافت اپلیکیشن رسا برای ویندوز فون" />
           </div>
           <div class="link-texts">
             <div class="link-provider-text">Download For</div>
@@ -27,7 +27,7 @@
         </div>
         <div class="link" @click="openModal">
           <div class="link-icon">
-            <img src="./playstore.png">
+            <img src="./playstore.png" alt="دریافت اپلیکیشن رسا از پلی استور" />
           </div>
           <div class="link-texts">
             <div class="link-provider-text">GET IT ON</div>
@@ -36,7 +36,7 @@
         </div>
         <div class="link" @click="openModal">
           <div class="link-icon">
-            <img src="./cafebazar.png">
+            <img src="./cafebazar.png" alt="دریافت اپلیکیشن رسا از کافه بازار" />
           </div>
           <div class="link-texts">
             <div class="link-provider-text">دانلود از</div>

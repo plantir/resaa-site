@@ -192,13 +192,15 @@
 
 <template>
   <div class="procedure-section-patients-container">
-    <div class="procedure-title">روش کار رِسا</div>
-    <div class="procedure-description">چطور با پزشک خود در ارتباط باشم؟</div>
+    <h2 class="procedure-title">روش کار رِسا</h2>
+    <p class="procedure-description">چطور با پزشک خود در ارتباط باشم؟</p>
     <div class="procedure-items-container">
       <div class="procedure-item item-odd">
         <div class="item-text">
           <div class="item-number">۱</div>
-          <div class="item-description-title">ثبت نام رایگان در رِسا</div>
+          <p class="item-description-title">
+            <strong>ثبت نام رایگان در رِسا</strong>
+          </p>
           <div class="item-description">
             - با شماره گیری ۷۴۴۷۱۱۱۱-۰۲۱ در سامانه یا از طریق همین
             <a
@@ -213,13 +215,15 @@
             می&#160;توانید اقدام به ثبت نام کنید.
           </div>
         </div>
-        <img class="item-image" src="./Item1.png" />
+        <img class="item-image" src="./Item1.png" alt="ثبت نام رایگان در رسا" />
       </div>
       <div class="procedure-item item-even">
         <div class="item-text">
           <div class="item-number">۲</div>
-          <div class="item-description-title">جستجوی کد رِسای پزشک خود</div>
-          <div class="item-description">
+          <p class="item-description-title">
+            <strong>جستجوی کد رِسای پزشک خود</strong>
+          </p>
+          <p class="item-description">
             - برای ارتباط با پزشک به کد رِسای آن نیاز است که از طریق همین
             <a
               v-scroll-to="{ el: '#doctors', offset: -50 }"
@@ -231,21 +235,23 @@
               class="item-description-link"
             >اپلیکیشن رِسا</a>
             می&#160;توانید کد و مشخصات پزشک خود را بیابید.
-          </div>
+          </p>
         </div>
-        <img class="item-image" src="./Item2P.png" />
+        <img class="item-image" src="./Item2P.png" alt="جستجوی کد رسای پزشک" />
       </div>
       <div class="procedure-item item-odd">
         <div class="item-text">
           <div class="item-number">۳</div>
-          <div class="item-description-title">براحتی گفتگو کنید</div>
+          <p class="item-description-title">
+            <strong>براحتی گفتگو کنید</strong>
+          </p>
           <div class="item-description-list">
-            <div class="item-description">- با پزشک خود بصورت مستقیم گفتگو کنید.</div>
-            <div class="item-description">
+            <p class="item-description">- با پزشک خود بصورت مستقیم گفتگو کنید.</p>
+            <p class="item-description">
               -
               هزینه تماس
               به صورت دقیقه‌ای محاسبه خواهد شد.
-            </div>
+            </p>
             <!-- <div class="item-description">- اولین تماس مهمان رسا هستید.
               <v-tooltip bottom>
                 <template #activator="data">
@@ -256,7 +262,7 @@
             </div>-->
           </div>
         </div>
-        <img class="item-image" src="./Item3.png" />
+        <img class="item-image" src="./Item3.png" alt="گفتگوی ممستقیم با پزشک رسا" />
       </div>
     </div>
 

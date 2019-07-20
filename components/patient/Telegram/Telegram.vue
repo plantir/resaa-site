@@ -1,33 +1,3 @@
-<template>
-  <div class="telegram-section-patients-container">
-    <div class="content">
-      <div class="telegram-title">رِسا در شبکه های اجتماعی</div>
-      <div class="telegram-description">
-        از طریق کانال
-        <b>تلگرام</b>
-        و
-        <b>اینستاگرام</b>
-        با
-        <b>رِسا</b>
-        در ارتباط باشید
-      </div>
-      <div class="link-wrapper">
-        <a href="https://www.instagram.com/resaanet/" target="_blank" class="link">
-          <i class="fa fa-instagram"></i>
-          resaa.medical
-        </a>
-        <a href="https://t.me/pezeshkepasokhgoo " target="_blank" class="link">
-          <i class="fa fa-telegram"></i>
-          @pezeshkepasokhgoo
-        </a>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script>
-export default {};
-</script>
 
 <style lang="scss" scoped>
 .telegram-section-patients-container {
@@ -128,3 +98,34 @@ export default {};
   }
 }
 </style>
+
+<template>
+  <div class="telegram-section-patients-container">
+    <div class="content">
+      <h2 class="telegram-title">رِسا در شبکه های اجتماعی</h2>
+      <p class="telegram-description">
+        از طریق کانال
+        <b>تلگرام</b>
+        و
+        <b>اینستاگرام</b>
+        با
+        <b>رِسا</b>
+        در ارتباط باشید
+      </p>
+      <div class="link-wrapper">
+        <a href="https://www.instagram.com/resaanet/" rel="nofllow" target="_blank" class="link">
+          <i class="fa fa-instagram"></i>
+          resaa.medical
+        </a>
+        <a href="https://t.me/pezeshkeresaa" rel="nofllow" target="_blank" class="link">
+          <i class="fa fa-telegram"></i>
+          @pezeshkeresaa
+        </a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {};
+</script>
