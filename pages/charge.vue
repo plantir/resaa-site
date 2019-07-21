@@ -209,7 +209,9 @@ export default {
   },
   created() {
     this.$axios.get("/api/Charge/Denominations").then(response => {
-      this.chargeMenuItems = response.data.result.denominations;
+      this.chargeMenuItems = response.data.result.denominations.sort(
+        (a, b) => a.amount - b.amount
+      );
       this.ajaxLoading = false;
       if (this.$route.query.chat_id) {
         localStorage.setItem("chat_id", this.$route.query.chat_id);

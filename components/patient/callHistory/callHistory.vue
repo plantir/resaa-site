@@ -1,147 +1,3 @@
-<template>
-  <div class="call-history-container">
-    <div>
-      <div class="section-title">تاریخچه تماس‌ها</div>
-      <div class="section-description">لیست تاریخچه تماس‌های صورت گرفته با پزشکان رِسا</div>
-      <div class="call-history-search">
-        <i class="fa fa-search" aria-hidden="true"></i>
-        <input
-          v-model="query"
-          @input="changeFilter($event)"
-          placeholder="جستجو براساس نام پزشک، کد رِسا، رشته تخصصی"
-        >
-      </div>
-      <div class="call-history-box">
-        <v-loading v-if="ajaxLoading" mode="relative"></v-loading>
-        <div class="call-history-item" v-for="item in calls" :key="item.id">
-          <div class="item-right-section">
-            <div class="item-avatar"></div>
-            <div class="item-right-sub-section">
-              <div class="item-doctor-name">
-                <router-link
-                  target="_blank"
-                  :to="{name:'Doctor',params:{subscriberNumber:item.receiver.subscriberNumber}}"
-                >{{item.receiver.fullName || item.receiver.title}}</router-link>
-              </div>
-              <div
-                class="item-date"
-              >{{item.startedAt | persianDate('dddd','fa') }} {{item.startedAt | persianDate('jYYYY/jMM/jDD HH:mm:ss') | persianDigit}}</div>
-            </div>
-          </div>
-          <div class="item-left-section">
-            <div class="item-call-duration-container">
-              <div class="item-call-duration-label">مدت مکالمه:</div>
-              <div class="item-call-duration">{{item.effectiveDuration | persianDigit}}"</div>
-            </div>
-            <div class="item-call-price-container">
-              <div class="item-call-price-label">هزینه مکالمه:</div>
-              <div class="item-call-price">{{sum(item.transactions) | currency | persianDigit}}</div>
-              <div class="item-call-price-currency">تومان</div>
-            </div>
-          </div>
-        </div>
-        <div v-if="!ajaxLoading && calls.length == 0" class="no-result">موردی یافت نشد</div>
-      </div>
-    </div>
-    <div v-if="!ajaxLoading && calls.length > 0" class="pagination-box">
-      <no-ssr>
-        <div class="hide-xs">
-          <pagination
-            :numOfPage="20"
-            v-model="page"
-            :limit="limit"
-            :totalItems="totalItems"
-            @change="changePage"
-          ></pagination>
-        </div>
-        <div class="show-xs">
-          <pagination
-            :numOfPage="6"
-            v-model="page"
-            :limit="limit"
-            :totalItems="totalItems"
-            @change="changePage"
-          ></pagination>
-        </div>
-      </no-ssr>
-    </div>
-  </div>
-</template>
-
-<script>
-export default {
-  data() {
-    return {
-      ajaxLoading: true,
-      timeout: null,
-      previousRequest: null,
-      calls: [],
-      limit: 10,
-      page: 1,
-      totalItems: 100,
-      query: ""
-    };
-  },
-  created() {
-    this.get_list();
-  },
-  methods: {
-    get_list() {
-      this.ajaxLoading = true;
-      let url = `/api/Accounts/${this.user_id}/Calls?limit=${
-        this.limit
-      }&offset=${this.offset}`;
-      if (this.query) {
-        url += `&query=${this.query}`;
-      }
-      this.$axios
-        .get(url, {
-          headers: {
-            Authorization: `Bearer ${this.user.access_token}`
-          },
-          before(request) {
-            if (this.previousRequest) {
-              this.previousRequest.abort();
-            }
-            this.previousRequest = request;
-          }
-        })
-        .then(response => {
-          this.calls = response.data.result.calls;
-          this.totalItems = response.data.result.callsTotalCount || 100;
-          this.ajaxLoading = false;
-        });
-    },
-    changePage(page) {
-      this.page = page;
-      this.get_list();
-    },
-    changeFilter() {
-      clearTimeout(this.timeout);
-      this.page = 1;
-      this.timeout = setTimeout(this.get_list, 800);
-    },
-    sum(transactions) {
-      let total = 0;
-      for (let item of transactions) {
-        total += item.amount;
-      }
-      return total;
-    }
-  },
-  computed: {
-    offset() {
-      return (this.page - 1) * this.limit;
-    },
-    user() {
-      return this.$store.state.patient.user;
-    },
-    user_id() {
-      return this.$store.state.patient.user_id;
-    }
-  }
-};
-</script>
 
 <style lang="scss" scoped>
 .pagination-box {
@@ -265,7 +121,7 @@ export default {
   margin-bottom: 10px;
 
   &:hover {
-    .item-doctor-name {
+    .item-doctor-name a {
       color: #0095e2;
     }
   }
@@ -290,6 +146,9 @@ export default {
   color: #44436c;
   text-align: right;
   font-weight: 500;
+  a {
+    color: #44436c;
+  }
 }
 
 .item-date {
@@ -337,3 +196,146 @@ export default {
   margin-right: 5px;
 }
 </style>
+
+<template>
+  <div class="call-history-container">
+    <div>
+      <div class="section-title">تاریخچه تماس‌ها</div>
+      <div class="section-description">لیست تاریخچه تماس‌های صورت گرفته با پزشکان رِسا</div>
+      <div class="call-history-search">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <input
+          v-model="query"
+          @input="changeFilter($event)"
+          placeholder="جستجو براساس نام پزشک، کد رِسا، رشته تخصصی"
+        />
+      </div>
+      <div class="call-history-box">
+        <v-loading v-if="ajaxLoading" mode="relative"></v-loading>
+        <div class="call-history-item" v-for="item in calls" :key="item.id">
+          <div class="item-right-section">
+            <div class="item-avatar"></div>
+            <div class="item-right-sub-section">
+              <div class="item-doctor-name">
+                <router-link
+                  target="_blank"
+                  :to="{name:'doctors-id',params:{id:item.receiver.subscriberNumber}}"
+                >{{item.receiver.fullName || item.receiver.title}}</router-link>
+              </div>
+              <div
+                class="item-date"
+              >{{item.startedAt | persianDate('dddd','fa') }} {{item.startedAt | persianDate('jYYYY/jMM/jDD HH:mm:ss') | persianDigit}}</div>
+            </div>
+          </div>
+          <div class="item-left-section">
+            <div class="item-call-duration-container">
+              <div class="item-call-duration-label">مدت مکالمه:</div>
+              <div class="item-call-duration">{{item.effectiveDuration | persianDigit}}"</div>
+            </div>
+            <div class="item-call-price-container">
+              <div class="item-call-price-label">هزینه مکالمه:</div>
+              <div class="item-call-price">{{sum(item.transactions) | currency | persianDigit}}</div>
+              <div class="item-call-price-currency">تومان</div>
+            </div>
+          </div>
+        </div>
+        <div v-if="!ajaxLoading && calls.length == 0" class="no-result">موردی یافت نشد</div>
+      </div>
+    </div>
+    <div v-if="!ajaxLoading && calls.length > 0" class="pagination-box">
+      <no-ssr>
+        <div class="hide-xs">
+          <pagination
+            :numOfPage="20"
+            v-model="page"
+            :limit="limit"
+            :totalItems="totalItems"
+            @change="changePage"
+          ></pagination>
+        </div>
+        <div class="show-xs">
+          <pagination
+            :numOfPage="6"
+            v-model="page"
+            :limit="limit"
+            :totalItems="totalItems"
+            @change="changePage"
+          ></pagination>
+        </div>
+      </no-ssr>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      ajaxLoading: true,
+      timeout: null,
+      previousRequest: null,
+      calls: [],
+      limit: 10,
+      page: 1,
+      totalItems: 100,
+      query: ""
+    };
+  },
+  created() {
+    this.get_list();
+  },
+  methods: {
+    get_list() {
+      this.ajaxLoading = true;
+      let url = `/api/Accounts/${this.user_id}/Calls?limit=${this.limit}&offset=${this.offset}`;
+      if (this.query) {
+        url += `&query=${this.query}`;
+      }
+      this.$axios
+        .get(url, {
+          headers: {
+            Authorization: `Bearer ${this.user.access_token}`
+          },
+          before(request) {
+            if (this.previousRequest) {
+              this.previousRequest.abort();
+            }
+            this.previousRequest = request;
+          }
+        })
+        .then(response => {
+          this.calls = response.data.result.calls;
+          this.totalItems = response.data.result.callsTotalCount || 100;
+          this.ajaxLoading = false;
+        });
+    },
+    changePage(page) {
+      this.page = page;
+      this.get_list();
+    },
+    changeFilter() {
+      clearTimeout(this.timeout);
+      this.page = 1;
+      this.timeout = setTimeout(this.get_list, 800);
+    },
+    sum(transactions) {
+      let total = 0;
+      for (let item of transactions) {
+        total += item.amount;
+      }
+      return total;
+    }
+  },
+  computed: {
+    offset() {
+      return (this.page - 1) * this.limit;
+    },
+    user() {
+      return this.$store.state.patient.user;
+    },
+    user_id() {
+      return this.$store.state.patient.user_id;
+    }
+  }
+};
+</script>
