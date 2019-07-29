@@ -2,6 +2,9 @@
 #doctors {
   // display: none;
   .doctors-search-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
     border-radius: 10px;
     background-color: #f2f2f2;
@@ -20,6 +23,7 @@
 
   .search-input {
     margin-bottom: 15px;
+    width: 100%;
     .v-input__control {
       min-height: 38px;
     }
@@ -30,22 +34,11 @@
   }
 
   .search-panel-button {
-    cursor: pointer;
-    margin: 0 auto;
-    text-align: center;
-    color: white;
     width: 80%;
-    height: 37px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 18.5px;
-    background-color: $tealish;
-    border: none;
-    &:disabled {
-      opacity: 0.75;
-      cursor: not-allowed;
-    }
+    // &:disabled {
+    //   opacity: 0.75;
+    //   cursor: not-allowed;
+    // }
     &.clear-filter {
       margin-top: 8px;
       background-color: #777590;
@@ -385,16 +378,21 @@
                   label="لطفا شهر مورد نظر را انتخاب نمایید"
                 ></v-select>
               </div>
-              <button
+              <v-btn
+                color="secondary"
                 @click="changeFilter"
+                round
                 :disabled="(filter.provinceId && !filter.cityId)"
                 class="search-panel-button"
-              >جستجو</button>
-              <button
+              >جستجو</v-btn>
+              <v-btn
                 v-if="filter.name || filter.code || filter.specialtyId || filter.provinceId || filter.cityId"
                 @click="clearFilter"
+                round
+                dark
+                :disabled="(filter.provinceId && !filter.cityId)"
                 class="search-panel-button clear-filter"
-              >راه اندازی مجدد</button>
+              >راه اندازی مجدد</v-btn>
             </div>
           </v-flex>
           <v-flex md8 sm12 pa-1>

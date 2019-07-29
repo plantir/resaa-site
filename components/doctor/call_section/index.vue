@@ -390,9 +390,6 @@ section#phoneDialog {
                   <!-- <v-icon>fa-phone</v-icon> -->
                   <span class="link-call">رزرو تماس</span>
                 </v-btn>
-                <!-- <v-btn :to="{name:'charge'}" color="#28db9a" dark outline round small>
-                  <span class="link-call">شارژ حساب</span>
-                </v-btn>-->
               </div>
             </div>
           </div>

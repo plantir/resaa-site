@@ -23,15 +23,14 @@
           </li>
         </ul>
         <div class="benefits-button-container">
-          <a
+          <v-btn
+            to="/patient/register"
             id="benefitsRegister"
-            v-scroll-to="{ el: '#register', offset: -50 }"
+            color="yellow darken-2"
             class="benefits-signup-button"
-          >ثبت نام رایگان</a>
-          <a
-            v-scroll-to="{ el: '#download', offset: -50 }"
-            class="benefits-download-button"
-          >دریافت اپلیکیشن</a>
+            round
+          >ثبت نام رایگان</v-btn>
+          <v-btn class="benefits-download-button" v-scroll-to="{ el: '#download', offset: -50 , duration: 1500}" outline round color="secondary">دریافت اپلیکیشن</v-btn>
         </div>
       </div>
       <div class="image">
@@ -72,7 +71,7 @@ export default {};
   color: #777590;
   text-align: center;
   font-style: normal;
-  font-size: 2rem;
+  font-size: 1.675rem;
   font-weight: 300;
 }
 
@@ -89,7 +88,6 @@ export default {};
     img {
       width: 850px;
       max-width: 100%;
-      width: 100%;
     }
   }
 }
@@ -148,49 +146,16 @@ export default {};
 }
 
 .benefits-signup-button {
-  display: block;
-  cursor: pointer;
   width: 174px;
-  height: 37.5px;
-  border-radius: 18.5px;
-  text-align: center;
-  line-height: 33px;
-  margin: 10px;
   box-shadow: 0 5px 7.5px 0 rgba(255, 206, 70, 0.3);
-  border: none;
   color: #545456;
   background-color: #febe10;
-  float: right;
-  z-index: 20;
-
-  &:hover,
-  &:focus,
-  &:active {
-    text-decoration: none;
-  }
 }
 
 .benefits-download-button {
-  display: block;
-  cursor: pointer;
   width: 174px;
-  height: 37.5px;
-  border-radius: 18.5px;
-  text-align: center;
-  line-height: 33px;
-  margin: 10px;
   box-shadow: 0 5px 7.5px 0 rgba(72, 229, 202, 0.2);
-  border: solid 2px $tealish;
-  color: $tealish;
-  background-color: white;
-  float: right;
-  z-index: 10;
-
-  &:hover,
-  &:focus,
-  &:active {
-    text-decoration: none;
-  }
+  border-width: 2px ;
 }
 
 @media only screen and (max-width: 1000px) {

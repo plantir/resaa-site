@@ -237,30 +237,12 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-bottom: 4rem;
   }
 
   .doctors-full-list-button {
-    display: block;
-    margin: 0 0 50px;
-    cursor: pointer;
-    line-height: 37px;
-    font-size: 1.275rem;
-    text-align: center;
-    color: $azure;
     width: 200px;
-    height: 37px;
-    border-radius: 18.5px;
-    border: solid 2px transparent;
-    background-image: linear-gradient(white, white),
-      linear-gradient(20deg, #11d0f8, #3de0cb);
-    background-origin: border-box;
-    background-clip: content-box, border-box;
-
-    &:hover,
-    &:focus,
-    &:active {
-      text-decoration: none;
-    }
+    border-width: 2px;
   }
   .item-right-sub-section {
     display: flex;
@@ -403,11 +385,14 @@
       </div>
     </div>
     <div class="doctors-full-list-container">
-      <router-link
-        target="_blank"
-        :to="{name:'doctors'}"
+      <v-btn
         class="doctors-full-list-button"
-      >لیست کامل پزشکان رِسا</router-link>
+        :to="{name:'doctors'}"
+        target="_blank"
+        color="secondary"
+        round
+        outline
+      >لیست کامل پزشکان رِسا</v-btn>
     </div>
   </div>
 </template>

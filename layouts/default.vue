@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <v-app>
     <header>
       <app-header></app-header>
     </header>
@@ -9,7 +9,7 @@
     <footer>
       <app-footer></app-footer>
     </footer>
-  </section>
+  </v-app>
 </template>
 
 <script>

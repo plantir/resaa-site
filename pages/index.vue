@@ -13,10 +13,10 @@ section#home {
     }
   }
   .custom-btn {
-    box-shadow: 0 5px 7.5px 0 rgba(255, 206, 70, 0.3);
-    color: #545456 !important;
-    background-color: #febe10;
-    border: none !important;
+    // box-shadow: 0 5px 7.5px 0 rgba(255, 206, 70, 0.3);
+    color: #545456;
+    // background-color: #febe10;
+    // border: none !important;
   }
   .nav-icon {
     position: absolute;
@@ -231,22 +231,15 @@ section#home {
       flex-direction: column;
     }
     a {
-      text-decoration: none;
       width: 173px;
-      height: 37px;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      border: 2px solid #fff;
-      border-radius: 18px;
-      + a {
-        margin-right: 16px;
-        @include respond-to(sm) {
-          margin-right: 0;
-          margin-top: 16px;
-        }
-      }
+      border-width: 2px;
+      // + a {
+      //   margin-right: 16px;
+      //   @include respond-to(sm) {
+      //     margin-right: 0;
+      //     margin-top: 16px;
+      //   }
+      // }
     }
   }
   .doctor,
@@ -291,13 +284,13 @@ section#home {
       color: #888;
     }
     .button-wrapper a {
-      border-radius: 18.5px;
-      border: 2px solid transparent;
-      background-image: linear-gradient(#e2e2e2, #e2e2e2),
-        linear-gradient(20deg, #33e4ea, #00b2ed);
-      background-origin: border-box;
-      background-clip: content-box, border-box;
-      color: #00aae2;
+      // border-radius: 18.5px;
+      // border: 2px solid transparent;
+      // background-image: linear-gradient(#e2e2e2, #e2e2e2),
+      //   linear-gradient(20deg, #33e4ea, #00b2ed);
+      // background-origin: border-box;
+      // background-clip: content-box, border-box;
+      // color: #00aae2;
     }
   }
   .patient {
@@ -394,8 +387,15 @@ section#home {
           <p>بیماران عزیز، با سامانه رِسا از هر جایی با پزشک خود مشورت کنید</p>
         </div>
         <div class="button-wrapper">
-          <router-link class="custom-btn" :to="{name:'patient-landing'}">بیشتر بدانید</router-link>
-          <router-link :to="{name:'charge'}">شارژ حساب</router-link>
+          <v-btn
+            color="yellow darken-2"
+            class="custom-btn"
+            round
+            :to="{name:'patient-landing'}"
+          >بیشتر بدانید</v-btn>
+          <!-- <router-link  :to="{name:'patient-landing'}">بیشتر بدانید</router-link> -->
+          <!-- <router-link>شارژ حساب</router-link> -->
+          <v-btn color="white" :to="{name:'charge'}" outline round>شارژ حساب</v-btn>
         </div>
       </section>
       <section class="doctor">
@@ -413,7 +413,7 @@ section#home {
           <p>پزشکان گرامی، براحتی تماس های دریافتی خود را مدیریت کنید</p>
         </div>
         <div class="button-wrapper">
-          <router-link to="doctors/landing">بیشتر بدانید</router-link>
+          <v-btn color="primary" outline round to="doctors/landing">بیشتر بدانید</v-btn>
         </div>
       </section>
     </div>

@@ -58,22 +58,10 @@
   justify-content: center;
   display: flex;
   flex-direction: row-reverse;
-
-  .button {
-    cursor: pointer;
-    width: 174px;
-    height: 37.5px;
-    border-radius: 18.5px;
-    text-align: center;
-    line-height: 37.5px;
-    color: white;
-    margin: 10px;
+  .v-btn {
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
-    border: solid 2px white;
-    z-index: 99;
-  }
-  a {
-    color: #fff;
+    border-width: 2px;
+    width: 174px;
   }
 }
 
@@ -117,6 +105,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.3s ease-in-out;
+    &:before {
+      transition: all 0.3s ease-in-out;
+    }
+    &:hover {
+      background-color: darken($light-gold, 5);
+      &:before {
+        padding-top: 8px;
+      }
+    }
   }
 }
 
@@ -232,12 +230,8 @@
     <h1 class="intro-title">ارتباط تلفنی و مستقیم با پزشک</h1>
     <p class="intro-description">با سـامانه رِسا از هـر جایی با پـزشـک خـود مـشـورت کنید</p>
     <div class="intro-buttons">
-      <a
-        id="introRegister"
-        v-scroll-to="{ el: '#register', offset: -50 }"
-        class="button"
-      >ثبت نام رایگان</a>
-      <a id="showVideo" class="button" @click="openVideo">نمایش ویدئو</a>
+      <v-btn id="introRegister" color="white" to="/patient/register" outline round>ثبت نام رایگان</v-btn>
+      <v-btn id="showVideo" color="white" outline round @click="openVideo">نمایش ویدئو</v-btn>
     </div>
     <div class="intro-patient-image">
       <img src="./PAT.png" alt="ارتباط تلفنی و مستفیم با پزشک در سامانه رسا" />

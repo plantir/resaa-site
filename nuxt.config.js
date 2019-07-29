@@ -102,7 +102,7 @@ export default {
    */
   css: [
     'material-design-icons-iconfont/dist/material-design-icons.css',
-    '~/assets/style/app.styl',
+    // '~/assets/style/app.styl',
     '~/assets/style/main.scss',
     '~/assets/style/vuetify_rtl.scss',
     'swiper/dist/css/swiper.css'
@@ -112,7 +112,7 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~/plugins/vuetify',
+    // '~/plugins/vuetify.js',
     {
       src: '~/plugins/global.js'
     },
@@ -145,6 +145,7 @@ export default {
     'nuxt-svg',
     'nuxt-device-detect',
     '@nuxtjs/pwa',
+    '@nuxtjs/vuetify',
     '@nuxtjs/style-resources',
     ['~/modules/nuxt-recaptcha'],
     [
@@ -170,7 +171,18 @@ export default {
     //   }
     // ]
   ],
-
+  vuetify: {
+    rtl: true,
+    materialIcons: false,
+    theme: {
+      primary: '#13d2f3',
+      accent: '#35d6c1',
+      secondary: '#35d6c1'
+    },
+    options: {
+      customProperties: true
+    }
+  },
   // doctors sitemap
   sitemap: {
     defaults: {
@@ -244,9 +256,9 @@ export default {
     transpile: ['vuetify/lib'],
     plugins: [new VuetifyLoaderPlugin()],
     loaders: {
-      // stylus: {
-      //   import: ['~assets/style/variables.styl']
-      // }
+      stylus: {
+        import: ['~assets/style/variables.styl']
+      }
     },
     /*
      ** You can extend webpack config here

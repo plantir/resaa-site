@@ -16,7 +16,7 @@
             <div class="link-provider">App Store</div>
           </div>
         </div>
-        <div class="link" @click="openModal">
+        <!-- <div class="link" @click="openModal">
           <div class="link-icon">
             <img src="./winmobile.png" alt="دریافت اپلیکیشن رسا برای ویندوز فون" />
           </div>
@@ -24,7 +24,7 @@
             <div class="link-provider-text">Download For</div>
             <div class="link-provider">WinMobile</div>
           </div>
-        </div>
+        </div>-->
         <div class="link" @click="openModal">
           <div class="link-icon">
             <img src="./playstore.png" alt="دریافت اپلیکیشن رسا از پلی استور" />
@@ -138,7 +138,10 @@ export default {
     height: 60px;
     border-radius: 15px;
     border: solid 2px #989cbe;
-
+    transition: background 0.2s ease-in-out;
+    &:hover {
+      background: rgba(152, 156, 190, 0.2);
+    }
     .link-texts {
       text-align: left;
       color: #989cbe;

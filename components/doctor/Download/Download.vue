@@ -66,7 +66,10 @@
     height: 60px;
     border-radius: 15px;
     border: solid 2px #989cbe;
-
+    transition: background 0.2s ease-in-out;
+    &:hover {
+      background: rgba(152, 156, 190, 0.2);
+    }
     .link-texts {
       text-align: left;
       color: #989cbe;
@@ -132,20 +135,20 @@
     <div class="section-title">دریافت اپلیکیشن رِسا</div>
     <div class="section-description">سازگار با سیستم عامل های اندروید، IOS و ویندوز موبایل</div>
     <div class="image-wrapper">
-      <img src="./mockup.jpg" alt>
+      <img src="./mockup.jpg" alt />
     </div>
     <div class="download-image-container">
       <div class="download-links">
         <div class="link" @click="openModal">
           <div class="link-icon">
-            <img src="./apple.png">
+            <img src="./apple.png" />
           </div>
           <div class="link-texts">
             <div class="link-provider-text">Available on The</div>
             <div class="link-provider">App Store</div>
           </div>
         </div>
-        <div class="link" @click="openModal">
+        <!-- <div class="link" @click="openModal">
           <div class="link-icon">
             <img src="./winmobile.png">
           </div>
@@ -153,10 +156,10 @@
             <div class="link-provider-text">Download For</div>
             <div class="link-provider">WinMobile</div>
           </div>
-        </div>
+        </div>-->
         <div class="link" @click="openModal">
           <div class="link-icon">
-            <img src="./playstore.png">
+            <img src="./playstore.png" />
           </div>
           <div class="link-texts">
             <div class="link-provider-text">GET IT ON</div>
@@ -165,7 +168,7 @@
         </div>
         <div class="link" @click="openModal">
           <div class="link-icon">
-            <img src="./cafebazar.png">
+            <img src="./cafebazar.png" />
           </div>
           <div class="link-texts">
             <div class="link-provider-text">دانلود از</div>

@@ -6,11 +6,13 @@
 </style>
 
 <template>
-  <main>
-    <section class="landing">
-      <nuxt dir="rtl" />
-    </section>
-  </main>
+  <v-app>
+    <main>
+      <section class="landing">
+        <nuxt dir="rtl" />
+      </section>
+    </main>
+  </v-app>
 </template>
 
 <script>

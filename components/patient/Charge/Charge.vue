@@ -111,6 +111,9 @@
 }
 
 .charge-card-price-and-buy {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .charge-card-price {
@@ -149,14 +152,8 @@
 }
 
 .charge-card-buy-button {
-  float: left;
-  font-weight: 500;
-  color: $bronze;
-  background-color: $light-gold;
-  border-radius: 15px;
-  text-align: center;
   width: 65px;
-  line-height: 30px;
+  min-width: 65px;
 }
 
 .section-description-3 {
@@ -219,7 +216,13 @@
                 {{item.amount | currency | persianDigit }}
                 <div>تومان</div>
               </div>
-              <div class="charge-card-buy-button">خرید</div>
+              <v-btn
+                color="yellow darken-2"
+                class="charge-card-buy-button"
+                depressed
+                round
+                small
+              >خرید</v-btn>
             </div>
           </div>
         </router-link>

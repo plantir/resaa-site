@@ -78,8 +78,12 @@
   .item-description-link {
     cursor: pointer;
     color: white;
-    text-decoration: underline;
+    border-bottom: 1px dashed;
+    padding-bottom: 3px;
     font-weight: 500;
+    &:hover {
+      color: #eee;
+    }
   }
 
   .procedure-item {
@@ -98,45 +102,14 @@
   }
 
   .procedure-signup-button {
-    display: block;
-    cursor: pointer;
     width: 174px;
-    height: 37.5px;
-    border-radius: 18.5px;
-    text-align: center;
-    line-height: 33px;
-    margin: 10px;
     box-shadow: 0 5px 7.5px 0 rgba(255, 206, 70, 0.3);
-    border: none;
     color: #545456;
-    background-color: #febe10;
-    float: right;
-    z-index: 20;
-
-    &:hover,
-    &:focus,
-    &:active {
-      text-decoration: none;
-    }
   }
 
   .procedure-download-button {
-    display: block;
-    cursor: pointer;
     width: 174px;
-    height: 37.5px;
-    border-radius: 18.5px;
-    text-align: center;
-    line-height: 33px;
-    margin: 10px;
-    border: solid 2px #ffffff;
-    color: #ffffff;
-
-    &:hover,
-    &:focus,
-    &:active {
-      text-decoration: none;
-    }
+    border-width: 2px;
   }
 
   @media only screen and (max-width: 900px) {
@@ -204,12 +177,12 @@
           <div class="item-description">
             - با شماره گیری ۷۴۴۷۱۱۱۱-۰۲۱ در سامانه یا از طریق همین
             <a
-              v-scroll-to="{ el: '#register', offset: -50 }"
+              v-scroll-to="{ el: '#register', offset: -50 ,duration:1500}"
               class="item-description-link"
             >سایت</a>
             و یا
             <a
-              v-scroll-to="{ el: '#download', offset: -50 }"
+              v-scroll-to="{ el: '#download', offset: -50,duration:1500 }"
               class="item-description-link"
             >اپلیکیشن رِسا</a>
             می&#160;توانید اقدام به ثبت نام کنید.
@@ -226,12 +199,12 @@
           <p class="item-description">
             - برای ارتباط با پزشک به کد رِسای آن نیاز است که از طریق همین
             <a
-              v-scroll-to="{ el: '#doctors', offset: -50 }"
+              v-scroll-to="{ el: '#doctors', offset: -50 ,duration:1500}"
               class="item-description-link"
             >سایت</a>
             و یا
             <a
-              v-scroll-to="{ el: '#download', offset: -50 }"
+              v-scroll-to="{ el: '#download', offset: -50,duration:1500 }"
               class="item-description-link"
             >اپلیکیشن رِسا</a>
             می&#160;توانید کد و مشخصات پزشک خود را بیابید.
@@ -267,8 +240,20 @@
     </div>
 
     <div class="procedure-button-container">
-      <a href="#register" id="procedureRegister" class="procedure-signup-button">ثبت نام رایگان</a>
-      <a href="#download" class="procedure-download-button">دریافت اپلیکیشن</a>
+      <v-btn
+        id="procedureRegister"
+        class="procedure-signup-button"
+        to="/patient/register"
+        round
+        color="yellow darken-2"
+      >ثبت نام رایگان</v-btn>
+      <v-btn
+        class="procedure-download-button"
+        v-scroll-to="{ el: '#download', offset: -50 , duration: 1500}"
+        color="white"
+        outline
+        round
+      >دریافت اپلیکیشن</v-btn>
     </div>
   </div>
 </template>

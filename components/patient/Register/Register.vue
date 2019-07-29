@@ -65,7 +65,8 @@
 }
 
 .register-btn {
-  color: #35d6c1;
+  width: 140px;
+  margin-top: 1rem;
 }
 
 .register-description-3 {
@@ -133,9 +134,10 @@
     </p>
     <div>
       <v-btn
-        class="register-btn black--text"
+        class="register-btn"
         id="freeRegister"
         round
+        outline
         color="white"
         :to="{name:'patient-register'}"
       >ثبت نام</v-btn>

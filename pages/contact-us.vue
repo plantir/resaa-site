@@ -104,18 +104,9 @@
 
 .contact-us-submit-button {
   left: 15px;
-  top: 180px;
-  cursor: pointer;
-  font-weight: 500;
-  text-align: center;
-  position: absolute;
+  bottom: 30px;
+  position: absolute !important;
   width: 100px;
-  height: 40px;
-  border-radius: 18.5px;
-  line-height: 40px;
-  color: white;
-  background-color: $tealish;
-  border: none;
 }
 
 .contact-us-input {
@@ -231,7 +222,7 @@
                   v-if="submitted && errors.has('message')"
                   class="invalid-feedback"
                 >{{ errors.first('message') }}</div>
-                <button class="contact-us-submit-button">ارسال</button>
+                <v-btn color="secondary" round class="contact-us-submit-button">ارسال</v-btn>
               </div>
             </form>
           </div>

@@ -116,25 +116,14 @@
 }
 
 .card-button {
-  display: block;
-  text-decoration: none;
-  cursor: pointer;
-  margin: 25px auto 0 auto;
-  color: $azure;
-  text-align: center;
   width: 173px;
-  height: 37px;
-  line-height: 37px;
-  border-radius: 18.5px;
-  box-shadow: 0 5px 7.5px 0 rgba(19, 210, 243, 0.2);
-  border: solid 2px transparent;
-  background-image: linear-gradient(white, white),
-    linear-gradient(20deg, #33e4ea, #00b2ed);
-  background-origin: border-box;
-  background-clip: content-box, border-box;
+  margin-top: 1rem;
 }
 
 .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 30px 30px;
   border-radius: 15px;
   background-color: white;
@@ -152,7 +141,7 @@
     <div class="section-description">خدمات و مزایای سامانه رِسا برای پزشکان</div>
     <div class="benefits-cards">
       <div class="card">
-        <img src="./young-doctor.png">
+        <img src="./young-doctor.png" />
         <div class="card-body">
           <div class="card-title">اکنون بیماران و تماس های زیادی دارید؟</div>
           <ul class="benefit-list">
@@ -163,14 +152,17 @@
             <li>اخذ هزینه بابت هر دقیقه مشاوره</li>
             <li>تعیین نرخ هر دقیقه مکالمه توسط شما</li>
           </ul>
-          <router-link
+          <v-btn
+            color="primary"
             :to="{name:'doctors-register',query:{subscriptionPlan:2}}"
             class="card-button"
-          >ثبت نام رایگان</router-link>
+            round
+            outline
+          >ثبت نام رایگان</v-btn>
         </div>
       </div>
       <div class="card">
-        <img src="./old-doctor.png">
+        <img src="./old-doctor.png" />
         <div class="card-body">
           <div class="card-title">حاضرید پاسخ سوالات همه را بدهید؟</div>
           <ul class="benefit-list">
@@ -181,10 +173,13 @@
             <li>اخذ هزینه بابت هر دقیقه مشاوره</li>
             <li>تعیین نرخ هر دقیقه مکالمه توسط شما</li>
           </ul>
-          <router-link
+          <v-btn
+            color="primary"
             :to="{name:'doctors-register',query:{subscriptionPlan:1}}"
             class="card-button"
-          >ثبت نام رایگان</router-link>
+            round
+            outline
+          >ثبت نام رایگان</v-btn>
         </div>
       </div>
     </div>

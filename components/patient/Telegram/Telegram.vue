@@ -119,7 +119,7 @@
         </a>
         <a href="https://t.me/pezeshkeresaa" rel="nofllow" target="_blank" class="link">
           <i class="fa fa-telegram"></i>
-          @pezeshkeresaa
+          pezeshkeresaa
         </a>
       </div>
     </div>
