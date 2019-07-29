@@ -118,7 +118,6 @@ export default {
       this.page += 1;
     },
     goPage(page) {
-      debugger;
       this.page = page;
     },
     goFirst() {
