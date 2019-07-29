@@ -118,6 +118,7 @@ export default {
       this.page += 1;
     },
     goPage(page) {
+      debugger;
       this.page = page;
     },
     goFirst() {
@@ -143,9 +144,10 @@ export default {
           end = this.page + Math.floor(this.page_show / 2);
         } else {
           start = this.lastPage - this.page_show + 2;
-          end = this.lastPage + 1;
+          end = this.lastPage;
         }
       }
+      start = start < 1 ? 1 : start;
       return _.range(start, end + 1);
     }
   }
