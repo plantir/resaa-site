@@ -149,6 +149,7 @@
 
   .item-image {
     width: 140px;
+    height: 140px;
   }
 }
 </style>

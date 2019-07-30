@@ -12,12 +12,16 @@
   }
 }
 .intro-section-patients-container {
-  padding-top: 140px;
+  padding-top: 70px;
   overflow: hidden;
   position: relative;
   width: 100%;
   min-height: 746px;
   background: linear-gradient(240deg, #39ec99, #11d0f8);
+  @include media(sm) {
+    padding-top: 40px;
+    min-height: auto;
+  }
   .parallax {
     position: absolute;
     bottom: 20px;
@@ -62,6 +66,7 @@
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
     border-width: 2px;
     width: 174px;
+    max-width: 45%;
   }
 }
 
@@ -70,6 +75,9 @@
   color: white;
   font-weight: 500;
   font-size: 2.375rem;
+  @include media(sm) {
+    font-size: 1.875rem;
+  }
 }
 
 .intro-description {
@@ -143,7 +151,9 @@
     top: 0;
     bottom: 0;
     margin: auto;
-
+    svg {
+      height: 80px;
+    }
     &.left {
       flex-direction: row-reverse;
       right: calc(100% - 50px);
@@ -241,7 +251,8 @@
           <a class="side-button-title">دریافت اپلیکیشن رِسا</a>
         </div>
         <div class="side-button-icon">
-          <img src="./mobile.svg" alt="اپلیکیشن رسا" />
+          <!-- <mobile /> -->
+          <img src="~assets/svg/mobile.svg" alt="اپلیکیشن رسا" />
         </div>
       </div>
       <div class="side-button right">
@@ -250,7 +261,8 @@
           <div class="side-button-title">تماس با ۷۴۴۷۱۱۱۱ ۰۲۱</div>
         </div>
         <div class="side-button-icon">
-          <img src="./phone.svg" alt="تماس با رسا" />
+          <!-- <old-phone /> -->
+          <img src="~assets/svg/old-phone.svg" alt="تماس با رسا" />
         </div>
       </div>
     </div>

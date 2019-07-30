@@ -175,8 +175,12 @@ section#home {
     padding: 16px;
     z-index: 9;
     animation: pulse-dot 2.25s cubic-bezier(0.455, 0.03, 0.515, 0.955) -0.4s infinite;
-    img {
-      max-width: 100%;
+    svg {
+      width: 36px;
+      height: 36px;
+      path {
+        fill: $secondary-color;
+      }
     }
     &:before {
       content: "";
@@ -369,7 +373,8 @@ section#home {
     </div>
     <div class="content">
       <div class="phone-icon">
-        <img src="~static/img/phone.svg" alt="تماس تلفنی مستقیم با پزشک" />
+        <phone />
+        <!-- <img src="~assets/svg/phone.svg" alt="تماس تلفنی مستقیم با پزشک" /> -->
       </div>
       <div class="line"></div>
       <section class="patient">
@@ -429,9 +434,13 @@ section#home {
   </section>
 </template>
 <script>
+import phone from "~/assets/svg/phone.svg?inline";
 export default {
   name: "home",
   layout: "landing",
+  components: {
+    phone
+  },
   head() {
     return {
       title: "رِسا، رسانه سلامت ایرانیان",

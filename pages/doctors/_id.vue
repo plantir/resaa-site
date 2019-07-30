@@ -43,9 +43,15 @@ p {
   text-align: center;
   font-size: 1.2rem;
   font-weight: 500;
-
-  i {
-    margin-left: 4px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  svg {
+    width: 20px;
+    height: 20px;
+    path {
+      fill: #fff;
+    }
   }
 }
 
@@ -305,9 +311,12 @@ p {
             />
           </div>
           <div class="doctor-resaa-info">
-            <i class="fa fa-phone-square"></i>
-            کد رِسا:
-            <p class="doctor-resaa-code">{{doctor.subscriberNumber | persianDigit}}</p>
+            <phone />
+            <!-- <i class="fa fa-phone-square"></i> -->
+            <div>
+              کد رِسا:
+              <p class="doctor-resaa-code">{{doctor.subscriberNumber | persianDigit}}</p>
+            </div>
           </div>
         </div>
         <div class="doctor-info-container">
@@ -404,6 +413,7 @@ p {
 
 <script>
 import callSection from "~/components/doctor/call_section/index.vue";
+import phone from "~/assets/svg/phone.svg?inline";
 export default {
   head() {
     return {
@@ -438,7 +448,7 @@ export default {
       ]
     };
   },
-  components: { callSection },
+  components: { callSection, phone },
   async asyncData({ store, params, $axios }) {
     let fields =
       "id,firstName,lastName,imagePath,currentlyAvailable,subscriberNumber,specialty,tags,expertise,title,workplaces,medicalCouncilNumber";

@@ -62,14 +62,17 @@
   > a {
     margin: 8px;
     color: #babcbd;
+    display: flex;
+    align-items: center;
   }
   span {
     display: inline-block;
     direction: ltr;
     margin-right: 16px;
   }
-  i {
-    color: #2ee5c4;
+  svg,
+  path {
+    fill: #2ee5c4;
   }
 }
 .link-wrapper {
@@ -174,17 +177,29 @@
   }
   ul {
     display: inline-flex;
-    margin: 0 32px 0 0;
     padding: 0;
+    margin: 0 32px 0 0;
     width: 40%;
     justify-content: space-between;
     list-style-type: none;
+    @include media(xs-only) {
+      margin: 0;
+      width: 60%;
+    }
     a {
-      color: #babcbd;
-      font-size: 1.375rem;
+      display: flex;
+      align-items: center;
+      justify-items: center;
       &:hover {
-        color: #2ee5c4;
+        svg,
+        path {
+          fill: $secondary-color;
+        }
       }
+    }
+    svg,
+    path {
+      fill: #babcbd;
     }
   }
 }
@@ -352,22 +367,27 @@
                   <ul>
                     <li>
                       <a rel="nofollow" target="_blank" href="https://t.me/pezeshkeresaa">
-                        <i class="fa fa-telegram"></i>
+                        <telegram />
+                        <!-- <img src="~assets/svg/telegram.svg" alt /> -->
+                        <!-- <i class="fa fa-telegram"></i> -->
                       </a>
                     </li>
                     <li>
                       <a rel="nofollow">
-                        <i class="fa fa-facebook"></i>
+                        <facebook />
+                        <!-- <i class="fa fa-facebook"></i> -->
                       </a>
                     </li>
                     <li>
                       <a rel="nofollow" target="_blank" href="https://instagram.com/resaanet/">
-                        <i class="fa fa-instagram"></i>
+                        <instagram />
+                        <!-- <i class="fa fa-instagram"></i> -->
                       </a>
                     </li>
                     <li>
                       <a rel="nofollow" target="_blank" href="https://twitter.com/resaanet">
-                        <i class="fa fa-twitter"></i>
+                        <twitter />
+                        <!-- <i class="fa fa-twitter"></i> -->
                       </a>
                     </li>
                   </ul>
@@ -385,7 +405,7 @@
             </div>
             <div class="tell-wrapper">
               <a :href="`tel:${contactInfo.support.value}`" class="footer-tel">
-                <v-icon>phone</v-icon>
+                <phone />
                 <span>{{contactInfo.support.text}}</span>
               </a>
               <!-- <a :href="`tel:${contactInfo.phoneNumber}`" class="footer-tel">
@@ -393,7 +413,8 @@
                 <span>{{contactInfo.phoneNumber}}</span>
               </a>-->
               <a :href="`mailto:${contactInfo.email}`" class="footer-email">
-                <v-icon>email</v-icon>
+                <!-- <v-icon>email</v-icon> -->
+                <envelope />
                 <span>{{contactInfo.email}}</span>
               </a>
             </div>
@@ -428,7 +449,21 @@
 </template>
 
 <script>
+import telegram from "~/assets/svg/telegram.svg?inline";
+import facebook from "~/assets/svg/facebook.svg?inline";
+import instagram from "~/assets/svg/instagram.svg?inline";
+import twitter from "~/assets/svg/twitter.svg?inline";
+import envelope from "~/assets/svg/envelope.svg?inline";
+import phone from "~/assets/svg/phone.svg?inline";
 export default {
+  components: {
+    telegram,
+    facebook,
+    instagram,
+    twitter,
+    envelope,
+    phone
+  },
   data() {
     return {
       isPatient: true

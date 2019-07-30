@@ -30,7 +30,13 @@
             class="benefits-signup-button"
             round
           >ثبت نام رایگان</v-btn>
-          <v-btn class="benefits-download-button" v-scroll-to="{ el: '#download', offset: -50 , duration: 1500}" outline round color="secondary">دریافت اپلیکیشن</v-btn>
+          <v-btn
+            class="benefits-download-button"
+            v-scroll-to="{ el: '#download', offset: -50 , duration: 1500}"
+            outline
+            round
+            color="secondary"
+          >دریافت اپلیکیشن</v-btn>
         </div>
       </div>
       <div class="image">
@@ -119,7 +125,9 @@ export default {};
   li {
     line-height: 30px;
     color: #777590;
-
+    @include media(sm) {
+      font-size: 1rem;
+    }
     a {
       color: #00aae2;
       text-decoration: underline;
@@ -155,7 +163,7 @@ export default {};
 .benefits-download-button {
   width: 174px;
   box-shadow: 0 5px 7.5px 0 rgba(72, 229, 202, 0.2);
-  border-width: 2px ;
+  border-width: 2px;
 }
 
 @media only screen and (max-width: 1000px) {

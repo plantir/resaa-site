@@ -142,7 +142,7 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    'nuxt-svg',
+    // 'nuxt-svg-loader',
     'nuxt-device-detect',
     '@nuxtjs/pwa',
     '@nuxtjs/vuetify',
@@ -183,6 +183,13 @@ export default {
       customProperties: true
     }
   },
+  // svgLoader: {
+  //   svgoConfig: {
+  //     plugins: [
+  //       { prefixIds: false } // Disables prefixing for SVG IDs
+  //     ]
+  //   }
+  // },
   // doctors sitemap
   sitemap: {
     defaults: {
@@ -263,6 +270,26 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {
+      const svgRule = config.module.rules.find(rule => rule.test.test('.svg'));
+
+      svgRule.test = /\.(png|jpe?g|gif|webp)$/;
+
+      config.module.rules.push({
+        test: /\.svg$/,
+        oneOf: [
+          {
+            resourceQuery: /inline/,
+            loader: 'vue-svg-loader'
+          },
+          {
+            loader: 'file-loader',
+            query: {
+              name: 'assets/[name].[hash:8].[ext]'
+            }
+          }
+        ]
+      });
+    }
   }
 };

@@ -5,6 +5,7 @@
   min-height: 200px;
   // background-color: white;
   background-image: url("social-networks.jpg");
+  background-color: whitesmoke;
   background-size: contain;
   background-position-x: left;
   background-position-y: center;
@@ -41,6 +42,19 @@
   display: flex;
   justify-content: space-between;
   width: 320px;
+  a {
+    display: inline-flex;
+    align-items: center;
+    &:hover {
+      color: $primary-color;
+    }
+  }
+  svg {
+    margin-left: 8px;
+    path {
+      fill: $primary-color;
+    }
+  }
 }
 .link {
   cursor: pointer;
@@ -79,7 +93,7 @@
   }
 
   .telegram-title {
-    font-size: 1.875rem !important;
+    font-size: 1.475rem !important;
   }
 
   .telegram-button {
@@ -89,9 +103,9 @@
 
   .telegram-description {
     color: white;
-    font-size: 1.375rem;
+    font-size: 1rem;
     text-align: justify;
-    line-height: 2.375rem;
+    padding-left: 12px;
     // b {
     //   font-weight: 600;
     // }
@@ -114,12 +128,13 @@
       </p>
       <div class="link-wrapper">
         <a href="https://www.instagram.com/resaanet/" rel="nofllow" target="_blank" class="link">
-          <i class="fa fa-instagram"></i>
+          <instagram />
+          <!-- <i class="fa fa-instagram"></i> -->
           resaa.medical
         </a>
         <a href="https://t.me/pezeshkeresaa" rel="nofllow" target="_blank" class="link">
-          <i class="fa fa-telegram"></i>
-          pezeshkeresaa
+          <!-- <i class="fa fa-telegram"></i> -->
+          <telegram />pezeshkeresaa
         </a>
       </div>
     </div>
@@ -127,5 +142,9 @@
 </template>
 
 <script>
-export default {};
+import telegram from "~/assets/svg/telegram.svg?inline";
+import instagram from "~/assets/svg/instagram.svg?inline";
+export default {
+  components: { telegram, instagram }
+};
 </script>

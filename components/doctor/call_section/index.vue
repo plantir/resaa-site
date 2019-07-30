@@ -68,6 +68,10 @@ section#phoneDialog {
     img {
       width: 100%;
     }
+    svg,
+    path {
+      fill: #fff;
+    }
   }
   .add_charge {
     margin-top: 16px;
@@ -166,7 +170,7 @@ section#phoneDialog {
           }
         }
       }
-      .info {
+      .info-text {
         flex: 1;
       }
       .hint {
@@ -284,7 +288,8 @@ section#phoneDialog {
       >
         <template v-slot:activator="{ on }">
           <div class="doctor-phone" v-on="on">
-            <img src="~assets/img/doctorPhone.svg" alt />
+            <phone />
+            <!-- <img src="~assets/img/doctorPhone.svg" alt /> -->
           </div>
         </template>
 
@@ -309,7 +314,7 @@ section#phoneDialog {
             </div>
             <div class="content-wrapper">
               <div>مراحل برقراری ارتباط با پزشک مورد نظر:</div>
-              <div class="info">
+              <div class="info-text">
                 <template v-if="user">
                   <ul v-if="$device.isMobile">
                     <li>
@@ -399,7 +404,11 @@ section#phoneDialog {
   </section>
 </template>
 <script>
+import phone from "~/assets/svg/phone.svg?inline";
 export default {
+  components: {
+    phone
+  },
   data() {
     return {
       booking_loading: false,

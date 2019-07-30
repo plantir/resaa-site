@@ -11,12 +11,16 @@
   }
 }
 .landing-section-doctors-intro {
-  padding-top: 140px;
+  padding-top: 70px;
   overflow: hidden;
   position: relative;
   width: 100%;
   min-height: 746px;
   background: linear-gradient(57deg, #33e4ea, #00b2ed);
+  @include media(sm) {
+    padding-top: 40px;
+    min-height: auto;
+  }
   .parallax {
     position: absolute;
     bottom: 20px;
@@ -61,6 +65,7 @@
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
     border-width: 2px;
     width: 174px;
+    max-width: 45%;
   }
 }
 
@@ -69,6 +74,9 @@
   color: white;
   font-weight: 500;
   font-size: 2.375rem;
+  @include media(sm) {
+    font-size: 1.875rem;
+  }
 }
 
 .intro-description {
@@ -142,7 +150,9 @@
     top: 0;
     bottom: 0;
     margin: auto;
-
+    svg {
+      height: 80px;
+    }
     &.left {
       flex-direction: row-reverse;
       right: calc(100% - 50px);
