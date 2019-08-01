@@ -237,13 +237,36 @@ section#home {
     a {
       width: 173px;
       border-width: 2px;
-      // + a {
-      //   margin-right: 16px;
-      //   @include respond-to(sm) {
-      //     margin-right: 0;
-      //     margin-top: 16px;
-      //   }
-      // }
+    }
+    .custom-btn {
+      background: #fff;
+      height: 36px;
+      margin: 6px 8px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      display: inline-flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding-right: 30px;
+      transition: all 0.4s;
+      svg {
+        width: 58px;
+        height: 48px;
+        position: absolute;
+        left: 5px;
+        top: -9px;
+        transition: all 0.4s;
+        path {
+          fill: #fbc02d;
+        }
+      }
+      &:hover {
+        background: #fbc02d;
+        svg path {
+          fill: #fff;
+        }
+      }
     }
   }
   .doctor,
@@ -392,12 +415,10 @@ section#home {
           <p>بیماران عزیز، با سامانه رِسا از هر جایی با پزشک خود مشورت کنید</p>
         </div>
         <div class="button-wrapper">
-          <v-btn
-            color="yellow darken-2"
-            class="custom-btn"
-            round
-            :to="{name:'patient-landing'}"
-          >بیشتر بدانید</v-btn>
+          <nuxt-link class="custom-btn" :to="{name:'patient-landing'}">
+            بیشتر بدانید
+            <element-svg />
+          </nuxt-link>
           <!-- <router-link  :to="{name:'patient-landing'}">بیشتر بدانید</router-link> -->
           <!-- <router-link>شارژ حساب</router-link> -->
           <v-btn color="white" :to="{name:'charge'}" outline round>شارژ حساب</v-btn>
@@ -435,11 +456,13 @@ section#home {
 </template>
 <script>
 import phone from "~/assets/svg/phone.svg?inline";
+import elementSvg from "~/assets/svg/element.svg?inline";
 export default {
   name: "home",
   layout: "landing",
   components: {
-    phone
+    phone,
+    elementSvg
   },
   head() {
     return {
