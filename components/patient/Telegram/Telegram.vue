@@ -129,12 +129,11 @@
       <div class="link-wrapper">
         <a href="https://www.instagram.com/resaanet/" rel="nofllow" target="_blank" class="link">
           <instagram />
-          <!-- <i class="fa fa-instagram"></i> -->
-          resaa.medical
+          <span>resaa.medical</span>
         </a>
         <a href="https://t.me/pezeshkeresaa" rel="nofllow" target="_blank" class="link">
-          <!-- <i class="fa fa-telegram"></i> -->
-          <telegram />pezeshkeresaa
+          <telegram />
+          <span>pezeshkeresaa</span>
         </a>
       </div>
     </div>

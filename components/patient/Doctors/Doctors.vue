@@ -419,7 +419,7 @@ export default {
     };
     this.fields = "id,specialty,subscriberNumber,firstName,lastName,imagePath";
   },
-  created() {
+  mounted() {
     this.getDoctors();
   },
   computed: {

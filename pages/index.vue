@@ -250,6 +250,7 @@ section#home {
       align-items: center;
       padding-right: 30px;
       transition: all 0.4s;
+      box-shadow: 0 1px 16px -9px #000;
       svg {
         width: 58px;
         height: 48px;
