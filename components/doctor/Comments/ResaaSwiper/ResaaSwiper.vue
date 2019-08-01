@@ -98,8 +98,11 @@
           <div class="doctor-comment-name">{{'دکتر ' + comment.firstName + ' '+ comment.lastName}}</div>
           <div class="doctor-comment-special">{{comment.specialist}}</div>
           <div class="doctor-comment-avatar">
-            <router-link :to="{name:'Doctor',params:{subscriberNumber:comment.subscriberNumber}}">
-              <img :src="comment.avatar">
+            <router-link
+              target="_blank"
+              :to="{name:'doctors-id',params:{id:comment.subscriberNumber}}"
+            >
+              <img :src="comment.avatar" />
             </router-link>
           </div>
         </div>
