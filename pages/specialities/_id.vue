@@ -10,7 +10,7 @@ section#speciality {
     z-index: 1;
     padding-top: 220px;
     .banner {
-      background: url(/img/speciality/background.jpg);
+      //background-image: url(/img/speciality/background.jpg);
       width: 100%;
       height: 100%;
       background-position: top left;
@@ -98,11 +98,17 @@ section#speciality {
       color: $primary-color;
       margin-bottom: 16px;
     }
-    h3 {
-      font-weight: 400;
-      color: $primary-color;
-      margin-bottom: 32px;
-      font-size: 1.675rem;
+    h3,
+    h3 *,
+    .index-number {
+      display: inline-flex;
+      font-weight: 400 !important;
+      color: $primary-color !important;
+      margin-bottom: 32px !important;
+      font-size: 1.675rem !important;
+    }
+    .index-number {
+      margin-left: 4px;
     }
     p {
       color: #fff;
@@ -368,7 +374,7 @@ section#speciality {
         cursor: pointer;
         display: flex;
         align-items: center;
-        height: 70px;
+        // height: 70px;
         padding: 0;
         direction: rtl;
         + .item {
@@ -540,33 +546,33 @@ section#speciality {
 <template>
   <section id="speciality">
     <div class="header">
-      <div class="banner"></div>
+      <div class="banner" :style="{'background-image':`url(${backgroundImage})`}"></div>
       <v-container>
-        <h3>تخصص قلب و عروق</h3>
-        <h4>cardiology & carcivasclue section</h4>
-        <p>کاردیولوژی یا پزشکی قلب یک تخصص در پزشکی است که با اختلالات قلب سر و کار دارد. این رشته شامل تشخیص پزشکی و درمان اختلالات مادرزادی قلب، بیماریهای عروق کرونر، نارسایی قلب، بیماریهای دریچه ای قلب و الکتروفیزیولوژی است. پزشکان متخصص قلب و عروق، کاردیولوژیست یا متخصص قلب و عروق خوانده می شوند. پزشکانی که در زمینه جراحی قلب تخصص دارند جراح قلب خوانده می شوند.</p>
+        <h3>{{speciality.title}}</h3>
+        <h4>{{speciality.description}}</h4>
+        <p>{{speciality.characterization}}</p>
       </v-container>
     </div>
     <div class="icons">
       <div class="items">
         <div class="item">
-          <img src="~assets/img/icons/info.png" alt>
+          <img src="~assets/img/icons/info.png" alt />
           <span>معرفی‌تخصص</span>
         </div>
         <div class="item">
-          <img src="~assets/img/icons/physician.png" alt>
+          <img src="~assets/img/icons/physician.png" alt />
           <span>پزشکان مرتبط</span>
         </div>
         <div class="item">
-          <img src="~assets/img/icons/blog.png" alt>
+          <img src="~assets/img/icons/blog.png" alt />
           <span>مقالات مرتبط</span>
         </div>
         <div class="item">
-          <img src="~assets/img/icons/faq.png" alt>
+          <img src="~assets/img/icons/faq.png" alt />
           <span>پرسش و پاسخ</span>
         </div>
         <div class="item">
-          <img src="~assets/img/icons/critical_condition.png" alt>
+          <img src="~assets/img/icons/critical_condition.png" alt />
           <span>شرایط اورژانسی</span>
         </div>
       </div>
@@ -574,42 +580,20 @@ section#speciality {
     <v-container class="section-container">
       <section class="info-section">
         <h2 class="section-title">
-          <img src="~assets/img/icons/info.png" alt>
+          <img src="~assets/img/icons/info.png" alt />
           <span>معرفی تخصص</span>
         </h2>
         <v-layout row wrap>
-          <v-flex md6 pa-4>
-            <h3>۱. تخصص قلب و عروق چیست؟</h3>
-            <div>
-              <p>اردیولوژی یا پزشکی قلب یک تخصص در پزشکی است که با اختلالات قلب سر و کار دارد. این رشته شامل تشخیص پزشکی و درمان اختلالات مادرزادی قلب، بیماریهای عروق کرونر، نارسایی قلب، بیماریهای دریچه ای قلب و الکتروفیزیولوژی است. پزشکان متخصص قلب و عروق، کاردیولوژیست یا متخصص قلب و عروق خوانده می شوند. پزشکانی که در زمینه جراحی قلب تخصص دارند جراح قلب خوانده می شوند.</p>
-              <p>نجام معاینه منظم فرد توسط متخصص قلب و عروق، یکی از بهترین راه‌های تشخیص بیماری‌های قلبی است، چرا که قبل از ابتلا یا عود بیماری، تشخیص داده می‌شود.</p>
-            </div>
-          </v-flex>
-          <v-flex md6 pa-4>
-            <h3>۲. وظایف متخصص قلب و عروق</h3>
-            <div>
-              <p>درمان بیماری‌های قلب و عروق خونی، انجام آنژیوگرافی، اکو و نیز تعیین موارد لازم برای عمل جراحی قلب به این گروه از پزشکان مرتبط است. عملکرد این رشته کاملا همانند رشته تخصصی قلب و عروق است (متخصصین قلب و عروق) که پس از دوره پزشکی عمومی به دست می‌آید. این رشته فلوشیپ‌های متعددی مثل اکوکاردیوگرافی (تصویربرداری از قلب با امواج صوتی)، اینترونشنال کاردیولوژی (ترمیم قلب و عروق از طریق کاتتر)، بیماری‌های مادرزادی قلب در بالغین، نارسایی قلب، پیس‌میکر (دستگاه ضربان‌ساز قلب) و. . . . نیز دارد.</p>
-            </div>
-          </v-flex>
-
-          <v-flex md6 pa-4>
-            <h3>۳. وظایف متخصص قلب و عروق</h3>
-            <div>
-              <p>درمان بیماری‌های قلب و عروق خونی، انجام آنژیوگرافی، اکو و نیز تعیین موارد لازم برای عمل جراحی قلب به این گروه از پزشکان مرتبط است. عملکرد این رشته کاملا همانند رشته تخصصی قلب و عروق است (متخصصین قلب و عروق) که پس از دوره پزشکی عمومی به دست می‌آید. این رشته فلوشیپ‌های متعددی مثل اکوکاردیوگرافی (تصویربرداری از قلب با امواج صوتی)، اینترونشنال کاردیولوژی (ترمیم قلب و عروق از طریق کاتتر)، بیماری‌های مادرزادی قلب در بالغین، نارسایی قلب، پیس‌میکر (دستگاه ضربان‌ساز قلب) و. . . . نیز دارد.</p>
-            </div>
-          </v-flex>
-          <v-flex md6 pa-4>
-            <h3>۴. تخصص قلب و عروق چیست؟</h3>
-            <div>
-              <p>اردیولوژی یا پزشکی قلب یک تخصص در پزشکی است که با اختلالات قلب سر و کار دارد. این رشته شامل تشخیص پزشکی و درمان اختلالات مادرزادی قلب، بیماریهای عروق کرونر، نارسایی قلب، بیماریهای دریچه ای قلب و الکتروفیزیولوژی است. پزشکان متخصص قلب و عروق، کاردیولوژیست یا متخصص قلب و عروق خوانده می شوند. پزشکانی که در زمینه جراحی قلب تخصص دارند جراح قلب خوانده می شوند.</p>
-              <p>نجام معاینه منظم فرد توسط متخصص قلب و عروق، یکی از بهترین راه‌های تشخیص بیماری‌های قلبی است، چرا که قبل از ابتلا یا عود بیماری، تشخیص داده می‌شود.</p>
-            </div>
+          <v-flex md6 pa-4 v-for="(item,index) in speciality.introductoryRemarks" :key="index">
+            <span class="index-number">{{index+1 | persianDigit}}.</span>
+            <h3 v-html="item.title"></h3>
+            <div v-html="item.description"></div>
           </v-flex>
         </v-layout>
       </section>
       <section class="physician-section">
         <h2 class="section-title">
-          <img src="~assets/img/icons/physician.png" alt>
+          <img src="~assets/img/icons/physician.png" alt />
           <span>پزشکان مرتبط</span>
         </h2>
         <v-layout row wrap>
@@ -617,16 +601,16 @@ section#speciality {
             <div class="doctor-count">
               <div>
                 <span>تعداد پزشکان :</span>
-                <span>{{235 | persianDigit}}</span>
+                <span>{{rleated_doctors.length | persianDigit}}</span>
               </div>
               <div>
-                <span>تعداد پزشکان :</span>
-                <span>{{209 | persianDigit}}</span>
+                <span>تعداد پزشکان پاسخگو :</span>
+                <span>{{available_doctors.length | persianDigit}}</span>
               </div>
             </div>
             <div class="doctor-list">
               <div class="list-header">
-                <img src="~assets/img/icons/doctor-list.png" alt>
+                <img src="~assets/img/icons/doctor-list.png" alt />
                 <div>مشاهده لیست همه پزشکان مرتبط</div>
               </div>
               <no-ssr>
@@ -635,19 +619,34 @@ section#speciality {
                   :settings="{maxScrollbarLength: 30,scrollXMarginOffset:15,suppressScrollX:true}"
                 >
                   <div class="items">
-                    <div class="item" v-for="(item,index) in 10" :key="index">
+                    <div
+                      class="item"
+                      v-for="doctor in rleated_doctors"
+                      :key="doctor.subscriberNumber"
+                    >
                       <div class="doctor-image">
-                        <img src="/img/doc-placeholder.png" alt>
+                        <img
+                          v-if="doctor.imagePath"
+                          :src="'https://webapi.resaa.net/'+doctor.imagePath"
+                          :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+                        />
+                        <img
+                          v-else
+                          src="/img/doc-placeholder.png"
+                          :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+                        />
                       </div>
                       <div class="doctor-info">
                         <div class="detail">
-                          <span class="name">دکتر لیدا عسگری {{index}}</span>
-                          <span class="speciality">متخصص قلب و عروق</span>
+                          <span
+                            class="name"
+                          >{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</span>
+                          <span class="speciality">متخصص {{doctor.specialty.title}}</span>
                         </div>
                         <div class="divider"></div>
                         <div class="code">
                           <span>کد رسا</span>
-                          <span>{{7002 | persianDigit}}</span>
+                          <span>{{doctor.subscriberNumber | persianDigit}}</span>
                         </div>
                       </div>
                       <div class="doctor-action">
@@ -668,15 +667,28 @@ section#speciality {
             <div class="swiper-title">دسترسی سریع به پزشکان پاسخگو</div>
             <div v-swiper:mySwiper="swiperOption" dir="rtl">
               <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="(comment, index) in 10" :key="index">
+                <div
+                  class="swiper-slide"
+                  v-for="doctor in available_doctors"
+                  :key="doctor.subscriberNumber"
+                >
                   <div class="image">
-                    <img src="/img/doc-placeholder.png" alt>
+                    <img
+                      v-if="doctor.imagePath"
+                      :src="'https://webapi.resaa.net/'+doctor.imagePath"
+                      :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+                    />
+                    <img
+                      v-else
+                      src="/img/doc-placeholder.png"
+                      :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+                    />
                   </div>
-                  <div class="name">دکتر مهران رضوی</div>
-                  <div class="speciality">متخصص قلب و عروق</div>
+                  <div class="name">دکتر {{doctor.firstName}} {{doctor.lastName}}</div>
+                  <div class="speciality">متخصص {{doctor.specialty.title}}</div>
                   <div class="code">
                     <span>کد رسا:</span>
-                    <span>{{7002 | persianDigit}}</span>
+                    <span>{{doctor.subscriberNumber | persianDigit}}</span>
                   </div>
                 </div>
               </div>
@@ -686,9 +698,9 @@ section#speciality {
           </v-flex>
         </v-layout>
       </section>
-      <section class="blog-section">
+      <!-- <section class="blog-section">
         <h2 class="section-title">
-          <img src="~assets/img/icons/blog.png" alt>
+          <img src="~assets/img/icons/blog.png" alt />
           <span>مقالات مرتبط</span>
         </h2>
         <div class="swiper-parent">
@@ -696,7 +708,7 @@ section#speciality {
             <div class="swiper-wrapper">
               <div class="swiper-slide" v-for="(comment, index) in 10" :key="index">
                 <div class="image">
-                  <img src="~assets/img/blog_placeholder.jpg" alt>
+                  <img src="~assets/img/blog_placeholder.jpg" alt />
                 </div>
                 <div class="content">
                   <div class="blog-title">حفاظت سلامت قلب با ورزش</div>
@@ -733,10 +745,10 @@ section#speciality {
             <div class="swiper-button-next" slot="button-next"></div>
           </div>
         </div>
-      </section>
+      </section>-->
       <section class="faq-section">
         <h2 class="section-title">
-          <img src="~assets/img/icons/faq.png" alt>
+          <img src="~assets/img/icons/faq.png" alt />
           <span>پرسش و پاسخ</span>
         </h2>
         <v-layout row wrap>
@@ -750,52 +762,45 @@ section#speciality {
                   <div class="items">
                     <div
                       class="item"
-                      :class="{active:active_item == item}"
-                      v-for="(item,index) in 10"
+                      :class="{active:active_item.id == item.id}"
+                      v-for="(item,index) in speciality.frequentlyAskedQuestions"
                       :key="index"
                       @click="active_item = item"
                     >
                       <div class="item-index">{{index+1 | persianDigit}}</div>
-                      <div
-                        class="item-summary"
-                      >آیا در صورت داشتن احساس درد در قفسه سینه, ناحیه پشت و دست چپ می بایست حتما به پزشک ...</div>
+                      <div class="item-summary" v-html="item.question"></div>
                     </div>
                   </div>
                 </vue-custom-scrollbar>
               </no-ssr>
             </div>
           </v-flex>
-          <v-flex pa-4 md7>
+          <v-flex pa-4 md7 v-if="active_item">
             <div class="faq-detail">
               <div class="question">
                 <div class="image">
-                  <img src="~assets/img/user_placeholder.png" alt>
+                  <img src="~assets/img/user_placeholder.png" alt />
                 </div>
-                <div
-                  class="text"
-                >آیا در صورت داشتن احساس درد در قفسه سینه, ناحیه پشت و دست چپ می بایست حتما به پزشک مراجعه نمود یا مصرف دارو برای کاهش درد کافیست؟</div>
+                <div class="text" v-html="active_item.question"></div>
               </div>
               <div class="answer">
                 <div class="image">
-                  <img src="~static/img/doc-placeholder.png" alt>
-                  <span>دکتر راهله برومند</span>
+                  <img src="~static/img/doc-placeholder.png" alt />
+                  <span>{{active_item.respondent.fullName}}</span>
                 </div>
                 <div class="text">
                   <div class="doctor-info">
                     <div class="doctor-name">
-                      <span>دکتر راهله برومند</span>
+                      <span>{{active_item.respondent.fullName}}</span>
                       <span>متخصص قلب و عروق</span>
                     </div>
                     <div class="doctor-code">
                       کد رسا :
-                      <span>7002</span>
-                      <img src="~assets/img/fingerprint.png" alt>
+                      <span>{{active_item.respondent.subscriberNumber}}</span>
+                      <img src="~assets/img/fingerprint.png" alt />
                     </div>
                   </div>
-                  <div>
-                    با سلام,
-                    در صورتی که درد به صورت مداوم بوده و یا در بازه هایی با فاصله کوتاه از یکدیگر تکرار می گردند حتما لازم است به نزدیکترین اورژانس مراجعه بفرمایید و درخواست نوار قلبی کنید و پس از اطمینان از وجود یا عدم وجود شرایط اورژانسی به پزشک مرتبط مراجعه بفرمایید.
-                  </div>
+                  <div v-html="active_item.answer"></div>
                 </div>
               </div>
             </div>
@@ -808,9 +813,22 @@ section#speciality {
 <script>
 export default {
   layout: "speciality",
-  data() {
+  async asyncData({ $axios, params }) {
+    let service = await $axios.$get(
+      `/Doctors/MedicalSpecialties/${params.id}/Manifest`
+    );
+    console.log(service);
+    let doctor_service = await $axios.$get(
+      `/Doctors?fields=specialty,title,subscriberNumber,firstName,lastName,imagePath,currentlyAvailable&specialtyId=8`
+    );
+    let rleated_doctors = doctor_service.result.doctors;
+    let available_doctors = rleated_doctors.filter(
+      item => item.currentlyAvailable
+    );
+    let speciality = service.result.manifest;
+    let active_item = service.result.manifest.frequentlyAskedQuestions[0];
     return {
-      active_item: null,
+      // service,
       swiperOption: {
         slidesPerView: 3,
         slidesPerColumn: 2,
@@ -869,8 +887,20 @@ export default {
           }
         },
         grabCursor: true
-      }
+      },
+      active_item,
+      speciality,
+      rleated_doctors,
+      available_doctors
     };
+  },
+  async mounted() {},
+  computed: {
+    backgroundImage() {
+      return (
+        `https://webapi.resaa.net/${this.speciality.backgroundImagePath}` || ""
+      );
+    }
   }
 };
 </script>
