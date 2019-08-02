@@ -817,7 +817,6 @@ export default {
     let service = await $axios.$get(
       `/Doctors/MedicalSpecialties/${params.id}/Manifest`
     );
-    console.log(service);
     let doctor_service = await $axios.$get(
       `/Doctors?fields=specialty,title,subscriberNumber,firstName,lastName,imagePath,currentlyAvailable&specialtyId=8`
     );
