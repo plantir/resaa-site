@@ -29,7 +29,7 @@
 
 <script>
 import appHeader from "~/components/header.vue";
-import appFooter from "~/components/footer.vue";
+import appFooter from "~/components/footer/footer";
 export default {
   components: {
     appHeader,
