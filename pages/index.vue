@@ -4,7 +4,7 @@ section#home {
   height: 100%;
   .logo {
     position: absolute;
-    left: 30px;
+    right: 30px;
     top: 30px;
     width: 80px;
     z-index: 9;
@@ -376,12 +376,12 @@ section#home {
     <div class="logo">
       <img src="~static/img/logo-resaa-blue.png" alt="سامانه رسا" />
     </div>
-    <div class="nav-icon" :class="{'active':menuActive}">
+    <!-- <div class="nav-icon" :class="{'active':menuActive}">
       <div @click="activateMenu" class="icon-wrapper">
         <img alt="منو سامانه رسا" v-if="menuActive" src="~static/img/nav-close-icon.png" />
         <img alt="منو سامانه رسا" v-else src="~static/img/nav-icon.png" />
       </div>
-    </div>
+    </div>-->
     <div class="nav-main" :class="{ 'active' : menuActive }">
       <div class="nav-main__content" :class="{ 'active' : menuActive }">
         <ul class="nav-main__list" :class="{ 'active' : menuActive }">
