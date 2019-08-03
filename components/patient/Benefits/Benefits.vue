@@ -77,7 +77,7 @@ export default {};
   color: #777590;
   text-align: center;
   font-style: normal;
-  font-size: 1.675rem;
+  font-size: 1.075rem;
   font-weight: 300;
 }
 
@@ -221,7 +221,7 @@ export default {};
   }
 
   .section-description {
-    font-size: 1.5rem;
+    font-size: 1.175rem;
   }
 
   .benefits-text-title {

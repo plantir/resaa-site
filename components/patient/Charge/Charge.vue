@@ -20,7 +20,7 @@
 .section-description {
   text-align: center;
   direction: rtl;
-  font-size: 1.675rem;
+  font-size: 1.075rem;
   color: #777590;
   margin-bottom: 70px;
 }
