@@ -240,7 +240,8 @@
     <h1 class="intro-title">ارتباط تلفنی و مستقیم با پزشک</h1>
     <p class="intro-description">با سـامانه رِسا از هـر جایی با پـزشـک خـود مـشـورت کنید</p>
     <div class="intro-buttons">
-      <v-btn id="introRegister" color="white" to="/patient/register" outline round>ثبت نام رایگان</v-btn>
+      <resaaButton id="introRegister" to="/patient/register">ثبت نام رایگان</resaaButton>
+      <!-- <v-btn id="introRegister" color="white" to="/patient/register" outline round>ثبت نام رایگان</v-btn> -->
       <v-btn id="showVideo" color="white" outline round @click="openVideo">نمایش ویدئو</v-btn>
     </div>
     <div class="intro-patient-image">
@@ -290,6 +291,7 @@
 import patientImage from "./patient.jpg";
 import Parallax from "parallax-js";
 import PatientVideo from "@/components/patient/video/video";
+import resaaButton from "~/components/resaa-button.vue";
 export default {
   data() {
     return {
@@ -298,7 +300,8 @@ export default {
       show_video: false
     };
   },
-  components: { PatientVideo },
+
+  components: { PatientVideo, resaaButton },
   mounted() {
     new Parallax(this.$refs.parallax);
     this.parallax_loaded = true;

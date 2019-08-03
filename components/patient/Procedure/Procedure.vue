@@ -240,13 +240,14 @@
     </div>
 
     <div class="procedure-button-container">
-      <v-btn
+      <!-- <v-btn
         id="procedureRegister"
         class="procedure-signup-button"
         to="/patient/register"
         round
         color="yellow darken-2"
-      >ثبت نام رایگان</v-btn>
+      >ثبت نام رایگان</v-btn>-->
+      <resaaButton id="procedureRegister" to="/patient/register">ثبت نام رایگان</resaaButton>
       <v-btn
         class="procedure-download-button"
         v-scroll-to="{ el: '#download', offset: -50 , duration: 1500}"
@@ -259,5 +260,10 @@
 </template>
 
 <script>
-export default {};
+import resaaButton from "~/components/resaa-button.vue";
+export default {
+  components: {
+    resaaButton
+  }
+};
 </script>

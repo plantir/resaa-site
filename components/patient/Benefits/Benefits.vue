@@ -23,13 +23,14 @@
           </li>
         </ul>
         <div class="benefits-button-container">
-          <v-btn
+          <!-- <v-btn
             to="/patient/register"
             id="benefitsRegister"
             color="yellow darken-2"
             class="benefits-signup-button"
             round
-          >ثبت نام رایگان</v-btn>
+          >ثبت نام رایگان</v-btn>-->
+          <resaaButton id="benefitsRegister" theme="dark" to="/patient/register">ثبت نام رایگان</resaaButton>
           <v-btn
             class="benefits-download-button"
             v-scroll-to="{ el: '#download', offset: -50 , duration: 1500}"
@@ -47,7 +48,12 @@
 </template>
 
 <script>
-export default {};
+import resaaButton from "~/components/resaa-button.vue";
+export default {
+  components: {
+    resaaButton
+  }
+};
 </script>
 
 <style lang="scss" scoped>

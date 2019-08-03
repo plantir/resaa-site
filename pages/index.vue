@@ -311,15 +311,6 @@ section#home {
     .subtitle {
       color: #888;
     }
-    .button-wrapper a {
-      // border-radius: 18.5px;
-      // border: 2px solid transparent;
-      // background-image: linear-gradient(#e2e2e2, #e2e2e2),
-      //   linear-gradient(20deg, #33e4ea, #00b2ed);
-      // background-origin: border-box;
-      // background-clip: content-box, border-box;
-      // color: #00aae2;
-    }
   }
   .patient {
     background-image: linear-gradient(240deg, #42f3a1, #11d0f8);
@@ -416,10 +407,10 @@ section#home {
           <p>بیماران عزیز، با سامانه رِسا از هر جایی با پزشک خود مشورت کنید</p>
         </div>
         <div class="button-wrapper">
-          <nuxt-link class="custom-btn" :to="{name:'patient-landing'}">
-            بیشتر بدانید
+          <!-- <nuxt-link class="custom-btn" :to="{name:'patient-landing'}">
             <element-svg />
-          </nuxt-link>
+          </nuxt-link>-->
+          <resaaButton :to="{name:'patient-landing'}">بیشتر بدانید</resaaButton>
           <!-- <router-link  :to="{name:'patient-landing'}">بیشتر بدانید</router-link> -->
           <!-- <router-link>شارژ حساب</router-link> -->
           <v-btn color="white" :to="{name:'charge'}" outline round>شارژ حساب</v-btn>
@@ -457,13 +448,13 @@ section#home {
 </template>
 <script>
 import phone from "~/assets/svg/phone.svg?inline";
-import elementSvg from "~/assets/svg/element.svg?inline";
+import resaaButton from "~/components/resaa-button.vue";
 export default {
   name: "home",
   layout: "landing",
   components: {
     phone,
-    elementSvg
+    resaaButton
   },
   head() {
     return {

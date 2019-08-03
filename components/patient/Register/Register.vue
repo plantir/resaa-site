@@ -133,14 +133,15 @@
       شماره کاربری و رمز عبور برای شما پیامک شود.
     </p>
     <div>
-      <v-btn
+      <!-- <v-btn
         class="register-btn"
         id="freeRegister"
         round
         outline
         color="white"
         :to="{name:'patient-register'}"
-      >ثبت نام</v-btn>
+      >ثبت نام</v-btn>-->
+      <resaaButton id="freeRegister" to="/patient/register">ثبت نام رایگان</resaaButton>
     </div>
     <span class="error-message" v-if="errorMessage">{{errorMessage}}</span>
     <span
@@ -161,10 +162,13 @@
 <script>
 import RegisterModal from "@/components/patient/register-modal/register-modal";
 import VueRecaptcha from "vue-recaptcha";
+
+import resaaButton from "~/components/resaa-button.vue";
 export default {
   components: {
     RegisterModal,
-    VueRecaptcha
+    VueRecaptcha,
+    resaaButton
   },
   data() {
     return {
