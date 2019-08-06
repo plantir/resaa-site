@@ -98,24 +98,34 @@ section#speciality {
       color: $primary-color;
       margin-bottom: 16px;
     }
-    h3,
-    h3 *,
+    h3 {
+      display: inline-flex;
+      font-weight: 400 !important;
+      color: $primary-color !important;
+      margin-bottom: 32px !important;
+      font-size: 1.675rem !important;
+      * {
+        color: $primary-color !important;
+        font-weight: 400 !important;
+        font-size: 1.675rem !important;
+      }
+    }
     .index-number {
+      margin-left: 4px;
       display: inline-flex;
       font-weight: 400 !important;
       color: $primary-color !important;
       margin-bottom: 32px !important;
       font-size: 1.675rem !important;
     }
-    .index-number {
-      margin-left: 4px;
-    }
-    p {
-      color: #fff;
-      text-align: justify;
-      line-height: 2rem;
-      font-weight: 300;
-      font-size: 1.175rem;
+    .description {
+      * {
+        color: #a3a3a3 !important;
+        text-align: justify !important;
+        line-height: 2rem !important;
+        font-weight: 300 !important;
+        font-size: 1.275rem !important;
+      }
     }
   }
   .doctor-count {
@@ -189,6 +199,11 @@ section#speciality {
             .name {
               color: $primary-color;
               font-size: 1.325rem;
+              width: 130px;
+              white-space: nowrap;
+              display: inline-block;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
             .speciality {
               font-size: 0.875rem;
@@ -587,7 +602,7 @@ section#speciality {
           <v-flex md6 pa-4 v-for="(item,index) in speciality.introductoryRemarks" :key="index">
             <span class="index-number">{{index+1 | persianDigit}}.</span>
             <h3 v-html="item.title"></h3>
-            <div v-html="item.description"></div>
+            <div class="description" v-html="item.description"></div>
           </v-flex>
         </v-layout>
       </section>
