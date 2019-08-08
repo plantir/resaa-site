@@ -470,14 +470,14 @@ export default {
     } else if (locations.length == 1) {
       center = locations[0];
     }
-    let title = `دکتر ${data.result.doctor.firstName} ${data.result.doctor.lastName} - شماره تلفن مستقیم - رسا`;
+    let title = `دکتر ${data.result.doctor.firstName} ${data.result.doctor.lastName} | تماس مستفیم با پزشک در سامانه رسا`;
     let og = {
       image:
         "https://webapi.resaa.net/" + data.result.doctor.imagePath ||
         "/img/doc-placeholder.png",
       site_name: `رسا : دکتر ${data.result.doctor.firstName} ${data.result.doctor.lastName}`,
       title: `تخصص : ${data.result.doctor.specialty.title}`,
-      description: `کد رسا : ${params.id}`,
+      description: `با استفاده از سامانه رسا می توانید در کوتاه ترین زمان ممکن، مستقیما با دکتر ${data.result.doctor.firstName}  ${data.result.doctor.lastName} متخصص ${data.result.doctor.specialty.title} تماس تلفنی برقرار کنید و به پاسخ سوالات خود برسید.`,
       canonical: `${process.env.SITE_URL}/doctors/${doctor.subscriberNumber}`
     };
     return {
