@@ -534,7 +534,7 @@ export default {
     get_profile() {
       this.ajaxLoading = true;
       this.$axios
-        .get(`/api/Accounts/${this.user_id}/Profile`, {
+        .get(`/Accounts/${this.user_id}/Profile`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }
@@ -548,7 +548,7 @@ export default {
     },
     get_callhistory() {
       this.$axios
-        .get(`/api/Accounts/${this.user_id}/Calls`, {
+        .get(`/Accounts/${this.user_id}/Calls`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }
@@ -563,7 +563,7 @@ export default {
     save() {
       this.saving = true;
       this.$axios
-        .put(`/api/Accounts/${this.user_id}/Profile`, this.editProfile, {
+        .put(`/Accounts/${this.user_id}/Profile`, this.editProfile, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }
@@ -601,7 +601,7 @@ export default {
       let data = new FormData();
       data.append("image", file);
       this.$axios
-        .put(`/api/Accounts/${this.user_id}/Profile/Image`, data, {
+        .put(`/Accounts/${this.user_id}/Profile/Image`, data, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`,
             "Content-Type": "multipart/form-data"
@@ -614,7 +614,7 @@ export default {
     },
     removeImage() {
       this.$axios
-        .delete(`/api/Accounts/${this.user_id}/Profile/Image`, {
+        .delete(`/Accounts/${this.user_id}/Profile/Image`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }

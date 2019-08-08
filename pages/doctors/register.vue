@@ -173,7 +173,7 @@ export default {
     },
     finish_register() {
       this.$axios
-        .post("/api/Doctors/Registration", this.doctor)
+        .post("/Doctors/Registration", this.doctor)
         .then(Response => {
           if (Response.body.status == "OK") {
             this.currentStep = this.currentStep + 1;

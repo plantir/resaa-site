@@ -443,7 +443,7 @@ export default {
     },
     getDoctors() {
       this.ajaxLoading = true;
-      let url = `/api/Doctors?fields=${this.fields}&limit=${this.limit}&offset=${this.offset}`;
+      let url = `/Doctors?fields=${this.fields}&limit=${this.limit}&offset=${this.offset}`;
       if (this.filter) {
         url += `&query=${this.filter}`;
       }

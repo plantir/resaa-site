@@ -212,7 +212,7 @@ export default {
   mounted() {
     this.$axios
       .$get(
-        `/api/Doctors/${
+        `/Doctors/${
           this.$route.params.id
         }?fields=timetable&clientTimeZoneOffset=${new Date().getTimezoneOffset()}`
       )

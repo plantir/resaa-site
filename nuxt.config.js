@@ -21,6 +21,7 @@ export default {
   },
   axios: {
     proxy: true, // Can be also an object with default options
+    prefix: '/api',
     port: process.env.PORT
   },
   proxy: {

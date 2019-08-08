@@ -510,10 +510,10 @@ export default {
   },
   created() {
     this.getDoctors();
-    this.$axios.get(`/api/Doctors/MedicalSpecialties`).then(response => {
+    this.$axios.get(`/Doctors/MedicalSpecialties`).then(response => {
       this.medicalSpecialties = response.data.result.medicalSpecialties;
     });
-    this.$axios.get(`/api/Geo/Provinces`).then(response => {
+    this.$axios.get(`/Geo/Provinces`).then(response => {
       this.provinces = response.data.result.provinces;
     });
   },
@@ -531,7 +531,7 @@ export default {
     getCities() {
       this.filter.cityId = null;
       this.$axios
-        .get(`/api/Geo/Provinces/${this.filter.provinceId}/Cities`)
+        .get(`/Geo/Provinces/${this.filter.provinceId}/Cities`)
         .then(response => {
           this.cities = response.data.result.cities;
         });
@@ -547,7 +547,7 @@ export default {
     },
     getDoctors() {
       this.ajaxLoading = true;
-      let url = `/api/Doctors?fields=${this.fields}&limit=${this.limit}&offset=${this.offset}`;
+      let url = `/Doctors?fields=${this.fields}&limit=${this.limit}&offset=${this.offset}`;
       if (this.filter.name) {
         url += `&name=${this.filter.name}`;
       }

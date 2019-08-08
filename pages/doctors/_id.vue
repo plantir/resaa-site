@@ -513,7 +513,7 @@ export default {
     }, 100);
     if (this.user) {
       this.$axios
-        .get(`/api/Doctors/${this.$route.params.id}/CommunicationQuote`, {
+        .get(`/Doctors/${this.$route.params.id}/CommunicationQuote`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }

@@ -249,13 +249,13 @@ export default {
   }),
 
   created() {
-    this.$axios.get(`/api/Geo/Provinces`).then(response => {
+    this.$axios.get(`/Geo/Provinces`).then(response => {
       this.provinces = response.data.result.provinces;
     });
     if (this.doctor.contactInformation.provinceId) {
       this.$axios
         .get(
-          `/api/Geo/Provinces/${
+          `/Geo/Provinces/${
             this.doctor.contactInformation.provinceId
           }/Cities`
         )
@@ -269,7 +269,7 @@ export default {
       this.doctor.contactInformation.cityId = null;
       this.$axios
         .get(
-          `/api/Geo/Provinces/${
+          `/Geo/Provinces/${
             this.doctor.contactInformation.provinceId
           }/Cities`
         )

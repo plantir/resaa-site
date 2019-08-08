@@ -181,7 +181,7 @@ export default {
   beforeCreate() {
     // if (this.$route.query.request_id) {
     //   this.$axios
-    //     .get(`/api//Charge/${this.$route.query.request_id}/Receipt`)
+    //     .get(`//Charge/${this.$route.query.request_id}/Receipt`)
     //     .then(response => {
     //       if (response.data.status === "OK") {
     //         this.chargeStep = "success";
@@ -196,7 +196,7 @@ export default {
     // if (this.$route.query.chargeRequestId) {
     //   this.ajaxLoading = true;
     //   this.$axios
-    //     .get(`/api/Charge/${this.$route.query.chargeRequestId}/Receipt`)
+    //     .get(`/Charge/${this.$route.query.chargeRequestId}/Receipt`)
     //     .then(res => {
     //       if (res.data.result.chargeReceipt.status === "Successful") {
     //         this.chargeStep = "success";
@@ -208,7 +208,7 @@ export default {
     // }
   },
   created() {
-    this.$axios.get("/api/Charge/Denominations").then(response => {
+    this.$axios.get("/Charge/Denominations").then(response => {
       this.chargeMenuItems = response.data.result.denominations.sort(
         (a, b) => a.amount - b.amount
       );
@@ -232,7 +232,7 @@ export default {
     if (this.$route.query.chargeRequestId) {
       this.ajaxLoading = true;
       this.$axios
-        .get(`/api/Charge/${this.$route.query.chargeRequestId}/Receipt`)
+        .get(`/Charge/${this.$route.query.chargeRequestId}/Receipt`)
         .then(res => {
           if (res.data.result.chargeReceipt.status === "Successful") {
             this.chargeStep = "success";
@@ -306,7 +306,7 @@ export default {
         data.subscriberNumber = subscriberNumber[0];
       }
       this.$axios
-        .post("/api/Charge", data)
+        .post("/Charge", data)
         .then(response => {
           this.pre_factor = response.data.result.electronicPaymentVoucher;
           this.chargeStep = "receipt";

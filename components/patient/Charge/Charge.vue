@@ -246,7 +246,7 @@ export default {
     };
   },
   mounted() {
-    this.$axios.get("/api/Charge/Denominations").then(response => {
+    this.$axios.get("/Charge/Denominations").then(response => {
       this.chargeMenuItems = response.data.result.denominations.sort(
         (a, b) => a.amount - b.amount
       );

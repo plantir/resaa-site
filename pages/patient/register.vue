@@ -119,7 +119,7 @@ export default {
     },
     register() {
       this.$axios
-        .post("/api/Patients/Registration", this.user)
+        .post("/Patients/Registration", this.user)
         .then(response => {
           this.$store.commit(
             "patient/register_token",
@@ -142,7 +142,7 @@ export default {
     },
     verifySMSCode() {
       this.$axios
-        .patch(`/api/Patients/Registration/${this.registrationToken}`, {
+        .patch(`/Patients/Registration/${this.registrationToken}`, {
           activationKey: this.activationKey
         })
         .then(response => {
@@ -157,7 +157,7 @@ export default {
     resendSMSCode: function() {
       this.$axios
         .post(
-          `/api/Patients/Registration/${this.registrationToken}/ResendActivationKey`
+          `/Patients/Registration/${this.registrationToken}/ResendActivationKey`
         )
         .then(response => {
           if (response.data.status === "OK") {

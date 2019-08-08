@@ -443,7 +443,7 @@ export default {
       }
       this.booking_loading = true;
       this.$axios
-        .get(`/api/Accounts/${this.user_id}/Profile`, {
+        .get(`/Accounts/${this.user_id}/Profile`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }
@@ -451,7 +451,7 @@ export default {
         .then(res => {
           this.$axios
             .post(
-              `/api/Doctors/${this.doctor.subscriberNumber}/CommunicationBooking?patientPhoneNumber=${res.data.result.profile.phoneNumber}`
+              `/Doctors/${this.doctor.subscriberNumber}/CommunicationBooking?patientPhoneNumber=${res.data.result.profile.phoneNumber}`
             )
             .then(res => {
               alert("رزرو پزشک با موفقیت انجام شد");

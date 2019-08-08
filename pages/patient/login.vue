@@ -258,7 +258,7 @@ export default {
       this.ajaxLoading = true;
       let data = `username=${this.user.username}&password=${this.user.password}&grant_type=${this.user.grant_type}`;
       this.$axios
-        .post("/api/oauth2/token", data, {
+        .post("/oauth2/token", data, {
           headers: {
             "Content-type": "application/x-www-form-urlencoded"
           }
@@ -272,7 +272,7 @@ export default {
             ];
 
           this.$axios
-            .get(`/api/Accounts/${id}/Profile`, {
+            .get(`/Accounts/${id}/Profile`, {
               headers: {
                 Authorization: `Bearer ${res.data.access_token}`
               }
