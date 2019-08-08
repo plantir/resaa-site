@@ -12,6 +12,7 @@
     <patient-doctors />
     <patient-register />
     <patient-charge />
+    <blog />
     <patient-telegram />
     <patient-download />
   </section>
@@ -24,6 +25,7 @@ import PatientProcedure from "~/components/patient/Procedure/Procedure";
 import PatientDoctors from "~/components/patient/Doctors/Doctors";
 import PatientBenefits from "~/components/patient/Benefits/Benefits";
 import PatientCharge from "~/components/patient/Charge/Charge";
+import Blog from "~/components/patient/blog";
 import PatientTelegram from "~/components/patient/Telegram/Telegram";
 import PatientDownload from "~/components/patient/Download/Download";
 
@@ -53,6 +55,7 @@ export default {
     PatientDoctors,
     PatientRegister,
     PatientCharge,
+    Blog,
     PatientTelegram,
     PatientDownload
   },

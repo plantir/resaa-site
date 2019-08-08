@@ -449,11 +449,15 @@ export default {
     };
   },
   components: { callSection, phone },
-  async asyncData({ store, params, $axios }) {
+  async asyncData({ store, params, $axios, isClient }) {
+    if (isClient) {
+      return window.location.reload;
+    }
     let fields =
       "id,firstName,lastName,imagePath,currentlyAvailable,subscriberNumber,specialty,tags,expertise,title,workplaces,medicalCouncilNumber";
-    let data = await $axios.$get(`/Doctors/${params.id}?fields=${fields}`);
-    let doctor = data.result.doctor;
+    let a = await $axios.$get(`/Doctors/${params.id}?fields=${fields}`);
+    debugger;
+    let doctor = a.result.doctor;
     let locations = [];
     for (let address of doctor.workplaces) {
       if (address.latitude && address.longitude) {
@@ -470,14 +474,14 @@ export default {
     } else if (locations.length == 1) {
       center = locations[0];
     }
-    let title = `دکتر ${data.result.doctor.firstName} ${data.result.doctor.lastName} | تماس مستفیم با پزشک در سامانه رسا`;
+    let title = `دکتر ${doctor.firstName} ${doctor.lastName} | تماس مستفیم با پزشک در سامانه رسا`;
     let og = {
       image:
-        "https://webapi.resaa.net/" + data.result.doctor.imagePath ||
+        "https://webapi.resaa.net/" + doctor.imagePath ||
         "/img/doc-placeholder.png",
-      site_name: `رسا : دکتر ${data.result.doctor.firstName} ${data.result.doctor.lastName}`,
-      title: `تخصص : ${data.result.doctor.specialty.title}`,
-      description: `با استفاده از سامانه رسا می توانید در کوتاه ترین زمان ممکن، مستقیما با دکتر ${data.result.doctor.firstName}  ${data.result.doctor.lastName} متخصص ${data.result.doctor.specialty.title} تماس تلفنی برقرار کنید و به پاسخ سوالات خود برسید.`,
+      site_name: `رسا : دکتر ${doctor.firstName} ${doctor.lastName}`,
+      title: `تخصص : ${doctor.specialty.title}`,
+      description: `با استفاده از سامانه رسا می توانید در کوتاه ترین زمان ممکن، مستقیما با دکتر ${doctor.firstName}  ${doctor.lastName} متخصص ${doctor.specialty.title} تماس تلفنی برقرار کنید و به پاسخ سوالات خود برسید.`,
       canonical: `${process.env.SITE_URL}/doctors/${doctor.subscriberNumber}`
     };
     return {

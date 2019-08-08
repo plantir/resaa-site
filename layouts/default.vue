@@ -4,7 +4,7 @@
       <app-header></app-header>
     </header>
     <main>
-      <nuxt dir="rtl" />
+      <nuxt dir="rtl" keep-alive :key="$route.fullPath" />
     </main>
     <footer>
       <app-footer></app-footer>
