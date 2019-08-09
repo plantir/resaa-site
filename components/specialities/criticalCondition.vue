@@ -9,11 +9,11 @@ section#criticalCondition {
     }
     &.show-mobile {
       position: absolute;
-      top: 0;
+      top: 380px;
       z-index: 1;
       img {
         position: absolute;
-        top: 300px;
+        top: 0;
         z-index: 1;
         right: -16px;
         background: #ed1163;
@@ -25,7 +25,7 @@ section#criticalCondition {
         height: 73px;
         content: "";
         position: absolute;
-        top: 300px;
+        top: 0;
         border: 1px solid #ed1163;
         z-index: -1;
         width: 73px;
@@ -38,7 +38,7 @@ section#criticalCondition {
         height: 73px;
         content: "";
         position: absolute;
-        top: 300px;
+        top: 0;
         border: 1px solid #ed1163;
         z-index: -1;
         width: 73px;
@@ -53,7 +53,7 @@ section#criticalCondition {
       height: 73px;
       content: "";
       position: absolute;
-      top: 300px;
+      top: 0;
       border: 1px solid #ed1163;
       z-index: -1;
       width: 73px;
@@ -266,14 +266,14 @@ section#criticalCondition {
   from {
     width: 73px;
     height: 73px;
-    top: 300px;
+    top: 0;
     right: -16px;
     opacity: 1;
   }
   to {
     width: 203px;
     height: 203px;
-    top: 235px;
+    top: -65px;
     right: -81px;
     opacity: 0;
   }
