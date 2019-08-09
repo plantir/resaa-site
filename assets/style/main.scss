@@ -79,3 +79,21 @@ svg {
   width: 24px;
   height: 24px;
 }
+
+.show-mobile {
+  display: none !important;
+  @include media(xs-only) {
+    display: inherit !important;
+  }
+}
+.hide-mobile {
+  display: inherit !important;
+  @include media(xs-only) {
+    display: none !important;
+  }
+}
+.svg-icon-white {
+  path {
+    fill: white;
+  }
+}
