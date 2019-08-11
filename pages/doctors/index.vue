@@ -15,7 +15,7 @@
   }
 
   .search-panel-title {
-    color: #44436c;
+    color: #777590;
     font-weight: 500;
     text-align: center;
     margin-bottom: 20px;
@@ -91,10 +91,37 @@
       margin-left: 5px;
     }
   }
-
+  .search-box {
+    border-radius: 16px 16px 0 0;
+    border: 1px solid #f2f2f2;
+    background: #f2f2f2;
+    padding: 2px;
+    position: relative;
+    background: #fff;
+    input {
+      width: 100%;
+      border-radius: 16px 16px 0 0;
+      border: none;
+      height: 40px;
+      padding: 0 40px 0 16px;
+      direction: rtl;
+    }
+    .icon {
+      position: absolute;
+      right: 0;
+      height: 40px;
+      display: flex;
+      top: 2px;
+      align-items: center;
+      width: 40px;
+      justify-content: center;
+      color: #999;
+      font-size: 1.375rem;
+    }
+  }
   .doctors-box {
     background-color: #f2f2f2;
-    border-radius: 16px 16px 0 0;
+    border-radius: 0;
     padding: 10px;
     width: 100%;
     min-height: 300px;
@@ -172,7 +199,7 @@
   }
 
   .item-doctor-name {
-    color: #44436c;
+    color: #777590;
     text-align: right;
     font-weight: 500;
     @include respond-to(sm) {
@@ -186,7 +213,8 @@
   }
 
   .item-doctor-specialty {
-    color: #777590;
+    font-size: 0.875rem;
+    font-weight: 400;
     text-align: right;
     @include respond-to(sm) {
       text-align: center;
@@ -316,7 +344,7 @@
           </div>
         </div>
         <v-layout row wrap>
-          <v-flex md4 sm12 pa-1>
+          <!-- <v-flex md4 sm12 pa-1>
             <div class="doctors-search-panel">
               <div class="search-panel-title">جستجوی پزشک</div>
               <div class="search-input">
@@ -328,10 +356,8 @@
                   label="نام پزشک"
                   solo
                 ></v-text-field>
-                <!-- <input v-model="filter.name" @keyup.enter="changeFilter" placeholder="نام پزشک"> -->
               </div>
               <div class="search-input">
-                <!-- <input v-model="filter.code" @keyup.enter="changeFilter" placeholder="کد رِسا"> -->
                 <v-text-field
                   hide-details
                   v-model="filter.code"
@@ -394,11 +420,25 @@
                 class="search-panel-button clear-filter"
               >راه اندازی مجدد</v-btn>
             </div>
-          </v-flex>
+          </v-flex>-->
+          <v-flex md2></v-flex>
           <v-flex md8 sm12 pa-1>
+            <div class="search-box">
+              <input
+                type="text"
+                v-model="filter"
+                @input="changeFilter($event)"
+                placeholder="جستجو براساس نام پزشک، کد رِسا، رشته تخصصی"
+              />
+              <span v-if="!filter" class="icon">
+                <i class="fa fa-search fa-rotate-90"></i>
+              </span>
+              <span v-else @click="clearFilter()" class="icon">
+                <i class="fa fa-times"></i>
+              </span>
+            </div>
             <div ref="doctors" class="doctors-box">
               <v-loading v-if="ajaxLoading" mode="relative"></v-loading>
-
               <div v-for="doctor in doctors" :key="doctor.id" class="doctors-item">
                 <router-link
                   :to="{name:'doctors-id',params:{id:doctor.subscriberNumber}}"
@@ -466,6 +506,7 @@
               </div>
             </div>
           </v-flex>
+          <v-flex md2></v-flex>
         </v-layout>
       </div>
     </section>
@@ -503,7 +544,7 @@ export default {
     page: 1,
 
     totalItems: 0,
-    filter: { specialtyId: null, provinceId: null, cityId: null }
+    filter: ""
   }),
   beforeCreate() {
     this.fields = "id,specialty,subscriberNumber,firstName,lastName,imagePath";
@@ -536,47 +577,68 @@ export default {
           this.cities = response.data.result.cities;
         });
     },
+
     changeFilter() {
+      clearTimeout(this.timeout);
       this.page = 1;
-      this.getDoctors();
+      this.timeout = setTimeout(this.getDoctors, 800);
     },
     clearFilter() {
-      this.filter = { specialtyId: null, provinceId: null, cityId: null };
-      this.page = 1;
-      this.getDoctors();
+      this.filter = "";
+      this.changeFilter();
     },
     getDoctors() {
       this.ajaxLoading = true;
       let url = `/Doctors?fields=${this.fields}&limit=${this.limit}&offset=${this.offset}`;
-      if (this.filter.name) {
-        url += `&name=${this.filter.name}`;
+      if (this.filter) {
+        url += `&query=${this.filter}`;
       }
-      if (this.filter.code) {
-        url += `&code=${this.filter.code}`;
-      }
-      if (this.filter.specialtyId) {
-        url += `&specialtyId=${this.filter.specialtyId}`;
-      }
-      if (this.filter.cityId) {
-        url += `&cityId=${this.filter.cityId}`;
-      }
-      this.timeout = setTimeout(() => {
-        this.$axios
-          .get(url, {
-            before(request) {
-              if (this.previousRequest) {
-                this.previousRequest.abort();
-              }
-              this.previousRequest = request;
+      this.$axios
+        .get(url, {
+          before(request) {
+            if (this.previousRequest) {
+              this.previousRequest.abort();
             }
-          })
-          .then(response => {
-            this.doctors = response.data.result.doctors;
-            this.totalItems = response.data.result.doctorsTotalCount;
-            this.ajaxLoading = false;
-            this.$scrollTo(this.$refs.doctors, 1000, { offset: -100 });
-          });
-      }, 200);
+            this.previousRequest = request;
+          }
+        })
+        .then(response => {
+          this.doctors = response.data.result.doctors;
+          this.totalItems = response.data.result.doctorsTotalCount;
+          this.ajaxLoading = false;
+          this.$scrollTo(this.$refs.doctors, 1000, { offset: -150 });
+        });
+      // this.ajaxLoading = true;
+      // let url = `/Doctors?fields=${this.fields}&limit=${this.limit}&offset=${this.offset}`;
+      // if (this.filter.name) {
+      //   url += `&name=${this.filter.name}`;
+      // }
+      // if (this.filter.code) {
+      //   url += `&code=${this.filter.code}`;
+      // }
+      // if (this.filter.specialtyId) {
+      //   url += `&specialtyId=${this.filter.specialtyId}`;
+      // }
+      // if (this.filter.cityId) {
+      //   url += `&cityId=${this.filter.cityId}`;
+      // }
+      // this.timeout = setTimeout(() => {
+      //   this.$axios
+      //     .get(url, {
+      //       before(request) {
+      //         if (this.previousRequest) {
+      //           this.previousRequest.abort();
+      //         }
+      //         this.previousRequest = request;
+      //       }
+      //     })
+      //     .then(response => {
+      //       this.doctors = response.data.result.doctors;
+      //       this.totalItems = response.data.result.doctorsTotalCount;
+      //       this.ajaxLoading = false;
+      //       this.$scrollTo(this.$refs.doctors, 1000, { offset: -100 });
+      //     });
+      // }, 200);
     }
   }
 };

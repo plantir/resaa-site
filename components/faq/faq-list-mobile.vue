@@ -97,7 +97,7 @@ section#question_awnser {
     background-size: auto;
     padding: 25px;
     color: #000;
-    @include media(xs-only){
+    @include media(xs-only) {
       padding: 0 5px;
     }
     .user {
@@ -208,7 +208,7 @@ section#question_awnser {
           border-radius: 20px;
           margin-bottom: 20px;
           display: flex;
-          @include media(xs-only){
+          @include media(xs-only) {
             padding: 15px 10px;
           }
           .name {
@@ -217,7 +217,7 @@ section#question_awnser {
               color: #63e1ae;
               font-size: 1.5rem;
               margin: 0;
-              @include media(xs-only){
+              @include media(xs-only) {
                 font-size: 1.2rem;
               }
             }
@@ -231,9 +231,8 @@ section#question_awnser {
             span {
               color: #8b8d90;
               font-size: 1rem;
-              @include media(xs-only){
-              font-size: 0.9rem;
-
+              @include media(xs-only) {
+                font-size: 0.9rem;
               }
             }
             .code {
@@ -251,7 +250,7 @@ section#question_awnser {
   <section id="question_awnser">
     <section class="faq-list-box show-mobile">
       <h2 class="section-title">
-        <img src="~assets/img/icons/faq.png" alt>
+        <img src="~assets/img/icons/faq.png" alt />
         <span>پرسش و پاسخ</span>
       </h2>
       <vue-custom-scrollbar
@@ -259,19 +258,15 @@ section#question_awnser {
         :settings="{maxScrollbarLength: 30,scrollXMarginOffset:15,suppressScrollX:true}"
       >
         <v-card
-          v-for="(question,index) in questions"
+          v-for="(item,index) in items"
           :key="index"
           class="faq-box"
-          :class="{active:question.faqShowDescripton}"
+          :class="{active:item == active_item}"
         >
-          <v-card-actions @click="FaqBoxShow(index)">
+          <v-card-actions @click="active_item = item">
             <v-card-title primary-title>
               <div>
-                <div
-                  class="question-title"
-                  v-if="!question.faqShowDescripton"
-                >{{question.faqTitle.slice(0,50)}}{{question.faqTitle.length>50?'...':''}}</div>
-                <div class="question-title" v-else>{{question.faqTitle}}</div>
+                <div class="question-title" v-html="item.question"></div>
               </div>
             </v-card-title>
           </v-card-actions>
@@ -282,36 +277,36 @@ section#question_awnser {
       <v-icon>arrow_drop_down</v-icon>
       <v-icon>arrow_drop_down</v-icon>
     </div>
-    <div class="awnser" id="speaking">
+    <div v-if="active_item" class="awnser" id="speaking">
       <div class="user">
         <div class="user_icon">
           <v-icon outline>account_circle</v-icon>
         </div>
         <div class="user_speaking">
-          <div class="title">
-            <h3>{{cardActive.faqUserName}}</h3>
-            <span>{{cardActive.faqUserMail}}</span>
-          </div>
-          {{cardActive.faqTitle}}
+          <!-- <div class="title" v-html="active_item.question">
+            <h3>{{active_item.faqUserName}}</h3>
+            <span>{{active_item.faqUserMail}}</span>
+          </div>-->
+          <div v-html="active_item.question"></div>
         </div>
       </div>
       <div class="doctor">
         <div class="doctor_icon">
-          <img src="/img/doc-placeholder.png" alt>
+          <img src="/img/doc-placeholder.png" alt />
         </div>
         <div class="doctor_speaking">
           <div class="title">
             <div class="name">
-              <h3>{{cardActive.faqDoctorName}}</h3>
-              <span>{{cardActive.DoctorDescription}}</span>
+              <h3>{{active_item.respondent.fullName}}</h3>
+              <span>متخصص قلب و عروق</span>
             </div>
             <div class="ressa_code">
               <span>کد رسا</span>
-              <span class="code">{{cardActive.ressacode}}</span>
+              <span class="code">{{active_item.respondent.subscriberNumber}}</span>
             </div>
           </div>با سلام,
-          <br>
-          {{cardActive.faqDescription}}
+          <br />
+          <div v-html="active_item.answer"></div>
         </div>
       </div>
     </div>
@@ -321,20 +316,16 @@ section#question_awnser {
 <script>
 import questions from "@/components/faq/faq.json";
 export default {
+  props: {
+    items: {}
+  },
   data() {
     return {
       questions,
-      cardActive: questions[0]
+      active_item: this.items[0]
     };
   },
   methods: {
-    FaqBoxShow(questionNumber) {
-      this.cardActive = questions[questionNumber];
-      for (let index = 0; index < questions.length; index++) {
-        questions[index].faqShowDescripton = false;
-      }
-      questions[questionNumber].faqShowDescripton = true;
-    },
     goSpeaking() {
       this.$scrollTo("#speaking", 1000);
     }

@@ -143,11 +143,11 @@
 }
 
 .item-doctor-name {
-  color: #44436c;
+  color: #777590;
   text-align: right;
   font-weight: 500;
   a {
-    color: #44436c;
+    color: #777590;
   }
 }
 

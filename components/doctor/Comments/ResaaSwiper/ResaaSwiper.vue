@@ -41,7 +41,7 @@
   font-stretch: normal;
   letter-spacing: normal;
   text-align: center;
-  color: #44436c;
+  color: #777590;
   margin-bottom: 30px;
   height: 100px;
   text-align: justify;

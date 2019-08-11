@@ -29,7 +29,7 @@
   text-align: center;
   direction: rtl;
   font-size: 1.225rem;
-  color: #44436c;
+  color: #777590;
 }
 
 .charge-cards-container {
@@ -57,7 +57,7 @@
   &:active,
   &:focus {
     text-decoration: none;
-    color: #44436c;
+    color: #777590;
   }
 }
 
@@ -107,7 +107,7 @@
 
 .charge-card-description {
   font-size: 1rem;
-  color: #44436c;
+  color: #777590;
 }
 
 .charge-card-price-and-buy {
@@ -159,7 +159,7 @@
 .section-description-3 {
   text-align: center;
   direction: rtl;
-  color: #44436c;
+  color: #777590;
   line-height: 30px;
 }
 

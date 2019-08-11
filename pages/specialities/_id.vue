@@ -61,7 +61,8 @@ section#speciality {
       position: absolute;
       top: 0;
       left: 0;
-      max-width: 400px;
+      width: 550px;
+      max-width: 100%;
     }
     .text-cardio {
       position: absolute;
@@ -102,13 +103,13 @@ section#speciality {
     h3 {
       font-weight: 400;
       color: $primary-color;
-      font-size: 1.675rem;
+      font-size: 2.175rem;
     }
     h4 {
       font-weight: 400;
-      font-size: 1.2rem;
+      font-size: 1.375rem;
       font-family: bebas;
-      color: #a3a3a3;
+      color: #777;
       margin: 8px 0 36px;
       @include media(sm) {
         margin-bottom: 0;
@@ -195,15 +196,6 @@ section#speciality {
       }
     }
     h3 {
-      font-weight: 400;
-      color: #37d4dd;
-      margin-bottom: 32px;
-      font-size: 1.775rem;
-      @include media(sm) {
-        font-size: 1.375rem;
-      }
-    }
-    h3 {
       display: inline-flex;
       font-weight: 400 !important;
       color: $primary-color !important;
@@ -231,6 +223,15 @@ section#speciality {
       font-size: 1.275rem;
       @include media(sm) {
         font-size: 0.975rem;
+      }
+    }
+    h3 {
+      font-weight: 400;
+      color: #37d4dd;
+      margin-bottom: 32px;
+      font-size: 1.775rem !important;
+      @include media(sm) {
+        font-size: 1.275rem !important;
       }
     }
   }
@@ -276,10 +277,16 @@ section#speciality {
     margin-bottom: 60px;
     margin-top: 8px;
     max-width: 80%;
+    @include media(sm) {
+      max-width: 100%;
+    }
     > div {
       span {
         font-weight: 300;
         font-size: 1.2rem;
+        @include media(sm) {
+          font-size: 1rem;
+        }
       }
       span:nth-child(2) {
         color: $green-color;
@@ -323,7 +330,7 @@ section#speciality {
     .items {
       margin: 0 42px 0 16px;
       @include media(xs-only) {
-        margin: 0 26px 0 6px;
+        margin: 0 6px 0 6px;
       }
       .item {
         display: flex;
@@ -369,6 +376,9 @@ section#speciality {
             display: flex;
             flex-direction: column;
             flex: 0 0 180px;
+            @include media(xs-only) {
+              flex: inherit;
+            }
             .name {
               color: $primary-color;
               font-size: 1.075rem;
@@ -750,9 +760,26 @@ section#speciality {
       background-color: $green-color;
     }
   }
-}
-.swiper-paginationText {
-  text-align: center;
+  .section-title {
+    svg {
+      width: 48px;
+      height: 48px;
+    }
+  }
+  .swiper-paginationText {
+    text-align: center;
+  }
+  .swiper-pagination-bullet {
+    opacity: 1;
+    border: 1px solid $primary-color;
+    width: 12px;
+    height: 12px;
+    &.swiper-pagination-bullet-active {
+      opacity: 1;
+      background: $primary-color;
+      border: none;
+    }
+  }
 }
 </style>
 <template>
@@ -869,7 +896,8 @@ section#speciality {
       <section class="physician-section">
         <h2 class="section-title">
           <!-- <img src="~assets/img/icons/physician.png" alt> -->
-          <physicianIcon class="svg-icon-blue" width="53px" />
+          <physicianIcon class="primary--text" width="53px" />
+
           <span>پزشکان مرتبط</span>
         </h2>
         <v-layout row wrap>
@@ -884,17 +912,31 @@ section#speciality {
                 <span>{{available_doctors.length | persianDigit}}</span>
               </div>
             </div>
-            <div v-swiper:mySwiper="swiperOptionDoctorsmobile" dir="rtl" class="hide-desktop">
+            <div
+              v-if="available_doctors.length"
+              v-swiper:mySwiper="swiperOptionDoctorsmobile"
+              dir="rtl"
+              class="hide-desktop"
+            >
               <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="(comment, index) in 10" :key="index">
+                <div class="swiper-slide" v-for="(doctor, index) in available_doctors" :key="index">
                   <div class="image">
-                    <img src="/img/doc-placeholder.png" alt />
+                    <img
+                      v-if="doctor.imagePath"
+                      :src="'https://webapi.resaa.net/'+doctor.imagePath"
+                      :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+                    />
+                    <img
+                      v-else
+                      src="/img/doc-placeholder.png"
+                      :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+                    />
                   </div>
-                  <div class="name">دکتر مهران رضوی</div>
-                  <div class="speciality">متخصص قلب و عروق</div>
+                  <div class="name">{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</div>
+                  <div class="speciality">متخصص {{doctor.specialty.title}}</div>
                   <div class="code">
                     <span>کد رسا:</span>
-                    <span>{{7002 + index | persianDigit}}</span>
+                    <span>{{doctor.subscriberNumber | persianDigit}}</span>
                   </div>
                 </div>
               </div>
@@ -1104,7 +1146,10 @@ section#speciality {
         </v-layout>
       </section>
       <div class="show-mobile">
-        <faq-mobile></faq-mobile>
+        <faq-mobile
+          v-if="speciality.frequentlyAskedQuestions"
+          :items="speciality.frequentlyAskedQuestions"
+        ></faq-mobile>
       </div>
     </v-container>
   </section>
@@ -1151,6 +1196,7 @@ export default {
       active_item: null,
       dark: true,
       swiperOptionText: {
+        autoHeight: true,
         slidesPerView: 1,
         spaceBetween: 30,
         slidesPerGroup: 1,

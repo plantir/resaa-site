@@ -423,7 +423,7 @@ export default {
   text-align: right;
   margin: 0 auto;
   padding: 12px 10px;
-  color: #44436c;
+  color: #777590;
   cursor: pointer;
 
   i:nth-child(1) {
@@ -433,7 +433,7 @@ export default {
 
   i:nth-child(2) {
     float: left;
-    color: #44436c;
+    color: #777590;
     margin-left: 5px;
   }
 }
@@ -459,7 +459,7 @@ export default {
   text-align: right;
   margin: 0 auto 15px;
   padding: 10px 0;
-  color: #44436c;
+  color: #777590;
   border-radius: 20px;
   box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.3);
   background-color: #ffffff;
@@ -528,7 +528,7 @@ export default {
   margin: 0 auto;
   text-align: center;
   font-size: 1rem;
-  color: #44436c;
+  color: #777590;
 }
 
 /*---------------STATE 2: RECEIPT---------------*/

@@ -104,9 +104,9 @@ export default {
   css: [
     'material-design-icons-iconfont/dist/material-design-icons.css',
     // '~/assets/style/app.styl',
-    '~/assets/style/main.scss',
     '~/assets/style/vuetify_rtl.scss',
-    'swiper/dist/css/swiper.css'
+    'swiper/dist/css/swiper.css',
+    '~/assets/style/main.scss'
   ],
 
   /*

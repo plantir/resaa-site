@@ -97,3 +97,12 @@ svg {
     fill: white;
   }
 }
+.primary--text {
+  path {
+    fill: var(--v-primary-base) !important;
+  }
+}
+.theme--light.v-btn {
+  color: #545456;
+  font-weight: 400;
+}

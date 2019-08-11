@@ -101,7 +101,7 @@ export default {
 }
 
 .day-name {
-  color: #44436c;
+  color: #777590;
 }
 
 .day-date {
