@@ -444,6 +444,11 @@ export default {
           hid: "canonical",
           property: "canonical",
           content: this.og.canonical
+        },
+        {
+          hid: "description",
+          property: "description",
+          content: this.description
         }
       ]
     };
@@ -475,13 +480,14 @@ export default {
       center = locations[0];
     }
     let title = `دکتر ${doctor.firstName} ${doctor.lastName} | تماس مستفیم با پزشک در سامانه رسا`;
+    let description = `با استفاده از سامانه رسا می توانید در کوتاه ترین زمان ممکن، مستقیما با دکتر ${doctor.firstName}  ${doctor.lastName} متخصص ${doctor.specialty.title} تماس تلفنی برقرار کنید و به پاسخ سوالات خود برسید.`;
     let og = {
       image:
         "https://webapi.resaa.net/" + doctor.imagePath ||
         "/img/doc-placeholder.png",
       site_name: `رسا : دکتر ${doctor.firstName} ${doctor.lastName}`,
       title: `تخصص : ${doctor.specialty.title}`,
-      description: `با استفاده از سامانه رسا می توانید در کوتاه ترین زمان ممکن، مستقیما با دکتر ${doctor.firstName}  ${doctor.lastName} متخصص ${doctor.specialty.title} تماس تلفنی برقرار کنید و به پاسخ سوالات خود برسید.`,
+      description: `کد رسا : ${doctor.subscriberNumber}`,
       canonical: `${process.env.SITE_URL}/doctors/${doctor.subscriberNumber}`
     };
     return {
@@ -490,6 +496,7 @@ export default {
       duration: null,
       hideMap: hideMap,
       title: title,
+      description: description,
       center: { lat: 10, lng: 10 },
       locations: locations,
       og: og
