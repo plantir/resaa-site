@@ -137,7 +137,7 @@ section#question_awnser {
         &::before {
           content: "";
           position: absolute;
-          right: -20px;
+          right: -19px;
           top: 20px;
           display: block;
           border: 10px solid #000;
@@ -198,7 +198,7 @@ section#question_awnser {
         &::before {
           content: "";
           position: absolute;
-          left: -20px;
+          left: -19px;
           top: 20px;
           display: block;
           border: 10px solid #000;
@@ -207,18 +207,20 @@ section#question_awnser {
         .title {
           background: #fff;
           padding: 15px 20px;
-          border-radius: 20px;
+          border-radius: 14px;
           margin-bottom: 20px;
           display: flex;
           @include media(xs-only) {
             padding: 15px 10px;
           }
           .name {
-            width: 80%;
+            width: 75%;
+            display: flex;
+            flex-direction: column;
             h3 {
               color: #63e1ae;
               font-size: 1.5rem;
-              margin: 0;
+              margin: 0 !important;
               @include media(xs-only) {
                 font-size: 1.2rem;
               }
@@ -226,19 +228,26 @@ section#question_awnser {
             span {
               color: #8b8d90;
               font-size: 1rem;
+              margin-top: 10px;
             }
           }
           .ressa_code {
-            width: 20%;
+            width: 25%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
             span {
               color: #8b8d90;
               font-size: 1rem;
+              margin-top: 6px;
               @include media(xs-only) {
                 font-size: 0.9rem;
               }
             }
             .code {
               color: #63e1ae;
+              margin-top: 12px;
             }
           }
         }
