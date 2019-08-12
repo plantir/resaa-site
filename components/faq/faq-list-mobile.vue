@@ -8,8 +8,10 @@ section.faq-list-box {
     color: #fff;
     border: none;
     margin: 10px;
+    height: 50px;
+    overflow: hidden;
     > div {
-      padding: 20px 8px;
+      padding: 0 20px;
     }
     &.active > div {
       background-color: #ed1163;

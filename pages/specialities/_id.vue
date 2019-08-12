@@ -375,13 +375,16 @@ section#speciality {
           .detail {
             display: flex;
             flex-direction: column;
-            flex: 0 0 180px;
-            @include media(xs-only) {
-              flex: inherit;
-            }
+            flex: 1;
             .name {
               color: $primary-color;
               font-size: 1.075rem;
+              @include media(xs-only) {
+                max-width: 180px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
             }
             .speciality {
               font-size: 0.9rem;
@@ -1000,9 +1003,9 @@ section#speciality {
               </no-ssr>
             </div>
           </v-flex>
-          <v-flex pa-4 lg6>
+          <v-flex pa-4 lg6 class="hide-mobile">
             <div class="swiper-title">دسترسی سریع به پزشکان پاسخگو</div>
-            <div v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl" class="hide-mobile">
+            <div v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
               <div class="swiper-wrapper">
                 <div
                   class="swiper-slide"

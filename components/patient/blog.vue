@@ -3,25 +3,39 @@ section {
   display: flex;
   max-width: 1370px;
   margin: 0 auto;
-  height: 500px;
+  min-height: 500px;
   align-items: center;
+  flex-wrap: wrap;
+  padding: 16px 25px;
+  @include media(sm) {
+    flex-direction: column;
+    min-height: auto;
+  }
   > div {
     flex: 0 0 50%;
+    width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    @include media(sm) {
+      width: 100%;
+      flex: 0 0 100%;
+      max-width: 400px;
+    }
   }
   .left-pane {
     img {
-      max-width: 550px;
+      width: 550px;
+      max-width: 100%;
     }
   }
   .right-pane {
     align-items: flex-start;
     .header {
       img {
-        max-width: 320px;
+        width: 320px;
+        max-width: 100%;
       }
     }
     .blog-title {

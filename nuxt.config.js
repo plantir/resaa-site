@@ -261,13 +261,14 @@ export default {
   //   })
   // },
   build: {
-    transpile: ['vuetify/lib'],
-    plugins: [new VuetifyLoaderPlugin()],
-    loaders: {
-      stylus: {
-        import: ['~assets/style/variables.styl']
-      }
-    },
+    // transpile: ['vuetify/lib'],
+    extractCSS: true,
+    // plugins: [new VuetifyLoaderPlugin()],
+    // loaders: {
+    //   stylus: {
+    //     import: ['~assets/style/variables.styl']
+    //   }
+    // },
     /*
      ** You can extend webpack config here
      */

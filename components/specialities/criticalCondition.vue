@@ -118,7 +118,7 @@ section#criticalCondition {
     left: 0;
     right: 0;
     margin: 0;
-    padding: 0;
+    padding: 0 10px;
     align-items: center;
     z-index: 9;
     @include media(xs-only) {
