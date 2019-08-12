@@ -20,7 +20,21 @@
 //   }
 // }
 .theme--dark.v-navigation-drawer {
-  background-color: #000;
+  background: linear-gradient(to bottom, $primary-color, $secondary-color);
+}
+.logo {
+  position: relative;
+  height: 80px;
+  svg {
+    width: 140px;
+    height: 140px;
+    position: absolute;
+    left: 0;
+    top: -23px;
+    path {
+      fill: #fff;
+    }
+  }
 }
 .nav-bar {
   flex-direction: column;
@@ -37,7 +51,7 @@
     justify-content: flex-start;
     margin: 0;
     padding: 0 36px;
-    box-shadow: 0 2px 9px -5px #13d1f2;
+    font-size: 1.275rem;
     a {
       color: #fff;
     }
@@ -47,6 +61,9 @@
 
 <template>
   <v-navigation-drawer v-model="showMenu" app dark right>
+    <div class="logo">
+      <resaaElement />
+    </div>
     <ul class="nav-bar">
       <li class="nav-item">
         <div v-if="user">
@@ -129,11 +146,20 @@
   </v-navigation-drawer>
 </template>
 <script>
+import resaaElement from "@/assets/svg/element.svg?inline";
 export default {
+  components: {
+    resaaElement
+  },
   data() {
     return {
       isPatient: true
     };
+  },
+  methods: {
+    closeNav() {
+      this.showMenu = false;
+    }
   },
   computed: {
     showMenu: {
