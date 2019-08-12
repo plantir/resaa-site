@@ -266,7 +266,7 @@
       display: block;
       position: absolute;
       left: calc(50% - 5px);
-      top: -6px;
+      top: -5px;
       &::before,
       &::after {
         content: "";
@@ -276,7 +276,7 @@
         background-color: #2ee5c4;
         display: block;
         position: absolute;
-        top: 2px;
+        top: 1px;
       }
       &::before {
         left: -14px;

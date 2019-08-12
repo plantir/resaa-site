@@ -107,14 +107,9 @@ section#question_awnser {
       .user_icon {
         width: 20%;
         padding-top: 5px;
-        i {
-          font-size: 4rem;
-          color: #000;
-          width: 42px;
-          margin-top: 5px;
-          height: 42px;
-          background: #fff;
-          border-radius: 50%;
+        svg {
+          width: 40px;
+          height: 40px;
         }
       }
       .user_speaking {
@@ -291,7 +286,7 @@ section#question_awnser {
     <div v-if="active_item" class="awnser" id="speaking">
       <div class="user">
         <div class="user_icon">
-          <v-icon outline>account_circle</v-icon>
+          <userIcon class="svg-icon-white" width="50px" />
         </div>
         <div class="user_speaking">
           <!-- <div class="title" v-html="active_item.question">
@@ -326,9 +321,13 @@ section#question_awnser {
 
 <script>
 import questions from "@/components/faq/faq.json";
+import userIcon from "@/assets/svg/user.svg?inline";
 export default {
   props: {
     items: {}
+  },
+  components: {
+    userIcon
   },
   data() {
     return {

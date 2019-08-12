@@ -19,18 +19,28 @@
 //     }
 //   }
 // }
+.theme--dark.v-navigation-drawer {
+  background-color: #000;
+}
 .nav-bar {
   flex-direction: column;
   justify-content: space-around;
   display: flex;
   height: max-content;
+  margin: 0;
+  padding: 0;
   li.nav-item {
     width: 100%;
     height: 60px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     margin: 0;
+    padding: 0 36px;
+    box-shadow: 0 2px 9px -5px #13d1f2;
+    a {
+      color: #fff;
+    }
   }
 }
 </style>
