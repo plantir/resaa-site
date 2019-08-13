@@ -6,10 +6,11 @@ section#home {
     position: absolute;
     right: 30px;
     top: 30px;
-    width: 80px;
+    // width: 80px;
     z-index: 9;
-    img {
-      max-width: 100%;
+    svg {
+      width: 80px;
+      height: 80px;
     }
   }
   .custom-btn {
@@ -365,7 +366,8 @@ section#home {
 <template>
   <section id="home">
     <div class="logo">
-      <img src="~static/img/logo-resaa-blue.png" alt="سامانه رسا" />
+      <!-- <img src="~static/img/logo-resaa-blue.png" alt="سامانه رسا" /> -->
+      <logo alt="سامانه رسا" />
     </div>
     <!-- <div class="nav-icon" :class="{'active':menuActive}">
       <div @click="activateMenu" class="icon-wrapper">
@@ -448,12 +450,14 @@ section#home {
 </template>
 <script>
 import phone from "~/assets/svg/phone.svg?inline";
+import logo from "~/assets/svg/logo.svg?inline";
 import resaaButton from "~/components/resaa-button.vue";
 export default {
   name: "home",
   layout: "landing",
   components: {
     phone,
+    logo,
     resaaButton
   },
   head() {
