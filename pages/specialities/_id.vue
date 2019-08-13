@@ -1004,36 +1004,38 @@ section#speciality {
             </div>
           </v-flex>
           <v-flex pa-4 lg6 class="hide-mobile">
-            <div class="swiper-title">دسترسی سریع به پزشکان پاسخگو</div>
-            <div v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
-              <div class="swiper-wrapper">
-                <div
-                  class="swiper-slide"
-                  v-for="doctor in available_doctors"
-                  :key="doctor.subscriberNumber"
-                >
-                  <div class="image">
-                    <img
-                      v-if="doctor.imagePath"
-                      :src="'https://webapi.resaa.net/'+doctor.imagePath"
-                      :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
-                    />
-                    <img
-                      v-else
-                      src="/img/doc-placeholder.png"
-                      :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
-                    />
-                  </div>
-                  <div class="name">دکتر {{doctor.firstName}} {{doctor.lastName}}</div>
-                  <div class="speciality">متخصص {{doctor.specialty.title}}</div>
-                  <div class="code">
-                    <span>کد رسا:</span>
-                    <span>{{doctor.subscriberNumber | persianDigit}}</span>
+            <div style="width:100%">
+              <div class="swiper-title">دسترسی سریع به پزشکان پاسخگو</div>
+              <div v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
+                <div class="swiper-wrapper">
+                  <div
+                    class="swiper-slide"
+                    v-for="doctor in available_doctors"
+                    :key="doctor.subscriberNumber"
+                  >
+                    <div class="image">
+                      <img
+                        v-if="doctor.imagePath"
+                        :src="'https://webapi.resaa.net/'+doctor.imagePath"
+                        :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+                      />
+                      <img
+                        v-else
+                        src="/img/doc-placeholder.png"
+                        :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+                      />
+                    </div>
+                    <div class="name">دکتر {{doctor.firstName}} {{doctor.lastName}}</div>
+                    <div class="speciality">متخصص {{doctor.specialty.title}}</div>
+                    <div class="code">
+                      <span>کد رسا:</span>
+                      <span>{{doctor.subscriberNumber | persianDigit}}</span>
+                    </div>
                   </div>
                 </div>
+                <div class="swiper-button-prev" slot="button-prev"></div>
+                <div class="swiper-button-next" slot="button-next"></div>
               </div>
-              <div class="swiper-button-prev" slot="button-prev"></div>
-              <div class="swiper-button-next" slot="button-next"></div>
             </div>
           </v-flex>
         </v-layout>
