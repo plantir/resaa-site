@@ -9,8 +9,8 @@ section#home {
     // width: 80px;
     z-index: 9;
     svg {
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 50px;
     }
   }
   .custom-btn {
