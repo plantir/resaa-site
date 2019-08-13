@@ -70,6 +70,7 @@ section#speciality {
       z-index: -1;
       line-height: 1;
       font-family: Bebas;
+      text-transform: uppercase;
       color: #202327;
       right: 90px;
       top: 220px;
@@ -791,7 +792,7 @@ section#speciality {
   <section id="speciality">
     <div class="header">
       <img class="speciality-image" :src="backgroundImage" alt />
-      <div class="text-cardio">CARDIO VASCULAR</div>
+      <div class="text-cardio">{{speciality.description}}</div>
       <v-container>
         <h3>{{speciality.title}}</h3>
         <h4>{{speciality.description}}</h4>
