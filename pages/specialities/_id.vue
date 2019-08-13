@@ -45,7 +45,7 @@ section#speciality {
     position: relative;
     display: flex;
     z-index: 1;
-    padding-top: 220px;
+    // padding-top: 220px;
     padding-right: 80px;
     @include media(md) {
       height: 450px;
@@ -72,6 +72,8 @@ section#speciality {
       font-family: Bebas;
       color: #202327;
       right: 90px;
+      top: 220px;
+      max-width: 1170px;
       @include media(md) {
         font-size: 14rem;
       }
@@ -109,7 +111,7 @@ section#speciality {
       font-weight: 400;
       font-size: 1.375rem;
       font-family: bebas;
-      color: #777;
+      color: #999;
       margin: 8px 0 36px;
       @include media(sm) {
         margin-bottom: 0;
@@ -789,10 +791,7 @@ section#speciality {
   <section id="speciality">
     <div class="header">
       <img class="speciality-image" :src="backgroundImage" alt />
-      <!-- <div class="text-cardio">
-        CARDIO
-        <br />VASCULAR
-      </div>-->
+      <div class="text-cardio">CARDIO VASCULAR</div>
       <v-container>
         <h3>{{speciality.title}}</h3>
         <h4>{{speciality.description}}</h4>
