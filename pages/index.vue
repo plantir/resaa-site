@@ -458,13 +458,14 @@ export default {
   },
   head() {
     return {
-      title: "رِسا، رسانه سلامت ایرانیان",
+      title: "سامانه رسا | بزرگترین بستر ارتباط تلفنی پزشک و بیمار",
       meta: [
         // hid is used as unique identifier. Do not use `vmid` for it as it will not work
         {
           hid: "description",
           name: "description",
-          content: "رِسا، رسانه سلامت ایرانیان"
+          content:
+            "سامانه رسا (رسانه سلامت ایرانیان) اولین و بزرگترین بستر ارتباط و مشاوره تلفنی بیمار و پزشک در ایران. با رسا می تونی در کوتاه ترین زمان ممکن با پزشک در تماس باشی."
         },
         {
           hid: "canonical",
