@@ -1,33 +1,3 @@
-<template>
-  <div class="telegram-section-patients-container">
-    <div class="content">
-      <div class="telegram-title">رِسا در شبکه های اجتماعی</div>
-      <div class="telegram-description">
-        از طریق کانال
-        <b>تلگرام</b>
-        و
-        <b>اینستاگرام</b>
-        با
-        <b>رِسا</b>
-        در ارتباط باشید
-      </div>
-      <div class="link-wrapper">
-        <a href="https://www.instagram.com/resaanet/" target="_blank" class="link">
-          <i class="fa fa-instagram"></i>
-          resaa.medical
-        </a>
-        <a href="https://t.me/pezeshkepasokhgoo " target="_blank" class="link">
-          <i class="fa fa-telegram"></i>
-          @pezeshkepasokhgoo
-        </a>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script>
-export default {};
-</script>
 
 <style lang="scss" scoped>
 .telegram-section-patients-container {
@@ -35,6 +5,7 @@ export default {};
   min-height: 200px;
   // background-color: white;
   background-image: url("social-networks.jpg");
+  background-color: whitesmoke;
   background-size: contain;
   background-position-x: left;
   background-position-y: center;
@@ -71,6 +42,19 @@ export default {};
   display: flex;
   justify-content: space-between;
   width: 320px;
+  a {
+    display: inline-flex;
+    align-items: center;
+    &:hover {
+      color: $primary-color;
+    }
+  }
+  svg {
+    margin-left: 8px;
+    path {
+      fill: $primary-color;
+    }
+  }
 }
 .link {
   cursor: pointer;
@@ -109,7 +93,7 @@ export default {};
   }
 
   .telegram-title {
-    font-size: 1.875rem !important;
+    font-size: 1.475rem !important;
   }
 
   .telegram-button {
@@ -119,12 +103,47 @@ export default {};
 
   .telegram-description {
     color: white;
-    font-size: 1.375rem;
+    font-size: 1rem;
     text-align: justify;
-    line-height: 2.375rem;
+    padding-left: 12px;
     // b {
     //   font-weight: 600;
     // }
   }
 }
 </style>
+
+<template>
+  <div class="telegram-section-patients-container">
+    <div class="content">
+      <h2 class="telegram-title">رِسا در شبکه های اجتماعی</h2>
+      <p class="telegram-description">
+        از طریق کانال
+        <b>تلگرام</b>
+        و
+        <b>اینستاگرام</b>
+        با
+        <b>رِسا</b>
+        در ارتباط باشید
+      </p>
+      <div class="link-wrapper">
+        <a href="https://www.instagram.com/resaanet/" rel="nofllow" target="_blank" class="link">
+          <instagram />
+          <span>resaa.medical</span>
+        </a>
+        <a href="https://t.me/pezeshkeresaa" rel="nofllow" target="_blank" class="link">
+          <telegram />
+          <span>pezeshkeresaa</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import telegram from "~/assets/svg/telegram.svg?inline";
+import instagram from "~/assets/svg/instagram.svg?inline";
+export default {
+  components: { telegram, instagram }
+};
+</script>

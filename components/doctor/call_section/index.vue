@@ -68,6 +68,10 @@ section#phoneDialog {
     img {
       width: 100%;
     }
+    svg,
+    path {
+      fill: #fff;
+    }
   }
   .add_charge {
     margin-top: 16px;
@@ -166,7 +170,7 @@ section#phoneDialog {
           }
         }
       }
-      .info {
+      .info-text {
         flex: 1;
       }
       .hint {
@@ -284,7 +288,8 @@ section#phoneDialog {
       >
         <template v-slot:activator="{ on }">
           <div class="doctor-phone" v-on="on">
-            <img src="~assets/img/doctorPhone.svg" alt />
+            <phone />
+            <!-- <img src="~assets/img/doctorPhone.svg" alt /> -->
           </div>
         </template>
 
@@ -309,7 +314,7 @@ section#phoneDialog {
             </div>
             <div class="content-wrapper">
               <div>مراحل برقراری ارتباط با پزشک مورد نظر:</div>
-              <div class="info">
+              <div class="info-text">
                 <template v-if="user">
                   <ul v-if="$device.isMobile">
                     <li>
@@ -390,9 +395,6 @@ section#phoneDialog {
                   <!-- <v-icon>fa-phone</v-icon> -->
                   <span class="link-call">رزرو تماس</span>
                 </v-btn>
-                <!-- <v-btn :to="{name:'charge'}" color="#28db9a" dark outline round small>
-                  <span class="link-call">شارژ حساب</span>
-                </v-btn>-->
               </div>
             </div>
           </div>
@@ -402,7 +404,11 @@ section#phoneDialog {
   </section>
 </template>
 <script>
+import phone from "~/assets/svg/phone.svg?inline";
 export default {
+  components: {
+    phone
+  },
   data() {
     return {
       booking_loading: false,
@@ -413,17 +419,23 @@ export default {
   },
   props: ["doctor", "duration"],
   created() {
-    window.addEventListener("resize", this.handleResize);
-    this.handleResize();
+    if (process.client) {
+      window.addEventListener("resize", this.handleResize);
+      this.handleResize();
+    }
   },
   destroyed() {
-    window.removeEventListener("resize", this.handleResize);
+    if (process.client) {
+      window.removeEventListener("resize", this.handleResize);
+    }
   },
   methods: {
     handleResize() {
-      let width = window.innerWidth;
-      this.top = width > 959 ? 40 : 70;
-      this.left = width > 959 ? 0 : 120;
+      if (process.client) {
+        let width = window.innerWidth;
+        this.top = width > 959 ? 40 : 70;
+        this.left = width > 959 ? 0 : 120;
+      }
     },
     reserve_doctor() {
       if (!this.user) {
@@ -431,7 +443,7 @@ export default {
       }
       this.booking_loading = true;
       this.$axios
-        .get(`/api/Accounts/${this.user_id}/Profile`, {
+        .get(`/Accounts/${this.user_id}/Profile`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }
@@ -439,7 +451,7 @@ export default {
         .then(res => {
           this.$axios
             .post(
-              `/api/Doctors/${this.doctor.subscriberNumber}/CommunicationBooking?patientPhoneNumber=${res.data.result.profile.phoneNumber}`
+              `/Doctors/${this.doctor.subscriberNumber}/CommunicationBooking?patientPhoneNumber=${res.data.result.profile.phoneNumber}`
             )
             .then(res => {
               alert("رزرو پزشک با موفقیت انجام شد");

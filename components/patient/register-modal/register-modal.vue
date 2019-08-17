@@ -40,7 +40,7 @@
 }
 
 .register-message-text {
-  color: #44436c;
+  color: #777590;
   line-height: 25px;
 }
 
@@ -113,7 +113,7 @@
 }
 
 .register-captcha-message {
-  color: #44436c;
+  color: #777590;
 }
 
 .g-recaptcha {
@@ -146,7 +146,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  color: #44436c;
+  color: #777590;
 
   i {
     color: $tealish;
@@ -187,7 +187,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  color: #44436c;
+  color: #777590;
 
   i {
     color: #d0225e;

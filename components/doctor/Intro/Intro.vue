@@ -11,12 +11,16 @@
   }
 }
 .landing-section-doctors-intro {
-  padding-top: 140px;
+  padding-top: 70px;
   overflow: hidden;
   position: relative;
   width: 100%;
   min-height: 746px;
   background: linear-gradient(57deg, #33e4ea, #00b2ed);
+  @include media(sm) {
+    padding-top: 40px;
+    min-height: auto;
+  }
   .parallax {
     position: absolute;
     bottom: 20px;
@@ -57,22 +61,11 @@
   justify-content: center;
   display: flex;
   flex-direction: row-reverse;
-
-  .button {
-    cursor: pointer;
-    width: 174px;
-    height: 37.5px;
-    border-radius: 18.5px;
-    text-align: center;
-    line-height: 37.5px;
-    color: white;
-    margin: 10px;
+  .v-btn {
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
-    border: solid 2px white;
-    z-index: 99;
-  }
-  a {
-    color: #fff;
+    border-width: 2px;
+    width: 174px;
+    max-width: 45%;
   }
 }
 
@@ -81,6 +74,9 @@
   color: white;
   font-weight: 500;
   font-size: 2.375rem;
+  @include media(sm) {
+    font-size: 1.875rem;
+  }
 }
 
 .intro-description {
@@ -116,6 +112,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.3s ease-in-out;
+    &:before {
+      transition: all 0.3s ease-in-out;
+    }
+    &:hover {
+      background-color: darken($light-gold, 5);
+      &:before {
+        padding-top: 8px;
+      }
+    }
   }
 }
 
@@ -144,7 +150,9 @@
     top: 0;
     bottom: 0;
     margin: auto;
-
+    svg {
+      height: 80px;
+    }
     &.left {
       flex-direction: row-reverse;
       right: calc(100% - 50px);
@@ -231,11 +239,17 @@
     <div class="intro-title">معرفی خدمات به پزشکان رِسا</div>
     <div class="intro-description">پزشکان گرامی، براحتی تماس های دریافتی خود را مدیریت کنید.</div>
     <div class="intro-buttons">
-      <router-link class="button" :to="{name:'doctors-register'}">ثبت نام رایگان</router-link>
-      <a @click="openVideo" class="button">نمایش ویدئو</a>
+      <v-btn
+        id="introRegister"
+        color="white"
+        :to="{name:'doctors-register'}"
+        outline
+        round
+      >ثبت نام رایگان</v-btn>
+      <v-btn id="showVideo" color="white" outline round @click="openVideo">نمایش ویدئو</v-btn>
     </div>
     <div class="intro-doctor-image">
-      <img src="./doc.png">
+      <img src="./doc.png" />
       <div class="side-button left">
         <div class="side-button-text">
           <router-link tag="div" :to="{name:'doctors-register'}">
@@ -244,7 +258,7 @@
           </router-link>
         </div>
         <div class="side-button-icon">
-          <img src="./mobile.svg">
+          <img src="./mobile.svg" />
           <!-- <router-link tag="div" :to="{name:'doctors-register'}">
           </router-link>-->
         </div>
@@ -255,7 +269,7 @@
           <div class="side-button-title">تماس با ۷۴۴۷۱۱۱۱ ۰۲۱</div>
         </div>
         <div class="side-button-icon">
-          <img src="./phone.svg">
+          <img src="./phone.svg" />
         </div>
       </div>
     </div>
@@ -263,7 +277,7 @@
       <i class="fa fa-angle-down"></i>
     </div>
     <div class="bottom-curve">
-      <img class="benefits-section-doctor-curve" src="./sec-2-bg@2x2.png">
+      <img class="benefits-section-doctor-curve" src="./sec-2-bg@2x2.png" />
     </div>
     <div class="parallax">
       <div ref="parallax">

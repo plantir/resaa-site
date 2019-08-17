@@ -73,8 +73,10 @@
 .item-description-link {
   cursor: pointer;
   color: white;
-  text-decoration: underline;
+  border-bottom: 1px dashed;
+  padding-bottom: 3px;
   font-weight: 500;
+  margin: 0 4px;
 }
 
 .procedure-item {
@@ -93,45 +95,13 @@
 }
 
 .procedure-signup-button {
-  display: block;
-  cursor: pointer;
   width: 174px;
-  height: 37.5px;
-  border-radius: 18.5px;
-  text-align: center;
-  line-height: 33px;
-  margin: 10px;
-  border: solid 2px #ffffff;
-  color: #ffffff;
-
-  &:hover,
-  &:focus,
-  &:active {
-    text-decoration: none;
-  }
+  border-width: 2px;
 }
 
 .procedure-download-button {
-  display: block;
-  cursor: pointer;
   width: 174px;
-  height: 37.5px;
-  border-radius: 18.5px;
-  text-align: center;
-  line-height: 33px;
-  margin: 10px;
-  box-shadow: 0 5px 7.5px 0 rgba(255, 206, 70, 0.3);
-  border: none;
   color: #545456;
-  background-color: #febe10;
-  float: right;
-  z-index: 20;
-
-  &:hover,
-  &:focus,
-  &:active {
-    text-decoration: none;
-  }
 }
 
 @media only screen and (max-width: 900px) {
@@ -179,6 +149,7 @@
 
   .item-image {
     width: 140px;
+    height: 140px;
   }
 }
 </style>
@@ -199,20 +170,21 @@
               v-scroll-to="{ el: '#download', offset: -50 }"
               class="item-description-link"
             >اپلیکیشن رِسا</a>
-            <br>می&#160;توانید اقدام به ثبت نام کنید.
+            <br />می&#160;توانید اقدام به ثبت نام کنید.
           </div>
         </div>
-        <img class="item-image" src="./Item1.png">
+        <img class="item-image" src="./Item1.png" />
       </div>
       <div class="procedure-item item-even">
         <div class="item-text">
           <div class="item-number">۲</div>
           <div class="item-description-title">تعیین وضعیت تماس</div>
-          <div class="item-description">- برای ارتباط بیمار با پزشک، وضعیت در دسترس بودن
-            <br>و بازه زمانی آن را مشخص کنید.
+          <div class="item-description">
+            - برای ارتباط بیمار با پزشک، وضعیت در دسترس بودن
+            <br />و بازه زمانی آن را مشخص کنید.
           </div>
         </div>
-        <img class="item-image" src="./Item2D.png">
+        <img class="item-image" src="./Item2D.png" />
       </div>
       <div class="procedure-item item-odd">
         <div class="item-text">
@@ -228,16 +200,25 @@
             <div class="item-description">گزارش کارکرد از طریق سایت و اپلیکیشن قابل مشاهده است.</div>
           </div>
         </div>
-        <img class="item-image" src="./Item3.png">
+        <img class="item-image" src="./Item3.png" />
       </div>
     </div>
 
     <div class="procedure-button-container">
-      <router-link class="procedure-signup-button" :to="{name:'doctors-register'}">ثبت نام رایگان</router-link>
-      <a
+      <v-btn
+        color="white"
+        round
+        outline
+        class="procedure-signup-button"
+        :to="{name:'doctors-register'}"
+      >ثبت نام رایگان</v-btn>
+      <v-btn
         class="procedure-download-button"
         v-scroll-to="{ el: '#download', offset: -50 }"
-      >دریافت اپلیکیشن</a>
+        color="yellow darken-2"
+        round
+      >دریافت اپلیکیشن</v-btn>
+      <!-- <router-link ></router-link> -->
     </div>
   </div>
 </template>

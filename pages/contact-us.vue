@@ -104,18 +104,9 @@
 
 .contact-us-submit-button {
   left: 15px;
-  top: 180px;
-  cursor: pointer;
-  font-weight: 500;
-  text-align: center;
-  position: absolute;
+  bottom: 30px;
+  position: absolute !important;
   width: 100px;
-  height: 40px;
-  border-radius: 18.5px;
-  line-height: 40px;
-  color: white;
-  background-color: $tealish;
-  border: none;
 }
 
 .contact-us-input {
@@ -155,17 +146,20 @@
               <div class="label">آدرس :&nbsp;</div>
               <div class="address-text">{{contactInfo.address}}</div>
             </div>
-            <div class="phone-number-container">
+            <!-- <div class="phone-number-container">
               <div class="label">تلفن دفتر:&nbsp;</div>
               <div class="phone-number-text">{{contactInfo.phoneNumber}}</div>
-            </div>
+            </div>-->
             <div class="phone-number-container">
               <div class="label">تلفن پشتیبانی:&nbsp;</div>
-              <div class="phone-number-text">{{contactInfo.support}}</div>
+              <a
+                :href="`tel:${contactInfo.support.value}`"
+                class="phone-number-text"
+              >{{contactInfo.support.text}}</a>
             </div>
             <div class="email-container">
               <div class="label">ایمیل :&nbsp;</div>
-              <div class="email-text">{{contactInfo.email}}</div>
+              <a :href="`mailto:${contactInfo.email}`" class="email-text">{{contactInfo.email}}</a>
             </div>
           </div>
 
@@ -181,7 +175,7 @@
                   class="contact-us-input form-control"
                   :class="{ 'is-invalid': submitted && errors.has('fullName') }"
                   placeholder="نام و نام خانوادگی"
-                >
+                />
                 <div
                   v-if="submitted && errors.has('fullName')"
                   class="invalid-feedback"
@@ -195,7 +189,7 @@
                   class="contact-us-input form-control"
                   :class="{ 'is-invalid': submitted && errors.has('phoneNumber') }"
                   placeholder="شماره تماس"
-                >
+                />
                 <div
                   v-if="submitted && errors.has('phoneNumber')"
                   class="invalid-feedback"
@@ -209,7 +203,7 @@
                   class="contact-us-input form-control"
                   :class="{ 'is-invalid': submitted && errors.has('email') }"
                   placeholder="ایمیل"
-                >
+                />
                 <div
                   v-if="submitted && errors.has('email')"
                   class="invalid-feedback"
@@ -228,7 +222,7 @@
                   v-if="submitted && errors.has('message')"
                   class="invalid-feedback"
                 >{{ errors.first('message') }}</div>
-                <button class="contact-us-submit-button">ارسال</button>
+                <v-btn color="secondary" round class="contact-us-submit-button">ارسال</v-btn>
               </div>
             </form>
           </div>
@@ -242,7 +236,7 @@
                 :zoom="18"
                 style="width: 100%; height:551px"
               >
-                <GmapMarker ref="mapMarker" :position="{lat: 35.717143, lng:51.387869}"/>
+                <GmapMarker ref="mapMarker" :position="{lat: 35.717143, lng:51.387869}" />
               </GmapMap>
             </div>
           </no-ssr>
@@ -263,6 +257,11 @@ export default {
           name: "description",
           content:
             "برای ارسال نظرات خود به سامانه رسا می‌توانید با وارد کردن اطلاعات و متن پیام خود، با ما در تماس باشید. آدرس دفتر شرکت، تلفن تماس و ایمیل رسا را به خاطر بسپارید"
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };

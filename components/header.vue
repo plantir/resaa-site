@@ -1,6 +1,7 @@
 <style lang="scss">
 section#header {
   position: absolute;
+  overflow: hidden;
   width: 100%;
   z-index: 2;
   .logo {
@@ -10,8 +11,25 @@ section#header {
     align-items: center;
     margin-left: 64px;
     flex: 0 0 90px;
+    @include media(md) {
+      flex: 0 0 60px;
+      margin-left: 14px;
+    }
     img {
       max-width: 100%;
+    }
+  }
+  .navicon {
+    display: none;
+    @include media(sm) {
+      display: inline-flex;
+      width: 40px;
+      align-items: center;
+      justify-content: center;
+      margin-left: 10px;
+      img {
+        max-width: 100%;
+      }
     }
   }
   .nav-bar {
@@ -20,6 +38,9 @@ section#header {
     margin: 0;
     padding: 0;
     list-style-type: none;
+    @include media(sm) {
+      display: none;
+    }
     li {
       margin: 0 16px;
     }
@@ -41,14 +62,56 @@ section#header {
     height: 32px;
   }
 }
+
+// @media only screen and (max-width: 768px) {
+//   section#header {
+//     .show-mobile {
+//       display: block;
+//     }
+//     aside {
+//       height: 100vh !important;
+//     }
+//     aside.v-navigation-drawer.v-navigation-drawer--absolute.v-navigation-drawer--open.v-navigation-drawer--temporary.theme--dark {
+//       height: 100vh !important;
+//       position: fixed;
+//       left: unset;
+//       right: 0;
+//       .nav-bar {
+//         flex-direction: column;
+//         justify-content: space-around;
+//         display: flex;
+//         height: max-content;
+//         li.nav-item {
+//           width: 100%;
+//           height: 60px;
+//           display: flex;
+//           align-items: center;
+//           justify-content: center;
+//           margin: 0;
+//         }
+//       }
+//     }
+//     .v-overlay {
+//       position: fixed;
+//       height: 100vh;
+//     }
+//     .nav-bar-mobile {
+//       display: flex;
+//       margin-left: 15px;
+//     }
+//   }
+// }
 </style>
 
 <template>
   <section id="header">
     <v-container>
       <v-layout row>
+        <div class="navicon" @click="toggleMenu">
+          <img src="~assets/img/navicon.png" alt />
+        </div>
         <div class="logo">
-          <img src="~assets/img/logo.png" alt>
+          <img src="~assets/img/logo.png" alt />
         </div>
         <ul class="nav-bar">
           <li class="nav-item">
@@ -139,6 +202,11 @@ export default {
     return {
       isPatient: true
     };
+  },
+  methods: {
+    toggleMenu() {
+      this.$store.commit("showMenu");
+    }
   },
   computed: {
     user() {

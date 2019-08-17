@@ -1,33 +1,33 @@
 <template>
   <div class="download-section-patient-container" id="download">
-    <div class="section-title">دریافت اپلیکیشن رِسا</div>
-    <div class="section-description">سازگار با سیستم عامل های اندروید، IOS و ویندوز موبایل</div>
+    <h2 class="section-title">دریافت اپلیکیشن رِسا</h2>
+    <p class="section-description">سازگار با سیستم عامل های اندروید، IOS و ویندوز موبایل</p>
     <div class="image-wrapper">
-      <img src="./mockup.jpg" alt>
+      <img src="./mockup.jpg" alt="دریافت اپلیکیشن سامانه رسا" />
     </div>
     <div class="download-image-container">
       <div class="download-links">
         <div class="link" @click="openModal">
           <div class="link-icon">
-            <img src="./apple.png">
+            <img src="./apple.png" alt="دریافت اپلیکیشن رسا برای ای او اس" />
           </div>
           <div class="link-texts">
             <div class="link-provider-text">Available on The</div>
             <div class="link-provider">App Store</div>
           </div>
         </div>
-        <div class="link" @click="openModal">
+        <!-- <div class="link" @click="openModal">
           <div class="link-icon">
-            <img src="./winmobile.png">
+            <img src="./winmobile.png" alt="دریافت اپلیکیشن رسا برای ویندوز فون" />
           </div>
           <div class="link-texts">
             <div class="link-provider-text">Download For</div>
             <div class="link-provider">WinMobile</div>
           </div>
-        </div>
+        </div>-->
         <div class="link" @click="openModal">
           <div class="link-icon">
-            <img src="./playstore.png">
+            <img src="./playstore.png" alt="دریافت اپلیکیشن رسا از پلی استور" />
           </div>
           <div class="link-texts">
             <div class="link-provider-text">GET IT ON</div>
@@ -36,7 +36,7 @@
         </div>
         <div class="link" @click="openModal">
           <div class="link-icon">
-            <img src="./cafebazar.png">
+            <img src="./cafebazar.png" alt="دریافت اپلیکیشن رسا از کافه بازار" />
           </div>
           <div class="link-texts">
             <div class="link-provider-text">دانلود از</div>
@@ -107,7 +107,7 @@ export default {
   color: #777590;
   text-align: center;
   font-style: normal;
-  font-size: 1.5rem;
+  font-size: 1.075rem;
   font-weight: 300;
 }
 
@@ -138,7 +138,10 @@ export default {
     height: 60px;
     border-radius: 15px;
     border: solid 2px #989cbe;
-
+    transition: background 0.2s ease-in-out;
+    &:hover {
+      background: rgba(152, 156, 190, 0.2);
+    }
     .link-texts {
       text-align: left;
       color: #989cbe;

@@ -160,11 +160,11 @@
       >پزشک گرامی، جهت دسترسی به خدمات برخط سامانه رِسا، لطفا وارد شوید</div>
       <div class="doctor-username">
         <i class="fa fa-user"></i>
-        <input id="username" placeholder="کد رسا / شماره همراه">
+        <input id="username" placeholder="کد رسا / شماره همراه" />
       </div>
       <div class="doctor-password">
         <i class="fa fa-lock"></i>
-        <input id="password" placeholder="کلمه عبور">
+        <input id="password" placeholder="کلمه عبور" />
       </div>
       <div
         class="g-recaptcha charge-captcha"
@@ -174,7 +174,8 @@
       <!-- <div class="forgot-password">
         <a>یادآوری کلمه عبور</a>
       </div>-->
-      <div class="sign-up">حساب کاربری ندارید؟
+      <div class="sign-up">
+        حساب کاربری ندارید؟
         <router-link :to="{name:'doctors-register'}" class="sign-up-link">رایگان ثبت نام کنید</router-link>
       </div>
     </div>
@@ -185,7 +186,19 @@
 export default {
   head() {
     return {
-      title: "ورود به بخش پزشکان"
+      title: "ورود به بخش پزشکان",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "ورود به بخش پزشکان"
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: `${process.env.SITE_URL}${this.$route.path}`
+        }
+      ]
     };
   }
 };

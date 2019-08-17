@@ -14,7 +14,7 @@
               v-model="subscriberNumber"
               placeholder="پنج رقم آخر شماره کاربری / شماره موبایل"
               required
-            >
+            />
           </div>
           <div class="charge-amount" @click="toggleChargeMenu">
             <i class="fa fa-credit-card-alt"></i>
@@ -41,8 +41,8 @@
           <div class="error-message" v-if="error">{{error}}</div>
           <div class="charge-followup-description">
             در صورت بروز هرگونه مشکل در هنگام تراکنش شماره‌ی تلفن، کد پیگیری و شماره‌ی رِسای خود را
-            <br>به شماره‌ی ۱۰۰۰۹۰۹۹۰۹۹۰۹۹ ارسال کنید، کارشناسان ما با شما تماس خواهند گرفت.
-            <br>یا با شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل فرمایید.
+            <br />به شماره‌ی ۱۰۰۰۹۰۹۹۰۹۹۰۹۹ ارسال کنید، کارشناسان ما با شما تماس خواهند گرفت.
+            <br />یا با شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل فرمایید.
           </div>
         </div>
         <!-- step 1 -->
@@ -151,6 +151,11 @@ export default {
           name: "description",
           content:
             "برای خرید شارژ جهت مکالمه با پزشک شماره موبایل و مبلغ کارت اعتباری مورد نیاز خود را وارد کنید و اعتبار حساب خود را افزایش دهید"
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };
@@ -176,7 +181,7 @@ export default {
   beforeCreate() {
     // if (this.$route.query.request_id) {
     //   this.$axios
-    //     .get(`/api//Charge/${this.$route.query.request_id}/Receipt`)
+    //     .get(`//Charge/${this.$route.query.request_id}/Receipt`)
     //     .then(response => {
     //       if (response.data.status === "OK") {
     //         this.chargeStep = "success";
@@ -191,7 +196,7 @@ export default {
     // if (this.$route.query.chargeRequestId) {
     //   this.ajaxLoading = true;
     //   this.$axios
-    //     .get(`/api/Charge/${this.$route.query.chargeRequestId}/Receipt`)
+    //     .get(`/Charge/${this.$route.query.chargeRequestId}/Receipt`)
     //     .then(res => {
     //       if (res.data.result.chargeReceipt.status === "Successful") {
     //         this.chargeStep = "success";
@@ -203,8 +208,10 @@ export default {
     // }
   },
   created() {
-    this.$axios.get("/api/Charge/Denominations").then(response => {
-      this.chargeMenuItems = response.data.result.denominations;
+    this.$axios.get("/Charge/Denominations").then(response => {
+      this.chargeMenuItems = response.data.result.denominations.sort(
+        (a, b) => a.amount - b.amount
+      );
       this.ajaxLoading = false;
       if (this.$route.query.chat_id) {
         localStorage.setItem("chat_id", this.$route.query.chat_id);
@@ -225,7 +232,7 @@ export default {
     if (this.$route.query.chargeRequestId) {
       this.ajaxLoading = true;
       this.$axios
-        .get(`/api/Charge/${this.$route.query.chargeRequestId}/Receipt`)
+        .get(`/Charge/${this.$route.query.chargeRequestId}/Receipt`)
         .then(res => {
           if (res.data.result.chargeReceipt.status === "Successful") {
             this.chargeStep = "success";
@@ -299,7 +306,7 @@ export default {
         data.subscriberNumber = subscriberNumber[0];
       }
       this.$axios
-        .post("/api/Charge", data)
+        .post("/Charge", data)
         .then(response => {
           this.pre_factor = response.data.result.electronicPaymentVoucher;
           this.chargeStep = "receipt";
@@ -416,7 +423,7 @@ export default {
   text-align: right;
   margin: 0 auto;
   padding: 12px 10px;
-  color: #44436c;
+  color: #777590;
   cursor: pointer;
 
   i:nth-child(1) {
@@ -426,7 +433,7 @@ export default {
 
   i:nth-child(2) {
     float: left;
-    color: #44436c;
+    color: #777590;
     margin-left: 5px;
   }
 }
@@ -452,7 +459,7 @@ export default {
   text-align: right;
   margin: 0 auto 15px;
   padding: 10px 0;
-  color: #44436c;
+  color: #777590;
   border-radius: 20px;
   box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.3);
   background-color: #ffffff;
@@ -521,7 +528,7 @@ export default {
   margin: 0 auto;
   text-align: center;
   font-size: 1rem;
-  color: #44436c;
+  color: #777590;
 }
 
 /*---------------STATE 2: RECEIPT---------------*/

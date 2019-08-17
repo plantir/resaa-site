@@ -350,8 +350,8 @@
         <div v-if="editMode === false" class="profile-container">
           <div class="profile-avatar">
             <v-loading v-if="saving"></v-loading>
-            <img v-if="user_profile.image" :src="user_profile.image" alt>
-            <img v-else src="/img/user-placeholder.png" alt>
+            <img v-if="user_profile.image" :src="user_profile.image" alt />
+            <img v-else src="/img/user-placeholder.png" alt />
             <div class="profile-avatar-edit-button">
               <label for="image">تغییر تصویر</label>
               <!-- <v-text-field
@@ -369,7 +369,7 @@
                 id="image"
                 name="image"
                 hidden="true"
-              >
+              />
             </div>
           </div>
           <div class="profile-info-container">
@@ -401,8 +401,8 @@
           <div class="profile-edit-input-area-container">
             <div class="profile-edit-avatar">
               <div class="profile-avatar">
-                <img v-if="user_profile.image" :src="user_profile.image">
-                <img v-else src="/img/user-placeholder.png" alt>
+                <img v-if="user_profile.image" :src="user_profile.image" />
+                <img v-else src="/img/user-placeholder.png" alt />
                 <div class="profile-avatar-edit-button">
                   <label for="image">تغییر تصویر</label>
                   <input
@@ -411,7 +411,7 @@
                     id="image"
                     name="image"
                     hidden="true"
-                  >
+                  />
                 </div>
               </div>
               <button v-if="user_profile.image" @click="removeImage">حذف عکس</button>
@@ -482,6 +482,23 @@
 <script>
 import CallHistory from "@/components/patient/callHistory/callHistory";
 export default {
+  head() {
+    return {
+      title: "پروفایل بیمار",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "پروفایل بیمار"
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: `${process.env.SITE_URL}${this.$route.path}`
+        }
+      ]
+    };
+  },
   components: {
     CallHistory
   },
@@ -517,7 +534,7 @@ export default {
     get_profile() {
       this.ajaxLoading = true;
       this.$axios
-        .get(`/api/Accounts/${this.user_id}/Profile`, {
+        .get(`/Accounts/${this.user_id}/Profile`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }
@@ -531,7 +548,7 @@ export default {
     },
     get_callhistory() {
       this.$axios
-        .get(`/api/Accounts/${this.user_id}/Calls`, {
+        .get(`/Accounts/${this.user_id}/Calls`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }
@@ -546,7 +563,7 @@ export default {
     save() {
       this.saving = true;
       this.$axios
-        .put(`/api/Accounts/${this.user_id}/Profile`, this.editProfile, {
+        .put(`/Accounts/${this.user_id}/Profile`, this.editProfile, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }
@@ -584,7 +601,7 @@ export default {
       let data = new FormData();
       data.append("image", file);
       this.$axios
-        .put(`/api/Accounts/${this.user_id}/Profile/Image`, data, {
+        .put(`/Accounts/${this.user_id}/Profile/Image`, data, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`,
             "Content-Type": "multipart/form-data"
@@ -597,7 +614,7 @@ export default {
     },
     removeImage() {
       this.$axios
-        .delete(`/api/Accounts/${this.user_id}/Profile/Image`, {
+        .delete(`/Accounts/${this.user_id}/Profile/Image`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }

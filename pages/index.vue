@@ -4,13 +4,20 @@ section#home {
   height: 100%;
   .logo {
     position: absolute;
-    left: 30px;
+    right: 30px;
     top: 30px;
-    width: 80px;
+    // width: 80px;
     z-index: 9;
-    img {
-      max-width: 100%;
+    svg {
+      width: 90px;
+      height: 50px;
     }
+  }
+  .custom-btn {
+    // box-shadow: 0 5px 7.5px 0 rgba(255, 206, 70, 0.3);
+    color: #545456;
+    // background-color: #febe10;
+    // border: none !important;
   }
   .nav-icon {
     position: absolute;
@@ -169,8 +176,12 @@ section#home {
     padding: 16px;
     z-index: 9;
     animation: pulse-dot 2.25s cubic-bezier(0.455, 0.03, 0.515, 0.955) -0.4s infinite;
-    img {
-      max-width: 100%;
+    svg {
+      width: 36px;
+      height: 36px;
+      path {
+        fill: $secondary-color;
+      }
     }
     &:before {
       content: "";
@@ -207,8 +218,10 @@ section#home {
     font-size: 29px;
     margin-bottom: 8px;
     text-align: center;
-    span {
+    h2 {
       color: #fff;
+      font-weight: 600;
+      font-size: 1.375rem;
     }
   }
   .subtitle {
@@ -223,20 +236,37 @@ section#home {
       flex-direction: column;
     }
     a {
-      text-decoration: none;
       width: 173px;
-      height: 37px;
+      border-width: 2px;
+    }
+    .custom-btn {
+      background: #fff;
+      height: 36px;
+      margin: 6px 8px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
       display: inline-flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-      color: #fff;
-      border: 2px solid #fff;
-      border-radius: 18px;
-      + a {
-        margin-right: 16px;
-        @include respond-to(sm) {
-          margin-right: 0;
-          margin-top: 16px;
+      padding-right: 30px;
+      transition: all 0.4s;
+      box-shadow: 0 1px 16px -9px #000;
+      svg {
+        width: 58px;
+        height: 48px;
+        position: absolute;
+        left: 5px;
+        top: -9px;
+        transition: all 0.4s;
+        path {
+          fill: #fbc02d;
+        }
+      }
+      &:hover {
+        background: #fbc02d;
+        svg path {
+          fill: #fff;
         }
       }
     }
@@ -281,15 +311,6 @@ section#home {
     }
     .subtitle {
       color: #888;
-    }
-    .button-wrapper a {
-      border-radius: 18.5px;
-      border: 2px solid transparent;
-      background-image: linear-gradient(#e2e2e2, #e2e2e2),
-        linear-gradient(20deg, #33e4ea, #00b2ed);
-      background-origin: border-box;
-      background-clip: content-box, border-box;
-      color: #00aae2;
     }
   }
   .patient {
@@ -345,14 +366,15 @@ section#home {
 <template>
   <section id="home">
     <div class="logo">
-      <img src="~static/img/logo-resaa-blue.png">
+      <!-- <img src="~static/img/logo-resaa-blue.png" alt="سامانه رسا" /> -->
+      <logo alt="سامانه رسا" />
     </div>
-    <div class="nav-icon" :class="{'active':menuActive}">
+    <!-- <div class="nav-icon" :class="{'active':menuActive}">
       <div @click="activateMenu" class="icon-wrapper">
-        <img v-if="menuActive" src="~static/img/nav-close-icon.png">
-        <img v-else src="~static/img/nav-icon.png">
+        <img alt="منو سامانه رسا" v-if="menuActive" src="~static/img/nav-close-icon.png" />
+        <img alt="منو سامانه رسا" v-else src="~static/img/nav-icon.png" />
       </div>
-    </div>
+    </div>-->
     <div class="nav-main" :class="{ 'active' : menuActive }">
       <div class="nav-main__content" :class="{ 'active' : menuActive }">
         <ul class="nav-main__list" :class="{ 'active' : menuActive }">
@@ -368,44 +390,50 @@ section#home {
     </div>
     <div class="content">
       <div class="phone-icon">
-        <img src="~static/img/phone.svg">
+        <phone />
+        <!-- <img src="~assets/svg/phone.svg" alt="تماس تلفنی مستقیم با پزشک" /> -->
       </div>
       <div class="line"></div>
       <section class="patient">
         <div class="image">
           <router-link :to="{name:'patient-landing'}">
-            <img src="~static/img/patient-edited.png">
+            <img src="~static/img/patient-edited.png" alt="معرفی خدمات رسا برای بیماران" />
           </router-link>
         </div>
         <div class="title">
           <router-link :to="{name:'patient-landing'}">
-            <span>ارتباط تلفنی و مستقیم با پزشک</span>
+            <h2>ارتباط تلفنی و مستقیم با پزشک</h2>
           </router-link>
         </div>
         <div class="subtitle">
-          <span>بیماران عزیز، با سامانه رِسا از هر جایی با پزشک خود مشورت کنید</span>
+          <p>بیماران عزیز، با سامانه رِسا از هر جایی با پزشک خود مشورت کنید</p>
         </div>
         <div class="button-wrapper">
-          <router-link :to="{name:'patient-landing'}">بیشتر بدانید</router-link>
-          <router-link :to="{name:'charge'}">شارژ حساب</router-link>
+          <!-- <nuxt-link class="custom-btn" :to="{name:'patient-landing'}">
+            <element-svg />
+          </nuxt-link>-->
+          <resaaButton :to="{name:'patient-landing'}">بیشتر بدانید</resaaButton>
+          <!-- <router-link  :to="{name:'patient-landing'}">بیشتر بدانید</router-link> -->
+          <!-- <router-link>شارژ حساب</router-link> -->
+          <v-btn color="white" :to="{name:'charge'}" outline round>شارژ حساب</v-btn>
         </div>
       </section>
       <section class="doctor">
         <div class="image">
           <router-link to="doctors/landing">
-            <img src="~static/img/doctor-edited.png">
+            <img src="~static/img/doctor-edited.png" alt="معرفی خدمات رسا برای پزشکان" />
           </router-link>
         </div>
         <div class="title">
           <router-link to="doctors/landing">
-            <span>معرفی خدمات به پزشکان رِسا</span>
+            <h2>معرفی خدمات به پزشکان رِسا</h2>
           </router-link>
         </div>
         <div class="subtitle">
-          <span>پزشکان گرامی، براحتی تماس های دریافتی خود را مدیریت کنید</span>
+          <p>پزشکان گرامی، براحتی تماس های دریافتی خود را مدیریت کنید</p>
         </div>
         <div class="button-wrapper">
-          <router-link to="doctors/landing">بیشتر بدانید</router-link>
+          <v-btn color="primary" outline round to="doctors/landing">بیشتر بدانید</v-btn>
         </div>
       </section>
     </div>
@@ -421,23 +449,37 @@ section#home {
   </section>
 </template>
 <script>
+import phone from "~/assets/svg/phone.svg?inline";
+import logo from "~/assets/svg/logo.svg?inline";
+import resaaButton from "~/components/resaa-button.vue";
 export default {
   name: "home",
   layout: "landing",
+  components: {
+    phone,
+    logo,
+    resaaButton
+  },
   head() {
     return {
-      title: "رِسا، رسانه سلامت ایرانیان",
+      title: "سامانه رسا | بزرگترین بستر ارتباط تلفنی پزشک و بیمار",
       meta: [
         // hid is used as unique identifier. Do not use `vmid` for it as it will not work
         {
           hid: "description",
           name: "description",
-          content: "My custom description"
+          content:
+            "سامانه رسا (رسانه سلامت ایرانیان) اولین و بزرگترین بستر ارتباط و مشاوره تلفنی بیمار و پزشک در ایران. با رسا می تونی در کوتاه ترین زمان ممکن با پزشک در تماس باشی."
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };
   },
-  data: function() {
+  data() {
     return {
       dialog: true,
       items: ["armin", "arash"],
@@ -465,9 +507,6 @@ export default {
         }
       ]
     };
-  },
-  created() {
-    this.$axios.get("/api/Charge/Denominations").then(res => {});
   },
   methods: {
     activateMenu: function() {

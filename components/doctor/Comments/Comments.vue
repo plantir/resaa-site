@@ -29,7 +29,7 @@
   <div class="comments-section-container">
     <div class="section-title">مزایای استفاده از رِسا</div>
     <div class="section-description">پزشکان در مورد رسا چه میگویند؟</div>
-    <resaa-swiper/>
+    <resaa-swiper />
   </div>
 </template>
 

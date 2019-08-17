@@ -59,16 +59,20 @@
   margin-top: 5px;
   justify-content: space-between;
   flex-direction: column;
-  > div {
+  > a {
     margin: 8px;
+    color: #babcbd;
+    display: flex;
+    align-items: center;
   }
   span {
     display: inline-block;
     direction: ltr;
     margin-right: 16px;
   }
-  i {
-    color: #2ee5c4;
+  svg,
+  path {
+    fill: #2ee5c4;
   }
 }
 .link-wrapper {
@@ -173,17 +177,29 @@
   }
   ul {
     display: inline-flex;
-    margin: 0 32px 0 0;
     padding: 0;
+    margin: 0 32px 0 0;
     width: 40%;
     justify-content: space-between;
     list-style-type: none;
+    @include media(xs-only) {
+      margin: 0;
+      width: 60%;
+    }
     a {
-      color: #babcbd;
-      font-size: 1.375rem;
+      display: flex;
+      align-items: center;
+      justify-items: center;
       &:hover {
-        color: #2ee5c4;
+        svg,
+        path {
+          fill: $secondary-color;
+        }
       }
+    }
+    svg,
+    path {
+      fill: #babcbd;
     }
   }
 }
@@ -250,7 +266,7 @@
       display: block;
       position: absolute;
       left: calc(50% - 5px);
-      top: -6px;
+      top: -5px;
       &::before,
       &::after {
         content: "";
@@ -260,7 +276,7 @@
         background-color: #2ee5c4;
         display: block;
         position: absolute;
-        top: 2px;
+        top: 1px;
       }
       &::before {
         left: -14px;
@@ -279,23 +295,27 @@
       <v-container>
         <v-layout row wrap>
           <v-flex pa-4 lg3 md6 order-lg1 order-md1 sm12>
-            <h5 class="title with-line">درباه رِسا</h5>
+            <p class="title with-line">
+              <strong>درباه رِسا</strong>
+            </p>
             <div class="about-wrapper">
               <div>
-                <div class="footer-info-text">
+                <p class="footer-info-text">
                   <strong>رِسا</strong>
                   اولین سامانه ارتباط پزشک با بیمار در کشور است و بیماران عزیز براحتی و بدون نیاز به حضور در مطب پزشک می توانند با پزشک خوب از هر جایی در ارتباط باشند. پزشکان گرامی نیز می توانند تماس های بیماران خود را در سامانه رِسا مدیریت کنند.
-                </div>
+                </p>
               </div>
               <div class="footer-logo">
-                <img src="./logo.png" />
+                <img src="./logo.png" alt="سامانه رسا" />
               </div>
             </div>
           </v-flex>
           <v-flex pa-4 lg6 md12 order-lg2 order-md3 sm12>
             <v-layout row wrap>
               <v-flex md6 sm6 xs12>
-                <h5 class="title with-line">کاربری</h5>
+                <p class="title with-line">
+                  <strong>کاربری</strong>
+                </p>
                 <div class="link-wrapper">
                   <div>
                     <ul>
@@ -319,7 +339,9 @@
                 </div>
               </v-flex>
               <v-flex md6 sm6 xs12>
-                <h5 class="title with-line">دسترسی سریع</h5>
+                <p class="title with-line">
+                  <strong>دسترسی سریع</strong>
+                </p>
                 <div class="link-wrapper">
                   <div>
                     <ul>
@@ -344,23 +366,28 @@
                   <span>به ما بپیوندید :</span>
                   <ul>
                     <li>
-                      <a target="_blank" href="https://t.me/pezeshkepasokhgoo">
-                        <i class="fa fa-telegram"></i>
+                      <a rel="nofollow" target="_blank" href="https://t.me/pezeshkeresaa">
+                        <telegram />
+                        <!-- <img src="~assets/svg/telegram.svg" alt /> -->
+                        <!-- <i class="fa fa-telegram"></i> -->
                       </a>
                     </li>
                     <li>
-                      <a>
-                        <i class="fa fa-facebook"></i>
+                      <a rel="nofollow">
+                        <facebook />
+                        <!-- <i class="fa fa-facebook"></i> -->
                       </a>
                     </li>
                     <li>
-                      <a target="_blank" href="https://instagram.com/resaanet/">
-                        <i class="fa fa-instagram"></i>
+                      <a rel="nofollow" target="_blank" href="https://instagram.com/resaanet/">
+                        <instagram />
+                        <!-- <i class="fa fa-instagram"></i> -->
                       </a>
                     </li>
                     <li>
-                      <a target="_blank" href="https://twitter.com/resaanet">
-                        <i class="fa fa-twitter"></i>
+                      <a rel="nofollow" target="_blank" href="https://twitter.com/resaanet">
+                        <twitter />
+                        <!-- <i class="fa fa-twitter"></i> -->
                       </a>
                     </li>
                   </ul>
@@ -369,24 +396,27 @@
             </v-layout>
           </v-flex>
           <v-flex pa-4 lg3 md6 order-lg3 order-md2 sm12>
-            <h5 class="title with-line">با ما تماس بگیرید</h5>
+            <p class="title with-line">
+              <strong>با ما تماس بگیرید</strong>
+            </p>
             <div class="footer-address">
               <!-- <i class="fa fa-map-marker" aria-hidden="true"></i> -->
               {{contactInfo.address}}
             </div>
             <div class="tell-wrapper">
-              <div class="footer-tel">
-                <v-icon>phone</v-icon>
-                <span>{{contactInfo.support}}</span>
-              </div>
-              <div class="footer-tel">
+              <a :href="`tel:${contactInfo.support.value}`" class="footer-tel">
+                <phone />
+                <span>{{contactInfo.support.text}}</span>
+              </a>
+              <!-- <a :href="`tel:${contactInfo.phoneNumber}`" class="footer-tel">
                 <v-icon>phone</v-icon>
                 <span>{{contactInfo.phoneNumber}}</span>
-              </div>
-              <div class="footer-email">
-                <v-icon>email</v-icon>
+              </a>-->
+              <a :href="`mailto:${contactInfo.email}`" class="footer-email">
+                <!-- <v-icon>email</v-icon> -->
+                <envelope />
                 <span>{{contactInfo.email}}</span>
-              </div>
+              </a>
             </div>
             <div class="e-namad">
               <!-- <img
@@ -395,7 +425,7 @@
                 alt
               >-->
               <img
-                src="https://trustseal.enamad.ir/logo.aspx?id=127333&amp;p=1p93aagdwcp8JwYd"
+                src="./e-namad.png"
                 alt
                 onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=127333&amp;p=1p93aagdwcp8JwYd&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30&quot;)"
                 style="cursor:pointer"
@@ -419,7 +449,21 @@
 </template>
 
 <script>
+import telegram from "~/assets/svg/telegram.svg?inline";
+import facebook from "~/assets/svg/facebook.svg?inline";
+import instagram from "~/assets/svg/instagram.svg?inline";
+import twitter from "~/assets/svg/twitter.svg?inline";
+import envelope from "~/assets/svg/envelope.svg?inline";
+import phone from "~/assets/svg/phone.svg?inline";
 export default {
+  components: {
+    telegram,
+    facebook,
+    instagram,
+    twitter,
+    envelope,
+    phone
+  },
   data() {
     return {
       isPatient: true

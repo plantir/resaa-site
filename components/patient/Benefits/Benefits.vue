@@ -1,13 +1,11 @@
 <template>
   <div class="benefits-section-patient-container">
     <!-- <img class="benefits-section-patient-curve" src="./sec-2-bg@2x2.png" /> -->
-    <div class="section-title" id="element">مزایای استفاده از رِسا</div>
-    <!-- <div class="section-description">
-      خدمات و مزایای سامانه رِسا برای بیماران
-    </div>-->
+    <h2 class="section-title" id="element">مزایای استفاده از رِسا</h2>
+    <p class="section-description">استفاده از سامانه رسا چه مزایایی دارد؟</p>
     <div class="benefits-container">
       <div class="benefits-text">
-        <div class="benefits-text-title">معرفی خدمات به بیماران عزیز</div>
+        <h3 class="benefits-text-title">معرفی خدمات به بیماران عزیز</h3>
         <ul class="benefits-list">
           <li>تماس مستقیم با پزشک بدون نیاز به شماره همراه ایشان</li>
           <li>صرفه جویی در وقت و هزینه بدون حضور در مطب</li>
@@ -25,26 +23,37 @@
           </li>
         </ul>
         <div class="benefits-button-container">
-          <a
+          <!-- <v-btn
+            to="/patient/register"
             id="benefitsRegister"
-            v-scroll-to="{ el: '#register', offset: -50 }"
+            color="yellow darken-2"
             class="benefits-signup-button"
-          >ثبت نام رایگان</a>
-          <a
-            v-scroll-to="{ el: '#download', offset: -50 }"
+            round
+          >ثبت نام رایگان</v-btn>-->
+          <resaaButton id="benefitsRegister" theme="dark" to="/patient/register">ثبت نام رایگان</resaaButton>
+          <v-btn
             class="benefits-download-button"
-          >دریافت اپلیکیشن</a>
+            v-scroll-to="{ el: '#download', offset: -50 , duration: 1500}"
+            outline
+            round
+            color="secondary"
+          >دریافت اپلیکیشن</v-btn>
         </div>
       </div>
       <div class="image">
-        <img src="./mockup.jpg" />
+        <img src="./mockup.jpg" alt="مزایای استفاده از سامانه رسا" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import resaaButton from "~/components/resaa-button.vue";
+export default {
+  components: {
+    resaaButton
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -74,7 +83,7 @@ export default {};
   color: #777590;
   text-align: center;
   font-style: normal;
-  font-size: 2rem;
+  font-size: 1.075rem;
   font-weight: 300;
 }
 
@@ -91,7 +100,6 @@ export default {};
     img {
       width: 850px;
       max-width: 100%;
-      width: 100%;
     }
   }
 }
@@ -123,7 +131,9 @@ export default {};
   li {
     line-height: 30px;
     color: #777590;
-
+    @include media(sm) {
+      font-size: 1rem;
+    }
     a {
       color: #00aae2;
       text-decoration: underline;
@@ -150,49 +160,16 @@ export default {};
 }
 
 .benefits-signup-button {
-  display: block;
-  cursor: pointer;
   width: 174px;
-  height: 37.5px;
-  border-radius: 18.5px;
-  text-align: center;
-  line-height: 33px;
-  margin: 10px;
   box-shadow: 0 5px 7.5px 0 rgba(255, 206, 70, 0.3);
-  border: none;
   color: #545456;
   background-color: #febe10;
-  float: right;
-  z-index: 20;
-
-  &:hover,
-  &:focus,
-  &:active {
-    text-decoration: none;
-  }
 }
 
 .benefits-download-button {
-  display: block;
-  cursor: pointer;
   width: 174px;
-  height: 37.5px;
-  border-radius: 18.5px;
-  text-align: center;
-  line-height: 33px;
-  margin: 10px;
   box-shadow: 0 5px 7.5px 0 rgba(72, 229, 202, 0.2);
-  border: solid 2px $tealish;
-  color: $tealish;
-  background-color: white;
-  float: right;
-  z-index: 10;
-
-  &:hover,
-  &:focus,
-  &:active {
-    text-decoration: none;
-  }
+  border-width: 2px;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -250,7 +227,7 @@ export default {};
   }
 
   .section-description {
-    font-size: 1.5rem;
+    font-size: 1.175rem;
   }
 
   .benefits-text-title {

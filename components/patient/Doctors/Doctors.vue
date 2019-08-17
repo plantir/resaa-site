@@ -162,7 +162,7 @@
   }
 
   .item-doctor-name {
-    color: #44436c;
+    color: #777590;
     text-align: right;
     font-weight: 500;
   }
@@ -237,30 +237,12 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-bottom: 4rem;
   }
 
   .doctors-full-list-button {
-    display: block;
-    margin: 0 0 50px;
-    cursor: pointer;
-    line-height: 37px;
-    font-size: 1.275rem;
-    text-align: center;
-    color: $azure;
     width: 200px;
-    height: 37px;
-    border-radius: 18.5px;
-    border: solid 2px transparent;
-    background-image: linear-gradient(white, white),
-      linear-gradient(20deg, #11d0f8, #3de0cb);
-    background-origin: border-box;
-    background-clip: content-box, border-box;
-
-    &:hover,
-    &:focus,
-    &:active {
-      text-decoration: none;
-    }
+    border-width: 2px;
   }
   .item-right-sub-section {
     display: flex;
@@ -321,8 +303,8 @@
 
 <template>
   <div class="doctors-section-patients-container" id="doctors">
-    <div class="doctors-title">پزشکان رِسا</div>
-    <div class="doctors-description">برخی از پزشکان رِسا</div>
+    <h2 class="doctors-title">پزشکان رِسا</h2>
+    <p class="doctors-description">پزشک مورد نظر خود را اینجا پیدا کنید</p>
     <div class="doctors-info-container">
       <div class="doctors-list">
         <div class="search-box">
@@ -331,7 +313,7 @@
             v-model="filter"
             @input="changeFilter($event)"
             placeholder="جستجو براساس نام پزشک، کد رِسا، رشته تخصصی"
-          >
+          />
           <span v-if="!filter" class="icon">
             <i class="fa fa-search fa-rotate-90"></i>
           </span>
@@ -355,8 +337,8 @@
                       v-if="doctor.imagePath"
                       :src="'https://webapi.resaa.net/'+doctor.imagePath"
                       alt
-                    >
-                    <img v-else src="/img/doc-placeholder.png" alt>
+                    />
+                    <img v-else src="/img/doc-placeholder.png" alt="پزشکان سامانه رسا" />
                   </div>
                   <div class="item-right-sub-section">
                     <div class="item-doctor-name">{{doctor.firstName}} {{doctor.lastName}}</div>
@@ -399,15 +381,18 @@
         </no-ssr>
       </div>
       <div class="doctors-image-container">
-        <img class="doctors-image" src="./doctors2.png">
+        <img class="doctors-image" src="./doctors2.png" />
       </div>
     </div>
     <div class="doctors-full-list-container">
-      <router-link
-        target="_blank"
-        :to="{name:'doctors'}"
+      <v-btn
         class="doctors-full-list-button"
-      >لیست کامل پزشکان رِسا</router-link>
+        :to="{name:'doctors'}"
+        target="_blank"
+        color="secondary"
+        round
+        outline
+      >لیست کامل پزشکان رِسا</v-btn>
     </div>
   </div>
 </template>
@@ -434,7 +419,7 @@ export default {
     };
     this.fields = "id,specialty,subscriberNumber,firstName,lastName,imagePath";
   },
-  created() {
+  mounted() {
     this.getDoctors();
   },
   computed: {
@@ -458,9 +443,7 @@ export default {
     },
     getDoctors() {
       this.ajaxLoading = true;
-      let url = `/api/Doctors?fields=${this.fields}&limit=${
-        this.limit
-      }&offset=${this.offset}`;
+      let url = `/Doctors?fields=${this.fields}&limit=${this.limit}&offset=${this.offset}`;
       if (this.filter) {
         url += `&query=${this.filter}`;
       }

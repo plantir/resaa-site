@@ -2,6 +2,9 @@
 #doctors {
   // display: none;
   .doctors-search-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
     border-radius: 10px;
     background-color: #f2f2f2;
@@ -12,7 +15,7 @@
   }
 
   .search-panel-title {
-    color: #44436c;
+    color: #777590;
     font-weight: 500;
     text-align: center;
     margin-bottom: 20px;
@@ -20,6 +23,7 @@
 
   .search-input {
     margin-bottom: 15px;
+    width: 100%;
     .v-input__control {
       min-height: 38px;
     }
@@ -30,22 +34,11 @@
   }
 
   .search-panel-button {
-    cursor: pointer;
-    margin: 0 auto;
-    text-align: center;
-    color: white;
     width: 80%;
-    height: 37px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 18.5px;
-    background-color: $tealish;
-    border: none;
-    &:disabled {
-      opacity: 0.75;
-      cursor: not-allowed;
-    }
+    // &:disabled {
+    //   opacity: 0.75;
+    //   cursor: not-allowed;
+    // }
     &.clear-filter {
       margin-top: 8px;
       background-color: #777590;
@@ -98,10 +91,37 @@
       margin-left: 5px;
     }
   }
-
+  .search-box {
+    border-radius: 16px 16px 0 0;
+    border: 1px solid #f2f2f2;
+    background: #f2f2f2;
+    padding: 2px;
+    position: relative;
+    background: #fff;
+    input {
+      width: 100%;
+      border-radius: 16px 16px 0 0;
+      border: none;
+      height: 40px;
+      padding: 0 40px 0 16px;
+      direction: rtl;
+    }
+    .icon {
+      position: absolute;
+      right: 0;
+      height: 40px;
+      display: flex;
+      top: 2px;
+      align-items: center;
+      width: 40px;
+      justify-content: center;
+      color: #999;
+      font-size: 1.375rem;
+    }
+  }
   .doctors-box {
     background-color: #f2f2f2;
-    border-radius: 16px 16px 0 0;
+    border-radius: 0;
     padding: 10px;
     width: 100%;
     min-height: 300px;
@@ -179,7 +199,7 @@
   }
 
   .item-doctor-name {
-    color: #44436c;
+    color: #777590;
     text-align: right;
     font-weight: 500;
     @include respond-to(sm) {
@@ -193,7 +213,8 @@
   }
 
   .item-doctor-specialty {
-    color: #777590;
+    font-size: 0.875rem;
+    font-weight: 400;
     text-align: right;
     @include respond-to(sm) {
       text-align: center;
@@ -323,7 +344,7 @@
           </div>
         </div>
         <v-layout row wrap>
-          <v-flex md4 sm12 pa-1>
+          <!-- <v-flex md4 sm12 pa-1>
             <div class="doctors-search-panel">
               <div class="search-panel-title">جستجوی پزشک</div>
               <div class="search-input">
@@ -335,10 +356,8 @@
                   label="نام پزشک"
                   solo
                 ></v-text-field>
-                <!-- <input v-model="filter.name" @keyup.enter="changeFilter" placeholder="نام پزشک"> -->
               </div>
               <div class="search-input">
-                <!-- <input v-model="filter.code" @keyup.enter="changeFilter" placeholder="کد رِسا"> -->
                 <v-text-field
                   hide-details
                   v-model="filter.code"
@@ -385,22 +404,41 @@
                   label="لطفا شهر مورد نظر را انتخاب نمایید"
                 ></v-select>
               </div>
-              <button
+              <v-btn
+                color="secondary"
                 @click="changeFilter"
+                round
                 :disabled="(filter.provinceId && !filter.cityId)"
                 class="search-panel-button"
-              >جستجو</button>
-              <button
+              >جستجو</v-btn>
+              <v-btn
                 v-if="filter.name || filter.code || filter.specialtyId || filter.provinceId || filter.cityId"
                 @click="clearFilter"
+                round
+                dark
+                :disabled="(filter.provinceId && !filter.cityId)"
                 class="search-panel-button clear-filter"
-              >راه اندازی مجدد</button>
+              >راه اندازی مجدد</v-btn>
             </div>
-          </v-flex>
+          </v-flex>-->
+          <v-flex md2></v-flex>
           <v-flex md8 sm12 pa-1>
+            <div class="search-box">
+              <input
+                type="text"
+                v-model="filter"
+                @input="changeFilter($event)"
+                placeholder="جستجو براساس نام پزشک، کد رِسا، رشته تخصصی"
+              />
+              <span v-if="!filter" class="icon">
+                <i class="fa fa-search fa-rotate-90"></i>
+              </span>
+              <span v-else @click="clearFilter()" class="icon">
+                <i class="fa fa-times"></i>
+              </span>
+            </div>
             <div ref="doctors" class="doctors-box">
               <v-loading v-if="ajaxLoading" mode="relative"></v-loading>
-
               <div v-for="doctor in doctors" :key="doctor.id" class="doctors-item">
                 <router-link
                   :to="{name:'doctors-id',params:{id:doctor.subscriberNumber}}"
@@ -413,8 +451,8 @@
                           v-if="doctor.imagePath"
                           :src="'https://webapi.resaa.net/'+doctor.imagePath"
                           alt
-                        >
-                        <img v-else src="/img/doc-placeholder.png" alt>
+                        />
+                        <img v-else src="/img/doc-placeholder.png" alt />
                       </div>
                       <div class="item-right-sub-section">
                         <div class="item-doctor-name">{{doctor.firstName}} {{doctor.lastName}}</div>
@@ -468,6 +506,7 @@
               </div>
             </div>
           </v-flex>
+          <v-flex md2></v-flex>
         </v-layout>
       </div>
     </section>
@@ -478,14 +517,19 @@
 export default {
   head() {
     return {
-      title: "لیست پزشکان سامانه رسا",
+      title: "پزشکان و متخصصان سامانه رسا",
       meta: [
         // hid is used as unique identifier. Do not use `vmid` for it as it will not work
         {
           hid: "description",
           name: "description",
           content:
-            "با جستجوی نام پزشک، کد رسای پزشک، تخصص یا استانی که پزشک در آن فعالیت دارد، پزشک مورد نظر خود را بیابید. همچنین می‌توانید همه‌ی پزشکان همکار رسا را در لیست پزشکان بیابید"
+            "با جستجو در بین پزشکان سامانه رسا در تخصص های زنان و زایمان، اطفال، مغز و اعصاب، روانشناسی و ... متخصص مورد نظر خود را انتخاب کنید و به صورت تلفنی به پاسخ سوالات خود برسید."
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };
@@ -500,17 +544,17 @@ export default {
     page: 1,
 
     totalItems: 0,
-    filter: { specialtyId: null, provinceId: null, cityId: null }
+    filter: ""
   }),
   beforeCreate() {
     this.fields = "id,specialty,subscriberNumber,firstName,lastName,imagePath";
   },
   created() {
     this.getDoctors();
-    this.$axios.get(`/api/Doctors/MedicalSpecialties`).then(response => {
+    this.$axios.get(`/Doctors/MedicalSpecialties`).then(response => {
       this.medicalSpecialties = response.data.result.medicalSpecialties;
     });
-    this.$axios.get(`/api/Geo/Provinces`).then(response => {
+    this.$axios.get(`/Geo/Provinces`).then(response => {
       this.provinces = response.data.result.provinces;
     });
   },
@@ -528,54 +572,73 @@ export default {
     getCities() {
       this.filter.cityId = null;
       this.$axios
-        .get(`/api/Geo/Provinces/${this.filter.provinceId}/Cities`)
+        .get(`/Geo/Provinces/${this.filter.provinceId}/Cities`)
         .then(response => {
           this.cities = response.data.result.cities;
         });
     },
+
     changeFilter() {
+      clearTimeout(this.timeout);
       this.page = 1;
-      this.getDoctors();
+      this.timeout = setTimeout(this.getDoctors, 800);
     },
     clearFilter() {
-      this.filter = { specialtyId: null, provinceId: null, cityId: null };
-      this.page = 1;
-      this.getDoctors();
+      this.filter = "";
+      this.changeFilter();
     },
     getDoctors() {
       this.ajaxLoading = true;
-      let url = `/api/Doctors?fields=${this.fields}&limit=${
-        this.limit
-      }&offset=${this.offset}`;
-      if (this.filter.name) {
-        url += `&name=${this.filter.name}`;
+      let url = `/Doctors?fields=${this.fields}&limit=${this.limit}&offset=${this.offset}`;
+      if (this.filter) {
+        url += `&query=${this.filter}`;
       }
-      if (this.filter.code) {
-        url += `&code=${this.filter.code}`;
-      }
-      if (this.filter.specialtyId) {
-        url += `&specialtyId=${this.filter.specialtyId}`;
-      }
-      if (this.filter.cityId) {
-        url += `&cityId=${this.filter.cityId}`;
-      }
-      this.timeout = setTimeout(() => {
-        this.$axios
-          .get(url, {
-            before(request) {
-              if (this.previousRequest) {
-                this.previousRequest.abort();
-              }
-              this.previousRequest = request;
+      this.$axios
+        .get(url, {
+          before(request) {
+            if (this.previousRequest) {
+              this.previousRequest.abort();
             }
-          })
-          .then(response => {
-            this.doctors = response.data.result.doctors;
-            this.totalItems = response.data.result.doctorsTotalCount;
-            this.ajaxLoading = false;
-            this.$scrollTo(this.$refs.doctors, 1000, { offset: -100 });
-          });
-      }, 200);
+            this.previousRequest = request;
+          }
+        })
+        .then(response => {
+          this.doctors = response.data.result.doctors;
+          this.totalItems = response.data.result.doctorsTotalCount;
+          this.ajaxLoading = false;
+          this.$scrollTo(this.$refs.doctors, 1000, { offset: -150 });
+        });
+      // this.ajaxLoading = true;
+      // let url = `/Doctors?fields=${this.fields}&limit=${this.limit}&offset=${this.offset}`;
+      // if (this.filter.name) {
+      //   url += `&name=${this.filter.name}`;
+      // }
+      // if (this.filter.code) {
+      //   url += `&code=${this.filter.code}`;
+      // }
+      // if (this.filter.specialtyId) {
+      //   url += `&specialtyId=${this.filter.specialtyId}`;
+      // }
+      // if (this.filter.cityId) {
+      //   url += `&cityId=${this.filter.cityId}`;
+      // }
+      // this.timeout = setTimeout(() => {
+      //   this.$axios
+      //     .get(url, {
+      //       before(request) {
+      //         if (this.previousRequest) {
+      //           this.previousRequest.abort();
+      //         }
+      //         this.previousRequest = request;
+      //       }
+      //     })
+      //     .then(response => {
+      //       this.doctors = response.data.result.doctors;
+      //       this.totalItems = response.data.result.doctorsTotalCount;
+      //       this.ajaxLoading = false;
+      //       this.$scrollTo(this.$refs.doctors, 1000, { offset: -100 });
+      //     });
+      // }, 200);
     }
   }
 };

@@ -41,7 +41,7 @@
   font-stretch: normal;
   letter-spacing: normal;
   text-align: center;
-  color: #44436c;
+  color: #777590;
   margin-bottom: 30px;
   height: 100px;
   text-align: justify;
@@ -98,8 +98,11 @@
           <div class="doctor-comment-name">{{'دکتر ' + comment.firstName + ' '+ comment.lastName}}</div>
           <div class="doctor-comment-special">{{comment.specialist}}</div>
           <div class="doctor-comment-avatar">
-            <router-link :to="{name:'Doctor',params:{subscriberNumber:comment.subscriberNumber}}">
-              <img :src="comment.avatar">
+            <router-link
+              target="_blank"
+              :to="{name:'doctors-id',params:{id:comment.subscriberNumber}}"
+            >
+              <img :src="comment.avatar" />
             </router-link>
           </div>
         </div>

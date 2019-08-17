@@ -207,7 +207,7 @@ export default {
     };
   },
   created() {
-    this.$axios.get(`/api/Doctors/MedicalSpecialties`).then(response => {
+    this.$axios.get(`/Doctors/MedicalSpecialties`).then(response => {
       this.medicalSpecialties = response.data.result.medicalSpecialties;
     });
   },

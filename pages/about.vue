@@ -21,7 +21,7 @@
           >
             <div class="team-member-container">
               <div class="team-member-image">
-                <img v-if="member.avatar" alt="member" :src="member.avatar">
+                <img v-if="member.avatar" alt="member" :src="member.avatar" />
               </div>
               <div class="team-member-short">{{member.firstName + ' ' + member.lastName}}</div>
               <div class="team-member-full">
@@ -63,6 +63,11 @@ export default {
           name: "description",
           content:
             "سامانه رسا با بهره‌گیری از افراد فارغ‌التحصیل دانشگاه‌های معتبری چون تهران و شریف، سعی کرده است راهی مطمئن برای برقراری تماس تلفنی بین بیمار و پزشک را فراهم آورد"
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };

@@ -130,6 +130,7 @@ table {
 </style>
 <template>
   <section>
+    <v-loading v-if="loading" mode="relative"></v-loading>
     <div class="days">
       <div :class="{selected:date===6}">
         <span>شنبه</span>
@@ -198,52 +199,62 @@ table {
 <script>
 import hours from "./hours";
 export default {
-  props: ["segments"],
+  // props: ["segments"],
   data() {
     return {
+      loading: true,
       hours,
       events: [],
       date: null,
       time: null
     };
   },
-  created() {
-    this.date = new Date().getDay();
-    this.time = (new Date().getHours() + new Date().getMinutes() / 60) * 100;
-    for (const item of this.segments) {
-      let start_time_hour = Math.floor((item.from / 60) % 24);
-      let end_time_hour = Math.floor((item.to / 60) % 24);
-      let start_time_minute = Math.round(((item.from / 60) % 1) * 60);
-      let end_time_minute = Math.round(((item.to / 60) % 1) * 60);
-      const top = (Math.floor(item.from / 60 / 24) + 1) * 50 + "px";
-      const left =
-        start_time_hour * 100 + (start_time_minute / 60) * 100 + "px";
-      const width = ((item.to - item.from) / 60) * 100 + "px";
-      if (start_time_minute < 10) {
-        start_time_minute = `0${start_time_minute}`;
-      }
-      if (end_time_minute < 10) {
-        end_time_minute = `0${end_time_minute}`;
-      }
-      if (start_time_hour < 10) {
-        start_time_hour = `0${start_time_hour}`;
-      }
-      if (end_time_hour < 10) {
-        end_time_hour = `0${end_time_hour}`;
-      }
-      const event = {
-        style: `top:${top};left:${left};width:${width}`,
-        start: `${start_time_hour}:${start_time_minute}`,
-        end: `${end_time_hour}:${end_time_minute}`
-      };
-      this.events.push(event);
-    }
-  },
   mounted() {
-    if (this.$refs.timeTable) {
-      let width = this.$refs.timeTable.clientWidth;
-      this.$refs.timeTable.scrollLeft = this.time - width / 2;
-    }
+    this.$axios
+      .$get(
+        `/Doctors/${
+          this.$route.params.id
+        }?fields=timetable&clientTimeZoneOffset=${new Date().getTimezoneOffset()}`
+      )
+      .then(data => {
+        this.segments = data.result.doctor.timetable.segments;
+        this.date = new Date().getDay();
+        this.time =
+          (new Date().getHours() + new Date().getMinutes() / 60) * 100;
+        for (const item of this.segments) {
+          let start_time_hour = Math.floor((item.from / 60) % 24);
+          let end_time_hour = Math.floor((item.to / 60) % 24);
+          let start_time_minute = Math.round(((item.from / 60) % 1) * 60);
+          let end_time_minute = Math.round(((item.to / 60) % 1) * 60);
+          const top = (Math.floor(item.from / 60 / 24) + 1) * 50 + "px";
+          const left =
+            start_time_hour * 100 + (start_time_minute / 60) * 100 + "px";
+          const width = ((item.to - item.from) / 60) * 100 + "px";
+          if (start_time_minute < 10) {
+            start_time_minute = `0${start_time_minute}`;
+          }
+          if (end_time_minute < 10) {
+            end_time_minute = `0${end_time_minute}`;
+          }
+          if (start_time_hour < 10) {
+            start_time_hour = `0${start_time_hour}`;
+          }
+          if (end_time_hour < 10) {
+            end_time_hour = `0${end_time_hour}`;
+          }
+          const event = {
+            style: `top:${top};left:${left};width:${width}`,
+            start: `${start_time_hour}:${start_time_minute}`,
+            end: `${end_time_hour}:${end_time_minute}`
+          };
+          this.events.push(event);
+          if (this.$refs.timeTable) {
+            let width = this.$refs.timeTable.clientWidth;
+            this.$refs.timeTable.scrollLeft = this.time - width / 2;
+          }
+          this.loading = false;
+        }
+      });
   }
 };
 </script>

@@ -12,12 +12,16 @@
   }
 }
 .intro-section-patients-container {
-  padding-top: 140px;
+  padding-top: 70px;
   overflow: hidden;
   position: relative;
   width: 100%;
   min-height: 746px;
   background: linear-gradient(240deg, #39ec99, #11d0f8);
+  @include media(sm) {
+    padding-top: 40px;
+    min-height: auto;
+  }
   .parallax {
     position: absolute;
     bottom: 20px;
@@ -58,22 +62,11 @@
   justify-content: center;
   display: flex;
   flex-direction: row-reverse;
-
-  .button {
-    cursor: pointer;
-    width: 174px;
-    height: 37.5px;
-    border-radius: 18.5px;
-    text-align: center;
-    line-height: 37.5px;
-    color: white;
-    margin: 10px;
+  .v-btn {
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1);
-    border: solid 2px white;
-    z-index: 99;
-  }
-  a {
-    color: #fff;
+    border-width: 2px;
+    width: 174px;
+    max-width: 45%;
   }
 }
 
@@ -82,6 +75,9 @@
   color: white;
   font-weight: 500;
   font-size: 2.375rem;
+  @include media(sm) {
+    font-size: 1.875rem;
+  }
 }
 
 .intro-description {
@@ -117,6 +113,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.3s ease-in-out;
+    &:before {
+      transition: all 0.3s ease-in-out;
+    }
+    &:hover {
+      background-color: darken($light-gold, 5);
+      &:before {
+        padding-top: 8px;
+      }
+    }
   }
 }
 
@@ -145,7 +151,9 @@
     top: 0;
     bottom: 0;
     margin: auto;
-
+    svg {
+      height: 80px;
+    }
     &.left {
       flex-direction: row-reverse;
       right: calc(100% - 50px);
@@ -229,25 +237,23 @@
 
 <template>
   <div class="intro-section-patients-container">
-    <div class="intro-title">ارتباط تلفنی و مستقیم با پزشک</div>
-    <div class="intro-description">با سـامانه رِسا از هـر جایی با پـزشـک خـود مـشـورت کنید</div>
+    <h1 class="intro-title">ارتباط تلفنی و مستقیم با پزشک</h1>
+    <p class="intro-description">با سـامانه رِسا از هـر جایی با پـزشـک خـود مـشـورت کنید</p>
     <div class="intro-buttons">
-      <a
-        id="introRegister"
-        v-scroll-to="{ el: '#register', offset: -50 }"
-        class="button"
-      >ثبت نام رایگان</a>
-      <a id="showVideo" class="button" @click="openVideo">نمایش ویدئو</a>
+      <resaaButton id="introRegister" to="/patient/register">ثبت نام رایگان</resaaButton>
+      <!-- <v-btn id="introRegister" color="white" to="/patient/register" outline round>ثبت نام رایگان</v-btn> -->
+      <v-btn id="showVideo" color="white" outline round @click="openVideo">نمایش ویدئو</v-btn>
     </div>
     <div class="intro-patient-image">
-      <img src="./PAT.png" />
+      <img src="./PAT.png" alt="ارتباط تلفنی و مستفیم با پزشک در سامانه رسا" />
       <div class="side-button left">
         <div v-scroll-to="{ el: '#download', offset: -50 }" class="side-button-text">
           <div class="side-button-sub-title">ارتباط با پزشکان</div>
           <a class="side-button-title">دریافت اپلیکیشن رِسا</a>
         </div>
         <div class="side-button-icon">
-          <img src="./mobile.svg" />
+          <!-- <mobile /> -->
+          <img src="~assets/svg/mobile.svg" alt="اپلیکیشن رسا" />
         </div>
       </div>
       <div class="side-button right">
@@ -256,7 +262,8 @@
           <div class="side-button-title">تماس با ۷۴۴۷۱۱۱۱ ۰۲۱</div>
         </div>
         <div class="side-button-icon">
-          <img src="./phone.svg" />
+          <!-- <old-phone /> -->
+          <img src="~assets/svg/old-phone.svg" alt="تماس با رسا" />
         </div>
       </div>
     </div>
@@ -284,6 +291,7 @@
 import patientImage from "./patient.jpg";
 import Parallax from "parallax-js";
 import PatientVideo from "@/components/patient/video/video";
+import resaaButton from "~/components/resaa-button.vue";
 export default {
   data() {
     return {
@@ -292,7 +300,8 @@ export default {
       show_video: false
     };
   },
-  components: { PatientVideo },
+
+  components: { PatientVideo, resaaButton },
   mounted() {
     new Parallax(this.$refs.parallax);
     this.parallax_loaded = true;

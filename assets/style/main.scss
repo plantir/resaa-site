@@ -4,7 +4,6 @@
 // @import '~bootstrap-vue/dist/bootstrap-vue.css';
 @import './select';
 
-
 html {
   font-family: IRANSans, tahoma;
   background-color: #f5f5f5;
@@ -72,6 +71,38 @@ input:required {
   box-shadow: none;
 }
 
-section#navigation+.container {
-  margin-top: 100px;
+header + main {
+  margin-top: 70px;
+}
+
+svg {
+  width: 24px;
+  height: 24px;
+}
+
+.show-mobile {
+  display: none !important;
+  @include media(xs-only) {
+    display: inherit !important;
+  }
+}
+.hide-mobile {
+  display: inherit !important;
+  @include media(xs-only) {
+    display: none !important;
+  }
+}
+.svg-icon-white {
+  path {
+    fill: white;
+  }
+}
+.primary--text {
+  path {
+    fill: var(--v-primary-base) !important;
+  }
+}
+.v-btn.theme--light.yellow {
+  color: #545456;
+  font-weight: 400;
 }

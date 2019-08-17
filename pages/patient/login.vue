@@ -213,7 +213,19 @@ import jwtDecode from "jwt-decode";
 export default {
   head() {
     return {
-      title: "ورود به بخش بیماران"
+      title: "ورود به بخش بیماران",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "ورود به بخش بیماران"
+        },
+        {
+          hid: "canonical",
+          property: "canonical",
+          content: `${process.env.SITE_URL}${this.$route.path}`
+        }
+      ]
     };
   },
   data() {
@@ -246,7 +258,7 @@ export default {
       this.ajaxLoading = true;
       let data = `username=${this.user.username}&password=${this.user.password}&grant_type=${this.user.grant_type}`;
       this.$axios
-        .post("/api/oauth2/token", data, {
+        .post("/oauth2/token", data, {
           headers: {
             "Content-type": "application/x-www-form-urlencoded"
           }
@@ -260,7 +272,7 @@ export default {
             ];
 
           this.$axios
-            .get(`/api/Accounts/${id}/Profile`, {
+            .get(`/Accounts/${id}/Profile`, {
               headers: {
                 Authorization: `Bearer ${res.data.access_token}`
               }

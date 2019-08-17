@@ -20,7 +20,7 @@
 .section-description {
   text-align: center;
   direction: rtl;
-  font-size: 1.675rem;
+  font-size: 1.075rem;
   color: #777590;
   margin-bottom: 70px;
 }
@@ -29,7 +29,7 @@
   text-align: center;
   direction: rtl;
   font-size: 1.225rem;
-  color: #44436c;
+  color: #777590;
 }
 
 .charge-cards-container {
@@ -57,7 +57,7 @@
   &:active,
   &:focus {
     text-decoration: none;
-    color: #44436c;
+    color: #777590;
   }
 }
 
@@ -107,10 +107,13 @@
 
 .charge-card-description {
   font-size: 1rem;
-  color: #44436c;
+  color: #777590;
 }
 
 .charge-card-price-and-buy {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .charge-card-price {
@@ -149,20 +152,14 @@
 }
 
 .charge-card-buy-button {
-  float: left;
-  font-weight: 500;
-  color: $bronze;
-  background-color: $light-gold;
-  border-radius: 15px;
-  text-align: center;
   width: 65px;
-  line-height: 30px;
+  min-width: 65px;
 }
 
 .section-description-3 {
   text-align: center;
   direction: rtl;
-  color: #44436c;
+  color: #777590;
   line-height: 30px;
 }
 
@@ -194,14 +191,14 @@
 
 <template>
   <div class="charge-section-patient-container">
-    <div class="section-title">خرید شارژ</div>
-    <div class="section-description">افزایش اعتبار برای مکالمه با پزشک</div>
-    <div class="section-description-2">
+    <h2 class="section-title">خرید شارژ</h2>
+    <p class="section-description">افزایش اعتبار برای مکالمه تلفنی با پزشک</p>
+    <p class="section-description-2">
       از طریق کد دستوری
       <span class="strong">ussd</span> با شماره
       <span class="strong" style="display: inline-block;direction: ltr;">*500*25#</span> میتوانید بدون نیاز به اینترنت اعتبار خود را افزایش دهید و
-      <br>یا جهت افزایش اعتبار می توانید یکی از کارت شارژ های اینترنتی زیر را انتخاب کنید:
-    </div>
+      <br />یا جهت افزایش اعتبار می توانید یکی از کارت شارژ های اینترنتی زیر را انتخاب کنید:
+    </p>
     <div class="charge-cards-container">
       <div v-for="(item, index) in chargeMenuItems" :key="index">
         <router-link
@@ -210,7 +207,7 @@
           :class="`card-${index + 1}`"
         >
           <div class="charge-card-top-tag" :class="`tag-${index + 1}`">
-            <img src="./resaa.png">
+            <img src="./resaa.png" :alt="`کارت اعتباری ${item.amount} تومانی`" />
           </div>
           <div class="charge-card-bottom-tag">
             <div class="charge-card-description">کارت اعتباری</div>
@@ -219,19 +216,25 @@
                 {{item.amount | currency | persianDigit }}
                 <div>تومان</div>
               </div>
-              <div class="charge-card-buy-button">خرید</div>
+              <v-btn
+                color="yellow darken-2"
+                class="charge-card-buy-button"
+                depressed
+                round
+                small
+              >خرید</v-btn>
             </div>
           </div>
         </router-link>
       </div>
     </div>
-    <div class="section-description-3">
+    <p class="section-description-3">
       در صورت بروز هرگونه مشکل در هنگام تراکنش شماره‌ی تلفن، کد پیگیری و شماره‌ی رِسای خود را
-      <br>به شماره‌ی
+      <br />به شماره‌ی
       <b>۱۰۰۰۹۰۹۹۰۹۹۰۹۹</b>
       ارسال کنید، کارشناسان ما با شما تماس خواهند گرفت.
-      <br>یا با شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل فرمایید.
-    </div>
+      <br />یا با شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل فرمایید.
+    </p>
   </div>
 </template>
 
@@ -242,9 +245,11 @@ export default {
       chargeMenuItems: []
     };
   },
-  created() {
-    this.$axios.get("/api/Charge/Denominations").then(response => {
-      this.chargeMenuItems = response.data.result.denominations;
+  mounted() {
+    this.$axios.get("/Charge/Denominations").then(response => {
+      this.chargeMenuItems = response.data.result.denominations.sort(
+        (a, b) => a.amount - b.amount
+      );
     });
   }
 };
