@@ -138,7 +138,7 @@ section#speciality {
   .icons {
     width: 760px;
     max-width: 100%;
-    margin: 150px auto;
+    margin: 90px auto;
     position: relative;
     z-index: 1;
     .items {
@@ -586,14 +586,14 @@ section#speciality {
         background: #1d1f23;
         padding: 0 16px;
         color: #ddd;
-        height: 70px;
+        height: 56px;
         font-size: 1rem;
       }
       .item-index {
         background: #1d1f23;
         margin-left: 8px;
-        width: 70px;
-        flex: 0 0 70px;
+        width: 56px;
+        flex: 0 0 56px;
         height: 100%;
         display: flex;
         align-items: center;
@@ -796,7 +796,7 @@ section#speciality {
       <v-container>
         <h3>{{speciality.title}}</h3>
         <h4>{{speciality.description}}</h4>
-        <p>{{speciality.characterization}}</p>
+        <p v-html="speciality.characterization"></p>
       </v-container>
     </div>
     <div class="icons hide-mobile">
@@ -1189,7 +1189,7 @@ export default {
       `/Doctors/MedicalSpecialties/${params.id}/Manifest`
     );
     let doctor_service = await $axios.$get(
-      `/Doctors?fields=specialty,title,subscriberNumber,firstName,lastName,imagePath,currentlyAvailable&specialtyId=8`
+      `/Doctors?fields=specialty,title,subscriberNumber,firstName,lastName,imagePath,currentlyAvailable&specialtyId=${params.id}`
     );
     let rleated_doctors = doctor_service.result.doctors;
     let available_doctors = rleated_doctors.filter(
@@ -1234,8 +1234,8 @@ export default {
         slidesPerView: 3,
         slidesPerColumn: 2,
         spaceBetween: 30,
-        slidesPerGroup: 1,
-        loopFillGroupWithBlank: true,
+        // slidesPerGroup: 1,
+        // loopFillGroupWithBlank: true,
         autoplay: {
           delay: 10000,
           disableOnInteraction: false
@@ -1358,10 +1358,10 @@ export default {
   async mounted() {},
   computed: {
     backgroundImage() {
-      return `/img/speciality/background.jpg`;
-      // return (
-      //   `https://webapi.resaa.net/${this.speciality.backgroundImagePath}` || ""
-      // );
+      return (
+        `https://webapi.resaa.net/${this.speciality.backgroundImagePath}` ||
+        "/img/speciality/background.jpg"
+      );
     }
   }
 };
