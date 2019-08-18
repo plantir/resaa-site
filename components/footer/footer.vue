@@ -168,6 +168,10 @@
   @include respond-to(md) {
     width: 100%;
   }
+  svg {
+    width: 20px;
+    height: 20px;
+  }
   span {
     color: #fff;
     font-size: 1.475rem;
