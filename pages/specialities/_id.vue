@@ -566,7 +566,7 @@ section#speciality {
         cursor: pointer;
         display: flex;
         align-items: center;
-        height: 70px;
+        height: 56px;
         padding: 0;
         direction: rtl;
         + .item {
