@@ -24,12 +24,14 @@
   <v-container id="doctor-detail">
     <Info :doctor="doctor" />
     <Call />
+    <Why />
   </v-container>
 </template>
 
 <script>
 import Info from "@/components/doctor_detail/Info";
 import Call from "@/components/doctor_detail/Call";
+import Why from "@/components/doctor_detail/Why";
 export default {
   head() {
     return {
@@ -69,7 +71,7 @@ export default {
       ]
     };
   },
-  components: { Info, Call },
+  components: { Info, Call, Why },
   async asyncData({ store, params, $axios, isClient }) {
     // if (isClient) {
     //   return window.location.reload;

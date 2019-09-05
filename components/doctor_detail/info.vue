@@ -16,12 +16,12 @@ ul {
 .v-card {
   overflow: hidden;
   .resaa-element {
-    width: 420px;
-    height: 280px;
+    width: 480px;
+    height: 320px;
     position: absolute;
     left: -3px;
     top: 0px;
-    opacity: 0.2;
+    opacity: 0.1;
     fill: $secondary-color;
   }
 }
