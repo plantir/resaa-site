@@ -1,302 +1,35 @@
-<style lang="scss" scoped>
-h1 {
-  display: inline-block;
-  font-size: 1.75rem;
-  font-weight: 500;
+<style lang="scss" >
+:root {
+  --grey-color: #969696;
 }
-p {
-  margin-bottom: 0;
-}
-.doctor-profile-container {
-  background: white;
-  padding: 60px 90px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.doctor-avatar {
-  direction: rtl;
-  border: 3.5px solid white;
-  border-radius: 5px;
-  box-shadow: 0 0 20px rgba(10, 10, 10, 0.14);
-  margin-left: 40px;
-  float: right;
-}
-
-.doctor-avatar-image {
-  img {
-    max-width: 170px;
-    border-radius: 5px 5px 0 0;
-    margin: auto 0;
-  }
-}
-
-.doctor-resaa-info {
-  direction: rtl;
-  color: white;
-  background-color: $tealish;
-  border-radius: 0 0 5px 5px;
-  padding: 10px 20px;
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: 500;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  svg {
-    width: 20px;
-    height: 20px;
-    path {
-      fill: #fff;
-    }
-  }
-}
-
-.doctor-resaa-code {
-  display: inline-block;
-}
-
-.doctor-info {
-  align-self: flex-end;
-  direction: rtl;
-  width: 100%;
-  position: relative;
-  a {
-    margin: 0 4px;
-  }
-}
-.call_button {
-  @include media(md-and-down) {
-    margin: 30px 0;
+#doctor-detail {
+  .v-card {
+    padding: 80px 70px;
+    border-radius: 30px;
     position: relative;
   }
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-.doctor-name {
-  font-size: 1.75rem;
-  font-weight: 500;
-  color: $dark-blue-grey;
-  margin-bottom: 10px;
-}
-
-.doctor-is-available {
-  display: inline-block;
-  color: $tealish;
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 10px;
-}
-.doctor-is-unavailable {
-  display: inline-block;
-  color: $red;
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 10px;
-}
-
-.doctor-specialty {
-  font-size: 1.175rem;
-  font-weight: 400;
-  color: $dark-blue-grey;
-}
-
-.specialty-area-container {
-  padding: 10px 0;
-}
-
-.specialty-area {
-  display: inline-block;
-  padding: 5px 12px;
-  margin-left: 5px;
-  border-radius: 4px;
-  color: white;
-  background-color: $tealish;
-  text-align: center;
-  font-size: 1.175rem;
-  font-weight: 400;
-}
-
-.doctor-np {
-  color: #7e86a6;
-  font-size: 1.175rem;
-  margin-bottom: 7px;
-}
-
-.doctor-np-code {
-  display: inline-block;
-  font-size: 1.4rem;
-  font-weight: 400;
-  color: $dark-blue-grey;
-}
-
-.available-time-container {
-  color: #7e86a6;
-  font-size: 1.175rem;
-  margin-bottom: 7px;
-  a {
-    color: #0095e2;
+  .title {
+    color: var(--grey-color);
+    font-size: 18px !important;
+    font-weight: 500;
+    margin-bottom: 16px;
   }
-}
-
-.available-time {
-  display: inline-block;
-  font-size: 1.175rem;
-  font-weight: 400;
-  color: $dark-blue-grey;
-  margin-left: 4px;
-}
-
-.available-time-unit {
-  display: inline-block;
-  font-size: 1.175rem;
-  font-weight: 400;
-  color: $dark-blue-grey;
-}
-
-.available-time-description {
-  color: #7e86a6;
-  font-size: 1.175rem;
-  display: flex;
-
-  i {
-    font-size: 0.925rem;
-    color: $light-gold;
-    margin-left: 5px;
-    margin-top: 5px;
-  }
-
-  div {
-    float: left;
-    width: 95%;
-
-    div {
-      float: none;
-      margin-bottom: 5px;
-    }
-  }
-
-  a {
-    color: #0095e2;
-    transition: color 0.5s;
-
-    &:hover,
-    &:focus,
-    &:active {
-      text-decoration: none;
-      color: $bright-sky-blue;
-    }
-  }
-}
-
-.doctor-contact-container {
-  font-size: 1.175rem;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  color: #7e86a6;
-}
-
-.doctor-address-container {
-  direction: rtl;
-  margin-bottom: 5px;
-
-  div {
-    display: inline;
-  }
-}
-
-.doctor-address {
-  color: $dark-blue-grey;
-}
-
-.doctor-phone-container {
-  direction: rtl;
-  margin-bottom: 5px;
-
-  div {
-    display: inline-block;
-  }
-}
-
-.doctor-phone {
-  color: $dark-blue-grey;
-}
-.time-table-wrapper {
-  h2 {
-    margin-bottom: 1.75rem;
-    font-size: 1.2rem;
-  }
-  width: 100%;
-  margin: 60px 0;
-}
-.doctor-map {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  min-height: 300px;
-  border: 3.5px solid white;
-  border-radius: 3px;
-  box-shadow: 0 0 20px rgba(10, 10, 10, 0.14);
-
-  iframe {
-    width: 100%;
-    height: 100%;
-
-    html > body {
-      background: none !important;
-    }
-  }
-}
-
-@media only screen and (max-width: 1150px) {
-  .doctor-profile-container {
-    padding: 30px 45px;
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  .doctor-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-
-  .doctor-avatar {
-    float: none;
-    margin: 0;
-  }
-
-  .doctor-avatar-image img {
-    max-width: 200px;
-  }
-
-  .doctor-contact-container {
-    text-align: center;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .doctor-profile-container {
-    padding: 20px;
+  section + section {
+    margin-top: 28px;
   }
 }
 </style>
 
 <template>
-  <v-container>
+  <v-container id="doctor-detail">
     <Info :doctor="doctor" />
+    <Call />
   </v-container>
 </template>
 
 <script>
-import Info from "@/components/doctor_detail/info";
+import Info from "@/components/doctor_detail/Info";
+import Call from "@/components/doctor_detail/Call";
 export default {
   head() {
     return {
@@ -336,7 +69,7 @@ export default {
       ]
     };
   },
-  components: { Info },
+  components: { Info, Call },
   async asyncData({ store, params, $axios, isClient }) {
     // if (isClient) {
     //   return window.location.reload;

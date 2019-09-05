@@ -1,9 +1,8 @@
 <style lang="scss" scoped>
-$grey-color: #969696;
 h1 {
   font-size: 28px;
   font-weight: 400;
-  color: $grey-color;
+  color: var(--grey-color);
   display: inline-flex;
 }
 strong {
@@ -13,17 +12,8 @@ ul {
   margin: 0;
   padding: 0;
 }
-.title {
-  color: $grey-color;
-  font-size: 18px;
-  font-weight: 400;
-  margin-bottom: 16px;
-}
 
 .v-card {
-  padding: 80px 0;
-  border-radius: 30px;
-  position: relative;
   overflow: hidden;
   .resaa-element {
     width: 420px;
@@ -38,7 +28,6 @@ ul {
 .image-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   .image {
     border-radius: 100%;
@@ -62,11 +51,7 @@ ul {
     }
   }
   .doctor-id {
-    background: linear-gradient(
-      to right,
-      $secondary-color 0%,
-      $primary-color 100%
-    );
+    background: linear-gradient(to right, #28db9a 0%, #0ec7e5 100%);
     width: 180px;
     color: #fff;
     font-size: 18px;
@@ -96,7 +81,7 @@ ul {
     margin-top: 80px;
     li {
       font-size: 14px;
-      color: $grey-color;
+      color: var(--grey-color);
       display: flex;
       align-items: center;
       &:before {
@@ -120,7 +105,7 @@ ul {
     li {
       flex: 0 0 50%;
       width: 50%;
-      color: $grey-color;
+      color: var(--grey-color);
       font-size: 14px;
       display: flex;
       align-items: center;
@@ -139,7 +124,7 @@ ul {
 }
 .response-wrapper {
   margin-top: 130px;
-  color: $grey-color;
+  color: var(--grey-color);
   font-size: 14px;
   .response-time {
     margin-bottom: 12px;
@@ -151,11 +136,11 @@ ul {
 }
 </style>
 <template>
-  <v-content>
+  <section>
     <v-card>
       <resaaElement class="resaa-element" />
       <v-layout row wrap>
-        <v-flex xs12 md3>
+        <v-flex xs12 md2>
           <div class="image-wrapper">
             <div class="image">
               <div class="status">
@@ -179,7 +164,7 @@ ul {
             </div>
           </div>
         </v-flex>
-        <v-flex xs12 md3>
+        <v-flex xs12 md4>
           <div class="name-wrapper">
             <div>
               <h1>{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</h1>
@@ -227,7 +212,7 @@ ul {
         </v-flex>
       </v-layout>
     </v-card>
-  </v-content>
+  </section>
 </template>
 <script>
 import Available from "~/assets/svg/Available.svg?inline";
