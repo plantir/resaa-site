@@ -25,6 +25,7 @@
     <Info :doctor="doctor" />
     <Call />
     <Why />
+    <Address :doctor="doctor" />
   </v-container>
 </template>
 
@@ -32,6 +33,7 @@
 import Info from "@/components/doctor_detail/Info";
 import Call from "@/components/doctor_detail/Call";
 import Why from "@/components/doctor_detail/Why";
+import Address from "@/components/doctor_detail/Address";
 export default {
   head() {
     return {
@@ -71,7 +73,7 @@ export default {
       ]
     };
   },
-  components: { Info, Call, Why },
+  components: { Info, Call, Why, Address },
   async asyncData({ store, params, $axios, isClient }) {
     // if (isClient) {
     //   return window.location.reload;
