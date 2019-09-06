@@ -2,8 +2,8 @@
 .v-card {
   padding: 50px 70px !important;
   .resaa-element {
-    width: 480px;
-    height: 320px;
+    width: 380px;
+    height: 250px;
     position: absolute;
     left: -3px;
     top: 0px;
@@ -12,7 +12,7 @@
   }
 }
 .title {
-  margin-bottom: 40px !important;
+  margin-bottom: 50px !important;
 }
 .address-item {
   display: flex;
@@ -66,25 +66,21 @@
   display: flex;
   width: 50%;
   align-items: center;
-  @include media(md) {
-    flex-direction: column;
-    width: 100%;
-    > div {
-      width: 100%;
-    }
-  }
-  .fa {
-    margin-right: 2px;
-  }
+  margin-top: 28px;
   > div {
     display: flex;
     align-items: center;
-  }
-  > div + div {
-    margin-right: 25px;
-    @include media(md) {
-      margin-right: 0;
-      margin-top: 8px;
+    + div {
+      margin-right: 25px;
+    }
+    a {
+      color: #a7a9ac;
+      &:hover {
+        color: $primary-color;
+      }
+    }
+    svg {
+      margin-left: 12px;
     }
   }
 }
@@ -108,15 +104,18 @@
       </div>
       <div class="social-media">
         <div>
-          <img src="~assets/img/Web-Icon.png" class="doctor-link-web-color" />
+          <web class="web-svg" />
+          <!-- <img src="~assets/img/Web-Icon.png" class="doctor-link-web-color" /> -->
           <a href="#" class="doctor-link-web">www.doctor-domain.com</a>
         </div>
         <div>
-          <img src="~assets/img/Instagram.png" class="doctor-link-instagram-color" />
+          <instagram class="instagram-svg" />
+          <!-- <img src="~assets/img/Instagram.png" class="doctor-link-instagram-color" /> -->
           <a href="#" class="doctor-link-instagram">dr-test</a>
         </div>
         <div>
-          <img src="~assets/img/Telegram.png" class="doctor-link-telegram-color" />
+          <telegram class="telegram-svg" />
+          <!-- <img src="~assets/img/Telegram.png" class="doctor-link-telegram-color" /> -->
           <a href="#" class="doctor-link-telegram">@dr-test</a>
         </div>
       </div>
@@ -127,9 +126,12 @@
 import resaaElement from "~/assets/svg/element.svg?inline";
 import location from "~/assets/svg/location.svg?inline";
 import phone from "~/assets/svg/phone_fill.svg?inline";
+import telegram from "~/assets/svg/telegram.svg?inline";
+import Instagram from "~/assets/svg/instagram.svg?inline";
+import web from "~/assets/svg/web.svg?inline";
 
 export default {
   props: { doctor: {} },
-  components: { resaaElement, location, phone }
+  components: { resaaElement, location, phone, telegram, Instagram, web }
 };
 </script>
