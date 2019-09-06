@@ -4,7 +4,7 @@
 }
 #doctor-detail {
   .v-card {
-    padding: 80px 70px;
+    padding: 40px 20px;
     border-radius: 30px;
     position: relative;
   }

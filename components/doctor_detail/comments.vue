@@ -23,8 +23,6 @@ section#doctor-detail-comments {
     }
   }
   .swiper-container {
-    // max-width: 1650px;
-    // padding: 0 40px;
     .swiper-slide {
       padding: 0 20px;
       box-sizing: border-box;
@@ -108,7 +106,7 @@ section#doctor-detail-comments {
   .comment-wrapper {
     position: relative;
     z-index: 1;
-    padding: 300px 0;
+    padding: 100px 0;
     .bg {
       position: absolute;
       background-color: #f6f6f6;
@@ -126,13 +124,11 @@ section#doctor-detail-comments {
     }
   }
   .send-commnet {
-    max-width: 1470px;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    @include media(lg) {
-      padding: 200px 17%;
-    }
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 100px;
     @include media(sm) {
       // background-position-x: -320px;
       // background-position-y: 93px;

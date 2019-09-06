@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 70px !important;
+  padding: 40px 20px !important;
 }
 .icon {
   img {

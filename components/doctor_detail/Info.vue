@@ -21,7 +21,7 @@ ul {
     position: absolute;
     left: -3px;
     top: 0px;
-    opacity: 0.1;
+    opacity: 0.08;
     fill: $secondary-color;
   }
 }
@@ -65,6 +65,7 @@ ul {
   }
 }
 .name-wrapper {
+  padding-right: 16px;
   > div {
     white-space: nowrap;
   }
