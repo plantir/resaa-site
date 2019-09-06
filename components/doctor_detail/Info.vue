@@ -1,146 +1,153 @@
-<style lang="scss" scoped>
-h1 {
-  font-size: 28px;
-  font-weight: 400;
-  color: var(--grey-color);
-  display: inline-flex;
-}
-strong {
-  font-weight: inherit;
-}
-ul {
-  margin: 0;
-  padding: 0;
-}
-
-.v-card {
-  overflow: hidden;
-  .resaa-element {
-    width: 480px;
-    height: 320px;
-    position: absolute;
-    left: -3px;
-    top: 0px;
-    opacity: 0.08;
-    fill: $secondary-color;
-  }
-}
-.image-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  .image {
-    border-radius: 100%;
-    width: 180px;
-    height: 180px;
-    border: 1px solid #d4d4d4;
-    padding: 10px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .status {
-      position: absolute;
-      top: 4px;
-      right: 25px;
-    }
-    img {
-      max-width: 100%;
-      max-height: 100%;
-      border-radius: 100%;
-    }
-  }
-  .doctor-id {
-    background: linear-gradient(to right, #28db9a 0%, #0ec7e5 100%);
-    width: 180px;
-    color: #fff;
-    font-size: 18px;
-    margin-top: 16px;
-    border-radius: 21px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 40px;
-    padding: 8px 8px 8px 16px;
-  }
-}
-.name-wrapper {
-  padding-right: 16px;
-  > div {
-    white-space: nowrap;
-  }
-  .availability {
-    margin-right: 8px;
-    color: $secondary-color;
-    &.deactive {
-      color: #e8aa00;
-    }
-  }
-  .specialty {
-    font-size: 18px;
-    color: #9f9f9f;
+<style lang="scss" >
+#doctor-info {
+  h1 {
+    font-size: 28px;
     font-weight: 400;
+    color: var(--grey-color);
+    display: inline-flex;
   }
-  .specialty-area-container {
-    margin-top: 80px;
-    li {
-      font-size: 14px;
-      color: var(--grey-color);
-      display: flex;
-      align-items: center;
-      &:before {
-        content: "";
-        position: relative;
-        margin-left: 10px;
-        width: 4px;
-        height: 4px;
-        display: inline-block;
-        border-radius: 100%;
-        background-color: $secondary-color;
-      }
-    }
+  strong {
+    font-weight: inherit;
   }
-}
-.fields-activity-wrapper {
-  margin-top: 130px;
   ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  .v-card {
+    overflow: hidden;
+    z-index: 1;
+    .resaa-element {
+      width: 480px;
+      height: 320px;
+      position: absolute;
+      left: -3px;
+      top: 0px;
+      opacity: 0.08;
+      fill: $secondary-color;
+      z-index: -1;
+    }
+  }
+  .image-wrapper {
     display: flex;
-    flex-wrap: wrap;
-    li {
-      flex: 0 0 50%;
-      width: 50%;
-      color: var(--grey-color);
-      font-size: 14px;
+    flex-direction: column;
+    justify-content: center;
+    .image {
+      border-radius: 100%;
+      width: 180px;
+      height: 180px;
+      border: 1px solid #d4d4d4;
+      padding: 10px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .status {
+        position: absolute;
+        top: 4px;
+        right: 25px;
+      }
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 100%;
+      }
+    }
+    .doctor-id {
+      background: linear-gradient(to right, #28db9a 0%, #0ec7e5 100%);
+      width: 180px;
+      color: #fff;
+      font-size: 18px;
+      margin-top: 16px;
+      border-radius: 21px;
       display: flex;
       align-items: center;
-      &:before {
-        content: "";
-        position: relative;
-        margin-left: 10px;
-        width: 4px;
-        height: 4px;
-        display: inline-block;
-        border-radius: 100%;
-        background-color: $secondary-color;
+      justify-content: space-between;
+      height: 40px;
+      padding: 8px 8px 8px 16px;
+    }
+  }
+  .name-wrapper {
+    padding-right: 16px;
+    > div {
+      white-space: nowrap;
+    }
+    .availability {
+      margin-right: 8px;
+      color: $secondary-color;
+      &.deactive {
+        color: #e8aa00;
+      }
+    }
+    .specialty {
+      font-size: 18px;
+      color: #9f9f9f;
+      font-weight: 400;
+    }
+    .specialty-area-container {
+      margin-top: 80px;
+      li {
+        font-size: 14px;
+        color: var(--grey-color);
+        display: flex;
+        align-items: center;
+        &:before {
+          content: "";
+          position: relative;
+          margin-left: 10px;
+          width: 4px;
+          height: 4px;
+          display: inline-block;
+          border-radius: 100%;
+          background-color: $secondary-color;
+        }
       }
     }
   }
+  .fields-activity-wrapper {
+    margin-top: 130px;
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      li {
+        flex: 0 0 50%;
+        width: 50%;
+        color: var(--grey-color);
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        &:before {
+          content: "";
+          position: relative;
+          margin-left: 10px;
+          width: 4px;
+          height: 4px;
+          display: inline-block;
+          border-radius: 100%;
+          background-color: $secondary-color;
+        }
+      }
+    }
+  }
+  .response-wrapper {
+    margin-top: 130px;
+    color: var(--grey-color);
+    font-size: 14px;
+    .response-time {
+      margin-bottom: 12px;
+      font-size: 18px;
+    }
+    .seperator {
+      margin: 0 8px;
+    }
+  }
 }
-.response-wrapper {
-  margin-top: 130px;
-  color: var(--grey-color);
-  font-size: 14px;
-  .response-time {
-    margin-bottom: 12px;
-    font-size: 18px;
-  }
-  .seperator {
-    margin: 0 8px;
-  }
+.custom-dialog {
+  border-radius: 36px;
 }
 </style>
 <template>
-  <section>
+  <section id="doctor-info">
     <v-card>
       <resaaElement class="resaa-element" />
       <v-layout row wrap>
@@ -207,15 +214,20 @@ ul {
               <span>۲۰:۰۰ - ۱۶:۰۰</span>
             </div>
             <div>
-              <span class="secondary--text">
+              <a @click="dialog = true" class="secondary--text">
                 مشاهده کل هفته
                 <v-icon color="secondary" size="20px">fa-angle-down</v-icon>
-              </span>
+              </a>
             </div>
           </div>
         </v-flex>
       </v-layout>
     </v-card>
+    <v-dialog content-class="custom-dialog" max-width="1360" v-model="dialog">
+      <no-ssr>
+        <timeTable @close="dialog = false"></timeTable>
+      </no-ssr>
+    </v-dialog>
   </section>
 </template>
 <script>
@@ -225,6 +237,11 @@ import resaaElement from "~/assets/svg/element.svg?inline";
 export default {
   props: { doctor: {} },
   components: { Available, NotAvailable, resaaElement },
+  data() {
+    return {
+      dialog: false
+    };
+  },
   mounted() {
     this.doctor.tags = [
       { id: 1, title: "دارای فلوشیپ تخصصی روانشناسی بالینی" },
