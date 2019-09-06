@@ -18,7 +18,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 960px;
   font-size: 16px;
   .address {
     padding-right: 32px;
@@ -26,7 +25,7 @@
     min-height: 24px;
     align-items: center;
     display: flex;
-    flex: 1;
+    flex: 0 0 60%;
     svg {
       position: absolute;
       display: inline-block;
@@ -43,10 +42,11 @@
     align-items: center;
     display: flex;
     height: 24px;
-    margin-left: 16px;
+    flex: 0 0 40%;
     .phone-number {
       direction: ltr;
       margin-right: 5px;
+      display: inline-block;
     }
     svg {
       position: absolute;
@@ -58,8 +58,11 @@
       }
     }
   }
+  .description {
+    margin-right: 16px;
+  }
   + .address-item {
-    margin-top: 8px;
+    margin-top: 28px;
   }
 }
 .social-media {
@@ -96,11 +99,13 @@
           {{workplace.street}}
         </div>
         <div class="phone">
-          <phone />
-          <span>مطب :</span>
-          <span class="phone-number">{{workplace.phoneNumber | persianDigit}}</span>
+          <div>
+            <phone />
+            <span>مطب :</span>
+            <span class="phone-number">{{workplace.phoneNumber | persianDigit}}</span>
+          </div>
+          <div class="description">{{workplace.description}}</div>
         </div>
-        <div>{{workplace.description}}</div>
       </div>
       <div class="social-media">
         <div>

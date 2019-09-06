@@ -65,6 +65,9 @@ ul {
   }
 }
 .name-wrapper {
+  > div {
+    white-space: nowrap;
+  }
   .availability {
     margin-right: 8px;
     color: $secondary-color;
@@ -144,7 +147,7 @@ ul {
           <div class="image-wrapper">
             <div class="image">
               <div class="status">
-                <Available />
+                <component :is="doctor.currentlyAvailable?'Available':'NotAvailable'"></component>
               </div>
               <img
                 v-if="doctor.imagePath"

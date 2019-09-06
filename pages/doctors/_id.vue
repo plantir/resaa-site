@@ -21,13 +21,18 @@
 </style>
 
 <template>
-  <v-container id="doctor-detail">
-    <Info :doctor="doctor" />
-    <Call />
-    <Why />
-    <Address :doctor="doctor" />
-    <RelatedDoctors :doctor="doctor" />
-  </v-container>
+  <div id="doctor-detail">
+    <v-container>
+      <Info :doctor="doctor" />
+      <Call />
+      <Why />
+      <Address :doctor="doctor" />
+    </v-container>
+    <v-container fluid class="pa-0">
+      <RelatedDoctors :doctor="doctor" />
+      <Comments />
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -36,6 +41,7 @@ import Call from "@/components/doctor_detail/Call";
 import Why from "@/components/doctor_detail/Why";
 import Address from "@/components/doctor_detail/Address";
 import RelatedDoctors from "@/components/doctor_detail/RelatedDoctors";
+import Comments from "@/components/doctor_detail/Comments";
 export default {
   head() {
     return {
@@ -75,7 +81,7 @@ export default {
       ]
     };
   },
-  components: { Info, Call, Why, Address, RelatedDoctors },
+  components: { Info, Call, Why, Address, RelatedDoctors, Comments },
   async asyncData({ store, params, $axios, isClient }) {
     // if (isClient) {
     //   return window.location.reload;

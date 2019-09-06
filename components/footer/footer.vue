@@ -236,12 +236,13 @@
   background-color: #3b4752;
   color: #a5abb6;
   position: relative;
-  height: 100px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
   p {
     text-align: center;
+    margin: 0;
   }
   .line {
     position: absolute;
