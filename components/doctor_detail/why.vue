@@ -6,8 +6,7 @@
   padding: 60px 70px !important;
 }
 .icon {
-  svg {
-    width: 130px;
+  img {
     height: 130px;
   }
 }
@@ -28,7 +27,7 @@
       <v-flex lg4>
         <v-card class="item">
           <div class="icon">
-            <img src="~/assets/svg/doctor.svg" alt />
+            <img src="~/assets/img/doctor@2x.png" alt />
           </div>
           <div class="title">متخصصین ممتاز</div>
           <div
@@ -39,7 +38,7 @@
       <v-flex lg4 px-4>
         <v-card class="item">
           <div class="icon">
-            <img src="~/assets/svg/privacy.svg" alt />
+            <img src="~/assets/img/privacy@2x.png" alt />
           </div>
           <div class="title">تماس ناشناس</div>
           <div
@@ -50,7 +49,7 @@
       <v-flex lg4>
         <v-card class="item">
           <div class="icon">
-            <img src="~/assets/svg/saveTime.svg" alt />
+            <img src="~/assets/img/saveTime@2x.png" alt />
           </div>
           <div class="title">تماس بدون معطلی</div>
           <div
