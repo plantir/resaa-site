@@ -26,6 +26,7 @@
     <Call />
     <Why />
     <Address :doctor="doctor" />
+    <RelatedDoctors :doctor="doctor" />
   </v-container>
 </template>
 
@@ -34,6 +35,7 @@ import Info from "@/components/doctor_detail/Info";
 import Call from "@/components/doctor_detail/Call";
 import Why from "@/components/doctor_detail/Why";
 import Address from "@/components/doctor_detail/Address";
+import RelatedDoctors from "@/components/doctor_detail/RelatedDoctors";
 export default {
   head() {
     return {
@@ -73,7 +75,7 @@ export default {
       ]
     };
   },
-  components: { Info, Call, Why, Address },
+  components: { Info, Call, Why, Address, RelatedDoctors },
   async asyncData({ store, params, $axios, isClient }) {
     // if (isClient) {
     //   return window.location.reload;
