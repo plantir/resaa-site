@@ -34,7 +34,7 @@ section {
 }
 .swiper-container {
   max-width: 1050px;
-  padding: 0 100px;
+  padding: 0 60px;
   .swiper-slide {
     width: 200px;
     display: flex;
@@ -175,7 +175,7 @@ export default {
       doctors: [],
       swiperOptionDoctors: {
         slidesPerView: 3,
-        spaceBetween: 100,
+        spaceBetween: 60,
         autoplay: {
           delay: 10000,
           disableOnInteraction: false

@@ -23,11 +23,13 @@ section#doctor-detail-comments {
     }
   }
   .swiper-container {
-    max-width: 1670px;
-    padding: 0 100px;
+    // max-width: 1650px;
+    // padding: 0 40px;
     .swiper-slide {
-      width: 200px;
+      padding: 0 20px;
+      box-sizing: border-box;
       display: flex;
+      justify-content: center;
       .profile {
         margin-left: 20px;
         padding-top: 20px;
@@ -77,8 +79,17 @@ section#doctor-detail-comments {
         }
       }
     }
+  }
+  .swiper-holder {
+    position: relative;
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 80px;
+    box-sizing: content-box;
     .swiper-button-prev,
     .swiper-button-next {
+      width: 40px;
+      height: 40px;
       background-image: none;
       svg {
         width: 40px;
@@ -88,7 +99,7 @@ section#doctor-detail-comments {
         }
       }
     }
-    .swiper-button-prev {
+    .swiper-button-next {
       svg {
         transform: rotate(180deg);
       }
@@ -196,19 +207,21 @@ section#doctor-detail-comments {
         <span>نظرات مردمی</span>
         <span class="secondary--text">درباره پزشک</span>
       </div>
-      <div v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide" v-for="(comment, index) in comments" :key="index">
-            <div class="profile">
-              <User />
-            </div>
-            <div class="comment-card">
-              <DropDownArrow />
-              <div class="header">
-                <span class="name">{{ comment.owner_name }}</span>
-                <span>{{comment.owner_email}}</span>
+      <div class="swiper-holder">
+        <div v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="(comment, index) in comments" :key="index">
+              <div class="profile">
+                <User />
               </div>
-              <p class="text">{{ comment.text }}</p>
+              <div class="comment-card">
+                <DropDownArrow />
+                <div class="header">
+                  <span class="name">{{ comment.owner_name }}</span>
+                  <span>{{comment.owner_email}}</span>
+                </div>
+                <p class="text">{{ comment.text }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -241,15 +254,16 @@ section#doctor-detail-comments {
           <br />
         </div>
         <div class="commnet">
-          <v-text-field
+          <v-textarea
             no-resize
+            outline
             class="custom-textarea"
             hide-details
             label="متن ..."
             name="name"
             textarea
-          ></v-text-field>
-          <v-checkbox class="mb-3" hide-details v-model="value" value="value">
+          ></v-textarea>
+          <v-checkbox class="mb-3" hide-details v-model="value2" value="value">
             <template v-slot:label>
               <div>
                 <span>
@@ -268,17 +282,6 @@ section#doctor-detail-comments {
         </div>
       </div>
     </div>
-
-    <!-- <svg aria-hidden="true" focusable="false" style="width:0;height:0;position:absolute;">
-      <linearGradient id="gradient-horizontal-bluegreen">
-        <stop offset="0%" stop-color="#33dda1" />
-        <stop offset="100%" stop-color="#1dcbe7" />
-      </linearGradient>
-      <linearGradient id="gradient-horizontal-purpleblue">
-        <stop offset="0%" stop-color="#00bbda" />
-        <stop offset="100%" stop-color="#0a7dbe" />
-      </linearGradient>
-    </svg>-->
   </section>
 </template>
 <script>
@@ -331,7 +334,6 @@ export default {
       ],
       swiperOptionDoctors: {
         slidesPerView: 3,
-        spaceBetween: 100,
         autoplay: {
           delay: 10000,
           disableOnInteraction: false
@@ -359,7 +361,9 @@ export default {
           }
         },
         grabCursor: true
-      }
+      },
+      value: false,
+      value2: false
     };
   }
 };

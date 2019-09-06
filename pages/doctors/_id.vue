@@ -31,6 +31,7 @@
     <v-container fluid class="pa-0">
       <RelatedDoctors :doctor="doctor" />
       <Comments />
+      <Social :doctor="doctor" />
     </v-container>
   </div>
 </template>
@@ -42,6 +43,7 @@ import Why from "@/components/doctor_detail/Why";
 import Address from "@/components/doctor_detail/Address";
 import RelatedDoctors from "@/components/doctor_detail/RelatedDoctors";
 import Comments from "@/components/doctor_detail/Comments";
+import Social from "@/components/doctor_detail/Social";
 export default {
   head() {
     return {
@@ -81,7 +83,7 @@ export default {
       ]
     };
   },
-  components: { Info, Call, Why, Address, RelatedDoctors, Comments },
+  components: { Info, Call, Why, Address, RelatedDoctors, Comments, Social },
   async asyncData({ store, params, $axios, isClient }) {
     // if (isClient) {
     //   return window.location.reload;

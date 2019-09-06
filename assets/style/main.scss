@@ -123,3 +123,33 @@ svg {
     fill: #0ec7e5;
   }
 }
+.twitter-svg {
+  path {
+    fill: #2ee5c4;
+  }
+}
+.facebook-svg {
+  path {
+    fill: #0e35e5;
+  }
+}
+.instagram-hover-svg:hover {
+  path {
+    fill: #ff6881 !important;
+  }
+}
+.telegram-hover-svg:hover {
+  path {
+    fill: #0ec7e5 !important;
+  }
+}
+.twitter-hover-svg:hover {
+  path {
+    fill: #2ee5c4 !important;
+  }
+}
+.facebook-hover-svg:hover {
+  path {
+    fill: #0e35e5 !important;
+  }
+}
