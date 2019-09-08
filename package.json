@@ -9,7 +9,8 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "sitemap": "node sitemap_generator.js"
+    "sitemap": "node sitemap_generator.js",
+    "release": "git push origin master && git push origin next && git push dist master && git push dist next"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.4.1",
