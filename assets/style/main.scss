@@ -3,6 +3,7 @@
 // @import 'bootstrap.css';
 // @import '~bootstrap-vue/dist/bootstrap-vue.css';
 @import './select';
+@import './typography';
 
 html {
   font-family: IRANSans, tahoma;
@@ -80,7 +81,16 @@ svg {
   width: 24px;
   height: 24px;
 }
-
+.hide-md {
+  @include media(md) {
+    display: none !important;
+  }
+}
+.hide-md-and-up {
+  @include media(md-and-up) {
+    display: none !important;
+  }
+}
 .show-mobile {
   display: none !important;
   @include media(xs-only) {

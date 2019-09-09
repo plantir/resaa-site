@@ -1,0 +1,49 @@
+:root {
+  --display-1: 21px;
+  --display-2: 18px;
+  --display-3: 15px;
+  --display-4: 13.5px;
+  --display-5: 12px;
+  --display-6: 10.5px;
+}
+
+.r {
+  &-display-1 {
+    font-size: var(--display-1) !important;
+    font-weight: normal;
+  }
+  &-display-2 {
+    font-size: var(--display-2) !important;
+    font-weight: normal;
+  }
+  &-display-3 {
+    font-size: var(--display-3) !important;
+  }
+  &-display-4 {
+    font-size: var(--display-4) !important;
+  }
+  &-display-5 {
+    font-size: var(--display-5) !important;
+  }
+  &-display-6 {
+    font-size: var(--display-6) !important;
+  }
+  &-display-light {
+    font-weight: 300;
+  }
+  &-display-normal {
+    font-weight: normal;
+  }
+  &-display-medium {
+    font-weight: 500;
+  }
+  &-display-bold {
+    font-weight: 700;
+  }
+  &-display-black {
+    font-weight: 900;
+  }
+}
+.v-label {
+  font-size: var(--display-3);
+}

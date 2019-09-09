@@ -1,13 +1,32 @@
 <style lang="scss" scoped>
+section {
+  margin-top: 0 !important;
+}
 .social-wrapper {
-  height: 190px;
+  height: 180px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1140px;
+  max-width: 1360px;
   margin: 0 auto;
-  font-size: 30px;
+  padding: 0 60px;
+  font-size: 23px;
+  @include media(sm) {
+    flex-direction: column;
+    padding: 20px 0;
+    > div {
+      &:first-child {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        span:last-child {
+          margin: 10px 0;
+        }
+      }
+    }
+  }
   .icon-wrapper {
+    display: flex;
     svg {
       width: 30px;
       height: 30px;
@@ -27,7 +46,7 @@
   <section>
     <div class="social-wrapper">
       <div>
-        <span class="secondary--text">این پزشک</span>
+        <span class="secondary--text">پروفایل این پزشک</span>
         <span>را به آشنایان معرفی کنید</span>
       </div>
       <div class="icon-wrapper">

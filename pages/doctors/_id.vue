@@ -14,6 +14,9 @@
     font-weight: 500;
     margin-bottom: 16px;
   }
+  [class*="r-display-"] {
+    color: var(--grey-color);
+  }
   section + section {
     margin-top: 28px;
   }

@@ -1,10 +1,10 @@
 <style lang="scss" >
 #doctor-info {
   h1 {
-    font-size: 28px;
-    font-weight: 400;
-    color: var(--grey-color);
+    // font-size: 21px;
+    // font-weight: 400;
     display: inline-flex;
+    color: var(--grey-color);
   }
   strong {
     font-weight: inherit;
@@ -18,24 +18,30 @@
     overflow: hidden;
     z-index: 1;
     .resaa-element {
-      width: 480px;
-      height: 320px;
+      width: 300px;
+      height: 200px;
       position: absolute;
       left: -3px;
       top: 0px;
       opacity: 0.08;
       fill: $secondary-color;
       z-index: -1;
+      @include media(sm) {
+        display: none;
+      }
     }
   }
   .image-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    @include media(sm) {
+      align-items: center;
+    }
     .image {
       border-radius: 100%;
-      width: 180px;
-      height: 180px;
+      width: 150px;
+      height: 150px;
       border: 1px solid #d4d4d4;
       padding: 10px;
       position: relative;
@@ -55,20 +61,29 @@
     }
     .doctor-id {
       background: linear-gradient(to right, #28db9a 0%, #0ec7e5 100%);
-      width: 180px;
+      width: 150px;
       color: #fff;
-      font-size: 18px;
       margin-top: 16px;
       border-radius: 21px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 40px;
-      padding: 8px 8px 8px 16px;
+      padding: 6px 6px 6px 16px;
+      @include media(sm) {
+        margin-bottom: 20px;
+      }
+      img {
+        max-height: 100%;
+      }
     }
   }
   .name-wrapper {
     padding-right: 16px;
+    @include media(sm) {
+      padding-right: 0;
+      text-align: center;
+    }
     > div {
       white-space: nowrap;
     }
@@ -80,17 +95,25 @@
       }
     }
     .specialty {
-      font-size: 18px;
+      // font-size: 18px;
       color: #9f9f9f;
-      font-weight: 400;
+      margin-top: 4px;
+      // font-weight: 400;
     }
     .specialty-area-container {
       margin-top: 80px;
+      @include media(sm) {
+        margin-top: 30px;
+      }
       li {
-        font-size: 14px;
         color: var(--grey-color);
         display: flex;
         align-items: center;
+        span {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
         &:before {
           content: "";
           position: relative;
@@ -106,6 +129,9 @@
   }
   .fields-activity-wrapper {
     margin-top: 130px;
+    @include media(sm) {
+      margin-top: 30px;
+    }
     ul {
       display: flex;
       flex-wrap: wrap;
@@ -113,7 +139,6 @@
         flex: 0 0 50%;
         width: 50%;
         color: var(--grey-color);
-        font-size: 14px;
         display: flex;
         align-items: center;
         &:before {
@@ -132,7 +157,9 @@
   .response-wrapper {
     margin-top: 130px;
     color: var(--grey-color);
-    font-size: 14px;
+    @include media(sm) {
+      margin-top: 30px;
+    }
     .response-time {
       margin-bottom: 12px;
       font-size: 18px;
@@ -168,7 +195,7 @@
                 :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
               />
             </div>
-            <div class="doctor-id">
+            <div class="doctor-id r-display-2">
               <img src="~assets/img/doctorFingerPrint.png" alt />
               کد رِسا:
               <div class="doctor-resaa-code">{{ doctor.subscriberNumber | persianDigit }}</div>
@@ -178,21 +205,29 @@
         <v-flex xs12 md4>
           <div class="name-wrapper">
             <div>
-              <h1>{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</h1>
+              <h1
+                class="r-display-1 r-display-normal"
+              >{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</h1>
               <span
-                class="availability"
+                class="availability hide-md"
                 :class="doctor.currentlyAvailable?'active':'deactive'"
               >({{doctor.currentlyAvailable?'در دسترس':'در دسترس نمی باشد'}})</span>
             </div>
-            <p v-if="doctor.specialty" class="specialty">
+            <p v-if="doctor.specialty" class="specialty r-display-2">
               تخصص:
               <strong>{{doctor.specialty.title}}</strong>
             </p>
+            <span
+              class="availability hide-md-and-up"
+              :class="doctor.currentlyAvailable?'active':'deactive'"
+            >({{doctor.currentlyAvailable?'در دسترس':'در دسترس نمی باشد'}})</span>
             <ul class="specialty-area-container">
               <li
                 class="specialty-area"
               >کد نظام پزشکی: {{doctor.medicalCouncilNumber || '-' | persianDigit}}</li>
-              <li v-for="tag in doctor.tags" :key="tag.id" class="specialty-area">{{tag.title}}</li>
+              <li v-for="tag in doctor.tags" :key="tag.id" class="specialty-area">
+                <span>{{tag.title}}</span>
+              </li>
             </ul>
           </div>
         </v-flex>
@@ -200,14 +235,16 @@
           <div class="fields-activity-wrapper">
             <div class="title">زمینه های فعالیت :</div>
             <ul>
-              <li v-for="(field, index) in doctor.fields" :key="index">{{field}}</li>
+              <li v-for="(field, index) in doctor.fields" :key="index">
+                <span>{{field}}</span>
+              </li>
             </ul>
           </div>
         </v-flex>
         <v-flex xs12 md3>
           <div class="response-wrapper">
             <div class="title">زمان های پاسخگویی</div>
-            <div class="response-time">
+            <div class="response-time r-display-3">
               <span>امروز:</span>
               <span>۱۲:۰۰ - ۹:۰۰</span>
               <span class="seperator">/</span>

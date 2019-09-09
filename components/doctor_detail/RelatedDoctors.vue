@@ -2,6 +2,9 @@
 section {
   background: #fff;
   padding: 80px 0;
+  @include media(sm) {
+    padding: 30px 0;
+  }
 }
 .header {
   display: flex;
@@ -9,25 +12,41 @@ section {
   margin: 0 auto;
   justify-content: space-between;
   margin-bottom: 100px;
+  @include media(sm) {
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 200px;
+    justify-content: space-between;
+    height: 100px;
+    margin-bottom: 40px;
+  }
   .header-title {
-    font-size: 24px !important;
+    font-size: var(--display-2) !important;
     color: var(--grey-color);
   }
   .guide {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @include media(sm) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
     > div {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 20px;
+      font-size: var(--display-3);
       color: #a3a3a3;
       svg {
         margin-left: 12px;
       }
       + div {
         margin-right: 60px;
+        @include media(sm) {
+          margin-right: 0px;
+          margin-top: 12px;
+        }
       }
     }
   }
@@ -45,8 +64,8 @@ section {
       position: relative;
       border: 1px solid #d4d4d4;
       border-radius: 100%;
-      width: 160px;
-      height: 160px;
+      width: 150px;
+      height: 150px;
       padding: 8px;
       .status {
         position: absolute;
@@ -61,7 +80,7 @@ section {
     .name {
       color: #34ccd7;
       margin: 8px 0 4px;
-      font-size: 18px;
+      font-size: var(--display-3);
       white-space: nowrap;
       display: block;
       overflow: hidden;
@@ -69,12 +88,12 @@ section {
       max-width: 100%;
     }
     .speciality {
-      color: #aaa;
-      font-size: 15px;
+      color: #bbb;
+      font-size: var(--display-4);
       margin-bottom: 8px;
     }
     .code {
-      font-size: 20px;
+      font-size: var(--display-3);
       span {
         color: #b1b1b1;
       }
@@ -180,25 +199,17 @@ export default {
           delay: 10000,
           disableOnInteraction: false
         },
-        // pagination: {
-        //   el: ".swiper-pagination",
-        //   clickable: true
-        // },
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev"
         },
         breakpoints: {
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 20
-          },
           640: {
-            slidesPerView: 2,
+            slidesPerView: 1,
             spaceBetween: 20
           },
           320: {
-            slidesPerView: 2,
+            slidesPerView: 1,
             spaceBetween: 10
           }
         },

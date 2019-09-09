@@ -3,14 +3,18 @@ section#doctor-detail-comments {
   margin-top: 0 !important;
   background: #f6f6f6;
   .section-title {
-    font-size: 30px;
+    font-size: var(--display-2);
     text-align: center;
     margin: 90px 0 130px;
     color: #7f8a99;
+    @include media(sm) {
+      margin: 50px 0;
+    }
   }
   .carousel-wrapper {
     overflow: hidden;
     position: relative;
+    z-index: 1;
     .resaa-element {
       width: 710px;
       height: 400px;
@@ -20,6 +24,16 @@ section#doctor-detail-comments {
       opacity: 0.7;
       fill: #fff;
       transform: rotate(90deg);
+      z-index: -1;
+      @include media(sm) {
+        width: 270px;
+        height: 180px;
+        position: absolute;
+        right: auto;
+        left: -7px;
+        top: 0px;
+        transform: rotate(0deg);
+      }
     }
   }
   .swiper-container {
@@ -29,8 +43,12 @@ section#doctor-detail-comments {
       display: flex;
       justify-content: center;
       .profile {
+        @include media(sm) {
+          display: none;
+        }
         margin-left: 20px;
         padding-top: 20px;
+
         svg {
           width: 50px;
           height: 50px;
@@ -44,12 +62,15 @@ section#doctor-detail-comments {
         border-radius: 22px;
         color: #fff;
         padding: 12px;
-        font-size: 16px;
+        font-size: var(--display-3);
         position: relative;
         svg {
           position: absolute;
           right: -19px;
           top: 40px;
+          @include media(sm) {
+            display: none;
+          }
           path {
             fill: #34ccd7;
           }
@@ -63,7 +84,7 @@ section#doctor-detail-comments {
           span {
             display: flex;
             color: #8b8d90;
-            font-size: 16px;
+            font-size: var(--display-3);
             &.name {
               color: $secondary-color;
               font-size: 20px;
@@ -71,7 +92,7 @@ section#doctor-detail-comments {
           }
         }
         .text {
-          text-align: justify;
+          text-align: right;
           padding: 0 20px;
           line-height: 32px;
         }
@@ -84,6 +105,9 @@ section#doctor-detail-comments {
     margin: 0 auto;
     padding: 0 80px;
     box-sizing: content-box;
+    @include media(sm) {
+      padding: 0 40px;
+    }
     .swiper-button-prev,
     .swiper-button-next {
       width: 40px;
@@ -107,6 +131,9 @@ section#doctor-detail-comments {
     position: relative;
     z-index: 1;
     padding: 100px 0;
+    @include media(sm) {
+      padding: 20px;
+    }
     .bg {
       position: absolute;
       background-color: #f6f6f6;
@@ -117,10 +144,15 @@ section#doctor-detail-comments {
       display: flex;
       width: 100%;
       height: 100%;
-      // padding: 150px 17%;
       z-index: -1;
       opacity: 0.3;
       top: 0;
+      @include media(sm) {
+        background-image: url(~assets/img/comment_bg_sm.png);
+        background-size: 100%;
+        opacity: 0.5;
+        background-position: center;
+      }
     }
   }
   .send-commnet {
@@ -128,23 +160,21 @@ section#doctor-detail-comments {
     justify-content: space-between;
     max-width: 1360px;
     margin: 0 auto;
-    padding: 0 100px;
+    padding: 0 60px;
     @include media(sm) {
-      // background-position-x: -320px;
-      // background-position-y: 93px;
-      padding: 50px 10%;
+      padding: 0 30px;
       flex-direction: column;
       align-items: center;
     }
     .data {
       width: 30%;
       @include media(sm) {
-        width: 80%;
-        margin-bottom: 40px;
+        width: 100%;
       }
+
       .unknow-commnet {
         position: relative;
-        font-size: 16px;
+        font-size: var(--display-3);
       }
     }
     .commnet {
@@ -161,7 +191,7 @@ section#doctor-detail-comments {
         padding: 5px;
         border-radius: 20px;
         transition: all 1s;
-        font-size: 16px;
+        font-size: var(--display-3);
         cursor: pointer;
         &:hover {
           background: linear-gradient(
@@ -170,10 +200,6 @@ section#doctor-detail-comments {
             darken(#28db9a, 10)
           );
           transition: all 1s;
-        }
-        @include media(sm) {
-          width: 80%;
-          margin: 0 auto;
         }
         svg {
           margin-right: 10px;
@@ -343,17 +369,11 @@ export default {
           prevEl: ".swiper-button-prev"
         },
         breakpoints: {
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 20
-          },
           640: {
-            slidesPerView: 2,
-            spaceBetween: 20
+            slidesPerView: 1
           },
           320: {
-            slidesPerView: 2,
-            spaceBetween: 10
+            slidesPerView: 1
           }
         },
         grabCursor: true

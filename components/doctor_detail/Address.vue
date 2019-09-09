@@ -1,24 +1,40 @@
 <style lang="scss" scoped>
 .v-card {
   padding: 50px 70px !important;
+  @include media(sm) {
+    padding: 30px 20px !important;
+  }
   .resaa-element {
-    width: 380px;
-    height: 250px;
+    width: 300px;
+    height: 200px;
     position: absolute;
     left: -3px;
     top: 0px;
     opacity: 0.1;
     fill: $secondary-color;
+    @include media(sm) {
+      display: none;
+    }
   }
 }
-.title {
-  margin-bottom: 50px !important;
+.section-title {
+  margin-bottom: 40px !important;
+  font-size: var(--display-2);
+  color: var(--grey-color);
+  @include media(sm) {
+    margin-bottom: 34px !important;
+    text-align: center;
+  }
 }
 .address-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 16px;
+  @include media(sm) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
   .address {
     padding-right: 32px;
     position: relative;
@@ -43,6 +59,11 @@
     display: flex;
     height: 24px;
     flex: 0 0 40%;
+    @include media(sm) {
+      margin-top: 16px;
+      flex-direction: column;
+      align-items: flex-start;
+    }
     .phone-number {
       direction: ltr;
       margin-right: 5px;
@@ -60,6 +81,9 @@
   }
   .description {
     margin-right: 16px;
+    @include media(sm) {
+      margin-right: 0px;
+    }
   }
   + .address-item {
     margin-top: 28px;
@@ -70,11 +94,20 @@
   width: 50%;
   align-items: center;
   margin-top: 28px;
+  @include media(sm) {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
   > div {
     display: flex;
     align-items: center;
     + div {
       margin-right: 25px;
+      @include media(sm) {
+        margin-right: 0px;
+        margin-top: 16px;
+      }
     }
     a {
       color: #a7a9ac;
@@ -92,7 +125,7 @@
   <section>
     <v-card>
       <resaaElement class="resaa-element" />
-      <div class="title">اطلاعات مطب پزشک</div>
+      <div class="section-title">اطلاعات مطب پزشک</div>
       <div class="address-item" v-for="(workplace,index) in doctor.workplaces" :key="index">
         <div class="address">
           <location />
