@@ -137,8 +137,8 @@ section {
     <div v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
       <div class="swiper-wrapper">
         <nuxt-link
+          target="_blank"
           class="swiper-slide"
-          tag="div"
           v-for="doctor in doctors"
           :key="doctor.subscriberNumber"
           :to="`/doctors/${doctor.subscriberNumber}`"

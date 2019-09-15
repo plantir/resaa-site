@@ -65,10 +65,7 @@ section#doctor-detail-comments {
         padding: 12px;
         font-size: var(--display-3);
         position: relative;
-        min-width: 340px;
-        @include media(sm) {
-          min-width: 250px;
-        }
+        width: 100%;
         svg {
           position: absolute;
           right: -19px;

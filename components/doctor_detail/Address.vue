@@ -28,7 +28,7 @@
 }
 .address-item {
   display: flex;
-  align-items: center;
+  // align-items: center;
   justify-content: space-between;
   font-size: 16px;
   @include media(sm) {
@@ -140,23 +140,20 @@
           <div class="description">{{workplace.description}}</div>
         </div>
       </div>
-      <div class="social-media">
+      <!-- <div class="social-media">
         <div>
           <web class="web-svg" />
-          <!-- <img src="~assets/img/Web-Icon.png" class="doctor-link-web-color" /> -->
           <a href="#" class="doctor-link-web">www.doctor-domain.com</a>
         </div>
         <div>
           <instagram class="instagram-svg" />
-          <!-- <img src="~assets/img/Instagram.png" class="doctor-link-instagram-color" /> -->
           <a href="#" class="doctor-link-instagram">dr-test</a>
         </div>
         <div>
           <telegram class="telegram-svg" />
-          <!-- <img src="~assets/img/Telegram.png" class="doctor-link-telegram-color" /> -->
           <a href="#" class="doctor-link-telegram">@dr-test</a>
         </div>
-      </div>
+      </div>-->
     </v-card>
   </section>
 </template> 
