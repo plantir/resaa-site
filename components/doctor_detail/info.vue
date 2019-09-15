@@ -51,7 +51,7 @@
       .status {
         position: absolute;
         top: 4px;
-        right: 25px;
+        right: 12px;
       }
       img {
         max-width: 100%;
@@ -182,60 +182,60 @@
           <div class="image-wrapper">
             <div class="image">
               <div class="status">
-                <component :is="doctor.currentlyAvailable?'Available':'NotAvailable'"></component>
+                <component :is="virtual_doctor.currentlyAvailable?'Available':'NotAvailable'"></component>
               </div>
               <img
-                v-if="doctor.imagePath"
-                :src="'https://webapi.resaa.net/'+doctor.imagePath"
-                :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+                v-if="virtual_doctor.imagePath"
+                :src="'https://webapi.resaa.net/'+virtual_doctor.imagePath"
+                :alt="`تصویر ${virtual_doctor.title} ${virtual_doctor.firstName} ${virtual_doctor.lastName}`"
               />
               <img
                 v-else
                 src="/img/doc-placeholder.png"
-                :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+                :alt="`تصویر ${virtual_doctor.title} ${virtual_doctor.firstName} ${virtual_doctor.lastName}`"
               />
             </div>
             <div class="doctor-id r-display-2">
               <img src="~assets/img/doctorFingerPrint.png" alt />
               کد رِسا:
-              <div class="doctor-resaa-code">{{ doctor.subscriberNumber | persianDigit }}</div>
+              <div class="doctor-resaa-code">{{ virtual_doctor.subscriberNumber | persianDigit }}</div>
             </div>
           </div>
         </v-flex>
-        <v-flex xs12 md4>
+        <v-flex xs12 md3>
           <div class="name-wrapper">
             <div>
               <h1
                 class="r-display-1 r-display-normal"
-              >{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</h1>
+              >{{virtual_doctor.title}} {{virtual_doctor.firstName}} {{virtual_doctor.lastName}}</h1>
               <span
                 class="availability hide-md"
-                :class="doctor.currentlyAvailable?'active':'deactive'"
-              >({{doctor.currentlyAvailable?'در دسترس':'در دسترس نمی باشد'}})</span>
+                :class="virtual_doctor.currentlyAvailable?'active':'deactive'"
+              >({{virtual_doctor.currentlyAvailable?'در دسترس':'در دسترس نمی باشد'}})</span>
             </div>
-            <p v-if="doctor.specialty" class="specialty r-display-2">
+            <p v-if="virtual_doctor.specialty" class="specialty r-display-2">
               تخصص:
-              <strong>{{doctor.specialty.title}}</strong>
+              <strong>{{virtual_doctor.specialty.title}}</strong>
             </p>
             <span
               class="availability hide-md-and-up"
-              :class="doctor.currentlyAvailable?'active':'deactive'"
-            >({{doctor.currentlyAvailable?'در دسترس':'در دسترس نمی باشد'}})</span>
+              :class="virtual_doctor.currentlyAvailable?'active':'deactive'"
+            >({{virtual_doctor.currentlyAvailable?'در دسترس':'در دسترس نمی باشد'}})</span>
             <ul class="specialty-area-container">
               <li
                 class="specialty-area"
-              >کد نظام پزشکی: {{doctor.medicalCouncilNumber || '-' | persianDigit}}</li>
-              <li v-for="tag in doctor.tags" :key="tag.id" class="specialty-area">
+              >کد نظام پزشکی: {{virtual_doctor.medicalCouncilNumber || '-' | persianDigit}}</li>
+              <li v-for="tag in virtual_doctor.custom_tags" :key="tag.id" class="specialty-area">
                 <span>{{tag.title}}</span>
               </li>
             </ul>
           </div>
         </v-flex>
-        <v-flex xs12 md3>
+        <v-flex xs12 md4>
           <div class="fields-activity-wrapper">
             <div class="title">زمینه های فعالیت :</div>
             <ul>
-              <li v-for="(field, index) in doctor.fields" :key="index">
+              <li v-for="(field, index) in virtual_doctor.fields" :key="index">
                 <span>{{field}}</span>
               </li>
             </ul>
@@ -244,11 +244,15 @@
         <v-flex xs12 md3>
           <div class="response-wrapper">
             <div class="title">زمان های پاسخگویی</div>
-            <div class="response-time r-display-3">
+            <div class="response-time r-display-3" v-if="day_of_week && times">
               <span>امروز:</span>
-              <span>۱۲:۰۰ - ۹:۰۰</span>
-              <span class="seperator">/</span>
-              <span>۲۰:۰۰ - ۱۶:۰۰</span>
+              <template v-for="(item,index) in times[day_of_week]">
+                <span :key="index">
+                  <span>{{item.start | persianDigit}} - {{item.end | persianDigit}}</span>
+                  <span v-if="index != times[day_of_week].length-1" class="seperator">/</span>
+                </span>
+              </template>
+              <!-- <span>۲۰:۰۰ - ۱۶:۰۰</span> -->
             </div>
             <div>
               <a @click="dialog = true" class="secondary--text">
@@ -260,9 +264,10 @@
         </v-flex>
       </v-layout>
     </v-card>
+
     <v-dialog content-class="custom-dialog" max-width="1360" v-model="dialog">
       <no-ssr>
-        <timeTable @close="dialog = false"></timeTable>
+        <timeTable v-model="times" @close="dialog = false"></timeTable>
       </no-ssr>
     </v-dialog>
   </section>
@@ -271,28 +276,25 @@
 import Available from "~/assets/svg/Available.svg?inline";
 import NotAvailable from "~/assets/svg/NotAvailable.svg?inline";
 import resaaElement from "~/assets/svg/element.svg?inline";
+import doctors from "./doctors.json";
 export default {
   props: { doctor: {} },
   components: { Available, NotAvailable, resaaElement },
   data() {
     return {
-      dialog: false
+      dialog: false,
+      virtual_doctor: this.doctor,
+      times: null,
+      day_of_week: null
     };
   },
   mounted() {
-    this.doctor.tags = [
-      { id: 1, title: "دارای فلوشیپ تخصصی روانشناسی بالینی" },
-      { id: 2, title: "دارای بورد تخصصی روانشناسی" },
-      { id: 3, title: "عضو هیئت علمی دانشگاه علوم پزشکی بقیه الله" }
-    ];
-    this.doctor.fields = [
-      "روانشناسی خانواده",
-      "استرس",
-      "اضطراب",
-      "روانشناسی کودک",
-      "روانشناسی بالینی",
-      "طرح واره درمانی"
-    ];
+    let days = ["su", "mo", "tu", "we", "th", "fr", "sa"];
+    this.day_of_week = days[new Date().getDay()];
+    let virtual_doctor = doctors.find(
+      item => item.subscriberNumber == this.$route.params.id
+    );
+    this.virtual_doctor = Object.assign(virtual_doctor, this.doctor);
   }
 };
 </script>

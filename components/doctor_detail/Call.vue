@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100px;
+    height: 140px;
     @include media(sm) {
       text-align: center;
       height: auto;
@@ -37,6 +37,7 @@
 
 .price-title {
   font-size: var(--display-2);
+  color: var(--grey-color);
 }
 .price {
   color: $secondary-color;
@@ -80,19 +81,28 @@
   <section>
     <v-card class="call-wrapper">
       <div>
-        <div class="section-title">همین حالا با پزشک تماس بگیرید</div>
-        <div
-          class="description"
-        >پزشک در حال حاضر در دسترس می باشد. تماس شما بلافاصله با موبایل پزشک برقرار می شود تا بتوانید در کوتاه ترین زمان پاسخ سوالات خود را بگیرید.</div>
+        <div class="section-title">
+          <span v-if="doctor.currentlyAvailable">همین حالا با پزشک تماس بگیرید</span>
+          <span v-else>از پزشک بخواهید با شما تماس بگیرد</span>
+        </div>
+        <div class="description">
+          <span
+            v-if="doctor.currentlyAvailable"
+          >پزشک در حال حاضر در دسترس می باشد. تماس شما بلافاصله با موبایل پزشک برقرار می شود تا بتوانید در کوتاه ترین زمان پاسخ سوالات خود را بگیرید.</span>
+          <span
+            v-else
+          >در حال حاضر پزشک در دسترس نیست. با ثبت درخواست تماس، پزشک در اولین ساعت پاسخگویی خود با شما تماس میگیرد. می توانید با بررسی زمان های پاسخگویی پزشک از اولین زمان پاسخگویی پزشک مطلع شوید.</span>
+        </div>
       </div>
       <div>
         <div class>
           <span class="price-title mb-0">هزینه هر دقیقه گفتگو با پزشک :</span>
-          <span class="price">{{3000 | currency | persianDigit}} تومان</span>
+          <span class="price">{{costPerMinute | currency | persianDigit}} تومان</span>
         </div>
         <div class>
           <a class="call-doctor">
-            <span>شروع مکالمه با پزشک</span>
+            <span v-if="doctor.currentlyAvailable">شروع مکالمه با پزشک</span>
+            <span v-else>ثبت درخواست تماس</span>
             <phone />
           </a>
         </div>
@@ -104,8 +114,22 @@
 <script>
 import phone from "~/assets/svg/phone.svg?inline";
 export default {
+  props: {
+    doctor: {}
+  },
   components: {
     phone
+  },
+  data() {
+    return {
+      costPerMinute: null
+    };
+  },
+  async mounted() {
+    let price = await this.$axios.$get(
+      `Rubika/Doctors/${this.$route.params.id}/communicationquote`
+    );
+    this.costPerMinute = price.result.quote.costPerMinute;
   }
 };
 </script>

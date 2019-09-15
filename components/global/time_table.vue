@@ -298,7 +298,7 @@ section {
 </style>
 <template>
   <section>
-    <close class="close" @click="$emit('close')" />
+    <close v-if="close" class="close" @click="$emit('close')" />
     <div class="showhelp">
       <!-- <span class="morning">
         <div class="mobilereverse">
@@ -319,7 +319,7 @@ section {
         <span class="space-betwen">:</span>
         <span class="timesheet">{{this.nighttime.start}} - {{this.nighttime.end}}</span>
       </span>-->
-      <span class="notaccess">
+      <span v-if="daynotaccess.length" class="notaccess">
         <div class="mobilereverse">
           <span>عدم پاسخگویی</span>
         </div>
@@ -473,6 +473,10 @@ import sun from "~/assets/svg/sun.svg?inline";
 import moon from "~/assets/svg/moon.svg?inline";
 import close from "~/assets/svg/close_circle.svg?inline";
 export default {
+  props: {
+    value: {},
+    close: { default: true }
+  },
   components: {
     sun,
     moon,
@@ -562,7 +566,7 @@ export default {
         this.daynotaccess.push(day);
       }
     }
-    console.log(this.daynotaccess);
+    this.$emit("input", this.events);
   },
   methods: {
     get_hour(value) {

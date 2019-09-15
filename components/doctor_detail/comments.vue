@@ -15,6 +15,7 @@ section#doctor-detail-comments {
     overflow: hidden;
     position: relative;
     z-index: 1;
+    padding-bottom: 60px;
     .resaa-element {
       width: 710px;
       height: 400px;
@@ -64,6 +65,10 @@ section#doctor-detail-comments {
         padding: 12px;
         font-size: var(--display-3);
         position: relative;
+        min-width: 340px;
+        @include media(sm) {
+          min-width: 250px;
+        }
         svg {
           position: absolute;
           right: -19px;
@@ -85,6 +90,9 @@ section#doctor-detail-comments {
             display: flex;
             color: #8b8d90;
             font-size: var(--display-3);
+            direction: ltr;
+            text-align: right;
+            justify-content: flex-end;
             &.name {
               color: $secondary-color;
               font-size: 20px;
@@ -232,7 +240,7 @@ section#doctor-detail-comments {
       <div class="swiper-holder">
         <div v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="(comment, index) in comments" :key="index">
+            <div class="swiper-slide" v-for="(comment, index) in doctor.comments" :key="index">
               <div class="profile">
                 <User />
               </div>
@@ -240,7 +248,7 @@ section#doctor-detail-comments {
                 <DropDownArrow />
                 <div class="header">
                   <span class="name">{{ comment.owner_name }}</span>
-                  <span>{{comment.owner_email}}</span>
+                  <span>{{comment.created_at | persianDate('jYYYY/jMM/jDD HH:mm:ss') | persianDigit}}</span>
                 </div>
                 <p class="text">{{ comment.text }}</p>
               </div>
@@ -255,7 +263,7 @@ section#doctor-detail-comments {
         </div>
       </div>
     </div>
-    <div class="comment-wrapper">
+    <!-- <div class="comment-wrapper">
       <div class="bg"></div>
       <div class="send-commnet">
         <div class="data">
@@ -270,7 +278,6 @@ section#doctor-detail-comments {
           </v-checkbox>
           <br />
           <v-text-field name="name" label="آدرس ایمیل ..." id="id"></v-text-field>
-          <!-- <input type="checkbox" /> -->
           <br />
           <v-text-field name="name" label="شماره همراه(اختیاری) ..." id="id"></v-text-field>
           <br />
@@ -303,7 +310,7 @@ section#doctor-detail-comments {
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
   </section>
 </template>
 <script>
@@ -312,6 +319,7 @@ import User from "~/assets/svg/user.svg?inline";
 import Send from "~/assets/svg/send.svg?inline";
 import DropDownArrow from "~/assets/svg/Polygon.svg?inline";
 import resaaElement from "~/assets/svg/element.svg?inline";
+import doctors from "./doctors.json";
 export default {
   components: {
     ChevronLeft,
@@ -322,38 +330,7 @@ export default {
   },
   data() {
     return {
-      comments: [
-        {
-          owner_email: "testanahita.gmail.com",
-          owner_name: "آناهیتا آهنگری",
-          text:
-            "علائم و بیماری‌های آلرژی به علت فعال شدن سیستم ایمنی و واکنش آن به مواد عمدتا بی ضرر و بی خطر مانند گرده ها، شوره حیوانات اهلی یا برخی مواد غذایی ایجاد می‌شود..."
-        },
-        {
-          owner_email: "testhadi.gmail.com",
-          owner_name: "هادی کیانور",
-          text:
-            "علائم و بیماری‌های آلرژی به علت فعال شدن سیستم ایمنی و واکنش آن به مواد عمدتا بی ضرر و بی خطر مانند گرده ها، شوره حیوانات اهلی یا برخی مواد غذایی ایجاد می‌شود..."
-        },
-        {
-          owner_email: "testsozan.gmail.com",
-          owner_name: "سوزان امیرسالاری",
-          text:
-            "علائم و بیماری‌های آلرژی به علت فعال شدن سیستم ایمنی و واکنش آن به مواد عمدتا بی ضرر و بی خطر مانند گرده ها، شوره حیوانات اهلی یا برخی مواد غذایی ایجاد می‌شود..."
-        },
-        {
-          owner_email: "testhadi.gmail.com",
-          owner_name: "هادی کیانور",
-          text:
-            "علائم و بیماری‌های آلرژی به علت فعال شدن سیستم ایمنی و واکنش آن به مواد عمدتا بی ضرر و بی خطر مانند گرده ها، شوره حیوانات اهلی یا برخی مواد غذایی ایجاد می‌شود..."
-        },
-        {
-          owner_email: "testsozan.gmail.com",
-          owner_name: "سوزان امیرسالاری",
-          text:
-            "علائم و بیماری‌های آلرژی به علت فعال شدن سیستم ایمنی و واکنش آن به مواد عمدتا بی ضرر و بی خطر مانند گرده ها، شوره حیوانات اهلی یا برخی مواد غذایی ایجاد می‌شود..."
-        }
-      ],
+      doctor: {},
       swiperOptionDoctors: {
         slidesPerView: 3,
         autoplay: {
@@ -381,6 +358,11 @@ export default {
       value: false,
       value2: false
     };
+  },
+  created() {
+    this.doctor = doctors.find(
+      item => item.subscriberNumber == this.$route.params.id
+    );
   }
 };
 </script>

@@ -21,7 +21,8 @@ section {
     margin-bottom: 40px;
   }
   .header-title {
-    font-size: var(--display-2) !important;
+    font-size: var(--display-1) !important;
+    font-weight: 500;
     color: var(--grey-color);
   }
   .guide {
@@ -123,7 +124,7 @@ section {
 <template>
   <section>
     <div class="header">
-      <div class="header-title">پزشکان با تخصص مرتبط</div>
+      <div class="header-title">سایر روانشناسان</div>
       <div class="guide">
         <div>
           <Available />در دسترس
@@ -178,6 +179,7 @@ section {
 import Available from "~/assets/svg/Available.svg?inline";
 import NotAvailable from "~/assets/svg/NotAvailable.svg?inline";
 import ChevronLeft from "~/assets/svg/chevron_left.svg?inline";
+import doctors from "./doctors.json";
 export default {
   props: {
     doctor: {
@@ -218,10 +220,10 @@ export default {
     };
   },
   async mounted() {
-    let res = await this.$axios.$get(
-      `/Doctors?fields=specialty,title,subscriberNumber,firstName,lastName,imagePath,currentlyAvailable&specialtyId=${this.doctor.specialty.id}&limit=8&offset=0`
-    );
-    this.doctors = res.result.doctors.filter(
+    // let res = await this.$axios.$get(
+    //   `/Doctors?fields=specialty,title,subscriberNumber,firstName,lastName,imagePath,currentlyAvailable&specialtyId=${this.doctor.specialty.id}&limit=8&offset=0`
+    // );
+    this.doctors = doctors.filter(
       item => item.subscriberNumber != this.$route.params.id
     );
   }
