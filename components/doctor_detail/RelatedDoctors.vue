@@ -179,7 +179,7 @@ section {
 import Available from "~/assets/svg/Available.svg?inline";
 import NotAvailable from "~/assets/svg/NotAvailable.svg?inline";
 import ChevronLeft from "~/assets/svg/chevron_left.svg?inline";
-import doctors from "./doctors.json";
+import doctors from "./doctors.js";
 export default {
   props: {
     doctor: {

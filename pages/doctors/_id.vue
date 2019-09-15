@@ -414,7 +414,7 @@ p {
 <script>
 import callSection from "~/components/doctor/call_section/index.vue";
 import phone from "~/assets/svg/phone.svg?inline";
-import doctors from "~/components/doctor_detail/doctors.json";
+import doctors from "~/components/doctor_detail/doctors.js";
 export default {
   head() {
     return {

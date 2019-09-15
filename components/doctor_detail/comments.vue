@@ -316,7 +316,7 @@ import User from "~/assets/svg/user.svg?inline";
 import Send from "~/assets/svg/send.svg?inline";
 import DropDownArrow from "~/assets/svg/Polygon.svg?inline";
 import resaaElement from "~/assets/svg/element.svg?inline";
-import doctors from "./doctors.json";
+import doctors from "./doctors.js";
 export default {
   components: {
     ChevronLeft,

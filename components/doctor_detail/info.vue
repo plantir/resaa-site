@@ -276,7 +276,7 @@
 import Available from "~/assets/svg/Available.svg?inline";
 import NotAvailable from "~/assets/svg/NotAvailable.svg?inline";
 import resaaElement from "~/assets/svg/element.svg?inline";
-import doctors from "./doctors.json";
+import doctors from "./doctors.js";
 export default {
   props: { doctor: {} },
   components: { Available, NotAvailable, resaaElement },
