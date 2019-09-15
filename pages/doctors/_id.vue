@@ -458,12 +458,7 @@ export default {
   async asyncData({ store, params, $axios, isClient, redirect }) {
     let test_doctor = doctors.find(item => item.subscriberNumber == params.id);
     if (test_doctor) {
-      let url = `/doctors/روانشناسی-psychology/${
-        test_doctor.subscriberNumber
-      }/${test_doctor.firstName.replace(
-        / /g,
-        "-"
-      )}-${test_doctor.lastName.replace(/ /g, "-")}`;
+      let url = `/doctors/روانشناسی-psychology/${test_doctor.subscriberNumber}`;
       return redirect(encodeURI(url));
     }
     if (isClient) {
