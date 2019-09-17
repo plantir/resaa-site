@@ -14,18 +14,17 @@
 }
 .charge-items {
   display: flex;
-  margin: 90px 100px;
+  justify-content: center;
+  margin: 90px -30px;
   .charge-item-wrapper {
-    width: 25%;
-    padding: 0 28px;
-    border-radius: 30px;
+    padding: 0 16px;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
     .charge-item {
       box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1), 0 -2px 5px rgba(0, 0, 0, 0.1);
-      border-radius: 64px;
-      min-height: 370px;
-
+      border-radius: 35px;
+      height: 290px;
+      width: 200px;
       .item-header {
         position: relative;
         span {
@@ -40,15 +39,16 @@
           margin: auto;
           justify-content: center;
           align-items: flex-start;
-          font-size: 32px;
+          font-size: 24px;
         }
       }
       .item-content {
         margin-top: -20px;
-        padding: 0 30px 10px;
+        padding: 0 16px 10px;
         font-size: 13px;
         color: #848484;
         font-weight: 500;
+        height: 110px;
         p {
           margin: 20px 0;
         }
@@ -58,7 +58,7 @@
         justify-content: space-between;
         padding: 0 30px;
         .price {
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 500;
           color: #848484;
         }
@@ -104,6 +104,11 @@
 
 <template>
   <section>
+    <no-ssr v-if="ajaxLoading">
+      <v-loading mode="relative">
+        <h3>در حال انتقال به بانک ...</h3>
+      </v-loading>
+    </no-ssr>
     <div class="card">
       <h1>افزایش اعتبار</h1>
       <h1>برای برقراری تماس لطفا حساب خود را به میزان دقایق مکالمه شارژ کنید:</h1>
@@ -111,10 +116,10 @@
       <div class="charge-items">
         <div
           class="charge-item-wrapper"
-          @click="selected = item"
-          :class="{selected:item==selected}"
-          v-for="(item,index) in items"
-          :key="index"
+          @click="selected = item.id"
+          :class="{selected:item.id==selected}"
+          v-for="item in items"
+          :key="item.id"
         >
           <div class="charge-item">
             <div class="item-header">
@@ -130,27 +135,33 @@
             <div class="item-footer">
               <div class="price">{{item.price | currency | persianDigit}} تومان</div>
               <div class="select-holder">
-                <v-icon v-if="item==selected">check</v-icon>
+                <v-icon v-if="item.id==selected">check</v-icon>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="payment-wrapper">
-        <v-btn class="payment-btn" dark round>
+        <v-btn @click="onSubmit" class="payment-btn" depressed dark round>
           <v-icon class="ml-3">fa-credit-card</v-icon>
           <span>پرداخت</span>
         </v-btn>
+        <vue-recaptcha
+          ref="invisibleRecaptcha"
+          @verify="onVerify"
+          size="invisible"
+          :sitekey="sitekey"
+        ></vue-recaptcha>
       </div>
       <div class="continue">
         <div class="text">
           <span>اعتبار فعلی حساب شما</span>
-          <span class="custom-color">{{3000 | currency | persianDigit}} تومان</span>
+          <span class="custom-color">{{credit | currency | persianDigit}} تومان</span>
           <span>است . شما میتوانید</span>
-          <span class="custom-color">{{28 | persianDigit}} دقیقه</span>
+          <span class="custom-color">{{duration | persianDigit}} دقیقه</span>
           <span>با دکتر فتانه محمدی صحبت کنید</span>
         </div>
-        <v-btn color="#27db9b" round outline>ادامه با اعتبار فعلی</v-btn>
+        <v-btn color="#27db9b" to="booking" round outline>ادامه با اعتبار فعلی</v-btn>
       </div>
     </div>
   </section>
@@ -161,43 +172,127 @@ import ChargeSvg from "@/components/charge-svg";
 export default {
   components: { ChargeSvg },
   data() {
-    let items = [
-      {
-        duration: 15,
-        title: "- آشنایی با مشاور",
-        description:
-          "- با این فرصت کوتاه خیالتان از کیفیت مشاوره تلفنی راحت می شود",
-        color: ["#FDBD10", "#7F5F08"],
-        price: 15000
-      },
-      {
-        duration: 30,
-        title: "- مناسب برای پیگیری روند مشاوره",
-        description: "- ممکن است برای اولین جلسه مشاوره کافی نباشد",
-        color: ["#EF4871", "#782439"],
-        price: 30000
-      },
-      {
-        duration: 45,
-        title: "- یک جلسه مشاوره استاندارد",
-        description:
-          "- پیشنهاد ما برای اینکه شما و مشاور فرصت کافی برای رسیدگی به دغدغه ها داشته باشید",
-        color: ["#0EC7E6", "#076473"],
-        price: 45000
-      },
-      {
-        duration: 60,
-        title: "- جلسه مشاوره مفصل و کامل",
-        description:
-          "- جزییات خیلی مهم است هر چه فرصت بیشتری داشته باشید بهتر می توانید از مشاور کمک بگیرید",
-        color: ["#28DB9A", "#146E4D"],
-        price: 60000
-      }
-    ];
     return {
-      items,
-      selected: items[2]
+      items: [
+        {
+          id: 6,
+          duration: 15,
+          title: "- آشنایی با مشاور",
+          description:
+            "- با این فرصت کوتاه خیالتان از کیفیت مشاوره تلفنی راحت می شود",
+          color: ["#FDBD10", "#7F5F08"],
+          price: 15000
+        },
+        {
+          id: 3,
+          duration: 30,
+          title: "- مناسب برای پیگیری روند مشاوره",
+          description: "- ممکن است برای اولین جلسه مشاوره کافی نباشد",
+          color: ["#EF4871", "#782439"],
+          price: 30000
+        },
+        {
+          id: 4,
+          duration: 45,
+          title: "- یک جلسه مشاوره استاندارد",
+          description:
+            "- پیشنهاد ما برای اینکه شما و مشاور فرصت کافی برای رسیدگی به دغدغه ها داشته باشید",
+          color: ["#0EC7E6", "#076473"],
+          price: 45000
+        },
+        {
+          id: 5,
+          duration: 60,
+          title: "- جلسه مشاوره مفصل و کامل",
+          description:
+            "- جزییات خیلی مهم است هر چه فرصت بیشتری داشته باشید بهتر می توانید از مشاور کمک بگیرید",
+          color: ["#28DB9A", "#146E4D"],
+          price: 60000
+        }
+      ],
+      user: {},
+      duration: 0,
+      credit: 0,
+      ajaxLoading: false,
+      selected: 4,
+      recaptchaResponse: null
     };
+  },
+  async mounted() {
+    try {
+      let { result } = await this.$axios.$get(
+        `/Accounts/${this.user_id}/Profile`
+      );
+      this.user = result.profile;
+      let { credit } = this.user.subscriberCards.find(
+        item => item.state == "Active"
+      );
+      this.credit = credit;
+    } catch (error) {}
+    try {
+      let { result } = await this.$axios.$get(
+        `/Doctors/${this.$route.params.id}/CommunicationQuote`
+      );
+      this.duration = result.quote.duration;
+    } catch (error) {}
+  },
+  methods: {
+    onVerify: function(response) {
+      this.ajaxLoading = true;
+      this.recaptchaResponse = response;
+      this.chargeRequest();
+    },
+    resetRecaptcha() {
+      this.$refs.invisibleRecaptcha.reset(); // Direct call reset method
+    },
+    onSubmit() {
+      this.$refs.invisibleRecaptcha.execute();
+    },
+    async chargeRequest() {
+      this.ajaxLoading = true;
+      try {
+        let res = await this.$axios.get(`/Accounts/${this.user_id}/Profile`);
+        let data = {
+          denominationId: this.selected,
+          callbackUrl:
+            process.env.SITE_URL +
+            this.$route.fullPath.replace("charge", "booking"),
+          recaptchaResponse: this.recaptchaResponse,
+          phoneNumber: res.data.result.profile.phoneNumber
+        };
+        debugger;
+        let response = await this.$axios.post("/Charge", data);
+        let {
+          address,
+          submissionParameters: { token }
+        } = response.data.result.electronicPaymentVoucher.gateway;
+        this.goPayment(address, token);
+        this.chargeStep = "receipt";
+      } catch (error) {
+        alert("خطایی رخ داده است");
+        this.resetRecaptcha();
+      }
+      this.ajaxLoading = false;
+    },
+    goPayment(action, token) {
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = action;
+      const input = document.createElement("input");
+      input.value = token;
+      input.name = "token";
+      form.appendChild(input);
+      document.body.appendChild(form);
+      form.submit();
+    }
+  },
+  computed: {
+    sitekey() {
+      return this.$store.state.sitekey;
+    },
+    user_id() {
+      return this.$store.state.patient.user_id;
+    }
   }
 };
 </script>

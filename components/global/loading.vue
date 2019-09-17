@@ -12,6 +12,11 @@
   align-items: center;
   z-index: 99;
 }
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 img {
   max-width: 100px;
 }
@@ -20,7 +25,8 @@ img {
   <no-ssr>
     <section id="loader">
       <div class="loader-wrapper">
-        <img src="./loader.gif" alt>
+        <img src="./loader.gif" alt />
+        <slot />
       </div>
     </section>
   </no-ssr>

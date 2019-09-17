@@ -151,7 +151,10 @@ export default {
       if (this.$route.name.includes("charge")) {
         return 3;
       }
-      if (this.$route.name.includes("booking")) {
+      if (
+        this.$route.name.includes("booking") ||
+        this.$route.name.includes("callback")
+      ) {
         return 4;
       }
     }
