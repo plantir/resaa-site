@@ -68,6 +68,9 @@
   justify-content: space-between;
   padding: 0 26px;
   font-size: 16px;
+  a {
+    color: #fff;
+  }
   svg {
     margin-right: 26px;
     path {
@@ -100,11 +103,14 @@
           <span class="price">{{costPerMinute | currency | persianDigit}} تومان</span>
         </div>
         <div class>
-          <a class="call-doctor">
-            <span v-if="doctor.currentlyAvailable">شروع مکالمه با پزشک</span>
-            <span v-else>ثبت درخواست تماس</span>
+          <div class="call-doctor">
+            <nuxt-link
+              :to="`${doctor.subscriberNumber}/call/register`"
+              v-if="doctor.currentlyAvailable"
+            >شروع مکالمه با پزشک</nuxt-link>
+            <nuxt-link :to="`${doctor.subscriberNumber}/call/register`" v-else>ثبت درخواست تماس</nuxt-link>
             <phone />
-          </a>
+          </div>
         </div>
       </div>
     </v-card>

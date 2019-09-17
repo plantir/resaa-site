@@ -1,5 +1,11 @@
 <style lang="scss" >
 #call-doctor {
+  h1 {
+    text-align: center;
+    color: #7e7e7e;
+    font-weight: 500;
+    margin-bottom: 40px;
+  }
   .card {
     border-radius: 30px;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1), 0 -2px 5px rgba(0, 0, 0, 0.1);
@@ -73,6 +79,9 @@
       background-color: #a3a3a3;
       border-radius: 100px;
       margin: -26px -26px 0;
+      &.completed {
+        background-color: #28db9a;
+      }
     }
   }
 }
@@ -90,7 +99,7 @@
           </div>
           <div class="step-label">انتخاب پزشک</div>
         </div>
-        <div class="step-divider"></div>
+        <div class="step-divider completed"></div>
         <div class="step" :class="{completed:step>2,active:step == 2}">
           <div class="step-icon">
             <span v-if="step == 2">
@@ -103,7 +112,7 @@
           </div>
           <div class="step-label">عضویت / ورود</div>
         </div>
-        <div class="step-divider"></div>
+        <div class="step-divider" :class="{completed:step>2}"></div>
         <div class="step" :class="{completed:step>3,active:step == 3}">
           <div class="step-icon">
             <span v-if="step == 3">
@@ -116,7 +125,7 @@
           </div>
           <div class="step-label">افزایش اعتبار</div>
         </div>
-        <div class="step-divider"></div>
+        <div class="step-divider" :class="{completed:step>3}"></div>
         <div class="step" :class="{active:step == 4}">
           <div class="step-icon">
             <span v-if="step == 4">
@@ -127,7 +136,7 @@
           <div class="step-label">تماس با پزشک</div>
         </div>
       </div>
-      <nuxt-child></nuxt-child>
+      <nuxt-child :key="$route.name"></nuxt-child>
     </section>
   </v-container>
 </template>

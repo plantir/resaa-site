@@ -1,27 +1,28 @@
-import Vue from 'vue'
-import VeeValidate, {
-  Validator
-} from 'vee-validate'
-const dictionary = {
-  en: {
-    messages: {
-      required: 'this field is required'
-    }
-  },
-  fa: {
-    messages: {
-      required: 'وارد کردن این فیلد اجباری میباشد.'
-    }
-  }
-};
-Validator.localize(dictionary);
+import Vue from 'vue';
+import VeeValidate, { Validator } from 'vee-validate';
+import validationMessages from 'vee-validate/dist/locale/fa';
+import VueI18n from 'vue-i18n';
+
+// const dictionary = {
+//   en: {
+//     messages: {
+//       required: 'this field is required'
+//     }
+//   },
+//   fa: {
+//     messages: {
+//       required: 'وارد کردن این فیلد اجباری میباشد.'
+//     }
+//   }
+// };
+// Validator.localize(dictionary);
 
 Validator.extend('mobile', {
   getMessage() {
     return 'فرمت موبایل صحیح نمی باشد.';
   },
   validate(value) {
-    let mobile = /^[0][9][0-3][0-9]{8,8}$/g.exec(value);
+    let mobile = /^[0][9][0-3|9][0-9]{8,8}$/g.exec(value);
     return mobile ? true : false;
   }
 });
@@ -76,6 +77,19 @@ Validator.extend('postalCode', {
     return postalCode ? true : false;
   }
 });
+Vue.use(VueI18n);
+const i18n = new VueI18n();
+i18n.locale = 'fa'; // set a default locale
+validationMessages.messages.custom_after = validationMessages.messages.after;
+
 Vue.use(VeeValidate, {
-  locale: 'fa'
-})
+  i18nRootKey: 'validations', // customize the root path for validation messages.
+  i18n,
+  dictionary: {
+    fa: validationMessages
+  }
+});
+
+// Vue.use(VeeValidate, {
+//   locale: 'fa'
+// });
