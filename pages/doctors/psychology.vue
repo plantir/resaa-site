@@ -56,6 +56,17 @@
     padding: 30px;
   }
 }
+.comments-wrapper {
+  background: #fff;
+  padding: 30px 0;
+  h3 {
+    text-align: center;
+    color: #999999;
+    font-weight: normal;
+    margin-bottom: 40px;
+    font-size: 20px;
+  }
+}
 </style>
 <template>
   <section>
@@ -85,24 +96,31 @@
         <div class="item" v-for="doctor in doctors.slice(0,3)" :key="doctor.subscriberNumber">
           <Doctor :doctor="doctor" />
         </div>
-        <div class="guide">راهنما</div>
+        <Guide />
         <div class="item" v-for="doctor in doctors.slice(3,6)" :key="doctor.subscriberNumber">
           <Doctor :doctor="doctor" />
         </div>
       </div>
     </v-container>
-    <v-container fluid>hi again</v-container>
-    <v-container>hi</v-container>
+    <v-container class="comments-wrapper" fluid>
+      <h3>نظر همراهان رسا در مورد مشاوره تلفنی روانشناسی</h3>
+      <Comments />
+    </v-container>
+    <v-container>
+      <Description />
+    </v-container>
   </section>
 </template>
 <script>
 import Wave from "@/assets/svg/speciality_wave.svg?inline";
-import Available from "@/assets/svg/Available.svg?inline";
-import NotAvailable from "@/assets/svg/NotAvailable.svg?inline";
 import doctors from "@/components/doctor_detail/doctors";
 import Doctor from "@/components/specialities/doctor";
+import Guide from "@/components/specialities/guide";
+import Comments from "@/components/specialities/comments";
+import Description from "@/components/specialities/description";
+
 export default {
-  components: { Wave, Available, NotAvailable, Doctor },
+  components: { Wave, Doctor, Guide, Comments, Description },
   data() {
     return {
       text_array: [

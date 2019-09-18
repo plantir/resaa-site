@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
 .item {
-  border: 1px solid #43e7a5;
+  border: 2px solid #43e7a5;
   border-radius: 20px;
   padding: 20px;
   display: flex;
@@ -116,7 +116,12 @@
       </div>
       <div>
         <div class="price-per-minute">{{1000 | persianDigit}} تومان / دقیقه</div>
-        <v-btn @click="onSubmit" class="select-btn" dark round>
+        <v-btn
+          :to="`/doctors/psychology/${doctor.subscriberNumber}/call/register`"
+          class="select-btn"
+          dark
+          round
+        >
           <span>انتخاب مشاور</span>
         </v-btn>
       </div>
@@ -124,9 +129,12 @@
   </section>
 </template>
 <script>
+import Available from "@/assets/svg/Available.svg?inline";
+import NotAvailable from "@/assets/svg/NotAvailable.svg?inline";
 export default {
   props: {
     doctor: {}
-  }
+  },
+  components: { Available, NotAvailable }
 };
 </script>
