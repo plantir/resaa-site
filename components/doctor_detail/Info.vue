@@ -195,7 +195,7 @@
                 :alt="`تصویر ${virtual_doctor.title} ${virtual_doctor.firstName} ${virtual_doctor.lastName}`"
               />
             </div>
-            <div class="doctor-id r-display-2">
+            <div v-scroll-to="{ el: '#call-section', offset: -50 }" class="doctor-id r-display-2">
               <img src="~assets/img/doctorFingerPrint.png" alt />
               کد رِسا:
               <div class="doctor-resaa-code">{{ virtual_doctor.subscriberNumber | persianDigit }}</div>

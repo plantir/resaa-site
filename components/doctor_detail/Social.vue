@@ -46,7 +46,7 @@ section {
   <section>
     <div class="social-wrapper">
       <div>
-        <span class="secondary--text">پروفایل این پزشک</span>
+        <span class="secondary--text">این پزشک</span>
         <span>را به آشنایان معرفی کنید</span>
       </div>
       <div class="icon-wrapper">

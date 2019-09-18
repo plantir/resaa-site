@@ -81,7 +81,7 @@
 </style>
 
 <template>
-  <section>
+  <section id="call-section">
     <v-card class="call-wrapper">
       <div>
         <div class="section-title">
