@@ -170,7 +170,7 @@
           </div>
         </div>
       </div>
-      <div class="hide-md-up" v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
+      <div class="hide-md-and-up" v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
         <div class="swiper-wrapper">
           <div
             class="charge-item-wrapper swiper-slide"
