@@ -1,10 +1,9 @@
 <style lang="scss" >
 #specoality-description {
-  .card {
+  &.card {
     overflow: hidden;
     z-index: 1;
     position: relative;
-    min-height: 900px;
     padding: 30px 50px;
     .resaa-element {
       width: 480px;
