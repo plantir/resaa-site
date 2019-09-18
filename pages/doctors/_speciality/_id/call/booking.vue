@@ -6,6 +6,11 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
+  @include media(sm) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
   .payment-status {
     color: #848484;
     font-size: 18px;
@@ -56,6 +61,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @include media(sm) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
   > div {
     flex: 0 0 60%;
   }

@@ -12,77 +12,100 @@
     }
   }
 }
+
 .charge-items {
   display: flex;
   justify-content: center;
   margin: 90px -30px;
-  .charge-item-wrapper {
-    padding: 0 16px;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-    .charge-item {
-      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1), 0 -2px 5px rgba(0, 0, 0, 0.1);
-      border-radius: 35px;
-      height: 290px;
-      width: 200px;
-      .item-header {
-        position: relative;
-        span {
-          position: absolute;
-          color: #fff;
-          font-weight: normal;
-          top: 30px;
-          right: 0;
-          left: 0;
-          display: flex;
-          bottom: 0;
-          margin: auto;
-          justify-content: center;
-          align-items: flex-start;
-          font-size: 24px;
-        }
-      }
-      .item-content {
-        margin-top: -20px;
-        padding: 0 16px 10px;
-        font-size: 13px;
-        color: #848484;
-        font-weight: 500;
-        height: 110px;
-        p {
-          margin: 20px 0;
-        }
-      }
-      .item-footer {
+}
+.swiper-wrapper {
+  padding: 10px 0 40px;
+}
+.charge-item-wrapper {
+  padding: 0 16px;
+  transition: all 0.3s ease-in-out;
+  @include media(sm) {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  cursor: pointer;
+  .charge-item {
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1), 0 -2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 35px;
+    height: 290px;
+    width: 200px;
+    @include media(sm) {
+      height: 310px;
+      width: 230px;
+    }
+    .item-header {
+      position: relative;
+      span {
+        position: absolute;
+        color: #fff;
+        font-weight: normal;
+        top: 30px;
+        right: 0;
+        left: 0;
         display: flex;
-        justify-content: space-between;
-        padding: 0 30px;
-        .price {
-          font-size: 16px;
-          font-weight: 500;
-          color: #848484;
-        }
-        .select-holder {
-          width: 30px;
-          height: 30px;
-          border-radius: 100%;
-          border: 2px solid #ccc;
+        bottom: 0;
+        margin: auto;
+        justify-content: center;
+        align-items: flex-start;
+        font-size: 24px;
+      }
+    }
+    .item-content {
+      margin-top: -20px;
+      padding: 0 16px 10px;
+      font-size: 13px;
+      color: #848484;
+      font-weight: 500;
+      height: 110px;
+      p {
+        margin: 20px 0;
+      }
+    }
+    .item-footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 30px;
+      .price {
+        font-size: 16px;
+        font-weight: 500;
+        color: #848484;
+      }
+      .select-holder {
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        border: 2px solid #ccc;
+        @include media(sm) {
+          width: 20px;
+          height: 20px;
           .v-icon {
-            color: #fff;
+            font-size: 18px;
           }
+        }
+        .v-icon {
+          color: #fff;
         }
       }
     }
-    &.selected {
-      transform: scale(1.1);
-      .item-footer {
-        .price {
-          color: #27db9b;
-        }
-        .select-holder {
-          border-color: #27db9b;
-          background: #27db9b;
-        }
+  }
+  &.selected {
+    transform: scale(1.1);
+    @include media(sm) {
+      transform: scale(1);
+    }
+    .item-footer {
+      .price {
+        color: #27db9b;
+      }
+      .select-holder {
+        border-color: #27db9b;
+        background: #27db9b;
       }
     }
   }
@@ -91,10 +114,17 @@
   margin-top: 30px;
   display: flex;
   justify-content: space-between;
+  @include media(sm) {
+    flex-direction: column;
+  }
   .text {
     font-size: 16px;
     color: #969696;
     font-weight: 500;
+    @include media(sm) {
+      text-align: center;
+      margin-bottom: 8px;
+    }
     .custom-color {
       color: #27db9b;
     }
@@ -112,8 +142,7 @@
     <div class="card">
       <h1>افزایش اعتبار</h1>
       <h1>برای برقراری تماس لطفا حساب خود را به میزان دقایق مکالمه شارژ کنید:</h1>
-
-      <div class="charge-items">
+      <div class="charge-items hide-md">
         <div
           class="charge-item-wrapper"
           @click="selected = item.id"
@@ -141,6 +170,38 @@
           </div>
         </div>
       </div>
+      <div class="hide-md-up" v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
+        <div class="swiper-wrapper">
+          <div
+            class="charge-item-wrapper swiper-slide"
+            @click="selected = item.id"
+            :class="{selected:item.id==selected}"
+            v-for="item in items"
+            :key="item.id"
+          >
+            <div class="charge-item">
+              <div class="item-header">
+                <div class="header-bg">
+                  <ChargeSvg :color="item.color" />
+                </div>
+                <span>{{item.duration | persianDigit}} دقیقه</span>
+              </div>
+              <div class="item-content">
+                <h4>{{item.title}}</h4>
+                <p>{{item.description}}</p>
+              </div>
+              <div class="item-footer">
+                <div class="price">{{item.price | currency | persianDigit}} تومان</div>
+                <div class="select-holder">
+                  <v-icon v-if="item.id==selected">check</v-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination" slot="pagination"></div>
+      </div>
+
       <div class="payment-wrapper">
         <v-btn @click="onSubmit" class="payment-btn" depressed dark round>
           <v-icon class="ml-3">fa-credit-card</v-icon>
@@ -227,6 +288,18 @@ export default {
           price: 60000
         }
       ],
+      swiperOptionDoctors: {
+        slidesPerView: 1,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+        },
+        autoplay: {
+          delay: 10000,
+          disableOnInteraction: false
+        },
+        grabCursor: true
+      },
       user: {},
       duration: 0,
       credit: 0,

@@ -5,6 +5,10 @@
     color: #7e7e7e;
     font-weight: 500;
     margin-bottom: 40px;
+    font-size: 18px;
+    @include media(sm) {
+      margin-bottom: 16px;
+    }
   }
   .card {
     border-radius: 30px;
@@ -12,6 +16,9 @@
     margin: 30px 0;
     padding: 30px 60px;
     background: #fff;
+    @include media(sm) {
+      padding: 30px;
+    }
   }
   .steper {
     height: 140px;
@@ -24,6 +31,11 @@
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1), 0 -2px 5px rgba(0, 0, 0, 0.1);
     margin-top: 30px;
     background: #fff;
+    @include media(sm) {
+      padding: 0 10px;
+      height: 80px;
+      border-radius: 12px;
+    }
     .step {
       align-items: center;
       justify-content: center;
@@ -31,6 +43,9 @@
       flex-direction: column;
       padding: 24px;
       position: relative;
+      @include media(sm) {
+        padding: 6px;
+      }
       .step-icon {
         width: 40px;
         height: 40px;
@@ -42,11 +57,25 @@
         justify-content: center;
         margin-bottom: 8px;
         font-size: 18px;
+        span {
+          display: flex;
+        }
+        @include media(sm) {
+          width: 25px;
+          height: 25px;
+          font-size: 16px;
+          .v-icon {
+            font-size: 18px;
+          }
+        }
       }
       .step-label {
         font-size: 14px;
         font-weight: 500;
         color: #8d8d8d;
+        @include media(sm) {
+          font-size: 11px;
+        }
       }
       &.active {
         .step-icon {
@@ -71,6 +100,10 @@
       height: 10px;
       background: #fff;
       border-radius: 100%;
+      @include media(sm) {
+        width: 6px;
+        height: 6px;
+      }
     }
     .step-divider {
       align-self: center;
@@ -79,6 +112,10 @@
       background-color: #a3a3a3;
       border-radius: 100px;
       margin: -26px -26px 0;
+      @include media(sm) {
+        margin: -26px -20px 0;
+        height: 1px;
+      }
       &.completed {
         background-color: #28db9a;
       }
@@ -90,6 +127,9 @@
     font-size: 14px;
     font-weight: normal;
     color: #7e7e7e;
+    @include media(sm) {
+      padding: 20px;
+    }
     > div {
       display: flex;
       align-items: center;
@@ -103,6 +143,9 @@
       max-width: 40px;
       min-width: 40px;
       margin-left: 50px;
+      @include media(sm) {
+        margin-left: 20px;
+      }
     }
   }
 }

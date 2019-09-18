@@ -3,18 +3,29 @@
   .register-container {
     max-width: 480px;
     margin: 0 auto;
+    text-align: center;
   }
   .register-form {
     padding: 90px 0;
+    @include media(sm) {
+      padding: 30px 60px;
+    }
   }
   .form-wrapper {
     display: flex;
+    @include media(sm) {
+      flex-direction: column;
+    }
     label:not(.v-label) {
       margin-top: 12px;
       margin-left: 16px;
       text-align: center;
       color: #7e7e7e;
       font-weight: 500;
+      @include media(sm) {
+        margin: 0 0 16px 0;
+        font-size: 18px;
+      }
     }
     .v-text-field {
       .v-input__slot {
@@ -27,6 +38,13 @@
         margin-top: 8px;
       }
     }
+  }
+  .register-btn {
+    min-width: 160px;
+    min-height: 46px;
+    font-size: 16px;
+    background: linear-gradient(to left, #0ec7e6, #28db9a);
+    font-weight: 500;
   }
   .input-detail {
     text-align: center;
@@ -74,6 +92,9 @@
               :sitekey="sitekey"
             ></vue-recaptcha>
           </div>
+          <v-btn @click="onRegister" class="register-btn" depressed dark round>
+            <span>ادامه</span>
+          </v-btn>
         </div>
         <div v-else>
           <div v-if="new_user">
@@ -87,13 +108,15 @@
               <v-text-field
                 outline
                 single-line
-                hide-details
                 v-model="user.activationKey"
                 name="activation"
                 label="کد تایید"
                 @keyup.enter="verifySMSCode"
               ></v-text-field>
             </div>
+            <v-btn @click="verifySMSCode" class="register-btn" depressed dark round>
+              <span>ارسال</span>
+            </v-btn>
             <div class="input-detail">
               <div v-if="resendSMSCode_timeout == 0">
                 <a @click="resendSMSCode">ارسال مجدد کد</a>
@@ -122,13 +145,15 @@
               <v-text-field
                 outline
                 single-line
-                hide-details
                 v-model="user.password"
                 name="activation"
                 label="رمز ورود"
                 @keyup.enter="login"
               ></v-text-field>
             </div>
+            <v-btn @click="login" class="register-btn" depressed dark round>
+              <span>ورود</span>
+            </v-btn>
             <div v-if="errorMessage" class="error-message">
               <span>{{errorMessage}}</span>
             </div>
@@ -177,8 +202,9 @@ export default {
     resetRecaptcha() {
       this.$refs.invisibleRecaptcha.reset(); // Direct call reset method
     },
-    onRegister() {
-      this.$refs.invisibleRecaptcha.execute();
+    async onRegister() {
+      let valid = await this.$validator.validate();
+      valid && this.$refs.invisibleRecaptcha.execute();
     },
     checkNumber() {
       this.error = null;
