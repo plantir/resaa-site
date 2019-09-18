@@ -18,9 +18,17 @@
   justify-content: center;
   margin: 90px -30px;
 }
-.swiper-wrapper {
-  padding: 10px 0 40px;
+.swiper-container {
+  margin: 0 -30px;
 }
+.swiper-wrapper {
+  padding: 30px 0 70px;
+}
+.swiper-slide {
+  height: 310px;
+  width: 200px;
+}
+
 .charge-item-wrapper {
   padding: 0 16px;
   transition: all 0.3s ease-in-out;
@@ -97,7 +105,7 @@
   &.selected {
     transform: scale(1.1);
     @include media(sm) {
-      transform: scale(1);
+      // transform: scale(1);
     }
     .item-footer {
       .price {
@@ -170,7 +178,13 @@
           </div>
         </div>
       </div>
-      <div class="hide-md-and-up" v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
+      <div
+        class="hide-md-and-up"
+        ref="mySwiper"
+        v-swiper:mySwiperdesktop="swiperOptionDoctors"
+        @slideChange="onChange"
+        dir="rtl"
+      >
         <div class="swiper-wrapper">
           <div
             class="charge-item-wrapper swiper-slide"
@@ -289,14 +303,15 @@ export default {
         }
       ],
       swiperOptionDoctors: {
-        slidesPerView: 1,
+        spaceBetween: 30,
+        slidesPerView: "auto",
+        centeredSlides: true,
+        slidesPerGroup: 1,
+        loopFillGroupWithBlank: true,
+        initialSlide: 2,
         pagination: {
           el: ".swiper-pagination",
           clickable: true
-        },
-        autoplay: {
-          delay: 10000,
-          disableOnInteraction: false
         },
         grabCursor: true
       },
@@ -337,6 +352,10 @@ export default {
     },
     onSubmit() {
       this.$refs.invisibleRecaptcha.execute();
+    },
+    onChange(item) {
+      let ids = [6, 3, 4, 5];
+      this.selected = ids[this.$refs.mySwiper.swiper.activeIndex];
     },
     async chargeRequest() {
       this.ajaxLoading = true;
@@ -380,6 +399,7 @@ export default {
     sitekey() {
       return this.$store.state.sitekey;
     },
+
     user_id() {
       return this.$store.state.patient.user_id;
     }

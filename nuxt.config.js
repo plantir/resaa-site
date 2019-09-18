@@ -53,6 +53,15 @@ export default {
   /*
    ** Headers of the page
    */
+  router: {
+    scrollBehavior: function(to, from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition;
+      } else {
+        return { x: 0, y: 0 };
+      }
+    }
+  },
   head: {
     title: 'رسا ، سامانه سلامت ایرانیان',
     meta: [
