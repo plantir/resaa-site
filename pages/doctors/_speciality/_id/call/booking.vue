@@ -33,6 +33,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     .status {
       position: absolute;
       top: 4px;
@@ -42,6 +43,11 @@
       max-width: 100%;
       max-height: 100%;
       border-radius: 100%;
+    }
+    &.deactive {
+      img {
+        filter: grayscale(0.8);
+      }
     }
   }
 }
@@ -93,7 +99,7 @@
               <span>کد پیگیری: {{charge.trackingNumber | persianDigit}}</span>
             </div>
           </div>
-          <div class="image">
+          <div class="image" :class="{deactive:!doctor.currentlyAvailable}">
             <div class="status">
               <component :is="doctor.currentlyAvailable?'Available':'NotAvailable'"></component>
             </div>
@@ -136,8 +142,37 @@
             class="retry-btn"
             to="charge"
           >تلاش مجدد</v-btn>
-          <v-btn v-else round depressed dark class="retry-btn" @click="reserveDoctor">تماس با پزشک</v-btn>
+          <v-btn v-else round depressed dark class="retry-btn" @click="reserveDoctor">
+            <span v-if="doctor.currentlyAvailable">تماس با پزشک</span>
+            <span v-else>ثبت درخواست تماس</span>
+          </v-btn>
         </div>
+      </div>
+    </div>
+    <div v-if="status == 'fail'" class="card notify">
+      <div>
+        <Tellphone />
+        <div>
+          <p>پشتیبانی رسا تا برقراری تماس موفق در کنار شماست. شماره پشتیبانی ۰۲۱۷۴۴۷۱۳۰۰</p>
+        </div>
+      </div>
+    </div>
+    <div v-else-if="!doctor.currentlyAvailable" class="card notify">
+      <div>
+        <Lamp />
+        <div>
+          <p>کافیست دکمه ثبت درخواست تماس را بفشارید و با موبایل خود با شماره ۰۲۱۷۴۴۷۱۴۰۲ تماس بگیرید. پس از پخش شدن صدای گویا عدد یک را وارد کنید.</p>
+          <p>پزشک نهایتا در اولین ساعت پاسخگویی خود با شماره موبایلی که در سامانه ثبت کرده‌اید تماس می‌گیرد. هزینه مکالمه به صورت دقیقه ای از اعتبار شما کسر می‌گردد.</p>
+          <p>پزشک با شماره ۰۲۱۷۴۴۷۱۱۱۱ با شما تماس می‌گیرد. در صورت عدم پاسخگویی شما مبلغی از حساب شما کسر نمی‌گردد.</p>
+        </div>
+      </div>
+    </div>
+    <div v-else class="card notify">
+      <div>
+        <Website />اگر با کامپیوتر این صفحه را مشاهده می‌کنید، دکمه تماس با پزشک را بفشارید و با موبایل خود با شماره ۰۲۱۷۴۴۷۱۴۰۲ تماس بگیرید.
+      </div>
+      <div>
+        <Tellphone />برای تماس با تلفن ثابت یا هر خطی بجز موبایلتان با شماره ۰۲۱۷۴۴۷۱۱۱۱ تماس بگیرید و کد کاربری و رمز عبوری که برای شما پیامک شده است، را وارد کنید. سپس کد رسای پزشک را وارد کنید تا تماس شما با پزشک بر قرار شود.
       </div>
     </div>
   </section>
@@ -145,10 +180,13 @@
 
 <script>
 import doctors from "@/components/doctor_detail/doctors.js";
-import Available from "~/assets/svg/Available.svg?inline";
-import NotAvailable from "~/assets/svg/NotAvailable.svg?inline";
+import Available from "@/assets/svg/Available.svg?inline";
+import NotAvailable from "@/assets/svg/NotAvailable.svg?inline";
+import Lamp from "@/assets/svg/lamp.svg?inline";
+import Tellphone from "@/assets/svg/booking_telephone.svg?inline";
+import Website from "@/assets/svg/booking_website.svg?inline";
 export default {
-  components: { Available, NotAvailable },
+  components: { Available, NotAvailable, Lamp, Tellphone, Website },
   data() {
     return {
       ajaxLoading: true,

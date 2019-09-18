@@ -44,22 +44,6 @@
     margin: 0 auto 15px;
     transition: box-shadow 0.5s;
   }
-  .notify {
-    max-width: 800px;
-    margin: 0 auto !important;
-    font-size: 16px;
-    font-weight: normal;
-    color: #7e7e7e;
-    > div {
-      display: flex;
-    }
-    svg {
-      width: 50px;
-      height: 50px;
-      margin-left: 50px;
-      flex: 0 0 50px;
-    }
-  }
 }
 </style>
 

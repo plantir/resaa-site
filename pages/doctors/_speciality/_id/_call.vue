@@ -84,6 +84,27 @@
       }
     }
   }
+  .notify {
+    max-width: 800px;
+    margin: 0 auto !important;
+    font-size: 14px;
+    font-weight: normal;
+    color: #7e7e7e;
+    > div {
+      display: flex;
+      align-items: center;
+      + div {
+        margin-top: 24px;
+      }
+    }
+    svg {
+      width: auto;
+      height: auto;
+      max-width: 40px;
+      min-width: 40px;
+      margin-left: 50px;
+    }
+  }
 }
 </style>
 
