@@ -5,6 +5,9 @@
     z-index: 1;
     position: relative;
     padding: 30px 50px;
+    @include media(sm) {
+      padding: 30px;
+    }
     .resaa-element {
       width: 480px;
       height: 320px;
@@ -34,9 +37,17 @@
   }
   .half-width {
     max-width: calc(100% - 430px);
+    @include media(sm) {
+      max-width: 100%;
+    }
   }
-  .item + .item {
-    margin-top: 40px;
+  .item {
+    @include media(sm) {
+      text-align: center;
+    }
+    + .item {
+      margin-top: 40px;
+    }
   }
 }
 </style>

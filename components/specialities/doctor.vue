@@ -1,11 +1,22 @@
 <style lang="scss" scoped>
 .item {
-  border: 2px solid #43e7a5;
+  border: 1px solid #43e7a5;
   border-radius: 20px;
   padding: 20px;
   display: flex;
   justify-content: space-between;
-
+  background: #fcfffe;
+  @include media(sm) {
+    flex-direction: column;
+    align-items: center;
+  }
+  .deactive {
+    background: #fffdf8;
+    border-color: #febe10;
+    img {
+      filter: grayscale(0.8);
+    }
+  }
   .image {
     border-radius: 100%;
     width: 140px;
@@ -27,33 +38,66 @@
       max-height: 100%;
       border-radius: 100%;
     }
-    &.deactive {
-      img {
-        filter: grayscale(0.8);
-      }
-    }
   }
   .name {
     flex: 1;
     text-align: right;
     margin-right: 20px;
+    @include media(sm) {
+      margin-right: 0;
+    }
     .doctor-name {
       font-size: 20px;
       color: #969696;
       font-weight: 500;
       margin-top: 16px;
       margin-bottom: 8px;
+      @include media(sm) {
+        text-align: center;
+        font-weight: normal;
+      }
     }
     .doctor-speciality {
       font-size: 16px;
       color: #9f9f9f;
       font-weight: 500;
       margin-bottom: 20px;
+      @include media(sm) {
+        text-align: center;
+        font-weight: normal;
+        font-size: 14px;
+      }
     }
     .doctor-tags {
       font-size: 12px;
       color: #9f9f9f;
       font-weight: 300;
+      @include media(sm) {
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+        span {
+          display: flex;
+          + span {
+            margin-top: 6px;
+          }
+        }
+        .success-call {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          svg {
+            width: auto;
+            height: auto;
+            margin-bottom: 4px;
+          }
+          span {
+            font-size: 18px;
+            color: #1ad0c1;
+            font-weight: 500;
+          }
+        }
+      }
     }
   }
   .price {
@@ -63,6 +107,10 @@
     text-align: center;
     font-size: 15px;
     padding: 10px 0;
+    @include media(sm) {
+      padding: 0;
+      margin-top: 20px;
+    }
     .success-call {
       span {
         color: #1ad0c1;
@@ -83,8 +131,8 @@
 </style>
 
 <template>
-  <section class="item">
-    <div class="image" :class="{deactive:!doctor.currentlyAvailable}">
+  <section class="item" :class="{deactive:!doctor.currentlyAvailable}">
+    <div class="image">
       <div class="status">
         <component :is="doctor.currentlyAvailable?'Available':'NotAvailable'"></component>
       </div>
@@ -103,14 +151,20 @@
       <div class="doctor-name">دکتر پیمان رضایی مرام</div>
       <div class="doctor-speciality">کارشناس ارشد روانشناسی عمومی</div>
       <div class="doctor-tags">
-        <span v-for="(tag,index) in doctor.custom_tags.slice(0,3)" :key="tag.id">
-          {{tag.title}}
-          <template v-if="index != 2">،</template>
-        </span>
+        <div>
+          <span v-for="(tag,index) in doctor.custom_tags.slice(0,3)" :key="tag.id">
+            {{tag.title}}
+            <template v-if="index != 2">،</template>
+          </span>
+        </div>
+        <div class="success-call hide-md-and-up">
+          <Favorite />
+          <span>{{500 | persianDigit}}+</span>
+        </div>
       </div>
     </div>
     <div class="price">
-      <div class="success-call">
+      <div class="success-call hide-md">
         <span>{{500 | persianDigit}}+</span>
         جلسه رضایت بخش
       </div>
@@ -131,10 +185,11 @@
 <script>
 import Available from "@/assets/svg/Available.svg?inline";
 import NotAvailable from "@/assets/svg/NotAvailable.svg?inline";
+import Favorite from "@/assets/svg/favorites_button.svg?inline";
 export default {
   props: {
     doctor: {}
   },
-  components: { Available, NotAvailable }
+  components: { Available, NotAvailable, Favorite }
 };
 </script>

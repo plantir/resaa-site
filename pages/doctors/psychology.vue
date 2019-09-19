@@ -1,6 +1,9 @@
 <style lang="scss" scoped>
 .header {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   img {
     max-width: 100%;
   }
@@ -11,6 +14,14 @@
     font-size: 26px;
     font-weight: 500;
     color: #fff;
+    @include media(sm) {
+      top: 70px;
+      font-size: 20px;
+      right: 0;
+      left: 0;
+      text-align: center;
+      font-weight: normal;
+    }
   }
   span {
     position: absolute;
@@ -19,11 +30,22 @@
     font-size: 20px;
     font-weight: 500;
     color: #fff;
+    @include media(sm) {
+      top: 120px;
+      font-size: 20px;
+      right: 0;
+      left: 0;
+      text-align: center;
+      font-weight: normal;
+    }
   }
 }
 .breadcrumbs {
   display: flex;
   align-items: center;
+  @include media(sm) {
+    justify-content: center;
+  }
   span {
     color: #707070;
     display: flex;
@@ -37,11 +59,17 @@
   color: #707070;
   font-weight: 500;
   margin-bottom: 4px;
+  @include media(sm) {
+    text-align: center;
+  }
 }
 .card-subtitle {
   color: #707070;
   font-weight: 500;
   margin-bottom: 40px;
+  @include media(sm) {
+    text-align: center;
+  }
 }
 .item + .item {
   margin-top: 16px;
@@ -71,11 +99,9 @@
 <template>
   <section>
     <div class="header">
-      <img src="~assets/img/speciality_bg.png" alt />
+      <img class="hide-md" src="~assets/img/speciality_bg.png" alt />
+      <img class="hide-md-and-up" src="~assets/img/speciality_bg_mobile@2x.png" alt />
       <h1>مشاوره تلفنی با متخصص روانشناسی</h1>
-      <!-- <transition-group name="fade" mode="out-in">
-        <span v-show="header_text == index" v-for="(text,index) in text_array" :key="index">{{text}}</span>
-      </transition-group>-->
       <transition name="fade" mode="out-in">
         <span :key="text_array[header_text]">{{text_array[header_text]}}</span>
       </transition>

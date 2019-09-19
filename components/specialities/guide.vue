@@ -5,9 +5,13 @@ section {
   align-items: center;
   margin: 20px 0;
   height: 150px;
-  border-radius: 30px;
+  border-radius: 20px;
   justify-content: space-between;
   padding: 0 30px;
+  @include media(sm) {
+    flex-direction: column;
+    height: auto;
+  }
 }
 .step {
   display: flex;
@@ -17,6 +21,9 @@ section {
   position: relative;
   flex: 0 0 200px;
   height: 100%;
+  @include media(sm) {
+    flex: auto;
+  }
   .label {
     position: absolute;
     top: 10px;
@@ -30,6 +37,9 @@ section {
     justify-content: center;
     align-items: center;
     font-size: 16px;
+    @include media(sm) {
+      display: none;
+    }
   }
   p {
     color: #9f9f9f;
@@ -51,6 +61,9 @@ section {
   svg {
     width: 30px;
     height: 30px;
+    @include media(sm) {
+      transform: rotate(270deg);
+    }
     path {
       fill: #43e7a5;
     }
