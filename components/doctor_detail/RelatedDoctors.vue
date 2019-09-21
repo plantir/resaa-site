@@ -14,7 +14,7 @@ section {
   margin-bottom: 100px;
   @include media(sm) {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     max-width: 200px;
     justify-content: space-between;
     height: 100px;
@@ -53,7 +53,7 @@ section {
   }
 }
 .swiper-container {
-  max-width: 1050px;
+  max-width: 1150px;
   padding: 0 60px;
   .swiper-slide {
     width: 200px;
@@ -100,6 +100,8 @@ section {
       }
       span:nth-child(2) {
         color: #43e7a5;
+        font-size: 21px;
+        font-weight: 500;
       }
     }
   }

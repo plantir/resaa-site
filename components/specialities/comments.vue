@@ -13,7 +13,7 @@
   height: 290px;
   background-color: #f9f9f9;
   box-shadow: 0 12px 20px 0 rgba(0, 0, 0, 0.07);
-  padding: 25px;
+  padding: 25px 60px;
   margin-bottom: 100px;
   position: relative;
 }
@@ -36,7 +36,7 @@
 
 .doctor-comment-text {
   direction: rtl;
-  font-size: 14.5px;
+  font-size: 14px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -45,7 +45,7 @@
   color: #777590;
   margin-bottom: 30px;
   height: 100px;
-  text-align: justify;
+  text-align: center;
 }
 
 .doctor-comment-special {

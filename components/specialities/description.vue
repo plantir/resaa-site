@@ -4,7 +4,7 @@
     overflow: hidden;
     z-index: 1;
     position: relative;
-    padding: 30px 50px;
+    padding: 70px;
     @include media(sm) {
       padding: 30px;
     }
@@ -25,7 +25,7 @@
   h3 {
     color: #0fc7e3;
     margin-bottom: 12px;
-    font-weight: normal;
+    font-weight: 500;
     font-size: 18px;
   }
   .content {
@@ -37,6 +37,9 @@
   }
   .half-width {
     max-width: calc(100% - 430px);
+    h3 {
+      font-size: 21px;
+    }
     @include media(sm) {
       max-width: 100%;
     }

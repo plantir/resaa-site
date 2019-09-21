@@ -92,7 +92,8 @@ section#doctor-detail-comments {
             justify-content: flex-end;
             &.name {
               color: $secondary-color;
-              font-size: 20px;
+              font-size: 18px;
+              font-weight: 500;
             }
           }
         }
@@ -100,6 +101,7 @@ section#doctor-detail-comments {
           text-align: right;
           padding: 0 20px;
           line-height: 32px;
+          font-size: 14px;
         }
       }
     }
@@ -108,7 +110,7 @@ section#doctor-detail-comments {
     position: relative;
     max-width: 1360px;
     margin: 0 auto;
-    padding: 0 80px;
+    padding: 0 100px;
     box-sizing: content-box;
     @include media(sm) {
       padding: 0 40px;

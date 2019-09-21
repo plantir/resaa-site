@@ -2,7 +2,7 @@
 .call-wrapper {
   display: flex;
   flex-wrap: wrap;
-  padding: 40px 30px !important;
+  padding: 40px 70px !important;
   > div {
     display: flex;
     flex-direction: column;
@@ -33,15 +33,18 @@
 }
 .section-title {
   font-size: var(--display-1);
+  font-weight: 500;
 }
 
 .price-title {
-  font-size: var(--display-2);
+  font-size: 14px;
   color: var(--grey-color);
+  font-weight: 500;
 }
 .price {
   color: $secondary-color;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 500;
   @include media(sm) {
     display: block;
     font-size: 18px;
@@ -50,7 +53,7 @@
 }
 .description {
   color: var(--grey-color);
-  font-size: 16px;
+  font-size: 14px;
   display: flex;
   align-items: center;
   @include media(sm) {

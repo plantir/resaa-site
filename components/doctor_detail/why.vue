@@ -31,7 +31,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 20px !important;
+    padding: 40px 50px !important;
     @include media(sm) {
       border-radius: 0px !important;
       box-shadow: none;
@@ -44,7 +44,7 @@ section {
   justify-content: center;
   align-items: center;
   img {
-    height: 120px;
+    height: 100px;
   }
 }
 .item-title {
@@ -52,7 +52,7 @@ section {
   font-weight: 500;
 }
 .description {
-  font-size: 16px;
+  font-size: 14px;
   width: 320px;
   max-width: 100%;
   text-align: center;

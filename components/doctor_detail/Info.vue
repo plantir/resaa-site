@@ -1,8 +1,8 @@
 <style lang="scss" >
 #doctor-info {
   h1 {
-    // font-size: 21px;
-    // font-weight: 400;
+    font-size: 24px;
+    font-weight: 500;
     display: inline-flex;
     color: var(--grey-color);
   }
@@ -17,6 +17,10 @@
   .v-card {
     overflow: hidden;
     z-index: 1;
+    padding: 40px 70px !important;
+    @include media(sm) {
+      padding: 40px 40px !important;
+    }
     .resaa-element {
       width: 300px;
       height: 200px;
@@ -101,7 +105,7 @@
       // font-weight: 400;
     }
     .specialty-area-container {
-      margin-top: 80px;
+      margin-top: 20px;
       @include media(sm) {
         margin-top: 30px;
       }
@@ -109,6 +113,7 @@
         color: var(--grey-color);
         display: flex;
         align-items: center;
+        font-size: 14px;
         span {
           overflow: hidden;
           white-space: nowrap;
@@ -128,7 +133,7 @@
     }
   }
   .fields-activity-wrapper {
-    margin-top: 130px;
+    margin-top: 90px;
     @include media(sm) {
       margin-top: 30px;
     }
@@ -141,6 +146,11 @@
         color: var(--grey-color);
         display: flex;
         align-items: center;
+        font-size: 14px;
+        @include media(sm) {
+          width: 100%;
+          flex: 0 0 100%;
+        }
         &:before {
           content: "";
           position: relative;
@@ -155,14 +165,14 @@
     }
   }
   .response-wrapper {
-    margin-top: 130px;
+    margin-top: 20px;
     color: var(--grey-color);
     @include media(sm) {
       margin-top: 30px;
     }
     .response-time {
       margin-bottom: 12px;
-      font-size: 18px;
+      font-size: 14px;
     }
     .seperator {
       margin: 0 8px;
@@ -202,12 +212,10 @@
             </div>
           </div>
         </v-flex>
-        <v-flex xs12 md3>
+        <v-flex xs12 md4>
           <div class="name-wrapper">
             <div>
-              <h1
-                class="r-display-1 r-display-normal"
-              >{{virtual_doctor.title}} {{virtual_doctor.firstName}} {{virtual_doctor.lastName}}</h1>
+              <h1>{{virtual_doctor.title}} {{virtual_doctor.firstName}} {{virtual_doctor.lastName}}</h1>
               <span
                 class="availability hide-md"
                 :class="virtual_doctor.currentlyAvailable?'active':'deactive'"
@@ -229,9 +237,28 @@
                 <span>{{tag.title}}</span>
               </li>
             </ul>
+            <div class="response-wrapper hide-md">
+              <div class="title">زمان های پاسخگویی</div>
+              <div class="response-time" v-if="day_of_week && times">
+                <span>امروز:</span>
+                <template v-for="(item,index) in times[day_of_week]">
+                  <span :key="index">
+                    <span>{{item.start | persianDigit}} - {{item.end | persianDigit}}</span>
+                    <span v-if="index != times[day_of_week].length-1" class="seperator">/</span>
+                  </span>
+                </template>
+                <!-- <span>۲۰:۰۰ - ۱۶:۰۰</span> -->
+              </div>
+              <div>
+                <a @click="dialog = true" class="secondary--text">
+                  مشاهده کل هفته
+                  <v-icon color="secondary" size="20px">fa-angle-down</v-icon>
+                </a>
+              </div>
+            </div>
           </div>
         </v-flex>
-        <v-flex xs12 md4>
+        <v-flex xs12 md5>
           <div class="fields-activity-wrapper">
             <div class="title">زمینه های فعالیت :</div>
             <ul>
@@ -241,7 +268,7 @@
             </ul>
           </div>
         </v-flex>
-        <v-flex xs12 md3>
+        <v-flex class="hide-md-and-top" xs12 md3>
           <div class="response-wrapper">
             <div class="title">زمان های پاسخگویی</div>
             <div class="response-time r-display-3" v-if="day_of_week && times">

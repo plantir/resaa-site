@@ -9,9 +9,9 @@
   }
   h1 {
     position: absolute;
-    top: 133px;
+    top: 153px;
     right: 120px;
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 500;
     color: #fff;
     @include media(sm) {
@@ -25,9 +25,9 @@
   }
   span {
     position: absolute;
-    top: 210px;
+    top: 230px;
     right: 130px;
-    font-size: 20px;
+    font-size: 28px;
     font-weight: 500;
     color: #fff;
     @include media(sm) {
@@ -43,7 +43,9 @@
 .breadcrumbs {
   display: flex;
   align-items: center;
+  padding-right: 16px;
   @include media(sm) {
+    padding-right: 0px;
     justify-content: center;
   }
   span {
@@ -77,7 +79,7 @@
 .card {
   border-radius: 30px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1), 0 -2px 5px rgba(0, 0, 0, 0.1);
-  margin: 30px 0;
+  margin: 10px 0;
   padding: 30px 60px;
   background: #fff;
   @include media(sm) {
@@ -90,9 +92,9 @@
   h3 {
     text-align: center;
     color: #999999;
-    font-weight: normal;
+    font-weight: 500;
     margin-bottom: 40px;
-    font-size: 20px;
+    font-size: 21px;
   }
 }
 </style>

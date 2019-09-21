@@ -9,7 +9,7 @@ section {
   align-items: center;
   max-width: 1360px;
   margin: 0 auto;
-  padding: 0 60px;
+  padding: 0 120px;
   font-size: 23px;
   @include media(sm) {
     flex-direction: column;
