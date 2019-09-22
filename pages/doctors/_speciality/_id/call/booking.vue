@@ -15,7 +15,12 @@
     color: #848484;
     font-size: 18px;
     font-weight: 500;
+    margin-top: 26px;
     margin-bottom: 8px;
+    @include media(sm) {
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
   }
   .amount {
     color: #848484;
@@ -99,6 +104,7 @@
             <div class="payment-status">
               <span v-if="status=='fail'">پرداخت ناموفق</span>
               <span v-if="status=='success'">پرداخت موفق</span>
+              <span v-if="status=='continue'">ثبت درخواست تماس با پزشک</span>
             </div>
             <div v-if="status=='success'" class="amount">
               <span>حساب شما</span>

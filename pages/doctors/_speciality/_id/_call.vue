@@ -1,5 +1,7 @@
 <style lang="scss" >
 #call-doctor {
+  max-width: 1100px;
+  margin: 0 auto;
   h1 {
     text-align: center;
     color: #7e7e7e;
@@ -21,7 +23,7 @@
     }
   }
   .steper {
-    height: 140px;
+    height: 110px;
     padding: 0 40px;
     align-items: stretch;
     display: flex;
@@ -29,7 +31,6 @@
     justify-content: space-between;
     border-radius: 30px;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1), 0 -2px 5px rgba(0, 0, 0, 0.1);
-    margin-top: 30px;
     background: #fff;
     @include media(sm) {
       padding: 0 10px;
@@ -122,11 +123,12 @@
     }
   }
   .notify {
-    max-width: 800px;
+    max-width: 650px;
     margin: 0 auto !important;
     font-size: 14px;
     font-weight: normal;
     color: #7e7e7e;
+    padding: 30px 40px;
     @include media(sm) {
       padding: 20px;
     }

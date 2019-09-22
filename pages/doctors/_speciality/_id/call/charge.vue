@@ -16,7 +16,7 @@
 .charge-items {
   display: flex;
   justify-content: center;
-  margin: 90px -30px;
+  margin: 50px -30px;
 }
 .swiper-container {
   margin: 0 -30px;
@@ -138,16 +138,21 @@
     }
   }
 }
+.notify {
+  > div {
+    align-items: flex-start !important;
+  }
+}
 </style>
 
 <template>
   <section>
-    <no-ssr v-if="ajaxLoading">
-      <v-loading mode="relative">
-        <h3>در حال انتقال به بانک ...</h3>
-      </v-loading>
-    </no-ssr>
     <div class="card">
+      <no-ssr v-if="ajaxLoading">
+        <v-loading mode="relative">
+          <h3>در حال انتقال به بانک ...</h3>
+        </v-loading>
+      </no-ssr>
       <h1>افزایش اعتبار</h1>
       <h1>برای برقراری تماس لطفا حساب خود را به میزان دقایق مکالمه شارژ کنید:</h1>
       <div class="charge-items hide-md">

@@ -6,7 +6,7 @@
     text-align: center;
   }
   .register-form {
-    padding: 90px 0;
+    padding: 40px 0 10px;
     @include media(sm) {
       padding: 30px 60px;
     }
