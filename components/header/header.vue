@@ -365,10 +365,10 @@
         <span class="menu-icon__line menu-icon__line-right" :class="{ 'active': menuActive }"></span>
       </div>
       <div class="navigation-bar-right">
-        <router-link :to="!isPatient?'/':'/'" class="navigation-bar-logo">
+        <nuxt-link :to="!isPatient?'/':'/'" class="navigation-bar-logo">
           <img alt="سامانه رسا" v-if="isPatient" src="./logo-teal.png" />
           <img alt="سامانه رسا" v-else src="./logo.png" />
-        </router-link>
+        </nuxt-link>
 
         <div class="navigation-bar-items">
           <ul class="nav">
@@ -379,11 +379,11 @@
                   <i class="fa fa-caret-down"></i>
                 </a>
                 <div v-if="isPatient">
-                  <router-link :to="{name:'patient-profile'}">پروفایل</router-link>
+                  <nuxt-link :to="{name:'patient-profile'}">پروفایل</nuxt-link>
                   <a @click="logout">خروج</a>
                 </div>
                 <div v-else>
-                  <router-link :to="{name:'patient-profile'}">پروفایل</router-link>
+                  <nuxt-link :to="{name:'patient-profile'}">پروفایل</nuxt-link>
                   <a @click="logout">خروج</a>
                 </div>
               </div>
@@ -393,109 +393,109 @@
                   <i class="fa fa-caret-down"></i>
                 </a>
                 <div v-if="isPatient">
-                  <router-link
+                  <nuxt-link
                     @click.native="closeNav"
                     :to="{name:'patient-login'}"
-                  >ورود به حساب کاربری</router-link>
-                  <router-link @click.native="closeNav" :to="{name:'patient-register'}">عضویت در رسا</router-link>
+                  >ورود به حساب کاربری</nuxt-link>
+                  <nuxt-link @click.native="closeNav" :to="{name:'patient-register'}">عضویت در رسا</nuxt-link>
                 </div>
                 <div v-else>
-                  <router-link
+                  <nuxt-link
                     @click.native="closeNav"
                     :to="{name:'doctors-login'}"
-                  >ورود به حساب کاربری</router-link>
-                  <router-link @click.native="closeNav" :to="{name:'doctors-register'}">عضویت در رسا</router-link>
+                  >ورود به حساب کاربری</nuxt-link>
+                  <nuxt-link @click.native="closeNav" :to="{name:'doctors-register'}">عضویت در رسا</nuxt-link>
                 </div>
               </div>
             </li>
             <li class="nav-item">
-              <router-link
+              <nuxt-link
                 @click.native="closeNav"
                 :to="{name:'doctors'}"
                 class="navigation-bar-item"
-              >لیست پزشکان</router-link>
+              >لیست پزشکان</nuxt-link>
             </li>
             <li class="nav-item">
-              <router-link
+              <nuxt-link
                 @click.native="closeNav"
                 :to="{name:'privacy'}"
                 class="navigation-bar-item"
-              >قوانین</router-link>
+              >قوانین</nuxt-link>
             </li>
             <li class="nav-item">
-              <router-link
+              <nuxt-link
                 @click.native="closeNav"
                 :to="{name:'faq'}"
                 class="navigation-bar-item"
-              >سوالات متداول</router-link>
+              >سوالات متداول</nuxt-link>
             </li>
             <li class="nav-item">
-              <router-link
+              <nuxt-link
                 @click.native="closeNav"
                 :to="{name:'about'}"
                 class="navigation-bar-item"
-              >درباره رسا</router-link>
+              >درباره رسا</nuxt-link>
             </li>
             <li class="nav-item">
-              <router-link
+              <nuxt-link
                 @click.native="closeNav"
                 :to="{name:'contact-us'}"
                 class="navigation-bar-item"
-              >تماس با ما</router-link>
+              >تماس با ما</nuxt-link>
             </li>
           </ul>
         </div>
       </div>
       <div class="navigation-bar-left">
-        <!-- <router-link
+        <!-- <nuxt-link
           class="navigation-bar-download-button"
           v-if="!isLanding"
           :to="{name:'patient-landing',hash:'#download'}"
-        >دریافت اپلیکیشن</router-link>-->
-        <!-- <router-link
+        >دریافت اپلیکیشن</nuxt-link>-->
+        <!-- <nuxt-link
           :to="{name:'charge'}"
           v-if="!isLanding"
           class="navigation-bar-button"
-        >افزایش اعتبار</router-link>-->
+        >افزایش اعتبار</nuxt-link>-->
         <div v-if="isLanding !== true">
-          <router-link
+          <nuxt-link
             :to="{name:'charge'}"
             v-if="isPatient === true"
             class="navigation-bar-button"
-          >افزایش اعتبار</router-link>
-          <router-link
+          >افزایش اعتبار</nuxt-link>
+          <nuxt-link
             :to="{name:'charge'}"
             v-if="isPatient === true"
             class="navigation-bar-button-mini"
           >
             <i class="fa fa-money"></i>
-          </router-link>
+          </nuxt-link>
         </div>
         <div v-else>
-          <router-link
+          <nuxt-link
             :to="{name:'charge'}"
             v-if="isPatient === true"
             class="navigation-bar-button"
-          >افزایش اعتبار</router-link>
-          <router-link
+          >افزایش اعتبار</nuxt-link>
+          <nuxt-link
             :to="{name:'charge'}"
             v-if="isPatient === true"
             class="navigation-bar-button-mini"
           >
             <i class="fa fa-money"></i>
-          </router-link>
-          <router-link
+          </nuxt-link>
+          <nuxt-link
             :to="{name:'patient-landing'}"
             v-if="isPatient !== true"
             class="navigation-bar-button"
-          >رِسای بیماران</router-link>
-          <router-link
+          >رِسای بیماران</nuxt-link>
+          <nuxt-link
             :to="{name:'patient-landing'}"
             v-if="isPatient !== true"
             class="navigation-bar-button-mini"
           >
             <i class="fa fa-user"></i>
-          </router-link>
+          </nuxt-link>
         </div>
       </div>
       <div class="nav-main" :class="{ 'active' : menuActive }">
@@ -505,56 +505,47 @@
               <div v-if="user">
                 <a class="drop-down">خوش اومدی {{user.firstName}}</a>
                 <div v-if="isPatient">
-                  <router-link :to="{name:'patient-profile'}">پروفایل</router-link>
+                  <nuxt-link :to="{name:'patient-profile'}">پروفایل</nuxt-link>
                   <a @click="logout">خروج</a>
                 </div>
                 <div v-else>
-                  <router-link :to="{name:'patient-profile'}">پروفایل</router-link>
+                  <nuxt-link :to="{name:'patient-profile'}">پروفایل</nuxt-link>
                   <a @click="logout">خروج</a>
                 </div>
               </div>
               <div v-else>
                 <a class="drop-down"></a>
                 <div v-if="isPatient">
-                  <router-link :to="{name:'patient-landing'}">عضویت در رسا</router-link>
+                  <nuxt-link :to="{name:'patient-landing'}">عضویت در رسا</nuxt-link>
                 </div>
                 <div v-else>
-                  <router-link :to="{name:'LoginDoctor'}">ورود به حساب کاربری</router-link>
-                  <router-link :to="{name:'doctors-register'}">عضویت در رسا</router-link>
+                  <nuxt-link :to="{name:'LoginDoctor'}">ورود به حساب کاربری</nuxt-link>
+                  <nuxt-link :to="{name:'doctors-register'}">عضویت در رسا</nuxt-link>
                 </div>
               </div>
             </li>-->
-            <router-link
+            <nuxt-link
               @click.native="closeNav"
               v-if="user"
               class="nav-main__list-item"
               :class="{ 'active' : menuActive }"
               :to="{name:'patient-profile'}"
-            >خوش اومدی {{user.firstName}}</router-link>
-            <router-link
+            >خوش اومدی {{user.firstName}}</nuxt-link>
+            <nuxt-link
               v-else
               class="nav-main__list-item"
               :class="{ 'active' : menuActive }"
               :to="{name:'patient-login'}"
-            >ورود به حساب کاربری</router-link>
-            <template v-if="isPatient">
-              <router-link
+            >ورود به حساب کاربری</nuxt-link>
+            <template>
+              <nuxt-link
                 @click.native="closeNav"
-                v-for="(item, index) in this.itemsListPatient"
+                v-for="(item, index) in this.itemsList"
                 :to="item.path"
                 :key="index"
                 class="nav-main__list-item"
                 :class="{ 'active' : menuActive }"
-              >{{ item.name }}</router-link>
-            </template>
-            <template v-if="isPatient !== true">
-              <router-link
-                v-for="(item, index) in this.itemsListDoctor"
-                :to="item.path"
-                :key="index"
-                class="nav-main__list-item"
-                :class="{ 'active' : menuActive }"
-              >{{ item.name }}</router-link>
+              >{{ item.name }}</nuxt-link>
             </template>
             <a
               v-if="user"
@@ -577,29 +568,7 @@ export default {
       isLanding: true,
       menuActive: false,
       show: false,
-      itemsListDoctor: [
-        {
-          name: "لیست پزشکان",
-          path: { name: "doctors" }
-        },
-        {
-          name: "قوانین",
-          path: { name: "privacy" }
-        },
-        {
-          name: "سوالات متداول",
-          path: { name: "faq" }
-        },
-        {
-          name: "درباره رسا",
-          path: { name: "about" }
-        },
-        {
-          name: "تماس با ما",
-          path: { name: "contact-us" }
-        }
-      ],
-      itemsListPatient: [
+      itemsList: [
         {
           name: "لیست پزشکان",
           path: { name: "doctors" }
