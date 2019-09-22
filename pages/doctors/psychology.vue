@@ -148,6 +148,7 @@ import Comments from "@/components/specialities/comments";
 import Description from "@/components/specialities/description";
 
 export default {
+  layout: "speciality",
   components: { Wave, Doctor, Guide, Comments, Description },
   data() {
     return {

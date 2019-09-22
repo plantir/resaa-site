@@ -1,7 +1,7 @@
 <style lang="scss">
 #speciality {
   .v-content {
-    background: #1c1f24;
+    background: var(--bg-color);
   }
   .container {
     @media only screen and (min-width: 1264px) {

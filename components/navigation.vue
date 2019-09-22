@@ -67,23 +67,31 @@
     <ul class="nav-bar">
       <li class="nav-item">
         <div v-if="user">
-          <a class="drop-down">
-            خوش اومدی {{user.firstName}}
-            <i class="fa fa-caret-down"></i>
-          </a>
-          <div v-if="isPatient">
-            <router-link :to="{name:'patient-profile'}">پروفایل</router-link>
-            <a @click="logout">خروج</a>
-          </div>
-          <div v-else>
-            <router-link :to="{name:'patient-profile'}">پروفایل</router-link>
-            <a @click="logout">خروج</a>
-          </div>
+          <v-menu left :offset-y="true" bottom>
+            <template v-slot:activator="{ on }">
+              <a v-on="on">
+                خوش اومدی {{user.firstName}}
+                <i class="fa fa-caret-down"></i>
+              </a>
+            </template>
+            <v-list class="register-dropdown">
+              <v-list-tile>
+                <v-list-tile-title>
+                  <nuxt-link :to="{name:isPatient?'patient-login':'doctors-login'}">پروفایل</nuxt-link>
+                </v-list-tile-title>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-title>
+                  <a @click="logout">خروج</a>
+                </v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
         </div>
         <div v-else>
           <v-menu left :offset-y="true" bottom>
             <template v-slot:activator="{ on }">
-              <a>
+              <a v-on="on">
                 <span>حساب کاربری</span>
                 <i class="fa fa-caret-down"></i>
               </a>
@@ -159,6 +167,11 @@ export default {
   methods: {
     closeNav() {
       this.showMenu = false;
+    },
+    logout() {
+      this.$store.commit("patient/logout");
+      this.$router.replace({ name: "patient-landing" });
+      this.menuActive = false;
     }
   },
   computed: {
