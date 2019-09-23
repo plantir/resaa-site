@@ -1,6 +1,6 @@
 <style lang="scss" >
 #call-doctor {
-  max-width: 1100px;
+  max-width: 1000px;
   margin: 0 auto;
   h1 {
     text-align: center;
@@ -123,12 +123,26 @@
     }
   }
   .notify {
-    max-width: 650px;
+    max-width: 800px;
     margin: 0 auto !important;
     font-size: 14px;
     font-weight: normal;
     color: #7e7e7e;
     padding: 30px 40px;
+    p:not(:first-child) {
+      position: relative;
+      &:before {
+        position: absolute;
+        right: -14px;
+        top: 6px;
+        content: "";
+        width: 6px;
+        height: 6px;
+        background: $secondary-color;
+        border-radius: 100%;
+        display: inline-block;
+      }
+    }
     @include media(sm) {
       padding: 20px;
     }
@@ -139,7 +153,7 @@
         margin-top: 24px;
       }
     }
-    svg {
+    img {
       width: auto;
       height: auto;
       max-width: 40px;

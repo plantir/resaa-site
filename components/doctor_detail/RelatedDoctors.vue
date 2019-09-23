@@ -53,7 +53,7 @@ section {
   }
 }
 .swiper-container {
-  max-width: 1150px;
+  max-width: 1200px;
   padding: 0 60px;
   .swiper-slide {
     width: 200px;

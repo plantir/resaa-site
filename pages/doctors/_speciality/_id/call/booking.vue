@@ -104,7 +104,10 @@
             <div class="payment-status">
               <span v-if="status=='fail'">پرداخت ناموفق</span>
               <span v-if="status=='success'">پرداخت موفق</span>
-              <span v-if="status=='continue'">ثبت درخواست تماس با پزشک</span>
+              <span v-if="status=='continue'">
+                <span v-if="doctor.currentlyAvailable">تماس با پزشک</span>
+                <span v-else>ثبت درخواست تماس با پزشک</span>
+              </span>
             </div>
             <div v-if="status=='success'" class="amount">
               <span>حساب شما</span>
@@ -158,10 +161,23 @@
             class="retry-btn"
             to="charge"
           >تلاش مجدد</v-btn>
-          <v-btn v-else round depressed dark class="retry-btn" @click="reserveDoctor">
-            <span v-if="doctor.currentlyAvailable">تماس با پزشک</span>
-            <span v-else>ثبت درخواست تماس</span>
-          </v-btn>
+          <v-btn
+            v-else-if="!doctor.currentlyAvailable"
+            round
+            depressed
+            dark
+            class="retry-btn"
+            @click="reserveDoctor"
+          >ثبت درخواست تماس</v-btn>
+          <v-btn
+            round
+            depressed
+            dark
+            @click="reserveDoctor"
+            :href="'tel:02174471402'"
+            v-else-if="doctor.currentlyAvailable && $device.isMobile"
+          >تماس با پزشک</v-btn>
+          <v-btn round depressed dark @click="reserveDoctor" v-else>تماس با پزشک</v-btn>
         </div>
       </div>
     </div>
@@ -175,7 +191,7 @@
     </div>
     <div v-else-if="!doctor.currentlyAvailable" class="card notify">
       <div>
-        <Lamp />
+        <img src="~assets/img/lamp@2x.png" alt />
         <div>
           <p>کافیست دکمه ثبت درخواست تماس را بفشارید و با موبایل خود با شماره ۰۲۱۷۴۴۷۱۴۰۲ تماس بگیرید. پس از پخش شدن صدای گویا عدد یک را وارد کنید.</p>
           <p>پزشک نهایتا در اولین ساعت پاسخگویی خود با شماره موبایلی که در سامانه ثبت کرده‌اید تماس می‌گیرد. هزینه مکالمه به صورت دقیقه ای از اعتبار شما کسر می‌گردد.</p>
@@ -183,14 +199,24 @@
         </div>
       </div>
     </div>
-    <div v-else class="card notify">
-      <div>
-        <Website />اگر با کامپیوتر این صفحه را مشاهده می‌کنید، دکمه تماس با پزشک را بفشارید و با موبایل خود با شماره ۰۲۱۷۴۴۷۱۴۰۲ تماس بگیرید.
+    <template v-else>
+      <div class="card notify hide-md">
+        <div>
+          <img src="~assets/img/booking_website@2x.png" />دکمه تماس با پزشک را بفشارید و با موبایل خود با شماره ۰۲۱۷۴۴۷۱۴۰۲ تماس بگیرید.
+        </div>
+        <div>
+          <img src="~assets/img/booking_telephone@2x.png" />برای تماس با تلفن ثابت یا هر خطی بجز موبایلتان با شماره ۰۲۱۷۴۴۷۱۱۱۱ تماس بگیرید و کد کاربری و رمز عبوری که برای شما پیامک شده است، را وارد کنید. سپس کد رسای پزشک را وارد کنید تا تماس شما با پزشک بر قرار شود.
+        </div>
       </div>
-      <div>
-        <Tellphone />برای تماس با تلفن ثابت یا هر خطی بجز موبایلتان با شماره ۰۲۱۷۴۴۷۱۱۱۱ تماس بگیرید و کد کاربری و رمز عبوری که برای شما پیامک شده است، را وارد کنید. سپس کد رسای پزشک را وارد کنید تا تماس شما با پزشک بر قرار شود.
+      <div class="card notify hide-md-and-up">
+        <div>
+          <img src="~assets/img/booking_phone@2x.png" />دکمه تماس با پزشک را بفشارید و با شماره سامانه رسا که روی صفحه موبایلتان ظاهر می شود تماس بگیرید. تماس شما به صورت خودکار با پزشک برقرار می شود
+        </div>
+        <div>
+          <img src="~assets/img/booking_telephone@2x.png" />برای تماس با تلفن ثابت یا هر خطی بجز موبایلتان با شماره ۰۲۱۷۴۴۷۱۱۱۱ تماس بگیرید و کد کاربری و رمز عبوری که برای شما پیامک شده است، را وارد کنید. سپس کد رسای پزشک را وارد کنید تا تماس شما با پزشک بر قرار شود.
+        </div>
       </div>
-    </div>
+    </template>
   </section>
 </template>
 
@@ -198,11 +224,9 @@
 import doctors from "@/components/doctor_detail/doctors.js";
 import Available from "@/assets/svg/Available.svg?inline";
 import NotAvailable from "@/assets/svg/NotAvailable.svg?inline";
-import Lamp from "@/assets/svg/lamp.svg?inline";
-import Tellphone from "@/assets/svg/booking_telephone.svg?inline";
-import Website from "@/assets/svg/booking_website.svg?inline";
+
 export default {
-  components: { Available, NotAvailable, Lamp, Tellphone, Website },
+  components: { Available, NotAvailable },
   data() {
     return {
       ajaxLoading: true,

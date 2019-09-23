@@ -230,9 +230,9 @@
               :class="virtual_doctor.currentlyAvailable?'active':'deactive'"
             >({{virtual_doctor.currentlyAvailable?'در دسترس':'در دسترس نمی باشد'}})</span>
             <ul class="specialty-area-container">
-              <li
+              <!-- <li
                 class="specialty-area"
-              >کد نظام پزشکی: {{virtual_doctor.medicalCouncilNumber || '-' | persianDigit}}</li>
+              >کد نظام پزشکی: {{virtual_doctor.medicalCouncilNumber || '-' | persianDigit}}</li>-->
               <li v-for="tag in virtual_doctor.custom_tags" :key="tag.id" class="specialty-area">
                 <span>{{tag.title}}</span>
               </li>
@@ -258,7 +258,7 @@
             </div>
           </div>
         </v-flex>
-        <v-flex xs12 md5>
+        <v-flex xs12 md6>
           <div class="fields-activity-wrapper">
             <div class="title">زمینه های فعالیت :</div>
             <ul>
@@ -268,7 +268,7 @@
             </ul>
           </div>
         </v-flex>
-        <v-flex class="hide-md-and-top" xs12 md3>
+        <v-flex class="hide-md-and-up" xs12 md3>
           <div class="response-wrapper">
             <div class="title">زمان های پاسخگویی</div>
             <div class="response-time r-display-3" v-if="day_of_week && times">

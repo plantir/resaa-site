@@ -1,4 +1,8 @@
 <style lang="scss" scoped>
+.custom-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 .header {
   position: relative;
   display: flex;
@@ -15,7 +19,7 @@
     font-weight: 500;
     color: #fff;
     @include media(sm) {
-      top: 70px;
+      top: 80px;
       font-size: 20px;
       right: 0;
       left: 0;
@@ -31,7 +35,7 @@
     font-weight: 500;
     color: #fff;
     @include media(sm) {
-      top: 120px;
+      top: 130px;
       font-size: 20px;
       right: 0;
       left: 0;
@@ -67,7 +71,7 @@
 }
 .card-subtitle {
   color: #707070;
-  font-weight: 500;
+  font-weight: normal;
   margin-bottom: 40px;
   @include media(sm) {
     text-align: center;
@@ -83,7 +87,7 @@
   padding: 30px 60px;
   background: #fff;
   @include media(sm) {
-    padding: 30px;
+    padding: 30px 16px;
   }
 }
 .comments-wrapper {
@@ -109,33 +113,48 @@
       </transition>
     </div>
     <v-container class="py-0">
-      <div class="breadcrumbs">
-        <span>سامانه رسا</span>
-        <span>
-          <v-icon>chevron_left</v-icon>
-        </span>
-        <span>مشاوره تلفنی با متخصص روانشناس</span>
-      </div>
-      <div class="card">
-        <h2 class="card-title">لیست متخصصین روانشناسی</h2>
-        <h3
-          class="card-subtitle"
-        >می توانید در این بخش لیست مشاوران روانشناسی سامانه رسا را مشاهده کنید و مشاور مورد نظر خود را انتخاب کنید.</h3>
-        <div class="item" v-for="doctor in doctors.slice(0,3)" :key="doctor.subscriberNumber">
-          <Doctor :doctor="doctor" />
+      <div class="custom-container">
+        <div class="breadcrumbs">
+          <span>سامانه رسا</span>
+          <span>
+            <v-icon>chevron_left</v-icon>
+          </span>
+          <span>مشاوره تلفنی با متخصص روانشناس</span>
         </div>
-        <Guide />
-        <div class="item" v-for="doctor in doctors.slice(3,6)" :key="doctor.subscriberNumber">
-          <Doctor :doctor="doctor" />
+        <div class="card">
+          <h2 class="card-title">لیست متخصصین روانشناسی</h2>
+          <h3
+            class="card-subtitle"
+          >می توانید در این بخش لیست مشاوران روانشناسی سامانه رسا را مشاهده کنید و مشاور مورد نظر خود را انتخاب کنید.</h3>
+          <div
+            class="item"
+            v-for="doctor in sorted_doctors.slice(0,3)"
+            :key="doctor.subscriberNumber"
+          >
+            <Doctor :doctor="doctor" />
+          </div>
+          <Guide />
+          <div
+            class="item"
+            v-for="doctor in sorted_doctors.slice(3,6)"
+            :key="doctor.subscriberNumber"
+          >
+            <Doctor :doctor="doctor" />
+          </div>
         </div>
       </div>
     </v-container>
     <v-container class="comments-wrapper" fluid>
-      <h3>نظر همراهان رسا در مورد مشاوره تلفنی روانشناسی</h3>
+      <h3>
+        نظر همراهان رسا در
+        <br class="hide-md-and-up" />مورد مشاوره تلفنی روانشناسی
+      </h3>
       <Comments />
     </v-container>
     <v-container>
-      <Description />
+      <div class="custom-container">
+        <Description />
+      </div>
     </v-container>
   </section>
 </template>
@@ -146,11 +165,19 @@ import Doctor from "@/components/specialities/doctor";
 import Guide from "@/components/specialities/guide";
 import Comments from "@/components/specialities/comments";
 import Description from "@/components/specialities/description";
-
+import _ from "lodash";
 export default {
   layout: "speciality",
   components: { Wave, Doctor, Guide, Comments, Description },
   data() {
+    let available = doctors.filter(item => item.currentlyAvailable);
+    let notavailable = doctors.filter(item => !item.currentlyAvailable);
+    let sorted_doctors = _.sampleSize(available, 6);
+    if (sorted_doctors.length < 6) {
+      sorted_doctors.push(
+        ..._.sampleSize(notavailable, 6 - sorted_doctors.length)
+      );
+    }
     return {
       text_array: [
         "از هر کجای ایران!",
@@ -164,7 +191,7 @@ export default {
         "بدون نیاز به گوشی هوشمند!"
       ],
       header_text: 0,
-      doctors
+      sorted_doctors: sorted_doctors
     };
   },
   mounted() {

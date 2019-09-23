@@ -1,4 +1,14 @@
 <style lang="scss" scoped>
+h2 {
+  font-weight: normal;
+  color: #7e7e7e;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 40px;
+  @include media(sm) {
+    margin-bottom: 16px;
+  }
+}
 .payment-wrapper {
   text-align: center;
   .payment-btn {
@@ -67,12 +77,19 @@
     .item-content {
       margin-top: -20px;
       padding: 0 16px 10px;
-      font-size: 13px;
+      font-size: 14px;
       color: #848484;
       font-weight: 500;
       height: 110px;
+      @include media(sm) {
+        text-align: center;
+      }
       p {
         margin: 20px 0;
+        font-weight: normal;
+        @include media(sm) {
+          text-align: center;
+        }
       }
     }
     .item-footer {
@@ -154,7 +171,7 @@
         </v-loading>
       </no-ssr>
       <h1>افزایش اعتبار</h1>
-      <h1>برای برقراری تماس لطفا حساب خود را به میزان دقایق مکالمه شارژ کنید:</h1>
+      <h2>برای برقراری تماس لطفا حساب خود را به میزان دقایق مکالمه شارژ کنید:</h2>
       <div class="charge-items hide-md">
         <div
           class="charge-item-wrapper"
@@ -239,15 +256,15 @@
           <span class="custom-color">{{credit | currency | persianDigit}} تومان</span>
           <span>است . شما میتوانید</span>
           <span class="custom-color">{{duration | persianDigit}} دقیقه</span>
-          <span>با دکتر فتانه محمدی صحبت کنید</span>
+          <span>با {{doctor.title}} {{doctor.firstName}} {{doctor.lastName}} صحبت کنید</span>
         </div>
-        <v-btn color="#27db9b" to="booking" round outline>ادامه با اعتبار فعلی</v-btn>
+        <v-btn v-if="duration >= 1" color="#27db9b" to="booking" round outline>ادامه با اعتبار فعلی</v-btn>
       </div>
     </div>
 
     <div class="card notify">
       <div>
-        <Lamp />
+        <img src="~assets/img/lamp@2x.png" />
         <div>
           <p>
             هزینه مشاوره به اندازه دقایق مکالمه شما از حساب رسا کسر می شود. باقی مانده اعتبار شما در تماس های بعدی قابل استفاده است.
@@ -265,10 +282,13 @@
 
 <script>
 import ChargeSvg from "@/components/charge-svg";
-import Lamp from "@/assets/svg/lamp.svg?inline";
+import doctors from "@/components/doctor_detail/doctors";
 export default {
-  components: { ChargeSvg, Lamp },
+  components: { ChargeSvg },
   data() {
+    let doctor = doctors.find(
+      item => item.subscriberNumber == this.$route.params.id
+    );
     return {
       items: [
         {
@@ -325,7 +345,8 @@ export default {
       credit: 0,
       ajaxLoading: false,
       selected: 4,
-      recaptchaResponse: null
+      recaptchaResponse: null,
+      doctor
     };
   },
   async mounted() {

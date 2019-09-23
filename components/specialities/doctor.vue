@@ -45,6 +45,8 @@
     margin-right: 20px;
     @include media(sm) {
       margin-right: 0;
+      width: 100%;
+      padding: 0 10px;
     }
     .doctor-name {
       font-size: 20px;
@@ -71,9 +73,8 @@
     .doctor-tags {
       font-size: 12px;
       color: #9f9f9f;
-      font-weight: 300;
+      font-weight: normal;
       @include media(sm) {
-        font-size: 14px;
         display: flex;
         justify-content: space-between;
         span {
@@ -86,6 +87,7 @@
           display: flex;
           flex-direction: column;
           align-items: center;
+          margin-right: 30px;
           svg {
             width: auto;
             height: auto;
@@ -148,8 +150,8 @@
       />
     </div>
     <div class="name">
-      <div class="doctor-name">دکتر پیمان رضایی مرام</div>
-      <div class="doctor-speciality">کارشناس ارشد روانشناسی عمومی</div>
+      <div class="doctor-name">{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</div>
+      <div class="doctor-speciality">{{doctor.specialty.title}}</div>
       <div class="doctor-tags">
         <div>
           <span v-for="(tag,index) in doctor.custom_tags.slice(0,3)" :key="tag.id">
@@ -170,12 +172,7 @@
       </div>
       <div>
         <div class="price-per-minute">{{1000 | persianDigit}} تومان / دقیقه</div>
-        <v-btn
-          :to="`/doctors/psychology/${doctor.subscriberNumber}/call/register`"
-          class="select-btn"
-          dark
-          round
-        >
+        <v-btn :to="`/doctors/psychology/${doctor.subscriberNumber}`" class="select-btn" dark round>
           <span>انتخاب مشاور</span>
         </v-btn>
       </div>

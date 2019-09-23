@@ -23,16 +23,22 @@
   section + section {
     margin-top: 28px;
   }
+  .custom-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 }
 </style>
 
 <template>
   <div id="doctor-detail">
     <v-container>
-      <Info :doctor="doctor" />
-      <Call :doctor="doctor" />
-      <Why />
-      <Address v-if="doctor.workplaces.length" :doctor="doctor" />
+      <div class="custom-container">
+        <Info :doctor="doctor" />
+        <Call :doctor="doctor" />
+        <Why />
+        <Address v-if="doctor.workplaces.length" :doctor="doctor" />
+      </div>
     </v-container>
     <v-container fluid class="pa-0">
       <RelatedDoctors :doctor="doctor" />

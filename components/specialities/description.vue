@@ -31,6 +31,9 @@
   .content {
     color: #707070;
     font-size: 14px;
+    @include media(sm) {
+      text-align: justify;
+    }
     p {
       margin-bottom: 6px;
     }
@@ -45,8 +48,9 @@
     }
   }
   .item {
-    @include media(sm) {
-      text-align: center;
+    ul {
+      margin: 0;
+      padding: 0;
     }
     + .item {
       margin-top: 40px;

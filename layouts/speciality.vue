@@ -3,11 +3,6 @@
   .v-content {
     background: var(--bg-color);
   }
-  .container {
-    @media only screen and (min-width: 1264px) {
-      max-width: 1480px;
-    }
-  }
   header + main {
     margin-top: 0px;
   }

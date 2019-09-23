@@ -373,7 +373,8 @@
         <div class="navigation-bar-items">
           <ul class="nav">
             <li class="nav-item">
-              <div v-if="user">
+              <nuxt-link :to="{name:user?'patient-profile':'patient-login'}">حساب کاربری</nuxt-link>
+              <!-- <div v-if="user">
                 <a class="drop-down">
                   خوش اومدی {{user.firstName}}
                   <i class="fa fa-caret-down"></i>
@@ -406,7 +407,7 @@
                   >ورود به حساب کاربری</nuxt-link>
                   <nuxt-link @click.native="closeNav" :to="{name:'doctors-register'}">عضویت در رسا</nuxt-link>
                 </div>
-              </div>
+              </div>-->
             </li>
             <li class="nav-item">
               <nuxt-link
