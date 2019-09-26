@@ -31,9 +31,7 @@
   .content {
     color: #707070;
     font-size: 14px;
-    @include media(sm) {
-      text-align: justify;
-    }
+    text-align: justify;
     p {
       margin-bottom: 6px;
     }

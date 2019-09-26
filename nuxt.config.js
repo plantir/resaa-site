@@ -115,7 +115,8 @@ export default {
     // '~/assets/style/app.styl',
     '~/assets/style/vuetify_rtl.scss',
     'swiper/dist/css/swiper.css',
-    '~/assets/style/main.scss'
+    '~/assets/style/main.scss',
+    'animate.css/animate.css'
   ],
 
   /*

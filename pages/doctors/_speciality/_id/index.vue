@@ -3,6 +3,25 @@
   --grey-color: #969696;
 }
 #doctor-detail {
+  .breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-right: 16px;
+    margin-bottom: 8px;
+    @include media(sm) {
+      padding-right: 0px;
+      justify-content: center;
+    }
+    span {
+      color: #707070;
+      display: flex;
+    }
+    .v-icon {
+      color: #a9a9a9;
+      font-size: 18px;
+    }
+  }
   .v-card {
     padding: 40px 20px;
     border-radius: 30px;
@@ -22,10 +41,14 @@
   }
   section + section {
     margin-top: 28px;
+    @include media(sm) {
+      margin-top: 20px;
+    }
   }
   .custom-container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 4px;
   }
 }
 </style>
@@ -34,6 +57,17 @@
   <div id="doctor-detail">
     <v-container>
       <div class="custom-container">
+        <div class="breadcrumbs">
+          <span>سامانه رسا</span>
+          <span>
+            <v-icon>chevron_left</v-icon>
+          </span>
+          <span>مشاوره تلفنی با متخصص روانشناس</span>
+          <span>
+            <v-icon>chevron_left</v-icon>
+          </span>
+          <span>{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</span>
+        </div>
         <Info :doctor="doctor" />
         <Call :doctor="doctor" />
         <Why />

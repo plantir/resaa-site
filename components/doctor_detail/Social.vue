@@ -10,7 +10,8 @@ section {
   max-width: 1360px;
   margin: 0 auto;
   padding: 0 120px;
-  font-size: 23px;
+  font-size: 18px;
+  font-weight: 500;
   @include media(sm) {
     flex-direction: column;
     padding: 20px 0;
@@ -20,7 +21,7 @@ section {
         flex-direction: column;
         align-items: center;
         span:last-child {
-          margin: 10px 0;
+          margin: 20px 0 10px;
         }
       }
     }
@@ -57,9 +58,9 @@ section {
         >
           <twitter class="twitter-hover-svg" />
         </a>
-        <a>
+        <!-- <a>
           <instagram class="instagram-hover-svg" />
-        </a>
+        </a>-->
         <a :href="`https://facebook.com/sharer/sharer.php?u=${url}`" target="_blank" rel="noopener">
           <facebook class="facebook-hover-svg" />
         </a>
@@ -94,7 +95,9 @@ export default {
       return `${process.env.SITE_URL}${this.$route.fullPath}`;
     },
     text() {
-      return `مشاوره تلفنی با ${this.doctor.title} ${this.doctor.firstName} ${this.doctor.lastName} متخصص ${this.doctor.specialty.title} را در سامانه رسا  به شما پیشنهاد می کنم.`;
+      return `مشاوره تلفنی با ${this.doctor.title || ""} ${this.doctor
+        .firstName || ""} ${this.doctor.lastName || ""} متخصص ${this.doctor
+        .specialty.title || ""} را در سامانه رسا  به شما پیشنهاد می کنم.`;
     }
   }
 };

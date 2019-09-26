@@ -43,7 +43,7 @@ h2 {
   padding: 0 16px;
   transition: all 0.3s ease-in-out;
   @include media(sm) {
-    padding: 0;
+    padding: 16px;
     display: flex;
     justify-content: center;
   }
@@ -51,7 +51,7 @@ h2 {
   .charge-item {
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1), 0 -2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 35px;
-    height: 290px;
+    height: 300px;
     width: 200px;
     @include media(sm) {
       height: 310px;
@@ -80,7 +80,7 @@ h2 {
       font-size: 14px;
       color: #848484;
       font-weight: 500;
-      height: 110px;
+      height: 128px;
       @include media(sm) {
         text-align: center;
       }
@@ -139,6 +139,7 @@ h2 {
   margin-top: 30px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   @include media(sm) {
     flex-direction: column;
   }
@@ -153,11 +154,6 @@ h2 {
     .custom-color {
       color: #27db9b;
     }
-  }
-}
-.notify {
-  > div {
-    align-items: flex-start !important;
   }
 }
 </style>
@@ -294,41 +290,41 @@ export default {
         {
           id: 6,
           duration: 15,
-          title: "- آشنایی با مشاور",
+          title: "آشنایی با مشاور",
           description:
-            "- با این فرصت کوتاه خیالتان از کیفیت مشاوره تلفنی راحت می شود",
+            "با این فرصت کوتاه خیالتان از کیفیت مشاوره تلفنی راحت می شود",
           color: ["#FDBD10", "#7F5F08"],
           price: 15000
         },
         {
           id: 3,
           duration: 30,
-          title: "- مناسب برای پیگیری روند مشاوره",
-          description: "- ممکن است برای اولین جلسه مشاوره کافی نباشد",
+          title: "مناسب برای پیگیری روند مشاوره",
+          description: "ممکن است برای اولین جلسه مشاوره کافی نباشد",
           color: ["#EF4871", "#782439"],
           price: 30000
         },
         {
           id: 4,
           duration: 45,
-          title: "- یک جلسه مشاوره استاندارد",
+          title: "یک جلسه مشاوره استاندارد",
           description:
-            "- پیشنهاد ما برای اینکه شما و مشاور فرصت کافی برای رسیدگی به دغدغه ها داشته باشید",
+            "پیشنهاد ما برای اینکه شما و مشاور فرصت کافی برای رسیدگی به دغدغه ها داشته باشید",
           color: ["#0EC7E6", "#076473"],
           price: 45000
         },
         {
           id: 5,
           duration: 60,
-          title: "- جلسه مشاوره مفصل و کامل",
+          title: "جلسه مشاوره مفصل و کامل",
           description:
-            "- جزییات خیلی مهم است هر چه فرصت بیشتری داشته باشید بهتر می توانید از مشاور کمک بگیرید",
+            "جزییات خیلی مهم است هر چه فرصت بیشتری داشته باشید بهتر می توانید از مشاور کمک بگیرید",
           color: ["#28DB9A", "#146E4D"],
           price: 60000
         }
       ],
       swiperOptionDoctors: {
-        spaceBetween: 30,
+        // spaceBetween: 10,
         slidesPerView: "auto",
         centeredSlides: true,
         slidesPerGroup: 1,
@@ -349,6 +345,7 @@ export default {
       doctor
     };
   },
+  methods: {},
   async mounted() {
     try {
       let { result } = await this.$axios.$get(
@@ -368,6 +365,10 @@ export default {
     } catch (error) {}
   },
   methods: {
+    yourCallBackFunction() {
+      // Your logic
+      console.log("object");
+    },
     onVerify: function(response) {
       this.ajaxLoading = true;
       this.recaptchaResponse = response;

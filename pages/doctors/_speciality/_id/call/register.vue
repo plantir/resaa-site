@@ -163,7 +163,8 @@
     </div>
     <div class="card notify">
       <div>
-        <Lamp />شماره موبایل شما نزد رسا امانت است و برای برقراری ارتباط با پزشک استفاده می شود.
+        <img src="~assets/img/lamp@2x.png" alt />
+        شماره موبایل شما نزد رسا امانت است و برای برقراری ارتباط با پزشک استفاده می شود.
         پزشک شماره تماس شما را نخواهد دید و هویت شما کاملا محرمانه می ماند.
       </div>
     </div>
@@ -172,9 +173,7 @@
 
 <script>
 import jwtDecode from "jwt-decode";
-import Lamp from "@/assets/svg/lamp.svg?inline";
 export default {
-  components: { Lamp },
   data() {
     return {
       ajaxLoading: false,
@@ -187,6 +186,14 @@ export default {
       resendSMSCode_timeout: 0,
       mobile_regex: /^[0][9][0-3|9][0-9]{8,8}$/g
     };
+  },
+  watch: {
+    $route(to, from) {
+      debugger;
+      if (from.name == "manage-uid-edit" && to.name == "manage-uid") {
+        this.get_product();
+      }
+    }
   },
   beforeCreate() {
     if (process.client && localStorage.getItem("auth")) {

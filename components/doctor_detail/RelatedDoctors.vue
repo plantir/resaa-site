@@ -37,10 +37,14 @@ section {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: var(--display-3);
+      font-size: 14px;
       color: #a3a3a3;
       svg {
         margin-left: 12px;
+        @include media(sm) {
+          width: 16px;
+          height: 16px;
+        }
       }
       + div {
         margin-right: 60px;
@@ -70,8 +74,8 @@ section {
       padding: 8px;
       .status {
         position: absolute;
-        top: 4px;
-        right: 25px;
+        top: 2px;
+        right: 16px;
       }
       img {
         width: 100%;
@@ -81,7 +85,8 @@ section {
     .name {
       color: #34ccd7;
       margin: 8px 0 4px;
-      font-size: var(--display-3);
+      font-size: 16px;
+      font-weight: 500;
       white-space: nowrap;
       display: block;
       overflow: hidden;
@@ -90,7 +95,7 @@ section {
     }
     .speciality {
       color: #bbb;
-      font-size: var(--display-4);
+      font-size: 14px;
       margin-bottom: 8px;
     }
     .code {
@@ -102,6 +107,10 @@ section {
         color: #43e7a5;
         font-size: 21px;
         font-weight: 500;
+        @include media(sm) {
+          font-size: 14px;
+          font-weight: normal;
+        }
       }
     }
   }

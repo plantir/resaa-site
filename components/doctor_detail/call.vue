@@ -60,6 +60,9 @@
     margin: 30px 0px;
   }
 }
+.button-wrapper {
+  animation: heartBeat 1.5s linear infinite;
+}
 .call-doctor {
   background: linear-gradient(to right, #28db9a 0%, #0ec7e5 100%);
   box-shadow: 0 3px 3px rgba(#000000, 0.16);
@@ -71,6 +74,22 @@
   justify-content: space-between;
   padding: 0 26px;
   font-size: 16px;
+  position: relative;
+  animation: waves 1.5s linear infinite;
+  animation-delay: 1.5s;
+  &:before {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 100%;
+    border-radius: 26px;
+    background: #0194c7;
+    transition: 5s ease;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    z-index: -1;
+  }
   a {
     color: #fff;
   }
@@ -79,6 +98,59 @@
     path {
       fill: #fff;
     }
+  }
+  .phone {
+    animation: shake 2s infinite;
+  }
+}
+@keyframes waves {
+  0% {
+    box-shadow: 0 0 0 0 rgba($secondary-color, 1);
+  }
+  100% {
+    box-shadow: 0 0 0 16px rgba($secondary-color, 0.3);
+  }
+}
+@keyframes shake {
+  5%,
+  15%,
+  25%,
+  35% {
+    -webkit-transform: translate3d(-3px, 0, 0);
+    transform: translate3d(-3px, 0, 0);
+  }
+
+  10%,
+  20%,
+  30%,
+  40% {
+    -webkit-transform: translate3d(3px, 0, 0);
+    transform: translate3d(3px, 0, 0);
+  }
+
+  0%,
+  45%,
+  50%,
+  55%,
+  60%,
+  65%,
+  70%,
+  80%,
+  90%,
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes heartBeat {
+  0%,
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  20% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
   }
 }
 </style>
@@ -105,15 +177,15 @@
           <span class="price-title mb-0">هزینه هر دقیقه گفتگو با پزشک :</span>
           <span class="price">{{costPerMinute | currency | persianDigit}} تومان</span>
         </div>
-        <div class>
-          <div class="call-doctor">
-            <nuxt-link
-              :to="`${doctor.subscriberNumber}/call/register`"
-              v-if="doctor.currentlyAvailable"
-            >شروع مکالمه با پزشک</nuxt-link>
-            <nuxt-link :to="`${doctor.subscriberNumber}/call/register`" v-else>ثبت درخواست تماس</nuxt-link>
-            <phone />
-          </div>
+        <div class="button-wrapper">
+          <nuxt-link
+            class="call-doctor"
+            :to="`${doctor.subscriberNumber}/call/${user?'charge':'register'}`"
+            v-if="doctor.currentlyAvailable"
+          >
+            {{doctor.currentlyAvailable?'شروع مکالمه با پزشک':'ثبت درخواست تماس'}}
+            <phone class="phone" />
+          </nuxt-link>
         </div>
       </div>
     </v-card>
@@ -139,6 +211,11 @@ export default {
       `Rubika/Doctors/${this.$route.params.id}/communicationquote`
     );
     this.costPerMinute = price.result.quote.costPerMinute;
+  },
+  computed: {
+    user() {
+      return this.$store.state.patient.user;
+    }
   }
 };
 </script>

@@ -30,8 +30,8 @@
 
     .status {
       position: absolute;
-      top: 4px;
-      right: 12px;
+      top: 2px;
+      right: 8px;
     }
     img {
       max-width: 100%;
@@ -140,6 +140,7 @@
       </div>
       <img
         v-if="doctor.imagePath"
+        :key="doctor.subscriberNumber"
         :src="'https://webapi.resaa.net/'+doctor.imagePath"
         :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
       />
@@ -161,13 +162,13 @@
         </div>
         <div class="success-call hide-md-and-up">
           <Favorite />
-          <span>{{500 | persianDigit}}+</span>
+          <span>{{doctor.success_call | persianDigit}}+</span>
         </div>
       </div>
     </div>
     <div class="price">
       <div class="success-call hide-md">
-        <span>{{500 | persianDigit}}+</span>
+        <span>{{doctor.success_call | persianDigit}}+</span>
         جلسه رضایت بخش
       </div>
       <div>

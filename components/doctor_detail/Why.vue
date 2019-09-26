@@ -48,7 +48,7 @@ section {
   }
 }
 .item-title {
-  margin: 40px 0 !important;
+  margin: 20px 0 !important;
   font-weight: 500;
 }
 .description {

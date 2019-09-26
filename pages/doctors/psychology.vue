@@ -31,7 +31,7 @@
     position: absolute;
     top: 230px;
     right: 130px;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 500;
     color: #fff;
     @include media(sm) {
@@ -165,19 +165,28 @@ import Doctor from "@/components/specialities/doctor";
 import Guide from "@/components/specialities/guide";
 import Comments from "@/components/specialities/comments";
 import Description from "@/components/specialities/description";
-import _ from "lodash";
 export default {
   layout: "speciality",
   components: { Wave, Doctor, Guide, Comments, Description },
-  data() {
-    let available = doctors.filter(item => item.currentlyAvailable);
-    let notavailable = doctors.filter(item => !item.currentlyAvailable);
-    let sorted_doctors = _.sampleSize(available, 6);
+  asyncData() {
+    let sorted_doctors = doctors
+      .filter(item => item.currentlyAvailable)
+      .sort(() => {
+        return 0.5 - Math.random();
+      });
+    sorted_doctors.push(
+      ...doctors
+        .filter(item => !item.currentlyAvailable)
+        .sort(() => {
+          return 0.5 - Math.random();
+        })
+    );
     if (sorted_doctors.length < 6) {
       sorted_doctors.push(
         ..._.sampleSize(notavailable, 6 - sorted_doctors.length)
       );
     }
+    doctors;
     return {
       text_array: [
         "از هر کجای ایران!",

@@ -19,7 +19,8 @@
 }
 .section-title {
   margin-bottom: 40px !important;
-  font-size: var(--display-2);
+  font-size: 21px;
+  font-weight: 500;
   color: var(--grey-color);
   @include media(sm) {
     margin-bottom: 34px !important;
@@ -30,7 +31,7 @@
   display: flex;
   // align-items: center;
   justify-content: space-between;
-  font-size: 16px;
+  font-size: 14px;
   @include media(sm) {
     flex-direction: column;
     align-items: flex-start;

@@ -15,7 +15,7 @@
   .card {
     border-radius: 30px;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1), 0 -2px 5px rgba(0, 0, 0, 0.1);
-    margin: 30px 0;
+    margin: 24px 0;
     padding: 30px 60px;
     background: #fff;
     @include media(sm) {
@@ -129,7 +129,7 @@
     font-weight: normal;
     color: #7e7e7e;
     padding: 30px 40px;
-    p:not(:first-child) {
+    p {
       position: relative;
       &:before {
         position: absolute;
@@ -148,7 +148,7 @@
     }
     > div {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       + div {
         margin-top: 24px;
       }
@@ -161,6 +161,8 @@
       margin-left: 50px;
       @include media(sm) {
         margin-left: 20px;
+        max-width: 25px;
+        min-width: 25px;
       }
     }
   }

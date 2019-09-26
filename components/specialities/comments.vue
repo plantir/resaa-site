@@ -16,6 +16,10 @@
   padding: 25px 60px;
   margin-bottom: 100px;
   position: relative;
+  @include media(sm) {
+    height: 330px;
+    padding: 25px 30px;
+  }
 }
 
 .quote-sign {
@@ -41,11 +45,13 @@
   font-style: normal;
   font-stretch: normal;
   letter-spacing: normal;
-  text-align: center;
+  text-align: justify;
   color: #777590;
   margin-bottom: 30px;
   height: 100px;
-  text-align: center;
+  @include media(sm) {
+    height: 150px;
+  }
 }
 
 .doctor-comment-special {

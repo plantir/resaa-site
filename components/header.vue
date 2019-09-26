@@ -59,7 +59,7 @@ section#header {
     a {
       color: #fff;
       padding: 16px 0;
-      font-weight: 300;
+      font-weight: medium;
       transition: color 0.2s ease-in;
       text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
       &:hover,

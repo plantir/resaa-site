@@ -3,10 +3,11 @@ section#doctor-detail-comments {
   margin-top: 0 !important;
   background: #f6f6f6;
   .section-title {
-    font-size: var(--display-2);
+    font-size: 21px;
     text-align: center;
     margin: 90px 0 130px;
     color: #7f8a99;
+    font-weight: 500;
     @include media(sm) {
       margin: 50px 0;
     }
