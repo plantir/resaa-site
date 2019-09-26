@@ -166,7 +166,7 @@
           <div class="contact-us-form">
             <v-loading v-if="ajaxLoading" mode="relative"></v-loading>
             <!-- -->
-            <form @submit.prevent="check_validation">
+            <form @submit.prevent>
               <div class="form-group">
                 <input
                   v-model="form.fullName"
@@ -222,7 +222,12 @@
                   v-if="submitted && errors.has('message')"
                   class="invalid-feedback"
                 >{{ errors.first('message') }}</div>
-                <v-btn color="secondary" round class="contact-us-submit-button">ارسال</v-btn>
+                <v-btn
+                  @click="submitForm"
+                  color="secondary"
+                  round
+                  class="contact-us-submit-button"
+                >ارسال</v-btn>
               </div>
             </form>
           </div>
@@ -299,27 +304,19 @@ export default {
     this.$validator.localize("fa", dict);
   },
   methods: {
-    submitForm() {
-      this.ajaxLoading = true;
-      this.$axios
-        .post("Inquiries", this.form)
-        .then(Response => {
-          if (Response.body.status == "OK") {
-            alert("درخواست شما با موفقیت ثبت شد");
-            this.form = {};
-          }
-        })
-        .then(() => {
-          this.ajaxLoading = false;
-        });
-    },
-    check_validation() {
+    async submitForm() {
       this.submitted = true;
-      this.$validator.validate().then(valid => {
-        if (valid) {
-          this.submitForm();
-        }
-      });
+      let valid = await this.$validator.validate();
+      if (!valid) {
+        return;
+      }
+      this.ajaxLoading = true;
+      let { status } = await this.$axios.$post("Inquiries", this.form);
+      if (status == "OK") {
+        alert("درخواست شما با موفقیت ثبت شد");
+        this.form = {};
+      }
+      this.ajaxLoading = false;
     }
   }
 };

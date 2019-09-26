@@ -20,17 +20,27 @@
 //   }
 // }
 .theme--dark.v-navigation-drawer {
-  background: linear-gradient(to bottom, $primary-color, $secondary-color);
+  background: linear-gradient(to bottom, #26d295, #0dbed9);
 }
 .logo {
   position: relative;
-  height: 80px;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  margin-bottom: 20px;
+  > div {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    span:first-child {
+      font-size: 21.5px;
+    }
+  }
   svg {
-    width: 140px;
-    height: 140px;
-    position: absolute;
-    left: 0;
-    top: -23px;
+    width: 80px;
+    height: auto;
     path {
       fill: #fff;
     }
@@ -62,28 +72,40 @@
 <template>
   <v-navigation-drawer v-model="showMenu" app dark right>
     <div class="logo">
-      <resaaElement />
+      <Logo />
+      <div>
+        <span>سامانه رســـــا</span>
+        <span>ارتباط تلفنی پزشک و بیمار</span>
+      </div>
     </div>
     <ul class="nav-bar">
       <li class="nav-item">
-        <div v-if="user">
-          <a class="drop-down">
-            خوش اومدی {{user.firstName}}
-            <i class="fa fa-caret-down"></i>
-          </a>
-          <div v-if="isPatient">
-            <router-link :to="{name:'patient-profile'}">پروفایل</router-link>
-            <a @click="logout">خروج</a>
-          </div>
-          <div v-else>
-            <router-link :to="{name:'patient-profile'}">پروفایل</router-link>
-            <a @click="logout">خروج</a>
-          </div>
+        <!-- <div v-if="user">
+          <v-menu left :offset-y="true" bottom>
+            <template v-slot:activator="{ on }">
+              <a v-on="on">
+                خوش اومدی {{user.firstName}}
+                <i class="fa fa-caret-down"></i>
+              </a>
+            </template>
+            <v-list class="register-dropdown">
+              <v-list-tile>
+                <v-list-tile-title>
+                  <nuxt-link :to="{name:isPatient?'patient-login':'doctors-login'}">پروفایل</nuxt-link>
+                </v-list-tile-title>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-title>
+                  <a @click="logout">خروج</a>
+                </v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
         </div>
         <div v-else>
           <v-menu left :offset-y="true" bottom>
             <template v-slot:activator="{ on }">
-              <a>
+              <a v-on="on">
                 <span>حساب کاربری</span>
                 <i class="fa fa-caret-down"></i>
               </a>
@@ -105,7 +127,12 @@
               </v-list-tile>
             </v-list>
           </v-menu>
-        </div>
+        </div>-->
+        <router-link
+          @click.native="closeNav"
+          :to="{name:user?'patient-profile':'patient-login'}"
+          class="navigation-bar-item"
+        >حساب کاربری</router-link>
       </li>
       <li class="nav-item">
         <router-link
@@ -147,9 +174,11 @@
 </template>
 <script>
 import resaaElement from "@/assets/svg/element.svg?inline";
+import Logo from "@/assets/svg/logo.svg?inline";
 export default {
   components: {
-    resaaElement
+    resaaElement,
+    Logo
   },
   data() {
     return {
@@ -159,6 +188,11 @@ export default {
   methods: {
     closeNav() {
       this.showMenu = false;
+    },
+    logout() {
+      this.$store.commit("patient/logout");
+      this.$router.replace({ name: "patient-landing" });
+      this.menuActive = false;
     }
   },
   computed: {

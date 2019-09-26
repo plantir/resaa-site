@@ -437,7 +437,7 @@ section#speciality {
           @include media(xs-only) {
             flex-direction: column;
           }
-          button {
+          .v-btn {
             margin: 6px 4px;
             width: 30px;
             height: 30px;
@@ -872,7 +872,7 @@ section#speciality {
           </v-layout>
         </div>
       </section>
-      <section class="important-device">
+      <section v-if="$route.params.id == 23" class="important-device">
         <h2>مهم ترین دستگاه های تشخیصی برای یافتن نوع عارضه قلبی</h2>
         <div>
           <h3>نوار قلبی / الکتروکاردیوگرافی</h3>
@@ -893,6 +893,45 @@ section#speciality {
         <div>
           <h3>تست ورزش</h3>
           <p>تست ورزش مانند نوار قلبی است، با این تفاوت که بیمار روی دستگاه تردمیل حرکت می‌کند و نوار قلب ثبت می‌شود. اگر اختلالی در عملکرد ریتم و خون‌رسانی قلبی وجود داشته باشد، با تست ورزش مشخص می‌شود.</p>
+        </div>
+      </section>
+      <section v-else-if="$route.params.id == 41" class="important-device">
+        <h2>چه زمانی باید به روانشناس مراجعه کنیم؟</h2>
+        <div>
+          <!-- <h3>نوار قلبی / الکتروکاردیوگرافی</h3> -->
+          <p>زندگی همیشه با خود چالش‌هایی را به همراه دارد. برخی از این مشکلات خیلی و سخت و غیرقابل تحمل‌اند و به نظر میرسد که ادامه دادن غیرممکن باشد. اما باید بدانیم که برای هر مانعی که زندگی بر سر راهمان می‌گذارد همیشه کمک و راه حلی وجود دارد. در مقابل مشکلات زیر حتما به روانشناس مراجعه کنید.</p>
+        </div>
+        <div>
+          <h3>از دست دادن عزیزان</h3>
+          <p>با اینکه مرگ بخش جدانشدنی زندگیست، اما این‌طور نیست که کنار آمدن با آن نیز ساده باشد. با این حال، اجتناب از واقعیت‌ها می‌تواند منجر به مشکلات طولانی و ماندگاری شود.</p>
+        </div>
+        <div>
+          <h3>استرس و اضطراب</h3>
+          <p>اگر این مشکل را به حال خود بگذارید، به افسردگی، انزوای اجتماعی و مشکلات دیگری منجر شود.</p>
+        </div>
+        <div>
+          <h3>افسردگی</h3>
+          <p>علائم آن ناامیدی و درماندگی است که باید در طول زمان درمان شود.</p>
+        </div>
+        <div>
+          <h3>ترس‌ها و فوبیاها</h3>
+          <p>بعضی ترس‌ها معمول اند و برخی غیرعادی مانند ترس از خوردن ، خطری جدی برای سلامتی‌اند.</p>
+        </div>
+        <div>
+          <h3>مسائل خانوادگی و روابط</h3>
+          <p>با اینکه روابط بهترین بخش زندگی‌اند، گاهی اوقات به منابع استرس و مشکلات تبدیل می‌شوند.</p>
+        </div>
+        <div>
+          <h3>عادت‌های ناسالم و اعتیاد</h3>
+          <p>برخی استعمال دخانیات را برای فرار از مشکلات موجود انتخاب می‌کنند.</p>
+        </div>
+        <div>
+          <h3>افزایش عملکرد</h3>
+          <p>ورزش‌کاران حرفه‌ای برای بازدهی بهتر و بیشتر به روان‌شناس مراجعه می‌کنند.</p>
+        </div>
+        <div>
+          <h3>اختلالات روانی</h3>
+          <p>این اختلالات پشت علائم متعددی مخفی‌اند و تنها با کمک متخصص کشف می‌شوند.</p>
         </div>
       </section>
       <div class="space">...</div>
@@ -989,7 +1028,13 @@ section#speciality {
                         </div>
                       </div>
                       <div class="doctor-action">
-                        <v-btn fab dark small class="sky-btn">
+                        <v-btn
+                          fab
+                          dark
+                          small
+                          :to="`/doctors/${doctor.subscriberNumber}`"
+                          class="sky-btn"
+                        >
                           <!-- <v-icon>fa-eye</v-icon>-->
                           <eyeIcon class="svg-icon-white" width="16px" />
                         </v-btn>
@@ -1008,10 +1053,11 @@ section#speciality {
               <div class="swiper-title">دسترسی سریع به پزشکان پاسخگو</div>
               <div v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
                 <div class="swiper-wrapper">
-                  <div
+                  <nuxt-link
                     class="swiper-slide"
                     v-for="doctor in available_doctors"
                     :key="doctor.subscriberNumber"
+                    :to="`/doctors/${doctor.subscriberNumber}`"
                   >
                     <div class="image">
                       <img
@@ -1031,7 +1077,7 @@ section#speciality {
                       <span>کد رسا:</span>
                       <span>{{doctor.subscriberNumber | persianDigit}}</span>
                     </div>
-                  </div>
+                  </nuxt-link>
                 </div>
                 <div class="swiper-button-prev" slot="button-prev"></div>
                 <div class="swiper-button-next" slot="button-next"></div>
@@ -1040,54 +1086,12 @@ section#speciality {
           </v-flex>
         </v-layout>
       </section>
-      <section class="blog-section">
+      <!-- <section class="blog-section">
         <div class="space">...</div>
         <div class="container">
           <doctorSlider :dark="dark" />
         </div>
-        <!-- <div class="swiper-parent">
-          <div v-swiper:mySwiper2="blog_swiper" dir="rtl">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide" v-for="(comment, index) in 10" :key="index">
-                <div class="image">
-                  <img src="~assets/img/blog_placeholder.jpg" alt>
-                </div>
-                <div class="content">
-                  <div class="blog-title">حفاظت سلامت قلب با ورزش</div>
-                  <div class="date">{{'2019-02-21' | persianDate | persianDigit}}</div>
-                  <div
-                    class="summary"
-                  >علائم بیماری های آلرژی به علت فعال شدن سیستم ایمنیو واکنش آن به مواد عمدتا بی ضرر ...</div>
-                  <div class="footer">
-                    <div>
-                      <div>
-                        <v-icon>fa-user</v-icon>
-                        <span>نویسنده</span>
-                      </div>
-                      <div>
-                        <v-icon>fa-comment</v-icon>
-                        <span>{{205 | persianDigit}}</span>
-                      </div>
-                      <div>
-                        <v-icon>fa-heart-o</v-icon>
-                        <span>{{1400 | persianDigit}}</span>
-                      </div>
-                    </div>
-                    <div>
-                      <v-btn fab dark small class="sky-btn">
-                        <eyeIcon class="svg-icon-white" width="18px"/>
-                      </v-btn>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-button-prev" slot="button-prev"></div>
-            <div class="swiper-button-next" slot="button-next"></div>
-          </div>
-        </div>-->
-      </section>
+      </section>-->
       <section class="faq-section hide-mobile">
         <h2 class="section-title">
           <faqIcon class="svg-icon-blue" width="53px" />
@@ -1170,6 +1174,7 @@ import eyeIcon from "@/assets/svg/eye.svg?inline";
 import doctorListIcon from "@/assets/svg/doctorList.svg?inline";
 import userIcon from "@/assets/svg/user.svg?inline";
 import doctorSlider from "@/components/doctor/doctor_detail/doctorSlider/doctorSlider";
+import doctors from "@/components/doctor_detail/doctors";
 export default {
   layout: "speciality",
   components: {
@@ -1188,10 +1193,15 @@ export default {
     let service = await $axios.$get(
       `/Doctors/MedicalSpecialties/${params.id}/Manifest`
     );
-    let doctor_service = await $axios.$get(
-      `/Doctors?fields=specialty,title,subscriberNumber,firstName,lastName,imagePath,currentlyAvailable&specialtyId=${params.id}`
-    );
-    let rleated_doctors = doctor_service.result.doctors;
+    let rleated_doctors;
+    if (params.id == 41) {
+      rleated_doctors = doctors;
+    } else {
+      let { result } = await $axios.$get(
+        `/Doctors?fields=specialty,title,subscriberNumber,firstName,lastName,imagePath,currentlyAvailable&specialtyId=${params.id}`
+      );
+      rleated_doctors = result.doctors;
+    }
     let available_doctors = rleated_doctors.filter(
       item => item.currentlyAvailable
     );

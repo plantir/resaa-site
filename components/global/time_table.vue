@@ -1,260 +1,649 @@
 <style lang="scss" scoped>
 section {
-  direction: ltr;
   position: relative;
-  width: 100%;
-  height: 400px;
-  padding-left: 100px;
-}
-.days {
-  width: 100px;
-  position: absolute;
-  left: 0;
-  height: 100%;
+  max-width: 1360px;
+  background: #fff;
+  padding: 50px;
+  border-radius: 36px;
+  margin: 0 auto;
+  height: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-top: 50px;
-  > div {
+  .close {
+    position: absolute;
+    cursor: pointer;
+    left: 30px;
+    top: 30px;
+    width: 30px;
+    height: 30px;
+    path {
+      fill: #ec4949;
+    }
+  }
+  @include media(xs-only) {
+    height: 700px;
+  }
+  .showhelp {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    @include media(xs-only) {
+      flex-direction: column;
+    }
+    > span {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      @include media(xs-only) {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+      .space-betwen {
+        font-size: 2rem;
+        @include media(xs-only) {
+          display: none;
+        }
+      }
+      img {
+        @include media(xs-only) {
+          flex: none;
+          margin: 0 12px;
+        }
+      }
+      .mobilereverse {
+        display: none;
+        @include media(xs-only) {
+          display: flex;
+          flex: 1;
+          text-align: left;
+        }
+        span {
+          @include media(xs-only) {
+            width: 100%;
+            text-align: left;
+          }
+        }
+      }
+      .mobilehide {
+        @include media(xs-only) {
+          display: none;
+        }
+      }
+      .timesheet {
+        color: #969696;
+        @include media(xs-only) {
+          flex: 1;
+        }
+      }
+    }
+    .morning {
+      color: #febe10;
+      span {
+        margin-right: 5px;
+      }
+    }
+    .evening {
+      color: #ff8149;
+      span {
+        margin-right: 5px;
+      }
+    }
+    .night {
+      color: #0ec7e5;
+      span {
+        margin-right: 5px;
+      }
+    }
+    .notaccess {
+      color: #ef4065;
+      span {
+        margin-right: 5px;
+      }
+      .items {
+        @include media(xs-only) {
+          flex: 1;
+        }
+      }
+      .item {
+        + .item {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+  .time {
     flex: 1;
     display: flex;
-    justify-content: center;
     align-items: center;
-    background: #efefee;
-    color: #374452;
-    font-weight: bold;
-    border-bottom: 1px solid #fff;
-    &.selected {
-      border-right: 4px solid $red;
-    }
-  }
-}
-.hours {
-  display: flex;
-  position: absolute;
-  width: 100%;
-  justify-content: space-between;
-  padding: 0 50px;
-  top: 0px;
-  height: 50px;
-  align-items: center;
-  border: 1px solid #efefef;
-  border-bottom: none;
-  div {
-    flex: 0 0 100px;
-    text-align: center;
-    &:last-child {
-      text-indent: -99999px;
-    }
-  }
-}
-.table-wraper {
-  width: 100%;
-  overflow: hidden;
-  overflow-x: auto;
-  > div {
-    min-width: 2400px;
-    position: relative;
-    padding-top: 50px;
-  }
-  .event {
-    position: absolute;
-    height: 50px;
-    background: lightblue;
-    width: 100px;
-    top: 50px;
-    left: 1200px;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    color: #fff;
-    font-size: 1.175rem;
-    font-weight: bold;
-    border-top: 1px solid #fff;
-    border-bottom: 1px solid #fff;
-    .sep {
-      margin: 0 8px;
+    .days-2 {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      position: relative;
+      height: 40px;
+      flex: 1;
+      direction: rtl;
+      background: linear-gradient(
+        to left,
+        rgba(14, 199, 229, 1) 0%,
+        rgba(40, 219, 154, 1) 100%
+      );
+      border-radius: 30px;
+      @include media(xs-only) {
+        flex-direction: column;
+        height: 100%;
+        flex: 0;
+      }
+      span {
+        color: #fff;
+        font-size: 1.2rem;
+        @include media(xs-only) {
+          display: flex;
+          align-items: center;
+        }
+        .rotate {
+          @include media(xs-only) {
+            transform: rotate(315deg);
+          }
+        }
+        .sa,
+        .mo,
+        .we,
+        .fr {
+          top: 50px;
+          position: absolute;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          @include media(xs-only) {
+            left: 60px;
+            top: unset;
+            flex-direction: row;
+          }
+          > img {
+            @include media(xs-only) {
+              display: none;
+            }
+          }
+          img.mobileshowimportant {
+            display: block !important;
+            @include media(xs-only) {
+              position: relative;
+              top: -10px;
+              left: 15px;
+              transform: rotate(270deg);
+            }
+          }
+          .items {
+            display: flex;
+            align-items: center;
+            top: 70px;
+            position: absolute;
+            @include media(xs-only) {
+              top: 0;
+              position: relative;
+              flex-direction: column;
+            }
+          }
+        }
+        .su,
+        .tu,
+        .th {
+          > img {
+            transform: rotate(180deg);
+            @include media(xs-only) {
+              display: none;
+            }
+          }
+          img.mobileshowimportant {
+            display: block !important;
+            @include media(xs-only) {
+              position: relative;
+              top: -10px;
+              right: 15px;
+              transform: rotate(90deg);
+            }
+          }
+          bottom: 50px;
+          position: absolute;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          @include media(xs-only) {
+            right: 60px;
+            bottom: unset;
+            flex-direction: row;
+          }
+          .items {
+            display: flex;
+            align-items: center;
+            bottom: 70px;
+            position: absolute;
+            @include media(xs-only) {
+              bottom: 0;
+              position: relative;
+              flex-direction: column;
+            }
+            .item {
+              @include media(xs-only) {
+                flex-direction: row;
+              }
+              > div {
+                @include media(xs-only) {
+                  padding-left: 0;
+                  padding-right: 10px;
+                }
+              }
+              span {
+                @include media(xs-only) {
+                  padding-left: 0px;
+                  padding-right: 6px;
+                }
+              }
+            }
+          }
+        }
+        .items {
+          .item {
+            width: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            @include media(xs-only) {
+              flex-direction: row-reverse;
+            }
+            span {
+              color: #9f9f9f;
+              @include media(xs-only) {
+                padding-left: 6px;
+              }
+            }
+            .spacemobile {
+              display: none;
+              @include media(xs-only) {
+                display: block;
+              }
+            }
+            > div {
+              padding-top: 10px;
+              @include media(xs-only) {
+                padding-top: 0;
+                padding-left: 10px;
+              }
+            }
+            + .item {
+              border-right: 1px solid #c5c5c5;
+              @include media(xs-only) {
+                border-right: none;
+              }
+            }
+          }
+        }
+      }
     }
   }
-}
-.selected-time {
-  position: absolute;
-  width: 4px;
-  background: $red;
-  height: 100%;
-  z-index: 9;
-  &:before {
-    content: "";
-    width: 0;
-    position: absolute;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 8px solid #f44336;
-    left: -6px;
-    top: 0;
-  }
-  &:after {
-    content: "";
-    width: 0;
-    position: absolute;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid #f44336;
-    left: -6px;
-    bottom: 0;
-  }
-}
-table {
-  width: 100%;
-  th,
-  td {
-    height: 50px;
-    width: 100px;
-    text-align: center;
-  }
-  th {
-    border-top: 1px solid #efefef;
-    &:first-child {
-      border-left: 1px solid #efefef;
-    }
-    &:last-child {
-      border-right: 1px solid #efefef;
+  .sun {
+    path,
+    circle {
+      fill: #fcbd0e;
     }
   }
-  td {
-    border: 1px solid #efefef;
+  .moon {
+    path {
+      fill: #0bc7e4;
+    }
   }
 }
 </style>
 <template>
   <section>
-    <v-loading v-if="loading" mode="relative"></v-loading>
-    <div class="days">
-      <div :class="{selected:date===6}">
-        <span>شنبه</span>
-      </div>
-      <div :class="{selected:date===0}">
-        <span>یکشنبه</span>
-      </div>
-      <div :class="{selected:date===1}">
-        <span>دوشنبه</span>
-      </div>
-      <div :class="{selected:date===2}">
-        <span>سه‌شنبه</span>
-      </div>
-      <div :class="{selected:date===3}">
-        <span>چهارشنبه</span>
-      </div>
-      <div :class="{selected:date===4}">
-        <span>پنجشنبه</span>
-      </div>
-      <div :class="{selected:date===5}">
-        <span>جمعه</span>
-      </div>
-    </div>
+    <close v-if="close" class="close" @click="$emit('close')" />
+    <div class="showhelp">
+      <!-- <span class="morning">
+        <div class="mobilereverse">
+          <span>بازه صبح</span>
+        </div>
 
-    <div ref="timeTable" class="table-wraper">
-      <div>
-        <div class="selected-time" :style="'left:'+time+'px'"></div>
-        <div class="event" v-for="(event,index) in events" :style="event.style" :key="index">
-          <span>{{event.start}}</span>
-          <span class="sep">-</span>
-          <span>{{event.end}}</span>
+        <sun class="sun" />
+        <span class="mobilehide">بازه صبح</span>
+        <span class="space-betwen">:</span>
+        <span class="timesheet">{{this.morningtime.start}} - {{this.morningtime.end}}</span>
+      </span>
+      <span class="night">
+        <div class="mobilereverse">
+          <span>بازه شب</span>
         </div>
-        <div class="hours">
-          <div v-for="(h,index) in hours" :key="index">{{h}}</div>
+        <moon class="moon" />
+        <span class="mobilehide">بازه شب</span>
+        <span class="space-betwen">:</span>
+        <span class="timesheet">{{this.nighttime.start}} - {{this.nighttime.end}}</span>
+      </span>-->
+      <span v-if="daynotaccess.length" class="notaccess">
+        <div class="mobilereverse">
+          <span>عدم پاسخگویی</span>
         </div>
-        <table cellspacing="0" cellpadding="0">
-          <!-- <tr>
-            <th ></th>
-          </tr>-->
-          <tr>
-            <td v-for="(h,index) in hours" :key="index"></td>
-          </tr>
-          <tr>
-            <td v-for="(h,index) in hours" :key="index"></td>
-          </tr>
-          <tr>
-            <td v-for="(h,index) in hours" :key="index"></td>
-          </tr>
-          <tr>
-            <td v-for="(h,index) in hours" :key="index"></td>
-          </tr>
-          <tr>
-            <td v-for="(h,index) in hours" :key="index"></td>
-          </tr>
-          <tr>
-            <td v-for="(h,index) in hours" :key="index"></td>
-          </tr>
-          <tr>
-            <td v-for="(h,index) in hours" :key="index"></td>
-          </tr>
-        </table>
+        <img src="~assets/img/icons/time-table/unavailable-icon.png" />
+        <span class="mobilehide">عدم پاسخگویی</span>
+        <span class="space-betwen">:</span>
+        <span class="timesheet" v-if="!daynotaccess">-</span>
+        <span v-for="item in daynotaccess" :key="item" class="items">
+          <span class="item">{{item | convertDay}}</span>
+        </span>
+      </span>
+    </div>
+    <div class="time">
+      <div class="days-2">
+        <span>
+          <span class="rotate">شنبه</span>
+          <div class="sa">
+            <img src="~assets/img/icons/time-table/img-bottom.png" v-if="events.sa[0]" />
+            <img src="~assets/img/icons/time-table/img-notaccess.png" v-else />
+            <div class="items" v-if="events.sa[0]">
+              <div class="item" v-for="(item,index) in events.sa" :key="index">
+                <div>
+                  <sun class="sun" v-if="item.time=='morning'" />
+                  <moon class="moon" v-if="item.time=='night'" />
+                </div>
+                <span>{{item.start | persianDigit}}</span>
+                <span class="spacemobile">-</span>
+                <span>{{item.end | persianDigit}}</span>
+              </div>
+            </div>
+          </div>
+        </span>
+        <span>
+          <span class="rotate">یکشنبه</span>
+          <div class="su">
+            <img src="~assets/img/icons/time-table/img-bottom.png" v-if="events.su[0]" />
+            <img
+              src="~assets/img/icons/time-table/img-notaccess.png"
+              class="mobileshowimportant"
+              v-else
+            />
+            <div class="items" v-if="events.su[0]">
+              <div class="item" v-for="(item,index) in events.su" :key="index">
+                <div>
+                  <sun class="sun" v-if="item.time=='morning'" />
+                  <moon class="moon" v-if="item.time=='night'" />
+                </div>
+                <span>{{item.start | persianDigit}}</span>
+                <span class="spacemobile">-</span>
+                <span>{{item.end | persianDigit}}</span>
+              </div>
+            </div>
+          </div>
+        </span>
+        <span>
+          <span class="rotate">دوشنبه</span>
+          <div class="mo">
+            <img src="~assets/img/icons/time-table/img-bottom.png" v-if="events.mo[0]" />
+            <img src="~assets/img/icons/time-table/img-notaccess.png" v-else />
+            <div class="items" v-if="events.mo[0]">
+              <div class="item" v-for="(item,index) in events.mo" :key="index">
+                <div>
+                  <sun class="sun" v-if="item.time=='morning'" />
+                  <moon class="moon" v-if="item.time=='night'" />
+                </div>
+                <span>{{item.start | persianDigit}}</span>
+                <span class="spacemobile">-</span>
+                <span>{{item.end | persianDigit}}</span>
+              </div>
+            </div>
+          </div>
+        </span>
+        <span>
+          <span class="rotate">سه‌شنبه</span>
+          <div class="tu">
+            <img src="~assets/img/icons/time-table/img-bottom.png" v-if="events.tu[0]" />
+            <img src="~assets/img/icons/time-table/img-notaccess.png" v-else />
+            <div class="items" v-if="events.tu[0]">
+              <div class="item" v-for="(item,index) in events.tu" :key="index">
+                <div>
+                  <sun class="sun" v-if="item.time=='morning'" />
+                  <moon class="moon" v-if="item.time=='night'" />
+                </div>
+                <span>{{item.start | persianDigit}}</span>
+                <span class="spacemobile">-</span>
+                <span>{{item.end | persianDigit}}</span>
+              </div>
+            </div>
+          </div>
+        </span>
+        <span>
+          <span class="rotate">چهارشنبه</span>
+          <div class="we">
+            <img src="~assets/img/icons/time-table/img-bottom.png" v-if="events.we[0]" />
+            <img src="~assets/img/icons/time-table/img-notaccess.png" v-else />
+            <div class="items" v-if="events.we[0]">
+              <div class="item" v-for="(item,index) in events.we" :key="index">
+                <div>
+                  <sun class="sun" v-if="item.time=='morning'" />
+                  <moon class="moon" v-if="item.time=='night'" />
+                </div>
+                <span>{{item.start | persianDigit}}</span>
+                <span class="spacemobile">-</span>
+                <span>{{item.end | persianDigit}}</span>
+              </div>
+            </div>
+          </div>
+        </span>
+        <span>
+          <span class="rotate">پنجشنبه</span>
+          <div class="th">
+            <img src="~assets/img/icons/time-table/img-bottom.png" v-if="events.th[0]" />
+            <img src="~assets/img/icons/time-table/img-notaccess.png" v-else />
+            <div class="items" v-if="events.th[0]">
+              <div class="item" v-for="(item,index) in events.th" :key="index">
+                <div>
+                  <sun class="sun" v-if="item.time=='morning'" />
+                  <moon class="moon" v-if="item.time=='night'" />
+                </div>
+                <span>{{item.start | persianDigit}}</span>
+                <span class="spacemobile">-</span>
+                <span>{{item.end | persianDigit}}</span>
+              </div>
+            </div>
+          </div>
+        </span>
+        <span>
+          <span class="rotate">جمعه</span>
+          <div class="fr">
+            <img src="~assets/img/icons/time-table/img-bottom.png" v-if="events.fr[0]" />
+            <img src="~assets/img/icons/time-table/img-notaccess.png" v-else />
+            <div class="items" v-if="events.fr[0]">
+              <div class="item" v-for="(item,index) in events.fr" :key="index">
+                <div>
+                  <sun class="sun" v-if="item.time=='morning'" />
+                  <moon class="moon" v-if="item.time=='night'" />
+                </div>
+                <span>{{item.start | persianDigit}}</span>
+                <span class="spacemobile">-</span>
+                <span>{{item.end | persianDigit}}</span>
+              </div>
+            </div>
+          </div>
+        </span>
       </div>
     </div>
   </section>
 </template>
 <script>
-import hours from "./hours";
+import sun from "~/assets/svg/sun.svg?inline";
+import moon from "~/assets/svg/moon.svg?inline";
+import close from "~/assets/svg/close_circle.svg?inline";
 export default {
-  // props: ["segments"],
+  props: {
+    value: {},
+    close: { default: true }
+  },
+  components: {
+    sun,
+    moon,
+    close
+  },
+  filters: {
+    convertDay(val) {
+      let day;
+      switch (val) {
+        case "sa":
+          day = "شنبه";
+          break;
+        case "su":
+          day = "یکشنبه";
+          break;
+        case "mo":
+          day = "دوشنبه";
+          break;
+        case "tu":
+          day = "سه‌شنبه";
+          break;
+        case "we":
+          day = "چهارشنبه";
+          break;
+        case "th":
+          day = "پنجشنبه";
+          break;
+        case "fr":
+          day = "جمعه";
+          break;
+      }
+      return day;
+    }
+  },
   data() {
     return {
       loading: true,
-      hours,
-      events: [],
-      date: null,
-      time: null
+      events: {
+        sa: [],
+        su: [],
+        mo: [],
+        tu: [],
+        we: [],
+        th: [],
+        fr: []
+      },
+      morningtime: {
+        start: null,
+        end: null
+      },
+      eveningtime: {
+        start: null,
+        end: null
+      },
+      nighttime: {
+        start: null,
+        end: null
+      },
+      daynotaccess: [],
+      day: null
     };
   },
-  mounted() {
-    this.$axios
-      .$get(
-        `/Doctors/${
-          this.$route.params.id
-        }?fields=timetable&clientTimeZoneOffset=${new Date().getTimezoneOffset()}`
-      )
-      .then(data => {
-        this.segments = data.result.doctor.timetable.segments;
-        this.date = new Date().getDay();
-        this.time =
-          (new Date().getHours() + new Date().getMinutes() / 60) * 100;
-        for (const item of this.segments) {
-          let start_time_hour = Math.floor((item.from / 60) % 24);
-          let end_time_hour = Math.floor((item.to / 60) % 24);
-          let start_time_minute = Math.round(((item.from / 60) % 1) * 60);
-          let end_time_minute = Math.round(((item.to / 60) % 1) * 60);
-          const top = (Math.floor(item.from / 60 / 24) + 1) * 50 + "px";
-          const left =
-            start_time_hour * 100 + (start_time_minute / 60) * 100 + "px";
-          const width = ((item.to - item.from) / 60) * 100 + "px";
-          if (start_time_minute < 10) {
-            start_time_minute = `0${start_time_minute}`;
-          }
-          if (end_time_minute < 10) {
-            end_time_minute = `0${end_time_minute}`;
-          }
-          if (start_time_hour < 10) {
-            start_time_hour = `0${start_time_hour}`;
-          }
-          if (end_time_hour < 10) {
-            end_time_hour = `0${end_time_hour}`;
-          }
-          const event = {
-            style: `top:${top};left:${left};width:${width}`,
-            start: `${start_time_hour}:${start_time_minute}`,
-            end: `${end_time_hour}:${end_time_minute}`
-          };
-          this.events.push(event);
-          if (this.$refs.timeTable) {
-            let width = this.$refs.timeTable.clientWidth;
-            this.$refs.timeTable.scrollLeft = this.time - width / 2;
-          }
-          this.loading = false;
-        }
+
+  async mounted() {
+    let url = `/Doctors/${
+      this.$route.params.id
+    }?fields=timetable&clientTimeZoneOffset=${new Date().getTimezoneOffset()}`;
+    let data = await this.$axios.$get(url);
+    this.segments = data.result.doctor.timetable.segments;
+
+    for (const item of this.segments) {
+      let start_hour = this.get_hour(item.from);
+      let end_hour = this.get_hour(item.to);
+      let start_minute = this.get_minute(item.from);
+      let end_minute = this.get_minute(item.to);
+      const day_of_week = this.get_day(item.from);
+      let time_array = this.convert_time({
+        start_hour,
+        end_hour,
+        start_minute,
+        end_minute
       });
+      this.push_time(day_of_week, time_array);
+    }
+    for (let day in this.events) {
+      if (this.events[day].length == 0) {
+        this.daynotaccess.push(day);
+      }
+    }
+    this.$emit("input", this.events);
+  },
+  methods: {
+    get_hour(value) {
+      let hour = Math.floor((value / 60) % 24);
+      return hour < 10 ? `0${hour}` : hour;
+    },
+    get_minute(value) {
+      let minute = Math.round(((value / 60) % 1) * 60);
+      return minute < 10 ? `0${minute}` : minute;
+    },
+    get_day(value) {
+      let index = Math.floor(value / 60 / 24);
+      let day;
+      switch (index) {
+        case 0:
+          day = "su";
+          break;
+        case 1:
+          day = "mo";
+          break;
+        case 2:
+          day = "tu";
+          break;
+        case 3:
+          day = "we";
+          break;
+        case 4:
+          day = "th";
+          break;
+        case 5:
+          day = "fr";
+          break;
+        case 6:
+          day = "sa";
+          break;
+      }
+      return day;
+    },
+    convert_time({ start_hour, start_minute, end_hour, end_minute }) {
+      if (end_hour <= 14) {
+        return [
+          {
+            start: `${start_hour}:${start_minute}`,
+            end: `${end_hour}:${end_minute}`,
+            time: "morning"
+          }
+        ];
+      } else {
+        if (start_hour >= 14) {
+          return [
+            {
+              start: `${start_hour}:${start_minute}`,
+              end: `${end_hour}:${end_minute}`,
+              time: "night"
+            }
+          ];
+        } else {
+          return [
+            {
+              start: `${start_hour}:${start_minute}`,
+              end: `14:00`,
+              time: "morning"
+            },
+            {
+              start: `14:00`,
+              end: `${end_hour}:${end_minute}`,
+              time: "night"
+            }
+          ];
+        }
+      }
+    },
+    push_time(day_of_week, time_array) {
+      for (const item of time_array) {
+        this.events[day_of_week].push(item);
+      }
+    }
   }
 };
 </script>

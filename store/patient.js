@@ -14,6 +14,7 @@ export const mutations = {
       return;
     }
     user = JSON.parse(user);
+    this.$axios.setToken(user.access_token, 'Bearer');
     state.user = user;
     let decoded_token = jwtDecode(user.access_token);
     state.user_id =

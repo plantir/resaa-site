@@ -1,12 +1,7 @@
 <style lang="scss">
 #speciality {
   .v-content {
-    background: #1c1f24;
-  }
-  .container {
-    @media only screen and (min-width: 1264px) {
-      max-width: 1480px;
-    }
+    background: var(--bg-color);
   }
   header + main {
     margin-top: 0px;

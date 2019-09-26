@@ -3,11 +3,13 @@
 // @import 'bootstrap.css';
 // @import '~bootstrap-vue/dist/bootstrap-vue.css';
 @import './select';
+@import './typography';
 
 html {
   font-family: IRANSans, tahoma;
   background-color: #f5f5f5;
   font-size: 13px !important;
+  font-weight: normal;
   overflow: auto;
 }
 .application,
@@ -79,7 +81,16 @@ svg {
   width: 24px;
   height: 24px;
 }
-
+.hide-md {
+  @include media(md) {
+    display: none !important;
+  }
+}
+.hide-md-and-up {
+  @include media(md-and-up) {
+    display: none !important;
+  }
+}
 .show-mobile {
   display: none !important;
   @include media(xs-only) {
@@ -105,4 +116,57 @@ svg {
 .v-btn.theme--light.yellow {
   color: #545456;
   font-weight: 400;
+}
+
+.web-svg {
+  path {
+    fill: #28db9b;
+  }
+}
+.instagram-svg {
+  path {
+    fill: #ff6881;
+  }
+}
+.telegram-svg {
+  path {
+    fill: #0ec7e5;
+  }
+}
+.twitter-svg {
+  path {
+    fill: #2ee5c4;
+  }
+}
+.facebook-svg {
+  path {
+    fill: #0e35e5;
+  }
+}
+.instagram-hover-svg:hover {
+  path {
+    fill: #ff6881 !important;
+  }
+}
+.telegram-hover-svg:hover {
+  path {
+    fill: #0ec7e5 !important;
+  }
+}
+.twitter-hover-svg:hover {
+  path {
+    fill: #2ee5c4 !important;
+  }
+}
+.facebook-hover-svg:hover {
+  path {
+    fill: #0e35e5 !important;
+  }
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }

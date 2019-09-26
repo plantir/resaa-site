@@ -4,6 +4,15 @@ section#header {
   overflow: hidden;
   width: 100%;
   z-index: 2;
+  .header-container {
+    display: flex;
+    padding: 0 36px;
+    @include media(sm) {
+      justify-content: space-between;
+      flex-direction: row-reverse;
+      padding: 0px;
+    }
+  }
   .logo {
     max-height: 50px;
     display: flex;
@@ -27,8 +36,10 @@ section#header {
       align-items: center;
       justify-content: center;
       margin-left: 10px;
-      img {
-        max-width: 100%;
+      svg {
+        width: auto;
+
+        height: auto;
       }
     }
   }
@@ -38,6 +49,7 @@ section#header {
     margin: 0;
     padding: 0;
     list-style-type: none;
+    flex: 1;
     @include media(sm) {
       display: none;
     }
@@ -47,12 +59,27 @@ section#header {
     a {
       color: #fff;
       padding: 16px 0;
-      font-weight: 300;
+      font-weight: medium;
       transition: color 0.2s ease-in;
+      text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
       &:hover,
       &.active {
         color: $primary-color;
       }
+    }
+  }
+  .left-nav {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    @include media(sm) {
+      display: none;
+    }
+    .support {
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+      margin-left: 24px;
     }
   }
 }
@@ -105,57 +132,16 @@ section#header {
 
 <template>
   <section id="header">
-    <v-container>
-      <v-layout row>
+    <v-container fluid>
+      <div class="header-container">
         <div class="navicon" @click="toggleMenu">
-          <img src="~assets/img/navicon.png" alt />
+          <Nav v-if="!showMenu" />
+          <Close v-else />
         </div>
         <div class="logo">
           <img src="~assets/img/logo.png" alt />
         </div>
         <ul class="nav-bar">
-          <li class="nav-item">
-            <div v-if="user">
-              <a class="drop-down">
-                خوش اومدی {{user.firstName}}
-                <i class="fa fa-caret-down"></i>
-              </a>
-              <div v-if="isPatient">
-                <router-link :to="{name:'patient-profile'}">پروفایل</router-link>
-                <a @click="logout">خروج</a>
-              </div>
-              <div v-else>
-                <router-link :to="{name:'patient-profile'}">پروفایل</router-link>
-                <a @click="logout">خروج</a>
-              </div>
-            </div>
-            <div v-else>
-              <v-menu left :offset-y="true" bottom>
-                <template v-slot:activator="{ on }">
-                  <a>
-                    <span>حساب کاربری</span>
-                    <i class="fa fa-caret-down"></i>
-                  </a>
-                </template>
-                <v-list class="register-dropdown">
-                  <v-list-tile>
-                    <v-list-tile-title>
-                      <nuxt-link
-                        :to="{name:isPatient?'patient-login':'doctors-login'}"
-                      >ورود به حساب کاربری</nuxt-link>
-                    </v-list-tile-title>
-                  </v-list-tile>
-                  <v-list-tile>
-                    <v-list-tile-title>
-                      <nuxt-link
-                        :to="{name:isPatient?'patient-register':'doctors-register'}"
-                      >عضویت در رسا</nuxt-link>
-                    </v-list-tile-title>
-                  </v-list-tile>
-                </v-list>
-              </v-menu>
-            </div>
-          </li>
           <li class="nav-item">
             <router-link
               @click.native="closeNav"
@@ -192,25 +178,56 @@ section#header {
             >تماس با ما</router-link>
           </li>
         </ul>
-      </v-layout>
+        <div class="left-nav">
+          <div class="support">
+            <span>شماره پشتیبانی</span>
+            <span>۰۲۱-۷۴۴۷۱۳۰۰</span>
+          </div>
+          <div>
+            <v-btn
+              :to="{name:user?'patient-profile':'patient-login'}"
+              color="white"
+              outline
+              round
+            >حساب کاربری</v-btn>
+          </div>
+        </div>
+      </div>
     </v-container>
   </section>
 </template>
 <script>
+import Nav from "@/assets/svg/nav.svg?inline";
+import Close from "@/assets/svg/close.svg?inline";
 export default {
+  components: {
+    Nav,
+    Close
+  },
   data() {
     return {
       isPatient: true
     };
   },
+  mounted() {
+    this.$store.commit("patient/initialize_user");
+  },
   methods: {
     toggleMenu() {
       this.$store.commit("showMenu");
+    },
+    logout() {
+      this.$store.commit("patient/logout");
+      this.$router.replace({ name: "patient-landing" });
+      this.menuActive = false;
     }
   },
   computed: {
     user() {
       return this.$store.state.patient.user;
+    },
+    showMenu() {
+      return this.$store.state.showMenu;
     }
   }
 };
