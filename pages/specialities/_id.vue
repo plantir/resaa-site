@@ -872,7 +872,7 @@ section#speciality {
           </v-layout>
         </div>
       </section>
-      <section class="important-device">
+      <!-- <section class="important-device">
         <h2>مهم ترین دستگاه های تشخیصی برای یافتن نوع عارضه قلبی</h2>
         <div>
           <h3>نوار قلبی / الکتروکاردیوگرافی</h3>
@@ -894,7 +894,7 @@ section#speciality {
           <h3>تست ورزش</h3>
           <p>تست ورزش مانند نوار قلبی است، با این تفاوت که بیمار روی دستگاه تردمیل حرکت می‌کند و نوار قلب ثبت می‌شود. اگر اختلالی در عملکرد ریتم و خون‌رسانی قلبی وجود داشته باشد، با تست ورزش مشخص می‌شود.</p>
         </div>
-      </section>
+      </section>-->
       <div class="space">...</div>
       <section class="physician-section">
         <h2 class="section-title">
