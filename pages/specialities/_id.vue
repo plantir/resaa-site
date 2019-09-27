@@ -965,7 +965,13 @@ section#speciality {
               class="hide-desktop"
             >
               <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="(doctor, index) in available_doctors" :key="index">
+                <nuxt-link
+                  class="swiper-slide"
+                  v-for="(doctor, index) in available_doctors"
+                  :key="index"
+                  tag="div"
+                  :to="`/doctors/${doctor.subscriberNumber}`"
+                >
                   <div class="image">
                     <img
                       v-if="doctor.imagePath"
@@ -984,7 +990,7 @@ section#speciality {
                     <span>کد رسا:</span>
                     <span>{{doctor.subscriberNumber | persianDigit}}</span>
                   </div>
-                </div>
+                </nuxt-link>
               </div>
               <div class="swiper-button-prev" slot="button-prev"></div>
               <div class="swiper-button-next" slot="button-next"></div>
