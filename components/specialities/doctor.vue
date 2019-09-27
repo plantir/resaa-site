@@ -134,7 +134,7 @@
 
 <template>
   <section class="item" :class="{deactive:!doctor.currentlyAvailable}">
-    <div class="image">
+    <nuxt-link class="image" :to="`/doctors/psychology/${doctor.subscriberNumber}`">
       <div class="status">
         <component :is="doctor.currentlyAvailable?'Available':'NotAvailable'"></component>
       </div>
@@ -149,9 +149,12 @@
         src="/img/doc-placeholder.png"
         :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
       />
-    </div>
+    </nuxt-link>
     <div class="name">
-      <div class="doctor-name">{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</div>
+      <nuxt-link
+        :to="`/doctors/psychology/${doctor.subscriberNumber}`"
+        class="doctor-name"
+      >{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</nuxt-link>
       <div class="doctor-speciality">{{doctor.specialty.title}}</div>
       <div class="doctor-tags">
         <div>

@@ -456,14 +456,14 @@ export default {
   },
   components: { callSection, phone },
   async asyncData({ store, params, $axios, isClient, redirect }) {
-    let test_doctor = doctors.find(item => item.subscriberNumber == params.id);
-    if (test_doctor) {
-      let url = `/doctors/psychology/${test_doctor.subscriberNumber}`;
-      return redirect(encodeURI(url));
-    }
-    if (isClient) {
-      return window.location.reload;
-    }
+    // let test_doctor = doctors.find(item => item.subscriberNumber == params.id);
+    // if (test_doctor) {
+    //   let url = `/doctors/psychology/${test_doctor.subscriberNumber}`;
+    //   return redirect(encodeURI(url));
+    // }
+    // if (isClient) {
+    //   return window.location.reload;
+    // }
     let fields =
       "id,firstName,lastName,imagePath,currentlyAvailable,subscriberNumber,specialty,tags,expertise,title,workplaces,medicalCouncilNumber";
     let a = await $axios.$get(`/Doctors/${params.id}?fields=${fields}`);

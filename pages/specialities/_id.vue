@@ -355,6 +355,7 @@ section#speciality {
           margin-left: 26px;
           background: #fff;
           position: relative;
+          cursor: pointer;
           @include media(xs-only) {
             flex: 0 0 60px;
             height: 60px;
@@ -457,6 +458,9 @@ section#speciality {
   }
   .green-btn {
     background: #43e7a5;
+    .v-icon {
+      display: flex;
+    }
     &:hover {
       background: darken(#43e7a5, 20);
     }
@@ -1002,7 +1006,11 @@ section#speciality {
                       v-for="doctor in rleated_doctors"
                       :key="doctor.subscriberNumber"
                     >
-                      <div class="doctor-image">
+                      <nuxt-link
+                        tag="div"
+                        :to="`/doctors/${doctor.subscriberNumber}`"
+                        class="doctor-image"
+                      >
                         <img
                           v-if="doctor.imagePath"
                           :src="'https://webapi.resaa.net/'+doctor.imagePath"
@@ -1013,19 +1021,20 @@ section#speciality {
                           src="/img/doc-placeholder.png"
                           :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
                         />
-                      </div>
+                      </nuxt-link>
                       <div class="doctor-info">
                         <div class="detail">
-                          <span
+                          <nuxt-link
                             class="name"
-                          >{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</span>
+                            :to="`/doctors/${doctor.subscriberNumber}`"
+                          >{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</nuxt-link>
                           <span class="speciality">متخصص {{doctor.specialty.title}}</span>
                         </div>
                         <div class="divider"></div>
-                        <div class="code">
+                        <nuxt-link class="code" :to="`/doctors/${doctor.subscriberNumber}`">
                           <span>کد رسا</span>
                           <span>{{doctor.subscriberNumber | persianDigit}}</span>
-                        </div>
+                        </nuxt-link>
                       </div>
                       <div class="doctor-action">
                         <v-btn
@@ -1038,7 +1047,13 @@ section#speciality {
                           <!-- <v-icon>fa-eye</v-icon>-->
                           <eyeIcon class="svg-icon-white" width="16px" />
                         </v-btn>
-                        <v-btn fab dark small class="green-btn">
+                        <v-btn
+                          fab
+                          dark
+                          small
+                          :to="`/doctors/${doctor.subscriberNumber}`"
+                          class="green-btn"
+                        >
                           <v-icon>fa-phone</v-icon>
                         </v-btn>
                       </div>
