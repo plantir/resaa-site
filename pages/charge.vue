@@ -4,7 +4,7 @@
       <no-ssr v-if="ajaxLoading">
         <v-loading mode="relative"></v-loading>
       </no-ssr>
-      <div v-else>
+      <div>
         <div v-if="chargeStep === 'input'" class="charge-input">
           <div class="charge-title">خرید شارژ</div>
           <div class="charge-description">افزایش اعتبار برای مکالمه با پزشک</div>
@@ -292,7 +292,7 @@ export default {
       this.isMenuOpen = false;
     },
 
-    goToPrereceipt() {
+    async goToPrereceipt() {
       let data = {
         denominationId: this.selectedChargeItem.id,
         callbackUrl: process.env.BANK_RETURN_URL,
@@ -305,19 +305,22 @@ export default {
       } else if (subscriberNumber) {
         data.subscriberNumber = subscriberNumber[0];
       }
-      this.$axios
-        .post("/Charge", data)
-        .then(response => {
-          this.pre_factor = response.data.result.electronicPaymentVoucher;
-          this.chargeStep = "receipt";
-        })
-        .catch(() => {
-          this.error = "کاربری با این شماره یافت نشد";
-          this.resetRecaptcha();
-        })
-        .then(() => {
-          this.ajaxLoading = false;
-        });
+      try {
+        let { result } = await this.$axios.$post("/Charge", data);
+        this.pre_factor = result.electronicPaymentVoucher;
+        this.chargeStep = "receipt";
+      } catch (error) {
+        if (error.response.data.code == 403) {
+          this.error =
+            "حساب کاربری شما اجازه شارژ ندارد لطفا با پشتیبانی تماس بگیرید";
+        }
+        if (error.response.data.code == 404) {
+          this.error =
+            "این شماره در سامانه رسا وجود ندارد برای شارژ حساب ابتدا در سامانه عضو شوید";
+        }
+        this.resetRecaptcha();
+      }
+      this.ajaxLoading = false;
     },
 
     goToPaymentPage: function() {

@@ -19,6 +19,10 @@
 //     }
 //   }
 // }
+.v-navigation-drawer {
+  display: flex;
+  flex-direction: column;
+}
 .theme--dark.v-navigation-drawer {
   background: linear-gradient(to bottom, #26d295, #0dbed9);
 }
@@ -48,11 +52,11 @@
 }
 .nav-bar {
   flex-direction: column;
-  justify-content: space-around;
   display: flex;
   height: max-content;
   margin: 0;
   padding: 0;
+  flex: 1;
   li.nav-item {
     width: 100%;
     height: 60px;
@@ -67,6 +71,15 @@
     }
   }
 }
+.footer {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  height: 60px;
+  align-items: center;
+  font-size: 16px;
+  padding: 0 36px;
+}
 </style>
 
 <template>
@@ -80,54 +93,6 @@
     </div>
     <ul class="nav-bar">
       <li class="nav-item">
-        <!-- <div v-if="user">
-          <v-menu left :offset-y="true" bottom>
-            <template v-slot:activator="{ on }">
-              <a v-on="on">
-                خوش اومدی {{user.firstName}}
-                <i class="fa fa-caret-down"></i>
-              </a>
-            </template>
-            <v-list class="register-dropdown">
-              <v-list-tile>
-                <v-list-tile-title>
-                  <nuxt-link :to="{name:isPatient?'patient-login':'doctors-login'}">پروفایل</nuxt-link>
-                </v-list-tile-title>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-title>
-                  <a @click="logout">خروج</a>
-                </v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-menu>
-        </div>
-        <div v-else>
-          <v-menu left :offset-y="true" bottom>
-            <template v-slot:activator="{ on }">
-              <a v-on="on">
-                <span>حساب کاربری</span>
-                <i class="fa fa-caret-down"></i>
-              </a>
-            </template>
-            <v-list class="register-dropdown">
-              <v-list-tile>
-                <v-list-tile-title>
-                  <nuxt-link
-                    :to="{name:isPatient?'patient-login':'doctors-login'}"
-                  >ورود به حساب کاربری</nuxt-link>
-                </v-list-tile-title>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-title>
-                  <nuxt-link
-                    :to="{name:isPatient?'patient-register':'doctors-register'}"
-                  >عضویت در رسا</nuxt-link>
-                </v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-menu>
-        </div>-->
         <router-link
           @click.native="closeNav"
           :to="{name:user?'patient-profile':'patient-login'}"
@@ -170,6 +135,10 @@
         >تماس با ما</router-link>
       </li>
     </ul>
+    <div class="footer">
+      <span>شماره پشتیبانی</span>
+      <span>۰۲۱-۷۴۴۷۱۳۰۰</span>
+    </div>
   </v-navigation-drawer>
 </template>
 <script>
