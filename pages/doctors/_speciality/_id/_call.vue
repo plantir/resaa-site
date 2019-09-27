@@ -225,6 +225,18 @@
 
 <script>
 export default {
+  head() {
+    return {
+      meta: [
+        {
+          hid: "robots",
+          name: "robots",
+          property: "robots",
+          content: "noindex"
+        }
+      ]
+    };
+  },
   computed: {
     step() {
       if (this.$route.name.includes("register")) {
