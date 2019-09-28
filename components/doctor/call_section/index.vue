@@ -454,11 +454,17 @@ export default {
               `/Doctors/${this.doctor.subscriberNumber}/CommunicationBooking?patientPhoneNumber=${res.data.result.profile.phoneNumber}`
             )
             .then(res => {
-              alert("رزرو پزشک با موفقیت انجام شد");
+              this.$dialog
+                .message("رزرو پزشک با موفقیت انجام شد")
+                .success()
+                .alert();
               this.booking_loading = false;
             })
             .catch(() => {
-              alert("رزرو پزشک با مشکل مواجه شد");
+              this.$dialog
+                .message("رزرو پزشک با مشکل مواجه شد")
+                .error()
+                .alert();
               this.booking_loading = false;
             });
         });

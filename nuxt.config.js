@@ -115,7 +115,8 @@ export default {
     // '~/assets/style/app.styl',
     '~/assets/style/vuetify_rtl.scss',
     'swiper/dist/css/swiper.css',
-    '~/assets/style/main.scss'
+    '~/assets/style/main.scss',
+    'vrwebdesign-nuxt/assets/style/main.scss'
   ],
 
   /*
@@ -145,6 +146,10 @@ export default {
     {
       src: '~/plugins/custom-scroll.js',
       ssr: false
+    },
+    {
+      src: '~/plugins/axios.js',
+      ssr: false
     }
   ],
 
@@ -173,7 +178,9 @@ export default {
     // ],
     '@nuxtjs/axios',
     '@nuxtjs/sitemap',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    'vrwebdesign-nuxt/modules/nuxt-toast',
+    'vrwebdesign-nuxt/modules/nuxt-dialog'
     // [
     //   {
     //     filename:
