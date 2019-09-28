@@ -3,12 +3,15 @@
 .swiper-slide {
   height: 350px;
   width: 680px;
+  @include media(sm) {
+    height: auto;
+  }
 }
 
 .swiper-container {
   height: 430px;
   @include media(sm) {
-    height: 470px;
+    height: auto;
   }
 }
 
@@ -20,8 +23,8 @@
   margin-bottom: 100px;
   position: relative;
   @include media(sm) {
-    height: 330px;
-    padding: 25px 30px;
+    height: auto;
+    padding: 25px 30px 60px;
   }
 }
 
@@ -53,7 +56,7 @@
   margin-bottom: 30px;
   height: 100px;
   @include media(sm) {
-    height: 150px;
+    height: auto;
   }
 }
 
@@ -137,6 +140,7 @@ export default {
         loopFillGroupWithBlank: true,
         initialSlide: 2,
         loop: true,
+
         autoplay: {
           delay: 10000,
           disableOnInteraction: false
@@ -152,7 +156,8 @@ export default {
           },
           640: {
             slidesPerView: 1,
-            spaceBetween: 20
+            spaceBetween: 20,
+            autoHeight: true
           },
           320: {
             slidesPerView: 1,
