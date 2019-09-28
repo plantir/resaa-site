@@ -51,12 +51,13 @@
   font-style: normal;
   font-stretch: normal;
   letter-spacing: normal;
-  text-align: justify;
+  text-align: center;
   color: #777590;
   margin-bottom: 30px;
   height: 100px;
   @include media(sm) {
     height: auto;
+    text-align: justify;
   }
 }
 
