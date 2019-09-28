@@ -57,6 +57,9 @@ section {
   max-width: 100%;
   text-align: center;
   color: var(--grey-color);
+  p {
+    margin: 0;
+  }
 }
 </style>
 <template>
@@ -68,9 +71,9 @@ section {
             <img src="~/assets/img/doctor@2x.png" alt />
           </div>
           <div class="r-display-2 item-title">متخصصین ممتاز</div>
-          <div
-            class="description"
-          >بهترین و زبده ترین پزشکان و روانشناسان ایران، رسا را برای ارائه خدمات تلفنی به مخاطبین خود برگزیده اند.</div>
+          <div class="description">
+            <p>بهترین و زبده ترین پزشکان و روانشناسان ایران، رسا را برای ارائه خدمات تلفنی به مخاطبین خود برگزیده اند.</p>
+          </div>
         </v-card>
       </v-flex>
       <v-flex class="item" lg4>
@@ -79,9 +82,9 @@ section {
             <img src="~/assets/img/privacy@2x.png" alt />
           </div>
           <div class="r-display-2 item-title">تماس ناشناس</div>
-          <div
-            class="description"
-          >کلیه تماس ها به صورت ناشناس با پزشک برقرار می شود و مکالمات شما و پزشک کاملا محرمانه بوده و در سامانه رسا ضبط نمی گردد.</div>
+          <div class="description">
+            <p>کلیه تماس ها به صورت ناشناس با پزشک برقرار می شود و مکالمات شما و پزشک کاملا محرمانه بوده و در سامانه رسا ضبط نمی گردد.</p>
+          </div>
         </v-card>
       </v-flex>
       <v-flex class="item" lg4>
@@ -90,9 +93,9 @@ section {
             <img src="~/assets/img/saveTime@2x.png" alt />
           </div>
           <div class="r-display-2 item-title">تماس بدون معطلی</div>
-          <div
-            class="description"
-          >برای تماس با پزشک نیازی به نوبت و انتظار در مطب نیست. با سامانه رسا همین حالا به موبایل پزشک وصل شوید.</div>
+          <div class="description">
+            <p>برای تماس با پزشک نیازی به نوبت و انتظار در مطب نیست. با سامانه رسا همین حالا به موبایل پزشک وصل شوید.</p>
+          </div>
         </v-card>
       </v-flex>
     </v-layout>

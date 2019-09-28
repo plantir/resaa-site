@@ -59,6 +59,9 @@
   @include media(sm) {
     margin: 30px 0px;
   }
+  p {
+    margin: 0;
+  }
 }
 .button-wrapper {
   animation: heartBeat 1.5s linear infinite;
@@ -100,7 +103,7 @@
     }
   }
   .phone {
-    animation: shake 2s infinite;
+    animation: shake 1.5s infinite;
   }
 }
 @keyframes waves {
@@ -108,7 +111,7 @@
     box-shadow: 0 0 0 0 rgba($secondary-color, 1);
   }
   100% {
-    box-shadow: 0 0 0 16px rgba($secondary-color, 0.3);
+    box-shadow: 0 0 0 16px rgba($secondary-color, 0);
   }
 }
 @keyframes shake {
@@ -164,12 +167,12 @@
           <span v-else>از پزشک بخواهید با شما تماس بگیرد</span>
         </div>
         <div class="description">
-          <span
+          <p
             v-if="doctor.currentlyAvailable"
-          >پزشک در حال حاضر در دسترس می باشد. تماس شما بلافاصله با موبایل پزشک برقرار می شود تا بتوانید در کوتاه ترین زمان پاسخ سوالات خود را بگیرید.</span>
-          <span
+          >پزشک در حال حاضر در دسترس می باشد. تماس شما بلافاصله با موبایل پزشک برقرار می شود تا بتوانید در کوتاه ترین زمان پاسخ سوالات خود را بگیرید.</p>
+          <p
             v-else
-          >در حال حاضر پزشک در دسترس نیست. با ثبت درخواست تماس، پزشک در اولین ساعت پاسخگویی خود با شما تماس میگیرد. می توانید با بررسی زمان های پاسخگویی پزشک از اولین زمان پاسخگویی پزشک مطلع شوید.</span>
+          >در حال حاضر پزشک در دسترس نیست. با ثبت درخواست تماس، پزشک در اولین ساعت پاسخگویی خود با شما تماس میگیرد. می توانید با بررسی زمان های پاسخگویی پزشک از اولین زمان پاسخگویی پزشک مطلع شوید.</p>
         </div>
       </div>
       <div>
@@ -181,7 +184,6 @@
           <nuxt-link
             class="call-doctor"
             :to="`${doctor.subscriberNumber}/call/${user?'charge':'register'}`"
-            v-if="doctor.currentlyAvailable"
           >
             {{doctor.currentlyAvailable?'شروع مکالمه با پزشک':'ثبت درخواست تماس'}}
             <phone class="phone" />

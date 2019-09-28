@@ -55,6 +55,7 @@
       margin-top: 16px;
       margin-bottom: 8px;
       @include media(sm) {
+        display: block;
         text-align: center;
         font-weight: normal;
       }
