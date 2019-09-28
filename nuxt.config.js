@@ -146,6 +146,10 @@ export default {
     {
       src: '~/plugins/custom-scroll.js',
       ssr: false
+    },
+    {
+      src: '~/plugins/axios.js',
+      ssr: false
     }
   ],
 
