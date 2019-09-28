@@ -137,7 +137,9 @@
             <h1>
               این شماره
               <span class="green--text">{{user.phoneNumber | persianDigit}}</span> در سیستم وجود دارد
-              <div class="caption">لطفا رمز ورود را وارد نمایید</div>
+              <div
+                class="caption"
+              >رمز عبور در هنگام ثبت نام برای شما پیامک شده است. در صورتی که رمز عبور خود را ندارید با پشتیبانی رسا تماس بگیرید.</div>
             </h1>
 
             <div class="form-wrapper">
