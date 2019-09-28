@@ -333,6 +333,7 @@ export default {
       doctor: {},
       swiperOptionDoctors: {
         slidesPerView: 3,
+        loop: true,
         autoplay: {
           delay: 10000,
           disableOnInteraction: false
