@@ -136,6 +136,7 @@ export default {
         slidesPerGroup: 1,
         loopFillGroupWithBlank: true,
         initialSlide: 2,
+        loop: true,
         autoplay: {
           delay: 10000,
           disableOnInteraction: false
