@@ -582,25 +582,25 @@ export default {
       let day;
       switch (index) {
         case 0:
-          day = "su";
+          day = "sa";
           break;
         case 1:
-          day = "mo";
+          day = "su";
           break;
         case 2:
-          day = "tu";
+          day = "mo";
           break;
         case 3:
-          day = "we";
+          day = "tu";
           break;
         case 4:
-          day = "th";
+          day = "we";
           break;
         case 5:
-          day = "fr";
+          day = "th";
           break;
         case 6:
-          day = "sa";
+          day = "fr";
           break;
       }
       return day;
