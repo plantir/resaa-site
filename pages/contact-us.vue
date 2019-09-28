@@ -313,7 +313,10 @@ export default {
       this.ajaxLoading = true;
       let { status } = await this.$axios.$post("Inquiries", this.form);
       if (status == "OK") {
-        alert("درخواست شما با موفقیت ثبت شد");
+        this.$dialog
+          .message("درخواست شما با موفقیت ثبت شد")
+          .success()
+          .alert();
         this.form = {};
       }
       this.ajaxLoading = false;

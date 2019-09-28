@@ -396,7 +396,6 @@ export default {
           recaptchaResponse: this.recaptchaResponse,
           phoneNumber: res.data.result.profile.phoneNumber
         };
-        debugger;
         let response = await this.$axios.post("/Charge", data);
         let {
           address,
@@ -405,7 +404,7 @@ export default {
         this.goPayment(address, token);
         this.chargeStep = "receipt";
       } catch (error) {
-        alert("خطایی رخ داده است");
+        this.$toast.error().showSimple("خطایی رخ داده است");
         this.resetRecaptcha();
       }
       this.ajaxLoading = false;

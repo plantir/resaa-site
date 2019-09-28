@@ -247,7 +247,7 @@ export default {
           }
         );
         if (response.data.status === "OK") {
-          alert("ثبت نام با موفقیت انجام شد");
+          this.$toast.success().showSimple("ثبت نام با موفقیت انجام شد");
           this.$store.commit("patient/login", {
             access_token: response.data.result.token
           });

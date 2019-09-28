@@ -147,7 +147,7 @@ export default {
         })
         .then(response => {
           if (response.data.status === "OK") {
-            alert("ثبت نام با موفقیت انجام شد");
+            this.$toast.success().showSimple("ثبت نام با موفقیت انجام شد");
             this.$router.push({ name: "patient-login" });
           } else {
             this.errorMessage = "کد وارد شده صحیح نمی باشد";
