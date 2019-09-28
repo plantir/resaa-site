@@ -292,10 +292,16 @@ export default {
         let res = await this.$axios.post(
           `/Doctors/${this.$route.params.id}/CommunicationBooking?patientPhoneNumber=${this.user.phoneNumber}`
         );
-        alert("رزرو پزشک با موفقیت انجام شد");
+        this.$dialog
+          .message("رزرو پزشک با موفقیت انجام شد")
+          .success()
+          .alert();
         this.ajaxLoading = false;
       } catch (error) {
-        alert("رزرو پزشک با مشکل مواجه شد");
+        this.$dialog
+          .message("رزرو پزشک با مشکل مواجه شد")
+          .error()
+          .alert();
         this.ajaxLoading = false;
       }
     }

@@ -62,6 +62,11 @@
   letter-spacing: normal;
   text-align: center;
   color: #9492a9;
+  display: block;
+  cursor: pointer;
+  &:hover {
+    color: $secondary-color;
+  }
 }
 
 .doctor-comment-avatar {
@@ -102,15 +107,19 @@
           <div
             class="doctor-comment-text"
           >{{comment.quote.slice(0,220)}}{{comment.quote.length>220?'...':''}}</div>
-          <div class="doctor-comment-name">{{'دکتر ' + comment.firstName + ' '+ comment.lastName}}</div>
-          <div class="doctor-comment-special">{{comment.specialist}}</div>
+          <div class="doctor-comment-name">{{ comment.name}}</div>
+          <router-link
+            class="doctor-comment-special"
+            target="_blank"
+            :to="{name:'doctors-id',params:{id:comment.doctor.subscriberNumber}}"
+          >مشاور : {{comment.doctor.name}}</router-link>
           <div class="doctor-comment-avatar">
-            <router-link
+            <img :src="comment.avatar" />
+            <!-- <router-link
               target="_blank"
-              :to="{name:'doctors-id',params:{id:comment.subscriberNumber}}"
+              :to="{name:'doctors-id',params:{id:comment.doctor.subscriberNumber}}"
             >
-              <img :src="comment.avatar" />
-            </router-link>
+            </router-link>-->
           </div>
         </div>
       </div>
@@ -120,7 +129,7 @@
   </div>
 </template>
 <script>
-import comments from "@/components/doctor/Comments/comments";
+import comments from "./comments.js";
 export default {
   name: "resaa-swiper",
   data() {
