@@ -147,35 +147,31 @@ section {
     </div>
     <div v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
       <div class="swiper-wrapper">
-        <nuxt-link
-          target="_blank"
-          class="swiper-slide"
-          v-for="doctor in doctors"
-          :key="doctor.subscriberNumber"
-          :to="`/doctors/${doctor.subscriberNumber}`"
-        >
-          <div class="image">
-            <div class="status">
-              <component :is="doctor.currentlyAvailable?'Available':'NotAvailable'"></component>
+        <div class="swiper-slide" v-for="(doctor,index) in doctors" :key="index">
+          <nuxt-link target="_blank" :to="`/doctors/${doctor.subscriberNumber}`">
+            <div class="image">
+              <div class="status">
+                <component :is="doctor.currentlyAvailable?'Available':'NotAvailable'"></component>
+              </div>
+              <img
+                v-if="doctor.imagePath"
+                :src="'https://webapi.resaa.net/'+doctor.imagePath"
+                :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+              />
+              <img
+                v-else
+                src="/img/doc-placeholder.png"
+                :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+              />
             </div>
-            <img
-              v-if="doctor.imagePath"
-              :src="'https://webapi.resaa.net/'+doctor.imagePath"
-              :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
-            />
-            <img
-              v-else
-              src="/img/doc-placeholder.png"
-              :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
-            />
-          </div>
-          <div class="name">دکتر {{doctor.firstName}} {{doctor.lastName}}</div>
-          <div class="speciality">متخصص {{doctor.specialty.title}}</div>
-          <div class="code">
-            <span>کد رسا:</span>
-            <span>{{doctor.subscriberNumber | persianDigit}}</span>
-          </div>
-        </nuxt-link>
+            <div class="name">دکتر {{doctor.firstName}} {{doctor.lastName}}</div>
+            <div class="speciality">متخصص {{doctor.specialty.title}}</div>
+            <div class="code">
+              <span>کد رسا:</span>
+              <span>{{doctor.subscriberNumber | persianDigit}}</span>
+            </div>
+          </nuxt-link>
+        </div>
       </div>
       <div class="swiper-button-prev" slot="button-prev">
         <ChevronLeft />
@@ -204,13 +200,19 @@ export default {
   },
   data() {
     return {
-      doctors: [],
+      doctors: doctors.filter(
+        item => item.subscriberNumber != this.$route.params.id
+      ),
       swiperOptionDoctors: {
         slidesPerView: 3,
         spaceBetween: 60,
+        // slidesPerGroup: 1,
+        // loopFillGroupWithBlank: true,
+        // initialSlide: 2,
+        loop: true,
         autoplay: {
-          delay: 10000,
-          disableOnInteraction: false
+          delay: 10000
+          // disableOnInteraction: false
         },
         navigation: {
           nextEl: ".swiper-button-next",
@@ -234,9 +236,7 @@ export default {
     // let res = await this.$axios.$get(
     //   `/Doctors?fields=specialty,title,subscriberNumber,firstName,lastName,imagePath,currentlyAvailable&specialtyId=${this.doctor.specialty.id}&limit=8&offset=0`
     // );
-    this.doctors = doctors.filter(
-      item => item.subscriberNumber != this.$route.params.id
-    );
+    // this.doctors =
   }
 };
 </script>
