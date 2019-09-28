@@ -456,11 +456,11 @@ export default {
   },
   components: { callSection, phone },
   async asyncData({ store, params, $axios, isClient, redirect }) {
-    let test_doctor = doctors.find(item => item.subscriberNumber == params.id);
-    if (test_doctor) {
-      let url = `/doctors/psychology/${test_doctor.subscriberNumber}`;
-      return redirect(encodeURI(url));
-    }
+    // let test_doctor = doctors.find(item => item.subscriberNumber == params.id);
+    // if (test_doctor) {
+    //   let url = `/doctors/psychology/${test_doctor.subscriberNumber}`;
+    //   return redirect(encodeURI(url));
+    // }
     // if (isClient) {
     //   return window.location.reload;
     // }
