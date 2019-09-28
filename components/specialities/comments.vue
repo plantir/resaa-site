@@ -7,6 +7,9 @@
 
 .swiper-container {
   height: 430px;
+  @include media(sm) {
+    height: 470px;
+  }
 }
 
 .doctor-comment-card {
@@ -104,9 +107,7 @@
           <div class="quote-sign">
             <i class="fa fa-quote-right" aria-hidden="true"></i>
           </div>
-          <div
-            class="doctor-comment-text"
-          >{{comment.quote.slice(0,220)}}{{comment.quote.length>220?'...':''}}</div>
+          <div class="doctor-comment-text">{{comment.quote}}</div>
           <div class="doctor-comment-name">{{ comment.name}}</div>
           <router-link
             class="doctor-comment-special"
