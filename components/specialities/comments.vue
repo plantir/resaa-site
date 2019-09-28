@@ -115,11 +115,6 @@
           >مشاور : {{comment.doctor.name}}</router-link>
           <div class="doctor-comment-avatar">
             <img :src="comment.avatar" />
-            <!-- <router-link
-              target="_blank"
-              :to="{name:'doctors-id',params:{id:comment.doctor.subscriberNumber}}"
-            >
-            </router-link>-->
           </div>
         </div>
       </div>
@@ -129,9 +124,8 @@
   </div>
 </template>
 <script>
-import comments from "./comments.js";
+import comments from "./user_comments.js";
 export default {
-  name: "resaa-swiper",
   data() {
     return {
       swiperOption: {
@@ -165,7 +159,7 @@ export default {
         },
         grabCursor: true
       },
-      comments
+      comments: comments
     };
   }
 };
