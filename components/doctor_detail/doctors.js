@@ -1,7 +1,7 @@
 let doctors = [
   {
     id: '0e17446e-a2fa-413b-84b2-a42e625016c8',
-    subscriberNumber: '7328',
+    subscriberNumber: '7830',
     gender: null,
     title: 'دکتر',
     firstName: 'فتانه',
@@ -15,36 +15,36 @@ let doctors = [
     },
     expertise: 'مشاور خانواده',
     currentlyAvailable: false,
-    imagePath: 'Doctors/17328/Image',
+    imagePath: 'Doctors/7830/Image',
     providesDiagnosticDocumentsService: false,
     timetable: {
       segments: [
         {
-          from: 2100,
+          from: 2640,
           to: 2820
         },
         {
-          from: 3540,
+          from: 4080,
           to: 4260
         },
         {
-          from: 4980,
+          from: 5520,
           to: 5700
         },
         {
-          from: 6420,
+          from: 6960,
           to: 7140
         },
         {
-          from: 7860,
+          from: 8400,
           to: 8580
         },
         {
-          from: 9300,
+          from: 9840,
           to: 10020
         },
         {
-          from: 660,
+          from: 1200,
           to: 1380
         }
       ]
@@ -61,18 +61,18 @@ let doctors = [
       }
     ],
     custom_tags: [
-      { id: 1, title: 'مشاوره خانواده و روابط بین فردی' },
-      { id: 2, title: 'مشاوره ازدواج و پیش از ازدواج' },
-      { id: 3, title: 'مشاوره کودک و فرزند پروری' },
-      { id: 4, title: 'مشاوره نوجوانان و بلوغ' },
-      { id: 5, title: 'مشاوره افسردگی و اضطراب' },
-      { id: 6, title: 'مشاوره مشکلات فردی' }
+      { id: 1, title: 'کارشناسی مشاوره و راهنمایی' },
+      { id: 2, title: 'کارشناسی ارشد مشاوره' },
+      { id: 3, title: 'مدرس دانشگاه و مهارت های زندگی POT' },
+      { id: 4, title: 'تحلیل ارتباط متقابل TA' }
     ],
     fields: [
-      'کارشناسی مشاوره و راهنمایی',
-      'کارشناسی ارشد مشاوره',
-      'مدرس دانشگاه و مهارت های زندگی POT',
-      'تحلیل ارتباط متقابل TA'
+      'مشاوره خانواده و روابط بین فردی',
+      'مشاوره ازدواج و پیش از ازدواج',
+      'مشاوره کودک و فرزند پروری',
+      'مشاوره نوجوانان و بلوغ',
+      'مشاوره افسردگی و اضطراب',
+      'مشاوره مشکلات فردی'
     ],
     comments: [
       {
@@ -117,32 +117,32 @@ let doctors = [
     timetable: {
       segments: [
         {
-          from: 2040,
-          to: 2820
+          from: 2640,
+          to: 2879
         },
         {
-          from: 3480,
-          to: 4260
+          from: 4080,
+          to: 4319
         },
         {
-          from: 4920,
-          to: 5700
+          from: 5520,
+          to: 5759
         },
         {
-          from: 6360,
-          to: 7140
+          from: 6960,
+          to: 7199
         },
         {
-          from: 7800,
-          to: 8580
+          from: 7920,
+          to: 8220
         },
         {
-          from: 9240,
-          to: 10020
+          from: 9360,
+          to: 9660
         },
         {
-          from: 600,
-          to: 1380
+          from: 1200,
+          to: 1439
         }
       ]
     },
@@ -212,32 +212,32 @@ let doctors = [
     timetable: {
       segments: [
         {
-          from: 1440,
-          to: 2879
+          from: 1980,
+          to: 2220
         },
         {
-          from: 2880,
-          to: 4319
+          from: 3420,
+          to: 3660
         },
         {
-          from: 4320,
-          to: 5759
+          from: 4860,
+          to: 5100
         },
         {
-          from: 5760,
-          to: 7199
+          from: 6300,
+          to: 6540
         },
         {
-          from: 7200,
-          to: 8639
+          from: 7740,
+          to: 7980
         },
         {
-          from: 8640,
-          to: 10079
+          from: 9180,
+          to: 9420
         },
         {
-          from: 0,
-          to: 1439
+          from: 540,
+          to: 780
         }
       ]
     },
@@ -308,32 +308,32 @@ let doctors = [
     timetable: {
       segments: [
         {
-          from: 1920,
-          to: 2760
+          from: 1980,
+          to: 2160
         },
         {
-          from: 3360,
-          to: 4200
+          from: 3420,
+          to: 3600
         },
         {
-          from: 4800,
-          to: 5640
+          from: 4860,
+          to: 5040
         },
         {
-          from: 6240,
-          to: 7080
+          from: 6300,
+          to: 6480
         },
         {
-          from: 7680,
-          to: 8520
+          from: 7740,
+          to: 7920
         },
         {
-          from: 9120,
-          to: 9960
+          from: 9180,
+          to: 9360
         },
         {
-          from: 480,
-          to: 1320
+          from: 540,
+          to: 720
         }
       ]
     },
@@ -400,32 +400,32 @@ let doctors = [
     timetable: {
       segments: [
         {
-          from: 1440,
-          to: 2879
+          from: 2460,
+          to: 2640
         },
         {
-          from: 2880,
-          to: 4319
+          from: 3900,
+          to: 4080
         },
         {
-          from: 4320,
-          to: 5759
+          from: 5340,
+          to: 5520
         },
         {
-          from: 5760,
-          to: 7199
+          from: 6780,
+          to: 6960
         },
         {
-          from: 7200,
-          to: 8639
+          from: 8220,
+          to: 8400
         },
         {
-          from: 8640,
-          to: 10079
+          from: 9660,
+          to: 9840
         },
         {
-          from: 0,
-          to: 1439
+          from: 1020,
+          to: 1200
         }
       ]
     },
@@ -515,32 +515,32 @@ let doctors = [
     timetable: {
       segments: [
         {
-          from: 2160,
-          to: 2580
+          from: 2280,
+          to: 2520
         },
         {
-          from: 3600,
-          to: 4020
+          from: 3720,
+          to: 3960
         },
         {
-          from: 5040,
-          to: 5460
+          from: 5160,
+          to: 5400
         },
         {
-          from: 6480,
-          to: 6900
+          from: 6600,
+          to: 6840
         },
         {
-          from: 7920,
-          to: 8340
+          from: 8040,
+          to: 8280
         },
         {
-          from: 9360,
-          to: 9780
+          from: 9480,
+          to: 9720
         },
         {
-          from: 720,
-          to: 1140
+          from: 840,
+          to: 1080
         }
       ]
     },
