@@ -97,6 +97,12 @@ export default {
       subscribe_regex: /^[0-9]{5,5}$/g
     };
   },
+  mounted() {
+    let registrationToken = this.$store.state.patient.registrationToken;
+    if (registrationToken) {
+      this.step = 2;
+    }
+  },
   methods: {
     onVerify: function(response) {
       this.ajaxLoading = true;
@@ -117,38 +123,44 @@ export default {
       }
       this.error = "فرمت شماره موبایل اشتباه است";
     },
-    register() {
-      this.$axios
-        .post("/Patients/Registration", this.user)
-        .then(response => {
-          this.$store.commit(
-            "patient/register_token",
-            response.data.result.registrationToken.value
-          );
-          this.step = 2;
-        })
-        .catch(err => {
-          if (err.response.data.code == 409) {
-            this.errorMessage = "این شماره موبایل در سیستم وجود دارد.";
-          }
-          setTimeout(() => {
-            this.errorMessage = null;
-          }, 5000);
-        })
-        .then(() => {
-          this.ajaxLoading = false;
-          this.resetRecaptcha();
-        });
+    async register() {
+      try {
+        let { result } = await this.$axios.$post(
+          "/Patients/Registration",
+          this.user
+        );
+
+        this.$store.commit(
+          "patient/register_token",
+          result.registrationToken.value
+        );
+        this.step = 2;
+      } catch (error) {
+        if (err.response.data.code == 409) {
+          this.errorMessage = "این شماره موبایل در سیستم وجود دارد.";
+        }
+        setTimeout(() => {
+          this.errorMessage = null;
+        }, 5000);
+        this.resetRecaptcha();
+      }
+      this.ajaxLoading = false;
     },
     verifySMSCode() {
       this.$axios
         .patch(`/Patients/Registration/${this.registrationToken}`, {
           activationKey: this.activationKey
         })
-        .then(response => {
+        .then(async response => {
           if (response.data.status === "OK") {
-            this.$toast.success().showSimple("ثبت نام با موفقیت انجام شد");
-            this.$router.push({ name: "patient-login" });
+            await this.$toast
+              .success()
+              .showSimple("ثبت نام با موفقیت انجام شد");
+            this.$store.commit("patient/login", {
+              access_token: response.data.result.token
+            });
+            this.$store.commit("patient/initialize_user");
+            this.$router.push("/");
           } else {
             this.errorMessage = "کد وارد شده صحیح نمی باشد";
           }
