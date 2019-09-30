@@ -233,10 +233,10 @@ section#doctor-detail-comments {
   <section id="doctor-detail-comments">
     <div class="carousel-wrapper">
       <resaaElement class="resaa-element" />
-      <div class="section-title">
+      <h2 class="section-title">
         <span>نظرات مردمی</span>
         <span class="secondary--text">درباره پزشک</span>
-      </div>
+      </h2>
       <div class="swiper-holder">
         <div v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
           <div class="swiper-wrapper">

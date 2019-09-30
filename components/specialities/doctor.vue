@@ -101,6 +101,9 @@
           }
         }
       }
+      p {
+        margin-bottom: 0;
+      }
     }
   }
   .price {
@@ -143,27 +146,31 @@
         v-if="doctor.imagePath"
         :key="doctor.subscriberNumber"
         :src="'https://webapi.resaa.net/'+doctor.imagePath"
-        :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+        :alt="`تصویر ${doctor.title || ''} ${doctor.firstName} ${doctor.lastName}`"
       />
       <img
         v-else
         src="/img/doc-placeholder.png"
-        :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+        :alt="`تصویر ${doctor.title || ''} ${doctor.firstName} ${doctor.lastName}`"
       />
     </nuxt-link>
     <div class="name">
-      <nuxt-link
-        :to="`/doctors/psychology/${doctor.subscriberNumber}`"
-        class="doctor-name"
-      >{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</nuxt-link>
-      <div class="doctor-speciality">{{doctor.specialty.title}}</div>
+      <h3>
+        <nuxt-link
+          :to="`/doctors/psychology/${doctor.subscriberNumber}`"
+          class="doctor-name"
+        >{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</nuxt-link>
+      </h3>
+      <p class="doctor-speciality">
+        <strong>{{doctor.specialty.title}}</strong>
+      </p>
       <div class="doctor-tags">
-        <div>
+        <p>
           <span v-for="(tag,index) in doctor.custom_tags.slice(0,3)" :key="tag.id">
             {{tag.title}}
             <template v-if="index != 2">،</template>
           </span>
-        </div>
+        </p>
         <div class="success-call hide-md-and-up">
           <Favorite />
           <span>{{doctor.success_call | persianDigit}}+</span>

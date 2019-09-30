@@ -114,10 +114,11 @@
         display: flex;
         align-items: center;
         font-size: 14px;
-        span {
+        p {
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
+          margin-bottom: 0;
         }
         &:before {
           content: "";
@@ -150,6 +151,9 @@
         @include media(sm) {
           width: 100%;
           flex: 0 0 100%;
+        }
+        p {
+          margin-bottom: 0;
         }
         &:before {
           content: "";
@@ -197,12 +201,12 @@
               <img
                 v-if="virtual_doctor.imagePath"
                 :src="'https://webapi.resaa.net/'+virtual_doctor.imagePath"
-                :alt="`تصویر ${virtual_doctor.title} ${virtual_doctor.firstName} ${virtual_doctor.lastName}`"
+                :alt="`تصویر ${virtual_doctor.title || ''} ${virtual_doctor.firstName} ${virtual_doctor.lastName}`"
               />
               <img
                 v-else
                 src="/img/doc-placeholder.png"
-                :alt="`تصویر ${virtual_doctor.title} ${virtual_doctor.firstName} ${virtual_doctor.lastName}`"
+                :alt="`تصویر ${virtual_doctor.title || ''} ${virtual_doctor.firstName} ${virtual_doctor.lastName}`"
               />
             </div>
             <div v-scroll-to="{ el: '#call-section', offset: -80 }" class="doctor-id r-display-2">
@@ -234,7 +238,7 @@
                 class="specialty-area"
               >کد نظام پزشکی: {{virtual_doctor.medicalCouncilNumber || '-' | persianDigit}}</li>-->
               <li v-for="tag in virtual_doctor.custom_tags" :key="tag.id" class="specialty-area">
-                <span>{{tag.title}}</span>
+                <p>{{tag.title}}</p>
               </li>
             </ul>
             <div class="response-wrapper hide-md">
@@ -260,17 +264,17 @@
         </v-flex>
         <v-flex xs12 md6>
           <div class="fields-activity-wrapper">
-            <div class="title">زمینه های فعالیت :</div>
+            <h2 class="title">زمینه های فعالیت :</h2>
             <ul>
               <li v-for="(field, index) in virtual_doctor.fields" :key="index">
-                <span>{{field}}</span>
+                <p>{{field}}</p>
               </li>
             </ul>
           </div>
         </v-flex>
         <v-flex class="hide-md-and-up" xs12 md3>
           <div class="response-wrapper">
-            <div class="title">زمان های پاسخگویی</div>
+            <h2 class="title">زمان های پاسخگویی</h2>
             <div class="response-time r-display-3" v-if="day_of_week && times">
               <span>امروز:</span>
               <template v-for="(item,index) in times[day_of_week]">

@@ -65,6 +65,7 @@ section {
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     .image {
       position: relative;
       border: 1px solid #d4d4d4;
@@ -156,16 +157,16 @@ section {
               <img
                 v-if="doctor.imagePath"
                 :src="'https://webapi.resaa.net/'+doctor.imagePath"
-                :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+                :alt="`تصویر ${doctor.title || ''} ${doctor.firstName} ${doctor.lastName}`"
               />
               <img
                 v-else
                 src="/img/doc-placeholder.png"
-                :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+                :alt="`تصویر ${doctor.title || ''} ${doctor.firstName} ${doctor.lastName}`"
               />
             </div>
-            <div class="name">دکتر {{doctor.firstName}} {{doctor.lastName}}</div>
-            <div class="speciality">متخصص {{doctor.specialty.title}}</div>
+            <h3 class="name">دکتر {{doctor.firstName}} {{doctor.lastName}}</h3>
+            <p class="speciality">متخصص {{doctor.specialty.title}}</p>
             <div class="code">
               <span>کد رسا:</span>
               <span>{{doctor.subscriberNumber | persianDigit}}</span>

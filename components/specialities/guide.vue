@@ -41,10 +41,11 @@ section {
       display: none;
     }
   }
-  p {
+  span {
     color: #9f9f9f;
     font-size: 14px;
     font-weight: normal;
+    margin-bottom: 16px;
   }
   .image {
     height: 100px;
@@ -77,7 +78,7 @@ section {
       <div class="image">
         <img src="~assets/img/doctor.png" />
       </div>
-      <p>پزشک خود را از لیست انتخاب کنید</p>
+      <span>پزشک خود را از لیست انتخاب کنید</span>
     </div>
     <div class="chevron">
       <chevron />
@@ -87,7 +88,7 @@ section {
       <div class="image">
         <img src="~assets/img/smartphone.png" />
       </div>
-      <p>شماره موبایل خود را وارد کنید</p>
+      <span>شماره موبایل خود را وارد کنید</span>
     </div>
     <div class="chevron">
       <chevron />
@@ -97,7 +98,7 @@ section {
       <div class="image">
         <img src="~assets/img/money.png" />
       </div>
-      <p>هزینه مشاوره خود را پرداخت کنید</p>
+      <span>هزینه مشاوره خود را پرداخت کنید</span>
     </div>
     <div class="chevron">
       <chevron />
@@ -107,7 +108,7 @@ section {
       <div class="image">
         <img src="~assets/img/call.png" />
       </div>
-      <p>با پزشک تماس بگیرید</p>
+      <span>با پزشک تماس بگیرید</span>
     </div>
   </section>
 </template>

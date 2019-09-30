@@ -24,6 +24,10 @@ section#header {
       flex: 0 0 60px;
       margin-left: 14px;
     }
+    a {
+      display: flex;
+      align-items: center;
+    }
     img {
       max-width: 100%;
     }
@@ -139,7 +143,9 @@ section#header {
           <Close v-else />
         </div>
         <div class="logo">
-          <img src="~assets/img/logo.png" alt />
+          <nuxt-link to="/">
+            <img src="~assets/img/logo.png" alt />
+          </nuxt-link>
         </div>
         <ul class="nav-bar">
           <li class="nav-item">
