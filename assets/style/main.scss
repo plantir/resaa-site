@@ -12,6 +12,10 @@ html {
   font-weight: normal;
   overflow: auto;
 }
+bold,
+strong {
+  font-weight: 500;
+}
 .application,
 .title,
 .headline {

@@ -26,6 +26,9 @@
     height: auto;
     padding: 25px 30px 60px;
   }
+  p {
+    margin-bottom: 0;
+  }
 }
 
 .quote-sign {
@@ -53,7 +56,7 @@
   letter-spacing: normal;
   text-align: center;
   color: #777590;
-  margin-bottom: 30px;
+  margin-bottom: 30px !important;
   height: 100px;
   @include media(sm) {
     height: auto;
@@ -85,7 +88,6 @@
   bottom: -45px;
   overflow: hidden;
   left: calc(50% - 45px);
-
   img {
     width: 100%;
   }
@@ -111,13 +113,15 @@
           <div class="quote-sign">
             <i class="fa fa-quote-right" aria-hidden="true"></i>
           </div>
-          <div class="doctor-comment-text">{{comment.quote}}</div>
-          <div class="doctor-comment-name">{{ comment.name}}</div>
-          <router-link
-            class="doctor-comment-special"
-            target="_blank"
-            :to="{name:'doctors-id',params:{id:comment.doctor.subscriberNumber}}"
-          >مشاور : {{comment.doctor.name}}</router-link>
+          <p class="doctor-comment-text">{{comment.quote}}</p>
+          <h3 class="doctor-comment-name">{{ comment.name}}</h3>
+          <p>
+            <router-link
+              class="doctor-comment-special"
+              target="_blank"
+              :to="{name:'doctors-id',params:{id:comment.doctor.subscriberNumber}}"
+            >مشاور : {{comment.doctor.name}}</router-link>
+          </p>
           <div class="doctor-comment-avatar">
             <img :src="comment.avatar" />
           </div>

@@ -52,9 +52,12 @@
     padding-right: 0px;
     justify-content: center;
   }
-  span {
+  a {
     color: #707070;
     display: flex;
+    &:hover {
+      color: $primary-color;
+    }
   }
   .v-icon {
     color: #a9a9a9;
@@ -73,6 +76,7 @@
   color: #707070;
   font-weight: normal;
   margin-bottom: 40px;
+  font-size: 15px;
   @include media(sm) {
     text-align: center;
   }
@@ -93,7 +97,7 @@
 .comments-wrapper {
   background: #fff;
   padding: 30px 0;
-  h3 {
+  h2 {
     text-align: center;
     color: #999999;
     font-weight: 500;
@@ -105,8 +109,16 @@
 <template>
   <section>
     <div class="header">
-      <img class="hide-md" src="~assets/img/speciality_bg.png" alt />
-      <img class="hide-md-and-up" src="~assets/img/speciality_bg_mobile@2x.png" alt />
+      <img
+        class="hide-md"
+        src="~assets/img/speciality_bg.png"
+        alt="مشاوره تلفنی با متخصص روانشناسی"
+      />
+      <img
+        class="hide-md-and-up"
+        src="~assets/img/speciality_bg_mobile@2x.png"
+        alt="مشاوره تلفنی با متخصص روانشناسی"
+      />
       <h1>مشاوره تلفنی با متخصص روانشناسی</h1>
       <transition name="fade" mode="out-in">
         <span :key="text_array[header_text]">{{text_array[header_text]}}</span>
@@ -115,17 +127,17 @@
     <v-container class="py-0">
       <div class="custom-container">
         <div class="breadcrumbs">
-          <span>سامانه رسا</span>
+          <nuxt-link to="/">سامانه رسا</nuxt-link>
           <span>
             <v-icon>chevron_left</v-icon>
           </span>
-          <span>مشاوره تلفنی با متخصص روانشناس</span>
+          <nuxt-link :to="$route.fullPath">مشاوره تلفنی با متخصص روانشناس</nuxt-link>
         </div>
         <div class="card">
           <h2 class="card-title">لیست متخصصین روانشناسی</h2>
-          <h3
+          <p
             class="card-subtitle"
-          >می توانید در این بخش لیست مشاوران روانشناسی سامانه رسا را مشاهده کنید و مشاور مورد نظر خود را انتخاب کنید.</h3>
+          >می توانید در این بخش لیست مشاوران روانشناسی سامانه رسا را مشاهده کنید و مشاور مورد نظر خود را انتخاب کنید.</p>
           <div
             class="item"
             v-for="doctor in sorted_doctors.slice(0,3)"
@@ -145,10 +157,10 @@
       </div>
     </v-container>
     <v-container class="comments-wrapper" fluid>
-      <h3>
+      <h2>
         نظر همراهان رسا در
         <br class="hide-md-and-up" />مورد مشاوره تلفنی روانشناسی
-      </h3>
+      </h2>
       <Comments />
     </v-container>
     <v-container>
