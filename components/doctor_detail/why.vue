@@ -81,7 +81,7 @@ section {
           <div class="icon">
             <img src="~/assets/img/privacy@2x.png" alt />
           </div>
-          <div class="r-display-2 item-title">تماس ناشناس</div>
+          <h3 class="r-display-2 item-title">تماس ناشناس</h3>
           <div class="description">
             <p>کلیه تماس ها به صورت ناشناس با پزشک برقرار می شود و مکالمات شما و پزشک کاملا محرمانه بوده و در سامانه رسا ضبط نمی گردد.</p>
           </div>

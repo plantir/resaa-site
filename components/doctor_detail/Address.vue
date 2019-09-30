@@ -43,6 +43,9 @@
     align-items: center;
     display: flex;
     flex: 0 0 60%;
+    p {
+      margin: 0;
+    }
     svg {
       position: absolute;
       display: inline-block;
@@ -69,6 +72,7 @@
       direction: ltr;
       margin-right: 5px;
       display: inline-block;
+      margin-bottom: 0;
     }
     svg {
       position: absolute;
@@ -82,6 +86,7 @@
   }
   .description {
     margin-right: 16px;
+    margin-bottom: 0;
     @include media(sm) {
       margin-right: 0px;
     }
@@ -126,19 +131,21 @@
   <section>
     <v-card>
       <resaaElement class="resaa-element" />
-      <div class="section-title">اطلاعات مطب پزشک</div>
+      <h2
+        class="section-title"
+      >آدرس و تلفن مطب {{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</h2>
       <div class="address-item" v-for="(workplace,index) in doctor.workplaces" :key="index">
         <div class="address">
           <location />
-          {{workplace.street}}
+          <p>{{workplace.street}}</p>
         </div>
         <div class="phone">
           <div>
             <phone />
             <span>مطب :</span>
-            <span class="phone-number">{{workplace.phoneNumber | persianDigit}}</span>
+            <p class="phone-number">{{workplace.phoneNumber | persianDigit}}</p>
           </div>
-          <div class="description">{{workplace.description}}</div>
+          <p class="description">{{workplace.description}}</p>
         </div>
       </div>
       <!-- <div class="social-media">

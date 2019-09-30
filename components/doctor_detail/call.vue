@@ -162,10 +162,10 @@
   <section id="call-section">
     <v-card class="call-wrapper">
       <div>
-        <div class="section-title">
+        <h2 class="section-title">
           <span v-if="doctor.currentlyAvailable">همین حالا با پزشک تماس بگیرید</span>
           <span v-else>از پزشک بخواهید با شما تماس بگیرد</span>
-        </div>
+        </h2>
         <div class="description">
           <p
             v-if="doctor.currentlyAvailable"

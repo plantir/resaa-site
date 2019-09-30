@@ -13,9 +13,12 @@
       padding-right: 0px;
       justify-content: center;
     }
-    span {
+    a {
       color: #707070;
       display: flex;
+      &:hover {
+        color: $primary-color;
+      }
     }
     .v-icon {
       color: #a9a9a9;
@@ -58,15 +61,15 @@
     <v-container>
       <div class="custom-container">
         <div class="breadcrumbs">
-          <span>سامانه رسا</span>
+          <nuxt-link to="/">سامانه رسا</nuxt-link>
           <span>
             <v-icon>chevron_left</v-icon>
           </span>
-          <span>مشاوره تلفنی با متخصص روانشناس</span>
+          <nuxt-link to="/doctors/psychology">مشاوره تلفنی با متخصص روانشناس</nuxt-link>
           <span>
             <v-icon>chevron_left</v-icon>
           </span>
-          <span>{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</span>
+          <nuxt-link :to="$route.fullPath">{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</nuxt-link>
         </div>
         <Info :doctor="doctor" />
         <Call :doctor="doctor" />
@@ -178,8 +181,7 @@ export default {
     };
   },
   mounted() {
-    // this.$axios.get('/api')
-
+    console.log(this.$route);
     setTimeout(() => {
       if (process.client && !this.hideMap) {
         this.$refs.mapRef.$mapPromise.then(map => {
