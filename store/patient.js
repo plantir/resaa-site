@@ -7,8 +7,10 @@ export const state = () => ({
 export const mutations = {
   register_token(state, token) {
     state.registrationToken = token;
+    localStorage.setItem('register_token', token);
   },
   initialize_user(state) {
+    state.registrationToken = localStorage.getItem('register_token');
     let user = localStorage.getItem('auth');
     if (!user) {
       return;
