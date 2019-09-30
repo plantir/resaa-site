@@ -305,7 +305,7 @@ export default {
           price: 30000
         },
         {
-          id: 4,
+          id: 7,
           duration: 45,
           title: "یک جلسه مشاوره استاندارد",
           description:
@@ -314,7 +314,7 @@ export default {
           price: 45000
         },
         {
-          id: 5,
+          id: 8,
           duration: 60,
           title: "جلسه مشاوره مفصل و کامل",
           description:
@@ -340,7 +340,7 @@ export default {
       duration: 0,
       credit: 0,
       ajaxLoading: false,
-      selected: 4,
+      selected: 7,
       recaptchaResponse: null,
       doctor
     };
