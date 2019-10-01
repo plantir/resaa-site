@@ -180,6 +180,44 @@ import Description from "@/components/specialities/description";
 export default {
   layout: "speciality",
   components: { Wave, Doctor, Guide, Comments, Description },
+  head() {
+    return {
+      title: this.title,
+      meta: [
+        // {
+        //   hid: "og:image",
+        //   property: "og:image",
+        //   content: this.og.image
+        // },
+        // {
+        //   hid: "og:title",
+        //   property: "og:title",
+        //   content: this.og.title
+        // },
+
+        // {
+        //   hid: "og:site_name",
+        //   property: "og:site_name",
+        //   content: this.og.site_name
+        // },
+        // {
+        //   hid: "og:description",
+        //   property: "og:description",
+        //   content: this.og.description
+        // },
+        // {
+        //   hid: "canonical",
+        //   property: "canonical",
+        //   content: this.og.canonical
+        // },
+        {
+          hid: "description",
+          property: "description",
+          content: this.description
+        }
+      ]
+    };
+  },
   asyncData() {
     let sorted_doctors = doctors
       .filter(item => item.currentlyAvailable)
@@ -200,6 +238,8 @@ export default {
     }
     doctors;
     return {
+      title: "مشاوره تلفنی با متخصص روانشناسی",
+      description: `دریافت مشاوره تلفنی روانشناسی فقط در سامانه رسا، با کمترین هزینه، بدون دریافت نوبت، بدون رفت و آمد، بدون انتظار و با بهترین مشاوران`,
       text_array: [
         "از هر کجای ایران!",
         "با بهترین مشاوران!",

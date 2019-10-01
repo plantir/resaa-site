@@ -254,7 +254,7 @@ export default {
             access_token: response.data.result.token
           });
           this.$store.commit("patient/initialize_user");
-          // this.$router.push({ name: "patient-login" });
+          this.$router.push("charge");
         } else {
           this.errorMessage = "کد وارد شده صحیح نمی باشد";
         }
