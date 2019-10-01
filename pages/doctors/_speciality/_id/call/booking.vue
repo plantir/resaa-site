@@ -168,6 +168,7 @@
             dark
             class="retry-btn"
             @click="reserveDoctor"
+            :href="'tel:02174471402'"
           >ثبت درخواست تماس</v-btn>
           <v-btn
             round
@@ -293,8 +294,11 @@ export default {
           `/Doctors/${this.$route.params.id}/CommunicationBooking?patientPhoneNumber=${this.user.phoneNumber}`
         );
         this.$dialog
-          .message("رزرو پزشک با موفقیت انجام شد")
-          .success()
+          .message(
+            `هم اکنون با شماره 021-74471402 تماس بگیرید.<br/>
+            در صورتی که ساعت پاسخگویی پزشک نباشد با شماره گیری عدد 1 درخواست تماس پزشک با شما ثبت می شود و پزشک در اولین فرصت با شماره 74471111 با شما تماس میگیرد.`
+          )
+          .icon("phone_in_talk")
           .alert();
         this.ajaxLoading = false;
       } catch (error) {
