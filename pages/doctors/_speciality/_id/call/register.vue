@@ -307,6 +307,7 @@ export default {
           this.$router.push("charge");
         } catch (error) {}
       } catch (error) {
+        this.$toast.error().showSimple("نام کاربری یا رمز عبور اشتباه است");
         this.erroMessage = "نام کاربری یا رمز عبور اشتباه است";
       }
       this.ajaxLoading = false;

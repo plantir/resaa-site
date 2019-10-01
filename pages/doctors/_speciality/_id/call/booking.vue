@@ -162,23 +162,20 @@
             to="charge"
           >تلاش مجدد</v-btn>
           <v-btn
-            v-else-if="!doctor.currentlyAvailable"
-            round
-            depressed
-            dark
-            class="retry-btn"
-            @click="reserveDoctor"
-            :href="'tel:02174471402'"
-          >ثبت درخواست تماس</v-btn>
-          <v-btn
             round
             depressed
             dark
             @click="reserveDoctor"
             :href="'tel:02174471402'"
-            v-else-if="doctor.currentlyAvailable && $device.isMobile"
-          >تماس با پزشک</v-btn>
-          <v-btn round depressed dark @click="reserveDoctor" v-else>تماس با پزشک</v-btn>
+            v-else-if="$device.isMobile"
+          >
+            <span v-if="!doctor.currentlyAvailable">ثبت درخواست تماس</span>
+            <span v-else>تماس با پزشک</span>
+          </v-btn>
+          <v-btn v-else round depressed dark class="retry-btn" @click="reserveDoctor">
+            <span v-if="!doctor.currentlyAvailable">ثبت درخواست تماس</span>
+            <span v-else>تماس با پزشک</span>
+          </v-btn>
         </div>
       </div>
     </div>
@@ -302,6 +299,7 @@ export default {
           .alert();
         this.ajaxLoading = false;
       } catch (error) {
+        debugger;
         this.$dialog
           .message("رزرو پزشک با مشکل مواجه شد")
           .error()
