@@ -162,23 +162,20 @@
             to="charge"
           >تلاش مجدد</v-btn>
           <v-btn
-            v-else-if="!doctor.currentlyAvailable"
-            round
-            depressed
-            dark
-            class="retry-btn"
-            @click="reserveDoctor"
-            :href="'tel:02174471402'"
-          >ثبت درخواست تماس</v-btn>
-          <v-btn
             round
             depressed
             dark
             @click="reserveDoctor"
             :href="'tel:02174471402'"
-            v-else-if="doctor.currentlyAvailable && $device.isMobile"
-          >تماس با پزشک</v-btn>
-          <v-btn round depressed dark @click="reserveDoctor" v-else>تماس با پزشک</v-btn>
+            v-else-if="$device.isMobile"
+          >
+            <span v-if="!doctor.currentlyAvailable">ثبت درخواست تماس</span>
+            <span v-else>تماس با پزشک</span>
+          </v-btn>
+          <v-btn v-else round depressed dark class="retry-btn" @click="reserveDoctor">
+            <span v-if="!doctor.currentlyAvailable">ثبت درخواست تماس</span>
+            <span v-else>تماس با پزشک</span>
+          </v-btn>
         </div>
       </div>
     </div>
@@ -298,10 +295,12 @@ export default {
             `هم اکنون با شماره 021-74471402 تماس بگیرید.<br/>
             در صورتی که ساعت پاسخگویی پزشک نباشد با شماره گیری عدد 1 درخواست تماس پزشک با شما ثبت می شود و پزشک در اولین فرصت با شماره 74471111 با شما تماس میگیرد.`
           )
+          .success()
           .icon("phone_in_talk")
           .alert();
         this.ajaxLoading = false;
       } catch (error) {
+        debugger;
         this.$dialog
           .message("رزرو پزشک با مشکل مواجه شد")
           .error()
