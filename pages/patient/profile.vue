@@ -108,7 +108,7 @@
     display: flex;
     flex-direction: row;
 
-    * {
+    .v-btn {
       width: 160px;
       text-align: center;
       color: white;
@@ -128,10 +128,10 @@
       }
     }
 
-    div {
-      background-color: #a5afb9;
-      cursor: pointer;
-    }
+    // div {
+    //   background-color: #a5afb9;
+    //   cursor: pointer;
+    // }
   }
 
   .profile-edit-container {
@@ -385,11 +385,12 @@
               </div>
             </div>
             <div class="profile-buttons">
-              <router-link
-                class="profile-charge-button"
+              <v-btn
+                color="cyan"
                 :to="{name:'charge',query:{mobile:user_profile.phoneNumber}}"
-              >افزایش اعتبار</router-link>
-              <div class="profile-edit-button" @click="activateEditMode">ویرایش حساب کاربری</div>
+              >افزایش اعتبار</v-btn>
+              <v-btn color="light-blue" @click="activateEditMode">ویرایش حساب کاربری</v-btn>
+              <v-btn color="red darken-3" @click="logout">خروج</v-btn>
             </div>
           </div>
           <div class="error-message" v-if="sizeError">حجم عکس باید کمتر از ۵۰۰ کیلوبایت باشد.</div>
@@ -623,6 +624,19 @@ export default {
           this.saving = false;
           this.get_profile();
         });
+    },
+    async logout() {
+      try {
+        let answer = await this.$dialog.confirm({
+          title: "آیا میخواهید از حساب کاربری خود خارج شوید؟",
+          message: " "
+        });
+        if (answer) {
+          this.$store.commit("patient/logout");
+          this.$router.replace({ name: "patient-landing" });
+          this.menuActive = false;
+        }
+      } catch (error) {}
     }
   },
   computed: {
