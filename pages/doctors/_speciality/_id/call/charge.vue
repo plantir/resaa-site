@@ -237,7 +237,7 @@ h2 {
       <div class="payment-wrapper">
         <v-btn @click="onSubmit" class="payment-btn" depressed dark round>
           <v-icon class="ml-3">fa-credit-card</v-icon>
-          <span>پرداخت</span>
+          <span id="journeygobank">پرداخت</span>
         </v-btn>
         <vue-recaptcha
           ref="invisibleRecaptcha"
