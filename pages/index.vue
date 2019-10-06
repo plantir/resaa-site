@@ -462,6 +462,13 @@ export default {
   },
   head() {
     return {
+      __dangerouslyDisableSanitizers: ["script"],
+      script: [
+        {
+          innerHTML: JSON.stringify(this.structuredData),
+          type: "application/ld+json"
+        }
+      ],
       title: "سامانه رسا | بزرگترین بستر ارتباط تلفنی پزشک و بیمار",
       meta: [
         // hid is used as unique identifier. Do not use `vmid` for it as it will not work
@@ -479,10 +486,9 @@ export default {
       ]
     };
   },
-  data() {
+  asyncData() {
     return {
       dialog: true,
-      items: ["armin", "arash"],
       menuActive: false,
       itemsList: [
         {
@@ -505,7 +511,24 @@ export default {
           name: "خرید شارژ",
           to: { name: "charge" }
         }
-      ]
+      ],
+      structuredData: {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        name: "Resaa Inc.",
+        url: "https://resaa.net",
+        logo: "https://resaa.net/_nuxt/img/5a30ad1.png",
+        slogan: "first and biggest telemedicine platform in Iran",
+        telephone: "+982174471111",
+        email: "info@resaa.net",
+        SameAs: [
+          "https://t.me/pezeshkeresaa",
+          "https://instagram.com/resaanet/",
+          "https://twitter.com/resaanet"
+        ],
+        description:
+          "Resaa, Inc. is the first and biggest telemedicine platform based in Tehran, Iran, which uses telephone network to connect the patients to their doctors. Resaa has a list of 460 doctors (by 2019) that the patients can choose from, call and discuss their health problems to get medical advice. It was founded in 2015 by Seyed Alireza Mirzargar and Seyed Soroush Hosseinalipour."
+      }
     };
   },
   methods: {
