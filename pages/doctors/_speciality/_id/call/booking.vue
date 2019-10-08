@@ -219,7 +219,6 @@
 </template>
 
 <script>
-import doctors from "@/components/doctor_detail/doctors.js";
 import Available from "@/assets/svg/Available.svg?inline";
 import NotAvailable from "@/assets/svg/NotAvailable.svg?inline";
 
@@ -250,7 +249,7 @@ export default {
       this.credit = credit;
     } catch (error) {}
     try {
-      this.doctor = doctors.find(
+      this.doctor = this.$virtual_doctors.find(
         item => item.subscriberNumber == this.$route.params.id
       );
       let { result } = await this.$axios.$get(

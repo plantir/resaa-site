@@ -173,6 +173,7 @@
 <script>
 import Wave from "@/assets/svg/speciality_wave.svg?inline";
 import doctors from "@/components/doctor_detail/doctors";
+
 import Doctor from "@/components/specialities/doctor";
 import Guide from "@/components/specialities/guide";
 import Comments from "@/components/specialities/comments";
@@ -218,14 +219,14 @@ export default {
       ]
     };
   },
-  asyncData() {
-    let sorted_doctors = doctors
+  asyncData(ctx) {
+    let sorted_doctors = ctx.app.$virtual_doctors
       .filter(item => item.currentlyAvailable)
       .sort(() => {
         return 0.5 - Math.random();
       });
     sorted_doctors.push(
-      ...doctors
+      ...ctx.app.$virtual_doctors
         .filter(item => !item.currentlyAvailable)
         .sort(() => {
           return 0.5 - Math.random();
@@ -236,7 +237,6 @@ export default {
         ..._.sampleSize(notavailable, 6 - sorted_doctors.length)
       );
     }
-    doctors;
     return {
       title: "مشاوره تلفنی با متخصص روانشناسی",
       description: `دریافت مشاوره تلفنی روانشناسی فقط در سامانه رسا، با کمترین هزینه، بدون دریافت نوبت، بدون رفت و آمد، بدون انتظار و با بهترین مشاوران`,

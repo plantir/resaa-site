@@ -307,7 +307,6 @@
 import Available from "~/assets/svg/Available.svg?inline";
 import NotAvailable from "~/assets/svg/NotAvailable.svg?inline";
 import resaaElement from "~/assets/svg/element.svg?inline";
-import doctors from "./doctors.js";
 export default {
   props: { doctor: {} },
   components: { Available, NotAvailable, resaaElement },
@@ -322,7 +321,7 @@ export default {
   mounted() {
     let days = ["su", "mo", "tu", "we", "th", "fr", "sa"];
     this.day_of_week = days[new Date().getDay()];
-    let virtual_doctor = doctors.find(
+    let virtual_doctor = this.$virtual_doctors.find(
       item => item.subscriberNumber == this.$route.params.id
     );
     this.virtual_doctor = Object.assign(virtual_doctor, this.doctor);

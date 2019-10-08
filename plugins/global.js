@@ -14,7 +14,7 @@ Vue.filter('currency', value => {
 });
 Vue.filter('persianDigit', value => {
   if (value || value === 0) {
-    return value.toString().replace(/\d+/g, function (digit) {
+    return value.toString().replace(/\d+/g, function(digit) {
       var enDigitArr = [],
         peDigitArr = [];
       for (var i = 0; i < digit.length; i++) {
@@ -36,7 +36,7 @@ Vue.filter('persianDigit', value => {
 // Vue.use(require('vue-jalali-moment'));
 Vue.filter('persianDate', (value, format, locale) => {
   if (locale) {
-    moment.locale(locale)
+    moment.locale(locale);
   }
   return moment(value, 'YYYY-M-D HH:mm:ss').format(format || 'jYYYY/jM/jD');
 });

@@ -130,6 +130,9 @@ export default {
   plugins: [
     // '~/plugins/vuetify.js',
     {
+      src: '~/plugins/virtual_doctors.js'
+    },
+    {
       src: '~/plugins/global.js'
     },
     {
@@ -175,12 +178,12 @@ export default {
       }
     ],
     //'~/modules/nuxt-service',
-    [
-      '@nuxtjs/google-analytics',
-      {
-        id: 'UA-135304047-1'
-      }
-    ],
+    // [
+    //   '@nuxtjs/google-analytics',
+    //   {
+    //     id: 'UA-135304047-1'
+    //   }
+    // ],
     '@nuxtjs/axios',
     '@nuxtjs/sitemap',
     '@nuxtjs/dotenv',
