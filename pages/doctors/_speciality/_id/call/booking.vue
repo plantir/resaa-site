@@ -299,7 +299,6 @@ export default {
           .alert();
         this.ajaxLoading = false;
       } catch (error) {
-        debugger;
         this.$dialog
           .message("رزرو پزشک با مشکل مواجه شد")
           .error()

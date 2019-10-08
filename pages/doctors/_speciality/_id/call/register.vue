@@ -191,7 +191,6 @@ export default {
   },
   watch: {
     $route(to, from) {
-      debugger;
       if (from.name == "manage-uid-edit" && to.name == "manage-uid") {
         this.get_product();
       }
