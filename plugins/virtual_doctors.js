@@ -5,7 +5,6 @@ export default async function(ctx, inject) {
     if (!doctor.timetable || !doctor.timetable.segments) {
       continue;
     }
-    console.log(doctor);
     for (const item of doctor.timetable.segments) {
       let start_hour = get_hour(item.from);
       let end_hour = get_hour(item.to);
