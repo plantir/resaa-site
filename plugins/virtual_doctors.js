@@ -1,5 +1,9 @@
-import doctors from '@/components/doctor_detail/doctors.json';
-export default function(ctx, inject) {
+// import doctors from '@/components/doctor_detail/doctors.json';
+import axios from 'axios';
+export default async function(ctx, inject) {
+  let { data: doctors } = await axios.get(
+    process.env.SITE_URL + '/doctors.json'
+  );
   for (let doctor of doctors) {
     for (const item of doctor.timetable.segments) {
       let start_hour = get_hour(item.from);
