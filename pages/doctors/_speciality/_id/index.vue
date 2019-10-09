@@ -219,12 +219,12 @@ export default {
           "@type": "ImageObject",
           url: `https://webapi.resaa.net/Doctors/${doctor.subscriberNumber}/Image`
         },
-        aggregateRating: {
-          "@type": "aggregateRating",
-          ratingValue: "88",
-          bestRating: "100",
-          ratingCount: "25"
-        },
+        // aggregateRating: {
+        //   "@type": "aggregateRating",
+        //   ratingValue: "88",
+        //   bestRating: "100",
+        //   ratingCount: "25"
+        // },
         description: doctor.custom_tags.map(item => item.title).join(",")
       }
     };

@@ -454,7 +454,14 @@ export default {
     };
   },
   components: { callSection, phone },
-  async asyncData({ store, params, $axios, isClient, redirect }) {
+  async asyncData({ app, store, params, $axios, isClient, redirect }) {
+    let test_doctor = app.$virtual_doctors.find(
+      item => item.subscriberNumber == params.id
+    );
+    if (test_doctor) {
+      let url = `/doctors/psychology/${test_doctor.subscriberNumber}`;
+      return redirect(encodeURI(url));
+    }
     let fields =
       "id,firstName,lastName,imagePath,currentlyAvailable,subscriberNumber,specialty,tags,expertise,title,workplaces,medicalCouncilNumber";
     let a = await $axios.$get(`/Doctors/${params.id}?fields=${fields}`);
