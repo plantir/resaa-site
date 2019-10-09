@@ -235,7 +235,7 @@ h2 {
       </div>
 
       <div class="payment-wrapper">
-        <v-btn @click="onSubmit" class="payment-btn" depressed dark round>
+        <v-btn id="journeygobank" @click="onSubmit" class="payment-btn" depressed dark round>
           <v-icon class="ml-3">fa-credit-card</v-icon>
           <span>پرداخت</span>
         </v-btn>

@@ -68,6 +68,7 @@ export default {
       {
         charset: 'utf-8'
       },
+
       {
         name: 'google-site-verification',
         content: 'vT5f4dImWLU1X6AHgqqFniG46MVEcXZYyxoCVLX0jNc'
@@ -81,6 +82,10 @@ export default {
         name: 'description',
         content:
           'با استفاده از رسا تماس های غیر ضروری خود از سمت بیماران را حذف کنید و مکالمات غیر مربوط به روند درمانی را کاهش رایگان ثبت‌نام کنید و با دسترسی به پزشکان معرفی‌شده در وب‌سایت رسا، تماس مستقیم با بهترین پزشکان متخصص را با صرفه‌جویی در وقت و هزینه خود، تجربه کنید'
+      },
+      {
+        'http-equiv': 'Content-Type',
+        content: 'text/html; charset=UTF-8'
       }
     ],
     link: [
@@ -124,6 +129,9 @@ export default {
    */
   plugins: [
     // '~/plugins/vuetify.js',
+    {
+      src: '~/plugins/virtual_doctors.js'
+    },
     {
       src: '~/plugins/global.js'
     },

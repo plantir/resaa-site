@@ -1,3 +1,4 @@
+import doctors from '@/components/doctor_detail/doctors.json';
 export const state = () => ({
   info: {
     specialtyId: null,
@@ -6,9 +7,10 @@ export const state = () => ({
     contactInformation: {
       provinceId: null,
       cityId: null
-    }
+    },
+    virtual_doctors: doctors
   }
-})
+});
 export const mutations = {
   doctor_subscriptionPlan(state, subscriptionPlan) {
     state.doctor.subscriptionPlan = subscriptionPlan;
@@ -45,10 +47,8 @@ export const mutations = {
         };
       }
     }
-  },
-}
+  }
+};
 
-export const actions = {
-
-}
-export const strict = false
+export const actions = {};
+export const strict = false;

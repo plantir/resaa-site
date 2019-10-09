@@ -187,7 +187,6 @@ section {
 import Available from "~/assets/svg/Available.svg?inline";
 import NotAvailable from "~/assets/svg/NotAvailable.svg?inline";
 import ChevronLeft from "~/assets/svg/chevron_left.svg?inline";
-import doctors from "./doctors.js";
 export default {
   props: {
     doctor: {
@@ -201,7 +200,7 @@ export default {
   },
   data() {
     return {
-      doctors: doctors.filter(
+      doctors: this.$virtual_doctors.filter(
         item => item.subscriberNumber != this.$route.params.id
       ),
       swiperOptionDoctors: {

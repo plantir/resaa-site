@@ -97,6 +97,13 @@ export default {
   head() {
     return {
       title: this.title,
+      __dangerouslyDisableSanitizers: ["script"],
+      script: [
+        {
+          innerHTML: JSON.stringify(this.schema),
+          type: "application/ld+json"
+        }
+      ],
       meta: [
         {
           hid: "og:image",
@@ -133,7 +140,7 @@ export default {
     };
   },
   components: { Info, Call, Why, Address, RelatedDoctors, Comments, Social },
-  async asyncData({ store, params, $axios, isClient }) {
+  async asyncData({ app, store, params, $axios, isClient }) {
     // if (isClient) {
     //   return window.location.reload;
     // }
@@ -141,6 +148,10 @@ export default {
       "id,firstName,lastName,imagePath,currentlyAvailable,subscriberNumber,specialty,tags,expertise,title,workplaces,medicalCouncilNumber";
     let res = await $axios.$get(`/Doctors/${params.id}?fields=${fields}`);
     let doctor = res.result.doctor;
+    let virtual_doctor = app.$virtual_doctors.find(
+      item => item.subscriberNumber == params.id
+    );
+    doctor = Object.assign(virtual_doctor, doctor);
     let locations = [];
     for (let address of doctor.workplaces) {
       if (address.latitude && address.longitude) {
@@ -177,7 +188,45 @@ export default {
       description: description,
       center: { lat: 10, lng: 10 },
       locations: locations,
-      og: og
+      og: og,
+      schema: {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        breadcrumb: {
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "سامانه رسا",
+              item: "https:/resaa.net"
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "مشاوره تلفنی با متخصص روانشناس",
+              item: "https://resaa.net/doctors/psychology/"
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: `دکتر ${doctor.firstName} ${doctor.lastName}`,
+              item: `https://resaa.net/doctors/psychology/${doctor.subscriberNumber}`
+            }
+          ]
+        },
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: `https://webapi.resaa.net/Doctors/${doctor.subscriberNumber}/Image`
+        },
+        // aggregateRating: {
+        //   "@type": "aggregateRating",
+        //   ratingValue: "88",
+        //   bestRating: "100",
+        //   ratingCount: "25"
+        // },
+        description: doctor.custom_tags.map(item => item.title).join(",")
+      }
     };
   },
   mounted() {
