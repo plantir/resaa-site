@@ -1,10 +1,11 @@
-// import doctors from '@/components/doctor_detail/doctors.json';
-import axios from 'axios';
+import doctors_json from '@/components/doctor_detail/doctors.json';
+let doctors = Object.freeze(doctors_json);
 export default async function(ctx, inject) {
-  let { data: doctors } = await axios.get(
-    process.env.SITE_URL + '/doctors.json'
-  );
   for (let doctor of doctors) {
+    if (!doctor.timetable || !doctor.timetable.segments) {
+      continue;
+    }
+    console.log(doctor);
     for (const item of doctor.timetable.segments) {
       let start_hour = get_hour(item.from);
       let end_hour = get_hour(item.to);

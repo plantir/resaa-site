@@ -531,14 +531,6 @@ export default {
       }
     };
   },
-  async mounted() {
-    try {
-      let doctors = await this.$axios.get(
-        process.env.SITE_URL + "/doctors.json"
-      );
-      console.log(doctors);
-    } catch (error) {}
-  },
   methods: {
     activateMenu: function() {
       this.menuActive = !this.menuActive;
