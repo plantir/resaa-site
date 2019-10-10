@@ -365,7 +365,7 @@
         <span class="menu-icon__line menu-icon__line-right" :class="{ 'active': menuActive }"></span>
       </div>
       <div class="navigation-bar-right">
-        <nuxt-link :to="!isPatient?'/':'/'" class="navigation-bar-logo">
+        <nuxt-link to="/" class="navigation-bar-logo">
           <img alt="سامانه رسا" v-if="isPatient" src="./logo-teal.png" />
           <img alt="سامانه رسا" v-else src="./logo.png" />
         </nuxt-link>
@@ -373,7 +373,10 @@
         <div class="navigation-bar-items">
           <ul class="nav">
             <li class="nav-item">
-              <nuxt-link :to="{name:user?'patient-profile':'patient-login'}">حساب کاربری</nuxt-link>
+              <nuxt-link
+                @click.native="closeNav"
+                :to="{name:user?'patient-profile':'patient-login'}"
+              >حساب کاربری</nuxt-link>
               <!-- <div v-if="user">
                 <a class="drop-down">
                   خوش اومدی {{user.firstName}}
@@ -534,6 +537,7 @@
             >خوش اومدی {{user.firstName}}</nuxt-link>
             <nuxt-link
               v-else
+              @click.native="closeNav"
               class="nav-main__list-item"
               :class="{ 'active' : menuActive }"
               :to="{name:'patient-login'}"
