@@ -10,7 +10,6 @@ export const mutations = {
     localStorage.setItem('register_token', token);
   },
   unregister_token(state) {
-    debugger;
     state.registrationToken = null;
     localStorage.removeItem('register_token');
   },
