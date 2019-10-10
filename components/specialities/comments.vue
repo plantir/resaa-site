@@ -123,7 +123,7 @@
             >مشاور : {{comment.doctor.name}}</router-link>
           </p>
           <div class="doctor-comment-avatar">
-            <img :src="comment.avatar" />
+            <img v-lazy="comment.avatar" />
           </div>
         </div>
       </div>

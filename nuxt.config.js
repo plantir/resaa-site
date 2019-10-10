@@ -158,6 +158,10 @@ export default {
     {
       src: '~/plugins/axios.js',
       ssr: false
+    },
+    {
+      src: '~/plugins/lazy_load.js',
+      ssr: false
     }
   ],
 

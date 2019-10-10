@@ -145,7 +145,7 @@
       <img
         v-if="doctor.imagePath"
         :key="doctor.subscriberNumber"
-        :src="'https://webapi.resaa.net/'+doctor.imagePath"
+        v-lazy="'https://webapi.resaa.net/'+doctor.imagePath"
         :alt="`تصویر ${doctor.title || ''} ${doctor.firstName} ${doctor.lastName}`"
       />
       <img
