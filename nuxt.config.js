@@ -158,6 +158,10 @@ export default {
     {
       src: '~/plugins/axios.js',
       ssr: false
+    },
+    {
+      src: '~/plugins/lazy_load.js',
+      ssr: false
     }
   ],
 
@@ -188,7 +192,8 @@ export default {
     '@nuxtjs/sitemap',
     '@nuxtjs/dotenv',
     'vrwebdesign-nuxt/modules/nuxt-toast',
-    'vrwebdesign-nuxt/modules/nuxt-dialog'
+    'vrwebdesign-nuxt/modules/nuxt-dialog',
+    'vrwebdesign-nuxt/modules/nuxt-loader'
     // [
     //   {
     //     filename:

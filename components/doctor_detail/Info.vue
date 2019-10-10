@@ -200,7 +200,7 @@
               </div>
               <img
                 v-if="virtual_doctor.imagePath"
-                :src="'https://webapi.resaa.net/'+virtual_doctor.imagePath"
+                v-lazy="'https://webapi.resaa.net/'+virtual_doctor.imagePath"
                 :alt="`تصویر ${virtual_doctor.title || ''} ${virtual_doctor.firstName} ${virtual_doctor.lastName}`"
               />
               <img

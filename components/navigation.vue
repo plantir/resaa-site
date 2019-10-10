@@ -83,7 +83,7 @@
 </style>
 
 <template>
-  <v-navigation-drawer v-model="showMenu" app dark right>
+  <v-navigation-drawer v-model="showMenu" app dark right stateless>
     <div class="logo">
       <Logo />
       <div>

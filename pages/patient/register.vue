@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container ref="wrapper">
     <v-loading v-if="ajaxLoading" mode="relative"></v-loading>
     <div v-if="step == 1" class="login-patient-container">
       <div class="section-title">ثبت نام</div>
@@ -40,11 +40,11 @@
       <div class="patient-username">
         <input v-model="activationKey" placeholder="کد تایید" @keyup.enter="verifySMSCode" />
       </div>
-      <div v-if="resendSMSCode_timeout == 0" class="register-code-resend" @click="resendSMSCode">
-        <a>ارسال مجدد کد</a>
-      </div>
-      <div v-else class="register-code-resend">
-        <a>
+      <div class="register-code-resend">
+        <a @click="change_number">ثبت نام با شماره دیگر</a>
+        <span>|</span>
+        <a v-if="resendSMSCode_timeout == 0" @click="resendSMSCode">ارسال مجدد کد</a>
+        <a v-else>
           کد برای شما ارسال شد لطفا منتظر بمانید
           {{resendSMSCode_timeout}}
           ثانیه
@@ -116,6 +116,9 @@ export default {
       this.$refs.invisibleRecaptcha.execute();
     },
     checkNumber() {
+      this.user.phoneNumber = this.user.phoneNumber.replace(/[۰-۹]/g, w => {
+        return ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"].indexOf(w);
+      });
       this.error = null;
       let is_mobile = this.mobile_regex.exec(this.user.phoneNumber);
       if (is_mobile) {
@@ -136,35 +139,42 @@ export default {
         );
         this.step = 2;
       } catch (error) {
-        if (err.response.data.code == 409) {
-          this.errorMessage = "این شماره موبایل در سیستم وجود دارد.";
+        if (error.response.data.code == 409) {
+          this.$toast
+            .error()
+            .showSimple("این شماره موبایل در سیستم وجود دارد.");
         }
-        setTimeout(() => {
-          this.errorMessage = null;
-        }, 5000);
         this.resetRecaptcha();
       }
       this.ajaxLoading = false;
     },
-    verifySMSCode() {
-      this.$axios
-        .patch(`/Patients/Registration/${this.registrationToken}`, {
-          activationKey: this.activationKey
-        })
-        .then(async response => {
-          if (response.data.status === "OK") {
-            await this.$toast
-              .success()
-              .showSimple("ثبت نام با موفقیت انجام شد");
-            this.$store.commit("patient/login", {
-              access_token: response.data.result.token
-            });
-            this.$store.commit("patient/initialize_user");
-            this.$router.push("/");
-          } else {
-            this.errorMessage = "کد وارد شده صحیح نمی باشد";
+    async verifySMSCode() {
+      let loader = this.$loader.show(this.$refs.wrapper);
+      let activationKey = this.activationKey.replace(/[۰-۹]/g, w => {
+        return ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"].indexOf(w);
+      });
+      try {
+        let data = await this.$axios.$patch(
+          `/Patients/Registration/${this.registrationToken}`,
+          {
+            activationKey
           }
-        });
+        );
+        if (data.status === "OK") {
+          await this.$toast.success().showSimple("ثبت نام با موفقیت انجام شد");
+          this.$store.commit("patient/unregister_token");
+          this.$store.commit("patient/login", {
+            access_token: data.result.token
+          });
+          this.$store.commit("patient/initialize_user");
+          this.$router.push("/");
+        } else {
+          this.$toast.error().showSimple("کد وارد شده صحیح نمی باشد");
+        }
+      } catch (error) {
+        this.$toast.error().showSimple("کد وارد شده صحیح نمی باشد");
+      }
+      loader.hide();
     },
     resendSMSCode: function() {
       this.$axios
@@ -184,8 +194,16 @@ export default {
           }
         })
         .catch(() => {
-          this.errorMessage = "خطایی رخ داده است لطفا بعدا امتحان کنید";
+          this.$toast
+            .error()
+            .showSimple(
+              "کد وارد شده صحیح نمی از ارسال اس ام اس قبلی شما هنوز ۲ دقیقه نگذشته است"
+            );
         });
+    },
+    change_number() {
+      this.$store.commit("patient/unregister_token");
+      this.step = 1;
     }
   },
   computed: {

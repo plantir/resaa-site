@@ -110,12 +110,12 @@
   <section>
     <div class="header">
       <img
-        class="hide-md"
+        v-if="$device.isDesktop"
         src="~assets/img/speciality_bg.png"
         alt="مشاوره تلفنی با متخصص روانشناسی"
       />
       <img
-        class="hide-md-and-up"
+        v-else
         src="~assets/img/speciality_bg_mobile@2x.png"
         alt="مشاوره تلفنی با متخصص روانشناسی"
       />

@@ -9,6 +9,10 @@ export const mutations = {
     state.registrationToken = token;
     localStorage.setItem('register_token', token);
   },
+  unregister_token(state) {
+    state.registrationToken = null;
+    localStorage.removeItem('register_token');
+  },
   initialize_user(state) {
     state.registrationToken = localStorage.getItem('register_token');
     let user = localStorage.getItem('auth');
