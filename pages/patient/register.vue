@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container ref="wrapper">
     <v-loading v-if="ajaxLoading" mode="relative"></v-loading>
     <div v-if="step == 1" class="login-patient-container">
       <div class="section-title">ثبت نام</div>
@@ -140,35 +140,41 @@ export default {
         this.step = 2;
       } catch (error) {
         if (error.response.data.code == 409) {
-          this.errorMessage = "این شماره موبایل در سیستم وجود دارد.";
+          this.$toast
+            .error()
+            .showSimple("این شماره موبایل در سیستم وجود دارد.");
         }
-        setTimeout(() => {
-          this.errorMessage = null;
-        }, 5000);
         this.resetRecaptcha();
       }
       this.ajaxLoading = false;
     },
-    verifySMSCode() {
-      this.$axios
-        .patch(`/Patients/Registration/${this.registrationToken}`, {
-          activationKey: this.activationKey
-        })
-        .then(async response => {
-          if (response.data.status === "OK") {
-            await this.$toast
-              .success()
-              .showSimple("ثبت نام با موفقیت انجام شد");
-            this.$store.commit("patient/unregister_token");
-            this.$store.commit("patient/login", {
-              access_token: response.data.result.token
-            });
-            this.$store.commit("patient/initialize_user");
-            this.$router.push("/");
-          } else {
-            this.errorMessage = "کد وارد شده صحیح نمی باشد";
+    async verifySMSCode() {
+      let loader = this.$loader.show(this.$refs.wrapper);
+      let activationKey = this.activationKey.replace(/[۰-۹]/g, w => {
+        return ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"].indexOf(w);
+      });
+      try {
+        let data = await this.$axios.$patch(
+          `/Patients/Registration/${this.registrationToken}`,
+          {
+            activationKey
           }
-        });
+        );
+        if (data.status === "OK") {
+          await this.$toast.success().showSimple("ثبت نام با موفقیت انجام شد");
+          this.$store.commit("patient/unregister_token");
+          this.$store.commit("patient/login", {
+            access_token: data.result.token
+          });
+          this.$store.commit("patient/initialize_user");
+          this.$router.push("/");
+        } else {
+          this.$toast.error().showSimple("کد وارد شده صحیح نمی باشد");
+        }
+      } catch (error) {
+        this.$toast.error().showSimple("کد وارد شده صحیح نمی باشد");
+      }
+      loader.hide();
     },
     resendSMSCode: function() {
       this.$axios
@@ -188,8 +194,11 @@ export default {
           }
         })
         .catch(() => {
-          this.errorMessage =
-            "از ارسال اس ام اس قبلی شما هنوز ۲ دقیقه نگذشته است";
+          this.$toast
+            .error()
+            .showSimple(
+              "کد وارد شده صحیح نمی از ارسال اس ام اس قبلی شما هنوز ۲ دقیقه نگذشته است"
+            );
         });
     },
     change_number() {
