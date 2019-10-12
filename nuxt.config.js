@@ -68,7 +68,16 @@ export default {
       {
         charset: 'utf-8'
       },
-
+      ...(process.env.NO_INDEX == 'true'
+        ? [
+            {
+              hid: 'robots',
+              name: 'robots',
+              property: 'robots',
+              content: 'noindex'
+            }
+          ]
+        : []),
       {
         name: 'google-site-verification',
         content: 'vT5f4dImWLU1X6AHgqqFniG46MVEcXZYyxoCVLX0jNc'
