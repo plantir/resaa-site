@@ -33,17 +33,15 @@ export default {
   head() {
     return {
       title: "ارتباط تلفنی و مستقیم با پزشک",
+      link: [
+        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
+      ],
       meta: [
         {
           hid: "description",
           name: "description",
           content:
             "با عضویت در سامانه رسا می توانید با پزشکان رسا ارتباط تلفنی مستقیم داشته باشید و در اولین فرصت سوالات خود را از پزشک مورد نظر خود بپرسید."
-        },
-        {
-          hid: "canonical",
-          property: "canonical",
-          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };

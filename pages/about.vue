@@ -57,17 +57,15 @@ export default {
   head() {
     return {
       title: "چرا سامانه رسا شکل گرفت؟",
+      link: [
+        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
+      ],
       meta: [
         {
           hid: "description",
           name: "description",
           content:
             "سامانه رسا با بهره‌گیری از افراد فارغ‌التحصیل دانشگاه‌های معتبری چون تهران و شریف، سعی کرده است راهی مطمئن برای برقراری تماس تلفنی بین بیمار و پزشک را فراهم آورد"
-        },
-        {
-          hid: "canonical",
-          property: "canonical",
-          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };

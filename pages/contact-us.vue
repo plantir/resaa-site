@@ -256,17 +256,15 @@ export default {
   head() {
     return {
       title: "برقراری تماس با سامانه رسا",
+      link: [
+        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
+      ],
       meta: [
         {
           hid: "description",
           name: "description",
           content:
             "برای ارسال نظرات خود به سامانه رسا می‌توانید با وارد کردن اطلاعات و متن پیام خود، با ما در تماس باشید. آدرس دفتر شرکت، تلفن تماس و ایمیل رسا را به خاطر بسپارید"
-        },
-        {
-          hid: "canonical",
-          property: "canonical",
-          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };

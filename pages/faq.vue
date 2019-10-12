@@ -42,17 +42,15 @@ export default {
   head() {
     return {
       title: "سوالات متداول پزشکان و بیماران درباره رسا",
+      link: [
+        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
+      ],
       meta: [
         {
           hid: "description",
           name: "description",
           content:
             "سوالات پرتکرار و متداول مرتبط با پزشک و مرتبط با بیمار، را در این بخش بخوانید. درصورتیکه پاسخ شما در موارد مطرح شده نبود، با شماره 021-74471300 تماس بگیرید"
-        },
-        {
-          hid: "canonical",
-          property: "canonical",
-          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };
