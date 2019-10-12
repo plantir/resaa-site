@@ -145,17 +145,15 @@ export default {
   head() {
     return {
       title: "افزایش اعتبار حساب برای تماس با پزشک",
+      link: [
+        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
+      ],
       meta: [
         {
           hid: "description",
           name: "description",
           content:
             "برای خرید شارژ جهت مکالمه با پزشک شماره موبایل و مبلغ کارت اعتباری مورد نیاز خود را وارد کنید و اعتبار حساب خود را افزایش دهید"
-        },
-        {
-          hid: "canonical",
-          property: "canonical",
-          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };

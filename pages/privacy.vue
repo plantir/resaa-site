@@ -62,17 +62,15 @@ export default {
   head() {
     return {
       title: "قوانین رسا درمورد حریم خصوصی و استفاده از اطلاعات",
+      link: [
+        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
+      ],
       meta: [
         {
           hid: "description",
           name: "description",
           content:
             "یکی از مهمترین ارزش‌های ارائه شده توسط سامانه رسا، حفاظت از اطلاعاتی است که کاربر مستقیما به رسا می‌دهد یا رسا طی استفاده کاربر از سامانه توسط کاربر به آن دسترسی می‌یابد"
-        },
-        {
-          hid: "canonical",
-          property: "canonical",
-          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };

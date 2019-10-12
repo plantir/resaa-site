@@ -418,6 +418,7 @@ export default {
   head() {
     return {
       title: this.title,
+      link: [{ rel: "canonical", href: this.og.canonical }],
       meta: [
         {
           hid: "og:image",
@@ -439,11 +440,6 @@ export default {
           hid: "og:description",
           property: "og:description",
           content: this.og.description
-        },
-        {
-          hid: "canonical",
-          property: "canonical",
-          content: this.og.canonical
         },
         {
           hid: "description",

@@ -470,6 +470,9 @@ export default {
         }
       ],
       title: "سامانه رسا | بزرگترین بستر ارتباط تلفنی پزشک و بیمار",
+      link: [
+        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
+      ],
       meta: [
         // hid is used as unique identifier. Do not use `vmid` for it as it will not work
         {
@@ -477,11 +480,6 @@ export default {
           name: "description",
           content:
             "سامانه رسا (رسانه سلامت ایرانیان) اولین و بزرگترین بستر ارتباط و مشاوره تلفنی بیمار و پزشک در ایران. با رسا می تونی در کوتاه ترین زمان ممکن با پزشک در تماس باشی."
-        },
-        {
-          hid: "canonical",
-          property: "canonical",
-          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };

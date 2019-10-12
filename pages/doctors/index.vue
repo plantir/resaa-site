@@ -518,6 +518,9 @@ export default {
   head() {
     return {
       title: "پزشکان و متخصصان سامانه رسا",
+      link: [
+        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
+      ],
       meta: [
         // hid is used as unique identifier. Do not use `vmid` for it as it will not work
         {
@@ -525,11 +528,6 @@ export default {
           name: "description",
           content:
             "با جستجو در بین پزشکان سامانه رسا در تخصص های زنان و زایمان، اطفال، مغز و اعصاب، روانشناسی و ... متخصص مورد نظر خود را انتخاب کنید و به صورت تلفنی به پاسخ سوالات خود برسید."
-        },
-        {
-          hid: "canonical",
-          property: "canonical",
-          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };

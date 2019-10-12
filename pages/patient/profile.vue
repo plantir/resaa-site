@@ -486,16 +486,14 @@ export default {
   head() {
     return {
       title: "پروفایل بیمار",
+      link: [
+        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
+      ],
       meta: [
         {
           hid: "description",
           name: "description",
           content: "پروفایل بیمار"
-        },
-        {
-          hid: "canonical",
-          property: "canonical",
-          content: `${process.env.SITE_URL}${this.$route.path}`
         }
       ]
     };

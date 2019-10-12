@@ -184,7 +184,6 @@ export default {
   head() {
     return {
       title: this.title,
-      title: this.title,
       __dangerouslyDisableSanitizers: ["script"],
       script: [
         {
@@ -201,32 +200,6 @@ export default {
         }
       ],
       meta: [
-        // {
-        //   hid: "og:image",
-        //   property: "og:image",
-        //   content: this.og.image
-        // },
-        // {
-        //   hid: "og:title",
-        //   property: "og:title",
-        //   content: this.og.title
-        // },
-
-        // {
-        //   hid: "og:site_name",
-        //   property: "og:site_name",
-        //   content: this.og.site_name
-        // },
-        // {
-        //   hid: "og:description",
-        //   property: "og:description",
-        //   content: this.og.description
-        // },
-        // {
-        //   hid: "canonical",
-        //   property: "canonical",
-        //   content: this.og.canonical
-        // },
         {
           hid: "description",
           property: "description",
