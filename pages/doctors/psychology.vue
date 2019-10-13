@@ -185,6 +185,9 @@ export default {
     return {
       title: this.title,
       __dangerouslyDisableSanitizers: ["script"],
+      link: [
+        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
+      ],
       script: [
         {
           innerHTML: JSON.stringify(this.main_schema),
@@ -202,7 +205,7 @@ export default {
       meta: [
         {
           hid: "description",
-          property: "description",
+          name: "description",
           content: this.description
         }
       ]
