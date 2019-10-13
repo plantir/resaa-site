@@ -129,7 +129,7 @@ export default {
         },
         {
           hid: "description",
-          property: "description",
+          name: "description",
           content: this.description
         }
       ]
