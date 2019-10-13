@@ -241,6 +241,9 @@ export default {
   mounted() {},
   methods: {
     checkNumber() {
+      this.user.username = this.user.username.replace(/[۰-۹]/g, w => {
+        return ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"].indexOf(w);
+      });
       this.error = null;
       let is_mobile = this.mobile_regex.exec(this.user.username);
       if (is_mobile) {
