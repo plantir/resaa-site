@@ -424,7 +424,7 @@ export default {
       } else {
         this.header_text = this.header_text + 1;
       }
-    }, 2000);
+    }, 4000);
   }
 };
 </script>
