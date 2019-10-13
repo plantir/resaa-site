@@ -618,7 +618,7 @@ section#speciality {
       overflow: auto;
       .text {
         background: darken($primary-color, 10);
-        background-image: url(~assets/img/element-top-left.png);
+        background-image: url(~assets/img/Element-top-left.png);
         background-position: left;
         background-size: cover;
         background-repeat: no-repeat;
