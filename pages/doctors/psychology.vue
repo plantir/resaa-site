@@ -224,7 +224,6 @@ export default {
           return 0.5 - Math.random();
         })
     );
-    // sorted_doctors = ctx.app.$calc_avalibility(sorted_doctors);
     return {
       title: "مشاوره تلفنی با متخصص روانشناسی",
       description: `دریافت مشاوره تلفنی روانشناسی فقط در سامانه رسا، با کمترین هزینه، بدون دریافت نوبت، بدون رفت و آمد، بدون انتظار و با بهترین مشاوران`,

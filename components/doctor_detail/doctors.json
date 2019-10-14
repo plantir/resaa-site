@@ -204,36 +204,7 @@
     "imagePath": "Doctors/17594/Image",
     "providesDiagnosticDocumentsService": false,
     "timetable": {
-      "segments": [
-        {
-          "from": 1980,
-          "to": 2220
-        },
-        {
-          "from": 3420,
-          "to": 3660
-        },
-        {
-          "from": 4860,
-          "to": 5100
-        },
-        {
-          "from": 6300,
-          "to": 6540
-        },
-        {
-          "from": 7740,
-          "to": 7980
-        },
-        {
-          "from": 9180,
-          "to": 9420
-        },
-        {
-          "from": 540,
-          "to": 780
-        }
-      ]
+      "segments": []
     },
     "workplaces": [
       {
