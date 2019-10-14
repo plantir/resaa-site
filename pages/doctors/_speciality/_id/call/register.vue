@@ -83,6 +83,7 @@
               v-validate="'required|mobile'"
               :error-messages="errors.collect('phoneNumber')"
               data-vv-as="شماره موبایل"
+              @input="onInputChange"
               @keyup.enter="onRegister"
             ></v-text-field>
             <vue-recaptcha
@@ -209,6 +210,11 @@ export default {
     },
     resetRecaptcha() {
       this.$refs.invisibleRecaptcha.reset(); // Direct call reset method
+    },
+    onInputChange() {
+      this.user.phoneNumber = this.user.phoneNumber.replace(/[۰-۹]/g, w => {
+        return ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"].indexOf(w);
+      });
     },
     async onRegister() {
       let valid = await this.$validator.validate();
