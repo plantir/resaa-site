@@ -184,6 +184,7 @@ section {
   </section>
 </template>
 <script>
+import doctors from "@/components/doctor_detail/doctors.json";
 import Available from "~/assets/svg/Available.svg?inline";
 import NotAvailable from "~/assets/svg/NotAvailable.svg?inline";
 import ChevronLeft from "~/assets/svg/chevron_left.svg?inline";
@@ -200,7 +201,7 @@ export default {
   },
   data() {
     return {
-      doctors: this.$virtual_doctors.filter(
+      doctors: doctors.filter(
         item => item.subscriberNumber != this.$route.params.id
       ),
       swiperOptionDoctors: {
@@ -233,6 +234,7 @@ export default {
     };
   },
   async mounted() {
+    this.doctors = this.$calc_avalibility(this.doctors);
     // let res = await this.$axios.$get(
     //   `/Doctors?fields=specialty,title,subscriberNumber,firstName,lastName,imagePath,currentlyAvailable&specialtyId=${this.doctor.specialty.id}&limit=8&offset=0`
     // );

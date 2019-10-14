@@ -412,6 +412,7 @@ p {
 </template>
 
 <script>
+import doctors from "@/components/doctor_detail/doctors.json";
 import callSection from "~/components/doctor/call_section/index.vue";
 import phone from "~/assets/svg/phone.svg?inline";
 export default {
@@ -451,9 +452,7 @@ export default {
   },
   components: { callSection, phone },
   async asyncData({ app, store, params, $axios, isClient, redirect }) {
-    let test_doctor = app.$virtual_doctors.find(
-      item => item.subscriberNumber == params.id
-    );
+    let test_doctor = doctors.find(item => item.subscriberNumber == params.id);
     if (test_doctor) {
       let url = `/doctors/psychology/${test_doctor.subscriberNumber}`;
       return redirect(encodeURI(url));

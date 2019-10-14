@@ -93,6 +93,7 @@ import Address from "@/components/doctor_detail/Address";
 import RelatedDoctors from "@/components/doctor_detail/RelatedDoctors";
 import Comments from "@/components/doctor_detail/Comments";
 import Social from "@/components/doctor_detail/Social";
+import doctors from "@/components/doctor_detail/doctors.json";
 export default {
   head() {
     return {
@@ -144,7 +145,7 @@ export default {
       "id,firstName,lastName,imagePath,currentlyAvailable,subscriberNumber,specialty,tags,expertise,title,workplaces,medicalCouncilNumber";
     let res = await $axios.$get(`/Doctors/${params.id}?fields=${fields}`);
     let doctor = res.result.doctor;
-    let virtual_doctor = app.$virtual_doctors.find(
+    let virtual_doctor = doctors.find(
       item => item.subscriberNumber == params.id
     );
     doctor = Object.assign(virtual_doctor, doctor);

@@ -1,5 +1,4 @@
 module.exports = function(req, res, next) {
-  console.log(req.url);
   let regex = /\/(doctors)\/([0-9]+)/gim;
   let is_doctor_profile = req.url.match(regex);
   if (is_doctor_profile) {

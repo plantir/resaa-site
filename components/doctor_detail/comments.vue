@@ -314,6 +314,7 @@ section#doctor-detail-comments {
   </section>
 </template>
 <script>
+import doctors from "@/components/doctor_detail/doctors.json";
 import ChevronLeft from "~/assets/svg/chevron_left.svg?inline";
 import User from "~/assets/svg/user.svg?inline";
 import Send from "~/assets/svg/send.svg?inline";
@@ -360,7 +361,7 @@ export default {
     };
   },
   created() {
-    this.doctor = this.$virtual_doctors.find(
+    this.doctor = doctors.find(
       item => item.subscriberNumber == this.$route.params.id
     );
   }
