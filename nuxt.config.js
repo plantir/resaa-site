@@ -75,7 +75,7 @@ export default {
               hid: 'robots',
               name: 'robots',
               property: 'robots',
-              content: 'noindex'
+              content: 'noindex,nofollow'
             }
           ]
         : []),
