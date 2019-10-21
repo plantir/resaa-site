@@ -87,7 +87,7 @@
     <resaaElement class="resaa-element" />
     <div class="item" v-for="(item, index) in items" :key="index" :class="{'half-width':item.half}">
       <h2>{{item.title}}</h2>
-      <p class="content" v-html="item.content"></p>
+      <div class="content" v-html="item.content"></div>
     </div>
   </div>
 </template>
