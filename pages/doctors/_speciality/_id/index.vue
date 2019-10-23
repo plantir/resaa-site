@@ -184,7 +184,7 @@ export default {
       site_name: `رسا : دکتر ${doctor.firstName} ${doctor.lastName}`,
       title: `تخصص : ${doctor.specialty.title}`,
       description: `کد رسا : ${doctor.subscriberNumber}`,
-      canonical: `${process.env.SITE_URL}/doctors/${doctor.subscriberNumber}`
+      canonical: `${process.env.SITE_URL}/doctors/psychology/${doctor.subscriberNumber}`
     };
     return {
       doctor: doctor,
