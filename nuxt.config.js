@@ -1,11 +1,11 @@
-import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin';
-import axios from 'axios';
-require('dotenv').config({
-  path: process.env.NODE_ENV == 'development' ? '.env.development' : '.env'
+import VuetifyLoaderPlugin from "vuetify-loader/lib/plugin";
+import axios from "axios";
+require("dotenv").config({
+  path: process.env.NODE_ENV == "development" ? ".env.development" : ".env"
 });
 // import shrinkRay from 'shrink-ray'
 export default {
-  mode: 'universal',
+  mode: "universal",
   // env: {
   //   PORT: process.env.PORT,
   //   HOST: process.env.HOST,
@@ -21,30 +21,30 @@ export default {
   },
   axios: {
     proxy: true, // Can be also an object with default options
-    prefix: '/api',
+    prefix: "/api",
     port: process.env.PORT
   },
   proxy: {
-    '/api/Mobile/': {
-      target: 'http://resa-web.bsn.local'
+    "/api/Mobile/": {
+      target: "http://resa-web.bsn.local"
     },
-    '/api/MessageCallback/': {
-      target: 'http://resa-web.bsn.local'
+    "/api/MessageCallback/": {
+      target: "http://resa-web.bsn.local"
     },
-    '/api/DoctorApp/': {
-      target: 'http://resa-web.bsn.local'
+    "/api/DoctorApp/": {
+      target: "http://resa-web.bsn.local"
     },
-    '/api/': {
+    "/api/": {
       target: process.env.API_URL,
       pathRewrite: {
-        '^/api/': ''
+        "^/api/": ""
       }
     }
   },
   serverMiddleware: [
-    '~/servermiddleware/redirect.js',
+    "~/servermiddleware/redirect.js",
     {
-      path: '/patient/profile',
+      path: "/patient/profile",
       handler: (req, res, next) => {
         res.spa = true;
         next();
@@ -64,51 +64,51 @@ export default {
     }
   },
   head: {
-    title: 'رسا ، سامانه سلامت ایرانیان',
+    title: "رسا ، سامانه سلامت ایرانیان",
     meta: [
       {
-        charset: 'utf-8'
+        charset: "utf-8"
       },
-      ...(process.env.NO_INDEX == 'true'
+      ...(process.env.NO_INDEX == "true"
         ? [
             {
-              hid: 'robots',
-              name: 'robots',
-              property: 'robots',
-              content: 'noindex,nofollow'
+              hid: "robots",
+              name: "robots",
+              property: "robots",
+              content: "noindex,nofollow"
             }
           ]
         : []),
       {
-        name: 'google-site-verification',
-        content: 'vT5f4dImWLU1X6AHgqqFniG46MVEcXZYyxoCVLX0jNc'
+        name: "google-site-verification",
+        content: "vT5f4dImWLU1X6AHgqqFniG46MVEcXZYyxoCVLX0jNc"
       },
       {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
+        name: "viewport",
+        content: "width=device-width, initial-scale=1"
       },
       {
-        hid: 'description',
-        name: 'description',
+        hid: "description",
+        name: "description",
         content:
-          'با استفاده از رسا تماس های غیر ضروری خود از سمت بیماران را حذف کنید و مکالمات غیر مربوط به روند درمانی را کاهش رایگان ثبت‌نام کنید و با دسترسی به پزشکان معرفی‌شده در وب‌سایت رسا، تماس مستقیم با بهترین پزشکان متخصص را با صرفه‌جویی در وقت و هزینه خود، تجربه کنید'
+          "با استفاده از رسا تماس های غیر ضروری خود از سمت بیماران را حذف کنید و مکالمات غیر مربوط به روند درمانی را کاهش رایگان ثبت‌نام کنید و با دسترسی به پزشکان معرفی‌شده در وب‌سایت رسا، تماس مستقیم با بهترین پزشکان متخصص را با صرفه‌جویی در وقت و هزینه خود، تجربه کنید"
       },
       {
-        'http-equiv': 'Content-Type',
-        content: 'text/html; charset=UTF-8'
+        "http-equiv": "Content-Type",
+        content: "text/html; charset=UTF-8"
       }
     ],
     link: [
       {
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
+        rel: "icon",
+        type: "image/x-icon",
+        href: "/favicon.ico"
       }
     ],
     script: [
       {
         src:
-          'https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit&hl=fa',
+          "https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit&hl=fa",
         defer: true,
         async: true
       }
@@ -119,19 +119,19 @@ export default {
    ** Customize the progress-bar color
    */
   loading: {
-    color: '#fff'
+    color: "#fff"
   },
 
   /*
    ** Global CSS
    */
   css: [
-    'material-design-icons-iconfont/dist/material-design-icons.css',
+    "material-design-icons-iconfont/dist/material-design-icons.css",
     // '~/assets/style/app.styl',
-    '~/assets/style/vuetify_rtl.scss',
-    'swiper/dist/css/swiper.css',
-    '~/assets/style/main.scss',
-    'vrwebdesign-nuxt/assets/style/main.scss'
+    "~/assets/style/vuetify_rtl.scss",
+    "swiper/dist/css/swiper.css",
+    "~/assets/style/main.scss",
+    "vrwebdesign-nuxt/assets/style/main.scss"
   ],
 
   /*
@@ -140,37 +140,37 @@ export default {
   plugins: [
     // '~/plugins/vuetify.js',
     {
-      src: '~/plugins/virtual_doctors.js'
+      src: "~/plugins/virtual_doctors.js"
     },
     {
-      src: '~/plugins/global.js'
+      src: "~/plugins/global.js"
     },
     {
-      src: '~/plugins/swiper.js',
+      src: "~/plugins/swiper.js",
       ssr: false
     },
     {
-      src: '~/plugins/scroll.js',
+      src: "~/plugins/scroll.js",
       ssr: false
     },
     {
-      src: '~/plugins/map.js',
+      src: "~/plugins/map.js",
       ssr: false
     },
     {
-      src: '~/plugins/resource.js',
+      src: "~/plugins/resource.js",
       ssr: false
     },
     {
-      src: '~/plugins/custom-scroll.js',
+      src: "~/plugins/custom-scroll.js",
       ssr: false
     },
     {
-      src: '~/plugins/axios.js',
+      src: "~/plugins/axios.js",
       ssr: false
     },
     {
-      src: '~/plugins/lazy_load.js',
+      src: "~/plugins/lazy_load.js",
       ssr: false
     }
   ],
@@ -180,15 +180,15 @@ export default {
    */
   modules: [
     // 'nuxt-svg-loader',
-    'nuxt-device-detect',
-    '@nuxtjs/pwa',
-    '@nuxtjs/vuetify',
-    '@nuxtjs/style-resources',
-    ['~/modules/nuxt-recaptcha'],
+    "nuxt-device-detect",
+    "@nuxtjs/pwa",
+    "@nuxtjs/vuetify",
+    "@nuxtjs/style-resources",
+    ["~/modules/nuxt-recaptcha"],
     [
-      '~/modules/nuxt-validate',
+      "~/modules/nuxt-validate",
       {
-        lang: 'fa'
+        lang: "fa"
       }
     ],
     //'~/modules/nuxt-service',
@@ -198,12 +198,12 @@ export default {
     //     id: 'UA-135304047-1'
     //   }
     // ],
-    '@nuxtjs/axios',
-    '@nuxtjs/sitemap',
-    '@nuxtjs/dotenv',
-    'vrwebdesign-nuxt/modules/nuxt-toast',
-    'vrwebdesign-nuxt/modules/nuxt-dialog',
-    'vrwebdesign-nuxt/modules/nuxt-loader'
+    "@nuxtjs/axios",
+    "@nuxtjs/sitemap",
+    "@nuxtjs/dotenv",
+    "vrwebdesign-nuxt/modules/nuxt-toast",
+    "vrwebdesign-nuxt/modules/nuxt-dialog",
+    "vrwebdesign-nuxt/modules/nuxt-loader"
     // [
     //   {
     //     filename:
@@ -215,9 +215,9 @@ export default {
     rtl: true,
     materialIcons: false,
     theme: {
-      primary: '#13d2f3',
-      accent: '#35d6c1',
-      secondary: '#35d6c1'
+      primary: "#13d2f3",
+      accent: "#35d6c1",
+      secondary: "#35d6c1"
     },
     options: {
       customProperties: true
@@ -233,32 +233,38 @@ export default {
   // doctors sitemap
   sitemap: {
     defaults: {
-      changefreq: 'weekly',
+      changefreq: "weekly",
       priority: 0.7,
       lastmod: new Date(),
       lastmodrealtime: true
     },
     hostname: process.env.SITE_URL,
     gzip: true,
-    exclude: ['/patient/profile'],
-    path: '/sitemap.xml',
+    exclude: ["/patient/profile"],
+    path: "/sitemap.xml",
     filter({ routes, options }) {
       return routes.map(route => {
-        if (route.url == '/') {
+        if (route.url == "/") {
           route.priority = 1;
-          route.changefreq = 'daily';
+          route.changefreq = "daily";
         }
         return route;
       });
     },
     routes() {
-      return axios
-        .get(`${process.env.API_URL}/misc/sitemap`)
-        .then(res =>
-          res.data.result.doctorSubscriberNumbers.map(
-            doctor => '/doctors/' + doctor
-          )
-        );
+      return axios.get(`${process.env.API_URL}/misc/sitemap`).then(res => {
+        let items = res.data.result.doctorSubscriberNumbers.map(id => {
+          let url;
+          if (["7830", "7155", "7594", "7265", "7106", "7305"].includes(id)) {
+            url = `/doctors/psychology/${id}`;
+          } else {
+            url = `/doctors/${id}`;
+          }
+          return url;
+        });
+        items.push("/doctors/psychology/7830");
+        return items;
+      });
     }
   },
 
@@ -284,7 +290,7 @@ export default {
   //   }
   // },
   styleResources: {
-    scss: ['assets/style/variables.scss']
+    scss: ["assets/style/variables.scss"]
   },
   /*
    ** Build configuration
@@ -312,7 +318,7 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {
-      const svgRule = config.module.rules.find(rule => rule.test.test('.svg'));
+      const svgRule = config.module.rules.find(rule => rule.test.test(".svg"));
 
       svgRule.test = /\.(png|jpe?g|gif|webp)$/;
 
@@ -321,12 +327,12 @@ export default {
         oneOf: [
           {
             resourceQuery: /inline/,
-            loader: 'vue-svg-loader'
+            loader: "vue-svg-loader"
           },
           {
-            loader: 'file-loader',
+            loader: "file-loader",
             query: {
-              name: 'assets/[name].[hash:8].[ext]'
+              name: "assets/[name].[hash:8].[ext]"
             }
           }
         ]

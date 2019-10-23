@@ -451,16 +451,26 @@ export default {
     };
   },
   components: { callSection, phone },
-  async asyncData({ app, store, params, $axios, isClient, redirect }) {
+
+  async asyncData({ app, store, params, error, $axios, isClient, redirect }) {
     // let test_doctor = doctors.find(item => item.subscriberNumber == params.id);
     // if (test_doctor) {
     //   let url = `/doctors/psychology/${test_doctor.subscriberNumber}`;
     //   return redirect(encodeURI(url));
     // }
+    if (isNaN(params.id)) {
+      return error({ statusCode: 404, message: "doctor not found" });
+    }
     let fields =
       "id,firstName,lastName,imagePath,currentlyAvailable,subscriberNumber,specialty,tags,expertise,title,workplaces,medicalCouncilNumber";
-    let a = await $axios.$get(`/Doctors/${params.id}?fields=${fields}`);
-    let doctor = a.result.doctor;
+    try {
+      var { result } = await $axios.$get(
+        `/Doctors/${params.id}?fields=${fields}`
+      );
+    } catch (err) {
+      return error({ statusCode: 410, message: "doctor not found" });
+    }
+    let doctor = result.doctor;
     let locations = [];
     for (let address of doctor.workplaces) {
       if (address.latitude && address.longitude) {

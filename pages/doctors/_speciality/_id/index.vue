@@ -137,14 +137,24 @@ export default {
     };
   },
   components: { Info, Call, Why, Address, RelatedDoctors, Comments, Social },
-  async asyncData({ app, store, params, $axios, isClient }) {
+  async asyncData({ app, store, error, params, $axios, isClient }) {
     // if (isClient) {
     //   return window.location.reload;
     // }
+    if (isNaN(params.id)) {
+      return error({ statusCode: 404, message: "doctor not found" });
+    }
+
     let fields =
       "id,firstName,lastName,imagePath,currentlyAvailable,subscriberNumber,specialty,tags,expertise,title,workplaces,medicalCouncilNumber";
-    let res = await $axios.$get(`/Doctors/${params.id}?fields=${fields}`);
-    let doctor = res.result.doctor;
+    try {
+      var { result } = await $axios.$get(
+        `/Doctors/${params.id}?fields=${fields}`
+      );
+    } catch (err) {
+      return error({ statusCode: 410, message: "doctor not found" });
+    }
+    let doctor = result.doctor;
     let virtual_doctor = doctors.find(
       item => item.subscriberNumber == params.id
     );
