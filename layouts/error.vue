@@ -18,7 +18,7 @@ export default {
   computed: {
     errorPage() {
       if (this.error.statusCode === 404 || this.error.statusCode == 410) {
-        return error550;
+        return error404;
       } else {
         return error550;
       }
