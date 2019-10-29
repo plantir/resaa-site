@@ -22,7 +22,7 @@ module.exports = function(req, res, next) {
     res.writeHead(301, { Location: url });
     res.end();
   } else {
-    if (req.url.endsWith("/")) {
+    if (req.url != "/" && req.url.endsWith("/")) {
       let url = req.url.replace(/.$/, "");
       res.writeHead(301, { Location: url });
       return res.end();
