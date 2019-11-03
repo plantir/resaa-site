@@ -183,7 +183,7 @@
         جلسه رضایت بخش
       </div>
       <div>
-        <div class="price-per-minute">{{1000 | persianDigit}} تومان / دقیقه</div>
+        <div class="price-per-minute">{{1250 | persianDigit}} تومان / دقیقه</div>
         <v-btn :to="`/doctors/psychology/${doctor.subscriberNumber}`" class="select-btn" dark round>
           <span>انتخاب مشاور</span>
         </v-btn>
