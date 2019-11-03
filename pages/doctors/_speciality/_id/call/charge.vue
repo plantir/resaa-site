@@ -288,39 +288,39 @@ export default {
     return {
       items: [
         {
-          id: 6,
-          duration: 15,
+          id: 2,
+          duration: 16,
           title: "آشنایی با مشاور",
           description:
             "با این فرصت کوتاه خیالتان از کیفیت مشاوره تلفنی راحت می شود",
           color: ["#FDBD10", "#7F5F08"],
-          price: 15000
+          price: 20000
         },
         {
-          id: 3,
-          duration: 30,
+          id: 4,
+          duration: 32,
           title: "مناسب برای پیگیری روند مشاوره",
           description: "ممکن است برای اولین جلسه مشاوره کافی نباشد",
           color: ["#EF4871", "#782439"],
-          price: 30000
+          price: 40000
         },
         {
-          id: 7,
-          duration: 45,
+          id: 8,
+          duration: 48,
           title: "یک جلسه مشاوره استاندارد",
           description:
             "پیشنهاد ما برای اینکه شما و مشاور فرصت کافی برای رسیدگی به دغدغه ها داشته باشید",
           color: ["#0EC7E6", "#076473"],
-          price: 45000
+          price: 60000
         },
         {
-          id: 8,
-          duration: 60,
+          id: 9,
+          duration: 62,
           title: "جلسه مشاوره مفصل و کامل",
           description:
             "جزییات خیلی مهم است هر چه فرصت بیشتری داشته باشید بهتر می توانید از مشاور کمک بگیرید",
           color: ["#28DB9A", "#146E4D"],
-          price: 60000
+          price: 80000
         }
       ],
       swiperOptionDoctors: {
