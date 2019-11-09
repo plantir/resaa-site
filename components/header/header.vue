@@ -174,13 +174,14 @@
     $transition--easing: cubic-bezier(0.77, 0, 0.175, 1);
     position: fixed;
     visibility: hidden;
-    top: 0;
+    top: 70px;
     right: 0;
-    height: 100vh;
+    height: calc(100vh - 70px);
     width: 100vw;
     background-color: white;
     opacity: 0;
     transition: all $transition--length + s $transition--easing;
+    overflow: auto;
 
     &.active {
       visibility: visible;
@@ -188,10 +189,10 @@
     }
 
     &__content {
-      position: fixed;
-      height: 100vh;
-      top: 50%;
-      transform: translate(0%, -50%);
+      // position: fixed;
+      // height: 100vh;
+      // top: 50%;
+      // transform: translate(0%, -50%);
       width: 100%;
       text-align: center;
       font-weight: 200;
@@ -420,6 +421,13 @@
               >لیست پزشکان</nuxt-link>
             </li>
             <li class="nav-item">
+              <router-link
+                @click.native="closeNav"
+                :to="{name:'doctors-psychology'}"
+                class="navigation-bar-item"
+              >روانشناسی</router-link>
+            </li>
+            <li class="nav-item">
               <nuxt-link
                 @click.native="closeNav"
                 :to="{name:'privacy'}"
@@ -577,6 +585,10 @@ export default {
         {
           name: "لیست پزشکان",
           path: { name: "doctors" }
+        },
+        {
+          name: "روانشناسی",
+          path: { name: "doctors-psychology" }
         },
         {
           name: "قوانین",

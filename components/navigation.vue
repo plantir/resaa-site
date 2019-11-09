@@ -109,6 +109,13 @@
       <li class="nav-item">
         <router-link
           @click.native="closeNav"
+          :to="{name:'doctors-psychology'}"
+          class="navigation-bar-item"
+        >روانشناسی</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link
+          @click.native="closeNav"
           :to="{name:'privacy'}"
           class="navigation-bar-item"
         >قوانین</router-link>
