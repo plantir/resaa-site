@@ -112,14 +112,10 @@
       <img
         v-if="$device.isDesktop"
         src="~assets/img/speciality_bg.png"
-        alt="مشاوره تلفنی با متخصص روانشناسی"
+        alt="مشاوره تلفنی روانشناسی"
       />
-      <img
-        v-else
-        src="~assets/img/speciality_bg_mobile@2x.png"
-        alt="مشاوره تلفنی با متخصص روانشناسی"
-      />
-      <h1>مشاوره تلفنی با متخصص روانشناسی</h1>
+      <img v-else src="~assets/img/speciality_bg_mobile@2x.png" alt="مشاوره تلفنی روانشناسی" />
+      <h1>مشاوره تلفنی روانشناسی</h1>
       <transition name="fade" mode="out-in">
         <span :key="text_array[header_text]">{{text_array[header_text]}}</span>
       </transition>
@@ -131,13 +127,13 @@
           <span>
             <v-icon>chevron_left</v-icon>
           </span>
-          <nuxt-link :to="$route.fullPath">مشاوره تلفنی با متخصص روانشناس</nuxt-link>
+          <nuxt-link :to="$route.fullPath">مشاوره تلفنی روانشناسی</nuxt-link>
         </div>
         <div class="card">
-          <h2 class="card-title">لیست متخصصین روانشناسی</h2>
+          <h2 class="card-title">لیست متخصصین مشاوره تلفنی روانشناسی</h2>
           <p
             class="card-subtitle"
-          >می توانید در این بخش لیست مشاوران روانشناسی سامانه رسا را مشاهده کنید و مشاور مورد نظر خود را انتخاب کنید.</p>
+          >می توانید در این بخش لیست مشاوره تلفنی روانشناسی سامانه رسا را مشاهده کنید و مشاور مورد نظر خود را انتخاب کنید.</p>
           <div
             class="item"
             v-for="doctor in sorted_doctors.slice(0,3)"
@@ -225,7 +221,7 @@ export default {
         })
     );
     return {
-      title: "مشاوره تلفنی با متخصص روانشناسی",
+      title: "مشاوره تلفنی روانشناسی",
       description: `دریافت مشاوره تلفنی روانشناسی فقط در سامانه رسا، با کمترین هزینه، بدون دریافت نوبت، بدون رفت و آمد، بدون انتظار و با بهترین مشاوران`,
       text_array: [
         "از هر کجای ایران!",
