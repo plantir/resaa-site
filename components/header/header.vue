@@ -421,18 +421,18 @@
               >لیست پزشکان</nuxt-link>
             </li>
             <li class="nav-item">
-              <router-link
-                @click.native="closeNav"
-                :to="{name:'doctors-psychology'}"
-                class="navigation-bar-item"
-              >روانشناسی</router-link>
-            </li>
-            <li class="nav-item">
               <nuxt-link
                 @click.native="closeNav"
                 :to="{name:'privacy'}"
                 class="navigation-bar-item"
               >قوانین</nuxt-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                @click.native="closeNav"
+                :to="{name:'doctors-psychology'}"
+                class="navigation-bar-item"
+              >مشاوره روانشناسی</router-link>
             </li>
             <li class="nav-item">
               <nuxt-link
@@ -587,12 +587,12 @@ export default {
           path: { name: "doctors" }
         },
         {
-          name: "روانشناسی",
-          path: { name: "doctors-psychology" }
-        },
-        {
           name: "قوانین",
           path: { name: "privacy" }
+        },
+        {
+          name: "مشاوره روانشناسی",
+          path: { name: "doctors-psychology" }
         },
         {
           name: "سوالات متداول",
