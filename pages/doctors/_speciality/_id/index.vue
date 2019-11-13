@@ -65,7 +65,7 @@
           <span>
             <v-icon>chevron_left</v-icon>
           </span>
-          <nuxt-link to="/doctors/psychology">مشاوره تلفنی با متخصص روانشناس</nuxt-link>
+          <nuxt-link to="/doctors/psychology">مشاوره تلفنی روانشناسی</nuxt-link>
           <span>
             <v-icon>chevron_left</v-icon>
           </span>
