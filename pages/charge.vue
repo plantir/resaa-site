@@ -1,366 +1,3 @@
-<template>
-  <v-container>
-    <div class="charge-container">
-      <no-ssr v-if="ajaxLoading">
-        <v-loading mode="relative"></v-loading>
-      </no-ssr>
-      <div>
-        <div v-if="chargeStep === 'input'" class="charge-input">
-          <div class="charge-title">خرید شارژ</div>
-          <div class="charge-description">افزایش اعتبار برای مکالمه با پزشک</div>
-          <div class="user-code">
-            <i class="fa fa-user"></i>
-            <input
-              v-model="subscriberNumber"
-              placeholder="پنج رقم آخر شماره کاربری / شماره موبایل"
-              required
-            />
-          </div>
-          <div class="charge-amount" @click="toggleChargeMenu">
-            <i class="fa fa-credit-card-alt"></i>
-            <div
-              id="activeChargeItem"
-            >کارت اعتباری {{ this.selectedChargeItem.amount | currency | persianDigit }} تومانی</div>
-            <i v-if="isMenuOpen" class="fa fa-sort-up"></i>
-            <i v-else class="fa fa-sort-down"></i>
-          </div>
-          <div v-if="isMenuOpen" class="charge-menu" id="dropdown">
-            <div
-              v-for="item in chargeMenuItems"
-              @click="selectChargeItem(item)"
-              :key="item.id"
-            >کارت اعتباری {{ item.amount | currency | persianDigit }} تومانی</div>
-          </div>
-          <button :disabled="!subscriberNumber" @click="onSubmit" class="charge-button">خرید شارژ</button>
-          <vue-recaptcha
-            ref="invisibleRecaptcha"
-            @verify="onVerify"
-            size="invisible"
-            :sitekey="sitekey"
-          ></vue-recaptcha>
-          <div class="error-message" v-if="error">{{error}}</div>
-          <div class="charge-followup-description">
-            در صورت بروز هرگونه مشکل در هنگام تراکنش شماره‌ی تلفن، کد پیگیری و شماره‌ی رِسای خود را
-            <br />به شماره‌ی ۱۰۰۰۹۰۹۹۰۹۹۰۹۹ ارسال کنید، کارشناسان ما با شما تماس خواهند گرفت.
-            <br />یا با شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل فرمایید.
-          </div>
-        </div>
-        <!-- step 1 -->
-        <div v-if="chargeStep === 'receipt'" class="charge-receipt">
-          <div class="charge-receipt-title">خرید شارژ</div>
-          <div class="charge-receipt-description">افزایش اعتبار برای مکالمه با پزشک</div>
-          <div class="charge-receipt-status">
-            <div class="charge-receipt-status-text">پیش فاکتور</div>
-            <div class="charge-receipt-status-container">
-              <div class="charge-receipt-amount-container">
-                مبلغ شارژ:
-                <div
-                  class="charge-receipt-amount"
-                >{{ pre_factor.chargeDenomination.payableAmount | currency | persianDigit }} تومان</div>
-              </div>
-              <div class="charge-receipt-resaacode-container">
-                کد رِسا:
-                <div
-                  class="charge-receipt-resaacode"
-                >{{ pre_factor.subscriberNumber | persianDigit }}</div>
-              </div>
-              <div class="charge-receipt-phoneNum-container">
-                شماره تلفن:
-                <div
-                  class="charge-receipt-phoneNum"
-                >{{ pre_factor.obfuscatedPhoneNumber | persianDigit }}</div>
-              </div>
-              <!-- <div class="charge-receipt-customer-ID-container">
-              شناسه خریدار:
-              <div class="charge-receipt-customer-ID">
-                {{pre_factor.gateway.submissionParameters.token}}
-              </div>
-              </div>-->
-              <div class="charge-receipt-date-container">
-                تاریخ خرید:
-                <div class="charge-receipt-date">{{pre_factor.issuedAt | persianDate}}</div>
-              </div>
-              <div class="charge-receipt-serial-container">
-                شماره پیش‌فاکتور:
-                <div class="charge-receipt-serial">{{pre_factor.paymentRequestId}}</div>
-              </div>
-            </div>
-          </div>
-          <div @click="goToPaymentPage" class="charge-receipt-button">تأیید و پرداخت</div>
-        </div>
-        <!-- step 2 -->
-        <div v-if="chargeStep === 'payment'">
-          <div style="direction: ltr;text-align: center;">Bank payment portal, probably...!</div>
-          <div @click="goToFinalPage" style="font-weight: bold;border: 1px solid black">Next</div>
-        </div>
-        <div v-if="chargeStep === 'success'" class="charge-success">
-          <div class="charge-success-container">
-            <i class="fa fa-check-circle"></i>
-            <div class="charge-success-message">
-              خرید شارژ
-              <div
-                class="charge-success-amount"
-              >{{ charge.amount | currency | persianDigit }} تومانی</div>با موفقیت انجام شد.
-            </div>
-            <div class="charge-success-info">
-              <div class="charge-success-tracking-code-container">
-                کد پیگیری:
-                <div class="charge-success-tracking-code">{{charge.trackingNumber}}</div>
-              </div>
-              <div class="charge-success-credit-container">
-                اعتبار فعلی شما:
-                <div class="charge-success-credit">{{ userCredit | currency | persianDigit }} تومان</div>
-              </div>
-              <p>در صورت وجود هر گونه مشکل و یا سوال میتوانید با پشتیبانی رسا به شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل نمایید.</p>
-            </div>
-            <router-link :to="{name:'patient-landing'}" class="charge-success-return-button">بازگشت</router-link>
-          </div>
-        </div>
-        <!-- step 3 -->
-        <div v-if="chargeStep === 'fail'" class="charge-failure">
-          <div class="charge-failure-container">
-            <i class="fa fa-times-circle"></i>
-            <div class="charge-failure-message">فرایند پرداخت با خطا روبرو شد.</div>
-            <div class="charge-failure-info">
-              <div class="charge-failure-tracking-code-container">
-                کد پیگیری:
-                <div class="charge-failure-tracking-code">{{charge.trackingNumber}}</div>
-                <div
-                  class="charge-failure-description"
-                >در صورتی که هزینه ای از حساب بانکی شما کسر شده باشد، طی ۲۴ ساعت آینده بازگردانده می‌شود. لطفاً در صورت تکرار این مشکل با پشتیبانی رسا به شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل نمایید.</div>
-              </div>
-            </div>
-            <div @click="goToInputPage" class="charge-failure-return-button">بازگشت</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- step 4 -->
-    </div>
-  </v-container>
-</template>
-
-<script>
-export default {
-  head() {
-    return {
-      title: "افزایش اعتبار حساب برای تماس با پزشک",
-      link: [
-        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
-      ],
-      meta: [
-        {
-          hid: "description",
-          name: "description",
-          content:
-            "برای خرید شارژ جهت مکالمه با پزشک شماره موبایل و مبلغ کارت اعتباری مورد نیاز خود را وارد کنید و اعتبار حساب خود را افزایش دهید"
-        }
-      ]
-    };
-  },
-  data() {
-    return {
-      ajaxLoading: true,
-      error: null,
-      selectedChargeItem: {},
-      chargeMenuItems: [],
-      isMenuOpen: false,
-      chargeStep: "input",
-      subscriberNumber: null,
-      recaptchaResponse: null,
-      userCredit: 0,
-      charge: {},
-      pre_factor: {},
-      bankReceiptSuccessResponse: true,
-      mobile_regex: /^[0][9][0-3|9][0-9]{8,8}$/g,
-      subscribe_regex: /^[0-9]{5,5}$/g
-    };
-  },
-  beforeCreate() {
-    // if (this.$route.query.request_id) {
-    //   this.$axios
-    //     .get(`//Charge/${this.$route.query.request_id}/Receipt`)
-    //     .then(response => {
-    //       if (response.data.status === "OK") {
-    //         this.chargeStep = "success";
-    //       } else {
-    //         this.chargeStep = "fail";
-    //       }
-    //     })
-    //     .catch(() => {
-    //       this.chargeStep = "fail";
-    //     });
-    // }
-    // if (this.$route.query.chargeRequestId) {
-    //   this.ajaxLoading = true;
-    //   this.$axios
-    //     .get(`/Charge/${this.$route.query.chargeRequestId}/Receipt`)
-    //     .then(res => {
-    //       if (res.data.result.chargeReceipt.status === "Successful") {
-    //         this.chargeStep = "success";
-    //       } else {
-    //         this.chargeStep = "fail";
-    //       }
-    //       this.ajaxLoading = false;
-    //     });
-    // }
-  },
-  created() {
-    this.$axios.get("/Charge/Denominations").then(response => {
-      this.chargeMenuItems = response.data.result.denominations
-        .filter(item => {
-          return !(
-            item.amount == 45000 ||
-            item.amount == 60000 ||
-            item.amount == 80000
-          );
-        })
-        .sort((a, b) => a.amount - b.amount);
-      this.ajaxLoading = false;
-      if (this.$route.query.chat_id) {
-        localStorage.setItem("chat_id", this.$route.query.chat_id);
-      }
-      if (
-        this.$route.query.chargeId &&
-        this.$route.query.chargeId <= this.chargeMenuItems.length
-      ) {
-        for (let item of this.chargeMenuItems) {
-          if (item.id == this.$route.query.chargeId) {
-            this.selectedChargeItem = item;
-          }
-        }
-      } else {
-        this.selectedChargeItem = this.chargeMenuItems[0];
-      }
-    });
-    if (this.$route.query.chargeRequestId) {
-      this.ajaxLoading = true;
-      this.$axios
-        .get(`/Charge/${this.$route.query.chargeRequestId}/Receipt`)
-        .then(res => {
-          if (res.data.result.chargeReceipt.status === "Successful") {
-            this.chargeStep = "success";
-            this.charge.amount =
-              res.data.result.chargeReceipt.chargeDenomination.amount;
-            this.charge.trackingNumber =
-              res.data.result.chargeReceipt.trackingNumber;
-            this.userCredit = res.data.result.chargeReceipt.currentBalance;
-            let chat_id = localStorage.getItem("chat_id");
-            if (chat_id) {
-              this.$axios
-                .post(`https://telegram.resaa.net/chargeNotify`, {
-                  chat_id,
-                  charge_amount: this.charge.amount,
-                  user_credit: this.userCredit
-                })
-                .then(res => {
-                  localStorage.removeItem("chat_id");
-                });
-            }
-          } else {
-            this.chargeStep = "fail";
-            this.charge.trackingNumber =
-              res.data.result.chargeReceipt.trackingNumber;
-          }
-          this.ajaxLoading = false;
-        })
-        .catch(() => {
-          this.chargeStep = "fail";
-          this.ajaxLoading = false;
-        });
-    }
-    if (this.$route.query.mobile) {
-      this.subscriberNumber = this.$route.query.mobile;
-    }
-  },
-
-  methods: {
-    onVerify: function(response) {
-      this.ajaxLoading = true;
-      this.recaptchaResponse = response;
-      this.goToPrereceipt();
-    },
-    resetRecaptcha() {
-      this.$refs.invisibleRecaptcha.reset(); // Direct call reset method
-    },
-    onSubmit() {
-      this.$refs.invisibleRecaptcha.execute();
-    },
-
-    toggleChargeMenu: function() {
-      this.isMenuOpen = !this.isMenuOpen;
-    },
-
-    selectChargeItem: function(item) {
-      this.selectedChargeItem = item;
-      this.isMenuOpen = false;
-    },
-
-    async goToPrereceipt() {
-      let data = {
-        denominationId: this.selectedChargeItem.id,
-        callbackUrl: process.env.BANK_RETURN_URL,
-        recaptchaResponse: this.recaptchaResponse
-      };
-      let mobile = this.mobile_regex.exec(this.subscriberNumber);
-      let subscriberNumber = this.subscribe_regex.exec(this.subscriberNumber);
-      if (mobile) {
-        data.phoneNumber = mobile[0];
-      } else if (subscriberNumber) {
-        data.subscriberNumber = subscriberNumber[0];
-      }
-      try {
-        let { result } = await this.$axios.$post("/Charge", data);
-        this.pre_factor = result.electronicPaymentVoucher;
-        this.chargeStep = "receipt";
-      } catch (error) {
-        if (error.response.data.code == 403) {
-          this.error =
-            "حساب کاربری شما اجازه شارژ ندارد لطفا با پشتیبانی تماس بگیرید";
-        }
-        if (error.response.data.code == 404) {
-          this.error =
-            "این شماره در سامانه رسا وجود ندارد برای شارژ حساب ابتدا در سامانه عضو شوید";
-        }
-        this.resetRecaptcha();
-      }
-      this.ajaxLoading = false;
-    },
-
-    goToPaymentPage: function() {
-      const form = document.createElement("form");
-      form.method = "POST";
-      form.action = this.pre_factor.gateway.address;
-      const input = document.createElement("input");
-      input.value = this.pre_factor.gateway.submissionParameters.token;
-      input.name = "token";
-      form.appendChild(input);
-      document.body.appendChild(form);
-      form.submit();
-    },
-
-    goToFinalPage: function() {
-      if (this.bankReceiptSuccessResponse === true) {
-        this.chargeStep = "success";
-        this.userCredit = this.userCredit + this.selectedChargeItem.amount;
-      } else if (this.bankReceiptSuccessResponse === false) {
-        this.chargeStep = "fail";
-      }
-    },
-
-    goToInputPage: function() {
-      this.chargeStep = "input";
-      this.$router.replace({ name: "Charge" });
-    }
-  },
-  computed: {
-    sitekey() {
-      return this.$store.state.sitekey;
-    }
-  }
-};
-</script>
-
 <style lang="scss" scoped>
 .charge-container {
   direction: rtl;
@@ -858,3 +495,429 @@ export default {
   }
 }
 </style>
+
+<template>
+  <v-container>
+    <div class="charge-container">
+      <no-ssr v-if="ajaxLoading">
+        <v-loading mode="relative"></v-loading>
+      </no-ssr>
+      <div>
+        <div v-if="chargeStep === 'input'" class="charge-input">
+          <div class="charge-title">خرید شارژ</div>
+          <div class="charge-description">
+            افزایش اعتبار برای مکالمه با پزشک
+          </div>
+          <div class="user-code">
+            <i class="fa fa-user"></i>
+            <input
+              v-model="subscriberNumber"
+              placeholder="پنج رقم آخر شماره کاربری / شماره موبایل"
+              required
+            />
+          </div>
+          <div class="charge-amount" @click="toggleChargeMenu">
+            <i class="fa fa-credit-card-alt"></i>
+            <div id="activeChargeItem">
+              کارت اعتباری
+              {{ this.selectedChargeItem.amount | currency | persianDigit }}
+              تومانی
+            </div>
+            <i v-if="isMenuOpen" class="fa fa-sort-up"></i>
+            <i v-else class="fa fa-sort-down"></i>
+          </div>
+          <div v-if="isMenuOpen" class="charge-menu" id="dropdown">
+            <div
+              v-for="item in chargeMenuItems"
+              @click="selectChargeItem(item)"
+              :key="item.id"
+            >
+              کارت اعتباری {{ item.amount | currency | persianDigit }} تومانی
+            </div>
+          </div>
+          <button
+            v-show="false"
+            :disabled="!subscriberNumber"
+            @click="onSubmit"
+            class="charge-button"
+          >
+            خرید شارژ
+          </button>
+          <v-alert style="width:400px" type="warning" outline :value="true">
+            <span>
+              با توجه به مشکل به وجود آمده در درگاه بانکی لطفاً جهت شارژ از ussd
+              استفاده نمایید
+            </span>
+            <span dir="ltr">
+              *500*25#
+            </span>
+          </v-alert>
+          <vue-recaptcha
+            ref="invisibleRecaptcha"
+            @verify="onVerify"
+            size="invisible"
+            :sitekey="sitekey"
+          ></vue-recaptcha>
+          <div class="error-message" v-if="error">{{ error }}</div>
+          <div class="charge-followup-description">
+            در صورت بروز هرگونه مشکل در هنگام تراکنش شماره‌ی تلفن، کد پیگیری و
+            شماره‌ی رِسای خود را
+            <br />به شماره‌ی ۱۰۰۰۹۰۹۹۰۹۹۰۹۹ ارسال کنید، کارشناسان ما با شما تماس
+            خواهند گرفت. <br />یا با شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل فرمایید.
+          </div>
+        </div>
+        <!-- step 1 -->
+        <div v-if="chargeStep === 'receipt'" class="charge-receipt">
+          <div class="charge-receipt-title">خرید شارژ</div>
+          <div class="charge-receipt-description">
+            افزایش اعتبار برای مکالمه با پزشک
+          </div>
+          <div class="charge-receipt-status">
+            <div class="charge-receipt-status-text">پیش فاکتور</div>
+            <div class="charge-receipt-status-container">
+              <div class="charge-receipt-amount-container">
+                مبلغ شارژ:
+                <div class="charge-receipt-amount">
+                  {{
+                    pre_factor.chargeDenomination.payableAmount
+                      | currency
+                      | persianDigit
+                  }}
+                  تومان
+                </div>
+              </div>
+              <div class="charge-receipt-resaacode-container">
+                کد رِسا:
+                <div class="charge-receipt-resaacode">
+                  {{ pre_factor.subscriberNumber | persianDigit }}
+                </div>
+              </div>
+              <div class="charge-receipt-phoneNum-container">
+                شماره تلفن:
+                <div class="charge-receipt-phoneNum">
+                  {{ pre_factor.obfuscatedPhoneNumber | persianDigit }}
+                </div>
+              </div>
+              <!-- <div class="charge-receipt-customer-ID-container">
+              شناسه خریدار:
+              <div class="charge-receipt-customer-ID">
+                {{pre_factor.gateway.submissionParameters.token}}
+              </div>
+              </div>-->
+              <div class="charge-receipt-date-container">
+                تاریخ خرید:
+                <div class="charge-receipt-date">
+                  {{ pre_factor.issuedAt | persianDate }}
+                </div>
+              </div>
+              <div class="charge-receipt-serial-container">
+                شماره پیش‌فاکتور:
+                <div class="charge-receipt-serial">
+                  {{ pre_factor.paymentRequestId }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div @click="goToPaymentPage" class="charge-receipt-button">
+            تأیید و پرداخت
+          </div>
+        </div>
+        <!-- step 2 -->
+        <div v-if="chargeStep === 'payment'">
+          <div style="direction: ltr;text-align: center;">
+            Bank payment portal, probably...!
+          </div>
+          <div
+            @click="goToFinalPage"
+            style="font-weight: bold;border: 1px solid black"
+          >
+            Next
+          </div>
+        </div>
+        <div v-if="chargeStep === 'success'" class="charge-success">
+          <div class="charge-success-container">
+            <i class="fa fa-check-circle"></i>
+            <div class="charge-success-message">
+              خرید شارژ
+              <div class="charge-success-amount">
+                {{ charge.amount | currency | persianDigit }} تومانی
+              </div>
+              با موفقیت انجام شد.
+            </div>
+            <div class="charge-success-info">
+              <div class="charge-success-tracking-code-container">
+                کد پیگیری:
+                <div class="charge-success-tracking-code">
+                  {{ charge.trackingNumber }}
+                </div>
+              </div>
+              <div class="charge-success-credit-container">
+                اعتبار فعلی شما:
+                <div class="charge-success-credit">
+                  {{ userCredit | currency | persianDigit }} تومان
+                </div>
+              </div>
+              <p>
+                در صورت وجود هر گونه مشکل و یا سوال میتوانید با پشتیبانی رسا به
+                شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل نمایید.
+              </p>
+            </div>
+            <router-link
+              :to="{ name: 'patient-landing' }"
+              class="charge-success-return-button"
+              >بازگشت</router-link
+            >
+          </div>
+        </div>
+        <!-- step 3 -->
+        <div v-if="chargeStep === 'fail'" class="charge-failure">
+          <div class="charge-failure-container">
+            <i class="fa fa-times-circle"></i>
+            <div class="charge-failure-message">
+              فرایند پرداخت با خطا روبرو شد.
+            </div>
+            <div class="charge-failure-info">
+              <div class="charge-failure-tracking-code-container">
+                کد پیگیری:
+                <div class="charge-failure-tracking-code">
+                  {{ charge.trackingNumber }}
+                </div>
+                <div class="charge-failure-description">
+                  در صورتی که هزینه ای از حساب بانکی شما کسر شده باشد، طی ۲۴
+                  ساعت آینده بازگردانده می‌شود. لطفاً در صورت تکرار این مشکل با
+                  پشتیبانی رسا به شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل نمایید.
+                </div>
+              </div>
+            </div>
+            <div @click="goToInputPage" class="charge-failure-return-button">
+              بازگشت
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- step 4 -->
+    </div>
+  </v-container>
+</template>
+
+<script>
+export default {
+  head() {
+    return {
+      title: "افزایش اعتبار حساب برای تماس با پزشک",
+      link: [
+        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
+      ],
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "برای خرید شارژ جهت مکالمه با پزشک شماره موبایل و مبلغ کارت اعتباری مورد نیاز خود را وارد کنید و اعتبار حساب خود را افزایش دهید"
+        }
+      ]
+    };
+  },
+  data() {
+    return {
+      ajaxLoading: true,
+      error: null,
+      selectedChargeItem: {},
+      chargeMenuItems: [],
+      isMenuOpen: false,
+      chargeStep: "input",
+      subscriberNumber: null,
+      recaptchaResponse: null,
+      userCredit: 0,
+      charge: {},
+      pre_factor: {},
+      bankReceiptSuccessResponse: true,
+      mobile_regex: /^[0][9][0-3|9][0-9]{8,8}$/g,
+      subscribe_regex: /^[0-9]{5,5}$/g
+    };
+  },
+  beforeCreate() {
+    // if (this.$route.query.request_id) {
+    //   this.$axios
+    //     .get(`//Charge/${this.$route.query.request_id}/Receipt`)
+    //     .then(response => {
+    //       if (response.data.status === "OK") {
+    //         this.chargeStep = "success";
+    //       } else {
+    //         this.chargeStep = "fail";
+    //       }
+    //     })
+    //     .catch(() => {
+    //       this.chargeStep = "fail";
+    //     });
+    // }
+    // if (this.$route.query.chargeRequestId) {
+    //   this.ajaxLoading = true;
+    //   this.$axios
+    //     .get(`/Charge/${this.$route.query.chargeRequestId}/Receipt`)
+    //     .then(res => {
+    //       if (res.data.result.chargeReceipt.status === "Successful") {
+    //         this.chargeStep = "success";
+    //       } else {
+    //         this.chargeStep = "fail";
+    //       }
+    //       this.ajaxLoading = false;
+    //     });
+    // }
+  },
+  created() {
+    this.$axios.get("/Charge/Denominations").then(response => {
+      this.chargeMenuItems = response.data.result.denominations
+        .filter(item => {
+          return !(
+            item.amount == 45000 ||
+            item.amount == 60000 ||
+            item.amount == 80000
+          );
+        })
+        .sort((a, b) => a.amount - b.amount);
+      this.ajaxLoading = false;
+      if (this.$route.query.chat_id) {
+        localStorage.setItem("chat_id", this.$route.query.chat_id);
+      }
+      if (
+        this.$route.query.chargeId &&
+        this.$route.query.chargeId <= this.chargeMenuItems.length
+      ) {
+        for (let item of this.chargeMenuItems) {
+          if (item.id == this.$route.query.chargeId) {
+            this.selectedChargeItem = item;
+          }
+        }
+      } else {
+        this.selectedChargeItem = this.chargeMenuItems[0];
+      }
+    });
+    if (this.$route.query.chargeRequestId) {
+      this.ajaxLoading = true;
+      this.$axios
+        .get(`/Charge/${this.$route.query.chargeRequestId}/Receipt`)
+        .then(res => {
+          if (res.data.result.chargeReceipt.status === "Successful") {
+            this.chargeStep = "success";
+            this.charge.amount =
+              res.data.result.chargeReceipt.chargeDenomination.amount;
+            this.charge.trackingNumber =
+              res.data.result.chargeReceipt.trackingNumber;
+            this.userCredit = res.data.result.chargeReceipt.currentBalance;
+            let chat_id = localStorage.getItem("chat_id");
+            if (chat_id) {
+              this.$axios
+                .post(`https://telegram.resaa.net/chargeNotify`, {
+                  chat_id,
+                  charge_amount: this.charge.amount,
+                  user_credit: this.userCredit
+                })
+                .then(res => {
+                  localStorage.removeItem("chat_id");
+                });
+            }
+          } else {
+            this.chargeStep = "fail";
+            this.charge.trackingNumber =
+              res.data.result.chargeReceipt.trackingNumber;
+          }
+          this.ajaxLoading = false;
+        })
+        .catch(() => {
+          this.chargeStep = "fail";
+          this.ajaxLoading = false;
+        });
+    }
+    if (this.$route.query.mobile) {
+      this.subscriberNumber = this.$route.query.mobile;
+    }
+  },
+
+  methods: {
+    onVerify: function(response) {
+      this.ajaxLoading = true;
+      this.recaptchaResponse = response;
+      this.goToPrereceipt();
+    },
+    resetRecaptcha() {
+      this.$refs.invisibleRecaptcha.reset(); // Direct call reset method
+    },
+    onSubmit() {
+      this.$refs.invisibleRecaptcha.execute();
+    },
+
+    toggleChargeMenu: function() {
+      this.isMenuOpen = !this.isMenuOpen;
+    },
+
+    selectChargeItem: function(item) {
+      this.selectedChargeItem = item;
+      this.isMenuOpen = false;
+    },
+
+    async goToPrereceipt() {
+      let data = {
+        denominationId: this.selectedChargeItem.id,
+        callbackUrl: process.env.BANK_RETURN_URL,
+        recaptchaResponse: this.recaptchaResponse
+      };
+      let mobile = this.mobile_regex.exec(this.subscriberNumber);
+      let subscriberNumber = this.subscribe_regex.exec(this.subscriberNumber);
+      if (mobile) {
+        data.phoneNumber = mobile[0];
+      } else if (subscriberNumber) {
+        data.subscriberNumber = subscriberNumber[0];
+      }
+      try {
+        let { result } = await this.$axios.$post("/Charge", data);
+        this.pre_factor = result.electronicPaymentVoucher;
+        this.chargeStep = "receipt";
+      } catch (error) {
+        if (error.response.data.code == 403) {
+          this.error =
+            "حساب کاربری شما اجازه شارژ ندارد لطفا با پشتیبانی تماس بگیرید";
+        }
+        if (error.response.data.code == 404) {
+          this.error =
+            "این شماره در سامانه رسا وجود ندارد برای شارژ حساب ابتدا در سامانه عضو شوید";
+        }
+        this.resetRecaptcha();
+      }
+      this.ajaxLoading = false;
+    },
+
+    goToPaymentPage: function() {
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = this.pre_factor.gateway.address;
+      const input = document.createElement("input");
+      input.value = this.pre_factor.gateway.submissionParameters.token;
+      input.name = "token";
+      form.appendChild(input);
+      document.body.appendChild(form);
+      form.submit();
+    },
+
+    goToFinalPage: function() {
+      if (this.bankReceiptSuccessResponse === true) {
+        this.chargeStep = "success";
+        this.userCredit = this.userCredit + this.selectedChargeItem.amount;
+      } else if (this.bankReceiptSuccessResponse === false) {
+        this.chargeStep = "fail";
+      }
+    },
+
+    goToInputPage: function() {
+      this.chargeStep = "input";
+      this.$router.replace({ name: "Charge" });
+    }
+  },
+  computed: {
+    sitekey() {
+      return this.$store.state.sitekey;
+    }
+  }
+};
+</script>
