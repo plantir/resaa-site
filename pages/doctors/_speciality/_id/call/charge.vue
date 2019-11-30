@@ -167,12 +167,14 @@ h2 {
         </v-loading>
       </no-ssr>
       <h1>افزایش اعتبار</h1>
-      <h2>برای برقراری تماس لطفا حساب خود را به میزان دقایق مکالمه شارژ کنید:</h2>
+      <h2>
+        برای برقراری تماس لطفا حساب خود را به میزان دقایق مکالمه شارژ کنید:
+      </h2>
       <div class="charge-items hide-md">
         <div
           class="charge-item-wrapper"
           @click="selected = item.id"
-          :class="{selected:item.id==selected}"
+          :class="{ selected: item.id == selected }"
           v-for="item in items"
           :key="item.id"
         >
@@ -181,16 +183,18 @@ h2 {
               <div class="header-bg">
                 <ChargeSvg :color="item.color" />
               </div>
-              <span>{{item.duration | persianDigit}} دقیقه</span>
+              <span>{{ item.duration | persianDigit }} دقیقه</span>
             </div>
             <div class="item-content">
-              <h4>{{item.title}}</h4>
-              <p>{{item.description}}</p>
+              <h4>{{ item.title }}</h4>
+              <p>{{ item.description }}</p>
             </div>
             <div class="item-footer">
-              <div class="price">{{item.price | currency | persianDigit}} تومان</div>
+              <div class="price">
+                {{ item.price | currency | persianDigit }} تومان
+              </div>
               <div class="select-holder">
-                <v-icon v-if="item.id==selected">check</v-icon>
+                <v-icon v-if="item.id == selected">check</v-icon>
               </div>
             </div>
           </div>
@@ -207,7 +211,7 @@ h2 {
           <div
             class="charge-item-wrapper swiper-slide"
             @click="selected = item.id"
-            :class="{selected:item.id==selected}"
+            :class="{ selected: item.id == selected }"
             v-for="item in items"
             :key="item.id"
           >
@@ -216,16 +220,18 @@ h2 {
                 <div class="header-bg">
                   <ChargeSvg :color="item.color" />
                 </div>
-                <span>{{item.duration | persianDigit}} دقیقه</span>
+                <span>{{ item.duration | persianDigit }} دقیقه</span>
               </div>
               <div class="item-content">
-                <h4>{{item.title}}</h4>
-                <p>{{item.description}}</p>
+                <h4>{{ item.title }}</h4>
+                <p>{{ item.description }}</p>
               </div>
               <div class="item-footer">
-                <div class="price">{{item.price | currency | persianDigit}} تومان</div>
+                <div class="price">
+                  {{ item.price | currency | persianDigit }} تومان
+                </div>
                 <div class="select-holder">
-                  <v-icon v-if="item.id==selected">check</v-icon>
+                  <v-icon v-if="item.id == selected">check</v-icon>
                 </div>
               </div>
             </div>
@@ -235,10 +241,27 @@ h2 {
       </div>
 
       <div class="payment-wrapper">
-        <v-btn id="journeygobank" @click="onSubmit" class="payment-btn" depressed dark round>
+        <v-btn
+          v-show="false"
+          id="journeygobank"
+          @click="onSubmit"
+          class="payment-btn"
+          depressed
+          dark
+          round
+        >
           <v-icon class="ml-3">fa-credit-card</v-icon>
           <span>پرداخت</span>
         </v-btn>
+        <v-alert style="width:400px" type="warning" outline :value="true">
+          <span>
+            با توجه به مشکل به وجود آمده در درگاه بانکی لطفاً جهت شارژ از ussd
+            استفاده نمایید
+          </span>
+          <span dir="ltr">
+            *500*25#
+          </span>
+        </v-alert>
         <vue-recaptcha
           ref="invisibleRecaptcha"
           @verify="onVerify"
@@ -249,12 +272,19 @@ h2 {
       <div class="continue">
         <div class="text">
           <span>اعتبار فعلی حساب شما</span>
-          <span class="custom-color">{{credit | currency | persianDigit}} تومان</span>
+          <span class="custom-color"
+            >{{ credit | currency | persianDigit }} تومان</span
+          >
           <span>است . شما میتوانید</span>
-          <span class="custom-color">{{duration | persianDigit}} دقیقه</span>
-          <span>با {{doctor.title}} {{doctor.firstName}} {{doctor.lastName}} صحبت کنید</span>
+          <span class="custom-color">{{ duration | persianDigit }} دقیقه</span>
+          <span
+            >با {{ doctor.title }} {{ doctor.firstName }}
+            {{ doctor.lastName }} صحبت کنید</span
+          >
         </div>
-        <v-btn v-if="duration >= 1" color="#27db9b" to="booking" round outline>ادامه با اعتبار فعلی</v-btn>
+        <v-btn v-if="duration >= 1" color="#27db9b" to="booking" round outline
+          >ادامه با اعتبار فعلی</v-btn
+        >
       </div>
     </div>
 
@@ -263,12 +293,23 @@ h2 {
         <img src="~assets/img/lamp@2x.png" />
         <div>
           <p>
-            هزینه مشاوره به اندازه دقایق مکالمه شما از حساب رسا کسر می شود. باقی مانده اعتبار شما در تماس های بعدی قابل استفاده است.
-            رسا در صورت عدم رضایت شما از خدمات ارائه شده، هزینه تماس را به طور کامل به شما بر می‌گرداند.
+            هزینه مشاوره به اندازه دقایق مکالمه شما از حساب رسا کسر می شود. باقی
+            مانده اعتبار شما در تماس های بعدی قابل استفاده است. رسا در صورت عدم
+            رضایت شما از خدمات ارائه شده، هزینه تماس را به طور کامل به شما بر
+            می‌گرداند.
           </p>
-          <p>در صورت عدم برقراری تماس و قطعی تماس در لحظات ابتدایی مکالمه هزینه ای از حساب شما کسر نمی گردد.</p>
-          <p>شما می توانید از شارژ حساب کاربری خود در رسا برای گفتگو با هر یک از پزشکان و مشاوران رسا که بخواهید، استفاده کنید.</p>
-          <p>رسا دارای گواهی اعتماد الکترونیکی e-namad است و پرداخت شما از طریق درگاه امن بانکی انجام می شود.</p>
+          <p>
+            در صورت عدم برقراری تماس و قطعی تماس در لحظات ابتدایی مکالمه هزینه
+            ای از حساب شما کسر نمی گردد.
+          </p>
+          <p>
+            شما می توانید از شارژ حساب کاربری خود در رسا برای گفتگو با هر یک از
+            پزشکان و مشاوران رسا که بخواهید، استفاده کنید.
+          </p>
+          <p>
+            رسا دارای گواهی اعتماد الکترونیکی e-namad است و پرداخت شما از طریق
+            درگاه امن بانکی انجام می شود.
+          </p>
           <p>پشتیبانی رسا در کلیه مراحل استفاده از سامانه در کنار شماست.</p>
         </div>
       </div>
