@@ -301,13 +301,17 @@ p {
           <div class="doctor-avatar-image">
             <img
               v-if="doctor.imagePath"
-              :src="'https://webapi.resaa.net/'+doctor.imagePath"
-              :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+              :src="'https://webapi.resaa.net/' + doctor.imagePath"
+              :alt="
+                `تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`
+              "
             />
             <img
               v-else
               src="/img/doc-placeholder.png"
-              :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+              :alt="
+                `تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`
+              "
             />
           </div>
           <div class="doctor-resaa-info">
@@ -315,65 +319,92 @@ p {
             <!-- <i class="fa fa-phone-square"></i> -->
             <div>
               کد رِسا:
-              <p class="doctor-resaa-code">{{doctor.subscriberNumber | persianDigit}}</p>
+              <p class="doctor-resaa-code">
+                {{ doctor.subscriberNumber | persianDigit }}
+              </p>
             </div>
           </div>
         </div>
         <div class="doctor-info-container">
           <div class="doctor-name">
-            <h1>{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</h1>
-            <p v-if="doctor.currentlyAvailable" class="doctor-is-available">(در دسترس)</p>
-            <p v-else class="doctor-is-unavailable">(در دسترس نمی باشد)</p>
+            <h1>
+              {{ doctor.title }} {{ doctor.firstName }} {{ doctor.lastName }}
+            </h1>
+            <p v-if="doctor.currentlyAvailable" class="doctor-is-available">
+              (در دسترس)
+            </p>
+            <p v-else class="doctor-is-unavailable">(خارج از ساعت پاسخگویی)</p>
           </div>
           <p v-if="doctor.specialty" class="doctor-specialty">
             تخصص:
-            <strong>{{doctor.specialty.title}}</strong>
+            <strong>{{ doctor.specialty.title }}</strong>
           </p>
           <div class="specialty-area-container">
-            <div v-for="tag in doctor.tags" :key="tag.id" class="specialty-area">{{tag.title}}</div>
+            <div
+              v-for="tag in doctor.tags"
+              :key="tag.id"
+              class="specialty-area"
+            >
+              {{ tag.title }}
+            </div>
           </div>
           <div class="doctor-np">
             کد نظام پزشکی:
-            <p class="doctor-np-code">{{doctor.medicalCouncilNumber || '-'}}</p>
+            <p class="doctor-np-code">
+              {{ doctor.medicalCouncilNumber || "-" }}
+            </p>
           </div>
           <div v-if="user" class="available-time-container">
             مدت زمان قابل گفتگو:
-            <div class="available-time">{{duration}}</div>
+            <div class="available-time">{{ duration }}</div>
             <div class="available-time-unit">دقیقه</div>
           </div>
           <div v-else class="available-time-container">
             <span>مدت زمان قابل گفتگو: برای دیدن مدت زمان مکالمه ابتدا</span>
-            <router-link :to="{name:'patient-login'}">وارد سایت</router-link>شوید
+            <router-link :to="{ name: 'patient-login' }">وارد سایت</router-link
+            >شوید
           </div>
         </div>
-        <callSection class="call_button" :doctor="doctor" :duration="duration"></callSection>
+        <callSection
+          class="call_button"
+          :doctor="doctor"
+          :duration="duration"
+        ></callSection>
         <div class="available-time-description">
           <i class="fa fa-circle"></i>
           <div>
             <p>
               <span>این زمان براساس میزان</span>
-              <router-link v-if="user" :to="{name:'patient-profile'}">شارژ فعلی</router-link>
-              <router-link v-else :to="{name:'patient-login'}">شارژ فعلی</router-link>
+              <router-link v-if="user" :to="{ name: 'patient-profile' }"
+                >شارژ فعلی</router-link
+              >
+              <router-link v-else :to="{ name: 'patient-login' }"
+                >شارژ فعلی</router-link
+              >
               <span>شما محاسبه شده است.</span>
             </p>
             <p>
               <span>می‌توانید از طریق</span>
-              <router-link :to="{name:'charge'}">خرید شارژ اینترنتی</router-link>اعتبار خود را افزایش دهید.
+              <router-link :to="{ name: 'charge' }"
+                >خرید شارژ اینترنتی</router-link
+              >اعتبار خود را افزایش دهید.
             </p>
           </div>
         </div>
       </div>
       <div class="doctor-contact-container">
-        <div v-for="(workplace,index) in doctor.workplaces" :key="index">
-          <h2>{{workplace.title}}</h2>
+        <div v-for="(workplace, index) in doctor.workplaces" :key="index">
+          <h2>{{ workplace.title }}</h2>
           <div class="doctor-address-container">
             <div>آدرس:</div>
-            <div class="doctor-address">{{workplace.street}}</div>
+            <div class="doctor-address">{{ workplace.street }}</div>
           </div>
           <div class="doctor-phone-container">
-            <p class="doctor-phone">تلفن: {{workplace.phoneNumber | persianDigit}}</p>
+            <p class="doctor-phone">
+              تلفن: {{ workplace.phoneNumber | persianDigit }}
+            </p>
           </div>
-          <p>{{workplace.description}}</p>
+          <p>{{ workplace.description }}</p>
         </div>
       </div>
       <div class="time-table-wrapper">
@@ -392,13 +423,13 @@ p {
         <no-ssr>
           <GmapMap
             :center="center"
-            :options="{disableDefaultUI: true}"
+            :options="{ disableDefaultUI: true }"
             :zoom="15"
             ref="mapRef"
             style="width: 100%; height:300px"
           >
             <GmapMarker
-              v-for="(position,index) in locations"
+              v-for="(position, index) in locations"
               :key="index"
               @click="geo(position)"
               ref="mapMarker"
@@ -552,4 +583,3 @@ export default {
   }
 };
 </script>
-

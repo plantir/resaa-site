@@ -65,6 +65,11 @@
     display: flex;
     align-items: center;
   }
+  p {
+    margin: 0;
+    padding: 0;
+    margin-right: 16px;
+  }
   span {
     display: inline-block;
     direction: ltr;
@@ -296,7 +301,7 @@
 
 <template>
   <section>
-    <div :class="[{'patient': isPatient}, 'footer']">
+    <div :class="[{ patient: isPatient }, 'footer']">
       <v-container>
         <v-layout row wrap>
           <v-flex pa-4 lg3 md6 order-lg1 order-md1 sm12>
@@ -307,7 +312,10 @@
               <div>
                 <p class="footer-info-text">
                   <strong>رِسا</strong>
-                  اولین سامانه ارتباط پزشک با بیمار در کشور است و بیماران عزیز براحتی و بدون نیاز به حضور در مطب پزشک می توانند با پزشک خوب از هر جایی در ارتباط باشند. پزشکان گرامی نیز می توانند تماس های بیماران خود را در سامانه رِسا مدیریت کنند.
+                  اولین سامانه ارتباط پزشک با بیمار در کشور است و بیماران عزیز
+                  براحتی و بدون نیاز به حضور در مطب پزشک می توانند با پزشک خوب
+                  از هر جایی در ارتباط باشند. پزشکان گرامی نیز می توانند تماس
+                  های بیماران خود را در سامانه رِسا مدیریت کنند.
                 </p>
               </div>
               <div class="footer-logo">
@@ -325,19 +333,30 @@
                   <div>
                     <ul>
                       <li>
-                        <router-link v-if="isPatient" :to="{name:'patient-login'}">حساب کاربری</router-link>
-                        <router-link v-else :to="{name:'LoginDoctor'}">حساب کاربری</router-link>
+                        <router-link
+                          v-if="isPatient"
+                          :to="{ name: 'patient-login' }"
+                          >حساب کاربری</router-link
+                        >
+                        <router-link v-else :to="{ name: 'LoginDoctor' }"
+                          >حساب کاربری</router-link
+                        >
                       </li>
                       <li>
-                        <router-link :to="{name:'doctors'}">لیست پزشکان</router-link>
+                        <router-link :to="{ name: 'doctors' }"
+                          >لیست پزشکان</router-link
+                        >
                       </li>
                       <li>
-                        <router-link :to="{name:'patient-landing'}">رسای بیماران</router-link>
+                        <router-link :to="{ name: 'patient-landing' }"
+                          >رسای بیماران</router-link
+                        >
                       </li>
                       <li>
                         <router-link
-                          :to="{name:'patient-landing',hash:'#download'}"
-                        >دریافت برنامه بیماران</router-link>
+                          :to="{ name: 'patient-landing', hash: '#download' }"
+                          >دریافت برنامه بیماران</router-link
+                        >
                       </li>
                     </ul>
                   </div>
@@ -351,16 +370,24 @@
                   <div>
                     <ul>
                       <li>
-                        <router-link :to="{name:'privacy'}">حریم خصوصی</router-link>
+                        <router-link :to="{ name: 'privacy' }"
+                          >حریم خصوصی</router-link
+                        >
                       </li>
                       <li>
-                        <router-link :to="{name:'faq'}">سوالات متداول</router-link>
+                        <router-link :to="{ name: 'faq' }"
+                          >سوالات متداول</router-link
+                        >
                       </li>
                       <li>
-                        <router-link :to="{name:'about'}">درباره رسا</router-link>
+                        <router-link :to="{ name: 'about' }"
+                          >درباره رسا</router-link
+                        >
                       </li>
                       <li>
-                        <router-link :to="{name:'contact-us'}">تماس با ما</router-link>
+                        <router-link :to="{ name: 'contact-us' }"
+                          >تماس با ما</router-link
+                        >
                       </li>
                     </ul>
                   </div>
@@ -371,7 +398,11 @@
                   <span>به ما بپیوندید :</span>
                   <ul>
                     <li>
-                      <a rel="nofollow" target="_blank" href="https://t.me/pezeshkeresaa">
+                      <a
+                        rel="nofollow"
+                        target="_blank"
+                        href="https://t.me/pezeshkeresaa"
+                      >
                         <telegram />
                         <!-- <img src="~assets/svg/telegram.svg" alt /> -->
                         <!-- <i class="fa fa-telegram"></i> -->
@@ -384,13 +415,21 @@
                       </a>
                     </li>
                     <li>
-                      <a rel="nofollow" target="_blank" href="https://instagram.com/resaanet/">
+                      <a
+                        rel="nofollow"
+                        target="_blank"
+                        href="https://instagram.com/resaanet/"
+                      >
                         <instagram />
                         <!-- <i class="fa fa-instagram"></i> -->
                       </a>
                     </li>
                     <li>
-                      <a rel="nofollow" target="_blank" href="https://twitter.com/resaanet">
+                      <a
+                        rel="nofollow"
+                        target="_blank"
+                        href="https://twitter.com/resaanet"
+                      >
                         <twitter />
                         <!-- <i class="fa fa-twitter"></i> -->
                       </a>
@@ -406,21 +445,31 @@
             </p>
             <div class="footer-address">
               <!-- <i class="fa fa-map-marker" aria-hidden="true"></i> -->
-              {{contactInfo.address}}
+              {{ contactInfo.address }}
             </div>
             <div class="tell-wrapper">
               <a :href="`tel:${contactInfo.support.value}`" class="footer-tel">
                 <phone />
-                <span>{{contactInfo.support.text}}</span>
+                <p>
+                  پشتیبانی بیماران :
+                  <span>{{ contactInfo.support.text }}</span>
+                </p>
               </a>
-              <!-- <a :href="`tel:${contactInfo.phoneNumber}`" class="footer-tel">
-                <v-icon>phone</v-icon>
-                <span>{{contactInfo.phoneNumber}}</span>
-              </a>-->
+              <a
+                :href="`tel:${contactInfo.doctor_support.value}`"
+                class="footer-tel"
+              >
+                <phone />
+                <p>
+                  پشتیبانی پزشکان :
+                  <span>{{ contactInfo.doctor_support.text }}</span>
+                </p>
+              </a>
+
               <a :href="`mailto:${contactInfo.email}`" class="footer-email">
                 <!-- <v-icon>email</v-icon> -->
                 <envelope />
-                <span>{{contactInfo.email}}</span>
+                <span>{{ contactInfo.email }}</span>
               </a>
             </div>
             <div class="e-namad">
@@ -432,7 +481,7 @@
               <img
                 src="./e-namad.png"
                 alt
-                onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=127333&amp;p=1p93aagdwcp8JwYd&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30&quot;)"
+                onclick='window.open("https://trustseal.enamad.ir/Verify.aspx?id=127333&amp;p=1p93aagdwcp8JwYd", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")'
                 style="cursor:pointer"
                 id="1p93aagdwcp8JwYd"
               />
@@ -447,7 +496,10 @@
         <div class="line">
           <span class="dot"></span>
         </div>
-        <p>کلیه حقوق مادی و معنوی این سایت به شرکت برگ‌های سبز و نقره‌ای تعلق دارد &copy; ۱۳۹۷</p>
+        <p>
+          کلیه حقوق مادی و معنوی این سایت به شرکت برگ‌های سبز و نقره‌ای تعلق
+          دارد &copy; ۱۳۹۷
+        </p>
       </div>
     </div>
   </section>
@@ -481,4 +533,3 @@ export default {
   }
 };
 </script>
-
