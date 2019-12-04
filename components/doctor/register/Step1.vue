@@ -1,4 +1,3 @@
-
 <style lang="scss" scoped>
 .step-info {
   text-align: center;
@@ -54,7 +53,9 @@ ul {
             <div
               v-if="submitted && errors.has('firstName')"
               class="invalid-feedback"
-            >{{ errors.first('firstName') }}</div>
+            >
+              {{ errors.first("firstName") }}
+            </div>
           </div>
         </v-flex>
         <v-flex md6 sm12 pa-1>
@@ -71,7 +72,9 @@ ul {
             <div
               v-if="submitted && errors.has('lastName')"
               class="invalid-feedback"
-            >{{ errors.first('lastName') }}</div>
+            >
+              {{ errors.first("lastName") }}
+            </div>
           </div>
         </v-flex>
         <v-flex md6 sm12 pa-1>
@@ -92,7 +95,9 @@ ul {
             <div
               v-if="submitted && errors.has('specialtyId')"
               class="invalid-feedback"
-            >{{ errors.first('specialtyId') }}</div>
+            >
+              {{ errors.first("specialtyId") }}
+            </div>
           </div>
         </v-flex>
         <v-flex md6 sm12 pa-1>
@@ -103,13 +108,17 @@ ul {
               v-model="doctor.medicalCouncilNumber"
               label="کد نظام پزشکی"
               name="medicalCouncilNumber"
-              :class="{ 'is-invalid': submitted && errors.has('medicalCouncilNumber') }"
+              :class="{
+                'is-invalid': submitted && errors.has('medicalCouncilNumber')
+              }"
               solo
             ></v-text-field>
             <div
               v-if="submitted && errors.has('medicalCouncilNumber')"
               class="invalid-feedback"
-            >{{ errors.first('medicalCouncilNumber') }}</div>
+            >
+              {{ errors.first("medicalCouncilNumber") }}
+            </div>
           </div>
         </v-flex>
         <v-flex md6 sm12 pa-1>
@@ -122,7 +131,10 @@ ul {
               item-value="key"
               required
               v-validate="'required'"
-              :items="[{key:'Male',title:'مرد'},{key:'Female',title:'زن'}]"
+              :items="[
+                { key: 'Male', title: 'مرد' },
+                { key: 'Female', title: 'زن' }
+              ]"
               v-model="doctor.gender"
               :class="{ 'is-invalid': submitted && errors.has('gender') }"
               label="لطفا جنسیت خود را انتخاب نمایید"
@@ -130,7 +142,9 @@ ul {
             <div
               v-if="submitted && errors.has('gender')"
               class="invalid-feedback"
-            >{{ errors.first('gender') }}</div>
+            >
+              {{ errors.first("gender") }}
+            </div>
           </div>
         </v-flex>
         <v-flex md6 sm12 pa-1>
@@ -141,13 +155,17 @@ ul {
               v-model="doctor.nationalNumber"
               label="کد ملی"
               name="nationalNumber"
-              :class="{ 'is-invalid': submitted && errors.has('nationalNumber') }"
+              :class="{
+                'is-invalid': submitted && errors.has('nationalNumber')
+              }"
               solo
             ></v-text-field>
             <div
               v-if="submitted && errors.has('nationalNumber')"
               class="invalid-feedback"
-            >{{ errors.first('nationalNumber') }}</div>
+            >
+              {{ errors.first("nationalNumber") }}
+            </div>
           </div>
         </v-flex>
         <v-flex md6 sm12 pa-1>
@@ -164,16 +182,29 @@ ul {
             <div
               v-if="submitted && errors.has('phoneNumber')"
               class="invalid-feedback"
-            >{{ errors.first('phoneNumber') }}</div>
+            >
+              {{ errors.first("phoneNumber") }}
+            </div>
           </div>
         </v-flex>
       </v-layout>
     </form>
+    <div class="doctor-suport">
+      شماره پشتیبانی پزشکان: <span>{{ "021-74471200" | persianDigit }}</span>
+    </div>
     <div class="step-notes">
       <ul>
-        <li>به منظور ارائه خدمات با کیفیت مناسب، تنها پزشکانی که دارای کد نظام ‌پزشکی هستند، می‌توانند از خدمات رِسا استفاده کنند.</li>
-        <li>تخصص پزشک با سایت نظام پزشکی بررسی می‌شود. اگر تاکنون تخصص شما در سایت نظام پزشکی ثبت نشده، نیاز به ارائه گواهی است.</li>
-        <li>شماره همراه و کد ملی شما به‌هیچ عنوان در اختیار دیگران قرار نمی‌گیرد.</li>
+        <li>
+          به منظور ارائه خدمات با کیفیت مناسب، تنها پزشکانی که دارای کد نظام
+          ‌پزشکی هستند، می‌توانند از خدمات رِسا استفاده کنند.
+        </li>
+        <li>
+          تخصص پزشک با سایت نظام پزشکی بررسی می‌شود. اگر تاکنون تخصص شما در سایت
+          نظام پزشکی ثبت نشده، نیاز به ارائه گواهی است.
+        </li>
+        <li>
+          شماره همراه و کد ملی شما به‌هیچ عنوان در اختیار دیگران قرار نمی‌گیرد.
+        </li>
       </ul>
     </div>
     <div class="step-actions">
@@ -188,8 +219,12 @@ ul {
         </div>-->
       </div>
       <div>
-        <div class="step-next-button" v-show="currentStep !== 4" @click="goNextStep">
-          <div v-if="currentStep < 3 " class="text">بعدی</div>
+        <div
+          class="step-next-button"
+          v-show="currentStep !== 4"
+          @click="goNextStep"
+        >
+          <div v-if="currentStep < 3" class="text">بعدی</div>
           <div v-else class="text">تایید و ثبت نهایی</div>
           <i class="fa fa-angle-left"></i>
         </div>

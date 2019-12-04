@@ -149,22 +149,41 @@ section#header {
         </div>
         <ul class="nav-bar">
           <li class="nav-item">
-            <router-link :to="{name:'doctors'}" class="navigation-bar-item">لیست پزشکان</router-link>
+            <router-link to="/" class="navigation-bar-item"
+              >سامانه رسا</router-link
+            >
           </li>
           <li class="nav-item">
-            <router-link :to="{name:'doctors-psychology'}" class="navigation-bar-item">روانشناسی</router-link>
+            <router-link :to="{ name: 'doctors' }" class="navigation-bar-item"
+              >لیست پزشکان</router-link
+            >
           </li>
           <li class="nav-item">
+            <router-link
+              :to="{ name: 'doctors-psychology' }"
+              class="navigation-bar-item"
+              >روانشناسی</router-link
+            >
+          </li>
+          <!-- <li class="nav-item">
             <router-link :to="{name:'privacy'}" class="navigation-bar-item">قوانین</router-link>
+          </li> -->
+          <li class="nav-item">
+            <router-link :to="{ name: 'faq' }" class="navigation-bar-item"
+              >سوالات متداول</router-link
+            >
           </li>
           <li class="nav-item">
-            <router-link :to="{name:'faq'}" class="navigation-bar-item">سوالات متداول</router-link>
+            <router-link :to="{ name: 'about' }" class="navigation-bar-item"
+              >درباره رسا</router-link
+            >
           </li>
           <li class="nav-item">
-            <router-link :to="{name:'about'}" class="navigation-bar-item">درباره رسا</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link :to="{name:'contact-us'}" class="navigation-bar-item">تماس با ما</router-link>
+            <router-link
+              :to="{ name: 'contact-us' }"
+              class="navigation-bar-item"
+              >تماس با ما</router-link
+            >
           </li>
         </ul>
         <div class="left-nav">
@@ -174,11 +193,12 @@ section#header {
           </div>
           <div>
             <v-btn
-              :to="{name:user?'patient-profile':'patient-login'}"
+              :to="{ name: user ? 'patient-profile' : 'patient-login' }"
               color="white"
               outline
               round
-            >حساب کاربری</v-btn>
+              >حساب کاربری</v-btn
+            >
           </div>
         </div>
       </div>

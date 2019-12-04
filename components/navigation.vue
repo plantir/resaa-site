@@ -93,53 +93,64 @@
     </div>
     <ul class="nav-bar">
       <li class="nav-item">
-        <router-link
-          @click.native="closeNav"
-          :to="{name:user?'patient-profile':'patient-login'}"
-          class="navigation-bar-item"
-        >حساب کاربری</router-link>
+        <router-link @click.native="closeNav" to="/" class="navigation-bar-item"
+          >سامانه رسا</router-link
+        >
       </li>
       <li class="nav-item">
         <router-link
           @click.native="closeNav"
-          :to="{name:'doctors'}"
+          :to="{ name: user ? 'patient-profile' : 'patient-login' }"
           class="navigation-bar-item"
-        >لیست پزشکان</router-link>
+          >حساب کاربری</router-link
+        >
       </li>
       <li class="nav-item">
+        <router-link
+          @click.native="closeNav"
+          :to="{ name: 'doctors' }"
+          class="navigation-bar-item"
+          >لیست پزشکان</router-link
+        >
+      </li>
+      <!-- <li class="nav-item">
         <router-link
           @click.native="closeNav"
           :to="{name:'privacy'}"
           class="navigation-bar-item"
         >قوانین</router-link>
+      </li> -->
+      <li class="nav-item">
+        <router-link
+          @click.native="closeNav"
+          :to="{ name: 'doctors-psychology' }"
+          class="navigation-bar-item"
+          >مشاوره روانشناسی</router-link
+        >
       </li>
       <li class="nav-item">
         <router-link
           @click.native="closeNav"
-          :to="{name:'doctors-psychology'}"
+          :to="{ name: 'faq' }"
           class="navigation-bar-item"
-        >مشاوره روانشناسی</router-link>
+          >سوالات متداول</router-link
+        >
       </li>
       <li class="nav-item">
         <router-link
           @click.native="closeNav"
-          :to="{name:'faq'}"
+          :to="{ name: 'about' }"
           class="navigation-bar-item"
-        >سوالات متداول</router-link>
+          >درباره رسا</router-link
+        >
       </li>
       <li class="nav-item">
         <router-link
           @click.native="closeNav"
-          :to="{name:'about'}"
+          :to="{ name: 'contact-us' }"
           class="navigation-bar-item"
-        >درباره رسا</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link
-          @click.native="closeNav"
-          :to="{name:'contact-us'}"
-          class="navigation-bar-item"
-        >تماس با ما</router-link>
+          >تماس با ما</router-link
+        >
       </li>
     </ul>
     <div class="footer">
