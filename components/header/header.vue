@@ -1,4 +1,3 @@
-
 <style lang="scss">
 #navigation {
   .navigation-bar {
@@ -359,11 +358,17 @@
 
 <template>
   <section id="navigation">
-    <div :class="[{'patient': isPatient}, 'navigation-bar']">
+    <div :class="[{ patient: isPatient }, 'navigation-bar']">
       <div class="menu-icon" @click="activateMenu">
-        <span class="menu-icon__line menu-icon__line-left" :class="{ 'active': menuActive }"></span>
-        <span class="menu-icon__line" :class="{ 'active': menuActive }"></span>
-        <span class="menu-icon__line menu-icon__line-right" :class="{ 'active': menuActive }"></span>
+        <span
+          class="menu-icon__line menu-icon__line-left"
+          :class="{ active: menuActive }"
+        ></span>
+        <span class="menu-icon__line" :class="{ active: menuActive }"></span>
+        <span
+          class="menu-icon__line menu-icon__line-right"
+          :class="{ active: menuActive }"
+        ></span>
       </div>
       <div class="navigation-bar-right">
         <nuxt-link to="/" class="navigation-bar-logo">
@@ -376,8 +381,17 @@
             <li class="nav-item">
               <nuxt-link
                 @click.native="closeNav"
-                :to="{name:user?'patient-profile':'patient-login'}"
-              >حساب کاربری</nuxt-link>
+                to="/"
+                class="navigation-bar-item"
+                >سامانه رسا</nuxt-link
+              >
+            </li>
+            <li class="nav-item">
+              <nuxt-link
+                @click.native="closeNav"
+                :to="{ name: user ? 'patient-profile' : 'patient-login' }"
+                >حساب کاربری</nuxt-link
+              >
               <!-- <div v-if="user">
                 <a class="drop-down">
                   خوش اومدی {{user.firstName}}
@@ -416,44 +430,49 @@
             <li class="nav-item">
               <nuxt-link
                 @click.native="closeNav"
-                :to="{name:'doctors'}"
+                :to="{ name: 'doctors' }"
                 class="navigation-bar-item"
-              >لیست پزشکان</nuxt-link>
+                >لیست پزشکان</nuxt-link
+              >
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <nuxt-link
                 @click.native="closeNav"
                 :to="{name:'privacy'}"
                 class="navigation-bar-item"
               >قوانین</nuxt-link>
-            </li>
+            </li> -->
             <li class="nav-item">
               <router-link
                 @click.native="closeNav"
-                :to="{name:'doctors-psychology'}"
+                :to="{ name: 'doctors-psychology' }"
                 class="navigation-bar-item"
-              >مشاوره روانشناسی</router-link>
+                >مشاوره روانشناسی</router-link
+              >
             </li>
             <li class="nav-item">
               <nuxt-link
                 @click.native="closeNav"
-                :to="{name:'faq'}"
+                :to="{ name: 'faq' }"
                 class="navigation-bar-item"
-              >سوالات متداول</nuxt-link>
+                >سوالات متداول</nuxt-link
+              >
             </li>
             <li class="nav-item">
               <nuxt-link
                 @click.native="closeNav"
-                :to="{name:'about'}"
+                :to="{ name: 'about' }"
                 class="navigation-bar-item"
-              >درباره رسا</nuxt-link>
+                >درباره رسا</nuxt-link
+              >
             </li>
             <li class="nav-item">
               <nuxt-link
                 @click.native="closeNav"
-                :to="{name:'contact-us'}"
+                :to="{ name: 'contact-us' }"
                 class="navigation-bar-item"
-              >تماس با ما</nuxt-link>
+                >تماس با ما</nuxt-link
+              >
             </li>
           </ul>
         </div>
@@ -471,12 +490,13 @@
         >افزایش اعتبار</nuxt-link>-->
         <div v-if="isLanding !== true">
           <nuxt-link
-            :to="{name:'charge'}"
+            :to="{ name: 'charge' }"
             v-if="isPatient === true"
             class="navigation-bar-button"
-          >افزایش اعتبار</nuxt-link>
+            >افزایش اعتبار</nuxt-link
+          >
           <nuxt-link
-            :to="{name:'charge'}"
+            :to="{ name: 'charge' }"
             v-if="isPatient === true"
             class="navigation-bar-button-mini"
           >
@@ -485,24 +505,26 @@
         </div>
         <div v-else>
           <nuxt-link
-            :to="{name:'charge'}"
+            :to="{ name: 'charge' }"
             v-if="isPatient === true"
             class="navigation-bar-button"
-          >افزایش اعتبار</nuxt-link>
+            >افزایش اعتبار</nuxt-link
+          >
           <nuxt-link
-            :to="{name:'charge'}"
+            :to="{ name: 'charge' }"
             v-if="isPatient === true"
             class="navigation-bar-button-mini"
           >
             <i class="fa fa-money"></i>
           </nuxt-link>
           <nuxt-link
-            :to="{name:'patient-landing'}"
+            :to="{ name: 'patient-landing' }"
             v-if="isPatient !== true"
             class="navigation-bar-button"
-          >رِسای بیماران</nuxt-link>
+            >رِسای بیماران</nuxt-link
+          >
           <nuxt-link
-            :to="{name:'patient-landing'}"
+            :to="{ name: 'patient-landing' }"
             v-if="isPatient !== true"
             class="navigation-bar-button-mini"
           >
@@ -510,9 +532,9 @@
           </nuxt-link>
         </div>
       </div>
-      <div class="nav-main" :class="{ 'active' : menuActive }">
-        <div class="nav-main__content" :class="{ 'active' : menuActive }">
-          <ul class="nav-main__list" :class="{ 'active' : menuActive }">
+      <div class="nav-main" :class="{ active: menuActive }">
+        <div class="nav-main__content" :class="{ active: menuActive }">
+          <ul class="nav-main__list" :class="{ active: menuActive }">
             <!-- <li class="nav-main__list-item">
               <div v-if="user">
                 <a class="drop-down">خوش اومدی {{user.firstName}}</a>
@@ -540,16 +562,18 @@
               @click.native="closeNav"
               v-if="user"
               class="nav-main__list-item"
-              :class="{ 'active' : menuActive }"
-              :to="{name:'patient-profile'}"
-            >خوش اومدی {{user.firstName}}</nuxt-link>
+              :class="{ active: menuActive }"
+              :to="{ name: 'patient-profile' }"
+              >خوش اومدی {{ user.firstName }}</nuxt-link
+            >
             <nuxt-link
               v-else
               @click.native="closeNav"
               class="nav-main__list-item"
-              :class="{ 'active' : menuActive }"
-              :to="{name:'patient-login'}"
-            >ورود به حساب کاربری</nuxt-link>
+              :class="{ active: menuActive }"
+              :to="{ name: 'patient-login' }"
+              >ورود به حساب کاربری</nuxt-link
+            >
             <template>
               <nuxt-link
                 @click.native="closeNav"
@@ -557,15 +581,17 @@
                 :to="item.path"
                 :key="index"
                 class="nav-main__list-item"
-                :class="{ 'active' : menuActive }"
-              >{{ item.name }}</nuxt-link>
+                :class="{ active: menuActive }"
+                >{{ item.name }}</nuxt-link
+              >
             </template>
             <a
               v-if="user"
               class="nav-main__list-item"
-              :class="{ 'active' : menuActive }"
+              :class="{ active: menuActive }"
               @click="logout"
-            >خروج</a>
+              >خروج</a
+            >
           </ul>
         </div>
       </div>
@@ -583,13 +609,17 @@ export default {
       show: false,
       itemsList: [
         {
+          name: "سامانه رسا",
+          path: { name: "index" }
+        },
+        {
           name: "لیست پزشکان",
           path: { name: "doctors" }
         },
-        {
-          name: "قوانین",
-          path: { name: "privacy" }
-        },
+        // {
+        //   name: "قوانین",
+        //   path: { name: "privacy" }
+        // },
         {
           name: "مشاوره روانشناسی",
           path: { name: "doctors-psychology" }

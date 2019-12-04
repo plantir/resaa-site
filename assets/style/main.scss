@@ -1,9 +1,9 @@
-@import './fonts';
+@import "./fonts";
 // @import 'variables';
 // @import 'bootstrap.css';
 // @import '~bootstrap-vue/dist/bootstrap-vue.css';
-@import './select';
-@import './typography';
+@import "./select";
+@import "./typography";
 
 html {
   font-family: IRANSans, tahoma;
@@ -173,4 +173,13 @@ svg {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+.doctor-suport {
+  font-weight: 600;
+  text-align: center;
+  font-size: 14px;
+  span {
+    direction: ltr;
+    display: inline-block;
+  }
 }

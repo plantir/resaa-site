@@ -1,4 +1,4 @@
-<style lang="scss" >
+<style lang="scss">
 #doctor-info {
   h1 {
     font-size: 24px;
@@ -196,59 +196,104 @@
           <div class="image-wrapper">
             <div class="image">
               <div class="status">
-                <component :is="virtual_doctor.currentlyAvailable?'Available':'NotAvailable'"></component>
+                <component
+                  :is="
+                    virtual_doctor.currentlyAvailable
+                      ? 'Available'
+                      : 'NotAvailable'
+                  "
+                ></component>
               </div>
               <img
                 v-if="virtual_doctor.imagePath"
-                v-lazy="'https://webapi.resaa.net/'+virtual_doctor.imagePath"
-                :alt="`تصویر ${virtual_doctor.title || ''} ${virtual_doctor.firstName} ${virtual_doctor.lastName}`"
+                v-lazy="'https://webapi.resaa.net/' + virtual_doctor.imagePath"
+                :alt="
+                  `تصویر ${virtual_doctor.title || ''} ${
+                    virtual_doctor.firstName
+                  } ${virtual_doctor.lastName}`
+                "
               />
               <img
                 v-else
                 src="/img/doc-placeholder.png"
-                :alt="`تصویر ${virtual_doctor.title || ''} ${virtual_doctor.firstName} ${virtual_doctor.lastName}`"
+                :alt="
+                  `تصویر ${virtual_doctor.title || ''} ${
+                    virtual_doctor.firstName
+                  } ${virtual_doctor.lastName}`
+                "
               />
             </div>
-            <div v-scroll-to="{ el: '#call-section', offset: -80 }" class="doctor-id r-display-2">
+            <div
+              v-scroll-to="{ el: '#call-section', offset: -80 }"
+              class="doctor-id r-display-2"
+            >
               <img src="~assets/img/doctorFingerPrint.png" alt />
               کد رِسا:
-              <div class="doctor-resaa-code">{{ virtual_doctor.subscriberNumber | persianDigit }}</div>
+              <div class="doctor-resaa-code">
+                {{ virtual_doctor.subscriberNumber | persianDigit }}
+              </div>
             </div>
           </div>
         </v-flex>
         <v-flex xs12 md4>
           <div class="name-wrapper">
             <div>
-              <h1>{{virtual_doctor.title}} {{virtual_doctor.firstName}} {{virtual_doctor.lastName}}</h1>
+              <h1>
+                {{ virtual_doctor.title }} {{ virtual_doctor.firstName }}
+                {{ virtual_doctor.lastName }}
+              </h1>
               <span
                 class="availability hide-md"
-                :class="virtual_doctor.currentlyAvailable?'active':'deactive'"
-              >({{virtual_doctor.currentlyAvailable?'در دسترس':'در دسترس نمی باشد'}})</span>
+                :class="
+                  virtual_doctor.currentlyAvailable ? 'active' : 'deactive'
+                "
+                >({{
+                  virtual_doctor.currentlyAvailable
+                    ? "در دسترس"
+                    : "خارج از ساعت پاسخگویی"
+                }})</span
+              >
             </div>
             <p v-if="virtual_doctor.specialty" class="specialty r-display-2">
               تخصص:
-              <strong>{{virtual_doctor.specialty.title}}</strong>
+              <strong>{{ virtual_doctor.specialty.title }}</strong>
             </p>
             <span
               class="availability hide-md-and-up"
-              :class="virtual_doctor.currentlyAvailable?'active':'deactive'"
-            >({{virtual_doctor.currentlyAvailable?'در دسترس':'در دسترس نمی باشد'}})</span>
+              :class="virtual_doctor.currentlyAvailable ? 'active' : 'deactive'"
+              >({{
+                virtual_doctor.currentlyAvailable
+                  ? "در دسترس"
+                  : "خارج از ساعت پاسخگویی"
+              }})</span
+            >
             <ul class="specialty-area-container">
               <!-- <li
                 class="specialty-area"
               >کد نظام پزشکی: {{virtual_doctor.medicalCouncilNumber || '-' | persianDigit}}</li>-->
-              <li v-for="tag in virtual_doctor.custom_tags" :key="tag.id" class="specialty-area">
-                <p>{{tag.title}}</p>
+              <li
+                v-for="tag in virtual_doctor.custom_tags"
+                :key="tag.id"
+                class="specialty-area"
+              >
+                <p>{{ tag.title }}</p>
               </li>
             </ul>
             <div class="response-wrapper hide-md">
               <div class="title">زمان های پاسخگویی</div>
               <div class="response-time" v-if="day_of_week && times">
                 <span>امروز:</span>
-                <template v-for="(item,index) in times[day_of_week]">
+                <template v-for="(item, index) in times[day_of_week]">
                   <span :key="index">
-                    <span>{{item.start | persianDigit}} - {{item.end | persianDigit}}</span>
-                    <span v-if="index != times[day_of_week].length-1" class="seperator">/</span>
+                    <span
+                      >{{ item.start | persianDigit }} -
+                      {{ item.end | persianDigit }}</span
+                    >
+                    <span
+                      v-if="index != times[day_of_week].length - 1"
+                      class="seperator"
+                      >/</span
+                    >
                   </span>
                 </template>
                 <!-- <span>۲۰:۰۰ - ۱۶:۰۰</span> -->
@@ -267,7 +312,7 @@
             <h2 class="title">زمینه های فعالیت :</h2>
             <ul>
               <li v-for="(field, index) in virtual_doctor.fields" :key="index">
-                <p>{{field}}</p>
+                <p>{{ field }}</p>
               </li>
             </ul>
           </div>
@@ -277,10 +322,17 @@
             <h2 class="title">زمان های پاسخگویی</h2>
             <div class="response-time r-display-3" v-if="day_of_week && times">
               <span>امروز:</span>
-              <template v-for="(item,index) in times[day_of_week]">
+              <template v-for="(item, index) in times[day_of_week]">
                 <span :key="index">
-                  <span>{{item.start | persianDigit}} - {{item.end | persianDigit}}</span>
-                  <span v-if="index != times[day_of_week].length-1" class="seperator">/</span>
+                  <span
+                    >{{ item.start | persianDigit }} -
+                    {{ item.end | persianDigit }}</span
+                  >
+                  <span
+                    v-if="index != times[day_of_week].length - 1"
+                    class="seperator"
+                    >/</span
+                  >
                 </span>
               </template>
               <!-- <span>۲۰:۰۰ - ۱۶:۰۰</span> -->
