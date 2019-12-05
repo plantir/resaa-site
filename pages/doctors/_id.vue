@@ -523,13 +523,17 @@ export default {
     } else if (locations.length == 1) {
       center = locations[0];
     }
-    let title = `${doctor.title} ${doctor.firstName} ${doctor.lastName} | تماس مستفیم با پزشک در سامانه رسا`;
+    let title = `${doctor.title || ""} ${doctor.firstName} ${
+      doctor.lastName
+    } | تماس مستفیم با پزشک در سامانه رسا`;
     let description = `با استفاده از سامانه رسا می توانید در کوتاه ترین زمان ممکن، مستقیما با دکتر ${doctor.firstName}  ${doctor.lastName} متخصص ${doctor.specialty.title} تماس تلفنی برقرار کنید و به پاسخ سوالات خود برسید.`;
     let og = {
       image:
         "https://webapi.resaa.net/" + doctor.imagePath ||
         "/img/doc-placeholder.png",
-      site_name: `رسا : ${doctor.title} ${doctor.firstName} ${doctor.lastName}`,
+      site_name: `رسا : ${doctor.title || ""} ${doctor.firstName} ${
+        doctor.lastName
+      }`,
       title: `تخصص : ${doctor.specialty.title}`,
       description: `کد رسا : ${doctor.subscriberNumber}`,
       canonical: `${process.env.SITE_URL}/doctors/${doctor.subscriberNumber}`
