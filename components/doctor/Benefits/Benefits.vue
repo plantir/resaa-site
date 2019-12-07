@@ -185,6 +185,9 @@
         </div>
       </div>
     </div>
+    <div class="doctor-suport mt-4">
+      شماره پشتیبانی پزشکان: <span>{{ "021-74471200" | persianDigit }}</span>
+    </div>
   </div>
 </template>
 
