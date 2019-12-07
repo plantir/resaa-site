@@ -60,7 +60,7 @@
   justify-content: space-between;
   flex-direction: column;
   > a {
-    margin: 8px;
+    margin: 8px 0;
     color: #babcbd;
     display: flex;
     align-items: center;
@@ -68,12 +68,12 @@
   p {
     margin: 0;
     padding: 0;
-    margin-right: 16px;
-  }
-  span {
-    display: inline-block;
-    direction: ltr;
-    margin-right: 16px;
+    margin-right: 8px;
+    span {
+      display: inline-block;
+      direction: ltr;
+      margin-right: 0;
+    }
   }
   svg,
   path {
@@ -389,6 +389,11 @@
                           >تماس با ما</router-link
                         >
                       </li>
+                      <li>
+                        <router-link :to="{ name: 'privacy' }"
+                          >قوانین</router-link
+                        >
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -469,7 +474,7 @@
               <a :href="`mailto:${contactInfo.email}`" class="footer-email">
                 <!-- <v-icon>email</v-icon> -->
                 <envelope />
-                <span>{{ contactInfo.email }}</span>
+                <p>{{ contactInfo.email }}</p>
               </a>
             </div>
             <div class="e-namad">
