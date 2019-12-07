@@ -366,8 +366,10 @@ p {
           </div>
           <div v-else class="available-time-container">
             <span>مدت زمان قابل گفتگو: برای دیدن مدت زمان مکالمه ابتدا</span>
-            <router-link :to="{ name: 'patient-login' }">وارد سایت</router-link
-            >شوید
+            <router-link :to="{ name: 'patient-login' }">وارد سایت</router-link>
+            <span>
+              شوید
+            </span>
           </div>
         </div>
         <callSection
@@ -392,7 +394,10 @@ p {
               <span>می‌توانید از طریق</span>
               <router-link :to="{ name: 'charge' }"
                 >خرید شارژ اینترنتی</router-link
-              >اعتبار خود را افزایش دهید.
+              >
+              <span>
+                اعتبار خود را افزایش دهید.
+              </span>
             </p>
           </div>
         </div>
