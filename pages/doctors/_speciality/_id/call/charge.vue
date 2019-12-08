@@ -242,7 +242,6 @@ h2 {
 
       <div class="payment-wrapper">
         <v-btn
-          v-show="false"
           id="journeygobank"
           @click="onSubmit"
           class="payment-btn"
