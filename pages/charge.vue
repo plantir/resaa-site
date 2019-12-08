@@ -536,7 +536,6 @@
             </div>
           </div>
           <button
-            v-show="false"
             :disabled="!subscriberNumber"
             @click="onSubmit"
             class="charge-button"
