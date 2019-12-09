@@ -252,7 +252,7 @@ h2 {
           <v-icon class="ml-3">fa-credit-card</v-icon>
           <span>پرداخت</span>
         </v-btn>
-        <v-alert style="width:400px" type="warning" outline :value="true">
+        <!-- <v-alert style="width:400px" type="warning" outline :value="true">
           <span>
             با توجه به مشکل به وجود آمده در درگاه بانکی لطفاً جهت شارژ از ussd
             استفاده نمایید
@@ -260,7 +260,7 @@ h2 {
           <span dir="ltr">
             *500*25#
           </span>
-        </v-alert>
+        </v-alert> -->
         <vue-recaptcha
           ref="invisibleRecaptcha"
           @verify="onVerify"
