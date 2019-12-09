@@ -371,6 +371,11 @@
                     <ul>
                       <li>
                         <router-link :to="{ name: 'privacy' }"
+                          >قوانین</router-link
+                        >
+                      </li>
+                      <li>
+                        <router-link :to="{ name: 'privacy' }"
                           >حریم خصوصی</router-link
                         >
                       </li>
@@ -387,11 +392,6 @@
                       <li>
                         <router-link :to="{ name: 'contact-us' }"
                           >تماس با ما</router-link
-                        >
-                      </li>
-                      <li>
-                        <router-link :to="{ name: 'privacy' }"
-                          >قوانین</router-link
                         >
                       </li>
                     </ul>

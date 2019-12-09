@@ -542,7 +542,7 @@
           >
             خرید شارژ
           </button>
-          <v-alert style="width:400px" type="warning" outline :value="true">
+          <!-- <v-alert style="width:400px" type="warning" outline :value="true">
             <span>
               با توجه به مشکل به وجود آمده در درگاه بانکی لطفاً جهت شارژ از ussd
               استفاده نمایید
@@ -550,7 +550,7 @@
             <span dir="ltr">
               *500*25#
             </span>
-          </v-alert>
+          </v-alert> -->
           <vue-recaptcha
             ref="invisibleRecaptcha"
             @verify="onVerify"
