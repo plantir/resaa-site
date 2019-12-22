@@ -160,7 +160,7 @@
       </div>
     </v-container>
     <v-container
-      v-if="category.testimonials.length"
+      v-if="category.testimonials && category.testimonials.length"
       class="comments-wrapper"
       fluid
     >
