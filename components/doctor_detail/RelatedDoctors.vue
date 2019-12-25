@@ -60,15 +60,15 @@ section {
   max-width: 1200px;
   padding: 0 60px;
   .swiper-slide {
-    width: 200px !important;
+    width: 200px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    a {
-      width: 100%;
-    }
+    // a {
+    //   width: 100%;
+    // }
     .image {
       position: relative;
       border: 1px solid #d4d4d4;
@@ -96,7 +96,7 @@ section {
       display: block;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 100%;
+      max-width: 200px;
     }
     .speciality {
       color: #bbb;
@@ -171,7 +171,7 @@ section {
               </div>
               <img
                 v-if="doctor.imagePath"
-                v-lazy="'https://webapi.resaa.net/' + doctor.imagePath"
+                :src="'https://webapi.resaa.net/' + doctor.imagePath"
                 :alt="`تصویر ${doctor.fullNameWithTitle}`"
               />
               <img
@@ -201,7 +201,6 @@ section {
   </section>
 </template>
 <script>
-import doctors from "@/components/doctor_detail/doctors.json";
 import Available from "~/assets/svg/Available.svg?inline";
 import NotAvailable from "~/assets/svg/NotAvailable.svg?inline";
 import ChevronLeft from "~/assets/svg/chevron_left.svg?inline";
@@ -213,9 +212,9 @@ export default {
   },
   data() {
     return {
-      doctors: doctors,
+      doctors: null,
       swiperOptionDoctors: {
-        slidesPerView: 1,
+        slidesPerView: 3,
         spaceBetween: 60,
         // slidesPerGroup: 1,
         // loopFillGroupWithBlank: true,
@@ -244,14 +243,14 @@ export default {
     };
   },
   async mounted() {
-    // try {
-    //   var { result } = await this.$axios.$get(
-    //     `/Doctors/${this.$route.params.id}/RelatedDoctors?limit=5`
-    //   );
-    // } catch (err) {
-    //   return error({ statusCode: 500, message: "related Doctor error" });
-    // }
-    // this.doctors = result.relatedDoctors;
+    try {
+      var { result } = await this.$axios.$get(
+        `/Doctors/${this.$route.params.id}/RelatedDoctors?limit=5`
+      );
+    } catch (err) {
+      return error({ statusCode: 500, message: "related Doctor error" });
+    }
+    this.doctors = result.relatedDoctors;
     // this.doctors = this.$calc_avalibility(this.doctors);
     // let res = await this.$axios.$get(
     //   `/Doctors?fields=specialty,title,subscriberNumber,firstName,lastName,imagePath,currentlyAvailable&specialtyId=${this.doctor.specialty.id}&limit=8&offset=0`
