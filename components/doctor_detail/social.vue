@@ -42,7 +42,6 @@ section {
 }
 </style>
 
-
 <template>
   <section>
     <div class="social-wrapper">
@@ -61,7 +60,11 @@ section {
         <!-- <a>
           <instagram class="instagram-hover-svg" />
         </a>-->
-        <a :href="`https://facebook.com/sharer/sharer.php?u=${url}`" target="_blank" rel="noopener">
+        <a
+          :href="`https://facebook.com/sharer/sharer.php?u=${url}`"
+          target="_blank"
+          rel="noopener"
+        >
           <facebook class="facebook-hover-svg" />
         </a>
         <a
@@ -97,7 +100,7 @@ export default {
     text() {
       return `مشاوره تلفنی با ${this.doctor.title || ""} ${this.doctor
         .firstName || ""} ${this.doctor.lastName || ""} متخصص ${this.doctor
-        .specialty.title || ""} را در سامانه رسا  به شما پیشنهاد می کنم.`;
+        .specialtyTitle || ""} را در سامانه رسا  به شما پیشنهاد می کنم.`;
     }
   }
 };

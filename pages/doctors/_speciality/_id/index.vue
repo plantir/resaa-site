@@ -1,4 +1,4 @@
-<style lang="scss" >
+<style lang="scss">
 :root {
   --grey-color: #969696;
 }
@@ -69,17 +69,23 @@
           <span>
             <v-icon>chevron_left</v-icon>
           </span>
-          <nuxt-link :to="$route.fullPath">{{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</nuxt-link>
+          <nuxt-link :to="$route.fullPath"
+            >{{ doctor.title }} {{ doctor.firstName }}
+            {{ doctor.lastName }}</nuxt-link
+          >
         </div>
         <Info :doctor="doctor" />
         <Call :doctor="doctor" />
         <Why />
-        <Address v-if="doctor.workplaces.length" :doctor="doctor" />
+        <Address
+          v-if="doctor.workplaces && doctor.workplaces.length"
+          :doctor="doctor"
+        />
       </div>
     </v-container>
     <v-container fluid class="pa-0">
-      <RelatedDoctors :doctor="doctor" />
-      <Comments />
+      <!-- <RelatedDoctors :doctor="doctor" /> -->
+      <Comments :service="doctor.comments" />
       <Social :doctor="doctor" />
     </v-container>
   </div>
@@ -148,26 +154,24 @@ export default {
     let fields =
       "id,firstName,lastName,imagePath,currentlyAvailable,subscriberNumber,specialty,tags,expertise,title,workplaces,medicalCouncilNumber";
     try {
-      var { result } = await $axios.$get(
-        `/Doctors/${params.id}?fields=${fields}`
-      );
+      var { result } = await $axios.$get(`/Doctors/${params.id}/profile`);
     } catch (err) {
       return error({ statusCode: 410, message: "doctor not found" });
     }
     let doctor = result.doctor;
-    let virtual_doctor = doctors.find(
-      item => item.subscriberNumber == params.id
-    );
-    doctor = Object.assign(virtual_doctor, doctor);
+    // let virtual_doctor = doctors.find(
+    //   item => item.subscriberNumber == params.id
+    // );
+    // doctor = Object.assign(virtual_doctor, doctor);
     let locations = [];
-    for (let address of doctor.workplaces) {
-      if (address.latitude && address.longitude) {
-        locations.push({
-          lat: address.latitude,
-          lng: address.longitude
-        });
-      }
-    }
+    // for (let address of doctor.workplaces) {
+    //   if (address.latitude && address.longitude) {
+    //     locations.push({
+    //       lat: address.latitude,
+    //       lng: address.longitude
+    //     });
+    //   }
+    // }
     let hideMap = false;
     let center = { lat: 10, lng: 10 };
     if (locations.length == 0) {
@@ -176,13 +180,13 @@ export default {
       center = locations[0];
     }
     let title = `دکتر ${doctor.firstName} ${doctor.lastName} | تماس مستفیم با پزشک در سامانه رسا`;
-    let description = `با استفاده از سامانه رسا می توانید در کوتاه ترین زمان ممکن، مستقیما با دکتر ${doctor.firstName}  ${doctor.lastName} متخصص ${doctor.specialty.title} تماس تلفنی برقرار کنید و به پاسخ سوالات خود برسید.`;
+    let description = `با استفاده از سامانه رسا می توانید در کوتاه ترین زمان ممکن، مستقیما با دکتر ${doctor.firstName}  ${doctor.lastName} متخصص ${doctor.specialtyTitle} تماس تلفنی برقرار کنید و به پاسخ سوالات خود برسید.`;
     let og = {
       image:
         "https://webapi.resaa.net/" + doctor.imagePath ||
         "/img/doc-placeholder.png",
       site_name: `رسا : دکتر ${doctor.firstName} ${doctor.lastName}`,
-      title: `تخصص : ${doctor.specialty.title}`,
+      title: `تخصص : ${doctor.specialtyTitle}`,
       description: `کد رسا : ${doctor.subscriberNumber}`,
       canonical: `${process.env.SITE_URL}/doctors/psychology/${doctor.subscriberNumber}`
     };
@@ -232,7 +236,7 @@ export default {
         //   bestRating: "100",
         //   ratingCount: "25"
         // },
-        description: doctor.custom_tags.map(item => item.title).join(",")
+        description: doctor.aboutDoctor.map(item => item.title).join(",")
       }
     };
   },
@@ -278,4 +282,3 @@ export default {
   }
 };
 </script>
-

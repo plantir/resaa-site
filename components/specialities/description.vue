@@ -1,4 +1,4 @@
-<style lang="scss" >
+<style lang="scss">
 #specoality-description {
   &.card {
     overflow: hidden;
@@ -85,8 +85,14 @@
 <template>
   <div class="card" id="specoality-description">
     <resaaElement class="resaa-element" />
-    <div class="item" v-for="(item, index) in items" :key="index" :class="{'half-width':item.half}">
-      <h2>{{item.title}}</h2>
+
+    <div
+      class="item"
+      v-for="(item, index) in items"
+      :key="index"
+      :class="{ 'half-width': item.half }"
+    >
+      <h2>{{ item.title }}</h2>
       <div class="content" v-html="item.content"></div>
     </div>
   </div>

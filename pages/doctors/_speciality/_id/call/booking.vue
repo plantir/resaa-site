@@ -102,65 +102,84 @@
         <div class="top-section">
           <div>
             <div class="payment-status">
-              <span v-if="status=='fail'">پرداخت ناموفق</span>
-              <span v-if="status=='success'">پرداخت موفق</span>
-              <span v-if="status=='continue'">
+              <span v-if="status == 'fail'">پرداخت ناموفق</span>
+              <span v-if="status == 'success'">پرداخت موفق</span>
+              <span v-if="status == 'continue'">
                 <span v-if="doctor.currentlyAvailable">تماس با پزشک</span>
                 <span v-else>ثبت درخواست تماس با پزشک</span>
               </span>
             </div>
-            <div v-if="status=='success'" class="amount">
+            <div v-if="status == 'success'" class="amount">
               <span>حساب شما</span>
-              <span class="price">{{charge.amount | currency | persianDigit}} تومان</span>
+              <span class="price"
+                >{{ charge.amount | currency | persianDigit }} تومان</span
+              >
               <span>شارژ شد.</span>
             </div>
-            <div v-if="status!=='continue'" class="trackingNumber">
-              <span>کد پیگیری: {{charge.trackingNumber | persianDigit}}</span>
+            <div v-if="status !== 'continue'" class="trackingNumber">
+              <span>کد پیگیری: {{ charge.trackingNumber | persianDigit }}</span>
             </div>
           </div>
-          <div class="image" :class="{deactive:!doctor.currentlyAvailable}">
+          <div class="image" :class="{ deactive: !doctor.currentlyAvailable }">
             <div class="status">
-              <component :is="doctor.currentlyAvailable?'Available':'NotAvailable'"></component>
+              <component
+                :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"
+              ></component>
             </div>
             <img
               v-if="doctor.imagePath"
-              :src="'https://webapi.resaa.net/'+doctor.imagePath"
-              :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+              :src="'https://webapi.resaa.net/' + doctor.imagePath"
+              :alt="
+                `تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`
+              "
             />
             <img
               v-else
               src="/img/doc-placeholder.png"
-              :alt="`تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`"
+              :alt="
+                `تصویر ${doctor.title} ${doctor.firstName} ${doctor.lastName}`
+              "
             />
           </div>
         </div>
         <div class="bottom-section">
           <div>
-            <div v-if="status ==  'fail'">
+            <div v-if="status == 'fail'">
               <p>عملیات پرداخت ناموفق بود.</p>
-              <p>در صورتی که مبلغی از حساب شما کسر شده باشد، حداکثر تا ۷۲ ساعت به حساب بانکی شما واریز می گردد. در صورت تکرار این مشکل با پشتیبانی تماس بگیرید.</p>
+              <p>
+                در صورتی که مبلغی از حساب شما کسر شده باشد، حداکثر تا ۷۲ ساعت به
+                حساب بانکی شما واریز می گردد. در صورت تکرار این مشکل با پشتیبانی
+                تماس بگیرید.
+              </p>
             </div>
             <div v-else>
               <p>
                 <span>اعتبار فعلی حساب شما</span>
-                <span class="price">{{credit | currency | persianDigit}} تومان</span>
+                <span class="price"
+                  >{{ credit | currency | persianDigit }} تومان</span
+                >
                 <span>است.</span>
               </p>
               <p>
                 <span>شما می توانید</span>
-                <span class="price">{{duration | persianDigit}} دقیقه</span>
-                <span>با {{doctor.title}} {{doctor.firstName}} {{doctor.lastName}} (کد رسا: {{doctor.subscriberNumber | persianDigit}}) صحبت کنید.</span>
+                <span class="price">{{ duration | persianDigit }} دقیقه</span>
+                <span
+                  >با {{ doctor.title }} {{ doctor.firstName }}
+                  {{ doctor.lastName }} (کد رسا:
+                  {{ doctor.subscriberNumber | persianDigit }}) صحبت کنید.</span
+                >
               </p>
             </div>
           </div>
           <v-btn
-            v-if="status ==  'fail'"
+            v-if="status == 'fail'"
             round
             depressed
             dark
             class="retry-btn"
             to="charge"
-          >تلاش مجدد</v-btn>
+            >تلاش مجدد</v-btn
+          >
           <v-btn
             round
             depressed
@@ -172,7 +191,14 @@
             <span v-if="!doctor.currentlyAvailable">ثبت درخواست تماس</span>
             <span v-else>تماس با پزشک</span>
           </v-btn>
-          <v-btn v-else round depressed dark class="retry-btn" @click="reserveDoctor">
+          <v-btn
+            v-else
+            round
+            depressed
+            dark
+            class="retry-btn"
+            @click="reserveDoctor"
+          >
             <span v-if="!doctor.currentlyAvailable">ثبت درخواست تماس</span>
             <span v-else>تماس با پزشک</span>
           </v-btn>
@@ -183,7 +209,10 @@
       <div>
         <Tellphone />
         <div>
-          <p>پشتیبانی رسا تا برقراری تماس موفق در کنار شماست. شماره پشتیبانی ۰۲۱۷۴۴۷۱۳۰۰</p>
+          <p>
+            پشتیبانی رسا تا برقراری تماس موفق در کنار شماست. شماره پشتیبانی
+            ۰۲۱۷۴۴۷۱۳۰۰
+          </p>
         </div>
       </div>
     </div>
@@ -191,27 +220,47 @@
       <div>
         <img src="~assets/img/lamp@2x.png" alt />
         <div>
-          <p>کافیست دکمه ثبت درخواست تماس را بفشارید و با موبایل خود با شماره ۰۲۱۷۴۴۷۱۴۰۲ تماس بگیرید. پس از پخش شدن صدای گویا عدد یک را وارد کنید.</p>
-          <p>پزشک نهایتا در اولین ساعت پاسخگویی خود با شماره موبایلی که در سامانه ثبت کرده‌اید تماس می‌گیرد. هزینه مکالمه به صورت دقیقه ای از اعتبار شما کسر می‌گردد.</p>
-          <p>پزشک با شماره ۰۲۱۷۴۴۷۱۱۱۱ با شما تماس می‌گیرد. در صورت عدم پاسخگویی شما مبلغی از حساب شما کسر نمی‌گردد.</p>
+          <p>
+            کافیست دکمه ثبت درخواست تماس را بفشارید و با موبایل خود با شماره
+            ۰۲۱۷۴۴۷۱۴۰۲ تماس بگیرید. پس از پخش شدن صدای گویا عدد یک را وارد
+            کنید.
+          </p>
+          <p>
+            پزشک نهایتا در اولین ساعت پاسخگویی خود با شماره موبایلی که در سامانه
+            ثبت کرده‌اید تماس می‌گیرد. هزینه مکالمه به صورت دقیقه ای از اعتبار
+            شما کسر می‌گردد.
+          </p>
+          <p>
+            پزشک با شماره ۰۲۱۷۴۴۷۱۱۱۱ با شما تماس می‌گیرد. در صورت عدم پاسخگویی
+            شما مبلغی از حساب شما کسر نمی‌گردد.
+          </p>
         </div>
       </div>
     </div>
     <template v-else>
       <div class="card notify hide-md">
         <div>
-          <img src="~assets/img/booking_website@2x.png" />دکمه تماس با پزشک را بفشارید و با موبایل خود با شماره ۰۲۱۷۴۴۷۱۴۰۲ تماس بگیرید.
+          <img src="~assets/img/booking_website@2x.png" />دکمه تماس با پزشک را
+          بفشارید و با موبایل خود با شماره ۰۲۱۷۴۴۷۱۴۰۲ تماس بگیرید.
         </div>
         <div>
-          <img src="~assets/img/booking_telephone@2x.png" />برای تماس با تلفن ثابت یا هر خطی بجز موبایلتان با شماره ۰۲۱۷۴۴۷۱۱۱۱ تماس بگیرید و کد کاربری و رمز عبوری که برای شما پیامک شده است، را وارد کنید. سپس کد رسای پزشک را وارد کنید تا تماس شما با پزشک بر قرار شود.
+          <img src="~assets/img/booking_telephone@2x.png" />برای تماس با تلفن
+          ثابت یا هر خطی بجز موبایلتان با شماره ۰۲۱۷۴۴۷۱۱۱۱ تماس بگیرید و کد
+          کاربری و رمز عبوری که برای شما پیامک شده است، را وارد کنید. سپس کد
+          رسای پزشک را وارد کنید تا تماس شما با پزشک بر قرار شود.
         </div>
       </div>
       <div class="card notify hide-md-and-up">
         <div>
-          <img src="~assets/img/booking_phone@2x.png" />دکمه تماس با پزشک را بفشارید و با شماره سامانه رسا که روی صفحه موبایلتان ظاهر می شود تماس بگیرید. تماس شما به صورت خودکار با پزشک برقرار می شود
+          <img src="~assets/img/booking_phone@2x.png" />دکمه تماس با پزشک را
+          بفشارید و با شماره سامانه رسا که روی صفحه موبایلتان ظاهر می شود تماس
+          بگیرید. تماس شما به صورت خودکار با پزشک برقرار می شود
         </div>
         <div>
-          <img src="~assets/img/booking_telephone@2x.png" />برای تماس با تلفن ثابت یا هر خطی بجز موبایلتان با شماره ۰۲۱۷۴۴۷۱۱۱۱ تماس بگیرید و کد کاربری و رمز عبوری که برای شما پیامک شده است، را وارد کنید. سپس کد رسای پزشک را وارد کنید تا تماس شما با پزشک بر قرار شود.
+          <img src="~assets/img/booking_telephone@2x.png" />برای تماس با تلفن
+          ثابت یا هر خطی بجز موبایلتان با شماره ۰۲۱۷۴۴۷۱۱۱۱ تماس بگیرید و کد
+          کاربری و رمز عبوری که برای شما پیامک شده است، را وارد کنید. سپس کد
+          رسای پزشک را وارد کنید تا تماس شما با پزشک بر قرار شود.
         </div>
       </div>
     </template>
@@ -250,9 +299,12 @@ export default {
       this.credit = credit;
     } catch (error) {}
     try {
-      this.doctor = doctors.find(
-        item => item.subscriberNumber == this.$route.params.id
-      );
+      try {
+        let { result } = await this.$axios.$get(
+          `/Doctors/${this.$route.params.id}/profile`
+        );
+        this.doctor = result.doctor;
+      } catch (error) {}
       let { result } = await this.$axios.$get(
         `/Doctors/${this.$route.params.id}/CommunicationQuote`
       );

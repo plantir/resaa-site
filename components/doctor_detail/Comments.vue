@@ -1,4 +1,4 @@
-<style lang="scss" >
+<style lang="scss">
 section#doctor-detail-comments {
   margin-top: 0 !important;
   background: #f6f6f6;
@@ -230,7 +230,7 @@ section#doctor-detail-comments {
 }
 </style>
 <template>
-  <section id="doctor-detail-comments">
+  <section v-if="comments.length" id="doctor-detail-comments">
     <div class="carousel-wrapper">
       <resaaElement class="resaa-element" />
       <h2 class="section-title">
@@ -240,7 +240,11 @@ section#doctor-detail-comments {
       <div class="swiper-holder">
         <div v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="(comment, index) in doctor.comments" :key="index">
+            <div
+              class="swiper-slide"
+              v-for="(comment, index) in comments"
+              :key="index"
+            >
               <div class="profile">
                 <User />
               </div>
@@ -248,7 +252,11 @@ section#doctor-detail-comments {
                 <DropDownArrow />
                 <div class="header">
                   <span class="name">{{ comment.owner_name }}</span>
-                  <span>{{comment.created_at | persianDate('jYYYY/jMM/jDD HH:mm:ss') | persianDigit}}</span>
+                  <span>{{
+                    comment.created_at
+                      | persianDate("jYYYY/jMM/jDD HH:mm:ss")
+                      | persianDigit
+                  }}</span>
                 </div>
                 <p class="text">{{ comment.text }}</p>
               </div>
@@ -328,9 +336,10 @@ export default {
     DropDownArrow,
     resaaElement
   },
+  props: ["service"],
   data() {
     return {
-      doctor: {},
+      comments: [],
       swiperOptionDoctors: {
         slidesPerView: 3,
         loop: true,
@@ -360,10 +369,10 @@ export default {
       value2: false
     };
   },
-  created() {
-    this.doctor = doctors.find(
-      item => item.subscriberNumber == this.$route.params.id
-    );
+  async mounted() {
+    let { result } = await this.$axios.$get(this.service);
+    console.log(result);
+    this.comments = result.comments;
   }
 };
 </script>

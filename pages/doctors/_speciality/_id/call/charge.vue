@@ -321,10 +321,13 @@ import ChargeSvg from "@/components/charge-svg";
 import doctors from "@/components/doctor_detail/doctors";
 export default {
   components: { ChargeSvg },
-  data() {
-    let doctor = doctors.find(
-      item => item.subscriberNumber == this.$route.params.id
-    );
+  async asyncData({ app, store, error, params, $axios, isClient }) {
+    try {
+      var { result } = await $axios.$get(`/Doctors/${params.id}/profile`);
+    } catch (err) {
+      return error({ statusCode: 410, message: "doctor not found" });
+    }
+    let doctor = result.doctor;
     return {
       items: [
         {
