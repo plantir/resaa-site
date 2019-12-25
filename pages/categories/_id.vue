@@ -258,89 +258,29 @@ export default {
           {
             "@type": "ListItem",
             position: 2,
-            name: "مشاوره تلفنی با متخصص روانشناس",
-            item: "https://resaa.net/doctors/psychology/"
+            name: category.title,
+            item: `https://resaa.net/categories/${params.id}`
           }
         ]
       },
       doctors_schema: {
         "@context": "http://schema.org",
         "@type": "ItemList",
-        name: "لیست متخصصین روانشناسی",
-        itemListElement: [
-          {
+        name: `لیست متخصصین ${category.title}`,
+        itemListElement: related_doctors.forEach((doctor, key) => {
+          return {
             "@type": "ListItem",
-            position: 1,
+            position: key + 1,
             item: {
-              "@id": "https://resaa.net/doctors/psychology/7106",
-              name: "دکتر مینا حسینی سده",
+              "@id": `https://resaa.net/doctors/psychology/${doctor.subscriberNumber}`,
+              name: `${doctor.fullNameWithTitle}`,
               image: {
                 "@type": "ImageObject",
-                url: "https://webapi.resaa.net/Doctors/17106/Image"
+                url: `https://webapi.resaa.net/Doctors/${doctor.subscriberNumber}/Image`
               }
             }
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            item: {
-              "@id": "https://resaa.net/doctors/psychology/7265",
-              name: "دکتر اکرم صادقی",
-              image: {
-                "@type": "ImageObject",
-                url: "https://webapi.resaa.net/Doctors/17265/Image"
-              }
-            }
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            item: {
-              "@id": "https://resaa.net/doctors/psychology/7830",
-              name: "دکتر فتانه محمدی",
-              image: {
-                "@type": "ImageObject",
-                url: "https://webapi.resaa.net/Doctors/17830/Image"
-              }
-            }
-          },
-          {
-            "@type": "ListItem",
-            position: 4,
-            item: {
-              "@id": "https://resaa.net/doctors/psychology/7155",
-              name: "دکتر ندا نعیمی",
-              image: {
-                "@type": "ImageObject",
-                url: "https://webapi.resaa.net/Doctors/17155/Image"
-              }
-            }
-          },
-          {
-            "@type": "ListItem",
-            position: 5,
-            item: {
-              "@id": "https://resaa.net/doctors/psychology/7305",
-              name: "دکتر بهنوش ده‌آرا",
-              image: {
-                "@type": "ImageObject",
-                url: "https://webapi.resaa.net/Doctors/17305/Image"
-              }
-            }
-          },
-          {
-            "@type": "ListItem",
-            position: 6,
-            item: {
-              "@id": "https://resaa.net/doctors/psychology/7594",
-              name: "دکتر ملیحه طباطبائی",
-              image: {
-                "@type": "ImageObject",
-                url: "https://webapi.resaa.net/Doctors/17594/Image"
-              }
-            }
-          }
-        ]
+          };
+        })
       },
       faq_schema: {
         "@context": "https://schema.org",
