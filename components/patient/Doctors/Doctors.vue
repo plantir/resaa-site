@@ -1,4 +1,4 @@
-<style lang="scss" >
+<style lang="scss">
 #doctors {
   .doctors-section-patients-container {
     background-color: white;
@@ -328,37 +328,48 @@
           <div v-for="doctor in doctors" :key="doctor.id" class="doctors-item">
             <router-link
               target="_blank"
-              :to="{name:'doctors-id',params:{id:doctor.subscriberNumber}}"
+              :to="
+                `/doctors/${doctor.specialty.description}/${doctor.subscriberNumber}`
+              "
             >
               <div class="doctors-item-info">
                 <div class="item-right-section">
                   <div class="item-avatar">
                     <img
                       v-if="doctor.imagePath"
-                      :src="'https://webapi.resaa.net/'+doctor.imagePath"
+                      :src="'https://webapi.resaa.net/' + doctor.imagePath"
                       alt
                     />
-                    <img v-else src="/img/doc-placeholder.png" alt="پزشکان سامانه رسا" />
+                    <img
+                      v-else
+                      src="/img/doc-placeholder.png"
+                      alt="پزشکان سامانه رسا"
+                    />
                   </div>
                   <div class="item-right-sub-section">
-                    <div class="item-doctor-name">{{doctor.firstName}} {{doctor.lastName}}</div>
-                    <div
-                      v-if="doctor.specialty"
-                      class="item-doctor-specialty"
-                    >{{doctor.specialty.title}}</div>
+                    <div class="item-doctor-name">
+                      {{ doctor.firstName }} {{ doctor.lastName }}
+                    </div>
+                    <div v-if="doctor.specialty" class="item-doctor-specialty">
+                      {{ doctor.specialty.title }}
+                    </div>
                   </div>
                 </div>
                 <div class="item-left-section">
                   <div class="item-resaa-code-container">
                     <div class="item-resaa-code-label">کد رِسا:</div>
-                    <div class="item-resaa-code">{{doctor.subscriberNumber | persianDigit}}</div>
+                    <div class="item-resaa-code">
+                      {{ doctor.subscriberNumber | persianDigit }}
+                    </div>
                   </div>
                   <i class="fa fa-angle-left" aria-hidden="true"></i>
                 </div>
               </div>
             </router-link>
           </div>
-          <div v-if="!ajaxLoading && doctors.length == 0" class="no-result">موردی یافت نشد</div>
+          <div v-if="!ajaxLoading && doctors.length == 0" class="no-result">
+            موردی یافت نشد
+          </div>
         </div>
         <no-ssr>
           <div class="pagination-box">
@@ -387,12 +398,13 @@
     <div class="doctors-full-list-container">
       <v-btn
         class="doctors-full-list-button"
-        :to="{name:'doctors'}"
+        :to="{ name: 'doctors' }"
         target="_blank"
         color="secondary"
         round
         outline
-      >لیست کامل پزشکان رِسا</v-btn>
+        >لیست کامل پزشکان رِسا</v-btn
+      >
     </div>
   </div>
 </template>
@@ -465,4 +477,3 @@ export default {
   }
 };
 </script>
-

@@ -60,12 +60,15 @@ section {
   max-width: 1200px;
   padding: 0 60px;
   .swiper-slide {
-    width: 200px;
+    width: 200px !important;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    a {
+      width: 100%;
+    }
     .image {
       position: relative;
       border: 1px solid #d4d4d4;
@@ -73,6 +76,7 @@ section {
       width: 150px;
       height: 150px;
       padding: 8px;
+      margin: auto;
       .status {
         position: absolute;
         top: 2px;
@@ -138,38 +142,51 @@ section {
     <div class="header">
       <div class="header-title">سایر روانشناسان</div>
       <div class="guide">
-        <div>
-          <Available />در دسترس
-        </div>
-        <div>
-          <NotAvailable />عدم دسترسی
-        </div>
+        <div><Available />در دسترس</div>
+        <div><NotAvailable />عدم دسترسی</div>
       </div>
     </div>
-    <div v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
+    <div
+      v-if="doctors"
+      v-swiper:mySwiperdesktop="swiperOptionDoctors"
+      dir="rtl"
+    >
       <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="(doctor,index) in doctors" :key="index">
-          <nuxt-link target="_blank" :to="`/doctors/${doctor.subscriberNumber}`">
+        <div
+          class="swiper-slide"
+          v-for="(doctor, index) in doctors"
+          :key="index"
+        >
+          <nuxt-link
+            target="_blank"
+            :to="
+              `/doctors/${$route.params.speciality}/${doctor.subscriberNumber}`
+            "
+          >
             <div class="image">
               <div class="status">
-                <component :is="doctor.currentlyAvailable?'Available':'NotAvailable'"></component>
+                <component
+                  :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"
+                ></component>
               </div>
               <img
                 v-if="doctor.imagePath"
-                v-lazy="'https://webapi.resaa.net/'+doctor.imagePath"
-                :alt="`تصویر ${doctor.title || ''} ${doctor.firstName} ${doctor.lastName}`"
+                v-lazy="'https://webapi.resaa.net/' + doctor.imagePath"
+                :alt="`تصویر ${doctor.fullNameWithTitle}`"
               />
               <img
                 v-else
                 src="/img/doc-placeholder.png"
-                :alt="`تصویر ${doctor.title || ''} ${doctor.firstName} ${doctor.lastName}`"
+                :alt="`تصویر ${doctor.fullNameWithTitle}`"
               />
             </div>
-            <h3 class="name">دکتر {{doctor.firstName}} {{doctor.lastName}}</h3>
-            <p class="speciality">متخصص {{doctor.specialty.title}}</p>
+            <h3 class="name">
+              {{ doctor.fullNameWithTitle }}
+            </h3>
+            <p class="speciality">متخصص {{ doctor.specialtyTitle }}</p>
             <div class="code">
               <span>کد رسا:</span>
-              <span>{{doctor.subscriberNumber | persianDigit}}</span>
+              <span>{{ doctor.subscriberNumber | persianDigit }}</span>
             </div>
           </nuxt-link>
         </div>
@@ -189,11 +206,6 @@ import Available from "~/assets/svg/Available.svg?inline";
 import NotAvailable from "~/assets/svg/NotAvailable.svg?inline";
 import ChevronLeft from "~/assets/svg/chevron_left.svg?inline";
 export default {
-  props: {
-    doctor: {
-      required: true
-    }
-  },
   components: {
     Available,
     NotAvailable,
@@ -201,11 +213,9 @@ export default {
   },
   data() {
     return {
-      doctors: doctors.filter(
-        item => item.subscriberNumber != this.$route.params.id
-      ),
+      doctors: doctors,
       swiperOptionDoctors: {
-        slidesPerView: 3,
+        slidesPerView: 1,
         spaceBetween: 60,
         // slidesPerGroup: 1,
         // loopFillGroupWithBlank: true,
@@ -234,7 +244,15 @@ export default {
     };
   },
   async mounted() {
-    this.doctors = this.$calc_avalibility(this.doctors);
+    // try {
+    //   var { result } = await this.$axios.$get(
+    //     `/Doctors/${this.$route.params.id}/RelatedDoctors?limit=5`
+    //   );
+    // } catch (err) {
+    //   return error({ statusCode: 500, message: "related Doctor error" });
+    // }
+    // this.doctors = result.relatedDoctors;
+    // this.doctors = this.$calc_avalibility(this.doctors);
     // let res = await this.$axios.$get(
     //   `/Doctors?fields=specialty,title,subscriberNumber,firstName,lastName,imagePath,currentlyAvailable&specialtyId=${this.doctor.specialty.id}&limit=8&offset=0`
     // );

@@ -84,7 +84,7 @@
       </div>
     </v-container>
     <v-container fluid class="pa-0">
-      <!-- <RelatedDoctors :doctor="doctor" /> -->
+      <RelatedDoctors />
       <Comments :service="doctor.comments" />
       <Social :doctor="doctor" />
     </v-container>

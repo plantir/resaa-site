@@ -328,7 +328,7 @@ section {
         <span class="space-betwen">:</span>
         <span class="timesheet" v-if="!daynotaccess">-</span>
         <span v-for="item in daynotaccess" :key="item" class="items">
-          <span class="item">{{item | convertDay}}</span>
+          <span class="item">{{ item | convertDay }}</span>
         </span>
       </span>
     </div>
@@ -337,17 +337,20 @@ section {
         <span>
           <span class="rotate">شنبه</span>
           <div class="sa">
-            <img src="~assets/img/icons/time-table/img-bottom.png" v-if="events.sa[0]" />
+            <img
+              src="~assets/img/icons/time-table/img-bottom.png"
+              v-if="events.sa[0]"
+            />
             <img src="~assets/img/icons/time-table/img-notaccess.png" v-else />
             <div class="items" v-if="events.sa[0]">
-              <div class="item" v-for="(item,index) in events.sa" :key="index">
+              <div class="item" v-for="(item, index) in events.sa" :key="index">
                 <div>
-                  <sun class="sun" v-if="item.time=='morning'" />
-                  <moon class="moon" v-if="item.time=='night'" />
+                  <sun class="sun" v-if="item.time == 'morning'" />
+                  <moon class="moon" v-if="item.time == 'night'" />
                 </div>
-                <span>{{item.start | persianDigit}}</span>
+                <span>{{ item.start | persianDigit }}</span>
                 <span class="spacemobile">-</span>
-                <span>{{item.end | persianDigit}}</span>
+                <span>{{ item.end | persianDigit }}</span>
               </div>
             </div>
           </div>
@@ -355,21 +358,24 @@ section {
         <span>
           <span class="rotate">یکشنبه</span>
           <div class="su">
-            <img src="~assets/img/icons/time-table/img-bottom.png" v-if="events.su[0]" />
+            <img
+              src="~assets/img/icons/time-table/img-bottom.png"
+              v-if="events.su[0]"
+            />
             <img
               src="~assets/img/icons/time-table/img-notaccess.png"
               class="mobileshowimportant"
               v-else
             />
             <div class="items" v-if="events.su[0]">
-              <div class="item" v-for="(item,index) in events.su" :key="index">
+              <div class="item" v-for="(item, index) in events.su" :key="index">
                 <div>
-                  <sun class="sun" v-if="item.time=='morning'" />
-                  <moon class="moon" v-if="item.time=='night'" />
+                  <sun class="sun" v-if="item.time == 'morning'" />
+                  <moon class="moon" v-if="item.time == 'night'" />
                 </div>
-                <span>{{item.start | persianDigit}}</span>
+                <span>{{ item.start | persianDigit }}</span>
                 <span class="spacemobile">-</span>
-                <span>{{item.end | persianDigit}}</span>
+                <span>{{ item.end | persianDigit }}</span>
               </div>
             </div>
           </div>
@@ -377,17 +383,20 @@ section {
         <span>
           <span class="rotate">دوشنبه</span>
           <div class="mo">
-            <img src="~assets/img/icons/time-table/img-bottom.png" v-if="events.mo[0]" />
+            <img
+              src="~assets/img/icons/time-table/img-bottom.png"
+              v-if="events.mo[0]"
+            />
             <img src="~assets/img/icons/time-table/img-notaccess.png" v-else />
             <div class="items" v-if="events.mo[0]">
-              <div class="item" v-for="(item,index) in events.mo" :key="index">
+              <div class="item" v-for="(item, index) in events.mo" :key="index">
                 <div>
-                  <sun class="sun" v-if="item.time=='morning'" />
-                  <moon class="moon" v-if="item.time=='night'" />
+                  <sun class="sun" v-if="item.time == 'morning'" />
+                  <moon class="moon" v-if="item.time == 'night'" />
                 </div>
-                <span>{{item.start | persianDigit}}</span>
+                <span>{{ item.start | persianDigit }}</span>
                 <span class="spacemobile">-</span>
-                <span>{{item.end | persianDigit}}</span>
+                <span>{{ item.end | persianDigit }}</span>
               </div>
             </div>
           </div>
@@ -395,17 +404,20 @@ section {
         <span>
           <span class="rotate">سه‌شنبه</span>
           <div class="tu">
-            <img src="~assets/img/icons/time-table/img-bottom.png" v-if="events.tu[0]" />
+            <img
+              src="~assets/img/icons/time-table/img-bottom.png"
+              v-if="events.tu[0]"
+            />
             <img src="~assets/img/icons/time-table/img-notaccess.png" v-else />
             <div class="items" v-if="events.tu[0]">
-              <div class="item" v-for="(item,index) in events.tu" :key="index">
+              <div class="item" v-for="(item, index) in events.tu" :key="index">
                 <div>
-                  <sun class="sun" v-if="item.time=='morning'" />
-                  <moon class="moon" v-if="item.time=='night'" />
+                  <sun class="sun" v-if="item.time == 'morning'" />
+                  <moon class="moon" v-if="item.time == 'night'" />
                 </div>
-                <span>{{item.start | persianDigit}}</span>
+                <span>{{ item.start | persianDigit }}</span>
                 <span class="spacemobile">-</span>
-                <span>{{item.end | persianDigit}}</span>
+                <span>{{ item.end | persianDigit }}</span>
               </div>
             </div>
           </div>
@@ -413,17 +425,20 @@ section {
         <span>
           <span class="rotate">چهارشنبه</span>
           <div class="we">
-            <img src="~assets/img/icons/time-table/img-bottom.png" v-if="events.we[0]" />
+            <img
+              src="~assets/img/icons/time-table/img-bottom.png"
+              v-if="events.we[0]"
+            />
             <img src="~assets/img/icons/time-table/img-notaccess.png" v-else />
             <div class="items" v-if="events.we[0]">
-              <div class="item" v-for="(item,index) in events.we" :key="index">
+              <div class="item" v-for="(item, index) in events.we" :key="index">
                 <div>
-                  <sun class="sun" v-if="item.time=='morning'" />
-                  <moon class="moon" v-if="item.time=='night'" />
+                  <sun class="sun" v-if="item.time == 'morning'" />
+                  <moon class="moon" v-if="item.time == 'night'" />
                 </div>
-                <span>{{item.start | persianDigit}}</span>
+                <span>{{ item.start | persianDigit }}</span>
                 <span class="spacemobile">-</span>
-                <span>{{item.end | persianDigit}}</span>
+                <span>{{ item.end | persianDigit }}</span>
               </div>
             </div>
           </div>
@@ -431,17 +446,20 @@ section {
         <span>
           <span class="rotate">پنجشنبه</span>
           <div class="th">
-            <img src="~assets/img/icons/time-table/img-bottom.png" v-if="events.th[0]" />
+            <img
+              src="~assets/img/icons/time-table/img-bottom.png"
+              v-if="events.th[0]"
+            />
             <img src="~assets/img/icons/time-table/img-notaccess.png" v-else />
             <div class="items" v-if="events.th[0]">
-              <div class="item" v-for="(item,index) in events.th" :key="index">
+              <div class="item" v-for="(item, index) in events.th" :key="index">
                 <div>
-                  <sun class="sun" v-if="item.time=='morning'" />
-                  <moon class="moon" v-if="item.time=='night'" />
+                  <sun class="sun" v-if="item.time == 'morning'" />
+                  <moon class="moon" v-if="item.time == 'night'" />
                 </div>
-                <span>{{item.start | persianDigit}}</span>
+                <span>{{ item.start | persianDigit }}</span>
                 <span class="spacemobile">-</span>
-                <span>{{item.end | persianDigit}}</span>
+                <span>{{ item.end | persianDigit }}</span>
               </div>
             </div>
           </div>
@@ -449,17 +467,20 @@ section {
         <span>
           <span class="rotate">جمعه</span>
           <div class="fr">
-            <img src="~assets/img/icons/time-table/img-bottom.png" v-if="events.fr[0]" />
+            <img
+              src="~assets/img/icons/time-table/img-bottom.png"
+              v-if="events.fr[0]"
+            />
             <img src="~assets/img/icons/time-table/img-notaccess.png" v-else />
             <div class="items" v-if="events.fr[0]">
-              <div class="item" v-for="(item,index) in events.fr" :key="index">
+              <div class="item" v-for="(item, index) in events.fr" :key="index">
                 <div>
-                  <sun class="sun" v-if="item.time=='morning'" />
-                  <moon class="moon" v-if="item.time=='night'" />
+                  <sun class="sun" v-if="item.time == 'morning'" />
+                  <moon class="moon" v-if="item.time == 'night'" />
                 </div>
-                <span>{{item.start | persianDigit}}</span>
+                <span>{{ item.start | persianDigit }}</span>
                 <span class="spacemobile">-</span>
-                <span>{{item.end | persianDigit}}</span>
+                <span>{{ item.end | persianDigit }}</span>
               </div>
             </div>
           </div>
@@ -543,9 +564,9 @@ export default {
   async mounted() {
     let url = `/Doctors/${
       this.$route.params.id
-    }?fields=timetable&clientTimeZoneOffset=${new Date().getTimezoneOffset()}`;
-    let data = await this.$axios.$get(url);
-    this.segments = data.result.doctor.timetable.segments;
+    }/TimeTable?clientTimeZoneOffset=${new Date().getTimezoneOffset()}`;
+    let { result } = await this.$axios.$get(url);
+    this.segments = result.timetable.segments;
 
     for (const item of this.segments) {
       let start_hour = this.get_hour(item.from);
