@@ -89,7 +89,7 @@
       class="item"
       v-for="(item, index) in content"
       :key="index"
-      :class="{ 'half-width': item.half }"
+      :class="{ 'half-width': index == 0 }"
     >
       <div v-html="item.title"></div>
       <div class="content" v-html="item.description"></div>
