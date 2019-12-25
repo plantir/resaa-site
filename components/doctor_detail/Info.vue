@@ -197,29 +197,25 @@
             <div class="image">
               <div class="status">
                 <component
-                  :is="
-                    virtual_doctor.currentlyAvailable
-                      ? 'Available'
-                      : 'NotAvailable'
-                  "
+                  :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"
                 ></component>
               </div>
               <img
-                v-if="virtual_doctor.imagePath"
-                v-lazy="'https://webapi.resaa.net/' + virtual_doctor.imagePath"
+                v-if="doctor.imagePath"
+                v-lazy="'https://webapi.resaa.net/' + doctor.imagePath"
                 :alt="
-                  `تصویر ${virtual_doctor.title || ''} ${
-                    virtual_doctor.firstName
-                  } ${virtual_doctor.lastName}`
+                  `تصویر ${doctor.title || ''} ${doctor.firstName} ${
+                    doctor.lastName
+                  }`
                 "
               />
               <img
                 v-else
                 src="/img/doc-placeholder.png"
                 :alt="
-                  `تصویر ${virtual_doctor.title || ''} ${
-                    virtual_doctor.firstName
-                  } ${virtual_doctor.lastName}`
+                  `تصویر ${doctor.title || ''} ${doctor.firstName} ${
+                    doctor.lastName
+                  }`
                 "
               />
             </div>
@@ -230,7 +226,7 @@
               <img src="~assets/img/doctorFingerPrint.png" alt />
               کد رِسا:
               <div class="doctor-resaa-code">
-                {{ virtual_doctor.subscriberNumber | persianDigit }}
+                {{ doctor.subscriberNumber | persianDigit }}
               </div>
             </div>
           </div>
@@ -239,30 +235,28 @@
           <div class="name-wrapper">
             <div>
               <h1>
-                {{ virtual_doctor.title }} {{ virtual_doctor.firstName }}
-                {{ virtual_doctor.lastName }}
+                {{ doctor.title }} {{ doctor.firstName }}
+                {{ doctor.lastName }}
               </h1>
               <span
                 class="availability hide-md"
-                :class="
-                  virtual_doctor.currentlyAvailable ? 'active' : 'deactive'
-                "
+                :class="doctor.currentlyAvailable ? 'active' : 'deactive'"
                 >({{
-                  virtual_doctor.currentlyAvailable
+                  doctor.currentlyAvailable
                     ? "در دسترس"
                     : "خارج از ساعت پاسخگویی"
                 }})</span
               >
             </div>
-            <p v-if="virtual_doctor.specialty" class="specialty r-display-2">
+            <p v-if="doctor.specialtyTitle" class="specialty r-display-2">
               تخصص:
-              <strong>{{ virtual_doctor.specialty.title }}</strong>
+              <strong>{{ doctor.specialtyTitle }}</strong>
             </p>
             <span
               class="availability hide-md-and-up"
-              :class="virtual_doctor.currentlyAvailable ? 'active' : 'deactive'"
+              :class="doctor.currentlyAvailable ? 'active' : 'deactive'"
               >({{
-                virtual_doctor.currentlyAvailable
+                doctor.currentlyAvailable
                   ? "در دسترس"
                   : "خارج از ساعت پاسخگویی"
               }})</span
@@ -270,9 +264,9 @@
             <ul class="specialty-area-container">
               <!-- <li
                 class="specialty-area"
-              >کد نظام پزشکی: {{virtual_doctor.medicalCouncilNumber || '-' | persianDigit}}</li>-->
+              >کد نظام پزشکی: {{doctor.medicalCouncilNumber || '-' | persianDigit}}</li>-->
               <li
-                v-for="tag in virtual_doctor.custom_tags"
+                v-for="tag in doctor.categories"
                 :key="tag.id"
                 class="specialty-area"
               >
@@ -311,7 +305,7 @@
           <div class="fields-activity-wrapper">
             <h2 class="title">زمینه های فعالیت :</h2>
             <ul>
-              <li v-for="(field, index) in virtual_doctor.fields" :key="index">
+              <li v-for="(field, index) in doctor.aboutDoctor" :key="index">
                 <p>{{ field }}</p>
               </li>
             </ul>
@@ -374,10 +368,10 @@ export default {
   mounted() {
     let days = ["su", "mo", "tu", "we", "th", "fr", "sa"];
     this.day_of_week = days[new Date().getDay()];
-    let virtual_doctor = doctors.find(
-      item => item.subscriberNumber == this.$route.params.id
-    );
-    this.virtual_doctor = Object.assign(virtual_doctor, this.doctor);
+    // let virtual_doctor = doctors.find(
+    //   item => item.subscriberNumber == this.$route.params.id
+    // );
+    // this.virtual_doctor = Object.assign(virtual_doctor, this.doctor);
   }
 };
 </script>

@@ -105,39 +105,41 @@
 }
 </style>
 <template>
-  <div v-swiper:mySwiper="swiperOption" dir="rtl">
-    <div class="swiper-wrapper">
-      <div
-        class="swiper-slide"
-        v-for="(comment, index) in comments"
-        :key="index"
-      >
-        <div class="doctor-comment-card">
-          <div class="quote-sign">
-            <i class="fa fa-quote-right" aria-hidden="true"></i>
-          </div>
-          <p class="doctor-comment-text" v-html="comment.body"></p>
-          <h3 class="doctor-comment-name">{{ comment.author }}</h3>
-          <p>
-            <router-link
-              class="doctor-comment-special"
-              target="_blank"
-              :to="{
-                name: 'doctors-id',
-                params: { id: comment.doctor.subscriberNumber }
-              }"
-              >مشاور : {{ comment.doctor.fullName }}</router-link
-            >
-          </p>
-          <div class="doctor-comment-avatar">
-            <img v-lazy="'/api/' + comment.authorImagePath" />
+  <no-ssr>
+    <div v-swiper:mySwiper="swiperOption" dir="rtl">
+      <div class="swiper-wrapper">
+        <div
+          class="swiper-slide"
+          v-for="(comment, index) in comments"
+          :key="index"
+        >
+          <div class="doctor-comment-card">
+            <div class="quote-sign">
+              <i class="fa fa-quote-right" aria-hidden="true"></i>
+            </div>
+            <p class="doctor-comment-text" v-html="comment.body"></p>
+            <h3 class="doctor-comment-name">{{ comment.author }}</h3>
+            <p>
+              <router-link
+                class="doctor-comment-special"
+                target="_blank"
+                :to="{
+                  name: 'doctors-id',
+                  params: { id: comment.doctor.subscriberNumber }
+                }"
+                >مشاور : {{ comment.doctor.fullName }}</router-link
+              >
+            </p>
+            <div class="doctor-comment-avatar">
+              <img v-lazy="'/api/' + comment.authorImagePath" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="swiper-pagination swiper-pagination-bullets"></div>
-  </div>
+      <div class="swiper-pagination swiper-pagination-bullets"></div>
+    </div>
+  </no-ssr>
 </template>
 <script>
 export default {

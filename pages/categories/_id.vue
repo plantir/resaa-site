@@ -151,7 +151,7 @@
           <Guide />
           <div
             class="item"
-            v-for="doctor in sorted_doctors.slice(3, 6)"
+            v-for="doctor in sorted_doctors.slice(3, sorted_doctors.length)"
             :key="doctor.subscriberNumber"
           >
             <Doctor :doctor="doctor" />
@@ -172,7 +172,7 @@
     </v-container>
     <v-container>
       <div class="custom-container">
-        <Description />
+        <Description :content="category.seoContents" />
       </div>
     </v-container>
   </section>
@@ -181,8 +181,8 @@
 import Wave from "@/assets/svg/speciality_wave.svg?inline";
 import Doctor from "@/components/categories/doctor";
 import Comments from "@/components/categories/comments";
+import Description from "@/components/categories/description";
 import Guide from "@/components/specialities/guide";
-import Description from "@/components/specialities/description";
 export default {
   layout: "speciality",
   components: { Wave, Doctor, Guide, Comments, Description },
@@ -228,7 +228,6 @@ export default {
       );
       related_doctors = result.relatedDoctors;
     } catch (error) {}
-    console.log(related_doctors);
     return {
       title: category.title,
       description: `دریافت ${category.title} فقط در سامانه رسا، با کمترین هزینه، بدون دریافت نوبت، بدون رفت و آمد، بدون انتظار و با بهترین مشاوران`,
