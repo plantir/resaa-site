@@ -259,7 +259,7 @@ export default {
             "@type": "ListItem",
             position: 2,
             name: category.title,
-            item: `https://resaa.net/categories/${params.id}`
+            item: `https://resaa.net/categories/${ctx.params.id}`
           }
         ]
       },
