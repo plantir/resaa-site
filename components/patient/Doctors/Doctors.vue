@@ -329,7 +329,9 @@
             <router-link
               target="_blank"
               :to="
-                `/doctors/${doctor.specialty.description}/${doctor.subscriberNumber}`
+                `/doctors/${doctor.specialty.description.replace(/ /g, '-')}/${
+                  doctor.subscriberNumber
+                }`
               "
             >
               <div class="doctors-item-info">

@@ -140,7 +140,11 @@
   <section class="item" :class="{ deactive: !doctor.currentlyAvailable }">
     <nuxt-link
       class="image"
-      :to="`/doctors/psychology/${doctor.subscriberNumber}`"
+      :to="
+        `/doctors/${doctor.specialtyEnglishTitle.replace(/ /g, '-')}/${
+          doctor.subscriberNumber
+        }`
+      "
     >
       <div class="status">
         <component
@@ -196,7 +200,11 @@
           {{ 1250 | persianDigit }} تومان / دقیقه
         </div>
         <v-btn
-          :to="`/doctors/psychology/${doctor.subscriberNumber}`"
+          :to="
+            `/doctors/${doctor.specialtyEnglishTitle.replace(/ /g, '-')}/${
+              doctor.subscriberNumber
+            }`
+          "
           class="select-btn"
           dark
           round

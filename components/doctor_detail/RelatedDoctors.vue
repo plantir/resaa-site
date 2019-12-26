@@ -140,7 +140,7 @@ section {
 <template>
   <section>
     <div class="header">
-      <div class="header-title">سایر روانشناسان</div>
+      <div class="header-title">سایر پزشکان {{ doctor.specialtyTitle }}</div>
       <div class="guide">
         <div><Available />در دسترس</div>
         <div><NotAvailable />عدم دسترسی</div>
@@ -210,6 +210,7 @@ export default {
     NotAvailable,
     ChevronLeft
   },
+  props: ["doctor"],
   data() {
     return {
       doctors: null,

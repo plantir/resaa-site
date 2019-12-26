@@ -305,8 +305,8 @@
           <div class="fields-activity-wrapper">
             <h2 class="title">زمینه های فعالیت :</h2>
             <ul>
-              <li v-for="(field, index) in doctor.aboutDoctor" :key="index">
-                <p>{{ field }}</p>
+              <li v-for="(category, index) in doctor.categories" :key="index">
+                <p>{{ category.title }}</p>
               </li>
             </ul>
           </div>

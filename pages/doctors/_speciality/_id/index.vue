@@ -65,7 +65,10 @@
           <span>
             <v-icon>chevron_left</v-icon>
           </span>
-          <nuxt-link to="/doctors/psychology">مشاوره تلفنی روانشناسی</nuxt-link>
+          <nuxt-link
+            :to="`/doctors/${doctor.specialtyEnglishTitle.replace(/ /g, '-')}`"
+            >{{ doctor.specialtyTitle }}</nuxt-link
+          >
           <span>
             <v-icon>chevron_left</v-icon>
           </span>
@@ -84,7 +87,7 @@
       </div>
     </v-container>
     <v-container fluid class="pa-0">
-      <RelatedDoctors />
+      <RelatedDoctors :doctor="doctor" />
       <Comments :service="doctor.comments" />
       <Social :doctor="doctor" />
     </v-container>
