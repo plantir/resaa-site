@@ -131,10 +131,12 @@
               <router-link
                 class="doctor-comment-special"
                 target="_blank"
-                :to="{
-                  name: 'doctors-id',
-                  params: { id: comment.doctor.subscriberNumber }
-                }"
+                :to="
+                  `/doctors/${comment.doctor.specialtyEnglishTitle.replace(
+                    / /g,
+                    '-'
+                  )}/${comment.doctor.subscriberNumber}`
+                "
                 >{{ comment.doctor.fullName }}</router-link
               >
             </p>
