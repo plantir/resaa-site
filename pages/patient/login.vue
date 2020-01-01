@@ -1,4 +1,3 @@
-
 <style lang="scss" scoped>
 .login-patient-container {
   background: white url("/img/wave.png") center bottom no-repeat;
@@ -177,7 +176,9 @@
     <v-loading v-if="ajaxLoading" mode="relative"></v-loading>
     <div class="login-patient-container">
       <div class="section-title">حساب کاربری</div>
-      <div class="section-description">جهت دسترسی به خدمات برخط سامانه رِسا، لطفا وارد شوید</div>
+      <div class="section-description">
+        جهت دسترسی به خدمات برخط سامانه رِسا، لطفا وارد شوید
+      </div>
       <div class="patient-username">
         <i class="fa fa-user"></i>
         <input
@@ -189,21 +190,31 @@
       </div>
       <div class="patient-password">
         <i class="fa fa-lock"></i>
-        <input v-model="user.password" type="password" placeholder="کلمه عبور" @keyup.enter="login" />
+        <input
+          v-model="user.password"
+          type="password"
+          placeholder="کلمه عبور"
+          @keyup.enter="login"
+        />
       </div>
-      <button :disabled="error" @click="login" class="login-button">ورود به حساب کاربری</button>
-      <div v-if="error" class="error-message">{{error}}</div>
-      <div v-if="erroMessage" class="error-message">{{erroMessage}}</div>
+      <button :disabled="error" @click="login" class="login-button">
+        ورود به حساب کاربری
+      </button>
+      <div v-if="error" class="error-message">{{ error }}</div>
+      <div v-if="erroMessage" class="error-message">{{ erroMessage }}</div>
       <!-- <div class="forgot-password">
         <a>یادآوری کلمه عبور</a>
       </div>-->
       <div class="sign-up">
         حساب کاربری ندارید؟
-        <router-link :to="{name:'patient-register'}" class="sign-up-link">رایگان ثبت نام کنید</router-link>
+        <router-link :to="{ name: 'patient-register' }" class="sign-up-link"
+          >رایگان ثبت نام کنید</router-link
+        >
       </div>
-      <div
-        class="forget-password"
-      >در صورتی که کد کاربری و رمز عبور خود را فراموش کرده اید با موبایلی که ثبت نام کردید عدد 1 را به شماره 100074471111 ارسال کنید.</div>
+      <div class="forget-password">
+        در صورتی که کد کاربری و رمز عبور خود را فراموش کرده اید با موبایلی که
+        ثبت نام کردید عدد 1 را به شماره 100074471111 ارسال کنید.
+      </div>
     </div>
   </v-container>
 </template>
@@ -256,6 +267,7 @@ export default {
       this.error = "فرمت نام کاربری اشتباه است";
     },
     login() {
+      debugger;
       this.ajaxLoading = true;
       let data = `username=${this.user.username}&password=${this.user.password}&grant_type=${this.user.grant_type}`;
       this.$axios
@@ -299,4 +311,3 @@ export default {
   }
 };
 </script>
-

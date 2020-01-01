@@ -1,4 +1,4 @@
-<style lang="scss" >
+<style lang="scss">
 #step-register {
   .register-container {
     max-width: 480px;
@@ -70,7 +70,7 @@
     <div class="card register-form">
       <v-loading v-if="ajaxLoading" mode="relative"></v-loading>
       <div class="register-container">
-        <div v-if="step ==1">
+        <div v-if="step == 1">
           <h1>برای تماس با پزشک لازم است شماره موبایل خود را وارد کنید.</h1>
           <div class="form-wrapper">
             <label>شماره موبایل :</label>
@@ -100,7 +100,7 @@
         <div v-else>
           <div v-if="new_user">
             <h1>
-              یک پیامک حاوی کد تایید برای شماره {{user.phoneNumber}} ارسال شد.
+              یک پیامک حاوی کد تایید برای شماره {{ user.phoneNumber }} ارسال شد.
               <div class="caption">لطفا کد ارسال شده را وارد نمایید</div>
             </h1>
 
@@ -115,7 +115,13 @@
                 @keyup.enter="verifySMSCode"
               ></v-text-field>
             </div>
-            <v-btn @click="verifySMSCode" class="register-btn" depressed dark round>
+            <v-btn
+              @click="verifySMSCode"
+              class="register-btn"
+              depressed
+              dark
+              round
+            >
               <span>ارسال</span>
             </v-btn>
             <div class="input-detail">
@@ -125,22 +131,27 @@
               <div v-else class="register-code-resend">
                 <a>
                   کد برای شما ارسال شد لطفا منتظر بمانید
-                  {{resendSMSCode_timeout}}
+                  {{ resendSMSCode_timeout }}
                   ثانیه
                 </a>
               </div>
               <div v-if="errorMessage" class="error-message">
-                <span>{{errorMessage}}</span>
+                <span>{{ errorMessage }}</span>
               </div>
             </div>
           </div>
           <div v-else>
             <h1>
               این شماره
-              <span class="green--text">{{user.phoneNumber | persianDigit}}</span> در سیستم وجود دارد
-              <div
-                class="caption"
-              >رمز عبور در هنگام ثبت نام برای شما پیامک شده است. در صورتی که رمز عبور خود را ندارید با پشتیبانی رسا تماس بگیرید.</div>
+              <span class="green--text">{{
+                user.phoneNumber | persianDigit
+              }}</span>
+              در سیستم وجود دارد
+              <div class="caption">
+                در صورتیکه رمز عبور خود را ندارید با پشتیبانی تماس بگیرید) بشود
+                این: (در صورتیکه رمز عبور خود را ندارید عدد ۱ را به ۱۰۰۰۷۴۴۷۱۱۱۱
+                پیامک کنید
+              </div>
             </h1>
 
             <div class="form-wrapper">
@@ -158,7 +169,7 @@
               <span>ورود</span>
             </v-btn>
             <div v-if="errorMessage" class="error-message">
-              <span>{{errorMessage}}</span>
+              <span>{{ errorMessage }}</span>
             </div>
           </div>
         </div>
@@ -167,8 +178,9 @@
     <div class="card notify">
       <div>
         <img src="~assets/img/lamp@2x.png" alt />
-        شماره موبایل شما نزد رسا امانت است و برای برقراری ارتباط با پزشک استفاده می شود.
-        پزشک شماره تماس شما را نخواهد دید و هویت شما کاملا محرمانه می ماند.
+        شماره موبایل شما نزد رسا امانت است و برای برقراری ارتباط با پزشک استفاده
+        می شود. پزشک شماره تماس شما را نخواهد دید و هویت شما کاملا محرمانه می
+        ماند.
       </div>
     </div>
   </section>

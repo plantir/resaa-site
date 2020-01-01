@@ -21,7 +21,6 @@
   }
 }
 .footer {
-  background-image: url("footer_bg.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 75%;
@@ -301,7 +300,10 @@
 
 <template>
   <section>
-    <div :class="[{ patient: isPatient }, 'footer']">
+    <div
+      v-lazy:background-image="footer_img"
+      :class="[{ patient: isPatient }, 'footer']"
+    >
       <v-container>
         <v-layout row wrap>
           <v-flex pa-4 lg3 md6 order-lg1 order-md1 sm12>
@@ -319,7 +321,7 @@
                 </p>
               </div>
               <div class="footer-logo">
-                <img src="./logo.png" alt="سامانه رسا" />
+                <img v-lazy="logo_img" alt="سامانه رسا" />
               </div>
             </div>
           </v-flex>
@@ -484,7 +486,7 @@
                 alt
               >-->
               <img
-                src="./e-namad.png"
+                v-lazy="enamad_img"
                 alt
                 onclick='window.open("https://trustseal.enamad.ir/Verify.aspx?id=127333&amp;p=1p93aagdwcp8JwYd", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")'
                 style="cursor:pointer"
@@ -517,6 +519,9 @@ import instagram from "~/assets/svg/instagram.svg?inline";
 import twitter from "~/assets/svg/twitter.svg?inline";
 import envelope from "~/assets/svg/envelope.svg?inline";
 import phone from "~/assets/svg/phone.svg?inline";
+import enamad_img from "./e-namad.png";
+import logo_img from "./logo.png";
+import footer_img from "./footer_bg.png";
 export default {
   components: {
     telegram,
@@ -528,7 +533,10 @@ export default {
   },
   data() {
     return {
-      isPatient: true
+      isPatient: true,
+      enamad_img,
+      logo_img,
+      footer_img
     };
   },
   computed: {

@@ -166,7 +166,11 @@
     <div class="name">
       <h3>
         <nuxt-link
-          :to="`/doctors/psychology/${doctor.subscriberNumber}`"
+          :to="
+            `/doctors/${doctor.specialtyEnglishTitle.replace(/ /g, '-')}/${
+              doctor.subscriberNumber
+            }`
+          "
           class="doctor-name"
           >{{ doctor.fullNameWithTitle }}</nuxt-link
         >
@@ -180,24 +184,24 @@
             v-for="(tag, index) in doctor.aboutDoctor.slice(0, 3)"
             :key="tag.id"
           >
-            {{ tag.title }}
+            {{ tag }}
             <template v-if="index != 2">،</template>
           </span>
         </p>
         <div class="success-call hide-md-and-up">
           <Favorite />
-          <span>{{ doctor.satisfiedCalls | persianDigit }}+</span>
+          <span>{{ doctor.satisfiedCalls | persianDigit }}</span>
         </div>
       </div>
     </div>
     <div class="price">
       <div class="success-call hide-md">
-        <span>{{ doctor.satisfiedCalls | persianDigit }}+</span>
+        <span>{{ doctor.satisfiedCalls | persianDigit }}</span>
         جلسه رضایت بخش
       </div>
       <div>
         <div class="price-per-minute">
-          {{ 1250 | persianDigit }} تومان / دقیقه
+          {{ doctor.pricePerMinute | persianDigit }} تومان / دقیقه
         </div>
         <v-btn
           :to="

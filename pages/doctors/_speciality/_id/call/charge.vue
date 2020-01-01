@@ -325,7 +325,7 @@ export default {
     try {
       var { result } = await $axios.$get(`/Doctors/${params.id}/profile`);
     } catch (err) {
-      return error({ statusCode: 410, message: "doctor not found" });
+      return error({ statusCode: 404, message: "doctor not found" });
     }
     let doctor = result.doctor;
     return {

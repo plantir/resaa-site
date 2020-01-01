@@ -5,7 +5,7 @@ require("dotenv").config({
 });
 // import shrinkRay from 'shrink-ray'
 export default {
-  mode: "universal",
+  mode: process.env.MODE,
   // env: {
   //   PORT: process.env.PORT,
   //   HOST: process.env.HOST,

@@ -509,7 +509,7 @@ export default {
         `/Doctors/${params.id}?fields=${fields}`
       );
     } catch (err) {
-      return error({ statusCode: 410, message: "doctor not found" });
+      return error({ statusCode: 404, message: "doctor not found" });
     }
     let doctor = result.doctor;
     let locations = [];

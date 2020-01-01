@@ -143,7 +143,7 @@
           </p>
           <div
             class="item"
-            v-for="doctor in sorted_doctors.slice(0, 3)"
+            v-for="doctor in related_doctors.slice(0, 5)"
             :key="doctor.subscriberNumber"
           >
             <Doctor :doctor="doctor" />
@@ -151,11 +151,21 @@
           <Guide />
           <div
             class="item"
-            v-for="doctor in sorted_doctors.slice(3, sorted_doctors.length)"
+            v-for="doctor in related_doctors.slice(5, related_doctors.length)"
             :key="doctor.subscriberNumber"
           >
             <Doctor :doctor="doctor" />
           </div>
+          <no-ssr>
+            <pagination
+              class="mt-3"
+              :numOfPage="10"
+              v-model="page"
+              :limit="limit"
+              :totalItems="totalItems"
+              @change="changePage"
+            ></pagination>
+          </no-ssr>
         </div>
       </div>
     </v-container>
@@ -218,15 +228,20 @@ export default {
   },
   async asyncData(ctx) {
     let category, related_doctors;
+    let limit = 10;
+    let page = 1;
+    let totalItems = 0;
+
     try {
       let { result } = await ctx.$axios.$get(`categories/${ctx.params.id}`);
       category = result.manifest;
     } catch (error) {}
     try {
       let { result } = await ctx.$axios.$get(
-        `categories/${ctx.params.id}/RelatedDoctors`
+        `categories/${ctx.params.id}/RelatedDoctors?limit=${limit}`
       );
       related_doctors = result.relatedDoctors;
+      totalItems = result.doctorsTotalCount;
     } catch (error) {}
     return {
       title: category.title,
@@ -243,7 +258,10 @@ export default {
         "بدون نیاز به گوشی هوشمند!"
       ],
       header_text: 0,
-      sorted_doctors: related_doctors,
+      limit,
+      page,
+      totalItems,
+      related_doctors: related_doctors,
       category: category,
       main_schema: {
         "@context": "https://schema.org",
@@ -306,6 +324,22 @@ export default {
         this.header_text = this.header_text + 1;
       }
     }, 4000);
+  },
+  methods: {
+    async changePage(page) {
+      this.page = page;
+      try {
+        let { result } = await this.$axios.$get(
+          `categories/${this.$route.params.id}/RelatedDoctors?limit=${this.limit}&offset=${this.offset}`
+        );
+        this.related_doctors = result.relatedDoctors;
+      } catch (error) {}
+    }
+  },
+  computed: {
+    offset() {
+      return (this.page - 1) * this.limit;
+    }
   }
 };
 </script>

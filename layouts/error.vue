@@ -1,4 +1,4 @@
-<template >
+<template>
   <div class="main-content">
     <component :is="errorPage" :error="error" />
   </div>
@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     errorPage() {
-      if (this.error.statusCode === 404 || this.error.statusCode == 410) {
+      if (this.error.statusCode === 404) {
         return error404;
       } else {
         return error550;

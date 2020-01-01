@@ -266,11 +266,11 @@
                 class="specialty-area"
               >کد نظام پزشکی: {{doctor.medicalCouncilNumber || '-' | persianDigit}}</li>-->
               <li
-                v-for="tag in doctor.categories"
+                v-for="tag in doctor.aboutDoctor"
                 :key="tag.id"
                 class="specialty-area"
               >
-                <p>{{ tag.title }}</p>
+                <p>{{ tag }}</p>
               </li>
             </ul>
             <div class="response-wrapper hide-md">

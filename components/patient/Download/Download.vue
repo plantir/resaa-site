@@ -1,9 +1,11 @@
 <template>
   <div class="download-section-patient-container" id="download">
     <h2 class="section-title">دریافت اپلیکیشن رِسا</h2>
-    <p class="section-description">سازگار با سیستم عامل های اندروید، IOS و ویندوز موبایل</p>
+    <p class="section-description">
+      سازگار با سیستم عامل های اندروید، IOS و ویندوز موبایل
+    </p>
     <div class="image-wrapper">
-      <img src="./mockup.jpg" alt="دریافت اپلیکیشن سامانه رسا" />
+      <img v-lazy="mockup_img" alt="دریافت اپلیکیشن سامانه رسا" />
     </div>
     <div class="download-image-container">
       <div class="download-links">
@@ -36,14 +38,20 @@
         </div>
         <div class="link" @click="openModal">
           <div class="link-icon">
-            <img src="./cafebazar.png" alt="دریافت اپلیکیشن رسا از کافه بازار" />
+            <img
+              src="./cafebazar.png"
+              alt="دریافت اپلیکیشن رسا از کافه بازار"
+            />
           </div>
           <div class="link-texts">
             <div class="link-provider-text">دانلود از</div>
             <div class="link-provider">کافه بازار</div>
           </div>
         </div>
-        <UnderDevelopment v-if="show_modal" @closeModal="closeModal"></UnderDevelopment>
+        <UnderDevelopment
+          v-if="show_modal"
+          @closeModal="closeModal"
+        ></UnderDevelopment>
       </div>
     </div>
   </div>
@@ -51,13 +59,15 @@
 
 <script>
 import UnderDevelopment from "@/components/global/under_development";
+import mockup_img from "./mockup.jpg";
 export default {
   components: {
     UnderDevelopment
   },
   data() {
     return {
-      show_modal: false
+      show_modal: false,
+      mockup_img
     };
   },
   methods: {

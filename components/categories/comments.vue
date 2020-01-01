@@ -27,6 +27,11 @@
   }
   p {
     margin-bottom: 0;
+    text-align: center;
+    span {
+      color: #9492a9;
+      font-size: 1.2rem;
+    }
   }
 }
 
@@ -71,7 +76,7 @@
   letter-spacing: normal;
   text-align: center;
   color: #9492a9;
-  display: block;
+  display: inline-block;
   cursor: pointer;
   &:hover {
     color: $secondary-color;
@@ -120,6 +125,9 @@
             <p class="doctor-comment-text" v-html="comment.body"></p>
             <h3 class="doctor-comment-name">{{ comment.author }}</h3>
             <p>
+              <span>
+                متخصص :
+              </span>
               <router-link
                 class="doctor-comment-special"
                 target="_blank"
@@ -127,7 +135,7 @@
                   name: 'doctors-id',
                   params: { id: comment.doctor.subscriberNumber }
                 }"
-                >مشاور : {{ comment.doctor.fullName }}</router-link
+                >{{ comment.doctor.fullName }}</router-link
               >
             </p>
             <div class="doctor-comment-avatar">
