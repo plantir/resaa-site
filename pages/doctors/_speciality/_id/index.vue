@@ -88,7 +88,7 @@
     </v-container>
     <v-container fluid class="pa-0">
       <RelatedDoctors :doctor="doctor" />
-      <Comments :service="doctor.comments" />
+      <Comments v-if="doctor.comments" :service="doctor.comments" />
       <Social :doctor="doctor" />
     </v-container>
   </div>
@@ -244,32 +244,32 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$route);
-    setTimeout(() => {
-      if (process.client && !this.hideMap) {
-        this.$refs.mapRef.$mapPromise.then(map => {
-          var bounds = new google.maps.LatLngBounds();
-          for (let location of this.locations) {
-            bounds.extend({
-              lat: parseFloat(location.lat),
-              lng: parseFloat(location.lng)
-            });
-          }
-          map.fitBounds(bounds);
-        });
-      }
-    }, 100);
-    if (this.user) {
-      this.$axios
-        .get(`/Doctors/${this.$route.params.id}/CommunicationQuote`, {
-          headers: {
-            Authorization: `Bearer ${this.user.access_token}`
-          }
-        })
-        .then(res => {
-          this.duration = res.data.result.quote.duration;
-        });
-    }
+    // console.log(this.$route);
+    // setTimeout(() => {
+    //   if (process.client && !this.hideMap) {
+    //     this.$refs.mapRef.$mapPromise.then(map => {
+    //       var bounds = new google.maps.LatLngBounds();
+    //       for (let location of this.locations) {
+    //         bounds.extend({
+    //           lat: parseFloat(location.lat),
+    //           lng: parseFloat(location.lng)
+    //         });
+    //       }
+    //       map.fitBounds(bounds);
+    //     });
+    //   }
+    // }, 100);
+    // if (this.user) {
+    //   this.$axios
+    //     .get(`/Doctors/${this.$route.params.id}/CommunicationQuote`, {
+    //       headers: {
+    //         Authorization: `Bearer ${this.user.access_token}`
+    //       }
+    //     })
+    //     .then(res => {
+    //       this.duration = res.data.result.quote.duration;
+    //     });
+    // }
   },
   computed: {
     user() {
