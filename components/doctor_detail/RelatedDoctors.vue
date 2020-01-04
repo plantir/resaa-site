@@ -138,25 +138,21 @@ section {
 }
 </style>
 <template>
-  <section>
+  <section id="related-doctors">
     <div class="header">
       <div class="header-title">سایر پزشکان {{ doctor.specialtyTitle }}</div>
       <div class="guide">
-        <div><Available />در دسترس</div>
-        <div><NotAvailable />عدم دسترسی</div>
+        <div>
+          <Available />در دسترس
+        </div>
+        <div>
+          <NotAvailable />عدم دسترسی
+        </div>
       </div>
     </div>
-    <div
-      v-if="doctors"
-      v-swiper:mySwiperdesktop="swiperOptionDoctors"
-      dir="rtl"
-    >
+    <div v-if="doctors" v-swiper:mySwiperdesktop="swiperOptionDoctors" dir="rtl">
       <div class="swiper-wrapper">
-        <div
-          class="swiper-slide"
-          v-for="(doctor, index) in doctors"
-          :key="index"
-        >
+        <div class="swiper-slide" v-for="(doctor, index) in doctors" :key="index">
           <nuxt-link
             target="_blank"
             :to="
@@ -165,24 +161,16 @@ section {
           >
             <div class="image">
               <div class="status">
-                <component
-                  :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"
-                ></component>
+                <component :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"></component>
               </div>
               <img
                 v-if="doctor.imagePath"
                 :src="'https://webapi.resaa.net/' + doctor.imagePath"
                 :alt="`تصویر ${doctor.fullNameWithTitle}`"
               />
-              <img
-                v-else
-                src="/img/doc-placeholder.png"
-                :alt="`تصویر ${doctor.fullNameWithTitle}`"
-              />
+              <img v-else src="/img/doc-placeholder.png" :alt="`تصویر ${doctor.fullNameWithTitle}`" />
             </div>
-            <h3 class="name">
-              {{ doctor.fullNameWithTitle }}
-            </h3>
+            <h3 class="name">{{ doctor.fullNameWithTitle }}</h3>
             <p class="speciality">متخصص {{ doctor.specialtyTitle }}</p>
             <div class="code">
               <span>کد رسا:</span>

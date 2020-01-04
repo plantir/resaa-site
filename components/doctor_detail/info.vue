@@ -272,7 +272,7 @@
             </ul>
             <div class="response-wrapper hide-md">
               <div class="title">زمان های پاسخگویی</div>
-              <div class="response-time" v-if="day_of_week && times">
+              <div class="response-time" v-if="day_of_week && times && times[day_of_week].length">
                 <span>امروز:</span>
                 <template v-for="(item, index) in times[day_of_week]">
                   <span :key="index">
@@ -311,7 +311,10 @@
         <v-flex class="hide-md-and-up" xs12 md3>
           <div class="response-wrapper">
             <h2 class="title">زمان های پاسخگویی</h2>
-            <div class="response-time r-display-3" v-if="day_of_week && times">
+            <div
+              class="response-time r-display-3"
+              v-if="day_of_week && times && times[day_of_week].length"
+            >
               <span>امروز:</span>
               <template v-for="(item, index) in times[day_of_week]">
                 <span :key="index">

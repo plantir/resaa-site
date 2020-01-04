@@ -166,7 +166,7 @@
           <span v-if="doctor.currentlyAvailable">همین حالا با پزشک تماس بگیرید</span>
           <template v-else>
             <span v-if="doctor.providesCallbackService">از پزشک بخواهید با شما تماس بگیرد</span>
-            <span v-else>خارج از دسترس</span>
+            <span v-else>در حال حاضر این متخصص پاسخگو نیست</span>
           </template>
         </h2>
         <div class="description">
@@ -177,7 +177,9 @@
             <p
               v-if="doctor.providesCallbackService"
             >در حال حاضر پزشک در دسترس نیست. با ثبت درخواست تماس، پزشک در اولین ساعت پاسخگویی خود با شما تماس میگیرد. می توانید با بررسی زمان های پاسخگویی پزشک از اولین زمان پاسخگویی پزشک مطلع شوید.</p>
-            <p v-else>این پزشک در حال حاضر در دسترس نمی باشد لفطا از پزشکان دیگر رسا استفاده کنید</p>
+            <p
+              v-else
+            >شما می توانید در زمان پاسخگویی بعدی (زمان پاسخگویی بعدی در این پرانتز به او نشان داده شود) از طریق همین صفحه اقدام کنید و یا با سایر متخصصین مرتبط با این پزشک صحبت کنید.</p>
           </template>
         </div>
       </div>
@@ -186,17 +188,30 @@
           <span class="price-title mb-0">هزینه هر دقیقه گفتگو با پزشک :</span>
           <span class="price">{{costPerMinute | currency | persianDigit}} تومان</span>
         </div>
-        <div
-          class="button-wrapper"
-          v-if="doctor.currentlyAvailable || doctor.providesCallbackService"
-        >
+        <div class="button-wrapper">
           <nuxt-link
+            v-if="doctor.currentlyAvailable"
             class="call-doctor"
             :to="`${doctor.subscriberNumber}/call/${user?'charge':'register'}`"
           >
-            {{doctor.currentlyAvailable?'شروع مکالمه با پزشک':'ثبت درخواست تماس'}}
+            شروع مکالمه با پزشک
             <phone class="phone" />
           </nuxt-link>
+          <template v-else>
+            <nuxt-link
+              v-if="doctor.providesCallbackService"
+              class="call-doctor"
+              :to="`${doctor.subscriberNumber}/call/${user?'charge':'register'}`"
+            >
+              ثبت درخواست تماس
+              <phone class="phone" />
+            </nuxt-link>
+            <a
+              v-else
+              class="call-doctor"
+              v-scroll-to="{ el: '#related-doctors', offset: -80 }"
+            >نمایش پزشکان مرتبط</a>
+          </template>
         </div>
       </div>
     </v-card>
