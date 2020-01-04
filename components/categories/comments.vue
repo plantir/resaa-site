@@ -113,11 +113,7 @@
   <no-ssr>
     <div v-swiper:mySwiper="swiperOption" dir="rtl">
       <div class="swiper-wrapper">
-        <div
-          class="swiper-slide"
-          v-for="(comment, index) in comments"
-          :key="index"
-        >
+        <div class="swiper-slide" v-for="(comment, index) in comments" :key="index">
           <div class="doctor-comment-card">
             <div class="quote-sign">
               <i class="fa fa-quote-right" aria-hidden="true"></i>
@@ -125,9 +121,7 @@
             <p class="doctor-comment-text" v-html="comment.body"></p>
             <h3 class="doctor-comment-name">{{ comment.author }}</h3>
             <p>
-              <span>
-                متخصص :
-              </span>
+              <span>متخصص :</span>
               <router-link
                 class="doctor-comment-special"
                 target="_blank"
@@ -137,11 +131,10 @@
                     '-'
                   )}/${comment.doctor.subscriberNumber}`
                 "
-                >{{ comment.doctor.fullName }}</router-link
-              >
+              >{{ comment.doctor.fullName }}</router-link>
             </p>
             <div class="doctor-comment-avatar">
-              <img v-lazy="'/api/' + comment.authorImagePath" />
+              <img :src="'/api/' + comment.authorImagePath" />
             </div>
           </div>
         </div>
