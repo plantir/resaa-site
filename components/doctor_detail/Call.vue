@@ -165,7 +165,8 @@
         <h2 class="section-title">
           <span v-if="doctor.currentlyAvailable">همین حالا با پزشک تماس بگیرید</span>
           <template v-else>
-            <span>از پزشک بخواهید با شما تماس بگیرد</span>
+            <span v-if="doctor.providesCallbackService">از پزشک بخواهید با شما تماس بگیرد</span>
+            <span v-else>خارج از دسترس</span>
           </template>
         </h2>
         <div class="description">
@@ -173,7 +174,10 @@
             v-if="doctor.currentlyAvailable"
           >پزشک در حال حاضر در دسترس می باشد. تماس شما بلافاصله با موبایل پزشک برقرار می شود تا بتوانید در کوتاه ترین زمان پاسخ سوالات خود را بگیرید.</p>
           <template v-else>
-            <p>در حال حاضر پزشک در دسترس نیست. با ثبت درخواست تماس، پزشک در اولین ساعت پاسخگویی خود با شما تماس میگیرد. می توانید با بررسی زمان های پاسخگویی پزشک از اولین زمان پاسخگویی پزشک مطلع شوید.</p>
+            <p
+              v-if="doctor.providesCallbackService"
+            >در حال حاضر پزشک در دسترس نیست. با ثبت درخواست تماس، پزشک در اولین ساعت پاسخگویی خود با شما تماس میگیرد. می توانید با بررسی زمان های پاسخگویی پزشک از اولین زمان پاسخگویی پزشک مطلع شوید.</p>
+            <p v-else>این پزشک در حال حاضر در دسترس نمی باشد لفطا از پزشکان دیگر رسا استفاده کنید</p>
           </template>
         </div>
       </div>
@@ -182,7 +186,10 @@
           <span class="price-title mb-0">هزینه هر دقیقه گفتگو با پزشک :</span>
           <span class="price">{{costPerMinute | currency | persianDigit}} تومان</span>
         </div>
-        <div class="button-wrapper">
+        <div
+          class="button-wrapper"
+          v-if="doctor.currentlyAvailable || doctor.providesCallbackService"
+        >
           <nuxt-link
             class="call-doctor"
             :to="`${doctor.subscriberNumber}/call/${user?'charge':'register'}`"
