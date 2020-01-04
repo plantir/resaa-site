@@ -360,15 +360,9 @@
   <section id="navigation">
     <div :class="[{ patient: isPatient }, 'navigation-bar']">
       <div class="menu-icon" @click="activateMenu">
-        <span
-          class="menu-icon__line menu-icon__line-left"
-          :class="{ active: menuActive }"
-        ></span>
+        <span class="menu-icon__line menu-icon__line-left" :class="{ active: menuActive }"></span>
         <span class="menu-icon__line" :class="{ active: menuActive }"></span>
-        <span
-          class="menu-icon__line menu-icon__line-right"
-          :class="{ active: menuActive }"
-        ></span>
+        <span class="menu-icon__line menu-icon__line-right" :class="{ active: menuActive }"></span>
       </div>
       <div class="navigation-bar-right">
         <nuxt-link to="/" class="navigation-bar-logo">
@@ -379,19 +373,13 @@
         <div class="navigation-bar-items">
           <ul class="nav">
             <li class="nav-item">
-              <nuxt-link
-                @click.native="closeNav"
-                to="/"
-                class="navigation-bar-item"
-                >سامانه رسا</nuxt-link
-              >
+              <nuxt-link @click.native="closeNav" to="/" class="navigation-bar-item">سامانه رسا</nuxt-link>
             </li>
             <li class="nav-item">
               <nuxt-link
                 @click.native="closeNav"
                 :to="{ name: user ? 'patient-profile' : 'patient-login' }"
-                >حساب کاربری</nuxt-link
-              >
+              >حساب کاربری</nuxt-link>
               <!-- <div v-if="user">
                 <a class="drop-down">
                   خوش اومدی {{user.firstName}}
@@ -432,8 +420,7 @@
                 @click.native="closeNav"
                 :to="{ name: 'doctors' }"
                 class="navigation-bar-item"
-                >لیست پزشکان</nuxt-link
-              >
+              >لیست پزشکان</nuxt-link>
             </li>
             <!-- <li class="nav-item">
               <nuxt-link
@@ -441,38 +428,34 @@
                 :to="{name:'privacy'}"
                 class="navigation-bar-item"
               >قوانین</nuxt-link>
-            </li> -->
+            </li>-->
             <li class="nav-item">
               <router-link
                 @click.native="closeNav"
-                :to="{ name: 'doctors-psychology' }"
+                to="/doctors/psychology"
                 class="navigation-bar-item"
-                >مشاوره روانشناسی</router-link
-              >
+              >مشاوره روانشناسی</router-link>
             </li>
             <li class="nav-item">
               <nuxt-link
                 @click.native="closeNav"
                 :to="{ name: 'faq' }"
                 class="navigation-bar-item"
-                >سوالات متداول</nuxt-link
-              >
+              >سوالات متداول</nuxt-link>
             </li>
             <li class="nav-item">
               <nuxt-link
                 @click.native="closeNav"
                 :to="{ name: 'about' }"
                 class="navigation-bar-item"
-                >درباره رسا</nuxt-link
-              >
+              >درباره رسا</nuxt-link>
             </li>
             <li class="nav-item">
               <nuxt-link
                 @click.native="closeNav"
                 :to="{ name: 'contact-us' }"
                 class="navigation-bar-item"
-                >تماس با ما</nuxt-link
-              >
+              >تماس با ما</nuxt-link>
             </li>
           </ul>
         </div>
@@ -493,8 +476,7 @@
             :to="{ name: 'charge' }"
             v-if="isPatient === true"
             class="navigation-bar-button"
-            >افزایش اعتبار</nuxt-link
-          >
+          >افزایش اعتبار</nuxt-link>
           <nuxt-link
             :to="{ name: 'charge' }"
             v-if="isPatient === true"
@@ -508,8 +490,7 @@
             :to="{ name: 'charge' }"
             v-if="isPatient === true"
             class="navigation-bar-button"
-            >افزایش اعتبار</nuxt-link
-          >
+          >افزایش اعتبار</nuxt-link>
           <nuxt-link
             :to="{ name: 'charge' }"
             v-if="isPatient === true"
@@ -521,8 +502,7 @@
             :to="{ name: 'patient-landing' }"
             v-if="isPatient !== true"
             class="navigation-bar-button"
-            >رِسای بیماران</nuxt-link
-          >
+          >رِسای بیماران</nuxt-link>
           <nuxt-link
             :to="{ name: 'patient-landing' }"
             v-if="isPatient !== true"
@@ -564,16 +544,14 @@
               class="nav-main__list-item"
               :class="{ active: menuActive }"
               :to="{ name: 'patient-profile' }"
-              >خوش اومدی {{ user.firstName }}</nuxt-link
-            >
+            >خوش اومدی {{ user.firstName }}</nuxt-link>
             <nuxt-link
               v-else
               @click.native="closeNav"
               class="nav-main__list-item"
               :class="{ active: menuActive }"
               :to="{ name: 'patient-login' }"
-              >ورود به حساب کاربری</nuxt-link
-            >
+            >ورود به حساب کاربری</nuxt-link>
             <template>
               <nuxt-link
                 @click.native="closeNav"
@@ -582,16 +560,14 @@
                 :key="index"
                 class="nav-main__list-item"
                 :class="{ active: menuActive }"
-                >{{ item.name }}</nuxt-link
-              >
+              >{{ item.name }}</nuxt-link>
             </template>
             <a
               v-if="user"
               class="nav-main__list-item"
               :class="{ active: menuActive }"
               @click="logout"
-              >خروج</a
-            >
+            >خروج</a>
           </ul>
         </div>
       </div>
@@ -622,7 +598,7 @@ export default {
         // },
         {
           name: "مشاوره روانشناسی",
-          path: { name: "doctors-psychology" }
+          path: "/doctors/psychology"
         },
         {
           name: "سوالات متداول",

@@ -67,23 +67,19 @@
           </span>
           <nuxt-link
             :to="`/doctors/${doctor.specialtyEnglishTitle.replace(/ /g, '-')}`"
-            >{{ doctor.specialtyTitle }}</nuxt-link
-          >
+          >{{ doctor.specialtyTitle }}</nuxt-link>
           <span>
             <v-icon>chevron_left</v-icon>
           </span>
-          <nuxt-link :to="$route.fullPath"
-            >{{ doctor.title }} {{ doctor.firstName }}
-            {{ doctor.lastName }}</nuxt-link
-          >
+          <nuxt-link :to="$route.fullPath">
+            {{ doctor.title }} {{ doctor.firstName }}
+            {{ doctor.lastName }}
+          </nuxt-link>
         </div>
         <Info :doctor="doctor" />
         <Call :doctor="doctor" />
         <Why />
-        <Address
-          v-if="doctor.workplaces && doctor.workplaces.length"
-          :doctor="doctor"
-        />
+        <Address v-if="doctor.workplaces && doctor.workplaces.length" :doctor="doctor" />
       </div>
     </v-container>
     <v-container fluid class="pa-0">
@@ -153,28 +149,22 @@ export default {
     if (isNaN(params.id)) {
       return error({ statusCode: 404, message: "doctor not found" });
     }
-
-    let fields =
-      "id,firstName,lastName,imagePath,currentlyAvailable,subscriberNumber,specialty,tags,expertise,title,workplaces,medicalCouncilNumber";
     try {
       var { result } = await $axios.$get(`/Doctors/${params.id}/profile`);
     } catch (err) {
       return error({ statusCode: 404, message: "doctor not found" });
     }
     let doctor = result.doctor;
-    // let virtual_doctor = doctors.find(
-    //   item => item.subscriberNumber == params.id
-    // );
-    // doctor = Object.assign(virtual_doctor, doctor);
+
     let locations = [];
-    // for (let address of doctor.workplaces) {
-    //   if (address.latitude && address.longitude) {
-    //     locations.push({
-    //       lat: address.latitude,
-    //       lng: address.longitude
-    //     });
-    //   }
-    // }
+    for (let address of doctor.workplaces) {
+      if (address.latitude && address.longitude) {
+        locations.push({
+          lat: address.latitude,
+          lng: address.longitude
+        });
+      }
+    }
     let hideMap = false;
     let center = { lat: 10, lng: 10 };
     if (locations.length == 0) {
@@ -191,7 +181,7 @@ export default {
       site_name: `رسا : دکتر ${doctor.firstName} ${doctor.lastName}`,
       title: `تخصص : ${doctor.specialtyTitle}`,
       description: `کد رسا : ${doctor.subscriberNumber}`,
-      canonical: `${process.env.SITE_URL}/doctors/psychology/${doctor.subscriberNumber}`
+      canonical: `${process.env.SITE_URL}/doctors/${doctor.specialtyEnglishTitle}/${doctor.subscriberNumber}`
     };
     return {
       doctor: doctor,
@@ -218,14 +208,14 @@ export default {
             {
               "@type": "ListItem",
               position: 2,
-              name: "مشاوره تلفنی با متخصص روانشناس",
-              item: "https://resaa.net/doctors/psychology/"
+              name: doctor.specialtyTitle,
+              item: `https://resaa.net/doctors/${doctor.specialtyEnglishTitle}/`
             },
             {
               "@type": "ListItem",
               position: 3,
               name: `دکتر ${doctor.firstName} ${doctor.lastName}`,
-              item: `https://resaa.net/doctors/psychology/${doctor.subscriberNumber}`
+              item: `https://resaa.net/doctors/${doctor.specialtyEnglishTitle}/${doctor.subscriberNumber}`
             }
           ]
         },

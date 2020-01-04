@@ -10,13 +10,17 @@
 import category from "@/components/categories/index";
 export default {
   layout: "speciality",
+
   components: { category },
   head() {
     return {
       title: this.title,
       __dangerouslyDisableSanitizers: ["script"],
       link: [
-        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
+        {
+          rel: "canonical",
+          href: `${process.env.SITE_URL}/doctors/${this.$route.params.speciality}`
+        }
       ],
       script: [
         {
@@ -45,13 +49,17 @@ export default {
     let category, related_doctors;
     let limit = 10;
     let totalItems = 0;
+    let category_id = ctx.store.state.category.relation[ctx.params.speciality];
+    if (!category_id) {
+      return ctx.error({ statusCode: 404, message: "speciality not found" });
+    }
     try {
-      let { result } = await ctx.$axios.$get(`categories/${ctx.params.id}`);
+      let { result } = await ctx.$axios.$get(`categories/${category_id}`);
       category = result.manifest;
     } catch (error) {}
     try {
       let { result } = await ctx.$axios.$get(
-        `categories/${ctx.params.id}/RelatedDoctors?limit=${limit}`
+        `categories/${category_id}/RelatedDoctors?limit=${limit}`
       );
       related_doctors = result.relatedDoctors;
       totalItems = result.doctorsTotalCount;
@@ -77,7 +85,7 @@ export default {
             "@type": "ListItem",
             position: 2,
             name: category.title,
-            item: `https://resaa.net/categories/${ctx.params.id}`
+            item: `https://resaa.net/categories/${category_id}`
           }
         ]
       },

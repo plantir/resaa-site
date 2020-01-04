@@ -154,6 +154,12 @@
         }
         p {
           margin-bottom: 0;
+          a {
+            color: inherit;
+            &:hover {
+              color: $primary-color;
+            }
+          }
         }
         &:before {
           content: "";
@@ -196,9 +202,7 @@
           <div class="image-wrapper">
             <div class="image">
               <div class="status">
-                <component
-                  :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"
-                ></component>
+                <component :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"></component>
               </div>
               <img
                 v-if="doctor.imagePath"
@@ -219,15 +223,10 @@
                 "
               />
             </div>
-            <div
-              v-scroll-to="{ el: '#call-section', offset: -80 }"
-              class="doctor-id r-display-2"
-            >
+            <div v-scroll-to="{ el: '#call-section', offset: -80 }" class="doctor-id r-display-2">
               <img src="~assets/img/doctorFingerPrint.png" alt />
               کد رِسا:
-              <div class="doctor-resaa-code">
-                {{ doctor.subscriberNumber | persianDigit }}
-              </div>
+              <div class="doctor-resaa-code">{{ doctor.subscriberNumber | persianDigit }}</div>
             </div>
           </div>
         </v-flex>
@@ -241,12 +240,13 @@
               <span
                 class="availability hide-md"
                 :class="doctor.currentlyAvailable ? 'active' : 'deactive'"
-                >({{
-                  doctor.currentlyAvailable
-                    ? "در دسترس"
-                    : "خارج از ساعت پاسخگویی"
-                }})</span
               >
+                ({{
+                doctor.currentlyAvailable
+                ? "در دسترس"
+                : "خارج از ساعت پاسخگویی"
+                }})
+              </span>
             </div>
             <p v-if="doctor.specialtyTitle" class="specialty r-display-2">
               تخصص:
@@ -255,21 +255,18 @@
             <span
               class="availability hide-md-and-up"
               :class="doctor.currentlyAvailable ? 'active' : 'deactive'"
-              >({{
-                doctor.currentlyAvailable
-                  ? "در دسترس"
-                  : "خارج از ساعت پاسخگویی"
-              }})</span
             >
+              ({{
+              doctor.currentlyAvailable
+              ? "در دسترس"
+              : "خارج از ساعت پاسخگویی"
+              }})
+            </span>
             <ul class="specialty-area-container">
               <!-- <li
                 class="specialty-area"
               >کد نظام پزشکی: {{doctor.medicalCouncilNumber || '-' | persianDigit}}</li>-->
-              <li
-                v-for="tag in doctor.aboutDoctor"
-                :key="tag.id"
-                class="specialty-area"
-              >
+              <li v-for="tag in doctor.aboutDoctor" :key="tag.id" class="specialty-area">
                 <p>{{ tag }}</p>
               </li>
             </ul>
@@ -279,15 +276,11 @@
                 <span>امروز:</span>
                 <template v-for="(item, index) in times[day_of_week]">
                   <span :key="index">
-                    <span
-                      >{{ item.start | persianDigit }} -
-                      {{ item.end | persianDigit }}</span
-                    >
-                    <span
-                      v-if="index != times[day_of_week].length - 1"
-                      class="seperator"
-                      >/</span
-                    >
+                    <span>
+                      {{ item.start | persianDigit }} -
+                      {{ item.end | persianDigit }}
+                    </span>
+                    <span v-if="index != times[day_of_week].length - 1" class="seperator">/</span>
                   </span>
                 </template>
                 <!-- <span>۲۰:۰۰ - ۱۶:۰۰</span> -->
@@ -306,7 +299,11 @@
             <h2 class="title">زمینه های فعالیت :</h2>
             <ul>
               <li v-for="(category, index) in doctor.categories" :key="index">
-                <p>{{ category.title }}</p>
+                <p>
+                  <nuxt-link
+                    :to="`/categories/${category.englishTitle}/${category.id}`"
+                  >{{ category.title }}</nuxt-link>
+                </p>
               </li>
             </ul>
           </div>
@@ -318,15 +315,11 @@
               <span>امروز:</span>
               <template v-for="(item, index) in times[day_of_week]">
                 <span :key="index">
-                  <span
-                    >{{ item.start | persianDigit }} -
-                    {{ item.end | persianDigit }}</span
-                  >
-                  <span
-                    v-if="index != times[day_of_week].length - 1"
-                    class="seperator"
-                    >/</span
-                  >
+                  <span>
+                    {{ item.start | persianDigit }} -
+                    {{ item.end | persianDigit }}
+                  </span>
+                  <span v-if="index != times[day_of_week].length - 1" class="seperator">/</span>
                 </span>
               </template>
               <!-- <span>۲۰:۰۰ - ۱۶:۰۰</span> -->
