@@ -1,6 +1,3 @@
 export const state = () => ({
-  relation: {
-    psychology: 8,
-    mamdology: 8
-  }
+  relation: { Orthopaedics: 1, "General-practitioner": 4, psychology: 8 }
 });

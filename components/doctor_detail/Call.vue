@@ -62,6 +62,13 @@
   p {
     margin: 0;
   }
+  .show-time-table {
+    cursor: pointer;
+    margin: 0 3px 0 8px;
+    &:hover {
+      color: $primary-color;
+    }
+  }
 }
 .button-wrapper {
   animation: heartBeat 1.5s linear infinite;
@@ -177,16 +184,20 @@
             <p
               v-if="doctor.providesCallbackService"
             >در حال حاضر پزشک در دسترس نیست. با ثبت درخواست تماس، پزشک در اولین ساعت پاسخگویی خود با شما تماس میگیرد. می توانید با بررسی زمان های پاسخگویی پزشک از اولین زمان پاسخگویی پزشک مطلع شوید.</p>
-            <p
-              v-else
-            >شما می توانید در زمان پاسخگویی بعدی (زمان پاسخگویی بعدی در این پرانتز به او نشان داده شود) از طریق همین صفحه اقدام کنید و یا با سایر متخصصین مرتبط با این پزشک صحبت کنید.</p>
+            <p v-else>
+              شما می توانید در زمان پاسخگویی بعدی (
+              <span
+                class="show-time-table"
+                @click="dialog = true"
+              >مشاهده ساعت های پاسخگویی</span>) از طریق همین صفحه اقدام کنید و یا با سایر متخصصین مرتبط با این پزشک صحبت کنید.
+            </p>
           </template>
         </div>
       </div>
       <div>
         <div class>
           <span class="price-title mb-0">هزینه هر دقیقه گفتگو با پزشک :</span>
-          <span class="price">{{costPerMinute | currency | persianDigit}} تومان</span>
+          <span class="price">{{doctor.pricePerMinute | currency | persianDigit}} تومان</span>
         </div>
         <div class="button-wrapper">
           <nuxt-link
@@ -198,16 +209,15 @@
             <phone class="phone" />
           </nuxt-link>
           <template v-else>
-            <nuxt-link
+            <!-- <nuxt-link
               v-if="doctor.providesCallbackService"
               class="call-doctor"
               :to="`${doctor.subscriberNumber}/call/${user?'charge':'register'}`"
             >
               ثبت درخواست تماس
               <phone class="phone" />
-            </nuxt-link>
+            </nuxt-link>-->
             <a
-              v-else
               class="call-doctor"
               v-scroll-to="{ el: '#related-doctors', offset: -80 }"
             >نمایش پزشکان مرتبط</a>
@@ -215,6 +225,11 @@
         </div>
       </div>
     </v-card>
+    <v-dialog content-class="custom-dialog" max-width="1360" v-model="dialog">
+      <no-ssr>
+        <timeTable v-model="times" @close="dialog = false"></timeTable>
+      </no-ssr>
+    </v-dialog>
   </section>
 </template>
 
@@ -229,15 +244,11 @@ export default {
   },
   data() {
     return {
-      costPerMinute: null
+      costPerMinute: null,
+      dialog: false
     };
   },
-  async mounted() {
-    let price = await this.$axios.$get(
-      `Rubika/Doctors/${this.$route.params.id}/communicationquote`
-    );
-    this.costPerMinute = price.result.quote.costPerMinute;
-  },
+  async mounted() {},
   computed: {
     user() {
       return this.$store.state.patient.user;

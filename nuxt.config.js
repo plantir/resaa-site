@@ -43,6 +43,7 @@ export default {
   },
   serverMiddleware: [
     "~/servermiddleware/redirect.js",
+    "~/servermiddleware/category_redirect.js",
     {
       path: "/patient/profile",
       handler: (req, res, next) => {

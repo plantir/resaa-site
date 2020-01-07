@@ -300,10 +300,7 @@
 
 <template>
   <section>
-    <div
-      v-lazy:background-image="footer_img"
-      :class="[{ patient: isPatient }, 'footer']"
-    >
+    <div v-lazy:background-image="footer_img" :class="[{ patient: isPatient }, 'footer']">
       <v-container>
         <v-layout row wrap>
           <v-flex pa-4 lg3 md6 order-lg1 order-md1 sm12>
@@ -335,30 +332,19 @@
                   <div>
                     <ul>
                       <li>
-                        <router-link
-                          v-if="isPatient"
-                          :to="{ name: 'patient-login' }"
-                          >حساب کاربری</router-link
-                        >
-                        <router-link v-else :to="{ name: 'LoginDoctor' }"
-                          >حساب کاربری</router-link
-                        >
+                        <router-link v-if="isPatient" :to="{ name: 'patient-login' }">حساب کاربری</router-link>
+                        <router-link v-else :to="{ name: 'LoginDoctor' }">حساب کاربری</router-link>
                       </li>
                       <li>
-                        <router-link :to="{ name: 'doctors' }"
-                          >لیست پزشکان</router-link
-                        >
+                        <router-link :to="{ name: 'doctors' }">لیست پزشکان</router-link>
                       </li>
                       <li>
-                        <router-link :to="{ name: 'patient-landing' }"
-                          >رسای بیماران</router-link
-                        >
+                        <router-link :to="{ name: 'patient-landing' }">رسای بیماران</router-link>
                       </li>
                       <li>
                         <router-link
                           :to="{ name: 'patient-landing', hash: '#download' }"
-                          >دریافت برنامه بیماران</router-link
-                        >
+                        >دریافت برنامه بیماران</router-link>
                       </li>
                     </ul>
                   </div>
@@ -372,29 +358,19 @@
                   <div>
                     <ul>
                       <li>
-                        <router-link :to="{ name: 'privacy' }"
-                          >قوانین</router-link
-                        >
+                        <router-link :to="{ name: 'privacy' }">قوانین</router-link>
                       </li>
                       <li>
-                        <router-link :to="{ name: 'privacy' }"
-                          >حریم خصوصی</router-link
-                        >
+                        <router-link :to="{ name: 'privacy' }">حریم خصوصی</router-link>
                       </li>
                       <li>
-                        <router-link :to="{ name: 'faq' }"
-                          >سوالات متداول</router-link
-                        >
+                        <router-link :to="{ name: 'faq' }">سوالات متداول</router-link>
                       </li>
                       <li>
-                        <router-link :to="{ name: 'about' }"
-                          >درباره رسا</router-link
-                        >
+                        <router-link :to="{ name: 'about' }">درباره رسا</router-link>
                       </li>
                       <li>
-                        <router-link :to="{ name: 'contact-us' }"
-                          >تماس با ما</router-link
-                        >
+                        <router-link :to="{ name: 'contact-us' }">تماس با ما</router-link>
                       </li>
                     </ul>
                   </div>
@@ -405,11 +381,7 @@
                   <span>به ما بپیوندید :</span>
                   <ul>
                     <li>
-                      <a
-                        rel="nofollow"
-                        target="_blank"
-                        href="https://t.me/pezeshkeresaa"
-                      >
+                      <a rel="nofollow" target="_blank" href="https://t.me/pezeshkeresaa">
                         <telegram />
                         <!-- <img src="~assets/svg/telegram.svg" alt /> -->
                         <!-- <i class="fa fa-telegram"></i> -->
@@ -422,21 +394,13 @@
                       </a>
                     </li>
                     <li>
-                      <a
-                        rel="nofollow"
-                        target="_blank"
-                        href="https://instagram.com/resaanet/"
-                      >
+                      <a rel="nofollow" target="_blank" href="https://instagram.com/resaanet/">
                         <instagram />
                         <!-- <i class="fa fa-instagram"></i> -->
                       </a>
                     </li>
                     <li>
-                      <a
-                        rel="nofollow"
-                        target="_blank"
-                        href="https://twitter.com/resaanet"
-                      >
+                      <a rel="nofollow" target="_blank" href="https://twitter.com/resaanet">
                         <twitter />
                         <!-- <i class="fa fa-twitter"></i> -->
                       </a>
@@ -462,10 +426,7 @@
                   <span>{{ contactInfo.support.text }}</span>
                 </p>
               </a>
-              <a
-                :href="`tel:${contactInfo.doctor_support.value}`"
-                class="footer-tel"
-              >
+              <a :href="`tel:${contactInfo.doctor_support.value}`" class="footer-tel">
                 <phone />
                 <p>
                   پشتیبانی پزشکان :
@@ -486,11 +447,11 @@
                 alt
               >-->
               <img
-                v-lazy="enamad_img"
-                alt
-                onclick='window.open("https://trustseal.enamad.ir/Verify.aspx?id=127333&amp;p=1p93aagdwcp8JwYd", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")'
-                style="cursor:pointer"
-                id="1p93aagdwcp8JwYd"
+              v-lazy="enamad_img"
+              alt
+              onclick="window.open("https://trustseal.enamad.ir/Verify.aspx?id=127333&amp;p=1p93aagdwcp8JwYd", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")"
+              style="cursor:pointer"
+              id="1p93aagdwcp8JwYd"
               />
               <!-- <img src="./samandehi.png" alt> -->
             </div>
@@ -505,7 +466,7 @@
         </div>
         <p>
           کلیه حقوق مادی و معنوی این سایت به شرکت برگ‌های سبز و نقره‌ای تعلق
-          دارد &copy; ۱۳۹۷
+          دارد &copy; {{year | persianDigit}}
         </p>
       </div>
     </div>
@@ -522,6 +483,8 @@ import phone from "~/assets/svg/phone.svg?inline";
 import enamad_img from "./e-namad.png";
 import logo_img from "./logo.png";
 import footer_img from "./footer_bg.png";
+import moment from "moment-jalaali";
+
 export default {
   components: {
     telegram,
@@ -542,6 +505,9 @@ export default {
   computed: {
     contactInfo() {
       return { ...this.$store.state.contact };
+    },
+    year() {
+      return moment().jYear();
     }
   }
 };

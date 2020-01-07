@@ -47,7 +47,7 @@ export default {
   },
   async asyncData(ctx) {
     let category, related_doctors;
-    let limit = 10;
+    let limit = 6;
     let totalItems = 0;
     let category_id = ctx.store.state.category.relation[ctx.params.speciality];
     if (!category_id) {

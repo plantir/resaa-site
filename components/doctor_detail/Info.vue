@@ -285,6 +285,9 @@
                 </template>
                 <!-- <span>۲۰:۰۰ - ۱۶:۰۰</span> -->
               </div>
+              <div v-else>
+                <span>امروز در دسترس نیست</span>
+              </div>
               <div>
                 <a @click="dialog = true" class="secondary--text">
                   مشاهده کل هفته

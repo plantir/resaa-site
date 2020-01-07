@@ -440,11 +440,7 @@
             </div>
             <div ref="doctors" class="doctors-box">
               <v-loading v-if="ajaxLoading" mode="relative"></v-loading>
-              <div
-                v-for="doctor in doctors"
-                :key="doctor.id"
-                class="doctors-item"
-              >
+              <div v-for="doctor in doctors" :key="doctor.id" class="doctors-item">
                 <router-link
                   :to="
                     `/doctors/${doctor.specialty.description.replace(
@@ -465,41 +461,31 @@
                         <img v-else src="/img/doc-placeholder.png" alt />
                       </div>
                       <div class="item-right-sub-section">
-                        <div class="item-doctor-name">
-                          {{ doctor.firstName }} {{ doctor.lastName }}
-                        </div>
+                        <div class="item-doctor-name">{{ doctor.firstName }} {{ doctor.lastName }}</div>
                         <div
                           v-if="doctor.specialty"
                           class="item-doctor-specialty"
-                        >
-                          {{ doctor.specialty.title }}
-                        </div>
+                        >{{ doctor.specialty.title }}</div>
                         <div v-if="doctor.tags" class="item-doctor-tags">
                           <div
                             v-for="tag in doctor.tags"
                             :key="tag.id"
                             class="item-doctor-tag"
-                          >
-                            {{ tag.title }}
-                          </div>
+                          >{{ tag.title }}</div>
                         </div>
                       </div>
                     </div>
                     <div class="item-left-section">
                       <div class="item-resaa-code-container">
                         <div class="item-resaa-code-label">کد رِسا:</div>
-                        <div class="item-resaa-code">
-                          {{ doctor.subscriberNumber | persianDigit }}
-                        </div>
+                        <div class="item-resaa-code">{{ doctor.subscriberNumber | persianDigit }}</div>
                       </div>
                       <i class="fa fa-angle-left" aria-hidden="true"></i>
                     </div>
                   </div>
                 </router-link>
               </div>
-              <div v-if="!ajaxLoading && doctors.length == 0" class="no-result">
-                موردی یافت نشد
-              </div>
+              <div v-if="!ajaxLoading && doctors.length == 0" class="no-result">موردی یافت نشد</div>
             </div>
             <div class="pagination-box">
               <div class="hide-xs">

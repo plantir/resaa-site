@@ -20,9 +20,9 @@ export default {
           rel: "canonical",
           href: `${
             process.env.SITE_URL
-          }/${this.category.englishTitle.toLowerCase().replace(/ /g, "-")}/${
-            this.category.id
-          }`
+          }/categories/${this.category.englishTitle
+            .toLowerCase()
+            .replace(/ /g, "-")}/${this.category.id}`
         }
       ],
       script: [
@@ -50,19 +50,26 @@ export default {
   },
   async asyncData(ctx) {
     let category, related_doctors;
-    let limit = 10;
+    let limit = 6;
     let totalItems = 0;
-    let exist_psycology = Object.entries(
-      ctx.store.state.category.relation
-    ).find(([key, value]) => {
-      return value == ctx.params.id;
-    });
-    if (exist_psycology) {
-      return ctx.redirect(`/doctors/${exist_psycology[0]}`);
-    }
+    // let exist_psycology = Object.entries(
+    //   ctx.store.state.category.relation
+    // ).find(([key, value]) => {
+    //   return value == ctx.params.id;
+    // });
+    // if (exist_psycology) {
+    //   return ctx.redirect(`/doctors/${exist_psycology[0]}`);
+    // }
+
     try {
       let { result } = await ctx.$axios.$get(`categories/${ctx.params.id}`);
       category = result.manifest;
+      if (
+        category.englishTitle.toLowerCase().replace(/ /g, "-") !==
+        ctx.params.name
+      ) {
+        return ctx.error({ statusCode: 404, message: "speciality not found" });
+      }
     } catch (error) {}
     try {
       let { result } = await ctx.$axios.$get(
