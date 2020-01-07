@@ -114,16 +114,14 @@
         :src="'/api/' + category.backgroundImagePath"
         :alt="category.title"
       />
-      <img
-        v-else
-        :src="'/api/' + category.mobileBackgroundImagePath"
-        :alt="category.title"
-      />
+      <img v-else :src="'/api/' + category.mobileBackgroundImagePath" :alt="category.title" />
       <h1>{{ category.title }}</h1>
       <transition name="fade" mode="out-in">
-        <span :key="text_array[header_text]">{{
+        <span :key="text_array[header_text]">
+          {{
           text_array[header_text]
-        }}</span>
+          }}
+        </span>
       </transition>
     </div>
     <v-container class="py-0">
@@ -143,7 +141,7 @@
           </p>
           <div
             class="item"
-            v-for="doctor in related_doctors.slice(0, 5)"
+            v-for="doctor in related_doctors.slice(0, 3)"
             :key="doctor.subscriberNumber"
           >
             <Doctor :doctor="doctor" />
@@ -151,7 +149,7 @@
           <Guide />
           <div
             class="item"
-            v-for="doctor in related_doctors.slice(5, related_doctors.length)"
+            v-for="doctor in related_doctors.slice(3, related_doctors.length)"
             :key="doctor.subscriberNumber"
           >
             <Doctor :doctor="doctor" />
@@ -176,7 +174,8 @@
     >
       <h2>
         نظر همراهان رسا در
-        <br class="hide-md-and-up" />مورد {{ category.title }}
+        <br class="hide-md-and-up" />
+        مورد {{ category.title }}
       </h2>
       <Comments :comments="category.testimonials" />
     </v-container>
