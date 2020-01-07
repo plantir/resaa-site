@@ -84,8 +84,8 @@ export default {
           {
             "@type": "ListItem",
             position: 2,
-            name: category.title,
-            item: `https://resaa.net/categories/${category_id}`
+            name: ctx.params.speciality,
+            item: `https://resaa.net/doctors/${ctx.params.speciality}`
           }
         ]
       },

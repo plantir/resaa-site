@@ -98,8 +98,8 @@ export default {
           {
             "@type": "ListItem",
             position: 2,
-            name: category.title,
-            item: `https://resaa.net/categories/${ctx.params.id}`
+            name: category.englishTitle.toLowerCase().replace(/ /g, "-"),
+            item: `https://resaa.net/categories/${ctx.params.name}/${ctx.params.id}`
           }
         ]
       },
