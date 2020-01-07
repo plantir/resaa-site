@@ -226,7 +226,7 @@ export default {
       this.page = page;
       try {
         let { result } = await this.$axios.$get(
-          `categories/${this.$route.params.id}/RelatedDoctors?limit=${this.limit}&offset=${this.offset}`
+          `categories/${this.category.id}/RelatedDoctors?limit=${this.limit}&offset=${this.offset}`
         );
         this.related_doctors = result.relatedDoctors;
       } catch (error) {}
