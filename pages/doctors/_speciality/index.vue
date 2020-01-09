@@ -98,7 +98,10 @@ export default {
             "@type": "ListItem",
             position: key + 1,
             item: {
-              "@id": `https://resaa.net/doctors/psychology/${doctor.subscriberNumber}`,
+              "@id": `https://resaa.net/doctors/${doctor.specialtyEnglishTitle.replace(
+                / /g,
+                "-"
+              )}/${doctor.subscriberNumber}`,
               name: `${doctor.fullNameWithTitle}`,
               image: {
                 "@type": "ImageObject",

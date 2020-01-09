@@ -304,7 +304,8 @@
               <li v-for="(category, index) in doctor.categories" :key="index">
                 <p>
                   <nuxt-link
-                    :to="`/categories/${category.englishTitle}/${category.id}`"
+                    :to="`/categories/${category.englishTitle?category.englishTitle.replace(/ /g, '-'):'undifiend'}/${category.id}`"
+                    target="_blank"
                   >{{ category.title }}</nuxt-link>
                 </p>
               </li>
