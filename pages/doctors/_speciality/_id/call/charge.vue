@@ -167,34 +167,32 @@ h2 {
         </v-loading>
       </no-ssr>
       <h1>افزایش اعتبار</h1>
-      <h2>
-        برای برقراری تماس لطفا حساب خود را به میزان دقایق مکالمه شارژ کنید:
-      </h2>
+      <h2>برای برقراری تماس لطفا حساب خود را به میزان دقایق مکالمه شارژ کنید:</h2>
       <div class="charge-items hide-md">
         <div
           class="charge-item-wrapper"
-          @click="selected = item.id"
-          :class="{ selected: item.id == selected }"
-          v-for="item in items"
-          :key="item.id"
+          @click="selected = item.denomination.id"
+          :class="{ selected: item.denomination.id == selected }"
+          v-for="(item,i) in charg_items"
+          :key="item.chargePackage.packageId"
         >
           <div class="charge-item">
             <div class="item-header">
               <div class="header-bg">
-                <ChargeSvg :color="item.color" />
+                <ChargeSvg :color="colors[i % 4]" />
               </div>
-              <span>{{ item.duration | persianDigit }} دقیقه</span>
+              <span>{{ item.chargePackage.durationInMinute | persianDigit }} دقیقه</span>
             </div>
             <div class="item-content">
-              <h4>{{ item.title }}</h4>
-              <p>{{ item.description }}</p>
+              <h4>{{ item.chargePackage.packageTitle }}</h4>
+              <p>{{ item.chargePackage.description }}</p>
             </div>
             <div class="item-footer">
-              <div class="price">
-                {{ item.price | currency | persianDigit }} تومان
-              </div>
+              <div
+                class="price"
+              >{{ item.denomination.payableAmount | currency | persianDigit }} تومان</div>
               <div class="select-holder">
-                <v-icon v-if="item.id == selected">check</v-icon>
+                <v-icon v-if="item.denomination.id == selected">check</v-icon>
               </div>
             </div>
           </div>
@@ -210,28 +208,28 @@ h2 {
         <div class="swiper-wrapper">
           <div
             class="charge-item-wrapper swiper-slide"
-            @click="selected = item.id"
-            :class="{ selected: item.id == selected }"
-            v-for="item in items"
-            :key="item.id"
+            @click="selected = item.denomination.id"
+            :class="{ selected: item.denomination.id == selected }"
+            v-for="(item,i) in charg_items"
+            :key="item.chargePackage.packageId"
           >
             <div class="charge-item">
               <div class="item-header">
                 <div class="header-bg">
-                  <ChargeSvg :color="item.color" />
+                  <ChargeSvg :color="colors[i % 4]" />
                 </div>
-                <span>{{ item.duration | persianDigit }} دقیقه</span>
+                <span>{{ item.chargePackage.durationInMinute | persianDigit }} دقیقه</span>
               </div>
               <div class="item-content">
-                <h4>{{ item.title }}</h4>
-                <p>{{ item.description }}</p>
+                <h4>{{ item.chargePackage.packageTitle }}</h4>
+                <p>{{ item.chargePackage.description }}</p>
               </div>
               <div class="item-footer">
-                <div class="price">
-                  {{ item.price | currency | persianDigit }} تومان
-                </div>
+                <div
+                  class="price"
+                >{{ item.denomination.payableAmount | currency | persianDigit }} تومان</div>
                 <div class="select-holder">
-                  <v-icon v-if="item.id == selected">check</v-icon>
+                  <v-icon v-if="item.denomination.id == selected">check</v-icon>
                 </div>
               </div>
             </div>
@@ -241,14 +239,7 @@ h2 {
       </div>
 
       <div class="payment-wrapper">
-        <v-btn
-          id="journeygobank"
-          @click="onSubmit"
-          class="payment-btn"
-          depressed
-          dark
-          round
-        >
+        <v-btn id="journeygobank" @click="onSubmit" class="payment-btn" depressed dark round>
           <v-icon class="ml-3">fa-credit-card</v-icon>
           <span>پرداخت</span>
         </v-btn>
@@ -260,7 +251,7 @@ h2 {
           <span dir="ltr">
             *500*25#
           </span>
-        </v-alert> -->
+        </v-alert>-->
         <vue-recaptcha
           ref="invisibleRecaptcha"
           @verify="onVerify"
@@ -271,19 +262,15 @@ h2 {
       <div class="continue">
         <div class="text">
           <span>اعتبار فعلی حساب شما</span>
-          <span class="custom-color"
-            >{{ credit | currency | persianDigit }} تومان</span
-          >
+          <span class="custom-color">{{ credit | currency | persianDigit }} تومان</span>
           <span>است . شما میتوانید</span>
           <span class="custom-color">{{ duration | persianDigit }} دقیقه</span>
-          <span
-            >با {{ doctor.title }} {{ doctor.firstName }}
-            {{ doctor.lastName }} صحبت کنید</span
-          >
+          <span>
+            با {{ doctor.title }} {{ doctor.firstName }}
+            {{ doctor.lastName }} صحبت کنید
+          </span>
         </div>
-        <v-btn v-if="duration >= 1" color="#27db9b" to="booking" round outline
-          >ادامه با اعتبار فعلی</v-btn
-        >
+        <v-btn v-if="duration >= 1" color="#27db9b" to="booking" round outline>ادامه با اعتبار فعلی</v-btn>
       </div>
     </div>
 
@@ -322,13 +309,31 @@ import doctors from "@/components/doctor_detail/doctors";
 export default {
   components: { ChargeSvg },
   async asyncData({ app, store, error, params, $axios, isClient }) {
+    let doctor;
+    let charg_items;
     try {
-      var { result } = await $axios.$get(`/Doctors/${params.id}/profile`);
+      let { result } = await $axios.$get(`/Doctors/${params.id}/profile`);
+      doctor = result.doctor;
     } catch (err) {
       return error({ statusCode: 404, message: "doctor not found" });
     }
-    let doctor = result.doctor;
+    try {
+      let result = await $axios.$get(
+        `/Doctors/${doctor.id}/TimeBasedChargePackages`
+      );
+      charg_items = result;
+    } catch (err) {
+      return error({ statusCode: 404, message: "doctor not found" });
+    }
+
     return {
+      charg_items,
+      colors: [
+        ["#FDBD10", "#7F5F08"],
+        ["#EF4871", "#782439"],
+        ["#0EC7E6", "#076473"],
+        ["#28DB9A", "#146E4D"]
+      ],
       items: [
         {
           id: 2,
