@@ -444,7 +444,6 @@ export default {
       }
     },
     gotoInitial() {
-      console.log("object");
       this.$scrollTo("#initialMeasures", 1000);
     },
     gotogettingHelp() {

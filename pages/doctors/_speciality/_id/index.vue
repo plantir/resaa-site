@@ -234,7 +234,6 @@ export default {
     };
   },
   mounted() {
-    // console.log(this.$route);
     // setTimeout(() => {
     //   if (process.client && !this.hideMap) {
     //     this.$refs.mapRef.$mapPromise.then(map => {

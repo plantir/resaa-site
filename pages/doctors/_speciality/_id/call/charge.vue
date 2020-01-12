@@ -415,7 +415,6 @@ export default {
   methods: {
     yourCallBackFunction() {
       // Your logic
-      console.log("object");
     },
     onVerify: function(response) {
       this.ajaxLoading = true;

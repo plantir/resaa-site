@@ -115,13 +115,7 @@
                 @keyup.enter="verifySMSCode"
               ></v-text-field>
             </div>
-            <v-btn
-              @click="verifySMSCode"
-              class="register-btn"
-              depressed
-              dark
-              round
-            >
+            <v-btn @click="verifySMSCode" class="register-btn" depressed dark round>
               <span>ارسال</span>
             </v-btn>
             <div class="input-detail">
@@ -143,9 +137,11 @@
           <div v-else>
             <h1>
               این شماره
-              <span class="green--text">{{
+              <span class="green--text">
+                {{
                 user.phoneNumber | persianDigit
-              }}</span>
+                }}
+              </span>
               در سیستم وجود دارد
               <div class="caption">
                 در صورتیکه رمز عبور خود را ندارید با پشتیبانی تماس بگیرید) بشود
@@ -251,7 +247,6 @@ export default {
           this.new_user = false;
           this.step = 2;
         } else {
-          console.log(error);
         }
       }
       this.ajaxLoading = false;
