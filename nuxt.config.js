@@ -255,15 +255,15 @@ export default {
     routes() {
       return axios.get(`${process.env.API_URL}/misc/sitemap`).then(res => {
         let items = res.data.result.doctorSubscriberNumbers.map(id => {
-          let url;
-          if (["7830", "7155", "7594", "7265", "7106", "7305"].includes(id)) {
-            url = `/doctors/psychology/${id}`;
-          } else {
-            url = `/doctors/${id}`;
-          }
+          // let url;
+          // if (["7830", "7155", "7594", "7265", "7106", "7305"].includes(id)) {
+          //   url = `/doctors/psychology/${id}`;
+          // } else {
+          // }
+          url = `/doctors/${id}`;
           return url;
         });
-        items.push("/doctors/psychology/7830");
+        // items.push("/doctors/psychology/7830");
         return items;
       });
     }
