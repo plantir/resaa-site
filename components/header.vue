@@ -154,9 +154,9 @@ section#header {
           <li class="nav-item">
             <router-link :to="{ name: 'doctors' }" class="navigation-bar-item">لیست پزشکان</router-link>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <router-link to="/doctors/psychology" class="navigation-bar-item">روانشناسی</router-link>
-          </li>
+          </li> -->
           <!-- <li class="nav-item">
             <router-link :to="{name:'privacy'}" class="navigation-bar-item">قوانین</router-link>
           </li>-->
