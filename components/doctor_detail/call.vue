@@ -245,7 +245,8 @@ export default {
   data() {
     return {
       costPerMinute: null,
-      dialog: false
+      dialog: false,
+      times: null
     };
   },
   async mounted() {},
