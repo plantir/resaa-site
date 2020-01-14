@@ -199,7 +199,7 @@ h2 {
         </div>
       </div>
       <div
-        class="hide-md-and-up"
+        class="hide-lg-and-up"
         ref="mySwiper"
         v-swiper:mySwiperdesktop="swiperOptionDoctors"
         @slideChange="onChange"

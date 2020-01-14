@@ -256,7 +256,7 @@ export default {
     routes() {
       return axios.get(`${process.env.API_URL}/misc/sitemap`).then(res => {
         let items = res.data.result.doctorSubscriberNumbers.map(id => {
-          // let url;
+          let url;
           // if (["7830", "7155", "7594", "7265", "7106", "7305"].includes(id)) {
           //   url = `/doctors/psychology/${id}`;
           // } else {
