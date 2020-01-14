@@ -66,7 +66,7 @@
             <v-icon>chevron_left</v-icon>
           </span>
           <nuxt-link
-            :to="`/doctors/${doctor.specialtyEnglishTitle.replace(/ /g, '-')}`"
+            :to="`/doctors/${doctor.specialtyEnglishTitle.toLowerCase().replace(/ /g, '-')}`"
           >{{ doctor.specialtyTitle }}</nuxt-link>
           <span>
             <v-icon>chevron_left</v-icon>
@@ -181,7 +181,11 @@ export default {
       site_name: `رسا : دکتر ${doctor.firstName} ${doctor.lastName}`,
       title: `تخصص : ${doctor.specialtyTitle}`,
       description: `کد رسا : ${doctor.subscriberNumber}`,
-      canonical: `${process.env.SITE_URL}/doctors/${doctor.specialtyEnglishTitle}/${doctor.subscriberNumber}`
+      canonical: `${
+        process.env.SITE_URL
+      }/doctors/${doctor.specialtyEnglishTitle
+        .toLowerCase()
+        .replace(/ /g, "-")}/${doctor.subscriberNumber}`
     };
     return {
       doctor: doctor,
@@ -209,13 +213,17 @@ export default {
               "@type": "ListItem",
               position: 2,
               name: doctor.specialtyTitle,
-              item: `https://resaa.net/doctors/${doctor.specialtyEnglishTitle}/`
+              item: `https://resaa.net/doctors/${doctor.specialtyEnglishTitle
+                .toLowerCase()
+                .replace(/ /g, "-")}/`
             },
             {
               "@type": "ListItem",
               position: 3,
               name: `دکتر ${doctor.firstName} ${doctor.lastName}`,
-              item: `https://resaa.net/doctors/${doctor.specialtyEnglishTitle}/${doctor.subscriberNumber}`
+              item: `https://resaa.net/doctors/${doctor.specialtyEnglishTitle
+                .toLowerCase()
+                .replace(/ /g, "-")}/${doctor.subscriberNumber}`
             }
           ]
         },
@@ -229,7 +237,9 @@ export default {
         //   bestRating: "100",
         //   ratingCount: "25"
         // },
-        description: doctor.aboutDoctor.map(item => item.title).join(",")
+        description: doctor.aboutDoctor
+          .concat(doctor.categories.map(item => item.title))
+          .join(",")
       }
     };
   },
