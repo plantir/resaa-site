@@ -429,13 +429,13 @@
                 class="navigation-bar-item"
               >قوانین</nuxt-link>
             </li>-->
-            <!-- <li class="nav-item">
+            <li class="nav-item">
               <router-link
                 @click.native="closeNav"
                 to="/doctors/psychology"
                 class="navigation-bar-item"
               >مشاوره روانشناسی</router-link>
-            </li>-->
+            </li>
             <li class="nav-item">
               <nuxt-link
                 @click.native="closeNav"

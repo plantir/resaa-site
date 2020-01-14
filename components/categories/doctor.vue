@@ -141,15 +141,13 @@
     <nuxt-link
       class="image"
       :to="
-        `/doctors/${doctor.specialtyEnglishTitle.replace(/ /g, '-')}/${
+        `/doctors/${doctor.specialtyEnglishTitle.toLowerCase().replace(/ /g, '-')}/${
           doctor.subscriberNumber
         }`
       "
     >
       <div class="status">
-        <component
-          :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"
-        ></component>
+        <component :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"></component>
       </div>
       <img
         v-if="doctor.imagePath"
@@ -157,33 +155,25 @@
         v-lazy="'https://webapi.resaa.net/' + doctor.imagePath"
         :alt="`تصویر ${doctor.fullNameWithTitle}`"
       />
-      <img
-        v-else
-        src="/img/doc-placeholder.png"
-        :alt="`تصویر ${doctor.fullNameWithTitle}`"
-      />
+      <img v-else src="/img/doc-placeholder.png" :alt="`تصویر ${doctor.fullNameWithTitle}`" />
     </nuxt-link>
     <div class="name">
       <h3>
         <nuxt-link
           :to="
-            `/doctors/${doctor.specialtyEnglishTitle.replace(/ /g, '-')}/${
+            `/doctors/${doctor.specialtyEnglishTitle.toLowerCase().replace(/ /g, '-')}/${
               doctor.subscriberNumber
             }`
           "
           class="doctor-name"
-          >{{ doctor.fullNameWithTitle }}</nuxt-link
-        >
+        >{{ doctor.fullNameWithTitle }}</nuxt-link>
       </h3>
       <p class="doctor-speciality">
         <strong>{{ doctor.specialtyTitle }}</strong>
       </p>
       <div class="doctor-tags">
         <p>
-          <span
-            v-for="(tag, index) in doctor.aboutDoctor.slice(0, 3)"
-            :key="tag.id"
-          >
+          <span v-for="(tag, index) in doctor.aboutDoctor.slice(0, 3)" :key="tag.id">
             {{ tag }}
             <template v-if="index != 2">،</template>
           </span>
@@ -200,12 +190,10 @@
         جلسه رضایت بخش
       </div>
       <div>
-        <div class="price-per-minute">
-          {{ doctor.pricePerMinute | persianDigit }} تومان / دقیقه
-        </div>
+        <div class="price-per-minute">{{ doctor.pricePerMinute | persianDigit }} تومان / دقیقه</div>
         <v-btn
           :to="
-            `/doctors/${doctor.specialtyEnglishTitle.replace(/ /g, '-')}/${
+            `/doctors/${doctor.specialtyEnglishTitle.toLowerCase().replace(/ /g, '-')}/${
               doctor.subscriberNumber
             }`
           "

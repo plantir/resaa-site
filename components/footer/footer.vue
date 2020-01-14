@@ -447,11 +447,11 @@
                 alt
               >-->
               <img
-              v-lazy="enamad_img"
-              alt
-              onclick="window.open("https://trustseal.enamad.ir/Verify.aspx?id=127333&amp;p=1p93aagdwcp8JwYd", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")"
-              style="cursor:pointer"
-              id="1p93aagdwcp8JwYd"
+                v-lazy="enamad_img"
+                alt
+                onclick="window.open('https://trustseal.enamad.ir/Verify.aspx?id=127333&amp;p=1p93aagdwcp8JwYd', 'Popup','toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30')"
+                style="cursor:pointer"
+                id="1p93aagdwcp8JwYd"
               />
               <!-- <img src="./samandehi.png" alt> -->
             </div>
