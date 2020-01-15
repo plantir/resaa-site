@@ -249,10 +249,12 @@ export default {
     this.$axios.get("/Charge/Denominations").then(response => {
       this.chargeMenuItems = response.data.result.denominations
         .filter(item => {
-          return !(
-            item.amount == 45000 ||
-            item.amount == 60000 ||
-            item.amount == 80000
+          return (
+            item.amount == 10000 ||
+            item.amount == 20000 ||
+            item.amount == 30000 ||
+            item.amount == 40000 ||
+            item.amount == 50000
           );
         })
         .sort((a, b) => a.amount - b.amount);
