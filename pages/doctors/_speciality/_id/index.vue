@@ -155,6 +155,12 @@ export default {
       return error({ statusCode: 404, message: "doctor not found" });
     }
     let doctor = result.doctor;
+    if (
+      doctor.specialtyEnglishTitle.toLowerCase().replace(/ /g, "-") !=
+      params.speciality
+    ) {
+      return error({ statusCode: 404, message: "doctor not found" });
+    }
 
     let locations = [];
     for (let address of doctor.workplaces) {

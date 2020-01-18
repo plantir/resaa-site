@@ -112,7 +112,9 @@ export default {
             "@type": "ListItem",
             position: key + 1,
             item: {
-              "@id": `https://resaa.net/doctors/${doctor.specialtyEnglishTitle.replace(/ /g, '-')}/${doctor.subscriberNumber}`,
+              "@id": `https://resaa.net/doctors/${doctor.specialtyEnglishTitle
+                .toLowerCase()
+                .replace(/ /g, "-")}/${doctor.subscriberNumber}`,
               name: `${doctor.fullNameWithTitle}`,
               image: {
                 "@type": "ImageObject",
