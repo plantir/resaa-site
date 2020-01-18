@@ -329,7 +329,7 @@
             <router-link
               target="_blank"
               :to="
-                `/doctors/${doctor.specialty.description.replace(/ /g, '-')}/${
+                `/doctors/${doctor.specialty.description.toLowerCase().replace(/ /g, '-')}/${
                   doctor.subscriberNumber
                 }`
               "
@@ -342,36 +342,27 @@
                       :src="'https://webapi.resaa.net/' + doctor.imagePath"
                       alt
                     />
-                    <img
-                      v-else
-                      src="/img/doc-placeholder.png"
-                      alt="پزشکان سامانه رسا"
-                    />
+                    <img v-else src="/img/doc-placeholder.png" alt="پزشکان سامانه رسا" />
                   </div>
                   <div class="item-right-sub-section">
-                    <div class="item-doctor-name">
-                      {{ doctor.firstName }} {{ doctor.lastName }}
-                    </div>
-                    <div v-if="doctor.specialty" class="item-doctor-specialty">
-                      {{ doctor.specialty.title }}
-                    </div>
+                    <div class="item-doctor-name">{{ doctor.firstName }} {{ doctor.lastName }}</div>
+                    <div
+                      v-if="doctor.specialty"
+                      class="item-doctor-specialty"
+                    >{{ doctor.specialty.title }}</div>
                   </div>
                 </div>
                 <div class="item-left-section">
                   <div class="item-resaa-code-container">
                     <div class="item-resaa-code-label">کد رِسا:</div>
-                    <div class="item-resaa-code">
-                      {{ doctor.subscriberNumber | persianDigit }}
-                    </div>
+                    <div class="item-resaa-code">{{ doctor.subscriberNumber | persianDigit }}</div>
                   </div>
                   <i class="fa fa-angle-left" aria-hidden="true"></i>
                 </div>
               </div>
             </router-link>
           </div>
-          <div v-if="!ajaxLoading && doctors.length == 0" class="no-result">
-            موردی یافت نشد
-          </div>
+          <div v-if="!ajaxLoading && doctors.length == 0" class="no-result">موردی یافت نشد</div>
         </div>
         <no-ssr>
           <div class="pagination-box">
@@ -405,8 +396,7 @@
         color="secondary"
         round
         outline
-        >لیست کامل پزشکان رِسا</v-btn
-      >
+      >لیست کامل پزشکان رِسا</v-btn>
     </div>
   </div>
 </template>

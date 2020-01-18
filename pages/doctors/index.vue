@@ -443,7 +443,7 @@
               <div v-for="doctor in doctors" :key="doctor.id" class="doctors-item">
                 <router-link
                   :to="
-                    `/doctors/${doctor.specialty.description.replace(
+                    `/doctors/${doctor.specialty.description.toLowerCase().replace(
                       / /g,
                       '-'
                     )}/${doctor.subscriberNumber}`

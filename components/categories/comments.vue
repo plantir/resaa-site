@@ -126,7 +126,7 @@
                 class="doctor-comment-special"
                 target="_blank"
                 :to="
-                  `/doctors/${comment.doctor.specialtyEnglishTitle.replace(
+                  `/doctors/${comment.doctor.specialtyEnglishTitle.toLowerCase().replace(
                     / /g,
                     '-'
                   )}/${comment.doctor.subscriberNumber}`
