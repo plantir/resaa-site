@@ -184,9 +184,9 @@ export default {
       image:
         "https://webapi.resaa.net/" + doctor.imagePath ||
         "/img/doc-placeholder.png",
-      site_name: `رسا : دکتر ${doctor.firstName} ${doctor.lastName}`,
-      title: `تخصص : ${doctor.specialtyTitle}`,
-      description: `کد رسا : ${doctor.subscriberNumber}`,
+      site_name: `سامانه رسا`,
+      title: `دکتر ${doctor.firstName} ${doctor.lastName} - متخصص : ${doctor.specialtyTitle}`,
+      description: `کد رسا:${doctor.subscriberNumber} - ${description}`,
       canonical: `${
         process.env.SITE_URL
       }/doctors/${doctor.specialtyEnglishTitle
