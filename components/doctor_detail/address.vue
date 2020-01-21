@@ -31,11 +31,21 @@
   display: flex;
   // align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   font-size: 14px;
   @include media(sm) {
     flex-direction: column;
     align-items: flex-start;
   }
+  .workplace-title {
+    display: flex;
+    width: 100%;
+    padding-right: 16px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
   .address {
     padding-right: 32px;
     position: relative;
@@ -135,17 +145,18 @@
         class="section-title"
       >آدرس و تلفن مطب {{doctor.title}} {{doctor.firstName}} {{doctor.lastName}}</h2>
       <div class="address-item" v-for="(workplace,index) in doctor.workplaces" :key="index">
+        <div class="workplace-title">{{workplace.title}}</div>
         <div class="address">
           <location />
           <p>{{workplace.street}}</p>
         </div>
-        <div class="phone">
+        <div class="phone" v-if="workplace.phoneNumber">
           <div>
             <phone />
             <span>مطب :</span>
             <p class="phone-number">{{workplace.phoneNumber | persianDigit}}</p>
           </div>
-          <p class="description">{{workplace.description}}</p>
+          <!-- <p class="description">{{workplace.description}}</p> -->
         </div>
       </div>
       <!-- <div class="social-media">
