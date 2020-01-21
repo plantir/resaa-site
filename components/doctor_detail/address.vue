@@ -52,7 +52,7 @@
     min-height: 24px;
     align-items: center;
     display: flex;
-    flex: 0 0 60%;
+    flex: 0 0 75%;
     p {
       margin: 0;
     }
@@ -72,7 +72,7 @@
     align-items: center;
     display: flex;
     height: 24px;
-    flex: 0 0 40%;
+    flex: 0 0 25%;
     @include media(sm) {
       margin-top: 16px;
       flex-direction: column;

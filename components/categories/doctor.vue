@@ -180,14 +180,20 @@
         </p>
         <div class="success-call hide-md-and-up">
           <Favorite />
-          <span>{{ doctor.satisfiedCalls | persianDigit }}</span>
+          <template v-if="doctor.satisfiedCalls> 50">
+            <span>{{ doctor.satisfiedCalls| callConvert | persianDigit }}</span>
+          </template>
+          <template v-else>پزشک جدید</template>
         </div>
       </div>
     </div>
     <div class="price">
       <div class="success-call hide-md">
-        <span>{{ doctor.satisfiedCalls | persianDigit }}</span>
-        جلسه رضایت بخش
+        <template v-if="doctor.satisfiedCalls> 50">
+          <span>{{ doctor.satisfiedCalls | callConvert | persianDigit }}</span>
+          جلسه رضایت بخش
+        </template>
+        <template v-else>پزشک جدید</template>
       </div>
       <div>
         <div class="price-per-minute">{{ doctor.pricePerMinute | persianDigit }} تومان / دقیقه</div>
@@ -214,6 +220,30 @@ import Favorite from "@/assets/svg/favorites_button.svg?inline";
 export default {
   props: {
     doctor: {}
+  },
+  filters: {
+    callConvert: val => {
+      if (val < 100) {
+        return "50+";
+      }
+      if (val < 200) {
+        return "100+";
+      }
+      if (val < 500) {
+        return "200+";
+      }
+      if (val < 1000) {
+        return "500+";
+      }
+      if (val < 2000) {
+        return "1000+";
+      }
+      if (val < 5000) {
+        return "2000+";
+      } else {
+        return "5000+";
+      }
+    }
   },
   components: { Available, NotAvailable, Favorite }
 };
