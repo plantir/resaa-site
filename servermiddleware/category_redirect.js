@@ -1,5 +1,6 @@
 const axios = require("axios");
-const related = { Orthopaedics: 1, "General-practitioner": 4, psychology: 8 };
+const related = require("../related_categories");
+// { Orthopaedics: 1, "General-practitioner": 4, psychology: 8 };
 const API_URL = process.env.API_URL;
 module.exports = async function(req, res, next) {
   let is_api = req.url.match(/^\/api/);

@@ -1,5 +1,7 @@
 import VuetifyLoaderPlugin from "vuetify-loader/lib/plugin";
 import axios from "axios";
+const related = require("./related_categories");
+// { Orthopaedics: 1, "General-practitioner": 4, psychology: 8 };
 require("dotenv").config({
   path: process.env.NODE_ENV == "development" ? ".env.development" : ".env"
 });
@@ -255,17 +257,23 @@ export default {
     },
     routes() {
       return axios.get(`${process.env.API_URL}/misc/sitemap`).then(res => {
-        let items = res.data.result.doctorSubscriberNumbers.map(id => {
-          let url;
-          // if (["7830", "7155", "7594", "7265", "7106", "7305"].includes(id)) {
-          //   url = `/doctors/psychology/${id}`;
-          // } else {
-          // }
-          url = `/doctors/${id}`;
-          return url;
+        let doctors = res.data.result.siteMap.doctorsSpecialtyMap.map(obj => {
+          return `/doctors/${obj.specialtyEnglishTitle
+            .toLowerCase()
+            .replace(/ /g, "-")}/${obj.vsin}`;
         });
-        // items.push("/doctors/psychology/7830");
-        return items;
+        let categories = res.data.result.siteMap.categories.map(obj => {
+          let exist_psycology = Object.entries(related).find(([key, value]) => {
+            return value == obj.id;
+          });
+          if (exist_psycology) {
+            return `/doctors/${exist_psycology[0]}`;
+          }
+          return `/categories/${obj.englishTitle
+            .toLowerCase()
+            .replace(/ /g, "-")}/${obj.id}`;
+        });
+        return [...doctors, ...categories];
       });
     }
   },
