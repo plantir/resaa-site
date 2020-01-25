@@ -15,7 +15,7 @@ module.exports = async function(req, res, next) {
     if (doctor) {
       let url = `/doctors/${doctor.specialtyEnglishTitle
         .toLowerCase()
-        .replace(/ /g, "-")}/${doctor_id}`;
+        .replace(/ /g, "-")}/${doctor.subscriberNumber}`;
       res.writeHead(301, { Location: url });
       return res.end();
     }
