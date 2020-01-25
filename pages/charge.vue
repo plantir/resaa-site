@@ -1,503 +1,525 @@
-<style lang="scss" scoped>
-.charge-container {
-  direction: rtl;
-}
+<style lang="scss" >
+#charge {
+  .v-input__slot {
+    box-shadow: none;
+    border-radius: 26px;
+    background-color: #f5f5f5;
+  }
+  .is-invalid {
+    .v-input__slot {
+      box-shadow: 0 0 8px -1px red;
+    }
+  }
+  .wraper {
+    max-width: 400px;
+    margin: 8px auto;
+    .v-icon {
+      font-size: 30px;
+      color: #c5c9d5;
+    }
+  }
+  .charge-container {
+    direction: rtl;
+  }
+  .v-icon {
+    font-size: 20px;
+  }
+  .charge-input,
+  .charge-receipt,
+  .charge-success,
+  .charge-failure {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+  }
 
-.charge-input,
-.charge-receipt,
-.charge-success,
-.charge-failure {
-  background-color: white;
-  padding: 30px;
-  border-radius: 10px;
-}
+  /*---------------STATE 1: INPUT---------------*/
 
-/*---------------STATE 1: INPUT---------------*/
+  .charge-title {
+    text-align: center;
+    color: $bright-sky-blue;
+    font-size: 2.675rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
 
-.charge-title {
-  text-align: center;
-  color: $bright-sky-blue;
-  font-size: 2.675rem;
-  font-weight: 500;
-  margin-bottom: 10px;
-}
+  .charge-description {
+    margin-bottom: 35px;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.9;
+    color: $dark-blue-grey;
+  }
 
-.charge-description {
-  margin-bottom: 35px;
-  text-align: center;
-  font-size: 1rem;
-  line-height: 1.9;
-  color: $dark-blue-grey;
-}
+  .user-code {
+    max-width: 400px;
+    background-color: #f5f5f5;
+    border-radius: 20px;
+    font-size: 1rem;
+    text-align: right;
+    margin: 0 auto 15px;
+    padding: 12px 10px;
 
-.user-code {
-  max-width: 400px;
-  background-color: #f5f5f5;
-  border-radius: 20px;
-  font-size: 1rem;
-  text-align: right;
-  margin: 0 auto 15px;
-  padding: 12px 10px;
+    input {
+      border: none;
+      background: none;
+      width: 90%;
 
-  input {
-    border: none;
-    background: none;
-    width: 90%;
+      &::placeholder {
+        color: #9aa0b7;
+        font-size: 1rem;
+      }
+    }
 
-    &::placeholder {
-      color: #9aa0b7;
-      font-size: 1rem;
+    i {
+      color: #c5c9d5;
+      margin-left: 5px;
     }
   }
 
-  i {
-    color: #c5c9d5;
-    margin-left: 5px;
-  }
-}
-
-.charge-amount {
-  display: flex;
-  flex-direction: row;
-  max-width: 400px;
-  background-color: #f5f5f5;
-  border-radius: 20px;
-  font-size: 1rem;
-  font-weight: 500;
-  text-align: right;
-  margin: 0 auto;
-  padding: 12px 10px;
-  color: #777590;
-  cursor: pointer;
-
-  i:nth-child(1) {
-    color: #c5c9d5;
-    margin-left: 5px;
-  }
-
-  i:nth-child(2) {
-    float: left;
-    color: #777590;
-    margin-left: 5px;
-  }
-}
-
-#activeChargeItem {
-  width: 100%;
-}
-
-.fa-sort-up::before {
-  position: relative;
-  top: 4px;
-}
-
-.charge-menu {
-  z-index: 9;
-  position: absolute;
-  left: 50%;
-  width: 100%;
-  transform: translate(-50%, 0);
-  flex-direction: column;
-  max-width: 400px;
-  font-size: 1rem;
-  text-align: right;
-  margin: 0 auto 15px;
-  padding: 10px 0;
-  color: #777590;
-  border-radius: 20px;
-  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.3);
-  background-color: #ffffff;
-  border: solid 1px #c5c9d5;
-  overflow: hidden;
-
-  div {
-    padding: 5px 25px;
-    cursor: pointer;
+  .charge-amount {
+    display: flex;
+    flex-direction: row;
+    max-width: 400px;
+    background-color: #f5f5f5;
+    border-radius: 20px;
     font-size: 1rem;
     font-weight: 500;
+    text-align: right;
+    margin: 0 auto;
+    padding: 12px 10px;
+    color: #777590;
+    cursor: pointer;
 
-    &:hover {
-      background-color: $tealish;
-      color: #f5f5f5;
-      font-weight: 500;
+    i:nth-child(1) {
+      color: #c5c9d5;
+      margin-left: 5px;
+    }
+
+    i:nth-child(2) {
+      float: left;
+      color: #777590;
+      margin-left: 5px;
     }
   }
-}
 
-.charge-captcha {
-  margin: 15px auto;
-  display: flex;
-  justify-content: center;
-}
-
-.charge-button {
-  width: 400px;
-  max-width: 100%;
-  display: block;
-  padding: 10px;
-  border: none;
-  border-radius: 20px;
-  background-color: $bright-sky-blue;
-  color: white;
-  font-size: 1.175rem;
-  font-weight: 600;
-  text-align: center;
-  margin: 10px auto;
-  transition: box-shadow 0.5s;
-  &[disabled] {
-    opacity: 0.8;
-    cursor: not-allowed;
+  #activeChargeItem {
+    width: 100%;
   }
-  &:not([disabled]):hover {
-    box-shadow: 0 0 7px #8c8c8c;
-    cursor: pointer;
-  }
-}
-.error-message {
-  width: 400px;
-  max-width: 100%;
-  display: block;
-  padding: 10px;
-  border: none;
-  border-radius: 20px;
-  color: red;
-  font-size: 1.175rem;
-  font-weight: 600;
-  text-align: center;
-  margin: 0 auto;
-  transition: box-shadow 0.5s;
-}
 
-.charge-followup-description {
-  margin: 0 auto;
-  text-align: center;
-  font-size: 1rem;
-  color: #777590;
-}
-
-/*---------------STATE 2: RECEIPT---------------*/
-
-.charge-receipt-title {
-  text-align: center;
-  color: $tealish;
-  font-size: 2.675rem;
-  font-weight: 500;
-  margin-bottom: 10px;
-}
-
-.charge-receipt-description {
-  margin-bottom: 35px;
-  text-align: center;
-  font-size: 1rem;
-  line-height: 1.9;
-  color: $dark-blue-grey;
-}
-
-.charge-receipt-status {
-  width: 450px;
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 10px 20px;
-  text-align: center;
-  border-radius: 10px;
-  color: #7e86a6;
-  background-color: #f7f7f7;
-}
-
-.charge-receipt-status-text {
-  font-size: 1.275rem;
-  font-weight: 500;
-  margin: 10px 5px;
-}
-
-.charge-receipt-status-container {
-  font-size: 1.175rem;
-  border-top: 1.5px dashed rgba(126, 134, 166, 0.5);
-  padding: 10px 20px;
-  text-align: right;
-}
-
-.charge-receipt-amount-container {
-  margin-bottom: 5px;
-}
-
-.charge-receipt-amount {
-  display: inline;
-  color: $tealish;
-  font-size: 1.375rem;
-  font-weight: 500;
-}
-
-.charge-receipt-resaacode-container {
-  margin-bottom: 5px;
-  font-size: 1.175rem;
-}
-
-.charge-receipt-resaacode {
-  display: inline;
-  color: $dark-blue-grey;
-  font-weight: 600;
-}
-
-.charge-receipt-phoneNum-container {
-  margin-bottom: 5px;
-  font-size: 1.175rem;
-}
-
-.charge-receipt-phoneNum {
-  display: inline-block;
-  direction: ltr;
-  color: $dark-blue-grey;
-  font-weight: 600;
-}
-
-.charge-receipt-customer-ID-container {
-  margin-bottom: 5px;
-}
-
-.charge-receipt-customer-ID {
-  display: inline;
-  color: $dark-blue-grey;
-}
-
-.charge-receipt-date-container {
-  margin-bottom: 5px;
-}
-
-.charge-receipt-date {
-  display: inline;
-  color: $dark-blue-grey;
-}
-
-.charge-receipt-serial-container {
-}
-
-.charge-receipt-serial {
-  display: inline;
-  color: $dark-blue-grey;
-}
-
-.charge-receipt-button {
-  max-width: 350px;
-  padding: 10px;
-  margin: 25px auto;
-  border: none;
-  border-radius: 20px;
-  background-color: $tealish;
-  color: white;
-  font-size: 1.175rem;
-  font-weight: 600;
-  text-align: center;
-  transition: box-shadow 0.5s;
-
-  &:hover {
-    box-shadow: 0 0 7px #8c8c8c;
-    cursor: pointer;
-  }
-}
-
-/*---------------STATE 3: SUCCESS---------------*/
-
-.charge-success {
-  text-align: center;
-  background: white url("/img/wave.png") center bottom no-repeat;
-  min-height: 500px;
-
-  i {
-    font-size: 95px;
-    color: $tealish;
-  }
-}
-
-.charge-success-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  min-height: 300px;
-}
-
-.charge-success-message {
-  color: $dark-blue-grey;
-  margin-bottom: 10px;
-  font-weight: 500;
-}
-
-.charge-success-amount {
-  display: inline;
-  color: $tealish;
-  font-size: 1.175rem;
-  font-weight: 500;
-  margin: 0 6px;
-}
-
-.charge-success-info {
-  width: 100%;
-  max-width: 300px;
-  padding: 20px;
-  color: #7e86a6;
-  background-color: #f7f7f7;
-  border-radius: 10px;
-  p {
-    margin: 6px 0 0 0;
-    text-align: justify;
-  }
-}
-
-.charge-success-tracking-code-container {
-}
-
-.charge-success-tracking-code {
-  display: inline;
-  color: $dark-blue-grey;
-}
-
-.charge-success-credit-container {
-}
-
-.charge-success-credit {
-  display: inline;
-  color: $dark-blue-grey;
-  font-size: 1.275rem;
-  font-weight: 500;
-}
-
-.charge-success-return-button {
-  display: block;
-  padding: 5px;
-  cursor: pointer;
-  font-size: 1.175rem;
-  text-align: center;
-  color: $bright-sky-blue;
-  width: 170px;
-  border-radius: 18px;
-  border: solid 2px $bright-sky-blue;
-  background-color: white;
-  margin-top: 13px;
-  &:hover,
-  &:focus,
-  &:active {
-    text-decoration: none;
-  }
-}
-
-/*---------------STATE 4: FAILURE---------------*/
-.charge-failure {
-  text-align: center;
-  background: white url("/img/wave.png") center bottom no-repeat;
-  min-height: 500px;
-
-  i {
-    font-size: 95px;
-    color: #d0225e;
-  }
-}
-
-.charge-failure-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  min-height: 300px;
-}
-
-.charge-failure-message {
-  color: #d0225e;
-  margin-bottom: 10px;
-  font-weight: 500;
-}
-
-.charge-failure-info {
-  max-width: 400px;
-  width: 100%;
-  padding: 10px;
-  color: #7e86a6;
-  background-color: #f7f7f7;
-  border-radius: 10px;
-}
-
-.charge-failure-tracking-code-container {
-}
-
-.charge-failure-tracking-code {
-  display: inline;
-  color: $dark-blue-grey;
-}
-
-.charge-failure-description {
-  color: $dark-blue-grey;
-  margin-top: 10px;
-  line-height: 25px;
-  text-align: justify;
-}
-
-.charge-failure-return-button {
-  display: block;
-  padding: 5px;
-  cursor: pointer;
-  font-size: 1.175rem;
-  text-align: center;
-  color: $bright-sky-blue;
-  width: 170px;
-  border-radius: 18px;
-  border: solid 2px $bright-sky-blue;
-  background-color: white;
-  margin-top: 13px;
-}
-
-@media only screen and (max-width: 600px) {
-  .charge-followup-description > br {
-    display: none;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .charge-button {
-    margin-bottom: 30px;
+  .fa-sort-up::before {
+    position: relative;
+    top: 4px;
   }
 
   .charge-menu {
-    width: 80%;
-  }
-}
+    z-index: 9;
+    position: absolute;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, 0);
+    flex-direction: column;
+    max-width: 400px;
+    font-size: 1rem;
+    text-align: right;
+    margin: 0 auto 15px;
+    padding: 10px 0;
+    color: #777590;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.3);
+    background-color: #ffffff;
+    border: solid 1px #c5c9d5;
+    overflow: hidden;
 
-@media only screen and (max-width: 450px) {
-  .charge-receipt-amount-container,
-  .charge-receipt-resaacode-container,
-  .charge-receipt-phoneNum-container,
-  .charge-receipt-customer-ID-container,
-  .charge-receipt-date-container,
+    div {
+      padding: 5px 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+
+      &:hover {
+        background-color: $tealish;
+        color: #f5f5f5;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .charge-captcha {
+    margin: 15px auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .charge-button {
+    width: 400px;
+    max-width: 100%;
+    display: block;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: $bright-sky-blue;
+    color: white;
+    font-size: 1.175rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 10px auto;
+    transition: box-shadow 0.5s;
+    &[disabled] {
+      opacity: 0.8;
+      cursor: not-allowed;
+    }
+    &:not([disabled]):hover {
+      box-shadow: 0 0 7px #8c8c8c;
+      cursor: pointer;
+    }
+  }
+  .error-message {
+    width: 400px;
+    max-width: 100%;
+    display: block;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    color: red;
+    font-size: 1.175rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 auto;
+    transition: box-shadow 0.5s;
+  }
+
+  .charge-followup-description {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1rem;
+    color: #777590;
+  }
+
+  /*---------------STATE 2: RECEIPT---------------*/
+
+  .charge-receipt-title {
+    text-align: center;
+    color: $tealish;
+    font-size: 2.675rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .charge-receipt-description {
+    margin-bottom: 35px;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.9;
+    color: $dark-blue-grey;
+  }
+
+  .charge-receipt-status {
+    width: 450px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 10px;
+    color: #7e86a6;
+    background-color: #f7f7f7;
+  }
+
+  .charge-receipt-status-text {
+    font-size: 1.275rem;
+    font-weight: 500;
+    margin: 10px 5px;
+  }
+
+  .charge-receipt-status-container {
+    font-size: 1.175rem;
+    border-top: 1.5px dashed rgba(126, 134, 166, 0.5);
+    padding: 10px 20px;
+    text-align: right;
+  }
+
+  .charge-receipt-amount-container {
+    margin-bottom: 5px;
+  }
+
+  .charge-receipt-amount {
+    display: inline;
+    color: $tealish;
+    font-size: 1.375rem;
+    font-weight: 500;
+  }
+
+  .charge-receipt-resaacode-container {
+    margin-bottom: 5px;
+    font-size: 1.175rem;
+  }
+
+  .charge-receipt-resaacode {
+    display: inline;
+    color: $dark-blue-grey;
+    font-weight: 600;
+  }
+
+  .charge-receipt-phoneNum-container {
+    margin-bottom: 5px;
+    font-size: 1.175rem;
+  }
+
+  .charge-receipt-phoneNum {
+    display: inline-block;
+    direction: ltr;
+    color: $dark-blue-grey;
+    font-weight: 600;
+  }
+
+  .charge-receipt-customer-ID-container {
+    margin-bottom: 5px;
+  }
+
+  .charge-receipt-customer-ID {
+    display: inline;
+    color: $dark-blue-grey;
+  }
+
+  .charge-receipt-date-container {
+    margin-bottom: 5px;
+  }
+
+  .charge-receipt-date {
+    display: inline;
+    color: $dark-blue-grey;
+  }
+
   .charge-receipt-serial-container {
+  }
+
+  .charge-receipt-serial {
+    display: inline;
+    color: $dark-blue-grey;
+  }
+
+  .charge-receipt-button {
+    max-width: 350px;
+    padding: 10px;
+    margin: 25px auto;
+    border: none;
+    border-radius: 20px;
+    background-color: $tealish;
+    color: white;
+    font-size: 1.175rem;
+    font-weight: 600;
+    text-align: center;
+    transition: box-shadow 0.5s;
+
+    &:hover {
+      box-shadow: 0 0 7px #8c8c8c;
+      cursor: pointer;
+    }
+  }
+
+  /*---------------STATE 3: SUCCESS---------------*/
+
+  .charge-success {
+    text-align: center;
+    background: white url("/img/wave.png") center bottom no-repeat;
+    min-height: 500px;
+
+    i {
+      font-size: 95px;
+      color: $tealish;
+    }
+  }
+
+  .charge-success-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
+    min-height: 300px;
   }
 
-  .charge-receipt {
-    padding: 0 10px;
-  }
-}
-
-@media only screen and (max-width: 400px) {
-  .charge-receipt-serial {
-    font-size: 1rem;
-    margin-top: 5px;
+  .charge-success-message {
+    color: $dark-blue-grey;
+    margin-bottom: 10px;
+    font-weight: 500;
   }
 
-  .charge-success-tracking-code-container,
-  .charge-success-credit-container {
-    display: flex;
-    flex-direction: column;
+  .charge-success-amount {
+    display: inline;
+    color: $tealish;
+    font-size: 1.175rem;
+    font-weight: 500;
+    margin: 0 6px;
   }
 
   .charge-success-info {
+    width: 100%;
+    max-width: 300px;
+    padding: 20px;
+    color: #7e86a6;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    p {
+      margin: 6px 0 0 0;
+      text-align: justify;
+    }
+  }
+
+  .charge-success-tracking-code-container {
+  }
+
+  .charge-success-tracking-code {
+    display: inline;
+    color: $dark-blue-grey;
+  }
+
+  .charge-success-credit-container {
+  }
+
+  .charge-success-credit {
+    display: inline;
+    color: $dark-blue-grey;
+    font-size: 1.275rem;
+    font-weight: 500;
+  }
+
+  .charge-success-return-button {
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 1.175rem;
+    text-align: center;
+    color: $bright-sky-blue;
+    width: 170px;
+    border-radius: 18px;
+    border: solid 2px $bright-sky-blue;
+    background-color: white;
+    margin-top: 13px;
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: none;
+    }
+  }
+
+  /*---------------STATE 4: FAILURE---------------*/
+  .charge-failure {
+    text-align: center;
+    background: white url("/img/wave.png") center bottom no-repeat;
+    min-height: 500px;
+
+    i {
+      font-size: 95px;
+      color: #d0225e;
+    }
+  }
+
+  .charge-failure-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    min-height: 300px;
+  }
+
+  .charge-failure-message {
+    color: #d0225e;
     margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .charge-failure-info {
+    max-width: 400px;
+    width: 100%;
+    padding: 10px;
+    color: #7e86a6;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+  }
+
+  .charge-failure-tracking-code-container {
+  }
+
+  .charge-failure-tracking-code {
+    display: inline;
+    color: $dark-blue-grey;
+  }
+
+  .charge-failure-description {
+    color: $dark-blue-grey;
+    margin-top: 10px;
+    line-height: 25px;
+    text-align: justify;
+  }
+
+  .charge-failure-return-button {
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 1.175rem;
+    text-align: center;
+    color: $bright-sky-blue;
+    width: 170px;
+    border-radius: 18px;
+    border: solid 2px $bright-sky-blue;
+    background-color: white;
+    margin-top: 13px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .charge-followup-description > br {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    .charge-button {
+      margin-bottom: 30px;
+    }
+
+    .charge-menu {
+      width: 80%;
+    }
+  }
+
+  @media only screen and (max-width: 450px) {
+    .charge-receipt-amount-container,
+    .charge-receipt-resaacode-container,
+    .charge-receipt-phoneNum-container,
+    .charge-receipt-customer-ID-container,
+    .charge-receipt-date-container,
+    .charge-receipt-serial-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .charge-receipt {
+      padding: 0 10px;
+    }
+  }
+
+  @media only screen and (max-width: 400px) {
+    .charge-receipt-serial {
+      font-size: 1rem;
+      margin-top: 5px;
+    }
+
+    .charge-success-tracking-code-container,
+    .charge-success-credit-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .charge-success-info {
+      margin-bottom: 10px;
+    }
   }
 }
 </style>
 
 <template>
-  <v-container>
+  <v-container id="charge">
     <div class="charge-container">
       <no-ssr v-if="ajaxLoading">
         <v-loading mode="relative"></v-loading>
@@ -505,19 +527,23 @@
       <div>
         <div v-if="chargeStep === 'input'" class="charge-input">
           <div class="charge-title">خرید شارژ</div>
-          <div class="charge-description">
-            افزایش اعتبار برای مکالمه با پزشک
-          </div>
-          <div class="user-code">
-            <i class="fa fa-user"></i>
-            <input
+          <div class="charge-description">افزایش اعتبار برای مکالمه با پزشک</div>
+          <div class="wraper">
+            <v-text-field
+              v-validate="'required|mobile'"
               v-model="subscriberNumber"
-              placeholder="پنج رقم آخر شماره کاربری / شماره موبایل"
-              required
-            />
+              label="شماره موبایل"
+              name="mobile"
+              :class="{ 'is-invalid': errors.has('mobile') }"
+              prepend-inner-icon="fa-mobile"
+              solo
+              hide-details
+            >
+              <v-icon>la-user</v-icon>
+            </v-text-field>
           </div>
           <div class="charge-amount" @click="toggleChargeMenu">
-            <i class="fa fa-credit-card-alt"></i>
+            <v-icon>fa-credit-card-alt</v-icon>
             <div id="activeChargeItem">
               کارت اعتباری
               {{ this.selectedChargeItem.amount | currency | persianDigit }}
@@ -531,17 +557,16 @@
               v-for="item in chargeMenuItems"
               @click="selectChargeItem(item)"
               :key="item.id"
-            >
-              کارت اعتباری {{ item.amount | currency | persianDigit }} تومانی
-            </div>
+            >کارت اعتباری {{ item.amount | currency | persianDigit }} تومانی</div>
           </div>
-          <button
-            :disabled="!subscriberNumber"
-            @click="onSubmit"
+          <v-btn
+            :disabled="!subscriberNumber || errors.has('mobile')"
             class="charge-button"
-          >
-            خرید شارژ
-          </button>
+            round
+            color="primary"
+            @click="onSubmit"
+          >خرید شارژ</v-btn>
+          <!-- <button :disabled="!subscriberNumber" @click="onSubmit" class="charge-button">خرید شارژ</button> -->
           <!-- <v-alert style="width:400px" type="warning" outline :value="true">
             <span>
               با توجه به مشکل به وجود آمده در درگاه بانکی لطفاً جهت شارژ از ussd
@@ -550,7 +575,7 @@
             <span dir="ltr">
               *500*25#
             </span>
-          </v-alert> -->
+          </v-alert>-->
           <vue-recaptcha
             ref="invisibleRecaptcha"
             @verify="onVerify"
@@ -562,15 +587,14 @@
             در صورت بروز هرگونه مشکل در هنگام تراکنش شماره‌ی تلفن، کد پیگیری و
             شماره‌ی رِسای خود را
             <br />به شماره‌ی ۱۰۰۰۹۰۹۹۰۹۹۰۹۹ ارسال کنید، کارشناسان ما با شما تماس
-            خواهند گرفت. <br />یا با شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل فرمایید.
+            خواهند گرفت.
+            <br />یا با شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل فرمایید.
           </div>
         </div>
         <!-- step 1 -->
         <div v-if="chargeStep === 'receipt'" class="charge-receipt">
           <div class="charge-receipt-title">خرید شارژ</div>
-          <div class="charge-receipt-description">
-            افزایش اعتبار برای مکالمه با پزشک
-          </div>
+          <div class="charge-receipt-description">افزایش اعتبار برای مکالمه با پزشک</div>
           <div class="charge-receipt-status">
             <div class="charge-receipt-status-text">پیش فاکتور</div>
             <div class="charge-receipt-status-container">
@@ -578,24 +602,24 @@
                 مبلغ شارژ:
                 <div class="charge-receipt-amount">
                   {{
-                    pre_factor.chargeDenomination.payableAmount
-                      | currency
-                      | persianDigit
+                  pre_factor.chargeDenomination.payableAmount
+                  | currency
+                  | persianDigit
                   }}
                   تومان
                 </div>
               </div>
               <div class="charge-receipt-resaacode-container">
                 کد رِسا:
-                <div class="charge-receipt-resaacode">
-                  {{ pre_factor.subscriberNumber | persianDigit }}
-                </div>
+                <div
+                  class="charge-receipt-resaacode"
+                >{{ pre_factor.subscriberNumber | persianDigit }}</div>
               </div>
               <div class="charge-receipt-phoneNum-container">
                 شماره تلفن:
-                <div class="charge-receipt-phoneNum">
-                  {{ pre_factor.obfuscatedPhoneNumber | persianDigit }}
-                </div>
+                <div
+                  class="charge-receipt-phoneNum"
+                >{{ pre_factor.obfuscatedPhoneNumber | persianDigit }}</div>
               </div>
               <!-- <div class="charge-receipt-customer-ID-container">
               شناسه خریدار:
@@ -605,56 +629,38 @@
               </div>-->
               <div class="charge-receipt-date-container">
                 تاریخ خرید:
-                <div class="charge-receipt-date">
-                  {{ pre_factor.issuedAt | persianDate }}
-                </div>
+                <div class="charge-receipt-date">{{ pre_factor.issuedAt | persianDate }}</div>
               </div>
               <div class="charge-receipt-serial-container">
                 شماره پیش‌فاکتور:
-                <div class="charge-receipt-serial">
-                  {{ pre_factor.paymentRequestId }}
-                </div>
+                <div class="charge-receipt-serial">{{ pre_factor.paymentRequestId }}</div>
               </div>
             </div>
           </div>
-          <div @click="goToPaymentPage" class="charge-receipt-button">
-            تأیید و پرداخت
-          </div>
+          <div @click="goToPaymentPage" class="charge-receipt-button">تأیید و پرداخت</div>
         </div>
         <!-- step 2 -->
         <div v-if="chargeStep === 'payment'">
-          <div style="direction: ltr;text-align: center;">
-            Bank payment portal, probably...!
-          </div>
-          <div
-            @click="goToFinalPage"
-            style="font-weight: bold;border: 1px solid black"
-          >
-            Next
-          </div>
+          <div style="direction: ltr;text-align: center;">Bank payment portal, probably...!</div>
+          <div @click="goToFinalPage" style="font-weight: bold;border: 1px solid black">Next</div>
         </div>
         <div v-if="chargeStep === 'success'" class="charge-success">
           <div class="charge-success-container">
             <i class="fa fa-check-circle"></i>
             <div class="charge-success-message">
               خرید شارژ
-              <div class="charge-success-amount">
-                {{ charge.amount | currency | persianDigit }} تومانی
-              </div>
-              با موفقیت انجام شد.
+              <div
+                class="charge-success-amount"
+              >{{ charge.amount | currency | persianDigit }} تومانی</div>با موفقیت انجام شد.
             </div>
             <div class="charge-success-info">
               <div class="charge-success-tracking-code-container">
                 کد پیگیری:
-                <div class="charge-success-tracking-code">
-                  {{ charge.trackingNumber }}
-                </div>
+                <div class="charge-success-tracking-code">{{ charge.trackingNumber }}</div>
               </div>
               <div class="charge-success-credit-container">
                 اعتبار فعلی شما:
-                <div class="charge-success-credit">
-                  {{ userCredit | currency | persianDigit }} تومان
-                </div>
+                <div class="charge-success-credit">{{ userCredit | currency | persianDigit }} تومان</div>
               </div>
               <p>
                 در صورت وجود هر گونه مشکل و یا سوال میتوانید با پشتیبانی رسا به
@@ -664,23 +670,18 @@
             <router-link
               :to="{ name: 'patient-landing' }"
               class="charge-success-return-button"
-              >بازگشت</router-link
-            >
+            >بازگشت</router-link>
           </div>
         </div>
         <!-- step 3 -->
         <div v-if="chargeStep === 'fail'" class="charge-failure">
           <div class="charge-failure-container">
             <i class="fa fa-times-circle"></i>
-            <div class="charge-failure-message">
-              فرایند پرداخت با خطا روبرو شد.
-            </div>
+            <div class="charge-failure-message">فرایند پرداخت با خطا روبرو شد.</div>
             <div class="charge-failure-info">
               <div class="charge-failure-tracking-code-container">
                 کد پیگیری:
-                <div class="charge-failure-tracking-code">
-                  {{ charge.trackingNumber }}
-                </div>
+                <div class="charge-failure-tracking-code">{{ charge.trackingNumber }}</div>
                 <div class="charge-failure-description">
                   در صورتی که هزینه ای از حساب بانکی شما کسر شده باشد، طی ۲۴
                   ساعت آینده بازگردانده می‌شود. لطفاً در صورت تکرار این مشکل با
@@ -688,9 +689,7 @@
                 </div>
               </div>
             </div>
-            <div @click="goToInputPage" class="charge-failure-return-button">
-              بازگشت
-            </div>
+            <div @click="goToInputPage" class="charge-failure-return-button">بازگشت</div>
           </div>
         </div>
       </div>
