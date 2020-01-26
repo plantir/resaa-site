@@ -157,7 +157,8 @@ export default {
     let doctor = result.doctor;
     if (
       doctor.specialtyEnglishTitle.toLowerCase().replace(/ /g, "-") !=
-      params.speciality
+        params.speciality ||
+      doctor.subscriberNumber != params.id
     ) {
       return error({ statusCode: 404, message: "doctor not found" });
     }
