@@ -553,14 +553,14 @@ export default {
   beforeCreate() {
     this.fields = "id,specialty,subscriberNumber,firstName,lastName,imagePath";
   },
-  created() {
+  mounted() {
     this.getDoctors();
-    this.$axios.get(`/Doctors/MedicalSpecialties`).then(response => {
-      this.medicalSpecialties = response.data.result.medicalSpecialties;
-    });
-    this.$axios.get(`/Geo/Provinces`).then(response => {
-      this.provinces = response.data.result.provinces;
-    });
+    // this.$axios.get(`/Doctors/MedicalSpecialties`).then(response => {
+    //   this.medicalSpecialties = response.data.result.medicalSpecialties;
+    // });
+    // this.$axios.get(`/Geo/Provinces`).then(response => {
+    //   this.provinces = response.data.result.provinces;
+    // });
   },
 
   computed: {
