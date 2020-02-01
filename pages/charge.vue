@@ -844,7 +844,8 @@ export default {
       this.$refs.invisibleRecaptcha.reset(); // Direct call reset method
     },
     onSubmit() {
-      this.$refs.invisibleRecaptcha.execute();
+      this.goToPrereceipt();
+      // this.$refs.invisibleRecaptcha.execute();
     },
 
     toggleChargeMenu: function() {
@@ -859,8 +860,8 @@ export default {
     async goToPrereceipt() {
       let data = {
         denominationId: this.selectedChargeItem.id,
-        callbackUrl: process.env.BANK_RETURN_URL,
-        recaptchaResponse: this.recaptchaResponse
+        callbackUrl: process.env.BANK_RETURN_URL
+        // recaptchaResponse: this.recaptchaResponse
       };
       let mobile = this.mobile_regex.exec(this.subscriberNumber);
       let subscriberNumber = this.subscribe_regex.exec(this.subscriberNumber);
