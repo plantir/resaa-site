@@ -152,9 +152,9 @@
   }
 
   .charge-button {
-    width: 400px;
-    max-width: 100%;
-    display: block;
+    max-width: 400px;
+    // width: 100%;
+    display: flex;
     padding: 10px;
     border: none;
     border-radius: 20px;
@@ -562,6 +562,7 @@
           <v-btn
             :disabled="!subscriberNumber || errors.has('mobile')"
             class="charge-button"
+            block
             round
             color="primary"
             @click="onSubmit"
@@ -785,11 +786,9 @@ export default {
         this.$route.query.chargeId &&
         this.$route.query.chargeId <= this.chargeMenuItems.length
       ) {
-        for (let item of this.chargeMenuItems) {
-          if (item.id == this.$route.query.chargeId) {
-            this.selectedChargeItem = item;
-          }
-        }
+        this.selectedChargeItem = this.chargeMenuItems[
+          this.$route.query.chargeId
+        ];
       } else {
         this.selectedChargeItem = this.chargeMenuItems[0];
       }
