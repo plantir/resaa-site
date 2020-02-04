@@ -10,15 +10,17 @@ module.exports = async function(req, res, next) {
   if (is_doctor) {
     let regex_result = regex.exec(req.url);
     let doctor_id = regex_result[2];
-    let { data } = await axios.get(`${API_URL}/doctors/${doctor_id}/profile`);
-    let doctor = data.result.doctor;
-    if (doctor) {
-      let url = `/doctors/${doctor.specialtyEnglishTitle
-        .toLowerCase()
-        .replace(/ /g, "-")}/${doctor.subscriberNumber}`;
-      res.writeHead(301, { Location: url });
-      return res.end();
-    }
+    try {
+      let { data } = await axios.get(`${API_URL}/doctors/${doctor_id}/profile`);
+      let doctor = data.result.doctor;
+      if (doctor) {
+        let url = `/doctors/${doctor.specialtyEnglishTitle
+          .toLowerCase()
+          .replace(/ /g, "-")}/${doctor.subscriberNumber}`;
+        res.writeHead(301, { Location: url });
+        return res.end();
+      }
+    } catch (error) {}
     // let
   }
   next();
