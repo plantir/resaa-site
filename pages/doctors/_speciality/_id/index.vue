@@ -179,7 +179,7 @@ export default {
     } else if (locations.length == 1) {
       center = locations[0];
     }
-    let title = `دکتر ${doctor.firstName} ${doctor.lastName} | تماس مستفیم با پزشک در سامانه رسا`;
+    let title = `دکتر ${doctor.firstName} ${doctor.lastName} | تماس مستقیم با پزشک در سامانه رسا`;
     let description = `با استفاده از سامانه رسا می توانید در کوتاه ترین زمان ممکن، مستقیما با دکتر ${doctor.firstName}  ${doctor.lastName} متخصص ${doctor.specialtyTitle} تماس تلفنی برقرار کنید و به پاسخ سوالات خود برسید.`;
     let og = {
       image:

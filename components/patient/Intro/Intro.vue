@@ -245,7 +245,7 @@
       <v-btn id="showVideo" color="white" outline round @click="openVideo">نمایش ویدئو</v-btn>
     </div>
     <div class="intro-patient-image">
-      <img src="./PAT.png" alt="ارتباط تلفنی و مستفیم با پزشک در سامانه رسا" />
+      <img src="./PAT.png" alt="ارتباط تلفنی و مستقیم با پزشک در سامانه رسا" />
       <div class="side-button left">
         <div v-scroll-to="{ el: '#download', offset: -50 }" class="side-button-text">
           <div class="side-button-sub-title">ارتباط با پزشکان</div>
