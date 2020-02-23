@@ -144,8 +144,7 @@
               </span>
               در سیستم وجود دارد
               <div class="caption">
-                در صورتیکه رمز عبور خود را ندارید با پشتیبانی تماس بگیرید) بشود
-                این: (در صورتیکه رمز عبور خود را ندارید عدد ۱ را به ۱۰۰۰۷۴۴۷۱۱۱۱
+                در صورتیکه رمز عبور خود را ندارید عدد ۱ را به ۱۰۰۰۷۴۴۷۱۱۱۱
                 پیامک کنید
               </div>
             </h1>
@@ -226,7 +225,7 @@ export default {
     },
     async onRegister() {
       let valid = await this.$validator.validate();
-      valid && this.$refs.invisibleRecaptcha.execute();
+      valid && this.register();
     },
     checkNumber() {
       this.error = null;
@@ -239,7 +238,7 @@ export default {
     async register() {
       try {
         let res = await this.$axios.post("/Patients/Registration", this.user);
-        this.user.registrationToken = res.data.result.registrationToken.value;
+        // this.user.registrationToken = res.data.result.registrationToken.value;
         this.new_user = true;
         this.step = 2;
       } catch (error) {

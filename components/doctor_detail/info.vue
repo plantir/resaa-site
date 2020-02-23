@@ -114,10 +114,10 @@
         display: flex;
         align-items: center;
         font-size: 14px;
+        &.low-opacity {
+          opacity: 0.3;
+        }
         p {
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
           margin-bottom: 0;
         }
         &:before {
@@ -130,6 +130,13 @@
           border-radius: 100%;
           background-color: $secondary-color;
         }
+      }
+      .v-icon {
+        font-size: 20px;
+        opacity: 0.6;
+        text-align: center;
+        display: inline-flex;
+        width: 100%;
       }
     }
   }
@@ -230,7 +237,7 @@
             </div>
           </div>
         </v-flex>
-        <v-flex xs12 md4>
+        <v-flex xs12 md5 pl-3>
           <div class="name-wrapper">
             <div>
               <h1>
@@ -262,14 +269,26 @@
               : "خارج از ساعت پاسخگویی"
               }})
             </span>
-            <ul class="specialty-area-container">
-              <!-- <li
+            <div class="specialty-area-container">
+              <h2 class="title">سوابق حرفه ای پزشک :</h2>
+              <transition-group name="fade" tag="ul" mode="out-in">
+                <!-- <li
                 class="specialty-area"
-              >کد نظام پزشکی: {{doctor.medicalCouncilNumber || '-' | persianDigit}}</li>-->
-              <li v-for="tag in doctor.aboutDoctor" :key="tag.id" class="specialty-area">
-                <p>{{ tag }}</p>
-              </li>
-            </ul>
+                >کد نظام پزشکی: {{doctor.medicalCouncilNumber || '-' | persianDigit}}</li>-->
+                <li
+                  v-for="(tag,i) in toBeShown"
+                  :key="tag"
+                  :class="{'low-opacity':!show_more&& i ==4}"
+                  class="specialty-area"
+                >
+                  <p>{{ tag }}</p>
+                </li>
+              </transition-group>
+              <v-icon
+                color="primary"
+                @click="show_more = !show_more"
+              >la-angle-{{show_more?'up':'down'}}</v-icon>
+            </div>
             <div class="response-wrapper hide-md">
               <div class="title">زمان های پاسخگویی</div>
               <div class="response-time" v-if="day_of_week && times && times[day_of_week].length">
@@ -297,7 +316,7 @@
             </div>
           </div>
         </v-flex>
-        <v-flex xs12 md6>
+        <v-flex xs12 md5 pr-3>
           <div class="fields-activity-wrapper">
             <h2 class="title">زمینه های فعالیت :</h2>
             <ul>
@@ -362,18 +381,23 @@ export default {
   data() {
     return {
       dialog: false,
-      virtual_doctor: this.doctor,
       times: null,
-      day_of_week: null
+      day_of_week: null,
+      show_more: false
     };
   },
   mounted() {
     let days = ["su", "mo", "tu", "we", "th", "fr", "sa"];
     this.day_of_week = days[new Date().getDay()];
-    // let virtual_doctor = doctors.find(
-    //   item => item.subscriberNumber == this.$route.params.id
-    // );
-    // this.virtual_doctor = Object.assign(virtual_doctor, this.doctor);
+  },
+  computed: {
+    toBeShown() {
+      if (this.show_more) {
+        return this.doctor.aboutDoctor;
+      } else {
+        return this.doctor.aboutDoctor.slice(0, 5);
+      }
+    }
   }
 };
 </script>
