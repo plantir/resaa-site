@@ -285,6 +285,7 @@
                 </li>
               </transition-group>
               <v-icon
+                v-if="doctor.aboutDoctor.length > 5"
                 color="primary"
                 @click="show_more = !show_more"
               >la-angle-{{show_more?'up':'down'}}</v-icon>
