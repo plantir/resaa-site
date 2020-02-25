@@ -112,7 +112,7 @@
       li {
         color: var(--grey-color);
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         font-size: 14px;
         &.low-opacity {
           opacity: 0.3;
@@ -130,6 +130,7 @@
           border-radius: 100%;
           background-color: $secondary-color;
           flex: 0 0 4px;
+          top: 8px;
         }
       }
       .v-icon {
