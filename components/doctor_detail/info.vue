@@ -88,9 +88,9 @@
       padding-right: 0;
       text-align: center;
     }
-    > div {
-      white-space: nowrap;
-    }
+    // > div {
+    //   white-space: nowrap;
+    // }
     .availability {
       margin-right: 8px;
       color: $secondary-color;
@@ -129,6 +129,7 @@
           display: inline-block;
           border-radius: 100%;
           background-color: $secondary-color;
+          flex: 0 0 4px;
         }
       }
       .v-icon {
