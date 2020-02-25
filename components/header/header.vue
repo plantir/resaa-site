@@ -608,6 +608,10 @@ export default {
           path: "/doctors/psychology"
         },
         {
+          name: "مشاوره پزشکی کرونا",
+          path: "/categories/medical-consultation-for-coronavirus/1141"
+        },
+        {
           name: "سوالات متداول",
           path: { name: "faq" }
         },
