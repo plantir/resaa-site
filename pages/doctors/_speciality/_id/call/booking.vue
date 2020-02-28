@@ -111,9 +111,7 @@
             </div>
             <div v-if="status == 'success'" class="amount">
               <span>حساب شما</span>
-              <span class="price"
-                >{{ charge.amount | currency | persianDigit }} تومان</span
-              >
+              <span class="price">{{ charge.amount | currency | persianDigit }} تومان</span>
               <span>شارژ شد.</span>
             </div>
             <div v-if="status !== 'continue'" class="trackingNumber">
@@ -122,9 +120,7 @@
           </div>
           <div class="image" :class="{ deactive: !doctor.currentlyAvailable }">
             <div class="status">
-              <component
-                :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"
-              ></component>
+              <component :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"></component>
             </div>
             <img
               v-if="doctor.imagePath"
@@ -155,19 +151,17 @@
             <div v-else>
               <p>
                 <span>اعتبار فعلی حساب شما</span>
-                <span class="price"
-                  >{{ credit | currency | persianDigit }} تومان</span
-                >
+                <span class="price">{{ credit | currency | persianDigit }} تومان</span>
                 <span>است.</span>
               </p>
               <p>
                 <span>شما می توانید</span>
                 <span class="price">{{ duration | persianDigit }} دقیقه</span>
-                <span
-                  >با {{ doctor.title }} {{ doctor.firstName }}
+                <span>
+                  با {{ doctor.title }} {{ doctor.firstName }}
                   {{ doctor.lastName }} (کد رسا:
-                  {{ doctor.subscriberNumber | persianDigit }}) صحبت کنید.</span
-                >
+                  {{ doctor.subscriberNumber | persianDigit }}) صحبت کنید.
+                </span>
               </p>
             </div>
           </div>
@@ -178,8 +172,7 @@
             dark
             class="retry-btn"
             to="charge"
-            >تلاش مجدد</v-btn
-          >
+          >تلاش مجدد</v-btn>
           <v-btn
             round
             depressed
@@ -191,14 +184,7 @@
             <span v-if="!doctor.currentlyAvailable">ثبت درخواست تماس</span>
             <span v-else>تماس با پزشک</span>
           </v-btn>
-          <v-btn
-            v-else
-            round
-            depressed
-            dark
-            class="retry-btn"
-            @click="reserveDoctor"
-          >
+          <v-btn v-else round depressed dark class="retry-btn" @click="reserveDoctor">
             <span v-if="!doctor.currentlyAvailable">ثبت درخواست تماس</span>
             <span v-else>تماس با پزشک</span>
           </v-btn>
@@ -344,7 +330,7 @@ export default {
         );
         this.$dialog
           .message(
-            `هم اکنون با شماره 021-74471402 تماس بگیرید.<br/>
+            `هم اکنون با شماره<span style="direction: ltr;display: inline-block;margin: 0 8px;font-weight: bold;color: #555;"> 021-74471402 </span>تماس بگیرید.<br/>
             در صورتی که ساعت پاسخگویی پزشک نباشد با شماره گیری عدد 1 درخواست تماس پزشک با شما ثبت می شود و پزشک در اولین فرصت با شماره 74471111 با شما تماس میگیرد.`
           )
           .success()
@@ -352,6 +338,8 @@ export default {
           .alert();
         this.ajaxLoading = false;
       } catch (error) {
+        console.log(error);
+        debugger;
         this.$dialog
           .message("رزرو پزشک با مشکل مواجه شد")
           .error()
