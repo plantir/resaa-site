@@ -3,6 +3,7 @@
   display: flex;
   flex-wrap: wrap;
   padding: 40px 70px !important;
+
   > div {
     display: flex;
     flex-direction: column;
@@ -14,6 +15,9 @@
     }
     &:first-child {
       flex: 0 0 70%;
+      @include media(md) {
+        flex: 0 0 60%;
+      }
       @include media(sm) {
         flex: 0 0 100%;
       }
@@ -21,6 +25,9 @@
     &:last-child {
       flex: 0 0 30%;
       align-items: flex-end;
+      @include media(md) {
+        flex: 0 0 40%;
+      }
       @include media(sm) {
         flex: 0 0 100%;
         align-items: center;
@@ -205,7 +212,7 @@
             class="call-doctor"
             :to="`${doctor.subscriberNumber}/call/${user?'charge':'register'}`"
           >
-            شروع مکالمه با پزشک
+            <span>شروع مکالمه با پزشک</span>
             <phone class="phone" />
           </nuxt-link>
           <template v-else>
