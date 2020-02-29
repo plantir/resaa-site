@@ -161,7 +161,7 @@ section#header {
             <router-link
               to="/categories/medical-consultation-for-coronavirus/1141"
               class="navigation-bar-item"
-            >مشاوره پزشکی کرونا</router-link>
+            >مشاوره کرونا</router-link>
           </li>
           <!-- <li class="nav-item">
             <router-link :to="{name:'privacy'}" class="navigation-bar-item">قوانین</router-link>
