@@ -128,7 +128,7 @@
           @click.native="closeNav"
           to="/categories/medical-consultation-for-coronavirus/1141"
           class="navigation-bar-item"
-        >مشاوره پزشکی کرونا</router-link>
+        >مشاوره کرونا</router-link>
       </li>
       <li class="nav-item">
         <router-link
