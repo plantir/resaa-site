@@ -86,7 +86,7 @@
     padding-right: 16px;
     @include media(sm) {
       padding-right: 0;
-      text-align: center;
+      // text-align: center;
     }
     // > div {
     //   white-space: nowrap;
@@ -151,8 +151,8 @@
       display: flex;
       flex-wrap: wrap;
       li {
-        flex: 0 0 50%;
-        width: 50%;
+        flex: 0 0 100%;
+        width: 100%;
         color: var(--grey-color);
         display: flex;
         align-items: center;
@@ -207,7 +207,7 @@
     <v-card>
       <resaaElement class="resaa-element" />
       <v-layout row wrap>
-        <v-flex xs12 md2>
+        <v-flex xs12 md3>
           <div class="image-wrapper">
             <div class="image">
               <div class="status">
@@ -319,7 +319,7 @@
             </div>
           </div>
         </v-flex>
-        <v-flex xs12 md5 pr-3>
+        <v-flex xs12 md4 pr-3>
           <div class="fields-activity-wrapper">
             <h2 class="title">زمینه های فعالیت :</h2>
             <ul>

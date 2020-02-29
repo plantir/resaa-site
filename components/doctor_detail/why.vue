@@ -32,6 +32,7 @@ section {
     flex-direction: column;
     align-items: center;
     padding: 40px 50px !important;
+    height: 100%;
     @include media(sm) {
       border-radius: 0px !important;
       box-shadow: none;
@@ -65,7 +66,7 @@ section {
 <template>
   <section>
     <v-layout row wrap>
-      <v-flex class="item" lg4>
+      <v-flex class="item" md4>
         <v-card>
           <div class="icon">
             <img src="~/assets/img/doctor@2x.png" alt />
@@ -76,7 +77,7 @@ section {
           </div>
         </v-card>
       </v-flex>
-      <v-flex class="item" lg4>
+      <v-flex class="item" md4>
         <v-card>
           <div class="icon">
             <img src="~/assets/img/privacy@2x.png" alt />
@@ -87,7 +88,7 @@ section {
           </div>
         </v-card>
       </v-flex>
-      <v-flex class="item" lg4>
+      <v-flex class="item" md4>
         <v-card>
           <div class="icon">
             <img src="~/assets/img/saveTime@2x.png" alt />
