@@ -473,7 +473,7 @@
           <div class="error-message" v-if="sizeError">حجم عکس باید کمتر از ۵۰۰ کیلوبایت باشد.</div>
         </div>
         <div class="call-history">
-          <CallHistory></CallHistory>
+          <CallHistory v-if="user_profile" :user="user_profile"></CallHistory>
         </div>
       </section>
     </no-ssr>
@@ -507,7 +507,6 @@ export default {
       ajaxLoading: true,
       saving: false,
       user_profile: null,
-      user_callhistory: null,
       sizeError: null,
       editProfile: {},
       editMode: false,
@@ -515,9 +514,11 @@ export default {
     };
   },
 
-  mounted() {
-    this.get_profile();
-    this.get_callhistory();
+  async mounted() {
+    this.ajaxLoading = true;
+    let profile = await this.get_profile();
+    this.user_profile = profile;
+    this.ajaxLoading = false;
   },
   methods: {
     activateEditMode() {
@@ -530,33 +531,29 @@ export default {
         this.editMode = true;
       }
     },
-    get_profile() {
-      this.ajaxLoading = true;
-      this.$axios
+    async get_profile() {
+      return this.$axios
         .get(`/Accounts/${this.user_id}/Profile`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }
         })
         .then(res => {
-          this.user_profile = res.data.result.profile;
-          if (this.user_callhistory) {
-            this.ajaxLoading = false;
-          }
+          return res.data.result.profile;
         });
     },
-    get_callhistory() {
-      this.$axios
+    async get_callhistory() {
+      return this.$axios
         .get(`/Accounts/${this.user_id}/Calls`, {
           headers: {
             Authorization: `Bearer ${this.user.access_token}`
           }
         })
         .then(res => {
-          this.user_callhistory = res.data.result.calls;
-          if (this.user_profile) {
-            this.ajaxLoading = false;
-          }
+          return res.data.result.calls;
+          // if (this.user_profile) {
+          //   this.ajaxLoading = false;
+          // }
         });
     },
     save() {

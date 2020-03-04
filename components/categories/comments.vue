@@ -113,7 +113,7 @@
   <no-ssr>
     <div v-swiper:mySwiper="swiperOption" dir="rtl">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="(comment, index) in comments" :key="index">
+        <div class="swiper-slide" v-for="(comment, index) in healthyComments" :key="index">
           <div class="doctor-comment-card">
             <div class="quote-sign">
               <i class="fa fa-quote-right" aria-hidden="true"></i>
@@ -188,6 +188,14 @@ export default {
         grabCursor: true
       }
     };
+  },
+  computed: {
+    healthyComments() {
+      return this.comments.filter(
+        item =>
+          item.doctor.subscriberNumber && item.doctor.specialtyEnglishTitle
+      );
+    }
   }
 };
 </script>
