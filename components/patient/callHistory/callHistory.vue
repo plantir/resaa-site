@@ -172,6 +172,7 @@
   color: #777590;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .item-call-duration {
@@ -183,6 +184,7 @@
   color: #777590;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .item-call-price {
@@ -219,8 +221,8 @@
               <div class="item-doctor-name">
                 <router-link
                   target="_blank"
-                  :to="{name:'doctors-id',params:{id:item.receiver.subscriberNumber}}"
-                >{{item.receiver.fullName || item.receiver.title}}</router-link>
+                  :to="{name:'doctors-id',params:{id:item[user.subscriberCards[0].subscriberNumber == item.caller.subscriberNumber?'receiver':'caller'].subscriberNumber}}"
+                >{{item[user.subscriberCards[0].subscriberNumber == item.caller.subscriberNumber?'receiver':'caller'].fullName || item[user.subscriberCards[0].subscriberNumber == item.caller.subscriberNumber?'receiver':'caller'].title}}</router-link>
               </div>
               <div
                 class="item-date"
@@ -269,6 +271,9 @@
 
 <script>
 export default {
+  props: {
+    user: {}
+  },
   data() {
     return {
       ajaxLoading: true,
@@ -294,7 +299,7 @@ export default {
       this.$axios
         .get(url, {
           headers: {
-            Authorization: `Bearer ${this.user.access_token}`
+            Authorization: `Bearer ${this.access_token}`
           },
           before(request) {
             if (this.previousRequest) {
@@ -330,8 +335,8 @@ export default {
     offset() {
       return (this.page - 1) * this.limit;
     },
-    user() {
-      return this.$store.state.patient.user;
+    access_token() {
+      return this.$store.state.patient.user.access_token;
     },
     user_id() {
       return this.$store.state.patient.user_id;
