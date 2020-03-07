@@ -154,9 +154,12 @@
                 <span class="price">{{ credit | currency | persianDigit }} تومان</span>
                 <span>است.</span>
               </p>
-              <p v-if="doctor.pricePerMinute != 0">
+              <p>
                 <span>شما می توانید</span>
-                <span class="price">{{ duration | persianDigit }} دقیقه</span>
+                <span
+                  v-if="doctor.pricePerMinute != 0"
+                  class="price"
+                >{{ duration | persianDigit }} دقیقه</span>
                 <span>
                   با {{ doctor.title }} {{ doctor.firstName }}
                   {{ doctor.lastName }} (کد رسا:
