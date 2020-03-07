@@ -308,12 +308,24 @@ import ChargeSvg from "@/components/charge-svg";
 import doctors from "@/components/doctor_detail/doctors";
 export default {
   components: { ChargeSvg },
-  async asyncData({ app, store, error, params, $axios, isClient }) {
+  async asyncData({
+    app,
+    store,
+    error,
+    params,
+    $axios,
+    isClient,
+    redirect,
+    route
+  }) {
     let doctor;
     let charg_items;
     try {
       let { result } = await $axios.$get(`/Doctors/${params.id}/profile`);
       doctor = result.doctor;
+      if (doctor.pricePerMinute == 0) {
+        redirect(`${route.path.replace("charge", "booking")}`);
+      }
     } catch (err) {
       return error({ statusCode: 404, message: "doctor not found" });
     }
