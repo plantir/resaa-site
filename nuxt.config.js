@@ -184,6 +184,7 @@ export default {
    */
   modules: [
     // 'nuxt-svg-loader',
+    "@nuxtjs/gtm",
     "nuxt-device-detect",
     "@nuxtjs/pwa",
     "@nuxtjs/vuetify",
@@ -215,6 +216,9 @@ export default {
     //   }
     // ]
   ],
+  gtm: {
+    id: "GTM-5QJM8W5"
+  },
   vuetify: {
     rtl: true,
     materialIcons: false,

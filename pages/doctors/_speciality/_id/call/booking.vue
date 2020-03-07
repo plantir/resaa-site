@@ -327,6 +327,7 @@ export default {
   methods: {
     async reserveDoctor() {
       this.ajaxLoading = true;
+      let booking_status;
       try {
         let res = await this.$axios.post(
           `/Doctors/${this.$route.params.id}/CommunicationBooking?patientPhoneNumber=${this.user.phoneNumber}`
@@ -339,16 +340,22 @@ export default {
           .success()
           .icon("phone_in_talk")
           .alert();
+        booking_status = true;
         this.ajaxLoading = false;
       } catch (error) {
-        console.log(error);
-        debugger;
         this.$dialog
           .message("رزرو پزشک با مشکل مواجه شد")
           .error()
           .alert();
         this.ajaxLoading = false;
+        booking_status = false;
       }
+      let data = {
+        booking_status,
+        user: this.user,
+        doctor: this.doctor
+      };
+      this.$gtm.push({ event: "final_booking_btn_click", ...data });
     }
   },
   computed: {
