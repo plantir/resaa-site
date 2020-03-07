@@ -154,7 +154,7 @@
                 <span class="price">{{ credit | currency | persianDigit }} تومان</span>
                 <span>است.</span>
               </p>
-              <p>
+              <p v-if="doctor.pricePerMinute != 0">
                 <span>شما می توانید</span>
                 <span class="price">{{ duration | persianDigit }} دقیقه</span>
                 <span>

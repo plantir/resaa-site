@@ -196,7 +196,10 @@
         <template v-else>پزشک جدید</template>
       </div>
       <div>
-        <div class="price-per-minute">{{ doctor.pricePerMinute | persianDigit }} تومان / دقیقه</div>
+        <div class="price-per-minute">
+          <template v-if="doctor.pricePerMinute == 0">رایگان</template>
+          <template v-else>{{ doctor.pricePerMinute | persianDigit }} تومان / دقیقه</template>
+        </div>
         <v-btn
           :to="
             `/doctors/${doctor.specialtyEnglishTitle.toLowerCase().replace(/ /g, '-')}/${

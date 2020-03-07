@@ -204,13 +204,17 @@
       <div>
         <div class>
           <span class="price-title mb-0">هزینه هر دقیقه گفتگو با پزشک :</span>
-          <span class="price">{{doctor.pricePerMinute | currency | persianDigit}} تومان</span>
+
+          <span class="price">
+            <template v-if="doctor.pricePerMinute == 0">رایگان</template>
+            <template v-else>{{doctor.pricePerMinute | currency | persianDigit}} تومان</template>
+          </span>
         </div>
         <div class="button-wrapper">
           <nuxt-link
             v-if="doctor.currentlyAvailable"
             class="call-doctor"
-            :to="`${doctor.subscriberNumber}/call/${user?'charge':'register'}`"
+            :to="`${doctor.subscriberNumber}/call/${user?doctor.pricePerMinute == 0?'booking':'charge':'register'}`"
           >
             <span>شروع مکالمه با پزشک</span>
             <phone class="phone" />
