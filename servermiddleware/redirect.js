@@ -23,6 +23,13 @@ module.exports = function(req, res, next) {
   //   res.end();
   // } else {
   // }
+  if (req.url == "/corona") {
+    res.writeHead(301, {
+      Location:
+        "/categories/medical-consultation-for-coronavirus/1141?utm_source=social&utm_medium=social&utm_campaign=corona_sr"
+    });
+    return res.end();
+  }
   if (req.url != "/" && req.url != "/svg/" && req.url.endsWith("/")) {
     let url = req.url.replace(/.$/, "");
     res.writeHead(301, { Location: url });
