@@ -194,7 +194,7 @@ import Description from "@/components/categories/description";
 import Guide from "@/components/specialities/guide";
 export default {
   components: { Wave, Doctor, Guide, Comments, Description },
-  props: ["category", "related_doctors", "limit", "totalItems"],
+  props: ["category", "related_doctors", "limit", "totalItems", "requestId"],
   data() {
     return {
       text_array: [
@@ -226,7 +226,14 @@ export default {
       this.page = page;
       try {
         let { result } = await this.$axios.$get(
-          `categories/${this.category.id}/RelatedDoctors?limit=${this.limit}&offset=${this.offset}`
+          `categories/${this.category.id}/RelatedDoctors`,
+          {
+            params: {
+              limit: this.limit,
+              offset: this.offset,
+              requestId: this.requestId
+            }
+          }
         );
         this.related_doctors = result.relatedDoctors;
       } catch (error) {}

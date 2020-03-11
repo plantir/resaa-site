@@ -237,6 +237,7 @@ export default {
     },
     async register() {
       try {
+        this.user.loginOrigin = localStorage.getItem("referrer");
         let res = await this.$axios.post("/Patients/Registration", this.user);
         // this.user.registrationToken = res.data.result.registrationToken.value;
         this.new_user = true;

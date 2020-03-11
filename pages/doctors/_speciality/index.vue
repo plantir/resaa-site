@@ -59,7 +59,13 @@ export default {
     } catch (error) {}
     try {
       let { result } = await ctx.$axios.$get(
-        `categories/${category_id}/RelatedDoctors?limit=${limit}`
+        `categories/${category_id}/RelatedDoctors`,
+        {
+          params: {
+            limit: limit,
+            offset: 0
+          }
+        }
       );
       related_doctors = result.relatedDoctors;
       totalItems = result.doctorsTotalCount;

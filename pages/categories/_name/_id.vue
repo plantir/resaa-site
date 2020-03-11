@@ -4,6 +4,7 @@
     :related_doctors="related_doctors"
     :limit="limit"
     :totalItems="totalItems"
+    :requestId="requestId"
   />
 </template>
 <script>
@@ -49,7 +50,7 @@ export default {
     };
   },
   async asyncData(ctx) {
-    let category, related_doctors;
+    let category, related_doctors, requestId;
     let limit = 6;
     let totalItems = 0;
     // let exist_psycology = Object.entries(
@@ -73,10 +74,17 @@ export default {
     } catch (error) {}
     try {
       let { result } = await ctx.$axios.$get(
-        `categories/${ctx.params.id}/RelatedDoctors?limit=${limit}`
+        `categories/${ctx.params.id}/RelatedDoctors`,
+        {
+          params: {
+            limit: limit,
+            offset: 0
+          }
+        }
       );
       related_doctors = result.relatedDoctors;
       totalItems = result.doctorsTotalCount;
+      requestId = result.requestId;
     } catch (error) {}
     return {
       title: category.title,
@@ -85,6 +93,7 @@ export default {
       totalItems,
       related_doctors: related_doctors,
       category: category,
+      requestId: requestId,
       main_schema: {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",

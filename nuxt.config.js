@@ -176,6 +176,10 @@ export default {
     {
       src: "~/plugins/lazy_load.js",
       ssr: false
+    },
+    {
+      src: "~/plugins/clientInit.js",
+      ssr: false
     }
   ],
 

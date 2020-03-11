@@ -765,34 +765,40 @@ export default {
     //     });
     // }
   },
-  created() {
-    this.$axios.get("/Charge/Denominations").then(response => {
-      this.chargeMenuItems = response.data.result.denominations
-        .filter(item => {
-          return (
-            item.amount == 10000 ||
-            item.amount == 20000 ||
-            item.amount == 30000 ||
-            item.amount == 40000 ||
-            item.amount == 50000
-          );
-        })
-        .sort((a, b) => a.amount - b.amount);
-      this.ajaxLoading = false;
-      if (this.$route.query.chat_id) {
-        localStorage.setItem("chat_id", this.$route.query.chat_id);
-      }
-      if (
-        this.$route.query.chargeId &&
-        this.$route.query.chargeId <= this.chargeMenuItems.length
-      ) {
-        this.selectedChargeItem = this.chargeMenuItems[
-          this.$route.query.chargeId
-        ];
-      } else {
-        this.selectedChargeItem = this.chargeMenuItems[0];
-      }
-    });
+  async created() {
+    this.$axios
+      .get("/Charge/Denominations")
+      .then(response => {
+        this.chargeMenuItems = response.data.result.denominations
+          .filter(item => {
+            return (
+              item.amount == 10000 ||
+              item.amount == 20000 ||
+              item.amount == 30000 ||
+              item.amount == 40000 ||
+              item.amount == 50000
+            );
+          })
+          .sort((a, b) => a.amount - b.amount);
+        this.ajaxLoading = false;
+        if (this.$route.query.chat_id) {
+          localStorage.setItem("chat_id", this.$route.query.chat_id);
+        }
+        if (
+          this.$route.query.chargeId &&
+          this.$route.query.chargeId <= this.chargeMenuItems.length
+        ) {
+          this.selectedChargeItem = this.chargeMenuItems[
+            this.$route.query.chargeId
+          ];
+        } else {
+          this.selectedChargeItem = this.chargeMenuItems[0];
+        }
+      })
+      .catch(msg => {
+        this.ajaxLoading = false;
+        this.$toast.error().showSimple("خطایی در برقراری با سرور رخ داده است");
+      });
     if (this.$route.query.chargeRequestId) {
       this.ajaxLoading = true;
       this.$axios
@@ -858,9 +864,11 @@ export default {
     },
 
     async goToPrereceipt() {
+      let loginOrigin = localStorage.getItem("referrer");
       let data = {
         denominationId: this.selectedChargeItem.id,
-        callbackUrl: process.env.BANK_RETURN_URL
+        callbackUrl: process.env.BANK_RETURN_URL,
+        loginOrigin
         // recaptchaResponse: this.recaptchaResponse
       };
       let mobile = this.mobile_regex.exec(this.subscriberNumber);
