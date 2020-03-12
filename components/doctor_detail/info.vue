@@ -213,24 +213,7 @@
               <div class="status">
                 <component :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"></component>
               </div>
-              <img
-                v-if="doctor.imagePath"
-                v-lazy="'https://webapi.resaa.net/' + doctor.imagePath"
-                :alt="
-                  `تصویر ${doctor.title || ''} ${doctor.firstName} ${
-                    doctor.lastName
-                  }`
-                "
-              />
-              <img
-                v-else
-                src="/img/doc-placeholder.png"
-                :alt="
-                  `تصویر ${doctor.title || ''} ${doctor.firstName} ${
-                    doctor.lastName
-                  }`
-                "
-              />
+              <doctorImage :doctor="doctor" lazy size="2" />
             </div>
             <div v-scroll-to="{ el: '#call-section', offset: -80 }" class="doctor-id r-display-2">
               <img src="~assets/img/doctorFingerPrint.png" alt />

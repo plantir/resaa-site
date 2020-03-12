@@ -1,18 +1,20 @@
-import Vue from 'vue';
-import loading from '~/components/global/loading';
-import pagination from '~/components/global/pagination';
-import timeTable from '~/components/global/time_table';
-import * as moment from 'moment-jalaali';
-Vue.component('v-loading', loading);
-Vue.component('pagination', pagination);
-Vue.component('timeTable', timeTable);
-Vue.filter('currency', value => {
-  if (typeof value !== 'number') {
+import Vue from "vue";
+import loading from "~/components/global/loading";
+import pagination from "~/components/global/pagination";
+import timeTable from "~/components/global/time_table";
+import doctorImage from "~/components/global/doctor_image";
+import * as moment from "moment-jalaali";
+Vue.component("v-loading", loading);
+Vue.component("pagination", pagination);
+Vue.component("timeTable", timeTable);
+Vue.component("doctorImage", doctorImage);
+Vue.filter("currency", value => {
+  if (typeof value !== "number") {
     return value;
   }
   return new Intl.NumberFormat().format(value);
 });
-Vue.filter('persianDigit', value => {
+Vue.filter("persianDigit", value => {
   if (value || value === 0) {
     return value.toString().replace(/\d+/g, function(digit) {
       var enDigitArr = [],
@@ -27,16 +29,16 @@ Vue.filter('persianDigit', value => {
           )
         );
       }
-      return peDigitArr.join('');
+      return peDigitArr.join("");
     });
   } else {
     return value;
   }
 });
 // Vue.use(require('vue-jalali-moment'));
-Vue.filter('persianDate', (value, format, locale) => {
+Vue.filter("persianDate", (value, format, locale) => {
   if (locale) {
     moment.locale(locale);
   }
-  return moment(value, 'YYYY-M-D HH:mm:ss').format(format || 'jYYYY/jM/jD');
+  return moment(value, "YYYY-M-D HH:mm:ss").format(format || "jYYYY/jM/jD");
 });

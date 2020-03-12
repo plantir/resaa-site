@@ -163,12 +163,7 @@ section {
               <div class="status">
                 <component :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"></component>
               </div>
-              <img
-                v-if="doctor.imagePath"
-                :src="'https://webapi.resaa.net/' + doctor.imagePath"
-                :alt="`تصویر ${doctor.fullNameWithTitle}`"
-              />
-              <img v-else src="/img/doc-placeholder.png" :alt="`تصویر ${doctor.fullNameWithTitle}`" />
+              <doctorImage :doctor="doctor" lazy />
             </div>
             <h3 class="name">{{ doctor.fullNameWithTitle }}</h3>
             <p class="speciality">متخصص {{ doctor.specialtyTitle }}</p>

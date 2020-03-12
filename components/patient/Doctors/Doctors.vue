@@ -337,12 +337,7 @@
               <div class="doctors-item-info">
                 <div class="item-right-section">
                   <div class="item-avatar">
-                    <img
-                      v-if="doctor.imagePath"
-                      :src="'https://webapi.resaa.net/' + doctor.imagePath"
-                      alt
-                    />
-                    <img v-else src="/img/doc-placeholder.png" alt="پزشکان سامانه رسا" />
+                    <doctorImage :doctor="doctor" lazy />
                   </div>
                   <div class="item-right-sub-section">
                     <div class="item-doctor-name">{{ doctor.firstName }} {{ doctor.lastName }}</div>
