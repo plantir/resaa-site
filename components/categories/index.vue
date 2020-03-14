@@ -68,8 +68,52 @@
   color: #707070;
   font-weight: 500;
   margin-bottom: 4px;
+  margin-left: 20px;
   @include media(sm) {
     text-align: center;
+  }
+}
+.guide {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+  max-width: 100%;
+  // padding: 0 20px;
+  .available {
+    color: #43e7a5;
+  }
+  .not-available {
+    color: #febe10;
+  }
+  @include media(sm) {
+    margin-bottom: 16px;
+  }
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #a3a3a3;
+    @include media(sm) {
+      font-size: 16px;
+    }
+    svg {
+      margin-left: 12px;
+      width: 25px;
+      height: 25px;
+      @include media(sm) {
+        width: 25px;
+        height: 25px;
+      }
+    }
+    + div {
+      // margin-right: 60px;
+      @include media(sm) {
+        // margin-right: 0px;
+        // margin-top: 12px;
+      }
+    }
   }
 }
 .card-subtitle {
@@ -93,6 +137,9 @@
   @include media(sm) {
     padding: 30px 16px;
   }
+}
+.card-header {
+  display: flex;
 }
 .comments-wrapper {
   background: #fff;
@@ -134,11 +181,29 @@
           <nuxt-link :to="$route.fullPath">{{ category.title }}</nuxt-link>
         </div>
         <div class="card">
-          <h2 class="card-title">لیست متخصصین {{ category.title }}</h2>
+          <div class="card-header">
+            <h2 class="card-title">لیست متخصصین {{ category.title }}</h2>
+            <div class="guide hide-md">
+              <div class="available">
+                <Available />در دسترس
+              </div>
+              <div class="not-available">
+                <NotAvailable />عدم دسترسی
+              </div>
+            </div>
+          </div>
           <p class="card-subtitle">
             می توانید در این بخش لیست {{ category.title }} سامانه رسا را مشاهده
             کنید و مشاور مورد نظر خود را انتخاب کنید.
           </p>
+          <div class="guide hide-md-and-up">
+            <div class="available">
+              <Available />در دسترس
+            </div>
+            <div class="not-available">
+              <NotAvailable />عدم دسترسی
+            </div>
+          </div>
           <div
             class="item"
             v-for="doctor in related_doctors.slice(0, 3)"
@@ -192,8 +257,19 @@ import Doctor from "@/components/categories/doctor";
 import Comments from "@/components/categories/comments";
 import Description from "@/components/categories/description";
 import Guide from "@/components/specialities/guide";
+import Available from "~/assets/svg/Available.svg?inline";
+import NotAvailable from "~/assets/svg/NotAvailable.svg?inline";
+
 export default {
-  components: { Wave, Doctor, Guide, Comments, Description },
+  components: {
+    Wave,
+    Doctor,
+    Guide,
+    Comments,
+    Description,
+    Available,
+    NotAvailable
+  },
   props: ["category", "related_doctors", "limit", "totalItems", "requestId"],
   data() {
     return {
