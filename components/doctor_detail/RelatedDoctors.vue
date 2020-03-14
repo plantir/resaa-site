@@ -166,6 +166,7 @@ section {
               <doctorImage :doctor="doctor" lazy />
             </div>
             <h3 class="name">{{ doctor.fullNameWithTitle }}</h3>
+            <p class="speciality" v-if="doctor.expertise">{{ doctor.expertise }}</p>
             <p class="speciality">متخصص {{ doctor.specialtyTitle }}</p>
             <div class="code">
               <span>کد رسا:</span>
@@ -203,7 +204,7 @@ export default {
         // slidesPerGroup: 1,
         // loopFillGroupWithBlank: true,
         // initialSlide: 2,
-        loop: true,
+        // loop: true,
         autoplay: {
           delay: 10000
           // disableOnInteraction: false

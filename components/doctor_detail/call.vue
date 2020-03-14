@@ -180,7 +180,7 @@
           <span v-if="doctor.currentlyAvailable">همین حالا با پزشک تماس بگیرید</span>
           <template v-else>
             <span v-if="doctor.providesCallbackService">از پزشک بخواهید با شما تماس بگیرد</span>
-            <span v-eles>در حال حاضر این متخصص پاسخگو نیست</span>
+            <span v-else>در حال حاضر این متخصص پاسخگو نیست</span>
           </template>
         </h2>
         <div class="description">

@@ -162,6 +162,9 @@
           class="doctor-name"
         >{{ doctor.fullNameWithTitle }}</nuxt-link>
       </h3>
+      <p v-if="doctor.expertise" class="doctor-speciality">
+        <strong>{{ doctor.expertise }}</strong>
+      </p>
       <p class="doctor-speciality">
         <strong>{{ doctor.specialtyTitle }}</strong>
       </p>

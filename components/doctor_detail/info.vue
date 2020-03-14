@@ -143,7 +143,7 @@
     }
   }
   .fields-activity-wrapper {
-    margin-top: 90px;
+    margin-top: 50px;
     @include media(sm) {
       margin-top: 30px;
     }
@@ -201,6 +201,24 @@
 .custom-dialog {
   border-radius: 36px;
 }
+.satisfiedCalls {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  svg {
+    width: auto;
+    height: auto;
+    margin-bottom: 4px;
+  }
+  p {
+    margin: 0;
+  }
+  span {
+    font-size: 18px;
+    color: #1ad0c1;
+    font-weight: 500;
+  }
+}
 </style>
 <template>
   <section id="doctor-info">
@@ -214,6 +232,12 @@
                 <component :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"></component>
               </div>
               <doctorImage :doctor="doctor" lazy size="2" />
+            </div>
+            <div class="satisfiedCalls hide-md-and-up">
+              <p>
+                <span>{{ doctor.satisfiedCalls | callConvert | persianDigit }}</span>
+                جلسه رضایت بخش
+              </p>
             </div>
             <div v-scroll-to="{ el: '#call-section', offset: -80 }" class="doctor-id r-display-2">
               <img src="~assets/img/doctorFingerPrint.png" alt />
@@ -241,7 +265,7 @@
               </span>
             </div>
             <p v-if="doctor.specialtyTitle" class="specialty r-display-2">
-              تخصص:
+              <strong v-if="doctor.expertise">{{doctor.expertise}} ،</strong>
               <strong>{{ doctor.specialtyTitle }}</strong>
             </p>
             <span
@@ -260,6 +284,11 @@
                 <!-- <li
                 class="specialty-area"
                 >کد نظام پزشکی: {{doctor.medicalCouncilNumber || '-' | persianDigit}}</li>-->
+                <li class="specialty-area" :key="doctor.medicalCouncilNumber">
+                  <p>
+                    <strong>کد نظام پزشکی: {{ doctor.medicalCouncilNumber | persianDigit }}</strong>
+                  </p>
+                </li>
                 <li
                   v-for="(tag,i) in toBeShown"
                   :key="tag"
@@ -303,6 +332,12 @@
           </div>
         </v-flex>
         <v-flex xs12 md4 pr-3>
+          <div class="satisfiedCalls hide-md">
+            <p>
+              <span>{{ doctor.satisfiedCalls | callConvert | persianDigit }}</span>
+              جلسه رضایت بخش
+            </p>
+          </div>
           <div class="fields-activity-wrapper">
             <h2 class="title">زمینه های فعالیت :</h2>
             <ul>
@@ -364,6 +399,30 @@ import resaaElement from "~/assets/svg/element.svg?inline";
 export default {
   props: { doctor: {} },
   components: { Available, NotAvailable, resaaElement },
+  filters: {
+    callConvert: val => {
+      if (val < 100) {
+        return "50+";
+      }
+      if (val < 200) {
+        return "100+";
+      }
+      if (val < 500) {
+        return "200+";
+      }
+      if (val < 1000) {
+        return "500+";
+      }
+      if (val < 2000) {
+        return "1000+";
+      }
+      if (val < 5000) {
+        return "2000+";
+      } else {
+        return "5000+";
+      }
+    }
+  },
   data() {
     return {
       dialog: false,
