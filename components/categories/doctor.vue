@@ -64,7 +64,10 @@
       font-size: 16px;
       color: #9f9f9f;
       font-weight: 500;
-      margin-bottom: 20px;
+      margin-bottom: 4px;
+      + .doctor-speciality {
+        margin-bottom: 20px;
+      }
       @include media(sm) {
         text-align: center;
         font-weight: normal;
