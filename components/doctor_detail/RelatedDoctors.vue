@@ -163,7 +163,7 @@ section {
               <div class="status">
                 <component :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"></component>
               </div>
-              <doctorImage :doctor="doctor" lazy />
+              <doctorImage :doctor="doctor" size="2" lazy />
             </div>
             <h3 class="name">{{ doctor.fullNameWithTitle }}</h3>
             <p class="speciality" v-if="doctor.expertise">{{ doctor.expertise }}</p>

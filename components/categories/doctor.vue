@@ -149,7 +149,7 @@
       <div class="status">
         <component :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"></component>
       </div>
-      <doctorImage :doctor="doctor" lazy />
+      <doctorImage :doctor="doctor" size="2" lazy />
     </nuxt-link>
     <div class="name">
       <h3>
