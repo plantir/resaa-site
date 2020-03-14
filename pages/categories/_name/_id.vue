@@ -50,7 +50,9 @@ export default {
     };
   },
   async asyncData(ctx) {
-    let category, related_doctors, requestId;
+    let category,
+      related_doctors = [],
+      requestId;
     let limit = 6;
     let totalItems = 0;
     // let exist_psycology = Object.entries(
@@ -69,7 +71,7 @@ export default {
         category.englishTitle.toLowerCase().replace(/ /g, "-") !==
         ctx.params.name
       ) {
-        return ctx.error({ statusCode: 404, message: "speciality not found" });
+        // return ctx.error({ statusCode: 404, message: "speciality not found" });
       }
     } catch (error) {}
     try {
@@ -82,6 +84,7 @@ export default {
           }
         }
       );
+      console.log(result);
       related_doctors = result.relatedDoctors;
       totalItems = result.doctorsTotalCount;
       requestId = result.requestId;

@@ -1,99 +1,147 @@
-<style lang="scss" scoped>
-.price {
-  color: #28db9a;
-}
-.top-section {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  @include media(sm) {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+<style lang="scss" >
+#booking {
+  .price {
+    color: #28db9a;
   }
-  .payment-status {
-    color: #848484;
-    font-size: 18px;
-    font-weight: 500;
-    margin-top: 26px;
+
+  .top-section {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 8px;
     @include media(sm) {
-      margin-top: 0;
-      margin-bottom: 16px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
-  }
-  .amount {
-    color: #848484;
-    font-size: 16px;
-
-    margin-bottom: 8px;
-  }
-  .trackingNumber {
-    color: #848484;
-    font-size: 14px;
-    margin-bottom: 32px;
-  }
-  .image {
-    border-radius: 100%;
-    width: 160px;
-    height: 160px;
-    border: 1px solid #d4d4d4;
-    padding: 10px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .status {
-      position: absolute;
-      top: 4px;
-      right: 12px;
+    .payment-status {
+      color: #848484;
+      font-size: 18px;
+      font-weight: 500;
+      margin-top: 26px;
+      margin-bottom: 8px;
+      @include media(sm) {
+        margin-top: 0;
+        margin-bottom: 16px;
+      }
     }
-    img {
-      max-width: 100%;
-      max-height: 100%;
+    .amount {
+      color: #848484;
+      font-size: 16px;
+
+      margin-bottom: 8px;
+    }
+    .trackingNumber {
+      color: #848484;
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+    .image {
       border-radius: 100%;
-    }
-    &.deactive {
+      width: 160px;
+      height: 160px;
+      border: 1px solid #d4d4d4;
+      padding: 10px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .status {
+        position: absolute;
+        top: 4px;
+        right: 12px;
+      }
       img {
-        filter: grayscale(0.8);
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 100%;
+      }
+      &.deactive {
+        img {
+          filter: grayscale(0.8);
+        }
       }
     }
   }
-}
 
-.bottom-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  @include media(sm) {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  .bottom-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    @include media(sm) {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    > div {
+      flex: 0 0 60%;
+    }
+    p {
+      margin-bottom: 8px;
+      font-size: 16px;
+      color: #848484;
+    }
+    .v-btn {
+      min-width: 160px;
+      min-height: 46px;
+      font-size: 16px;
+      background: linear-gradient(to left, #0ec7e6, #28db9a);
+      font-weight: 500;
+      margin-left: 0;
+      .v-icon {
+        font-size: 24px;
+      }
+    }
   }
-  > div {
-    flex: 0 0 60%;
-  }
-  p {
-    margin-bottom: 8px;
-    font-size: 16px;
-    color: #848484;
-  }
-  .v-btn {
-    min-width: 160px;
-    min-height: 46px;
-    font-size: 16px;
-    background: linear-gradient(to left, #0ec7e6, #28db9a);
-    font-weight: 500;
-    margin-left: 0;
-    .v-icon {
-      font-size: 24px;
+
+  .callback-message {
+    width: 420px;
+    @include media(sm) {
+      width: 300px;
+      margin: auto;
+    }
+    @include media(xs-only) {
+      width: 240px;
+      margin: auto;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      margin: 30px 0 8px;
+      &-icon {
+        margin-left: 8px;
+        display: flex;
+        img {
+          max-width: 24px;
+          @include media(sm) {
+            max-width: 48px;
+          }
+        }
+      }
+      &-text {
+        color: #999;
+        @include media(sm) {
+          font-size: 1.3rem;
+          text-align: right;
+        }
+        @include media(xs-only) {
+          font-size: 1.1rem;
+          text-align: right;
+        }
+      }
+    }
+    .v-input__slot {
+      border: 1px solid #999;
+      border-radius: 16px;
+    }
+    .caption {
+      text-align: justify;
     }
   }
 }
 </style>
 <template>
-  <section>
+  <section id="booking">
     <div class="card">
       <no-ssr v-if="ajaxLoading">
         <v-loading mode="relative"></v-loading>
@@ -166,6 +214,25 @@
                   {{ doctor.subscriberNumber | persianDigit }}) صحبت کنید.
                 </span>
               </p>
+              <div class="callback-message" v-if="!doctor.currentlyAvailable">
+                <div class="header">
+                  <div class="header-icon">
+                    <img src="~assets/img/text_icon.png" alt />
+                  </div>
+                  <div class="header-text">توضیح مختصری به درخواست خود اضافه کنید.(اختیاری)</div>
+                </div>
+                <v-textarea
+                  v-model="message"
+                  outline
+                  hide-details
+                  :no-resize="true"
+                  single-line
+                  placeholder="توضیح خود را اینجا بنویسید"
+                ></v-textarea>
+                <p
+                  class="caption mt-2"
+                >با اضافه کردن توضیح به درخواست تماس خود پزشک را در جریان موضوع درخواست خود قرار داده و از سایر درخواست ها متمایز می شوید.</p>
+              </div>
             </div>
           </div>
           <v-btn
@@ -176,7 +243,7 @@
             class="retry-btn"
             to="charge"
           >تلاش مجدد</v-btn>
-          <v-btn
+          <!-- <v-btn
             round
             depressed
             dark
@@ -186,10 +253,18 @@
           >
             <span v-if="!doctor.currentlyAvailable">ثبت درخواست تماس</span>
             <span v-else>تماس با پزشک</span>
-          </v-btn>
-          <v-btn v-else round depressed dark class="retry-btn" @click="reserveDoctor">
-            <span v-if="!doctor.currentlyAvailable">ثبت درخواست تماس</span>
-            <span v-else>تماس با پزشک</span>
+          </v-btn>-->
+          <v-btn
+            v-else
+            round
+            depressed
+            dark
+            class="retry-btn"
+            :href="doctor.currentlyAvailable?'tel:02174471402':null"
+            :style="{'margin-bottom':doctor.currentlyAvailable?'0px':'52px'}"
+          >
+            <span v-if="!doctor.currentlyAvailable" @click="callBackRequest">ثبت درخواست تماس</span>
+            <span v-else @click="reserveDoctor">تماس با پزشک</span>
           </v-btn>
         </div>
       </div>
@@ -269,6 +344,7 @@ export default {
       status: "continue",
       doctor: {},
       user: {},
+      message: "",
       charge: {
         trackingNumber: 12345
       },
@@ -356,6 +432,25 @@ export default {
         doctor: this.doctor
       };
       this.$gtm.push({ event: "final_booking_btn_click", ...data });
+    },
+    async callBackRequest() {
+      let loader = this.$loader.show("#booking");
+      try {
+        let { data } = await this.$axios.$post(
+          `/api/calls/WebsiteCallRequest`,
+          {
+            DoctorSubscriberNumber: this.$route.params.id,
+            Message: this.message,
+            loginOrigin: localStorage.getItem("referrer")
+          }
+        );
+        this.$toast.success().showSimple("درخواست تماس با موفقیت ثبت شد");
+      } catch (error) {
+        this.$toast
+          .error()
+          .showSimple("مشکلی رخ داده است لطفا با پشتیبانی تماس بگیرید");
+      }
+      loader.hide();
     }
   },
   computed: {
