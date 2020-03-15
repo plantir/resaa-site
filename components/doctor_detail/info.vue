@@ -17,7 +17,7 @@
   .v-card {
     overflow: hidden;
     z-index: 1;
-    padding: 40px 70px !important;
+    padding: 40px 0px !important;
     @include media(sm) {
       padding: 40px 40px !important;
     }
@@ -39,9 +39,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    @include media(sm) {
-      align-items: center;
-    }
+    align-items: center;
+    // @include media(sm) {
+    // }
     .image {
       border-radius: 100%;
       width: 150px;
@@ -82,27 +82,35 @@
       }
     }
   }
-  .name-wrapper {
-    padding-right: 16px;
+  .availability {
+    margin-right: 8px;
+    color: $secondary-color;
     @include media(sm) {
-      padding-right: 0;
-      // text-align: center;
+      margin-top: -16px;
+      margin-bottom: 8px;
     }
+    &.deactive {
+      color: #e8aa00;
+    }
+  }
+  .name-wrapper {
     // > div {
     //   white-space: nowrap;
     // }
-    .availability {
-      margin-right: 8px;
-      color: $secondary-color;
-      &.deactive {
-        color: #e8aa00;
+    .doctor-name {
+      @include media(sm) {
+        text-align: center;
       }
     }
+
     .specialty {
       // font-size: 18px;
       color: #9f9f9f;
       margin-top: 4px;
       // font-weight: 400;
+      @include media(sm) {
+        text-align: center;
+      }
     }
     .specialty-area-container {
       margin-top: 20px;
@@ -143,9 +151,11 @@
     }
   }
   .fields-activity-wrapper {
+    padding-right: 16px;
     margin-top: 50px;
     @include media(sm) {
       margin-top: 30px;
+      padding-right: 0;
     }
     ul {
       display: flex;
@@ -205,6 +215,9 @@
   display: flex;
   align-items: center;
   height: 40px;
+  @include media(sm) {
+    margin-bottom: 20px;
+  }
   svg {
     width: auto;
     height: auto;
@@ -227,19 +240,23 @@
       <v-layout row wrap>
         <v-flex xs12 md3>
           <div class="image-wrapper">
+            <span
+              class="availability hide-md-and-up"
+              :class="doctor.currentlyAvailable ? 'active' : 'deactive'"
+            >
+              ({{
+              doctor.currentlyAvailable
+              ? "در دسترس"
+              : "خارج از ساعت پاسخگویی"
+              }})
+            </span>
             <div class="image">
               <div class="status">
                 <component :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"></component>
               </div>
               <doctorImage :doctor="doctor" lazy size="2" />
             </div>
-            <div class="satisfiedCalls hide-md-and-up">
-              <p v-if="doctor.satisfiedCalls> 50">
-                <span>{{ doctor.satisfiedCalls | callConvert | persianDigit }}</span>
-                جلسه رضایت بخش
-              </p>
-              <p v-else>پزشک جدید</p>
-            </div>
+
             <div v-scroll-to="{ el: '#call-section', offset: -80 }" class="doctor-id r-display-2">
               <img src="~assets/img/doctorFingerPrint.png" alt />
               کد رِسا:
@@ -247,9 +264,9 @@
             </div>
           </div>
         </v-flex>
-        <v-flex xs12 md5 pl-3>
+        <v-flex xs12 md5>
           <div class="name-wrapper">
-            <div>
+            <div class="doctor-name">
               <h1>
                 {{ doctor.title }} {{ doctor.firstName }}
                 {{ doctor.lastName }}
@@ -269,17 +286,15 @@
               <strong v-if="doctor.expertise">{{doctor.expertise}} ،</strong>
               <strong>{{ doctor.specialtyTitle }}</strong>
             </p>
-            <span
-              class="availability hide-md-and-up"
-              :class="doctor.currentlyAvailable ? 'active' : 'deactive'"
-            >
-              ({{
-              doctor.currentlyAvailable
-              ? "در دسترس"
-              : "خارج از ساعت پاسخگویی"
-              }})
-            </span>
+
             <div class="specialty-area-container">
+              <!-- v-if="doctor.satisfiedCalls> 50" -->
+              <div class="satisfiedCalls hide-md-and-up">
+                <p>
+                  <span>{{ doctor.satisfiedCalls | callConvert | persianDigit }}</span>
+                  جلسه رضایت بخش
+                </p>
+              </div>
               <h2 class="title">سوابق حرفه ای پزشک :</h2>
               <transition-group name="fade" tag="ul" mode="out-in">
                 <!-- <li
@@ -297,7 +312,7 @@
                 <li
                   v-for="(tag,i) in toBeShown"
                   :key="tag"
-                  :class="{'low-opacity':!show_more&& i ==4}"
+                  :class="{'low-opacity':!show_more && doctor.aboutDoctor.length > 5 && i ==4}"
                   class="specialty-area"
                 >
                   <p>{{ tag }}</p>
@@ -336,13 +351,13 @@
             </div>
           </div>
         </v-flex>
-        <v-flex xs12 md4 pr-3>
+        <v-flex xs12 md4>
+          <!-- v-if="doctor.satisfiedCalls> 50" -->
           <div class="satisfiedCalls hide-md">
-            <p v-if="doctor.satisfiedCalls> 50">
+            <p>
               <span>{{ doctor.satisfiedCalls | callConvert | persianDigit }}</span>
               جلسه رضایت بخش
             </p>
-            <p v-else>پزشک جدید</p>
           </div>
           <div class="fields-activity-wrapper">
             <h2 class="title">زمینه های فعالیت :</h2>

@@ -146,7 +146,7 @@ section {
           <Available />در دسترس
         </div>
         <div>
-          <NotAvailable />عدم دسترسی
+          <NotAvailable />خارج از ساعت پاسخگویی
         </div>
       </div>
     </div>

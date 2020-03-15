@@ -1,5 +1,5 @@
 <style lang="scss">
-#doctors {
+#patient-doctors {
   .doctors-section-patients-container {
     background-color: white;
   }
@@ -302,7 +302,7 @@
 </style>
 
 <template>
-  <div class="doctors-section-patients-container" id="doctors">
+  <div class="doctors-section-patients-container" id="patient-doctors">
     <h2 class="doctors-title">پزشکان رِسا</h2>
     <p class="doctors-description">پزشک مورد نظر خود را اینجا پیدا کنید</p>
     <div class="doctors-info-container">

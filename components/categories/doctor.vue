@@ -165,10 +165,10 @@
           class="doctor-name"
         >{{ doctor.fullNameWithTitle }}</nuxt-link>
       </h3>
-      <p v-if="doctor.expertise" class="doctor-speciality">
-        <strong>{{ doctor.expertise }}</strong>
-      </p>
       <p class="doctor-speciality">
+        <strong
+          v-if="doctor.expertise && doctor.expertise != doctor.specialtyTitle"
+        >{{ doctor.expertise }} ،</strong>
         <strong>{{ doctor.specialtyTitle }}</strong>
       </p>
       <div class="doctor-tags">
