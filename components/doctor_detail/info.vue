@@ -302,7 +302,7 @@
                 class="specialty-area"
                 >کد نظام پزشکی: {{doctor.medicalCouncilNumber || '-' | persianDigit}}</li>-->
                 <li
-                  v-if="doctor.medicalCouncilNumber"
+                  v-if="doctor.medicalCouncilNumber && doctor.medicalCouncilNumber != '0000'"
                   class="specialty-area"
                   :key="doctor.medicalCouncilNumber"
                 >
