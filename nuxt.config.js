@@ -44,6 +44,7 @@ export default {
     }
   },
   serverMiddleware: [
+    "~/servermiddleware/underconstruction.js",
     "~/servermiddleware/redirect.js",
     "~/servermiddleware/category_redirect.js",
     "~/servermiddleware/doctors.js",
