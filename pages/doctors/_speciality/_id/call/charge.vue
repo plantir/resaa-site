@@ -261,7 +261,7 @@ h2 {
       </div>
       <div class="continue">
         <div class="text" v-if="isFree && duration <1">
-          <span>همچنین می توانید در صورت تمایل، تماس اول</span>
+          <span>همچنین می توانید در صورت تمایل،</span>
           <span class="custom-color">تماس اول</span>
           <span>خود در سامانه رسا را میهمان ما باشید</span>
         </div>
