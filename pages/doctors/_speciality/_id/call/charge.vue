@@ -260,7 +260,12 @@ h2 {
         ></vue-recaptcha>
       </div>
       <div class="continue">
-        <div class="text">
+        <div class="text" v-if="isFree && duration <1">
+          <span>همچنین می توانید در صورت تمایل، تماس اول</span>
+          <span class="custom-color">تماس اول</span>
+          <span>خود در سامانه رسا را میهمان ما باشید</span>
+        </div>
+        <div class="text" v-else>
           <span>اعتبار فعلی حساب شما</span>
           <span class="custom-color">{{ credit | currency | persianDigit }} تومان</span>
           <span>است . شما میتوانید</span>
@@ -270,14 +275,8 @@ h2 {
             {{ doctor.lastName }} صحبت کنید
           </span>
         </div>
-        <v-btn v-if="isFree" color="#27db9b" to="booking" round outline>تماس اول رایگان</v-btn>
-        <v-btn
-          v-else-if="duration >= 1"
-          color="#27db9b"
-          to="booking"
-          round
-          outline
-        >ادامه با اعتبار فعلی</v-btn>
+        <v-btn v-if="duration >= 1" color="#27db9b" to="booking" round outline>ادامه با اعتبار فعلی</v-btn>
+        <v-btn v-else-if="isFree" color="#27db9b" to="booking" round outline>تماس اول رایگان</v-btn>
       </div>
     </div>
 
