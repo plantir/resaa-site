@@ -75,7 +75,6 @@
 }
 .guide {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   // width: 300px;
   max-width: 100%;
@@ -89,6 +88,7 @@
   }
   @include media(sm) {
     margin-bottom: 16px;
+    justify-content: center;
   }
   > div {
     display: flex;

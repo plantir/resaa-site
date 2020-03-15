@@ -1,7 +1,7 @@
 <style lang="scss">
 #doctor-info {
   h1 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
     display: inline-flex;
     color: var(--grey-color);
@@ -83,11 +83,11 @@
     }
   }
   .availability {
-    margin-right: 8px;
+    margin-bottom: 8px;
     color: $secondary-color;
     @include media(sm) {
+      margin-right: 0;
       margin-top: -16px;
-      margin-bottom: 8px;
     }
     &.deactive {
       color: #e8aa00;
@@ -121,7 +121,7 @@
         color: var(--grey-color);
         display: flex;
         align-items: flex-start;
-        font-size: 14px;
+        font-size: 13px;
         &.low-opacity {
           opacity: 0.3;
         }
@@ -151,7 +151,7 @@
     }
   }
   .fields-activity-wrapper {
-    padding-right: 16px;
+    padding-right: 20px;
     margin-top: 50px;
     @include media(sm) {
       margin-top: 30px;
@@ -166,7 +166,7 @@
         color: var(--grey-color);
         display: flex;
         align-items: center;
-        font-size: 14px;
+        font-size: 13px;
         @include media(sm) {
           width: 100%;
           flex: 0 0 100%;
@@ -215,8 +215,11 @@
   display: flex;
   align-items: center;
   height: 40px;
+  padding-right: 20px;
   @include media(sm) {
+    padding-right: 0;
     margin-bottom: 20px;
+    justify-content: center;
   }
   svg {
     width: auto;
@@ -240,10 +243,7 @@
       <v-layout row wrap>
         <v-flex xs12 md3>
           <div class="image-wrapper">
-            <span
-              class="availability hide-md-and-up"
-              :class="doctor.currentlyAvailable ? 'active' : 'deactive'"
-            >
+            <span class="availability" :class="doctor.currentlyAvailable ? 'active' : 'deactive'">
               ({{
               doctor.currentlyAvailable
               ? "در دسترس"
@@ -257,7 +257,7 @@
               <doctorImage :doctor="doctor" lazy size="2" />
             </div>
 
-            <div v-scroll-to="{ el: '#call-section', offset: -80 }" class="doctor-id r-display-2">
+            <div v-scroll-to="{ el: '#call-section', offset: -80 }" class="doctor-id r-display-3">
               <img src="~assets/img/doctorFingerPrint.png" alt />
               کد رِسا:
               <div class="doctor-resaa-code">{{ doctor.subscriberNumber | persianDigit }}</div>
@@ -271,7 +271,7 @@
                 {{ doctor.title }} {{ doctor.firstName }}
                 {{ doctor.lastName }}
               </h1>
-              <span
+              <!-- <span
                 class="availability hide-md"
                 :class="doctor.currentlyAvailable ? 'active' : 'deactive'"
               >
@@ -280,9 +280,9 @@
                 ? "در دسترس"
                 : "خارج از ساعت پاسخگویی"
                 }})
-              </span>
+              </span>-->
             </div>
-            <p v-if="doctor.specialtyTitle" class="specialty r-display-2">
+            <p v-if="doctor.specialtyTitle" class="specialty r-display-3">
               <strong v-if="doctor.expertise">{{doctor.expertise}} ،</strong>
               <strong>{{ doctor.specialtyTitle }}</strong>
             </p>

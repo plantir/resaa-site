@@ -35,7 +35,7 @@
   }
   .title {
     color: var(--grey-color);
-    font-size: 18px !important;
+    font-size: 16px !important;
     font-weight: 500;
     margin-bottom: 16px;
   }
