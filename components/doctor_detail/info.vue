@@ -234,10 +234,11 @@
               <doctorImage :doctor="doctor" lazy size="2" />
             </div>
             <div class="satisfiedCalls hide-md-and-up">
-              <p>
+              <p v-if="doctor.satisfiedCalls> 50">
                 <span>{{ doctor.satisfiedCalls | callConvert | persianDigit }}</span>
                 جلسه رضایت بخش
               </p>
+              <p v-else>پزشک جدید</p>
             </div>
             <div v-scroll-to="{ el: '#call-section', offset: -80 }" class="doctor-id r-display-2">
               <img src="~assets/img/doctorFingerPrint.png" alt />
@@ -284,7 +285,11 @@
                 <!-- <li
                 class="specialty-area"
                 >کد نظام پزشکی: {{doctor.medicalCouncilNumber || '-' | persianDigit}}</li>-->
-                <li class="specialty-area" :key="doctor.medicalCouncilNumber">
+                <li
+                  v-if="doctor.medicalCouncilNumber"
+                  class="specialty-area"
+                  :key="doctor.medicalCouncilNumber"
+                >
                   <p>
                     <strong>کد نظام پزشکی: {{ doctor.medicalCouncilNumber | persianDigit }}</strong>
                   </p>
@@ -333,10 +338,11 @@
         </v-flex>
         <v-flex xs12 md4 pr-3>
           <div class="satisfiedCalls hide-md">
-            <p>
+            <p v-if="doctor.satisfiedCalls> 50">
               <span>{{ doctor.satisfiedCalls | callConvert | persianDigit }}</span>
               جلسه رضایت بخش
             </p>
+            <p v-else>پزشک جدید</p>
           </div>
           <div class="fields-activity-wrapper">
             <h2 class="title">زمینه های فعالیت :</h2>

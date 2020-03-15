@@ -154,7 +154,7 @@
 }
 </style>
 <template>
-  <section>
+  <section ref="wrapper">
     <div class="header">
       <img
         v-if="$device.isDesktop"
@@ -299,6 +299,7 @@ export default {
   },
   methods: {
     async changePage(page) {
+      let loader = this.$loader.show(this.$refs.wrapper);
       this.page = page;
       try {
         let { result } = await this.$axios.$get(
@@ -312,7 +313,9 @@ export default {
           }
         );
         this.related_doctors = result.relatedDoctors;
+        this.$scrollTo(this.$refs.wrapper, 1000);
       } catch (error) {}
+      loader.hide();
     }
   },
   computed: {

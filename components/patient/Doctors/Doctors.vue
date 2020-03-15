@@ -342,6 +342,10 @@
                   <div class="item-right-sub-section">
                     <div class="item-doctor-name">{{ doctor.firstName }} {{ doctor.lastName }}</div>
                     <div
+                      v-if="doctor.expertise && doctor.expertise != doctor.specialty.title"
+                      class="item-doctor-specialty"
+                    >{{ doctor.expertise }}</div>
+                    <div
                       v-if="doctor.specialty"
                       class="item-doctor-specialty"
                     >{{ doctor.specialty.title }}</div>
@@ -416,7 +420,8 @@ export default {
         url: "Doctors?name={name}&fields={fields}&limit={limit}&offset={offset}"
       }
     };
-    this.fields = "id,specialty,subscriberNumber,firstName,lastName,imagePath";
+    this.fields =
+      "id,specialty,subscriberNumber,firstName,lastName,imagePath,expertise";
   },
   mounted() {
     this.getDoctors();

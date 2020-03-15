@@ -84,9 +84,8 @@ export default {
           }
         }
       );
-      console.log(result);
       related_doctors = result.relatedDoctors;
-      totalItems = result.doctorsTotalCount;
+      totalItems = result.relatedDoctorsTotalCount;
       requestId = result.requestId;
     } catch (error) {}
     return {
