@@ -4,6 +4,7 @@ div {
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
 </style>
 <template>
