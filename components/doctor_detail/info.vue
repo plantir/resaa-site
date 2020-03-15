@@ -97,6 +97,10 @@
     // > div {
     //   white-space: nowrap;
     // }
+    padding-left: 20px;
+    @include media(sm) {
+      padding-left: 0;
+    }
     .doctor-name {
       @include media(sm) {
         text-align: center;
@@ -151,7 +155,6 @@
     }
   }
   .fields-activity-wrapper {
-    padding-right: 20px;
     margin-top: 50px;
     @include media(sm) {
       margin-top: 30px;
@@ -215,9 +218,7 @@
   display: flex;
   align-items: center;
   height: 40px;
-  padding-right: 20px;
   @include media(sm) {
-    padding-right: 0;
     margin-bottom: 20px;
     justify-content: center;
   }
@@ -283,7 +284,7 @@
               </span>-->
             </div>
             <p v-if="doctor.specialtyTitle" class="specialty r-display-3">
-              <strong v-if="doctor.expertise">{{doctor.expertise}} ،</strong>
+              <strong v-if="doctor.expertise != ' '">{{doctor.expertise}} ،</strong>
               <strong>{{ doctor.specialtyTitle }}</strong>
             </p>
 

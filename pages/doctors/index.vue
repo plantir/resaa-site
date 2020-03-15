@@ -468,9 +468,7 @@
                       <div class="item-right-sub-section">
                         <div class="item-doctor-name">{{ doctor.firstName }} {{ doctor.lastName }}</div>
                         <div v-if="doctor.specialty" class="item-doctor-specialty">
-                          <strong
-                            v-if="doctor.expertise && doctor.expertise != doctor.specialty.title"
-                          >
+                          <strong v-if="doctor.expertise != ' '">
                             {{ doctor.expertise }}
                             <span class="hide-md">،</span>
                           </strong>
