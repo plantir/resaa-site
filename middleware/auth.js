@@ -1,13 +1,9 @@
-export default function ({
-  store,
-  redirect,
-  error
-}) {
-  if (!localStorage.getItem('auth')) {
-    redirect('/patient/landing')
+export default function({ store, redirect, route, error }) {
+  if (!localStorage.getItem("auth")) {
+    redirect(`/patient/login?return_url=${route.fullPath}`);
     error({
-      message: 'You are not connected',
+      message: "You are not connected",
       statusCode: 403
-    })
+    });
   }
 }

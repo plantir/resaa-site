@@ -270,7 +270,14 @@ h2 {
             {{ doctor.lastName }} صحبت کنید
           </span>
         </div>
-        <v-btn v-if="duration >= 1" color="#27db9b" to="booking" round outline>ادامه با اعتبار فعلی</v-btn>
+        <v-btn v-if="isFree" color="#27db9b" to="booking" round outline>تماس اول رایگان</v-btn>
+        <v-btn
+          v-else-if="duration >= 1"
+          color="#27db9b"
+          to="booking"
+          round
+          outline
+        >ادامه با اعتبار فعلی</v-btn>
       </div>
     </div>
 
@@ -489,6 +496,9 @@ export default {
 
     user_id() {
       return this.$store.state.patient.user_id;
+    },
+    isFree() {
+      return this.doctor.categories.some(item => item.id == 1144);
     }
   }
 };
