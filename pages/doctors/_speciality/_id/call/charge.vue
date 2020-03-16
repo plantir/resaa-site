@@ -171,8 +171,8 @@ h2 {
       <div class="charge-items hide-md">
         <div
           class="charge-item-wrapper"
-          @click="selected = item.denomination.id"
-          :class="{ selected: item.denomination.id == selected }"
+          @click="selected = item"
+          :class="{ selected: item == selected }"
           v-for="(item,i) in charg_items"
           :key="item.chargePackage.packageId"
         >
@@ -192,7 +192,7 @@ h2 {
                 class="price"
               >{{ item.denomination.payableAmount | currency | persianDigit }} تومان</div>
               <div class="select-holder">
-                <v-icon v-if="item.denomination.id == selected">check</v-icon>
+                <v-icon v-if="item == selected">check</v-icon>
               </div>
             </div>
           </div>
@@ -208,8 +208,8 @@ h2 {
         <div class="swiper-wrapper">
           <div
             class="charge-item-wrapper swiper-slide"
-            @click="selected = item.denomination.id"
-            :class="{ selected: item.denomination.id == selected }"
+            @click="selected = item"
+            :class="{ selected: item == selected }"
             v-for="(item,i) in charg_items"
             :key="item.chargePackage.packageId"
           >
@@ -229,7 +229,7 @@ h2 {
                   class="price"
                 >{{ item.denomination.payableAmount | currency | persianDigit }} تومان</div>
                 <div class="select-holder">
-                  <v-icon v-if="item.denomination.id == selected">check</v-icon>
+                  <v-icon v-if="item == selected">check</v-icon>
                 </div>
               </div>
             </div>
@@ -446,8 +446,7 @@ export default {
       this.$refs.invisibleRecaptcha.execute();
     },
     onChange(item) {
-      let ids = [6, 3, 4, 5];
-      this.selected = ids[this.$refs.mySwiper.swiper.activeIndex];
+      this.selected = this.charg_items[this.$refs.mySwiper.swiper.activeIndex];
     },
     async chargeRequest() {
       this.ajaxLoading = true;
@@ -455,7 +454,7 @@ export default {
         let res = await this.$axios.get(`/Accounts/${this.user_id}/Profile`);
         let loginOrigin = localStorage.getItem("referrer");
         let data = {
-          denominationId: this.selected,
+          denominationId: this.selected.denomination.id,
           callbackUrl:
             process.env.SITE_URL +
             this.$route.fullPath.replace("charge", "booking"),
@@ -463,6 +462,10 @@ export default {
           phoneNumber: res.data.result.profile.phoneNumber,
           loginOrigin
         };
+        this.$gtm.push({
+          event: "PaymentAtempted",
+          amount: this.selected.denomination.amount
+        });
         let response = await this.$axios.post("/Charge", data);
         let {
           address,
