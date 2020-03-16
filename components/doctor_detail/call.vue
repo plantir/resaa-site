@@ -179,8 +179,8 @@
         <h2 class="section-title">
           <span v-if="doctor.currentlyAvailable">همین حالا با پزشک تماس بگیرید</span>
           <template v-else>
-            <!-- <span v-if="doctor.providesCallbackService">از پزشک بخواهید با شما تماس بگیرد</span> -->
-            <span>در حال حاضر این متخصص پاسخگو نیست</span>
+            <span v-if="doctor.providesCallbackService">از پزشک بخواهید با شما تماس بگیرد</span>
+            <span v-else>در حال حاضر این متخصص پاسخگو نیست</span>
           </template>
         </h2>
         <div class="description">
@@ -188,10 +188,10 @@
             v-if="doctor.currentlyAvailable"
           >پزشک در حال حاضر در دسترس می باشد. تماس شما بلافاصله با موبایل پزشک برقرار می شود تا بتوانید در کوتاه ترین زمان پاسخ سوالات خود را بگیرید.</p>
           <template v-else>
-            <!-- <p
+            <p
               v-if="doctor.providesCallbackService"
-            >در حال حاضر پزشک در دسترس نیست. با ثبت درخواست تماس، پزشک در اولین ساعت پاسخگویی خود با شما تماس میگیرد. می توانید با بررسی زمان های پاسخگویی پزشک از اولین زمان پاسخگویی پزشک مطلع شوید.</p>-->
-            <p>
+            >در حال حاضر پزشک در دسترس نیست. با ثبت درخواست تماس، پزشک در اولین ساعت پاسخگویی خود با شما تماس میگیرد. می توانید با بررسی زمان های پاسخگویی پزشک از اولین زمان پاسخگویی پزشک مطلع شوید.</p>
+            <p v-else>
               شما می توانید در زمان پاسخگویی بعدی (
               <span
                 class="show-time-table"
@@ -220,15 +220,16 @@
             <phone class="phone" />
           </nuxt-link>
           <template v-else>
-            <!-- <nuxt-link
+            <nuxt-link
               v-if="doctor.providesCallbackService"
               class="call-doctor"
               :to="`${doctor.subscriberNumber}/call/${user?'charge':'register'}`"
             >
               ثبت درخواست تماس
               <phone class="phone" />
-            </nuxt-link>-->
+            </nuxt-link>
             <a
+              v-else
               class="call-doctor"
               v-scroll-to="{ el: '#related-doctors', offset: -80 }"
             >نمایش پزشکان مرتبط</a>

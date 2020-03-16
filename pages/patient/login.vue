@@ -176,9 +176,7 @@
     <v-loading v-if="ajaxLoading" mode="relative"></v-loading>
     <div class="login-patient-container">
       <div class="section-title">حساب کاربری</div>
-      <div class="section-description">
-        جهت دسترسی به خدمات برخط سامانه رِسا، لطفا وارد شوید
-      </div>
+      <div class="section-description">جهت دسترسی به خدمات برخط سامانه رِسا، لطفا وارد شوید</div>
       <div class="patient-username">
         <i class="fa fa-user"></i>
         <input
@@ -190,16 +188,9 @@
       </div>
       <div class="patient-password">
         <i class="fa fa-lock"></i>
-        <input
-          v-model="user.password"
-          type="password"
-          placeholder="کلمه عبور"
-          @keyup.enter="login"
-        />
+        <input v-model="user.password" type="password" placeholder="کلمه عبور" @keyup.enter="login" />
       </div>
-      <button :disabled="error" @click="login" class="login-button">
-        ورود به حساب کاربری
-      </button>
+      <button :disabled="error" @click="login" class="login-button">ورود به حساب کاربری</button>
       <div v-if="error" class="error-message">{{ error }}</div>
       <div v-if="erroMessage" class="error-message">{{ erroMessage }}</div>
       <!-- <div class="forgot-password">
@@ -207,9 +198,7 @@
       </div>-->
       <div class="sign-up">
         حساب کاربری ندارید؟
-        <router-link :to="{ name: 'patient-register' }" class="sign-up-link"
-          >رایگان ثبت نام کنید</router-link
-        >
+        <router-link :to="{ name: 'patient-register' }" class="sign-up-link">رایگان ثبت نام کنید</router-link>
       </div>
       <div class="forget-password">
         در صورتی که کد کاربری و رمز عبور خود را فراموش کرده اید با موبایلی که
@@ -249,7 +238,9 @@ export default {
       subscribe_regex: /^[0-9]{5,5}$/g
     };
   },
-  mounted() {},
+  mounted() {
+    console.log(this.$route);
+  },
   methods: {
     checkNumber() {
       this.user.username = this.user.username.replace(/[۰-۹]/g, w => {
@@ -295,6 +286,7 @@ export default {
               this.ajaxLoading = false;
               this.$store.commit("patient/login", res.data);
               this.$store.commit("patient/initialize_user");
+              debugger;
               let return_url = this.$route.query.return_url;
               if (return_url) {
                 this.$router.push(return_url);

@@ -44,6 +44,7 @@ export default {
     }
   },
   serverMiddleware: [
+    "~/servermiddleware/underconstruction.js",
     "~/servermiddleware/redirect.js",
     "~/servermiddleware/category_redirect.js",
     "~/servermiddleware/doctors.js",
@@ -175,6 +176,10 @@ export default {
     },
     {
       src: "~/plugins/lazy_load.js",
+      ssr: false
+    },
+    {
+      src: "~/plugins/clientInit.js",
       ssr: false
     }
   ],

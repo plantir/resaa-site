@@ -15,7 +15,6 @@ section {
   @include media(sm) {
     flex-direction: column;
     align-items: center;
-    max-width: 200px;
     justify-content: space-between;
     height: 100px;
     margin-bottom: 40px;
@@ -146,7 +145,7 @@ section {
           <Available />در دسترس
         </div>
         <div>
-          <NotAvailable />عدم دسترسی
+          <NotAvailable />خارج از ساعت پاسخگویی
         </div>
       </div>
     </div>
@@ -163,14 +162,10 @@ section {
               <div class="status">
                 <component :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"></component>
               </div>
-              <img
-                v-if="doctor.imagePath"
-                :src="'https://webapi.resaa.net/' + doctor.imagePath"
-                :alt="`تصویر ${doctor.fullNameWithTitle}`"
-              />
-              <img v-else src="/img/doc-placeholder.png" :alt="`تصویر ${doctor.fullNameWithTitle}`" />
+              <doctorImage :doctor="doctor" size="2" lazy />
             </div>
             <h3 class="name">{{ doctor.fullNameWithTitle }}</h3>
+            <p class="speciality" v-if="doctor.expertise != ' '">{{ doctor.expertise }}</p>
             <p class="speciality">متخصص {{ doctor.specialtyTitle }}</p>
             <div class="code">
               <span>کد رسا:</span>
@@ -208,7 +203,7 @@ export default {
         // slidesPerGroup: 1,
         // loopFillGroupWithBlank: true,
         // initialSlide: 2,
-        loop: true,
+        // loop: true,
         autoplay: {
           delay: 10000
           // disableOnInteraction: false

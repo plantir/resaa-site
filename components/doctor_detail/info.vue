@@ -1,7 +1,7 @@
 <style lang="scss">
 #doctor-info {
   h1 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
     display: inline-flex;
     color: var(--grey-color);
@@ -17,7 +17,7 @@
   .v-card {
     overflow: hidden;
     z-index: 1;
-    padding: 40px 70px !important;
+    padding: 40px 0px !important;
     @include media(sm) {
       padding: 40px 40px !important;
     }
@@ -39,9 +39,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    @include media(sm) {
-      align-items: center;
-    }
+    align-items: center;
+    // @include media(sm) {
+    // }
     .image {
       border-radius: 100%;
       width: 150px;
@@ -82,27 +82,39 @@
       }
     }
   }
-  .name-wrapper {
-    padding-right: 16px;
+  .availability {
+    margin-bottom: 8px;
+    color: $secondary-color;
     @include media(sm) {
-      padding-right: 0;
-      // text-align: center;
+      margin-right: 0;
+      margin-top: -16px;
     }
+    &.deactive {
+      color: #e8aa00;
+    }
+  }
+  .name-wrapper {
     // > div {
     //   white-space: nowrap;
     // }
-    .availability {
-      margin-right: 8px;
-      color: $secondary-color;
-      &.deactive {
-        color: #e8aa00;
+    padding-left: 20px;
+    @include media(sm) {
+      padding-left: 0;
+    }
+    .doctor-name {
+      @include media(sm) {
+        text-align: center;
       }
     }
+
     .specialty {
       // font-size: 18px;
       color: #9f9f9f;
       margin-top: 4px;
       // font-weight: 400;
+      @include media(sm) {
+        text-align: center;
+      }
     }
     .specialty-area-container {
       margin-top: 20px;
@@ -113,7 +125,7 @@
         color: var(--grey-color);
         display: flex;
         align-items: flex-start;
-        font-size: 14px;
+        font-size: 13px;
         &.low-opacity {
           opacity: 0.3;
         }
@@ -143,9 +155,10 @@
     }
   }
   .fields-activity-wrapper {
-    margin-top: 90px;
+    margin-top: 50px;
     @include media(sm) {
       margin-top: 30px;
+      padding-right: 0;
     }
     ul {
       display: flex;
@@ -156,7 +169,7 @@
         color: var(--grey-color);
         display: flex;
         align-items: center;
-        font-size: 14px;
+        font-size: 13px;
         @include media(sm) {
           width: 100%;
           flex: 0 0 100%;
@@ -201,6 +214,28 @@
 .custom-dialog {
   border-radius: 36px;
 }
+.satisfiedCalls {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  @include media(sm) {
+    margin-bottom: 20px;
+    justify-content: center;
+  }
+  svg {
+    width: auto;
+    height: auto;
+    margin-bottom: 4px;
+  }
+  p {
+    margin: 0;
+  }
+  span {
+    font-size: 18px;
+    color: #1ad0c1;
+    font-weight: 500;
+  }
+}
 </style>
 <template>
   <section id="doctor-info">
@@ -209,44 +244,35 @@
       <v-layout row wrap>
         <v-flex xs12 md3>
           <div class="image-wrapper">
+            <span class="availability" :class="doctor.currentlyAvailable ? 'active' : 'deactive'">
+              ({{
+              doctor.currentlyAvailable
+              ? "در دسترس"
+              : "خارج از ساعت پاسخگویی"
+              }})
+            </span>
             <div class="image">
               <div class="status">
                 <component :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"></component>
               </div>
-              <img
-                v-if="doctor.imagePath"
-                v-lazy="'https://webapi.resaa.net/' + doctor.imagePath"
-                :alt="
-                  `تصویر ${doctor.title || ''} ${doctor.firstName} ${
-                    doctor.lastName
-                  }`
-                "
-              />
-              <img
-                v-else
-                src="/img/doc-placeholder.png"
-                :alt="
-                  `تصویر ${doctor.title || ''} ${doctor.firstName} ${
-                    doctor.lastName
-                  }`
-                "
-              />
+              <doctorImage :doctor="doctor" lazy size="2" />
             </div>
-            <div v-scroll-to="{ el: '#call-section', offset: -80 }" class="doctor-id r-display-2">
+
+            <div v-scroll-to="{ el: '#call-section', offset: -80 }" class="doctor-id r-display-3">
               <img src="~assets/img/doctorFingerPrint.png" alt />
               کد رِسا:
               <div class="doctor-resaa-code">{{ doctor.subscriberNumber | persianDigit }}</div>
             </div>
           </div>
         </v-flex>
-        <v-flex xs12 md5 pl-3>
+        <v-flex xs12 md5>
           <div class="name-wrapper">
-            <div>
+            <div class="doctor-name">
               <h1>
                 {{ doctor.title }} {{ doctor.firstName }}
                 {{ doctor.lastName }}
               </h1>
-              <span
+              <!-- <span
                 class="availability hide-md"
                 :class="doctor.currentlyAvailable ? 'active' : 'deactive'"
               >
@@ -255,32 +281,39 @@
                 ? "در دسترس"
                 : "خارج از ساعت پاسخگویی"
                 }})
-              </span>
+              </span>-->
             </div>
-            <p v-if="doctor.specialtyTitle" class="specialty r-display-2">
-              تخصص:
+            <p v-if="doctor.specialtyTitle" class="specialty r-display-3">
+              <strong v-if="doctor.expertise != ' '">{{doctor.expertise}} ،</strong>
               <strong>{{ doctor.specialtyTitle }}</strong>
             </p>
-            <span
-              class="availability hide-md-and-up"
-              :class="doctor.currentlyAvailable ? 'active' : 'deactive'"
-            >
-              ({{
-              doctor.currentlyAvailable
-              ? "در دسترس"
-              : "خارج از ساعت پاسخگویی"
-              }})
-            </span>
+
             <div class="specialty-area-container">
+              <!-- v-if="doctor.satisfiedCalls> 50" -->
+              <div class="satisfiedCalls hide-md-and-up">
+                <p>
+                  <span>{{ doctor.satisfiedCalls | callConvert | persianDigit }}</span>
+                  جلسه رضایت بخش
+                </p>
+              </div>
               <h2 class="title">سوابق حرفه ای پزشک :</h2>
               <transition-group name="fade" tag="ul" mode="out-in">
                 <!-- <li
                 class="specialty-area"
                 >کد نظام پزشکی: {{doctor.medicalCouncilNumber || '-' | persianDigit}}</li>-->
                 <li
+                  v-if="doctor.medicalCouncilNumber && doctor.medicalCouncilNumber != '0000'"
+                  class="specialty-area"
+                  :key="doctor.medicalCouncilNumber"
+                >
+                  <p>
+                    <strong>کد نظام پزشکی: {{ doctor.medicalCouncilNumber | persianDigit }}</strong>
+                  </p>
+                </li>
+                <li
                   v-for="(tag,i) in toBeShown"
                   :key="tag"
-                  :class="{'low-opacity':!show_more&& i ==4}"
+                  :class="{'low-opacity':!show_more && doctor.aboutDoctor.length > 5 && i ==4}"
                   class="specialty-area"
                 >
                   <p>{{ tag }}</p>
@@ -319,7 +352,14 @@
             </div>
           </div>
         </v-flex>
-        <v-flex xs12 md4 pr-3>
+        <v-flex xs12 md4>
+          <!-- v-if="doctor.satisfiedCalls> 50" -->
+          <div class="satisfiedCalls hide-md">
+            <p>
+              <span>{{ doctor.satisfiedCalls | callConvert | persianDigit }}</span>
+              جلسه رضایت بخش
+            </p>
+          </div>
           <div class="fields-activity-wrapper">
             <h2 class="title">زمینه های فعالیت :</h2>
             <ul>
@@ -381,6 +421,30 @@ import resaaElement from "~/assets/svg/element.svg?inline";
 export default {
   props: { doctor: {} },
   components: { Available, NotAvailable, resaaElement },
+  filters: {
+    callConvert: val => {
+      if (val < 100) {
+        return "50+";
+      }
+      if (val < 200) {
+        return "100+";
+      }
+      if (val < 500) {
+        return "200+";
+      }
+      if (val < 1000) {
+        return "500+";
+      }
+      if (val < 2000) {
+        return "1000+";
+      }
+      if (val < 5000) {
+        return "2000+";
+      } else {
+        return "5000+";
+      }
+    }
+  },
   data() {
     return {
       dialog: false,

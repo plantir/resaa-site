@@ -43,6 +43,10 @@
     flex: 1;
     text-align: right;
     margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 18px;
     @include media(sm) {
       margin-right: 0;
       width: 100%;
@@ -64,7 +68,10 @@
       font-size: 16px;
       color: #9f9f9f;
       font-weight: 500;
-      margin-bottom: 20px;
+      margin-bottom: 4px;
+      + .doctor-speciality {
+        margin-bottom: 20px;
+      }
       @include media(sm) {
         text-align: center;
         font-weight: normal;
@@ -78,6 +85,7 @@
       @include media(sm) {
         display: flex;
         justify-content: space-between;
+        margin-top: 16px;
         span {
           display: flex;
           + span {
@@ -129,6 +137,7 @@
       min-width: 160px;
       min-height: 36px;
       font-size: 13px;
+      margin-top: 10px;
       background: linear-gradient(to left, #0ec7e6, #28db9a);
       font-weight: 500;
     }
@@ -149,28 +158,25 @@
       <div class="status">
         <component :is="doctor.currentlyAvailable ? 'Available' : 'NotAvailable'"></component>
       </div>
-      <img
-        v-if="doctor.imagePath"
-        :key="doctor.subscriberNumber"
-        v-lazy="'https://webapi.resaa.net/' + doctor.imagePath"
-        :alt="`تصویر ${doctor.fullNameWithTitle}`"
-      />
-      <img v-else src="/img/doc-placeholder.png" :alt="`تصویر ${doctor.fullNameWithTitle}`" />
+      <doctorImage :doctor="doctor" size="2" lazy />
     </nuxt-link>
     <div class="name">
-      <h3>
-        <nuxt-link
-          :to="
+      <div>
+        <h3>
+          <nuxt-link
+            :to="
             `/doctors/${doctor.specialtyEnglishTitle.toLowerCase().replace(/ /g, '-')}/${
               doctor.subscriberNumber
             }`
           "
-          class="doctor-name"
-        >{{ doctor.fullNameWithTitle }}</nuxt-link>
-      </h3>
-      <p class="doctor-speciality">
-        <strong>{{ doctor.specialtyTitle }}</strong>
-      </p>
+            class="doctor-name"
+          >{{ doctor.fullNameWithTitle }}</nuxt-link>
+        </h3>
+        <p class="doctor-speciality">
+          <strong v-if="doctor.expertise != ' '">{{ doctor.expertise }} ،</strong>
+          <strong>{{ doctor.specialtyTitle }}</strong>
+        </p>
+      </div>
       <div class="doctor-tags">
         <p>
           <span v-for="(tag, index) in doctor.aboutDoctor.slice(0, 3)" :key="tag.id">

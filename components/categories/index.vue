@@ -68,8 +68,53 @@
   color: #707070;
   font-weight: 500;
   margin-bottom: 4px;
+  margin-left: 20px;
   @include media(sm) {
     text-align: center;
+  }
+}
+.guide {
+  display: flex;
+  align-items: center;
+  // width: 300px;
+  max-width: 100%;
+  // padding: 0 20px;
+  .available {
+    color: #43e7a5;
+  }
+  .not-available {
+    color: #febe10;
+    margin-right: 16px;
+  }
+  @include media(sm) {
+    margin-bottom: 16px;
+    justify-content: center;
+  }
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #a3a3a3;
+    @include media(sm) {
+      // font-size: 16px;
+    }
+    svg {
+      margin-left: 12px;
+      width: 25px;
+      height: 25px;
+      @include media(sm) {
+        width: 25px;
+        height: 25px;
+      }
+    }
+    + div {
+      // margin-right: 60px;
+      @include media(sm) {
+        // margin-right: 0px;
+        // margin-top: 12px;
+      }
+    }
   }
 }
 .card-subtitle {
@@ -94,6 +139,10 @@
     padding: 30px 16px;
   }
 }
+.card-header {
+  display: flex;
+  justify-content: space-between;
+}
 .comments-wrapper {
   background: #fff;
   padding: 30px 0;
@@ -107,7 +156,7 @@
 }
 </style>
 <template>
-  <section>
+  <section ref="wrapper">
     <div class="header">
       <img
         v-if="$device.isDesktop"
@@ -134,11 +183,29 @@
           <nuxt-link :to="$route.fullPath">{{ category.title }}</nuxt-link>
         </div>
         <div class="card">
-          <h2 class="card-title">لیست متخصصین {{ category.title }}</h2>
+          <div class="card-header">
+            <h2 class="card-title">لیست متخصصین {{ category.title }}</h2>
+            <div class="guide hide-md">
+              <div class="available">
+                <Available />در دسترس
+              </div>
+              <div class="not-available">
+                <NotAvailable />خارج از ساعت پاسخگویی
+              </div>
+            </div>
+          </div>
           <p class="card-subtitle">
             می توانید در این بخش لیست {{ category.title }} سامانه رسا را مشاهده
             کنید و مشاور مورد نظر خود را انتخاب کنید.
           </p>
+          <div class="guide hide-md-and-up">
+            <div class="available">
+              <Available />در دسترس
+            </div>
+            <div class="not-available">
+              <NotAvailable />خارج از ساعت پاسخگویی
+            </div>
+          </div>
           <div
             class="item"
             v-for="doctor in related_doctors.slice(0, 3)"
@@ -192,9 +259,20 @@ import Doctor from "@/components/categories/doctor";
 import Comments from "@/components/categories/comments";
 import Description from "@/components/categories/description";
 import Guide from "@/components/specialities/guide";
+import Available from "~/assets/svg/Available.svg?inline";
+import NotAvailable from "~/assets/svg/NotAvailable.svg?inline";
+
 export default {
-  components: { Wave, Doctor, Guide, Comments, Description },
-  props: ["category", "related_doctors", "limit", "totalItems"],
+  components: {
+    Wave,
+    Doctor,
+    Guide,
+    Comments,
+    Description,
+    Available,
+    NotAvailable
+  },
+  props: ["category", "related_doctors", "limit", "totalItems", "requestId"],
   data() {
     return {
       text_array: [
@@ -223,13 +301,23 @@ export default {
   },
   methods: {
     async changePage(page) {
+      let loader = this.$loader.show(this.$refs.wrapper);
       this.page = page;
       try {
         let { result } = await this.$axios.$get(
-          `categories/${this.category.id}/RelatedDoctors?limit=${this.limit}&offset=${this.offset}`
+          `categories/${this.category.id}/RelatedDoctors`,
+          {
+            params: {
+              limit: this.limit,
+              offset: this.offset,
+              requestId: this.requestId
+            }
+          }
         );
         this.related_doctors = result.relatedDoctors;
+        this.$scrollTo(this.$refs.wrapper, 1000);
       } catch (error) {}
+      loader.hide();
     }
   },
   computed: {

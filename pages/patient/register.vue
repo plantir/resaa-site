@@ -126,6 +126,7 @@ export default {
     },
     async register() {
       try {
+        this.user.loginOrigin = localStorage.getItem("referrer");
         let { result } = await this.$axios.$post(
           "/Patients/Registration",
           this.user

@@ -237,8 +237,9 @@ export default {
     },
     async register() {
       try {
+        this.user.loginOrigin = localStorage.getItem("referrer");
         let res = await this.$axios.post("/Patients/Registration", this.user);
-        // this.user.registrationToken = res.data.result.registrationToken.value;
+        this.user.registrationToken = res.data.result.registrationToken.value;
         this.new_user = true;
         this.step = 2;
       } catch (error) {
@@ -287,7 +288,8 @@ export default {
           }, 1000);
         }
       } catch (error) {
-        this.errorMessage = "خطایی رخ داده است لطفا بعدا امتحان کنید";
+        this.errorMessage =
+          "ار ارسال اس ام اس قبلی شما هنوز ۲ دقیقه نگذشته است";
       }
     },
     async login() {

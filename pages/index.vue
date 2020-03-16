@@ -529,6 +529,7 @@ export default {
       }
     };
   },
+
   methods: {
     activateMenu: function() {
       this.menuActive = !this.menuActive;

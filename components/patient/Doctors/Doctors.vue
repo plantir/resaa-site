@@ -1,5 +1,5 @@
 <style lang="scss">
-#doctors {
+#patient-doctors {
   .doctors-section-patients-container {
     background-color: white;
   }
@@ -302,7 +302,7 @@
 </style>
 
 <template>
-  <div class="doctors-section-patients-container" id="doctors">
+  <div class="doctors-section-patients-container" id="patient-doctors">
     <h2 class="doctors-title">پزشکان رِسا</h2>
     <p class="doctors-description">پزشک مورد نظر خود را اینجا پیدا کنید</p>
     <div class="doctors-info-container">
@@ -337,15 +337,14 @@
               <div class="doctors-item-info">
                 <div class="item-right-section">
                   <div class="item-avatar">
-                    <img
-                      v-if="doctor.imagePath"
-                      :src="'https://webapi.resaa.net/' + doctor.imagePath"
-                      alt
-                    />
-                    <img v-else src="/img/doc-placeholder.png" alt="پزشکان سامانه رسا" />
+                    <doctorImage :doctor="doctor" lazy />
                   </div>
                   <div class="item-right-sub-section">
                     <div class="item-doctor-name">{{ doctor.firstName }} {{ doctor.lastName }}</div>
+                    <div
+                      v-if="doctor.expertise != ' '"
+                      class="item-doctor-specialty"
+                    >{{ doctor.expertise }}</div>
                     <div
                       v-if="doctor.specialty"
                       class="item-doctor-specialty"
@@ -421,7 +420,8 @@ export default {
         url: "Doctors?name={name}&fields={fields}&limit={limit}&offset={offset}"
       }
     };
-    this.fields = "id,specialty,subscriberNumber,firstName,lastName,imagePath";
+    this.fields =
+      "id,specialty,subscriberNumber,firstName,lastName,imagePath,expertise";
   },
   mounted() {
     this.getDoctors();

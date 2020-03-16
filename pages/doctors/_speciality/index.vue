@@ -4,6 +4,7 @@
     :related_doctors="related_doctors"
     :limit="limit"
     :totalItems="totalItems"
+    :requestId="requestId"
   />
 </template>
 <script>
@@ -46,7 +47,7 @@ export default {
     };
   },
   async asyncData(ctx) {
-    let category, related_doctors;
+    let category, related_doctors, requestId;
     let limit = 6;
     let totalItems = 0;
     let category_id = ctx.store.state.category.relation[ctx.params.speciality];
@@ -59,15 +60,23 @@ export default {
     } catch (error) {}
     try {
       let { result } = await ctx.$axios.$get(
-        `categories/${category_id}/RelatedDoctors?limit=${limit}`
+        `categories/${category_id}/RelatedDoctors`,
+        {
+          params: {
+            limit: limit,
+            offset: 0
+          }
+        }
       );
       related_doctors = result.relatedDoctors;
-      totalItems = result.doctorsTotalCount;
+      totalItems = result.relatedDoctorsTotalCount;
+      requestId = result.requestId;
     } catch (error) {}
     return {
       title: category.title,
       description: `دریافت ${category.title} فقط در سامانه رسا، با کمترین هزینه، بدون دریافت نوبت، بدون رفت و آمد، بدون انتظار و با بهترین مشاوران`,
       limit,
+      requestId,
       totalItems,
       related_doctors: related_doctors,
       category: category,

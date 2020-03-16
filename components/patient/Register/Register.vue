@@ -197,6 +197,7 @@ export default {
       this.$refs.invisibleRecaptcha.execute();
     },
     register() {
+      this.user.loginOrigin = localStorage.getItem("referrer");
       this.$axios
         .post("/Patients/Registration", this.user)
         .then(response => {
