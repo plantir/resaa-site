@@ -75,9 +75,8 @@
 }
 .guide {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 300px;
+  // width: 300px;
   max-width: 100%;
   // padding: 0 20px;
   .available {
@@ -85,9 +84,11 @@
   }
   .not-available {
     color: #febe10;
+    margin-right: 16px;
   }
   @include media(sm) {
     margin-bottom: 16px;
+    justify-content: center;
   }
   > div {
     display: flex;
@@ -96,7 +97,7 @@
     font-size: 14px;
     color: #a3a3a3;
     @include media(sm) {
-      font-size: 16px;
+      // font-size: 16px;
     }
     svg {
       margin-left: 12px;
@@ -140,6 +141,7 @@
 }
 .card-header {
   display: flex;
+  justify-content: space-between;
 }
 .comments-wrapper {
   background: #fff;
@@ -188,7 +190,7 @@
                 <Available />در دسترس
               </div>
               <div class="not-available">
-                <NotAvailable />عدم دسترسی
+                <NotAvailable />خارج از ساعت پاسخگویی
               </div>
             </div>
           </div>
@@ -201,7 +203,7 @@
               <Available />در دسترس
             </div>
             <div class="not-available">
-              <NotAvailable />عدم دسترسی
+              <NotAvailable />خارج از ساعت پاسخگویی
             </div>
           </div>
           <div

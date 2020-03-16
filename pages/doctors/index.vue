@@ -67,12 +67,17 @@
     text-align: center;
     color: $dark-blue-grey;
     margin-bottom: 50px;
+    @include respond-to(sm) {
+      margin-bottom: 20px;
+    }
   }
 
   .doctors-info-container {
     text-align: center;
     @include respond-to(lg) {
       flex-direction: column;
+    }
+    @include media(sm) {
     }
   }
 
@@ -142,6 +147,7 @@
 
   .doctors-item-info {
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -170,12 +176,14 @@
       width: 50%;
       flex: 0 0 50%;
     }
+    a {
+      height: 100%;
+    }
     &:hover {
       .item-doctor-name {
         color: #0095e2;
       }
     }
-
     &:last-child {
       margin-bottom: 0;
     }
@@ -216,13 +224,15 @@
     font-size: 0.875rem;
     font-weight: 400;
     text-align: right;
+    color: #777590;
+    display: flex;
     @include respond-to(sm) {
-      text-align: center;
+      flex-direction: column;
+      align-items: center;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       padding: 0 4px;
-      text-align: center;
     }
   }
 
@@ -457,14 +467,13 @@
                       </div>
                       <div class="item-right-sub-section">
                         <div class="item-doctor-name">{{ doctor.firstName }} {{ doctor.lastName }}</div>
-                        <div
-                          v-if="doctor.expertise && doctor.expertise != doctor.specialty.title"
-                          class="item-doctor-specialty"
-                        >{{ doctor.expertise }}</div>
-                        <div
-                          v-if="doctor.specialty"
-                          class="item-doctor-specialty"
-                        >{{ doctor.specialty.title }}</div>
+                        <div v-if="doctor.specialty" class="item-doctor-specialty">
+                          <strong v-if="doctor.expertise != ' '">
+                            {{ doctor.expertise }}
+                            <span class="hide-md">،</span>
+                          </strong>
+                          <strong>{{ doctor.specialty.title }}</strong>
+                        </div>
                         <div v-if="doctor.tags" class="item-doctor-tags">
                           <div
                             v-for="tag in doctor.tags"

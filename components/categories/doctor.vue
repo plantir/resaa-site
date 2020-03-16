@@ -43,6 +43,10 @@
     flex: 1;
     text-align: right;
     margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 18px;
     @include media(sm) {
       margin-right: 0;
       width: 100%;
@@ -81,6 +85,7 @@
       @include media(sm) {
         display: flex;
         justify-content: space-between;
+        margin-top: 16px;
         span {
           display: flex;
           + span {
@@ -132,6 +137,7 @@
       min-width: 160px;
       min-height: 36px;
       font-size: 13px;
+      margin-top: 10px;
       background: linear-gradient(to left, #0ec7e6, #28db9a);
       font-weight: 500;
     }
@@ -155,22 +161,22 @@
       <doctorImage :doctor="doctor" size="2" lazy />
     </nuxt-link>
     <div class="name">
-      <h3>
-        <nuxt-link
-          :to="
+      <div>
+        <h3>
+          <nuxt-link
+            :to="
             `/doctors/${doctor.specialtyEnglishTitle.toLowerCase().replace(/ /g, '-')}/${
               doctor.subscriberNumber
             }`
           "
-          class="doctor-name"
-        >{{ doctor.fullNameWithTitle }}</nuxt-link>
-      </h3>
-      <p v-if="doctor.expertise" class="doctor-speciality">
-        <strong>{{ doctor.expertise }}</strong>
-      </p>
-      <p class="doctor-speciality">
-        <strong>{{ doctor.specialtyTitle }}</strong>
-      </p>
+            class="doctor-name"
+          >{{ doctor.fullNameWithTitle }}</nuxt-link>
+        </h3>
+        <p class="doctor-speciality">
+          <strong v-if="doctor.expertise != ' '">{{ doctor.expertise }} ،</strong>
+          <strong>{{ doctor.specialtyTitle }}</strong>
+        </p>
+      </div>
       <div class="doctor-tags">
         <p>
           <span v-for="(tag, index) in doctor.aboutDoctor.slice(0, 3)" :key="tag.id">

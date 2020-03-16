@@ -127,7 +127,7 @@ section#sameDoctorSlider {
           <v-icon small class="available">done</v-icon>در دسترس
         </div>
         <div>
-          <v-icon small class="not-available">remove</v-icon>عدم دسترسی
+          <v-icon small class="not-available">remove</v-icon>خارج از ساعت پاسخگویی
         </div>
       </div>
     </div>
@@ -135,7 +135,7 @@ section#sameDoctorSlider {
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="(comment, index) in 10" :key="index">
           <div class="image">
-            <img src="/img/doc-placeholder.png" alt>
+            <img src="/img/doc-placeholder.png" alt />
             <v-icon small class="available" v-if="index%2==0">done</v-icon>
             <v-icon small class="not-available" v-else>remove</v-icon>
           </div>
