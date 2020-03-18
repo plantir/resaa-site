@@ -20,9 +20,8 @@ export const mutations = {
   }
 };
 export const actions = {
-  async nuxtServerInit({ dispatch, state }, { req, $axios, $storage }) {
-    console.log("object");
-    if (process.server && process.env.NODE_ENV !== "development") {
+  async nuxtServerInit({ dispatch, state }, { req, route, $axios, $storage }) {
+    if (process.server) {
       let ip =
         req.connection.remoteAddress ||
         req.socket.remoteAddress || // socket is an alias to connection, just delete this line
@@ -39,6 +38,9 @@ export const actions = {
       } catch (error) {
         console.log(error);
       }
+    }
+    if (route.query.utm_campaign == "corona_amum") {
+      state.is_corona_amum = true;
     }
     let referrer = $storage.getUniversal("referrer");
     if (referrer && referrer.includes("corona_amum")) {
