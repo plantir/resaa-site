@@ -242,10 +242,18 @@ export default {
         this.user.registrationToken = res.data.result.registrationToken.value;
         this.new_user = true;
         this.step = 2;
+        this.$gtm.push({
+          event: "userRegister",
+          mobile: this.user.phoneNumber
+        });
       } catch (error) {
         if (error.response.data.code == 409) {
           this.new_user = false;
           this.step = 2;
+          this.$gtm.push({
+            event: "userLogin",
+            mobile: this.user.phoneNumber
+          });
         } else {
         }
       }

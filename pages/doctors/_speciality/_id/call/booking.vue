@@ -388,9 +388,17 @@ export default {
             this.status = "success";
             this.charge.amount = chargeDenomination.amount;
             this.charge.trackingNumber = trackingNumber;
+            this.$gtm.push({
+              event: "SuccessfullPayment",
+              PaymentAmount: chargeDenomination.amount
+            });
           } else {
             this.status = "fail";
             this.charge.trackingNumber = trackingNumber;
+            this.$gtm.push({
+              event: "FailedPayment",
+              FailedPaymentAmount: chargeDenomination.amount
+            });
           }
         } catch (error) {}
       }
