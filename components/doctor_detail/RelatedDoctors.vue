@@ -165,7 +165,10 @@ section {
               <doctorImage :doctor="doctor" size="2" lazy />
             </div>
             <h3 class="name">{{ doctor.fullNameWithTitle }}</h3>
-            <p class="speciality" v-if="doctor.expertise != ' '">{{ doctor.expertise }}</p>
+            <p
+              class="speciality"
+              v-if="doctor.expertise && doctor.expertise != ' '"
+            >{{ doctor.expertise }}</p>
             <p class="speciality">متخصص {{ doctor.specialtyTitle }}</p>
             <div class="code">
               <span>کد رسا:</span>

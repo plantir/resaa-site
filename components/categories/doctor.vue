@@ -173,7 +173,7 @@
           >{{ doctor.fullNameWithTitle }}</nuxt-link>
         </h3>
         <p class="doctor-speciality">
-          <strong v-if="doctor.expertise != ' '">{{ doctor.expertise }} ،</strong>
+          <strong v-if="doctor.expertise && doctor.expertise != ' '">{{ doctor.expertise }} ،</strong>
           <strong>{{ doctor.specialtyTitle }}</strong>
         </p>
       </div>
