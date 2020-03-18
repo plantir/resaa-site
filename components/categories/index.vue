@@ -166,14 +166,14 @@
       />
       <img v-else :src="'/api/' + category.mobileBackgroundImagePath" :alt="category.title" />
       <h1>{{ category.title }}</h1>
-      <transition v-if="$route.params.id == 1144" name="fade" mode="out-in">
+      <span v-if="$route.params.id == 1144">تماس اول رایگان</span>
+      <transition v-else name="fade" mode="out-in">
         <span :key="text_array[header_text]">
           {{
           text_array[header_text]
           }}
         </span>
       </transition>
-      <span v-else>تماس اول رایگان</span>
     </div>
     <v-container class="py-0">
       <div class="custom-container">
