@@ -436,7 +436,7 @@
                 class="navigation-bar-item"
               >مشاوره روانشناسی</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="!is_corona_amum">
               <router-link
                 @click.native="closeNav"
                 to="/categories/medical-consultation-for-coronavirus/1141"
@@ -607,10 +607,16 @@ export default {
           name: "مشاوره روانشناسی",
           path: "/doctors/psychology"
         },
-        {
-          name: "مشاوره کرونا",
-          path: "/categories/medical-consultation-for-coronavirus/1141"
-        },
+        [
+          ...(this.is_corona_amum
+            ? []
+            : [
+                {
+                  name: "مشاوره کرونا",
+                  path: "/categories/medical-consultation-for-coronavirus/1141"
+                }
+              ])
+        ],
         {
           name: "سوالات متداول",
           path: { name: "faq" }
@@ -662,6 +668,15 @@ export default {
   computed: {
     user() {
       return this.$store.state.patient.user;
+    },
+    is_corona_amum() {
+      if (process.browser) {
+        let referrer = localStorage.getItem("referrer");
+        if (referrer && referrer.includes("corona_amum")) {
+          return true;
+        }
+        return false;
+      }
     }
   }
 };
