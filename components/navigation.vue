@@ -194,13 +194,11 @@ export default {
       return this.$store.state.patient.user;
     },
     is_corona_amum() {
-      if (process.browser) {
-        let referrer = localStorage.getItem("referrer");
-        if (referrer && referrer.includes("corona_amum")) {
-          return true;
-        }
-        return false;
+      if (process.server) {
+        let referrer = this.$storage.getUniversal("referrer");
+        return referrer && referrer.includes("corona_amum");
       }
+      return this.$store.state.is_corona_amum;
     }
   }
 };

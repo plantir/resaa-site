@@ -158,22 +158,22 @@
 <template>
   <section ref="wrapper">
     <div class="header">
-      <!-- :src="'/api/' + category.backgroundImagePath" -->
+      <!--  -->
       <img
         v-if="$device.isDesktop"
-        src="https://resaa.net/api/Categories/1144/BackgroundImage"
+        :src="'/api/' + category.backgroundImagePath"
         :alt="category.title"
       />
       <img v-else :src="'/api/' + category.mobileBackgroundImagePath" :alt="category.title" />
       <h1>{{ category.title }}</h1>
-      <transition v-if="1==2" name="fade" mode="out-in">
+      <span v-if="$route.params.id == 1144">تماس اول رایگان</span>
+      <transition v-else name="fade" mode="out-in">
         <span :key="text_array[header_text]">
           {{
           text_array[header_text]
           }}
         </span>
       </transition>
-      <span>تماس اول رایگان</span>
     </div>
     <v-container class="py-0">
       <div class="custom-container">

@@ -194,6 +194,7 @@ export default {
     "@nuxtjs/pwa",
     "@nuxtjs/vuetify",
     "@nuxtjs/style-resources",
+    "@nuxtjs/universal-storage",
     ["~/modules/nuxt-recaptcha"],
     [
       "~/modules/nuxt-validate",

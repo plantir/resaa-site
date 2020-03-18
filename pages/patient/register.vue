@@ -1,6 +1,7 @@
 <template>
   <v-container ref="wrapper">
     <v-loading v-if="ajaxLoading" mode="relative"></v-loading>
+
     <div v-if="step == 1" class="login-patient-container">
       <div class="section-title">ثبت نام</div>
       <div class="section-description">جهت دسترسی به خدمات برخط سامانه رِسا، لطفا ثبت نام کنید</div>
@@ -13,12 +14,14 @@
           @keyup.enter="onRegister"
         />
       </div>
-      <vue-recaptcha
-        ref="invisibleRecaptcha"
-        @verify="onVerify"
-        size="invisible"
-        :sitekey="sitekey"
-      ></vue-recaptcha>
+      <no-ssr>
+        <vue-recaptcha
+          ref="invisibleRecaptcha"
+          @verify="onVerify"
+          size="invisible"
+          :sitekey="sitekey"
+        ></vue-recaptcha>
+      </no-ssr>
       <div v-if="error" class="error-message">{{error}}</div>
       <button
         :disabled="error ||  !user.phoneNumber"
@@ -34,6 +37,7 @@
         <router-link :to="{name:'patient-login'}" class="sign-up-link">وارد شوید</router-link>
       </div>
     </div>
+
     <div v-if="step == 2" class="login-patient-container">
       <div class="section-title">ثبت نام</div>
       <div class="section-description">جهت دسترسی به خدمات برخط سامانه رِسا، لطفا ثبت نام کنید</div>

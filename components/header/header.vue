@@ -590,46 +590,7 @@ export default {
       isLanding: true,
       menuActive: false,
       show: false,
-      itemsList: [
-        {
-          name: "سامانه رسا",
-          path: { name: "index" }
-        },
-        {
-          name: "لیست پزشکان",
-          path: { name: "doctors" }
-        },
-        // {
-        //   name: "قوانین",
-        //   path: { name: "privacy" }
-        // },
-        {
-          name: "مشاوره روانشناسی",
-          path: "/doctors/psychology"
-        },
-        [
-          ...(this.is_corona_amum
-            ? []
-            : [
-                {
-                  name: "مشاوره کرونا",
-                  path: "/categories/medical-consultation-for-coronavirus/1141"
-                }
-              ])
-        ],
-        {
-          name: "سوالات متداول",
-          path: { name: "faq" }
-        },
-        {
-          name: "درباره رسا",
-          path: { name: "about" }
-        },
-        {
-          name: "تماس با ما",
-          path: { name: "contact-us" }
-        }
-      ]
+      itemsList: []
     };
   },
   created() {
@@ -650,6 +611,44 @@ export default {
       }
     };
     this.$store.commit("patient/initialize_user");
+    this.itemsList = [
+      {
+        name: "سامانه رسا",
+        path: { name: "index" }
+      },
+      {
+        name: "لیست پزشکان",
+        path: { name: "doctors" }
+      },
+      // {
+      //   name: "قوانین",
+      //   path: { name: "privacy" }
+      // },
+      {
+        name: "مشاوره روانشناسی",
+        path: "/doctors/psychology"
+      },
+      ...(this.is_corona_amum
+        ? []
+        : [
+            {
+              name: "مشاوره کرونا",
+              path: "/categories/medical-consultation-for-coronavirus/1141"
+            }
+          ]),
+      {
+        name: "سوالات متداول",
+        path: { name: "faq" }
+      },
+      {
+        name: "درباره رسا",
+        path: { name: "about" }
+      },
+      {
+        name: "تماس با ما",
+        path: { name: "contact-us" }
+      }
+    ];
   },
 
   methods: {
@@ -670,13 +669,11 @@ export default {
       return this.$store.state.patient.user;
     },
     is_corona_amum() {
-      if (process.browser) {
-        let referrer = localStorage.getItem("referrer");
-        if (referrer && referrer.includes("corona_amum")) {
-          return true;
-        }
-        return false;
+      if (process.server) {
+        let referrer = this.$storage.getUniversal("referrer");
+        return referrer && referrer.includes("corona_amum");
       }
+      return this.$store.state.is_corona_amum;
     }
   }
 };
