@@ -194,6 +194,10 @@ export default {
       return this.$store.state.patient.user;
     },
     is_corona_amum() {
+      if (process.server) {
+        let referrer = this.$storage.getUniversal("referrer");
+        return referrer && referrer.includes("corona_amum");
+      }
       return this.$store.state.is_corona_amum;
     }
   }

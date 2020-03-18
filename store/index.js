@@ -20,25 +20,32 @@ export const mutations = {
   }
 };
 export const actions = {
-  async nuxtServerInit({ dispatch, state }, { req, $axios }) {
-    try {
-      if (process.server) {
-        let ip =
-          req.connection.remoteAddress ||
-          req.socket.remoteAddress || // socket is an alias to connection, just delete this line
-          req.connection.socket.remoteAddress;
-        if (process.env.NODE_ENV == "development" && ip == "127.0.0.1") {
-          ip = "37.40.96.22";
-        }
+  async nuxtServerInit({ dispatch, state }, { req, $axios, $storage }) {
+    console.log("object");
+    if (process.server && process.env.NODE_ENV !== "development") {
+      let ip =
+        req.connection.remoteAddress ||
+        req.socket.remoteAddress || // socket is an alias to connection, just delete this line
+        req.connection.socket.remoteAddress;
+      if (process.env.NODE_ENV == "development" && ip == "127.0.0.1") {
+        ip = "37.40.96.22";
+      }
+      try {
         const Ip_location = await $axios.get(
           "https://api.ipgeolocation.io/ipgeo?apiKey=22c7c02d22334a3dbfa13318db2dd9bf&ip=" +
             ip
         );
         state.location = Ip_location.data.country_name;
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {}
+    }
+    let referrer = $storage.getUniversal("referrer");
+    if (referrer && referrer.includes("corona_amum")) {
+      state.is_corona_amum = true;
+    }
   },
-  async nuxtClientInit({ state }, { route }) {
+  async nuxtClientInit({ state }, { route, $storage }) {
     let referrer = document.referrer.includes(process.env.SITE_URL)
       ? ""
       : document.referrer;
@@ -46,10 +53,11 @@ export const actions = {
     if (query.utm_source || query.gclid) {
       referrer = route.fullPath.split("?")[1];
     }
-    debugger;
     if (referrer && referrer != "" && referrer != " ") {
+      $storage.setUniversal("referrer", referrer);
       localStorage.setItem("referrer", referrer);
     }
+    referrer = localStorage.getItem("referrer");
     if (referrer && referrer.includes("corona_amum")) {
       state.is_corona_amum = true;
     }
