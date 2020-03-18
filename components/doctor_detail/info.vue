@@ -284,7 +284,7 @@
               </span>-->
             </div>
             <p v-if="doctor.specialtyTitle" class="specialty r-display-3">
-              <strong v-if="doctor.expertise != ' '">{{doctor.expertise}} ،</strong>
+              <strong v-if="doctor.expertise && doctor.expertise != ' '">{{doctor.expertise}} ،</strong>
               <strong>{{ doctor.specialtyTitle }}</strong>
             </p>
 
