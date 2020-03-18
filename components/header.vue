@@ -157,7 +157,7 @@ section#header {
           <li class="nav-item">
             <router-link to="/doctors/psychology" class="navigation-bar-item">روانشناسی</router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="!is_corona_amum">
             <router-link
               to="/categories/medical-consultation-for-coronavirus/1141"
               class="navigation-bar-item"
@@ -226,6 +226,15 @@ export default {
     },
     showMenu() {
       return this.$store.state.showMenu;
+    },
+    is_corona_amum() {
+      if (process.browser) {
+        let referrer = localStorage.getItem("referrer");
+        if (referrer && referrer.includes("corona_amum")) {
+          return true;
+        }
+        return false;
+      }
     }
   }
 };
