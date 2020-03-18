@@ -607,16 +607,14 @@ export default {
           name: "مشاوره روانشناسی",
           path: "/doctors/psychology"
         },
-        [
-          ...(this.is_corona_amum
-            ? []
-            : [
-                {
-                  name: "مشاوره کرونا",
-                  path: "/categories/medical-consultation-for-coronavirus/1141"
-                }
-              ])
-        ],
+        ...(this.is_corona_amum
+          ? []
+          : [
+              {
+                name: "مشاوره کرونا",
+                path: "/categories/medical-consultation-for-coronavirus/1141"
+              }
+            ]),
         {
           name: "سوالات متداول",
           path: { name: "faq" }
@@ -677,6 +675,7 @@ export default {
         }
         return false;
       }
+      return false;
     }
   }
 };

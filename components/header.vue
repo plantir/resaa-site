@@ -235,6 +235,7 @@ export default {
         }
         return false;
       }
+      return false;
     }
   }
 };
