@@ -2,7 +2,8 @@ export const strict = false;
 export const state = () => ({
   sitekey: process.env.RECAPTCHA_SITEKEY,
   location: null,
-  showMenu: false
+  showMenu: false,
+  is_corona_amum: false
 });
 export const mutations = {
   toggleMenu(state) {
@@ -37,7 +38,7 @@ export const actions = {
       }
     } catch (error) {}
   },
-  async nuxtClientInit(state, { route }) {
+  async nuxtClientInit({ state }, { route }) {
     let referrer = document.referrer.includes(process.env.SITE_URL)
       ? ""
       : document.referrer;
@@ -45,8 +46,12 @@ export const actions = {
     if (query.utm_source || query.gclid) {
       referrer = route.fullPath.split("?")[1];
     }
+    debugger;
     if (referrer && referrer != "" && referrer != " ") {
       localStorage.setItem("referrer", referrer);
+    }
+    if (referrer && referrer.includes("corona_amum")) {
+      state.is_corona_amum = true;
     }
   }
 };

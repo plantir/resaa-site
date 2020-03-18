@@ -228,14 +228,7 @@ export default {
       return this.$store.state.showMenu;
     },
     is_corona_amum() {
-      if (process.browser) {
-        let referrer = localStorage.getItem("referrer");
-        if (referrer && referrer.includes("corona_amum")) {
-          return true;
-        }
-        return false;
-      }
-      return false;
+      return this.$store.state.is_corona_amum;
     }
   }
 };
