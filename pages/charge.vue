@@ -784,13 +784,10 @@ export default {
         if (this.$route.query.chat_id) {
           localStorage.setItem("chat_id", this.$route.query.chat_id);
         }
-        if (
-          this.$route.query.chargeId &&
-          this.$route.query.chargeId <= this.chargeMenuItems.length
-        ) {
-          this.selectedChargeItem = this.chargeMenuItems[
-            this.$route.query.chargeId
-          ];
+        if (this.$route.query.chargeId) {
+          this.selectedChargeItem = this.chargeMenuItems.find(
+            item => item.id == this.$route.query.chargeId
+          );
         } else {
           this.selectedChargeItem = this.chargeMenuItems[0];
         }
