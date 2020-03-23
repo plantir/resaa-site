@@ -45,7 +45,17 @@ export default {
           hid: "description",
           name: "description",
           content: this.description
-        }
+        },
+        ...(this.noIndex
+          ? [
+              {
+                hid: "robots",
+                name: "robots",
+                property: "robots",
+                content: "noindex"
+              }
+            ]
+          : [])
       ]
     };
   },
@@ -96,6 +106,7 @@ export default {
       related_doctors: related_doctors,
       category: category,
       requestId: requestId,
+      noIndex: ctx.params.id == 1144,
       main_schema: {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
