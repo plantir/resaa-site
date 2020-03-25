@@ -17,6 +17,9 @@ export const mutations = {
   },
   hideMenu(state) {
     state.showMenu = false;
+  },
+  corona_amum(state) {
+    state.is_corona_amum = true;
   }
 };
 export const actions = {
