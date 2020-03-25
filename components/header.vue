@@ -170,11 +170,14 @@ section#header {
             <router-link :to="{ name: 'faq' }" class="navigation-bar-item">سوالات متداول</router-link>
           </li>
           <li class="nav-item">
+            <router-link to="/doctors/landing" class="navigation-bar-item">ثبت نام پزشکان</router-link>
+          </li>
+          <!-- <li class="nav-item">
             <router-link :to="{ name: 'about' }" class="navigation-bar-item">درباره رسا</router-link>
           </li>
           <li class="nav-item">
             <router-link :to="{ name: 'contact-us' }" class="navigation-bar-item">تماس با ما</router-link>
-          </li>
+          </li>-->
         </ul>
         <div class="left-nav">
           <div class="support">

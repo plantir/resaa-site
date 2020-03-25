@@ -35,6 +35,11 @@ export default {
     appNavigation,
     appHeader,
     appFooter
+  },
+  mounted() {
+    if (this.$route.query.utm_campaign == "corona_amum") {
+      this.$store.commit("corona_amum");
+    }
   }
 };
 </script>

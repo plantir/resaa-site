@@ -236,6 +236,10 @@
     border-radius: 8px;
   }
 }
+.logo {
+  width: 100%;
+  height: 100%;
+}
 .copy-right {
   background-color: #3b4752;
   color: #a5abb6;
@@ -318,7 +322,8 @@
                 </p>
               </div>
               <div class="footer-logo">
-                <img v-lazy="logo_img" alt="سامانه رسا" />
+                <logo class="logo" />
+                <!-- <img v-lazy="logo_img" alt="سامانه رسا" /> -->
               </div>
             </div>
           </v-flex>
@@ -338,14 +343,14 @@
                       <li>
                         <router-link :to="{ name: 'doctors' }">لیست پزشکان</router-link>
                       </li>
-                      <li>
+                      <!-- <li>
                         <router-link :to="{ name: 'patient-landing' }">رسای بیماران</router-link>
                       </li>
                       <li>
                         <router-link
                           :to="{ name: 'patient-landing', hash: '#download' }"
                         >دریافت برنامه بیماران</router-link>
-                      </li>
+                      </li>-->
                     </ul>
                   </div>
                 </div>
@@ -481,7 +486,7 @@ import twitter from "~/assets/svg/twitter.svg?inline";
 import envelope from "~/assets/svg/envelope.svg?inline";
 import phone from "~/assets/svg/phone.svg?inline";
 import enamad_img from "./e-namad.png";
-import logo_img from "./logo.png";
+import logo from "~/assets/svg/logo_primary.svg?inline";
 import footer_img from "./footer_bg.png";
 import moment from "moment-jalaali";
 
@@ -492,13 +497,13 @@ export default {
     instagram,
     twitter,
     envelope,
-    phone
+    phone,
+    logo
   },
   data() {
     return {
       isPatient: true,
       enamad_img,
-      logo_img,
       footer_img
     };
   },

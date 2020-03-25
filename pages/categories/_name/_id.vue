@@ -134,7 +134,7 @@ export default {
             "@type": "ListItem",
             position: key + 1,
             item: {
-              "@id": `https://resaa.net/doctors/${doctor.specialtyEnglishTitle
+              url: `https://resaa.net/doctors/${doctor.specialtyEnglishTitle
                 .toLowerCase()
                 .replace(/ /g, "-")}/${doctor.subscriberNumber}`,
               name: `${doctor.fullNameWithTitle}`,

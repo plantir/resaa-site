@@ -453,6 +453,13 @@
             <li class="nav-item">
               <nuxt-link
                 @click.native="closeNav"
+                to="/doctors/landing"
+                class="navigation-bar-item"
+              >ثبت نام پزشکان</nuxt-link>
+            </li>
+            <!-- <li class="nav-item">
+              <nuxt-link
+                @click.native="closeNav"
                 :to="{ name: 'about' }"
                 class="navigation-bar-item"
               >درباره رسا</nuxt-link>
@@ -463,7 +470,7 @@
                 :to="{ name: 'contact-us' }"
                 class="navigation-bar-item"
               >تماس با ما</nuxt-link>
-            </li>
+            </li>-->
           </ul>
         </div>
       </div>
@@ -478,21 +485,13 @@
           v-if="!isLanding"
           class="navigation-bar-button"
         >افزایش اعتبار</nuxt-link>-->
-        <div v-if="isLanding !== true">
-          <nuxt-link
-            :to="{ name: 'charge' }"
-            v-if="isPatient === true"
-            class="navigation-bar-button"
-          >افزایش اعتبار</nuxt-link>
-          <nuxt-link
-            :to="{ name: 'charge' }"
-            v-if="isPatient === true"
-            class="navigation-bar-button-mini"
-          >
+        <div>
+          <nuxt-link :to="{ name: 'charge' }" class="navigation-bar-button">افزایش اعتبار</nuxt-link>
+          <nuxt-link :to="{ name: 'charge' }" class="navigation-bar-button-mini">
             <i class="fa fa-money"></i>
           </nuxt-link>
         </div>
-        <div v-else>
+        <!-- <div v-else>
           <nuxt-link
             :to="{ name: 'charge' }"
             v-if="isPatient === true"
@@ -517,7 +516,7 @@
           >
             <i class="fa fa-user"></i>
           </nuxt-link>
-        </div>
+        </div>-->
       </div>
       <div class="nav-main" :class="{ active: menuActive }">
         <div class="nav-main__content" :class="{ active: menuActive }">
@@ -641,13 +640,17 @@ export default {
         path: { name: "faq" }
       },
       {
-        name: "درباره رسا",
-        path: { name: "about" }
-      },
-      {
-        name: "تماس با ما",
-        path: { name: "contact-us" }
+        name: "ثبت نام پزشکان",
+        path: "/doctors/landing"
       }
+      // {
+      //   name: "درباره رسا",
+      //   path: { name: "about" }
+      // },
+      // {
+      //   name: "تماس با ما",
+      //   path: { name: "contact-us" }
+      // }
     ];
   },
 
