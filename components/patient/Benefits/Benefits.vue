@@ -2,7 +2,7 @@
   <div class="benefits-section-patient-container">
     <!-- <img class="benefits-section-patient-curve" src="./sec-2-bg@2x2.png" /> -->
     <h2 class="section-title" id="element">چرا مشاوره پزشکی در سامانه رسا؟</h2>
-    <p class="section-description">• مشاوره پزشکی رسا چه مزایایی دارد؟</p>
+    <p class="section-description">مشاوره پزشکی رسا چه مزایایی دارد؟</p>
     <div class="benefits-container">
       <div class="benefits-text">
         <h3 class="benefits-text-title">مزایای استفاده از سامانه رسا</h3>
