@@ -237,7 +237,7 @@
 
 <template>
   <div class="intro-section-patients-container">
-    <h1 class="intro-title">ارتباط تلفنی و مستقیم با پزشک</h1>
+    <h1 class="intro-title">مشاوره پزشکی تلفنی با بهترین متخصصان در سامانه رسا</h1>
     <p class="intro-description">با سـامانه رِسا از هـر جایی با پـزشـک خـود مـشـورت کنید</p>
     <div class="intro-buttons">
       <resaaButton id="introRegister" to="/patient/register">ثبت نام رایگان</resaaButton>
@@ -245,7 +245,7 @@
       <v-btn id="showVideo" color="white" outline round @click="openVideo">نمایش ویدئو</v-btn>
     </div>
     <div class="intro-patient-image">
-      <img src="./PAT.png" alt="ارتباط تلفنی و مستقیم با پزشک در سامانه رسا" />
+      <img src="./PAT.png" alt="مشاوره پزشکی تلفنی با بهترین متخصصان در سامانه رسا" />
       <div class="side-button left">
         <div v-scroll-to="{ el: '#download', offset: -50 }" class="side-button-text">
           <div class="side-button-sub-title">ارتباط با پزشکان</div>

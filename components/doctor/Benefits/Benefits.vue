@@ -137,10 +137,8 @@
 <template>
   <div class="benefits-section-container">
     <!-- <img class="benefits-section-doctor-curve" src="./sec-2-bg@2x2.png" /> -->
-    <div id="element" class="section-title">مزایای استفاده از رِسا</div>
-    <div class="section-description">
-      خدمات و مزایای سامانه رِسا برای پزشکان
-    </div>
+    <div id="element" class="section-title">چرا مشاوره پزشکی در سامانه رسا؟</div>
+    <div class="section-description">خدمات و مزایای سامانه رِسا برای پزشکان</div>
     <div class="benefits-cards">
       <div class="card">
         <img src="./young-doctor.png" />
@@ -159,8 +157,7 @@
             :to="{ name: 'doctors-register', query: { subscriptionPlan: 2 } }"
             class="card-button"
             round
-            >ثبت نام رایگان</v-btn
-          >
+          >ثبت نام رایگان</v-btn>
         </div>
       </div>
       <div class="card">
@@ -180,13 +177,13 @@
             :to="{ name: 'doctors-register', query: { subscriptionPlan: 1 } }"
             class="card-button"
             round
-            >ثبت نام رایگان</v-btn
-          >
+          >ثبت نام رایگان</v-btn>
         </div>
       </div>
     </div>
     <div class="doctor-suport mt-4">
-      شماره پشتیبانی پزشکان: <span>{{ "021-74471200" | persianDigit }}</span>
+      شماره پشتیبانی پزشکان:
+      <span>{{ "021-74471200" | persianDigit }}</span>
     </div>
   </div>
 </template>

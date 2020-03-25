@@ -154,6 +154,10 @@
     font-size: 21px;
   }
 }
+.subheading {
+  text-align: center;
+  color: #707070;
+}
 </style>
 <template>
   <section ref="wrapper">
@@ -207,6 +211,9 @@
             <div class="not-available">
               <NotAvailable />خارج از ساعت پاسخگویی
             </div>
+          </div>
+          <div v-if="$route.params.id == 1144" class="subheading my-4">
+            <strong>«شایان ذکر است تماس اول شما با پزشکان این صفحه رایگان بوده و مبالغ ذکر شده جهت تماس های بعدی است»</strong>
           </div>
           <div
             class="item"

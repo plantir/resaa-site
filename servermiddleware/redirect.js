@@ -30,6 +30,12 @@ module.exports = function(req, res, next) {
     });
     return res.end();
   }
+  if (req.url == "/patient/landing") {
+    res.writeHead(301, {
+      Location: "/"
+    });
+    return res.end();
+  }
   if (req.url != "/" && req.url != "/svg/" && req.url.endsWith("/")) {
     let url = req.url.replace(/.$/, "");
     res.writeHead(301, { Location: url });
