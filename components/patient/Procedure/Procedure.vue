@@ -15,7 +15,7 @@
     text-align: center;
     color: white;
     font-weight: 500;
-    font-size: 2.375rem;
+    font-size: 1.75rem;
     text-shadow: 0 1px 5px rgba(12, 108, 124, 0.35);
   }
 
@@ -165,7 +165,7 @@
 
 <template>
   <div class="procedure-section-patients-container">
-    <h2 class="procedure-title">روش دریافت مشاوره پزشکی در رسا</h2>
+    <h2 class="procedure-title">مراحل دریافت مشاوره پزشکی در رسا</h2>
     <p class="procedure-description">چطور با پزشک خود در ارتباط باشم؟</p>
     <div class="procedure-items-container">
       <div class="procedure-item item-odd">

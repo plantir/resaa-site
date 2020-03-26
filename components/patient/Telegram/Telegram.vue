@@ -28,7 +28,7 @@
 
 .telegram-title {
   color: #27d3df;
-  font-size: 2.375rem;
+  font-size: 1.75rem;
   font-weight: 500;
   margin-bottom: 20px;
 }

@@ -8,7 +8,7 @@
     padding-top: 60px;
     text-align: center;
     font-weight: 500;
-    font-size: 2.375rem;
+    font-size: 1.75rem;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -131,7 +131,7 @@
       margin-left: 0;
     }
     .fa {
-      font-size: 2.375rem;
+      font-size: 1.75rem;
       color: #c7c7cc;
       position: absolute;
       left: 6px;
