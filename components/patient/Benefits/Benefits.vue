@@ -75,7 +75,7 @@ export default {
   -webkit-text-fill-color: transparent;
   font-weight: 500;
   text-align: center;
-  font-size: 2.675rem;
+  font-size: 1.75rem;
   margin-bottom: 15px;
 }
 
@@ -223,7 +223,7 @@ export default {
   }
 
   .section-title {
-    font-size: 2.8rem;
+    font-size: 1.75rem;
   }
 
   .section-description {

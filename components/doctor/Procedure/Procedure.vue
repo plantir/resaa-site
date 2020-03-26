@@ -9,7 +9,7 @@
   text-align: center;
   color: white;
   font-weight: 500;
-  font-size: 2.375rem;
+  font-size: 1.75rem;
   text-shadow: 0 1px 5px rgba(12, 108, 124, 0.35);
 }
 
@@ -164,16 +164,11 @@
           <div class="item-description-title">ثبت نام رایگان در رِسا</div>
           <div class="item-description">
             - از طریق همین
-            <router-link
-              class="item-description-link"
-              :to="{ name: 'doctors-register' }"
-              >سایت</router-link
-            >و یا
+            <router-link class="item-description-link" :to="{ name: 'doctors-register' }">سایت</router-link>و یا
             <a
               v-scroll-to="{ el: '#download', offset: -50 }"
               class="item-description-link"
-              >اپلیکیشن رِسا</a
-            >
+            >اپلیکیشن رِسا</a>
             <br />می&#160;توانید اقدام به ثبت نام کنید.
           </div>
         </div>
@@ -195,15 +190,9 @@
           <div class="item-number">۳</div>
           <div class="item-description-title">براحتی گفتگو کنید</div>
           <div class="item-description-list">
-            <div class="item-description">
-              - با بیمار خود بصورت مستقیم گفتگو کنید.
-            </div>
-            <div class="item-description">
-              - هزینه تماس بصورت دقیقه ای محاسبه خواهد شد.
-            </div>
-            <div class="item-description">
-              گزارش کارکرد از طریق سایت و اپلیکیشن قابل مشاهده است.
-            </div>
+            <div class="item-description">- با بیمار خود بصورت مستقیم گفتگو کنید.</div>
+            <div class="item-description">- هزینه تماس بصورت دقیقه ای محاسبه خواهد شد.</div>
+            <div class="item-description">گزارش کارکرد از طریق سایت و اپلیکیشن قابل مشاهده است.</div>
           </div>
         </div>
         <img class="item-image" src="./Item3.png" />
@@ -216,16 +205,14 @@
         class="procedure-signup-button"
         :to="{ name: 'doctors-register' }"
         round
-        >ثبت نام رایگان</v-btn
-      >
+      >ثبت نام رایگان</v-btn>
       <v-btn
         class="procedure-download-button"
         v-scroll-to="{ el: '#download', offset: -50 }"
         color="white"
         outline
         round
-        >دریافت اپلیکیشن</v-btn
-      >
+      >دریافت اپلیکیشن</v-btn>
       <!-- <router-link ></router-link> -->
     </div>
   </div>

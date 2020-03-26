@@ -14,7 +14,7 @@
   text-align: center;
   color: white;
   font-weight: 500;
-  font-size: 2.375rem;
+  font-size: 1.75rem;
   text-shadow: 0 1px 5px rgba(12, 108, 124, 0.35);
 }
 
