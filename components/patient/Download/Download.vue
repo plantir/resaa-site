@@ -1,9 +1,7 @@
 <template>
   <div class="download-section-patient-container" id="download">
     <h2 class="section-title">دریافت اپلیکیشن رِسا</h2>
-    <p class="section-description">
-      سازگار با سیستم عامل های اندروید، IOS و ویندوز موبایل
-    </p>
+    <p class="section-description">سازگار با سیستم عامل های اندروید، IOS و ویندوز موبایل</p>
     <div class="image-wrapper">
       <img v-lazy="mockup_img" alt="دریافت اپلیکیشن سامانه رسا" />
     </div>
@@ -38,20 +36,14 @@
         </div>
         <div class="link" @click="openModal">
           <div class="link-icon">
-            <img
-              src="./cafebazar.png"
-              alt="دریافت اپلیکیشن رسا از کافه بازار"
-            />
+            <img src="./cafebazar.png" alt="دریافت اپلیکیشن رسا از کافه بازار" />
           </div>
           <div class="link-texts">
             <div class="link-provider-text">دانلود از</div>
             <div class="link-provider">کافه بازار</div>
           </div>
         </div>
-        <UnderDevelopment
-          v-if="show_modal"
-          @closeModal="closeModal"
-        ></UnderDevelopment>
+        <UnderDevelopment v-if="show_modal" @closeModal="closeModal"></UnderDevelopment>
       </div>
     </div>
   </div>
@@ -106,7 +98,7 @@ export default {
   background-image: linear-gradient(240deg, #3de0cb, #0dc9f0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 2.675rem;
+  font-size: 1.75rem;
   font-weight: 500;
   text-align: center;
   margin-bottom: 10px;

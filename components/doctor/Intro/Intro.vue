@@ -241,11 +241,10 @@
 <template>
   <div class="landing-section-doctors-intro">
     <div class="intro-title">معرفی خدمات به پزشکان رِسا</div>
-    <div class="intro-description">
-      پزشکان گرامی، براحتی تماس های دریافتی خود را مدیریت کنید.
-    </div>
+    <div class="intro-description">پزشکان گرامی، براحتی تماس های دریافتی خود را مدیریت کنید.</div>
     <div class="doctor-suport">
-      شماره پشتیبانی پزشکان: <span>{{ "021-74471200" | persianDigit }}</span>
+      شماره پشتیبانی پزشکان:
+      <span>{{ "021-74471200" | persianDigit }}</span>
     </div>
     <div class="intro-buttons">
       <v-btn
@@ -253,11 +252,8 @@
         color="yellow darken-2"
         :to="{ name: 'doctors-register' }"
         round
-        >ثبت نام رایگان</v-btn
-      >
-      <v-btn id="showVideo" color="white" outline round @click="openVideo"
-        >نمایش ویدئو</v-btn
-      >
+      >ثبت نام رایگان</v-btn>
+      <v-btn id="showVideo" color="white" outline round @click="openVideo">نمایش ویدئو</v-btn>
     </div>
     <div class="intro-doctor-image">
       <img src="./doc.png" />
@@ -284,10 +280,7 @@
         </div>
       </div>
     </div>
-    <div
-      class="next-section-button"
-      v-scroll-to="{ el: '#element', offset: -100 }"
-    >
+    <div class="next-section-button" v-scroll-to="{ el: '#element', offset: -100 }">
       <i class="fa fa-angle-down"></i>
     </div>
     <div class="bottom-curve">

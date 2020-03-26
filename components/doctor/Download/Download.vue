@@ -22,7 +22,7 @@
 
 .section-title {
   background-image: linear-gradient(240deg, #3de0cb, #0dc9f0);
-  font-size: 2.675rem;
+  font-size: 1.75rem;
   font-weight: 500;
   text-align: center;
   -webkit-background-clip: text;
@@ -112,7 +112,7 @@
 
 @media only screen and (max-width: 500px) {
   .section-title {
-    font-size: 2.8rem;
+    font-size: 1.75rem;
   }
 
   .section-description {

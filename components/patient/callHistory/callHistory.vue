@@ -60,7 +60,7 @@
 .section-title {
   color: $tealish;
   text-align: center;
-  font-size: 2.675rem;
+  font-size: 1.75rem;
   font-weight: 500;
   margin-bottom: 30px;
 }
