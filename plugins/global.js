@@ -42,3 +42,13 @@ Vue.filter("persianDate", (value, format, locale) => {
   }
   return moment(value, "YYYY-M-D HH:mm:ss").format(format || "jYYYY/jM/jD");
 });
+Vue.directive("fix-digit", {
+  bind: function(el, binding, vnode) {
+    el.addEventListener("input", function(val) {
+      let digit = val.target.value.replace(/[۰-۹]/g, w => {
+        return ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"].indexOf(w);
+      });
+      vnode.child.$emit("input", digit);
+    });
+  }
+});

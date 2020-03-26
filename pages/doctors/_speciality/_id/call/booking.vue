@@ -364,49 +364,46 @@ export default {
       this.credit = credit;
     } catch (error) {}
     try {
-      try {
-        let { result } = await this.$axios.$get(
-          `/Doctors/${this.$route.params.id}/profile`
-        );
-        this.doctor = result.doctor;
-      } catch (error) {}
+      let { result } = await this.$axios.$get(
+        `/Doctors/${this.$route.params.id}/profile`
+      );
+      this.doctor = result.doctor;
+    } catch (error) {}
+    try {
       let { result } = await this.$axios.$get(
         `/Doctors/${this.$route.params.id}/CommunicationQuote`
       );
       this.duration = result.quote.duration;
-      if (this.$route.query.chargeRequestId) {
-        try {
-          let { result } = await this.$axios.$get(
-            `/Charge/${this.$route.query.chargeRequestId}/Receipt`
-          );
-          let {
-            status,
-            trackingNumber,
-            chargeDenomination
-          } = result.chargeReceipt;
-          if (status === "Successful") {
-            this.status = "success";
-            this.charge.amount = chargeDenomination.amount;
-            this.charge.trackingNumber = trackingNumber;
-            this.$gtm.push({
-              event: "SuccessfullPayment",
-              PaymentAmount: chargeDenomination.amount
-            });
-          } else {
-            this.status = "fail";
-            this.charge.trackingNumber = trackingNumber;
-            this.$gtm.push({
-              event: "FailedPayment",
-              FailedPaymentAmount: chargeDenomination.amount
-            });
-          }
-        } catch (error) {}
-      }
-      this.ajaxLoading = false;
-    } catch (error) {
-      this.status = "fail";
-      this.ajaxLoading = false;
+    } catch (error) {}
+    if (this.$route.query.chargeRequestId) {
+      try {
+        let { result } = await this.$axios.$get(
+          `/Charge/${this.$route.query.chargeRequestId}/Receipt`
+        );
+        let {
+          status,
+          trackingNumber,
+          chargeDenomination
+        } = result.chargeReceipt;
+        if (status === "Successful") {
+          this.status = "success";
+          this.charge.amount = chargeDenomination.amount;
+          this.charge.trackingNumber = trackingNumber;
+          this.$gtm.push({
+            event: "SuccessfullPayment",
+            PaymentAmount: chargeDenomination.amount
+          });
+        } else {
+          this.status = "fail";
+          this.charge.trackingNumber = trackingNumber;
+          this.$gtm.push({
+            event: "FailedPayment",
+            FailedPaymentAmount: chargeDenomination.amount
+          });
+        }
+      } catch (error) {}
     }
+    this.ajaxLoading = false;
   },
   methods: {
     async reserveDoctor() {
