@@ -536,6 +536,7 @@
               name="mobile"
               :class="{ 'is-invalid': errors.has('mobile') }"
               prepend-inner-icon="fa-mobile"
+              v-fix-digit
               solo
               hide-details
             >
