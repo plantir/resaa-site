@@ -106,16 +106,19 @@ export default {
           return {
             "@type": "ListItem",
             position: key + 1,
-            item: {
-              url: `https://resaa.net/doctors/${doctor.specialtyEnglishTitle
-                .toLowerCase()
-                .replace(/ /g, "-")}/${doctor.subscriberNumber}`,
-              name: `${doctor.fullNameWithTitle}`,
-              image: {
-                "@type": "ImageObject",
-                url: `https://webapi.resaa.net/Doctors/${doctor.subscriberNumber}/Image`
-              }
-            }
+            url: `https://resaa.net/doctors/${doctor.specialtyEnglishTitle
+              .toLowerCase()
+              .replace(/ /g, "-")}/${doctor.subscriberNumber}`
+            // item: {
+            //   url: `https://resaa.net/doctors/${doctor.specialtyEnglishTitle
+            //     .toLowerCase()
+            //     .replace(/ /g, "-")}/${doctor.subscriberNumber}`,
+            //   name: `${doctor.fullNameWithTitle}`,
+            //   image: {
+            //     "@type": "ImageObject",
+            //     url: `https://webapi.resaa.net/Doctors/${doctor.subscriberNumber}/Image`
+            //   }
+            // }
           };
         })
       },
