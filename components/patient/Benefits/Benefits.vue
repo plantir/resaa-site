@@ -31,6 +31,14 @@
             round
           >ثبت نام رایگان</v-btn>-->
           <resaaButton id="benefitsRegister" theme="dark" to="/patient/register">ثبت نام رایگان</resaaButton>
+          <v-btn
+            class="benefits-download-button"
+            id="showVideo"
+            color="secondary"
+            outline
+            round
+            @click="$emit('openVideo')"
+          >نمایش ویدئو</v-btn>
           <!-- <v-btn
             class="benefits-download-button"
             v-scroll-to="{ el: '#download', offset: -50 , duration: 1500}"
