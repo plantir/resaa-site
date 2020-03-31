@@ -25,6 +25,7 @@
 }
 .theme--dark.v-navigation-drawer {
   background: linear-gradient(to bottom, #26d295, #0dbed9);
+  z-index: 1000;
 }
 .logo {
   position: relative;
@@ -71,6 +72,14 @@
     }
   }
 }
+.v-list {
+  flex: 1;
+  background: none;
+  .nav-main__list-item {
+    color: #fff;
+    font-size: 1.275rem;
+  }
+}
 .footer {
   display: flex;
   justify-content: space-between;
@@ -83,7 +92,7 @@
 </style>
 
 <template>
-  <v-navigation-drawer v-model="showMenu" app dark right temporary absolute>
+  <v-navigation-drawer height="100vh" v-model="showMenu" app dark right temporary absolute>
     <div class="logo">
       <Logo />
       <div>
@@ -91,67 +100,55 @@
         <span>ارتباط تلفنی پزشک و بیمار</span>
       </div>
     </div>
-    <ul class="nav-bar">
-      <li class="nav-item">
-        <router-link @click.native="closeNav" to="/" class="navigation-bar-item">سامانه رسا</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link
-          @click.native="closeNav"
-          :to="{ name: user ? 'patient-profile' : 'patient-login' }"
-          class="navigation-bar-item"
-        >حساب کاربری</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link
-          @click.native="closeNav"
-          :to="{ name: 'doctors' }"
-          class="navigation-bar-item"
-        >لیست پزشکان</router-link>
-      </li>
-      <!-- <li class="nav-item">
-        <router-link
-          @click.native="closeNav"
-          :to="{name:'privacy'}"
-          class="navigation-bar-item"
-        >قوانین</router-link>
-      </li>-->
-      <li class="nav-item">
-        <router-link
-          @click.native="closeNav"
-          to="/doctors/psychology"
-          class="navigation-bar-item"
-        >مشاوره روانشناسی</router-link>
-      </li>
-      <li class="nav-item" v-if="!is_corona_amum">
-        <router-link
-          @click.native="closeNav"
-          to="/categories/medical-consultation-for-coronavirus/1141"
-          class="navigation-bar-item"
-        >مشاوره کرونا</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link
-          @click.native="closeNav"
-          :to="{ name: 'faq' }"
-          class="navigation-bar-item"
-        >سوالات متداول</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link
-          @click.native="closeNav"
-          :to="{ name: 'about' }"
-          class="navigation-bar-item"
-        >درباره رسا</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link
-          @click.native="closeNav"
-          :to="{ name: 'contact-us' }"
-          class="navigation-bar-item"
-        >تماس با ما</router-link>
-      </li>
-    </ul>
+    <v-list>
+      <v-list-tile v-if="user">
+        <v-list-tile-content>
+          <nuxt-link
+            @click.native="closeNav"
+            class="nav-main__list-item"
+            :to="{ name: 'patient-profile' }"
+          >خوش اومدی {{ user.firstName }}</nuxt-link>
+        </v-list-tile-content>
+      </v-list-tile>
+      <v-list-tile v-else>
+        <v-list-tile-content>
+          <nuxt-link
+            @click.native="closeNav"
+            class="nav-main__list-item"
+            :to="{ name: 'patient-login' }"
+          >ورود به حساب کاربری</nuxt-link>
+        </v-list-tile-content>
+      </v-list-tile>
+      <template v-for="(item, index) in itemsList">
+        <v-list-group :key="index" v-if="item.children" no-action>
+          <template v-slot:activator>
+            <v-list-tile>
+              <v-list-tile-content>
+                <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </template>
+          <v-list-tile v-for="(child,i) in item.children" :key="i">
+            <v-list-tile-content>
+              <nuxt-link
+                @click.native="closeNav"
+                :to="child.path"
+                class="nav-main__list-item"
+              >{{ child.name }}</nuxt-link>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list-group>
+        <v-list-tile v-else :key="index">
+          <v-list-tile-content>
+            <nuxt-link
+              @click.native="closeNav"
+              :to="item.path"
+              class="nav-main__list-item"
+            >{{ item.name }}</nuxt-link>
+          </v-list-tile-content>
+        </v-list-tile>
+      </template>
+    </v-list>
     <div class="footer">
       <span>شماره پشتیبانی</span>
       <span>۰۲۱-۷۴۴۷۱۳۰۰</span>
@@ -168,7 +165,58 @@ export default {
   },
   data() {
     return {
-      isPatient: true
+      isPatient: true,
+      itemsList: [
+        {
+          name: "سامانه رسا",
+          path: { name: "index" }
+        },
+        {
+          name: "لیست پزشکان",
+          path: { name: "doctors" }
+        },
+        // {
+        //   name: "قوانین",
+        //   path: { name: "privacy" }
+        // },
+        {
+          name: "مشاوره روانشناسی",
+          path: "/doctors/psychology"
+        },
+        {
+          name: "کرونا",
+          children: [
+            {
+              name: "مشاوره رایگان کرونا",
+              path: "/categories/medical-consultation-for-coronavirus/1141"
+            },
+            {
+              name: "تخصص من رایگان",
+              path: "/categories/free-speciality-consultant/1148"
+            },
+            {
+              name: "مشاوره روانشناسی قرنطینه",
+              path: "/categories/quarantine-free-psychotherapy/1143"
+            }
+          ]
+        },
+        {
+          name: "سوالات متداول",
+          path: { name: "faq" }
+        },
+        {
+          name: "درباره رسا",
+          path: { name: "about" }
+        },
+        {
+          name: "تماس با ما",
+          path: { name: "contact-us" }
+        },
+        {
+          name: "ثبت نام پزشکان",
+          path: "/doctors/landing"
+        }
+      ]
     };
   },
   methods: {

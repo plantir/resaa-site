@@ -208,52 +208,52 @@
       align-items: center;
     }
 
-    &__list-item {
-      font-size: 1.8rem;
-      position: relative;
-      margin: 0 20px;
-      color: #00aae2;
-      cursor: pointer;
-      font-weight: 500;
-      line-height: 30px;
-      transition-delay: $transition--length + s;
-      opacity: 0;
-      transform: translate(0%, 50%);
-      transition: opacity 0.2s ease, transform 0.3s ease, color 0.2s;
+    // &__list-item {
+    //   font-size: 1.8rem;
+    //   position: relative;
+    //   margin: 0 20px;
+    //   color: #00aae2;
+    //   cursor: pointer;
+    //   font-weight: 500;
+    //   line-height: 30px;
+    //   transition-delay: $transition--length + s;
+    //   opacity: 0;
+    //   transform: translate(0%, 50%);
+    //   transition: opacity 0.2s ease, transform 0.3s ease, color 0.2s;
 
-      &.active {
-        transform: translate(0%, 0%);
-        opacity: 1;
+    //   &.active {
+    //     transform: translate(0%, 0%);
+    //     opacity: 1;
 
-        @for $i from 0 through 10 {
-          &:nth-child(#{$i}) {
-            transition-delay: $transition--length * $i / 10 + 0.2 + s;
-          }
-        }
-      }
+    //     @for $i from 0 through 10 {
+    //       &:nth-child(#{$i}) {
+    //         transition-delay: $transition--length * $i / 10 + 0.2 + s;
+    //       }
+    //     }
+    //   }
 
-      &:hover {
-        color: #24bda9;
-        text-decoration: none;
+    //   &:hover {
+    //     color: #24bda9;
+    //     text-decoration: none;
 
-        &::before {
-          background-color: #24bda9;
-          width: 100%;
-        }
-      }
+    //     &::before {
+    //       background-color: #24bda9;
+    //       width: 100%;
+    //     }
+    //   }
 
-      &::before {
-        content: "";
-        width: 20px;
-        height: 1px;
-        background-color: #00aae2;
-        position: absolute;
-        top: 100%;
-        transform: translate(0%, 0%);
-        transition: all 0.3s ease;
-        z-index: -1;
-      }
-    }
+    //   &::before {
+    //     content: "";
+    //     width: 20px;
+    //     height: 1px;
+    //     background-color: #00aae2;
+    //     position: absolute;
+    //     top: 100%;
+    //     transform: translate(0%, 0%);
+    //     transition: all 0.3s ease;
+    //     z-index: -1;
+    //   }
+    // }
   }
 
   @media only screen and (max-width: 900px) {
@@ -306,9 +306,9 @@
       flex-direction: column;
     }
 
-    .nav-main__list-item {
-      margin: 20px 0;
-    }
+    // .nav-main__list-item {
+    //   margin: 20px 0;
+    // }
   }
   .nav {
     display: flex;
@@ -335,7 +335,7 @@
       display: none;
       position: absolute;
       flex-direction: column;
-      width: 180px;
+      min-width: 180px;
       background: #fff;
       padding: 8px 16px;
       box-shadow: 0 0 21px -7px #bbb;
@@ -353,13 +353,33 @@
       }
     }
   }
+  .v-list {
+    .v-list__group {
+      height: 48px;
+    }
+    > div {
+      border-bottom: 1px solid #0000001f;
+      // display: flex;
+      // height: 60px;
+      // align-items: center;
+      &:last-child {
+        border: none;
+      }
+    }
+    a {
+      color: #666;
+      &.nuxt-link-exact-active {
+        color: $primary-color;
+      }
+    }
+  }
 }
 </style>
 
 <template>
   <section id="navigation">
     <div :class="[{ patient: isPatient }, 'navigation-bar']">
-      <div class="menu-icon" @click="activateMenu">
+      <div class="menu-icon" @click="toggleMenu">
         <span class="menu-icon__line menu-icon__line-left" :class="{ active: menuActive }"></span>
         <span class="menu-icon__line" :class="{ active: menuActive }"></span>
         <span class="menu-icon__line menu-icon__line-right" :class="{ active: menuActive }"></span>
@@ -436,13 +456,32 @@
                 class="navigation-bar-item"
               >مشاوره روانشناسی</router-link>
             </li>
-            <li class="nav-item" v-if="!is_corona_amum">
-              <router-link
-                @click.native="closeNav"
-                to="/categories/medical-consultation-for-coronavirus/1141"
-                class="navigation-bar-item"
-              >مشاوره کرونا</router-link>
+            <li class="nav-item">
+              <div>
+                <a class="drop-down">
+                  کرونا
+                  <i class="fa fa-caret-down"></i>
+                </a>
+                <div>
+                  <nuxt-link
+                    @click.native="closeNav"
+                    to="/categories/medical-consultation-for-coronavirus/1141"
+                    class="navigation-bar-item"
+                  >مشاوره رایگان کرونا</nuxt-link>
+                  <nuxt-link
+                    @click.native="closeNav"
+                    to="/categories/free-speciality-consultant/1148"
+                    class="navigation-bar-item"
+                  >تخصص من رایگان</nuxt-link>
+                  <nuxt-link
+                    @click.native="closeNav"
+                    to="/categories/quarantine-free-psychotherapy/1143"
+                    class="navigation-bar-item"
+                  >مشاوره روانشناسی قرنطینه</nuxt-link>
+                </div>
+              </div>
             </li>
+
             <li class="nav-item">
               <nuxt-link
                 @click.native="closeNav"
@@ -520,61 +559,59 @@
       </div>
       <div class="nav-main" :class="{ active: menuActive }">
         <div class="nav-main__content" :class="{ active: menuActive }">
-          <ul class="nav-main__list" :class="{ active: menuActive }">
-            <!-- <li class="nav-main__list-item">
-              <div v-if="user">
-                <a class="drop-down">خوش اومدی {{user.firstName}}</a>
-                <div v-if="isPatient">
-                  <nuxt-link :to="{name:'patient-profile'}">پروفایل</nuxt-link>
-                  <a @click="logout">خروج</a>
-                </div>
-                <div v-else>
-                  <nuxt-link :to="{name:'patient-profile'}">پروفایل</nuxt-link>
-                  <a @click="logout">خروج</a>
-                </div>
-              </div>
-              <div v-else>
-                <a class="drop-down"></a>
-                <div v-if="isPatient">
-                  <nuxt-link :to="{name:'patient-landing'}">عضویت در رسا</nuxt-link>
-                </div>
-                <div v-else>
-                  <nuxt-link :to="{name:'LoginDoctor'}">ورود به حساب کاربری</nuxt-link>
-                  <nuxt-link :to="{name:'doctors-register'}">عضویت در رسا</nuxt-link>
-                </div>
-              </div>
-            </li>-->
-            <nuxt-link
-              @click.native="closeNav"
-              v-if="user"
-              class="nav-main__list-item"
-              :class="{ active: menuActive }"
-              :to="{ name: 'patient-profile' }"
-            >خوش اومدی {{ user.firstName }}</nuxt-link>
-            <nuxt-link
-              v-else
-              @click.native="closeNav"
-              class="nav-main__list-item"
-              :class="{ active: menuActive }"
-              :to="{ name: 'patient-login' }"
-            >ورود به حساب کاربری</nuxt-link>
-            <template>
-              <nuxt-link
-                @click.native="closeNav"
-                v-for="(item, index) in this.itemsList"
-                :to="item.path"
-                :key="index"
-                class="nav-main__list-item"
-                :class="{ active: menuActive }"
-              >{{ item.name }}</nuxt-link>
+          <v-list>
+            <v-list-tile v-if="user">
+              <v-list-tile-content>
+                <nuxt-link
+                  @click.native="closeNav"
+                  class="nav-main__list-item"
+                  :class="{ active: menuActive }"
+                  :to="{ name: 'patient-profile' }"
+                >خوش اومدی {{ user.firstName }}</nuxt-link>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile v-else>
+              <v-list-tile-content>
+                <nuxt-link
+                  @click.native="closeNav"
+                  class="nav-main__list-item"
+                  :class="{ active: menuActive }"
+                  :to="{ name: 'patient-login' }"
+                >ورود به حساب کاربری</nuxt-link>
+              </v-list-tile-content>
+            </v-list-tile>
+            <template v-for="(item, index) in itemsList">
+              <v-list-group :key="index" v-if="item.children" no-action>
+                <template v-slot:activator>
+                  <v-list-tile>
+                    <v-list-tile-content>
+                      <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                </template>
+                <v-list-tile v-for="(child,i) in item.children" :key="i">
+                  <v-list-tile-content>
+                    <nuxt-link
+                      @click.native="closeNav"
+                      :to="child.path"
+                      class="nav-main__list-item"
+                      :class="{ active: menuActive }"
+                    >{{ child.name }}</nuxt-link>
+                  </v-list-tile-content>
+                </v-list-tile>
+              </v-list-group>
+              <v-list-tile v-else :key="index">
+                <v-list-tile-content>
+                  <nuxt-link
+                    @click.native="closeNav"
+                    :to="item.path"
+                    class="nav-main__list-item"
+                    :class="{ active: menuActive }"
+                  >{{ item.name }}</nuxt-link>
+                </v-list-tile-content>
+              </v-list-tile>
             </template>
-            <a
-              v-if="user"
-              class="nav-main__list-item"
-              :class="{ active: menuActive }"
-              @click="logout"
-            >خروج</a>
-          </ul>
+          </v-list>
         </div>
       </div>
     </div>
@@ -628,8 +665,21 @@ export default {
         path: "/doctors/psychology"
       },
       {
-        name: "مشاوره کرونا",
-        path: "/categories/medical-consultation-for-coronavirus/1141"
+        name: "کرونا",
+        children: [
+          {
+            name: "مشاوره رایگان کرونا",
+            path: "/categories/medical-consultation-for-coronavirus/1141"
+          },
+          {
+            name: "تخصص من رایگان",
+            path: "/categories/free-speciality-consultant/1148"
+          },
+          {
+            name: "مشاوره روانشناسی قرنطینه",
+            path: "/categories/quarantine-free-psychotherapy/1143"
+          }
+        ]
       },
       {
         name: "سوالات متداول",
@@ -651,6 +701,9 @@ export default {
   },
 
   methods: {
+    toggleMenu() {
+      this.$store.commit("showMenu");
+    },
     activateMenu: function() {
       this.menuActive = !this.menuActive;
     },

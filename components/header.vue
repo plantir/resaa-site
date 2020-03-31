@@ -157,15 +157,29 @@ section#header {
           <li class="nav-item">
             <router-link to="/doctors/psychology" class="navigation-bar-item">روانشناسی</router-link>
           </li>
-          <li class="nav-item" v-if="!is_corona_amum">
+          <!-- <li class="nav-item">
             <router-link
               to="/categories/medical-consultation-for-coronavirus/1141"
               class="navigation-bar-item"
             >مشاوره کرونا</router-link>
-          </li>
-          <!-- <li class="nav-item">
-            <router-link :to="{name:'privacy'}" class="navigation-bar-item">قوانین</router-link>
           </li>-->
+          <li class="nav-item">
+            <v-expansion-panel>
+              <v-expansion-panel-content v-for="(item,i) in 5" :key="i">
+                <template v-slot:header>
+                  <div>Item</div>
+                </template>
+                <v-card>
+                  <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-card-text>
+                </v-card>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+            <!-- <router-link
+              to="/categories/medical-consultation-for-coronavirus/1141"
+              class="navigation-bar-item"
+            >مشاوره کرونا</router-link>-->
+          </li>
+
           <li class="nav-item">
             <router-link :to="{ name: 'faq' }" class="navigation-bar-item">سوالات متداول</router-link>
           </li>

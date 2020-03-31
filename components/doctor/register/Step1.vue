@@ -53,9 +53,7 @@ ul {
             <div
               v-if="submitted && errors.has('firstName')"
               class="invalid-feedback"
-            >
-              {{ errors.first("firstName") }}
-            </div>
+            >{{ errors.first("firstName") }}</div>
           </div>
         </v-flex>
         <v-flex md6 sm12 pa-1>
@@ -72,9 +70,7 @@ ul {
             <div
               v-if="submitted && errors.has('lastName')"
               class="invalid-feedback"
-            >
-              {{ errors.first("lastName") }}
-            </div>
+            >{{ errors.first("lastName") }}</div>
           </div>
         </v-flex>
         <v-flex md6 sm12 pa-1>
@@ -95,9 +91,7 @@ ul {
             <div
               v-if="submitted && errors.has('specialtyId')"
               class="invalid-feedback"
-            >
-              {{ errors.first("specialtyId") }}
-            </div>
+            >{{ errors.first("specialtyId") }}</div>
           </div>
         </v-flex>
         <v-flex md6 sm12 pa-1>
@@ -116,9 +110,7 @@ ul {
             <div
               v-if="submitted && errors.has('medicalCouncilNumber')"
               class="invalid-feedback"
-            >
-              {{ errors.first("medicalCouncilNumber") }}
-            </div>
+            >{{ errors.first("medicalCouncilNumber") }}</div>
           </div>
         </v-flex>
         <v-flex md6 sm12 pa-1>
@@ -142,9 +134,7 @@ ul {
             <div
               v-if="submitted && errors.has('gender')"
               class="invalid-feedback"
-            >
-              {{ errors.first("gender") }}
-            </div>
+            >{{ errors.first("gender") }}</div>
           </div>
         </v-flex>
         <v-flex md6 sm12 pa-1>
@@ -163,9 +153,7 @@ ul {
             <div
               v-if="submitted && errors.has('nationalNumber')"
               class="invalid-feedback"
-            >
-              {{ errors.first("nationalNumber") }}
-            </div>
+            >{{ errors.first("nationalNumber") }}</div>
           </div>
         </v-flex>
         <v-flex md6 sm12 pa-1>
@@ -182,15 +170,14 @@ ul {
             <div
               v-if="submitted && errors.has('phoneNumber')"
               class="invalid-feedback"
-            >
-              {{ errors.first("phoneNumber") }}
-            </div>
+            >{{ errors.first("phoneNumber") }}</div>
           </div>
         </v-flex>
       </v-layout>
     </form>
     <div class="doctor-suport">
-      شماره پشتیبانی پزشکان: <span>{{ "021-74471200" | persianDigit }}</span>
+      شماره پشتیبانی پزشکان:
+      <span>{{ "021-74471200" | persianDigit }}</span>
     </div>
     <div class="step-notes">
       <ul>
@@ -202,9 +189,7 @@ ul {
           تخصص پزشک با سایت نظام پزشکی بررسی می‌شود. اگر تاکنون تخصص شما در سایت
           نظام پزشکی ثبت نشده، نیاز به ارائه گواهی است.
         </li>
-        <li>
-          شماره همراه و کد ملی شما به‌هیچ عنوان در اختیار دیگران قرار نمی‌گیرد.
-        </li>
+        <li>شماره همراه و کد ملی شما به‌هیچ عنوان در اختیار دیگران قرار نمی‌گیرد.</li>
       </ul>
     </div>
     <div class="step-actions">
@@ -219,11 +204,7 @@ ul {
         </div>-->
       </div>
       <div>
-        <div
-          class="step-next-button"
-          v-show="currentStep !== 4"
-          @click="goNextStep"
-        >
+        <div class="step-next-button" v-show="currentStep !== 4" @click="goNextStep">
           <div v-if="currentStep < 3" class="text">بعدی</div>
           <div v-else class="text">تایید و ثبت نهایی</div>
           <i class="fa fa-angle-left"></i>
@@ -262,7 +243,17 @@ export default {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
-          this.$emit("goNextStep");
+          return his.$emit("goNextStep");
+        }
+        if (this.errors.items[0].id) {
+          const field = this.$validator.fields.find({
+            id: this.errors.items[0].id
+          });
+          if (field) {
+            this.$scrollTo(field.el, 1000, { offset: -150 });
+          }
+        } else {
+          this.$scrollTo("body", 1000, { offset: -150 });
         }
       });
     }
