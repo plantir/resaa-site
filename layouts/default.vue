@@ -1,5 +1,11 @@
+<style lang="scss" >
+.v-overlay {
+  z-index: 999;
+}
+</style>
 <template>
   <v-app>
+    <app-navigation></app-navigation>
     <header>
       <app-header></app-header>
     </header>
@@ -13,10 +19,12 @@
 </template>
 
 <script>
+import appNavigation from "~/components/navigation.vue";
 import appHeader from "~/components/header/header";
 import appFooter from "~/components/footer/footer";
 export default {
   components: {
+    appNavigation,
     appHeader,
     appFooter
   }

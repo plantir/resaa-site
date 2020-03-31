@@ -156,6 +156,7 @@
                   v-model="doctor.contactInformation.phoneNumber"
                   label="شماره تماس"
                   name="phoneNumber"
+                  placeholder="شماره تماس را همراه با کد مطب وارد نمایید"
                   :class="{ 'is-invalid': submitted && errors.has('phoneNumber') }"
                   solo
                 ></v-text-field>
@@ -206,7 +207,7 @@
           <gharardad></gharardad>
         </div>
         <div class="checkbox-wrapper" :class="{ 'is-invalid': submitted && errors.has('privacy') }">
-          <input type="checkbox" v-validate="'required'" name="privacy">
+          <input type="checkbox" v-validate="'required'" name="privacy" />
           قرارداد را خواندم و قبول دارم.
           <div
             v-if="submitted && errors.has('privacy')"
@@ -255,9 +256,7 @@ export default {
     if (this.doctor.contactInformation.provinceId) {
       this.$axios
         .get(
-          `/Geo/Provinces/${
-            this.doctor.contactInformation.provinceId
-          }/Cities`
+          `/Geo/Provinces/${this.doctor.contactInformation.provinceId}/Cities`
         )
         .then(response => {
           this.cities = response.data.result.cities;
@@ -269,9 +268,7 @@ export default {
       this.doctor.contactInformation.cityId = null;
       this.$axios
         .get(
-          `/Geo/Provinces/${
-            this.doctor.contactInformation.provinceId
-          }/Cities`
+          `/Geo/Provinces/${this.doctor.contactInformation.provinceId}/Cities`
         )
         .then(response => {
           this.cities = response.data.result.cities;
@@ -287,7 +284,17 @@ export default {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
-          this.$emit("goNextStep");
+          return this.$emit("goNextStep");
+        }
+        if (this.errors.items[0].id) {
+          const field = this.$validator.fields.find({
+            id: this.errors.items[0].id
+          });
+          if (field) {
+            this.$scrollTo(field.el, 1000, { offset: -150 });
+          }
+        } else {
+          this.$scrollTo("body", 1000, { offset: -150 });
         }
       });
     },
