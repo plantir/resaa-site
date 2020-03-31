@@ -145,6 +145,7 @@ export default {
       this.$refs.invisibleRecaptcha.execute();
     },
     async goNextStep() {
+      debugger;
       if (this.currentStep == 3) {
         this.ajaxLoading = true;
         return this.$refs.invisibleRecaptcha.execute();
@@ -169,28 +170,27 @@ export default {
         }
       });
     },
-    finish_register() {
-      this.$axios
-        .post("/Doctors/Registration", this.doctor)
-        .then(Response => {
-          if (Response.body.status == "OK") {
-            this.currentStep = this.currentStep + 1;
-            this.$router.push({
-              name: this.$router.name,
-              query: {
-                subscriptionPlan: this.$route.query.subscriptionPlan,
-                step: this.currentStep
-              }
-            });
-            this.$store.commit("save_doctor_info");
-          }
-        })
-        .catch(() => {
-          this.resetRecaptcha();
-        })
-        .then(() => {
-          this.ajaxLoading = false;
-        });
+    async finish_register() {
+      try {
+        let { data } = await this.$axios.post(
+          "/Doctors/Registration",
+          this.doctor
+        );
+        if (data.status == "OK") {
+          this.currentStep = this.currentStep + 1;
+          this.$router.push({
+            name: this.$router.name,
+            query: {
+              subscriptionPlan: this.$route.query.subscriptionPlan,
+              step: this.currentStep
+            }
+          });
+          this.$store.commit("save_doctor_info");
+        }
+      } catch (error) {
+        this.resetRecaptcha();
+      }
+      this.ajaxLoading = false;
     }
   },
   computed: {
