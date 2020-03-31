@@ -145,7 +145,6 @@ export default {
       this.$refs.invisibleRecaptcha.execute();
     },
     async goNextStep() {
-      debugger;
       if (this.currentStep == 3) {
         this.ajaxLoading = true;
         return this.$refs.invisibleRecaptcha.execute();
