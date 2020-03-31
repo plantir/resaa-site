@@ -31,13 +31,13 @@
             round
           >ثبت نام رایگان</v-btn>-->
           <resaaButton id="benefitsRegister" theme="dark" to="/patient/register">ثبت نام رایگان</resaaButton>
-          <v-btn
+          <!-- <v-btn
             class="benefits-download-button"
             v-scroll-to="{ el: '#download', offset: -50 , duration: 1500}"
             outline
             round
             color="secondary"
-          >دریافت اپلیکیشن</v-btn>
+          >دریافت اپلیکیشن</v-btn>-->
         </div>
       </div>
       <div class="image">

@@ -14,7 +14,7 @@
     <patient-charge />
     <blog />
     <patient-telegram />
-    <patient-download />
+    <!-- <patient-download /> -->
   </section>
 </template>
 

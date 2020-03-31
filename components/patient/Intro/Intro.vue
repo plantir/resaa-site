@@ -247,9 +247,9 @@
     <div class="intro-patient-image">
       <img src="./PAT.png" alt="مشاوره پزشکی تلفنی  در سامانه رسا" />
       <div class="side-button left">
-        <div v-scroll-to="{ el: '#download', offset: -50 }" class="side-button-text">
-          <div class="side-button-sub-title">ارتباط با پزشکان</div>
-          <a class="side-button-title">دریافت اپلیکیشن رِسا</a>
+        <div class="side-button-text">
+          <div class="side-button-sub-title">ارتباط با پشتیبانی</div>
+          <div class="side-button-title">تماس با ۷۴۴۷۱۳۰۰ ۰۲۱</div>
         </div>
         <div class="side-button-icon">
           <!-- <mobile /> -->

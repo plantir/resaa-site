@@ -248,13 +248,13 @@
         color="yellow darken-2"
       >ثبت نام رایگان</v-btn>-->
       <resaaButton id="procedureRegister" to="/patient/register">ثبت نام رایگان</resaaButton>
-      <v-btn
+      <!-- <v-btn
         class="procedure-download-button"
         v-scroll-to="{ el: '#download', offset: -50 , duration: 1500}"
         color="white"
         outline
         round
-      >دریافت اپلیکیشن</v-btn>
+      >دریافت اپلیکیشن</v-btn>-->
     </div>
   </div>
 </template>

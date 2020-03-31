@@ -206,13 +206,13 @@
         :to="{ name: 'doctors-register' }"
         round
       >ثبت نام رایگان</v-btn>
-      <v-btn
+      <!-- <v-btn
         class="procedure-download-button"
         v-scroll-to="{ el: '#download', offset: -50 }"
         color="white"
         outline
         round
-      >دریافت اپلیکیشن</v-btn>
+      >دریافت اپلیکیشن</v-btn>-->
       <!-- <router-link ></router-link> -->
     </div>
   </div>
