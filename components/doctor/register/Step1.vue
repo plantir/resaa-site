@@ -243,7 +243,7 @@ export default {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
-          return his.$emit("goNextStep");
+          return this.$emit("goNextStep");
         }
         if (this.errors.items[0].id) {
           const field = this.$validator.fields.find({
