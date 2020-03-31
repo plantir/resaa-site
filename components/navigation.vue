@@ -211,6 +211,10 @@ export default {
         {
           name: "تماس با ما",
           path: { name: "contact-us" }
+        },
+        {
+          name: "ثبت نام پزشکان",
+          path: "/doctors/landing"
         }
       ]
     };
