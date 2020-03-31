@@ -242,14 +242,14 @@
     <div class="intro-buttons">
       <resaaButton id="introRegister" to="/patient/register">ثبت نام رایگان</resaaButton>
       <!-- <v-btn id="introRegister" color="white" to="/patient/register" outline round>ثبت نام رایگان</v-btn> -->
-      <v-btn id="showVideo" color="white" outline round @click="openVideo">نمایش ویدئو</v-btn>
+      <v-btn id="showVideo" color="white" outline round @click="$emit('openVideo')">نمایش ویدئو</v-btn>
     </div>
     <div class="intro-patient-image">
       <img src="./PAT.png" alt="مشاوره پزشکی تلفنی  در سامانه رسا" />
       <div class="side-button left">
-        <div v-scroll-to="{ el: '#download', offset: -50 }" class="side-button-text">
-          <div class="side-button-sub-title">ارتباط با پزشکان</div>
-          <a class="side-button-title">دریافت اپلیکیشن رِسا</a>
+        <div class="side-button-text">
+          <div class="side-button-sub-title">ارتباط با پشتیبانی</div>
+          <div class="side-button-title">تماس با ۷۴۴۷۱۳۰۰ ۰۲۱</div>
         </div>
         <div class="side-button-icon">
           <!-- <mobile /> -->
@@ -283,36 +283,25 @@
         </div>
       </div>
     </div>
-    <PatientVideo v-if="show_video" @closeModal="closeModal"></PatientVideo>
   </div>
 </template>
 
 <script>
 import patientImage from "./patient.jpg";
 import Parallax from "parallax-js";
-import PatientVideo from "@/components/patient/video/video";
 import resaaButton from "~/components/resaa-button.vue";
 export default {
   data() {
     return {
       patientImage,
-      parallax_loaded: false,
-      show_video: false
+      parallax_loaded: false
     };
   },
 
-  components: { PatientVideo, resaaButton },
+  components: { resaaButton },
   mounted() {
     new Parallax(this.$refs.parallax);
     this.parallax_loaded = true;
-  },
-  methods: {
-    openVideo() {
-      this.show_video = true;
-    },
-    closeModal() {
-      this.show_video = false;
-    }
   }
 };
 </script>

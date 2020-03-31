@@ -250,11 +250,19 @@
       <resaaButton id="procedureRegister" to="/patient/register">ثبت نام رایگان</resaaButton>
       <v-btn
         class="procedure-download-button"
+        id="showVideo"
+        color="white"
+        outline
+        round
+        @click="$emit('openVideo')"
+      >نمایش ویدئو</v-btn>
+      <!-- <v-btn
+        class="procedure-download-button"
         v-scroll-to="{ el: '#download', offset: -50 , duration: 1500}"
         color="white"
         outline
         round
-      >دریافت اپلیکیشن</v-btn>
+      >دریافت اپلیکیشن</v-btn>-->
     </div>
   </div>
 </template>

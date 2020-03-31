@@ -1,7 +1,7 @@
 <style lang="scss">
 section#header {
   position: absolute;
-  overflow: hidden;
+  // overflow: hidden;
   width: 100%;
   z-index: 2;
   .header-container {
@@ -86,6 +86,32 @@ section#header {
       margin-left: 24px;
     }
   }
+  .v-menu {
+    .v-menu__content {
+      contain: inherit;
+      overflow: inherit;
+      &::before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid #fff;
+        position: absolute;
+        top: -7px;
+        right: 12px;
+      }
+    }
+    .v-list {
+      a {
+        color: #999 !important;
+        text-shadow: none;
+        &:hover {
+          color: $primary-color !important;
+        }
+      }
+    }
+  }
 }
 .register-dropdown {
   .v-list__tile {
@@ -93,7 +119,31 @@ section#header {
     height: 32px;
   }
 }
-
+// .drop-down {
+//   cursor: default;
+//   ~ div {
+//     display: none;
+//     position: absolute;
+//     flex-direction: column;
+//     min-width: 180px;
+//     background: #fff;
+//     padding: 8px 16px;
+//     box-shadow: 0 0 21px -7px #bbb;
+//     a {
+//       text-decoration: none;
+//       color: #333 !important;
+//       cursor: pointer;
+//     }
+//     &:hover {
+//       display: flex;
+//     }
+//   }
+//   &:hover {
+//     ~ div {
+//       display: flex;
+//     }
+//   }
+// }
 // @media only screen and (max-width: 768px) {
 //   section#header {
 //     .show-mobile {
@@ -164,20 +214,67 @@ section#header {
             >مشاوره کرونا</router-link>
           </li>-->
           <li class="nav-item">
-            <v-expansion-panel>
-              <v-expansion-panel-content v-for="(item,i) in 5" :key="i">
-                <template v-slot:header>
-                  <div>Item</div>
-                </template>
-                <v-card>
-                  <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-card-text>
-                </v-card>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
             <!-- <router-link
               to="/categories/medical-consultation-for-coronavirus/1141"
               class="navigation-bar-item"
             >مشاوره کرونا</router-link>-->
+            <v-menu open-on-hover bottom attach left nudge-bottom="50px" nudge-right="10px">
+              <template v-slot:activator="{ on }">
+                <a v-on="on">کرونا</a>
+              </template>
+              <v-list>
+                <v-list-tile>
+                  <v-list-tile-title>
+                    <nuxt-link
+                      @click.native="closeNav"
+                      to="/categories/medical-consultation-for-coronavirus/1141"
+                      class="navigation-bar-item"
+                    >مشاوره رایگان کرونا</nuxt-link>
+                  </v-list-tile-title>
+                </v-list-tile>
+                <v-list-tile>
+                  <v-list-tile-title>
+                    <nuxt-link
+                      @click.native="closeNav"
+                      to="/categories/free-speciality-consultant/1148"
+                      class="navigation-bar-item"
+                    >تخصص من رایگان</nuxt-link>
+                  </v-list-tile-title>
+                </v-list-tile>
+                <v-list-tile>
+                  <v-list-tile-title>
+                    <nuxt-link
+                      @click.native="closeNav"
+                      to="/categories/quarantine-free-psychotherapy/1143"
+                      class="navigation-bar-item"
+                    >مشاوره روانشناسی قرنطینه</nuxt-link>
+                  </v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
+            <!-- <div>
+              <a class="drop-down">
+                کرونا
+                <i class="fa fa-caret-down"></i>
+              </a>
+              <div>
+                <nuxt-link
+                  @click.native="closeNav"
+                  to="/categories/medical-consultation-for-coronavirus/1141"
+                  class="navigation-bar-item"
+                >مشاوره رایگان کرونا</nuxt-link>
+                <nuxt-link
+                  @click.native="closeNav"
+                  to="/categories/free-speciality-consultant/1148"
+                  class="navigation-bar-item"
+                >تخصص من رایگان</nuxt-link>
+                <nuxt-link
+                  @click.native="closeNav"
+                  to="/categories/quarantine-free-psychotherapy/1143"
+                  class="navigation-bar-item"
+                >مشاوره روانشناسی قرنطینه</nuxt-link>
+              </div>
+            </div>-->
           </li>
 
           <li class="nav-item">

@@ -6,15 +6,16 @@
 
 <template>
   <section>
-    <patient-intro />
-    <patient-benefits />
-    <patient-procedure />
+    <patient-intro @openVideo="openVideo" />
+    <patient-benefits @openVideo="openVideo" />
+    <patient-procedure @openVideo="openVideo" />
     <patient-doctors />
     <patient-register />
     <patient-charge />
     <blog />
     <patient-telegram />
-    <patient-download />
+    <!-- <patient-download /> -->
+    <PatientVideo v-if="show_video" @closeModal="closeModal"></PatientVideo>
   </section>
 </template>
 
@@ -28,6 +29,7 @@ import PatientCharge from "~/components/patient/Charge/Charge";
 import Blog from "~/components/patient/blog";
 import PatientTelegram from "~/components/patient/Telegram/Telegram";
 import PatientDownload from "~/components/patient/Download/Download";
+import PatientVideo from "@/components/patient/video/video";
 
 export default {
   head() {
@@ -55,16 +57,26 @@ export default {
     PatientCharge,
     Blog,
     PatientTelegram,
-    PatientDownload
+    PatientDownload,
+    PatientVideo
   },
   data() {
     return {
-      dialog: true
+      dialog: true,
+      show_video: false
     };
   },
   computed: {
     user() {
       return this.$store.state.user;
+    }
+  },
+  methods: {
+    openVideo() {
+      this.show_video = true;
+    },
+    closeModal() {
+      this.show_video = false;
     }
   }
 };
