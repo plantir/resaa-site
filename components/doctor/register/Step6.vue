@@ -1,6 +1,9 @@
 <template>
   <div class="step-container">
-    <div class="step-welcome-text">« به رِسا خوش‌آمدید »</div>
+    <div class="step-welcome-text">« به خانواده رِسا خوش‌آمدید »</div>
+    <div class="text-xs-center mb-3">
+      <v-icon size="48" color="green">la-check-circle</v-icon>
+    </div>
     <div class="step-register-complete-text">
       ثبت‌نام اولیه شما با موفقیت انجام شد.
       <br />
@@ -21,10 +24,7 @@
         <span>خواهشمند است همین الان این شماره را در گوشی خود ذخیره نمایید تا متوجه تماس پشتیبانی رسا و مراجعین خود بشوید.</span>
       </div>
       <div class="step-warning-phone-numbers">
-        <div class="phone-number">۰۲۱-۷۴۴۷۱۷۰۰</div>
-        <div class="phone-number">۰۲۱-۷۴۴۷۱۶۰۰</div>
-        <div class="phone-number">۰۲۱-۷۴۴۷۱۵۰۰</div>
-        <div class="phone-number">۰۲۱-۷۴۴۷۱۳۰۰</div>
+        <div class="phone-number">۰۲۱-۷۴۴۷۱۰۰۰</div>
       </div>
       <!-- <div class="step-warning-qr-image">
         <img src="./qr.png" alt="qr image" />
