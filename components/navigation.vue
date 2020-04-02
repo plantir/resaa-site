@@ -92,7 +92,7 @@
 </style>
 
 <template>
-  <v-navigation-drawer height="100vh" v-model="showMenu" app dark right temporary absolute>
+  <v-navigation-drawer v-model="showMenu" app dark right temporary>
     <div class="logo">
       <Logo />
       <div>
