@@ -1,8 +1,11 @@
 <template>
   <div class="step-container">
-    <div class="step-welcome-text">« به رِسا خوش‌آمدید »</div>
+    <div class="step-welcome-text">« به خانواده رِسا خوش‌آمدید »</div>
+    <div class="text-xs-center mb-3">
+      <v-icon size="48" color="green">la-check-circle</v-icon>
+    </div>
     <div class="step-register-complete-text">
-      {{doctor.gender === 'Male'?'جناب آقای':'سرکار خانم'}} دکتر {{doctor.firstName}} {{doctor.lastName}}، ثبت‌نام اولیه شما با موفقیت انجام شد.
+      ثبت‌نام اولیه شما با موفقیت انجام شد.
       <br />
       <!-- <span class="highlight">
         اطلاعات کاربری
@@ -13,23 +16,25 @@
     <div class="step-warning-container">
       <div class="step-warning-text">توجه!</div>
       <div class="step-warning-description">
-        پزشک گرامی، با اسکن کد زیر، برخی از شماره‌ تماس‌های رِسا را در تلفن همراه خود ذخیره کنید.
-        <br />درصورت عدم نصب اپلیکشن، بیماران رِسا تنها از طریق این شماره‌ها با شما تماس خواهند گرفت.
+        <span>
+          همکار گرامی, پس از عضویت در رسا مراجعین شما و پشتیبانی رسا تنها از طریق شماره تماس
+          <strong>02174471000</strong> با شما تماس خواهند گرفت.
+        </span>
+        <br />
+        <span>خواهشمند است همین الان این شماره را در گوشی خود ذخیره نمایید تا متوجه تماس پشتیبانی رسا و مراجعین خود بشوید.</span>
       </div>
       <div class="step-warning-phone-numbers">
-        <div class="phone-number">۰۲۱-۷۴۴۷۱۷۰۰</div>
-        <div class="phone-number">۰۲۱-۷۴۴۷۱۶۰۰</div>
-        <div class="phone-number">۰۲۱-۷۴۴۷۱۵۰۰</div>
-        <div class="phone-number">۰۲۱-۷۴۴۷۱۳۰۰</div>
+        <div class="phone-number">۰۲۱-۷۴۴۷۱۰۰۰</div>
       </div>
-      <div class="step-warning-qr-image">
+      <!-- <div class="step-warning-qr-image">
         <img src="./qr.png" alt="qr image" />
-      </div>
+      </div>-->
     </div>
 
     <div class="step-actions">
-      <router-link to="/login-doctor" class="login-button">ورود به حساب کاربری</router-link>
-      <!-- <div class="download-button">دریافت اپلیکیشن</div> -->
+      <v-btn outline round color="primary" href="tel:02174471200">ارتباط با پشتیبانی پزشکان</v-btn>
+      <!-- <router-link to="/login-doctor" class="login-button"></router-link> -->
+      <!-- <div class="download-button">دریافت اپلیکیشن</div>  -->
     </div>
   </div>
 </template>
@@ -103,7 +108,7 @@ export default {
 
 .step-actions {
   display: flex;
-  justify-content: center;
+  justify-content: center !important;
 }
 
 .login-button {
