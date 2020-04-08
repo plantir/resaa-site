@@ -531,19 +531,30 @@
           <div class="wraper">
             <v-text-field
               v-validate="'required|mobile'"
-              v-model="subscriberNumber"
+              :error-messages="errors.collect('mobile')"
+              data-vv-as="شماره موبایل"
+              v-model="mobile"
               label="شماره موبایل"
               name="mobile"
               :class="{ 'is-invalid': errors.has('mobile') }"
               prepend-inner-icon="fa-mobile"
               v-fix-digit
               solo
-              hide-details
             >
               <v-icon>la-user</v-icon>
             </v-text-field>
+            <v-select
+              solo
+              v-validate="'required'"
+              :error-messages="errors.collect('charge')"
+              data-vv-as="کارت شارژ"
+              :items="chargeMenuItems"
+              name="charge"
+              v-model="selectedChargeItem"
+              label="کارت شارژ"
+            ></v-select>
           </div>
-          <div class="charge-amount" @click="toggleChargeMenu">
+          <!-- <div class="charge-amount" @click="toggleChargeMenu">
             <v-icon>fa-credit-card-alt</v-icon>
             <div id="activeChargeItem">
               کارت اعتباری
@@ -559,15 +570,8 @@
               @click="selectChargeItem(item)"
               :key="item.id"
             >کارت اعتباری {{ item.amount | currency | persianDigit }} تومانی</div>
-          </div>
-          <v-btn
-            :disabled="!subscriberNumber || errors.has('mobile')"
-            class="charge-button"
-            block
-            round
-            color="primary"
-            @click="onSubmit"
-          >خرید شارژ</v-btn>
+          </div>-->
+          <v-btn class="charge-button" block round color="primary" @click="onSubmit">خرید شارژ</v-btn>
           <!-- <button :disabled="!subscriberNumber" @click="onSubmit" class="charge-button">خرید شارژ</button> -->
           <!-- <v-alert style="width:400px" type="warning" outline :value="true">
             <span>
@@ -727,14 +731,12 @@ export default {
       chargeMenuItems: [],
       isMenuOpen: false,
       chargeStep: "input",
-      subscriberNumber: null,
+      mobile: null,
       recaptchaResponse: null,
       userCredit: 0,
       charge: {},
       pre_factor: {},
-      bankReceiptSuccessResponse: true,
-      mobile_regex: /^[0][9][0-3|9][0-9]{8,8}$/g,
-      subscribe_regex: /^[0-9]{5,5}$/g
+      bankReceiptSuccessResponse: true
     };
   },
   beforeCreate() {
@@ -780,17 +782,24 @@ export default {
               item.amount == 50000
             );
           })
-          .sort((a, b) => a.amount - b.amount);
+          .sort((a, b) => a.amount - b.amount)
+          .map(item => {
+            return {
+              text: `کارت شار‍‍‍ ${this.$options.filters.persianDigit(
+                this.$options.filters.currency(item.amount)
+              )} تومانی`,
+              value: item.id
+            };
+          });
         this.ajaxLoading = false;
         if (this.$route.query.chat_id) {
           localStorage.setItem("chat_id", this.$route.query.chat_id);
         }
+        debugger;
         if (this.$route.query.chargeId) {
-          this.selectedChargeItem = this.chargeMenuItems.find(
-            item => item.id == this.$route.query.chargeId
-          );
+          this.selectedChargeItem = +this.$route.query.chargeId;
         } else {
-          this.selectedChargeItem = this.chargeMenuItems[0];
+          this.selectedChargeItem = this.chargeMenuItems[0].value;
         }
       })
       .catch(msg => {
@@ -847,8 +856,11 @@ export default {
     resetRecaptcha() {
       this.$refs.invisibleRecaptcha.reset(); // Direct call reset method
     },
-    onSubmit() {
-      this.goToPrereceipt();
+    async onSubmit() {
+      let valid = await this.$validator.validateAll();
+      if (valid) {
+        this.goToPrereceipt();
+      }
       // this.$refs.invisibleRecaptcha.execute();
     },
 
@@ -864,18 +876,12 @@ export default {
     async goToPrereceipt() {
       let loginOrigin = localStorage.getItem("referrer");
       let data = {
-        denominationId: this.selectedChargeItem.id,
+        denominationId: this.selectedChargeItem,
         callbackUrl: process.env.BANK_RETURN_URL,
-        loginOrigin
+        loginOrigin,
+        phoneNumber: this.mobile
         // recaptchaResponse: this.recaptchaResponse
       };
-      let mobile = this.mobile_regex.exec(this.subscriberNumber);
-      let subscriberNumber = this.subscribe_regex.exec(this.subscriberNumber);
-      if (mobile) {
-        data.phoneNumber = mobile[0];
-      } else if (subscriberNumber) {
-        data.subscriberNumber = subscriberNumber[0];
-      }
       try {
         let { result } = await this.$axios.$post("/Charge", data);
         this.pre_factor = result.electronicPaymentVoucher;
