@@ -166,10 +166,14 @@
       <img
         v-if="$device.isDesktop"
         :src="'/api/' + category.backgroundImagePath"
-        :alt="category.title"
+        :alt="category.pageHeaderTitle"
       />
-      <img v-else :src="'/api/' + category.mobileBackgroundImagePath" :alt="category.title" />
-      <h1>{{ category.title }}</h1>
+      <img
+        v-else
+        :src="'/api/' + category.mobileBackgroundImagePath"
+        :alt="category.pageHeaderTitle"
+      />
+      <h1>{{ category.pageHeaderTitle }}</h1>
       <span v-if="$route.params.id == 1144">تماس اول رایگان</span>
       <transition v-else name="fade" mode="out-in">
         <span :key="text_array[header_text]">
