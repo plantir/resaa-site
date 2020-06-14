@@ -70,6 +70,10 @@ export default {
   },
   head: {
     title: "رسا ، سامانه سلامت ایرانیان",
+    htmlAttrs: {
+      lang: "fa-IR",
+      dir: "rtl"
+    },
     meta: [
       {
         charset: "utf-8"
