@@ -72,7 +72,7 @@
             <v-icon>chevron_left</v-icon>
           </span>
           <nuxt-link :to="$route.fullPath">
-            {{ doctor.title }} {{ doctor.firstName }}
+            {{ doctor.title || '' }} {{ doctor.firstName }}
             {{ doctor.lastName }}
           </nuxt-link>
         </div>
@@ -179,14 +179,21 @@ export default {
     } else if (locations.length == 1) {
       center = locations[0];
     }
-    let title = `دکتر ${doctor.firstName} ${doctor.lastName} | تماس مستقیم با پزشک در سامانه رسا`;
-    let description = `با استفاده از سامانه رسا می توانید در کوتاه ترین زمان ممکن، مستقیما با دکتر ${doctor.firstName}  ${doctor.lastName} متخصص ${doctor.specialtyTitle} تماس تلفنی برقرار کنید و به پاسخ سوالات خود برسید.`;
+    let title = `${doctor.title || ""} ${doctor.firstName} ${
+      doctor.lastName
+    } | تماس مستقیم با پزشک در سامانه رسا`;
+    let description = `با استفاده از سامانه رسا می توانید در کوتاه ترین زمان ممکن، مستقیما با ${doctor.title ||
+      ""} ${doctor.firstName}  ${doctor.lastName} متخصص ${
+      doctor.specialtyTitle
+    } تماس تلفنی برقرار کنید و به پاسخ سوالات خود برسید.`;
     let og = {
       image:
         "https://webapi.resaa.net/" + doctor.imagePath ||
         "/img/doc-placeholder.png",
       site_name: `سامانه رسا`,
-      title: `دکتر ${doctor.firstName} ${doctor.lastName} - متخصص : ${doctor.specialtyTitle}`,
+      title: `${doctor.title || ""} ${doctor.firstName} ${
+        doctor.lastName
+      } - متخصص : ${doctor.specialtyTitle}`,
       description: `کد رسا:${doctor.subscriberNumber} - ${description}`,
       canonical: `${
         process.env.SITE_URL
@@ -227,7 +234,9 @@ export default {
             {
               "@type": "ListItem",
               position: 3,
-              name: `دکتر ${doctor.firstName} ${doctor.lastName}`,
+              name: `${doctor.title || ""} ${doctor.firstName} ${
+                doctor.lastName
+              }`,
               item: `https://resaa.net/doctors/${doctor.specialtyEnglishTitle
                 .toLowerCase()
                 .replace(/ /g, "-")}/${doctor.subscriberNumber}`
