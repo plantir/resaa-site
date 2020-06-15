@@ -38,6 +38,7 @@ export default {
       link: [
         { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
       ],
+
       meta: [
         {
           hid: "description",

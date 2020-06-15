@@ -17,6 +17,14 @@
 
 <script>
 export default {
+  head() {
+    return {
+      htmlAttrs: {
+        lang: "fa-IR",
+        dir: "rtl"
+      }
+    };
+  }
   // data() {
   //   return {
   //     clipped: false,

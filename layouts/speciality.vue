@@ -31,6 +31,14 @@ import appNavigation from "~/components/navigation.vue";
 import appHeader from "~/components/header.vue";
 import appFooter from "~/components/footer/footer";
 export default {
+  head() {
+    return {
+      htmlAttrs: {
+        lang: "fa-IR",
+        dir: "rtl"
+      }
+    };
+  },
   components: {
     appNavigation,
     appHeader,
