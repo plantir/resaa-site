@@ -14,6 +14,7 @@
   transition: all 0.4s;
   box-shadow: 0 1px 16px -9px #000;
   color: #545456;
+  z-index: 1;
   svg {
     width: 58px;
     height: 48px;
@@ -21,6 +22,7 @@
     left: 5px;
     top: -9px;
     transition: all 0.4s;
+    z-index: -1;
     path {
       fill: #fbc02d;
     }
