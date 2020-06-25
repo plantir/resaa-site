@@ -193,12 +193,12 @@
   <div class="charge-section-patient-container">
     <h2 class="section-title">خرید شارژ</h2>
     <p class="section-description">افزایش اعتبار برای مکالمه تلفنی با پزشک</p>
-    <p class="section-description-2">
+    <!-- <p class="section-description-2">
       از طریق کد دستوری
       <span class="strong">ussd</span> با شماره
       <span class="strong" style="display: inline-block;direction: ltr;">*500*25#</span> میتوانید بدون نیاز به اینترنت اعتبار خود را افزایش دهید و
       <br />یا جهت افزایش اعتبار می توانید یکی از کارت شارژ های اینترنتی زیر را انتخاب کنید:
-    </p>
+    </p>-->
     <div class="charge-cards-container">
       <div v-for="(item, index) in chargeMenuItems" :key="index">
         <router-link
