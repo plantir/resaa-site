@@ -129,7 +129,7 @@
       <div class="link-wrapper">
         <a href="https://www.instagram.com/resaanet/" rel="nofllow" target="_blank" class="link">
           <instagram />
-          <span>resaa.medical</span>
+          <span>resaanet</span>
         </a>
         <a href="https://t.me/pezeshkeresaa" rel="nofllow" target="_blank" class="link">
           <telegram />
