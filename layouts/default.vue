@@ -23,11 +23,20 @@ import appNavigation from "~/components/navigation.vue";
 import appHeader from "~/components/header/header";
 import appFooter from "~/components/footer/footer";
 export default {
+  head() {
+    return {
+      htmlAttrs: {
+        lang: "fa-IR",
+        dir: "rtl"
+      }
+    };
+  },
   components: {
     appNavigation,
     appHeader,
     appFooter
   }
+
   // data() {
   //   return {
   //     clipped: false,

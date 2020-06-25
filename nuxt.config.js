@@ -28,13 +28,13 @@ export default {
   },
   proxy: {
     "/api/Mobile/": {
-      target: "http://resa-web.bsn.local"
+      target: "http://webold.develop.bsn.local"
     },
     "/api/MessageCallback/": {
-      target: "http://resa-web.bsn.local"
+      target: "http://webold.develop.bsn.local"
     },
     "/api/DoctorApp/": {
-      target: "http://resa-web.bsn.local"
+      target: "http://webold.develop.bsn.local"
     },
     "/api/": {
       target: process.env.API_URL,
@@ -70,6 +70,10 @@ export default {
   },
   head: {
     title: "رسا ، سامانه سلامت ایرانیان",
+    htmlAttrs: {
+      lang: "fa-IR",
+      dir: "rtl"
+    },
     meta: [
       {
         charset: "utf-8"

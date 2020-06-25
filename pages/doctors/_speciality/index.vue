@@ -73,8 +73,9 @@ export default {
       requestId = result.requestId;
     } catch (error) {}
     return {
-      title: category.title,
-      description: `دریافت ${category.title} فقط در سامانه رسا، با کمترین هزینه، بدون دریافت نوبت، بدون رفت و آمد، بدون انتظار و با بهترین مشاوران`,
+      title: category.pageHeaderTitle || category.title,
+      description: `دریافت ${category.pageHeaderTitle ||
+        category.title} فقط در سامانه رسا، با کمترین هزینه، بدون دریافت نوبت، بدون رفت و آمد، بدون انتظار و با بهترین مشاوران`,
       limit,
       requestId,
       totalItems,
