@@ -28,13 +28,13 @@ export default {
   },
   proxy: {
     "/api/Mobile/": {
-      target: "http://webold.develop.bsn.local"
+      target: "http://resa-web-old.bsn.local"
     },
     "/api/MessageCallback/": {
-      target: "http://webold.develop.bsn.local"
+      target: "http://resa-web-old.bsn.local"
     },
     "/api/DoctorApp/": {
-      target: "http://webold.develop.bsn.local"
+      target: "http://resa-web-old.bsn.local"
     },
     "/api/": {
       target: process.env.API_URL,
