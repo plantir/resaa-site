@@ -170,7 +170,7 @@
               <div class="form-input">
                 <v-text-field
                   hide-details
-                  v-validate="'required|postalCode'"
+                  v-validate="'postalCode'"
                   v-model="doctor.contactInformation.postalCode"
                   label="کد پستی مطب یا بیمارستان"
                   name="postalCode"
@@ -187,7 +187,6 @@
               <div class="form-input">
                 <v-text-field
                   hide-details
-                  v-validate="'required'"
                   v-model="doctor.contactInformation.address"
                   label="آدرس مطب یا بیمارستان"
                   name="address"

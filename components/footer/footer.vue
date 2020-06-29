@@ -434,7 +434,7 @@
               <a :href="`tel:${contactInfo.doctor_support.value}`" class="footer-tel">
                 <phone />
                 <p>
-                  پشتیبانی پزشکان :
+                  ثبت نام پزشکان :
                   <span>{{ contactInfo.doctor_support.text }}</span>
                 </p>
               </a>
