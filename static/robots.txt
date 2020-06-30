@@ -1,6 +1,7 @@
 user-agent: *
 disallow: /patient/profile
 disallow: dev.resaa.net/*
+disallow: mainweb.resaa.net/*
 disallow: next.resaa.net/*
 disallow: admin.resaa.net/*
 disallow: nw.resaa.net/*
