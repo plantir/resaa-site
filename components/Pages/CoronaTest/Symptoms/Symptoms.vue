@@ -59,7 +59,7 @@ h3 {
       color: #4a4a4a;
       padding: 0 12px;
       text-align: center;
-      font-size: 14px;
+      font-size: 13px;
     }
   }
 }
