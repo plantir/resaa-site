@@ -8,6 +8,8 @@
   p {
     color: #a5abb6;
     margin: 0;
+    padding: 0 10px;
+    text-align: center;
   }
 }
 </style>
