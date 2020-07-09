@@ -19,6 +19,22 @@
     }
   }
 }
+.boxAndForm {
+  .flex {
+    &:first-child {
+      order: 1;
+      @include media(md-and-up) {
+        order: 2;
+      }
+    }
+    &:last-child {
+      order: 2;
+      @include media(md-and-up) {
+        order: 1;
+      }
+    }
+  }
+}
 </style>
 <template>
   <section id="corona-test">
@@ -35,11 +51,11 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap class="boxAndForm">
-      <v-flex xs12 md8>
-        <FormBox />
-      </v-flex>
       <v-flex xs12 md4>
         <PriceBox />
+      </v-flex>
+      <v-flex xs12 md8>
+        <FormBox />
       </v-flex>
     </v-layout>
   </section>
