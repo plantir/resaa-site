@@ -39,7 +39,7 @@ h3 {
     height: 250px;
     background: #fff;
     margin: 16px;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.16);
     border-radius: 16px;
     display: flex;
     flex-direction: column;
