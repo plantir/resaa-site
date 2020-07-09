@@ -2,6 +2,9 @@
 .wrapper {
   text-align: center;
   margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   @include media(md-and-up) {
     margin-top: 60px;
     padding: 0 110px;
@@ -23,8 +26,16 @@ h3 {
   flex-wrap: wrap;
   justify-content: center;
   margin: 20px -16px;
+  padding: 0 20px;
+  max-width: 1065px;
+  @include media(md-and-up) {
+    padding: 0;
+  }
   .item {
-    width: 250px;
+    width: 100%;
+    @include media(md-and-up) {
+      width: 250px;
+    }
     height: 250px;
     background: #fff;
     margin: 16px;
