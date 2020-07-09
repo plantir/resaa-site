@@ -350,8 +350,7 @@
         <div v-if="editMode === false" class="profile-container">
           <div class="profile-avatar">
             <v-loading v-if="saving"></v-loading>
-            <img v-if="user_profile.image" :src="user_profile.image" alt />
-            <img v-else src="/img/user-placeholder.png" alt />
+            <img :src="image" alt />
             <div class="profile-avatar-edit-button">
               <label for="image">تغییر تصویر</label>
               <!-- <v-text-field
@@ -402,8 +401,7 @@
           <div class="profile-edit-input-area-container">
             <div class="profile-edit-avatar">
               <div class="profile-avatar">
-                <img v-if="user_profile.image" :src="user_profile.image" />
-                <img v-else src="/img/user-placeholder.png" alt />
+                <img :src="image" />
                 <div class="profile-avatar-edit-button">
                   <label for="image">تغییر تصویر</label>
                   <input
@@ -415,7 +413,7 @@
                   />
                 </div>
               </div>
-              <button v-if="user_profile.image" @click="removeImage">حذف عکس</button>
+              <button v-if="image !== '/img/user-placeholder.png'" @click="removeImage">حذف عکس</button>
             </div>
             <div class="profile-edit-left">
               <div class="profile-edit-input-container">
@@ -518,6 +516,7 @@ export default {
     this.ajaxLoading = true;
     let profile = await this.get_profile();
     this.user_profile = profile;
+    await this.getImage();
     this.ajaxLoading = false;
   },
   methods: {
@@ -551,9 +550,6 @@ export default {
         })
         .then(res => {
           return res.data.result.calls;
-          // if (this.user_profile) {
-          //   this.ajaxLoading = false;
-          // }
         });
     },
     save() {
@@ -576,7 +572,33 @@ export default {
         this.editMode = false;
       }
     },
-
+    _imageEncode(arrayBuffer) {
+      let u8 = new Uint8Array(arrayBuffer);
+      let b64encoded = btoa(
+        [].reduce.call(
+          new Uint8Array(arrayBuffer),
+          function(p, c) {
+            return p + String.fromCharCode(c);
+          },
+          ""
+        )
+      );
+      let mimetype = "image/jpeg";
+      return "data:" + mimetype + ";base64," + b64encoded;
+    },
+    async getImage() {
+      try {
+        let response = await this.$axios.get(
+          `Accounts/${this.user_id}/Profile/image`,
+          {
+            responseType: "arraybuffer"
+          }
+        );
+        this.image = this._imageEncode(response.data);
+      } catch (error) {
+        this.image = "/img/user-placeholder.png";
+      }
+    },
     changeImage(event) {
       let file = event.target.files[0];
       if (!file) {
@@ -605,7 +627,7 @@ export default {
         })
         .then(() => {
           this.saving = false;
-          this.get_profile();
+          this.getImage();
         });
     },
     removeImage() {
@@ -617,7 +639,7 @@ export default {
         })
         .then(() => {
           this.saving = false;
-          this.get_profile();
+          this.getImage();
         });
     },
     async logout() {
@@ -638,8 +660,18 @@ export default {
     user() {
       return this.$store.state.patient.user;
     },
+
     user_id() {
       return this.$store.state.patient.user_id;
+    },
+    async user_image() {
+      let response = await this.$axios.get(
+        `Accounts/${this.$store.state.patient.user_id}/Profile/Image`,
+        {
+          responseType: "arraybuffer"
+        }
+      );
+      return Buffer.from(response.data, "binary").toString("base64");
     }
   }
 };
