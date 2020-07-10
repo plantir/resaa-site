@@ -107,6 +107,9 @@
     }
   }
 }
+.input-detail {
+  text-align: center;
+}
 .reserve-btn {
   text-align: center;
   margin-top: 20px;
@@ -123,64 +126,126 @@
       <h3>فرم رزرو تست کرونا در منزل</h3>
       <p>برای انجام تست کرونا در منزل لازم است فرم زیر را پر کنید تا پشتیبانی رسا بلافاصله برای هماهنگی بیشتر با شما تماس بگیرد.</p>
       <div class="form-wrapper">
-        <div class="form-group">
-          <label required>انتخاب نوع تست</label>
-          <v-select
-            v-model="form.type"
-            :items="testItems"
-            :error-messages="errors.collect('type')"
-            data-vv-as="نوع تست"
-            v-validate="'required'"
-            name="type"
-            single-line
-            outline
-            placeholder="لطفا نوع تستی مورد نظر خود را انتخاب نمایید"
-          ></v-select>
-        </div>
-        <div class="form-group">
-          <label required>نام و نام خانوادگی</label>
-          <v-text-field
-            v-model="form.name"
-            :error-messages="errors.collect('name')"
-            data-vv-as="نام و نام خانوادگی"
-            name="name"
-            v-validate="'required'"
-            single-line
-            outline
-            placeholder="لطفا نام و نام خانوادگی خود را وارد نمایید"
-          ></v-text-field>
-        </div>
-        <div class="form-group">
-          <label required>شماره تلفن همراه</label>
-          <v-text-field
-            v-model="form.mobile"
-            :error-messages="errors.collect('mobile')"
-            data-vv-as="شماره تلفن همراه"
-            name="mobile"
-            v-fix-digit
-            v-validate="'required|mobile'"
-            single-line
-            outline
-            placeholder="لطفا شماره تلفن همراه خود را وارد نمایید"
-          ></v-text-field>
-        </div>
-        <div class="form-group">
-          <label required>نشانی</label>
-          <v-textarea
-            v-model="form.address"
-            :error-messages="errors.collect('address')"
-            data-vv-as="نشانی"
-            name="address"
-            v-validate="'required'"
-            single-line
-            outline
-            no-resize
-            placeholder="لطفا نشانی کامل محل سکونت خود را وارد نمایید"
-          ></v-textarea>
-        </div>
-        <div class="reserve-btn">
-          <v-btn color="success" round @click="send">رزرو تست کرونا</v-btn>
-        </div>
+        <template v-if="!need_verify">
+          <div class="form-group">
+            <label required>انتخاب نوع تست</label>
+            <v-select
+              v-model="form.type"
+              :items="testItems"
+              :error-messages="errors.collect('type')"
+              data-vv-as="نوع تست"
+              v-validate="'required'"
+              name="type"
+              single-line
+              outline
+              placeholder="لطفا نوع تستی مورد نظر خود را انتخاب نمایید"
+            ></v-select>
+          </div>
+          <div class="form-group">
+            <label required>نام و نام خانوادگی</label>
+            <v-text-field
+              v-model="form.name"
+              :error-messages="errors.collect('name')"
+              data-vv-as="نام و نام خانوادگی"
+              name="name"
+              v-validate="'required'"
+              single-line
+              outline
+              placeholder="لطفا نام و نام خانوادگی خود را وارد نمایید"
+            ></v-text-field>
+          </div>
+          <div class="form-group">
+            <label required>شماره تلفن همراه</label>
+            <v-text-field
+              v-model="form.mobile"
+              :error-messages="errors.collect('mobile')"
+              data-vv-as="شماره تلفن همراه"
+              name="mobile"
+              v-fix-digit
+              v-validate="'required|mobile'"
+              single-line
+              outline
+              placeholder="لطفا شماره تلفن همراه خود را وارد نمایید"
+            ></v-text-field>
+          </div>
+          <div class="form-group">
+            <label required>نشانی</label>
+            <v-textarea
+              v-model="form.address"
+              :error-messages="errors.collect('address')"
+              data-vv-as="نشانی"
+              name="address"
+              v-validate="'required'"
+              single-line
+              outline
+              no-resize
+              placeholder="لطفا نشانی کامل محل سکونت خود را وارد نمایید"
+            ></v-textarea>
+          </div>
+          <div class="reserve-btn">
+            <v-btn color="success" round @click="send">رزرو تست کرونا</v-btn>
+          </div>
+        </template>
+        <template v-else>
+          <div v-if="new_user">
+            <v-alert type="info" :value="true" class="mb-3">
+              یک پیامک حاوی کد تایید برای شماره {{ form.mobile }} ارسال شد.
+              <div class="caption">لطفا کد ارسال شده را وارد نمایید</div>
+            </v-alert>
+            <div class="form-group">
+              <label required>کد تایید</label>
+              <v-text-field
+                v-model="activationKey"
+                :error-messages="errors.collect('activationKey')"
+                data-vv-as="کد تایید"
+                name="activationKey"
+                v-validate="'required'"
+                single-line
+                outline
+                placeholder="کد تایید را وارد نمایید"
+                @keyup.enter="verifySMSCode"
+              ></v-text-field>
+            </div>
+            <div class="reserve-btn">
+              <v-btn color="success" round @click="verifySMSCode">ارسال و رزرو تست کرونا</v-btn>
+            </div>
+            <div class="input-detail">
+              <div v-if="resendSMSCode_timeout == 0">
+                <a @click="resendSMSCode">ارسال مجدد کد</a>
+              </div>
+              <div v-else class="register-code-resend">
+                <a>
+                  کد برای شما ارسال شد لطفا منتظر بمانید
+                  {{ resendSMSCode_timeout }}
+                  ثانیه
+                </a>
+              </div>
+            </div>
+          </div>
+          <div v-else>
+            <v-alert type="info" :value="true" class="mb-3">
+              این شماره موبایل در سیستم رسا موجود میباشد لطفا با وارد کردن رمز عبور به حساب کاربری خود وارد شوید
+              <br />در صورتیکه رمز عبور خود را ندارید عدد ۱ را به ۱۰۰۰۷۴۴۷۱۱۱۱
+              پیامک کنید
+            </v-alert>
+            <div class="form-group">
+              <label required>رمز عبور</label>
+              <v-text-field
+                v-model="password"
+                :error-messages="errors.collect('password')"
+                data-vv-as="رمز عبور"
+                name="password"
+                v-validate="'required'"
+                single-line
+                outline
+                placeholder="لطفا رمز عبور خود را وارد نمایید"
+              ></v-text-field>
+            </div>
+            <div class="reserve-btn">
+              <v-btn color="success" round @click="login">ورود و رزرو تست کرونا</v-btn>
+            </div>
+          </div>
+        </template>
       </div>
     </div>
   </section>
@@ -194,8 +259,14 @@ export default {
   },
   data() {
     return {
+      resendSMSCode_timeout: 0,
+      registrationToken: null,
+      need_verify: false,
+      new_user: false,
       user: {},
       form: {},
+      activationKey: null,
+      password: null,
       testItems: [
         {
           text: "تست PCR",
@@ -221,7 +292,7 @@ export default {
         if (this.user_id) {
           this.chargeRequest();
         } else {
-          this.register({ phoneNumber: data.mobile });
+          this.register({ phoneNumber: this.form.mobile });
         }
       }
     },
@@ -270,7 +341,7 @@ export default {
         // localStorage.setItem("cronaTest", JSON.stringify(cronaTest));
         this.$storage.setCookie("cronaTest", JSON.stringify(cronaTest));
         this.$storage.setUniversal("cronaTest", JSON.stringify(cronaTest));
-        // this.goPayment(address, token);
+        this.goPayment(address, token);
       } catch (error) {
         this.$toast.error().showSimple("خطایی رخ داده است");
       }
@@ -291,11 +362,19 @@ export default {
       try {
         user.loginOrigin = localStorage.getItem("referrer");
         let res = await this.$axios.post("/Patients/Registration", user);
-        user.registrationToken = res.data.result.registrationToken.value;
+        this.registrationToken = res.data.result.registrationToken.value;
         this.new_user = true;
+        this.need_verify = true;
       } catch (error) {
         if (error.response.data.code == 409) {
           this.new_user = false;
+          this.need_verify = true;
+        } else {
+          this.$toast
+            .error()
+            .showSimple(
+              "خطایی رخ داده است لطفا شماره موبایل خود را مجددا بررسی نمایید"
+            );
         }
       }
       this.loading.hide();
@@ -303,9 +382,9 @@ export default {
     async verifySMSCode() {
       try {
         let response = await this.$axios.patch(
-          `/Patients/Registration/${this.user.registrationToken}`,
+          `/Patients/Registration/${this.registrationToken}`,
           {
-            activationKey: this.user.activationKey
+            activationKey: this.activationKey
           }
         );
         if (response.data.status === "OK") {
@@ -314,16 +393,16 @@ export default {
             access_token: response.data.result.token
           });
           this.$store.commit("patient/initialize_user");
-          this.$router.push("charge");
+          this.chargeRequest();
         } else {
-          this.errorMessage = "کد وارد شده صحیح نمی باشد";
+          this.$toast.error().showSimple("کد وارد شده صحیح نمی باشد");
         }
       } catch (error) {}
     },
     async resendSMSCode() {
       try {
         let response = await this.$axios.post(
-          `/Patients/Registration/${this.user.registrationToken}/ResendActivationKey`
+          `/Patients/Registration/${this.registrationToken}/ResendActivationKey`
         );
         if (response.data.status === "OK") {
           this.resendSMSCode_timeout = 120;
@@ -341,37 +420,21 @@ export default {
       }
     },
     async login() {
-      this.ajaxLoading = true;
-      let data = `username=${this.user.phoneNumber}&password=${this.user.password}&grant_type=password`;
+      let loading = this.$loader.show("#FormBox");
+      let data = `username=${this.form.mobile}&password=${this.password}&grant_type=password`;
       try {
         let res = await this.$axios.post("/oauth2/token", data, {
           headers: {
             "Content-type": "application/x-www-form-urlencoded"
           }
         });
-        let decoded_token = jwtDecode(res.data.access_token);
-        let id =
-          decoded_token[
-            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
-          ];
-        try {
-          let Response = await this.$axios.get(`/Accounts/${id}/Profile`, {
-            headers: {
-              Authorization: `Bearer ${res.data.access_token}`
-            }
-          });
-          res.data.firstName = Response.data.result.profile.firstName;
-          this.ajaxLoading = false;
-          this.$store.commit("patient/login", res.data);
-          this.$store.commit("patient/initialize_user");
-          let return_url = this.$route.query.return_url;
-          this.$router.push("charge");
-        } catch (error) {}
+        this.$store.commit("patient/login", res.data);
+        this.$store.commit("patient/initialize_user");
+        this.chargeRequest();
       } catch (error) {
         this.$toast.error().showSimple("نام کاربری یا رمز عبور اشتباه است");
-        this.erroMessage = "نام کاربری یا رمز عبور اشتباه است";
       }
-      this.ajaxLoading = false;
+      loading.hide();
     }
   }
 };
