@@ -200,9 +200,10 @@
             <label required>نام و نام خانوادگی</label>
             <v-text-field
               v-model="form.name"
-              :error-messages="errors.collect('name')"
+              autocomplete="new-password"
+              :error-messages="errors.collect('nandf')"
               data-vv-as="نام و نام خانوادگی"
-              name="name"
+              name="nandf"
               v-validate="'required'"
               single-line
               outline
@@ -213,10 +214,12 @@
             <label required>شماره تلفن همراه</label>
             <v-text-field
               v-model="form.mobile"
-              :error-messages="errors.collect('mobile')"
+              autocomplete="new-password"
+              :error-messages="errors.collect('m')"
               data-vv-as="شماره تلفن همراه"
-              name="mobile"
+              name="m"
               v-fix-digit
+              hint="کاربر گرامی لطفا شماره موبایلی را وارد کنید که هم اکنون برای وارد کردن کد تایید به آن دسترسی دارید"
               v-validate="'required|mobile'"
               single-line
               outline
@@ -228,6 +231,7 @@
             <v-textarea
               v-model="form.address"
               :error-messages="errors.collect('address')"
+              autocomplete="new-password"
               data-vv-as="نشانی"
               name="address"
               v-validate="'required'"
