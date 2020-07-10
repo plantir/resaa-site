@@ -26,6 +26,10 @@
 .text {
   margin-top: 20px;
   flex: 0 0 50%;
+  text-align: center;
+  @include media(md-and-up) {
+    text-align: right;
+  }
   h1 {
     color: #212020;
     font-size: 30px;
@@ -36,12 +40,11 @@
     }
   }
   p {
-    text-align: justify;
+    text-align: center;
     color: #717171;
-    font-size: 14px;
     @include media(md-and-up) {
+      text-align: justify;
       max-width: 400px;
-      font-size: 18px;
       margin-bottom: 40px;
     }
   }
@@ -65,10 +68,19 @@
     <div class="wrapper">
       <div class="text">
         <h1>تست ویروس کرونا در منزل</h1>
-        <p>اگر ساکن تهران هستید همین امروز می توانید در منزل خود تست کرونا دهید. متخصصین آزمایشگاه میلاد برای تست آنتی بادی یا تست PCR در محل خودتان نمونه می گیرند و نتیجه را ظرف 24 ساعت به صورت آنلاین به شما اعلام می کنند.</p>
+        <p>
+          اگر ساکن تهران هستید همین امروز می توانید در منزل خود تست کرونا دهید. متخصصین
+          <strong>آزمایشگاه میلاد</strong> برای تست آنتی بادی یا تست PCR در محل خودتان نمونه می گیرند و نتیجه را ظرف 24 ساعت به صورت آنلاین به شما اعلام می کنند.
+        </p>
         <div class="button-wrapper">
-          <v-btn class="reserve-btn" dark round depressed>رزرو تست کرونا</v-btn>
-          <v-btn color="primary" outline round>تماس با پشتیبانی</v-btn>
+          <v-btn
+            v-scroll-to="{el:'#FormBox',offset: 0, duration:1000 }"
+            class="reserve-btn"
+            dark
+            round
+            depressed
+          >رزرو تست کرونا</v-btn>
+          <v-btn href="tel:02174471300" color="primary" outline round>تماس با پشتیبانی</v-btn>
         </div>
       </div>
       <div class="image">

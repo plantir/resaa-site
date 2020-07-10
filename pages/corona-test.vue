@@ -3,34 +3,52 @@
   p {
     font-size: 16px;
   }
-}
-.coopretaionAndFaq,
-.boxAndForm {
-  margin-top: 30px;
-  .flex {
+  h2 {
+    color: #212020;
+    font-size: 28px;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  h3 {
+    color: #212020;
+    font-size: 18px;
+  }
+  strong {
+    font-weight: 700;
+    color: #212020;
+  }
+  .coopretaionAndFaq,
+  .boxAndForm {
+    margin-top: 50px;
     @include media(md-and-up) {
-      padding: 16px;
+      margin-top: 30px;
     }
-    + .flex {
-      margin-top: 16px;
+    .flex {
       @include media(md-and-up) {
-        margin-top: 0;
+        padding: 16px;
+      }
+      + .flex {
+        margin-top: 30px;
+        @include media(md-and-up) {
+          margin-top: 0;
+        }
       }
     }
   }
-}
-.boxAndForm {
-  .flex {
-    &:first-child {
-      order: 1;
-      @include media(md-and-up) {
-        order: 2;
-      }
-    }
-    &:last-child {
-      order: 2;
-      @include media(md-and-up) {
+  .boxAndForm {
+    margin-bottom: 40px;
+    .flex {
+      &:first-child {
         order: 1;
+        @include media(md-and-up) {
+          order: 2;
+        }
+      }
+      &:last-child {
+        order: 2;
+        @include media(md-and-up) {
+          order: 1;
+        }
       }
     }
   }
@@ -55,7 +73,7 @@
         <PriceBox />
       </v-flex>
       <v-flex xs12 md8>
-        <FormBox />
+        <FormBox @onRequest="requestTest" />
       </v-flex>
     </v-layout>
   </section>
@@ -164,6 +182,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    requestTest() {
+      let loading = this.$loader.show("#FormBox");
+    }
   }
 };
 </script>

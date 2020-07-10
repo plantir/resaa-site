@@ -82,31 +82,9 @@
     </div>
     <v-list>
       <template v-for="(item, index) in items">
-        <v-list-group :key="index" v-if="item.children" no-action>
-          <template v-slot:activator>
-            <v-list-tile>
-              <v-list-tile-content>
-                <v-list-tile-title>{{ item.name }}</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </template>
-          <v-list-tile v-for="(child,i) in item.children" :key="i">
-            <v-list-tile-content>
-              <nuxt-link
-                @click.native="closeNav"
-                :to="child.path"
-                class="nav-main__list-item"
-              >{{ child.name }}</nuxt-link>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list-group>
-        <v-list-tile v-else :key="index">
+        <v-list-tile :key="index">
           <v-list-tile-content>
-            <nuxt-link
-              @click.native="closeNav"
-              :to="item.path"
-              class="nav-main__list-item"
-            >{{ item.name }}</nuxt-link>
+            <a @click="closeNav" v-scroll-to="item.to" class="nav-main__list-item">{{ item.name }}</a>
           </v-list-tile-content>
         </v-list-tile>
       </template>

@@ -39,28 +39,29 @@ export default {
       }
     };
   },
+
   data() {
     return {
       itemsList: [
         {
           name: "تست ویروس کرونا در منزل",
-          path: { name: "index" }
+          to: { el: "#FirstFord", offset: -200 }
         },
         {
           name: "علائم شایع کرونا",
-          path: { name: "doctors" }
+          to: { el: "#Symptoms", offset: -100 }
         },
         {
           name: "تست آنتی بادی",
-          path: "/doctors/psychology"
+          to: { el: "#AntyBody", offset: -100 }
         },
         {
           name: "تست PCR",
-          path: { name: "faq" }
+          to: { el: "#Pcr", offset: -100 }
         },
         {
           name: "رزرو تست کرونا",
-          path: { name: "about" }
+          to: { el: "#PriceBox", offset: -100 }
         }
       ]
     };

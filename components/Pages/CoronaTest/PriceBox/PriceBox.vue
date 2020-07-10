@@ -38,7 +38,7 @@ p {
 <template>
   <section id="PriceBox">
     <div class="wrapper">
-      <h2>هزینه آزمایش ها:</h2>
+      <h3>هزینه آزمایش ها:</h3>
       <div class="price-wrapper">
         <div class="item">
           <span>تست آنتی بادی</span>
@@ -55,7 +55,7 @@ p {
       </div>
       <p>برای اطلاعات بیشتر و ثبت تلفنی درخواست تست کرونا می توانید با پشتیبانی رسا صحبت کنید</p>
       <v-spacer></v-spacer>
-      <v-btn color="primary" round outline>تماس با پشتیبانی</v-btn>
+      <v-btn href="tel:02174471300" color="primary" round outline>تماس با پشتیبانی</v-btn>
     </div>
   </section>
 </template>

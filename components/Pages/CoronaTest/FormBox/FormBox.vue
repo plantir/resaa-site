@@ -10,7 +10,7 @@
   @include media(md-and-up) {
     padding: 20px 30px;
   }
-  h4 {
+  p {
     max-width: 500px;
     text-align: center;
     font-weight: 400;
@@ -30,24 +30,25 @@
   @include media(md-and-up) {
     flex-direction: row;
   }
-  + .form-group {
-    margin-top: 16px;
-  }
+
   > label {
     flex: 0 0 100%;
     color: #4a4a4a;
-    padding: 12px 0;
+    padding: 0 12px 12px 0;
     @include media(md-and-up) {
       flex: 0 0 25%;
-      padding: 12px;
+      padding: 6px;
     }
-    &.required:after {
+    &[required]:after {
       content: "*";
       margin-right: 4px;
       color: #e91e63;
     }
   }
   ::v-deep {
+    .v-input--is-dirty.invalid .v-input__slot {
+      border-color: #e91e63 !important;
+    }
     .v-input {
       font-size: 13px;
       &.v-input--is-focused {
@@ -119,14 +120,17 @@
 <template>
   <section id="FormBox">
     <div class="wrapper">
-      <h2>فرم رزرو تست کرونا در منزل</h2>
-      <h4>برای انجام تست کرونا در منزل لازم است فرم زیر را پر کنید تا پشتیبانی رسا بلافاصله برای هماهنگی بیشتر با شما تماس بگیرد.</h4>
+      <h3>فرم رزرو تست کرونا در منزل</h3>
+      <p>برای انجام تست کرونا در منزل لازم است فرم زیر را پر کنید تا پشتیبانی رسا بلافاصله برای هماهنگی بیشتر با شما تماس بگیرد.</p>
       <div class="form-wrapper">
         <div class="form-group">
-          <label for>انتخاب نوع تست</label>
+          <label required>انتخاب نوع تست</label>
           <v-select
             :items="testItems"
-            hide-details
+            :error-messages="errors.collect('type')"
+            data-vv-as="نوع تست"
+            v-validate="'required'"
+            name="type"
             v-model="form.type"
             single-line
             outline
@@ -134,40 +138,47 @@
           ></v-select>
         </div>
         <div class="form-group">
-          <label for>نام و نام خانوادگی</label>
+          <label required>نام و نام خانوادگی</label>
           <v-text-field
+            v-model="form.name"
+            :error-messages="errors.collect('name')"
+            data-vv-as="نام و نام خانوادگی"
             name="name"
-            hide-details
+            v-validate="'required'"
             single-line
             outline
             placeholder="لطفا نام و نام خانوادگی خود را وارد نمایید"
-            id="id"
           ></v-text-field>
         </div>
         <div class="form-group">
-          <label for>شماره تلفن همراه</label>
+          <label required>شماره تلفن همراه</label>
           <v-text-field
-            name="name"
-            hide-details
+            v-model="form.phone"
+            :error-messages="errors.collect('phone')"
+            data-vv-as="شماره تلفن همراه"
+            name="phone"
+            v-validate="'required|mobile'"
             single-line
             outline
             placeholder="لطفا شماره تلفن همراه خود را وارد نمایید"
-            id="id"
           ></v-text-field>
         </div>
         <div class="form-group">
-          <label for>نشانی</label>
+          <label required>نشانی</label>
           <v-textarea
-            name="name"
-            hide-details
+            v-model="form.address"
+            :error-messages="errors.collect('address')"
+            data-vv-as="نشانی"
+            name="address"
+            v-validate="'required'"
             single-line
             outline
+            no-resize
             placeholder="لطفا نشانی کامل محل سکونت خود را وارد نمایید"
-            id="id"
           ></v-textarea>
         </div>
         <div class="reserve-btn">
-          <v-btn color="success" round>رزرو تست کرونا</v-btn>
+          <v-btn color="success" round @click="send">رزرو تست کرونا</v-btn>
         </div>
       </div>
     </div>
@@ -193,6 +204,14 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    async send() {
+      let valid = await this.$validator.validateAll();
+      if (valid) {
+        this.$emit("onRequest", this.form);
+      }
+    }
   }
 };
 </script>

@@ -1,26 +1,15 @@
 <style lang="scss" scoped>
 .wrapper {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
   @include media(md-and-up) {
-    margin-top: 60px;
     padding: 0 110px;
   }
 }
-h2 {
-  color: #212020;
-  font-size: 32px;
-  margin-bottom: 12px;
-  font-weight: 500;
-}
-h3 {
-  color: #6e6e6e;
-  font-size: 20px;
-  font-weight: 400;
-}
+
 .item-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -79,7 +68,7 @@ h3 {
   <section id="Symptoms">
     <div class="wrapper">
       <h2>علائم شایع کرونا</h2>
-      <h3>اگر هر یک از این علائم را دارید می توانید با تست در منزل از سلامت یا ابتلای خود مطمئن شوید</h3>
+      <p>اگر هر یک از این علائم را دارید می توانید با تست در منزل از سلامت یا ابتلای خود مطلع شوید</p>
       <div class="item-wrapper">
         <div class="item" v-for="(item, index) in items" :key="index">
           <div class="item--image">

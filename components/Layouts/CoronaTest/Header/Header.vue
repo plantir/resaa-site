@@ -24,7 +24,7 @@
         <div class="navigation-bar-items">
           <ul class="nav">
             <li class="nav-item" v-for="(item, index) in items" :key="index">
-              <nuxt-link :to="{ name: 'faq' }" class="navigation-bar-item">{{item.name}}</nuxt-link>
+              <a v-scroll-to="item.to" class="navigation-bar-item">{{item.name}}</a>
             </li>
           </ul>
         </div>
