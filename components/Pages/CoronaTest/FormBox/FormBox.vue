@@ -270,15 +270,15 @@ export default {
       testItems: [
         {
           text: "تست PCR",
-          value: { chargeId: 36, doctorId: 6843 }
+          value: { chargeId: 36, doctorId: 2304 }
         },
         {
           text: "تست آنتی بادی",
-          value: { chargeId: 37, doctorId: 6843 }
+          value: { chargeId: 37, doctorId: 2305 }
         },
         {
           text: "هر دو",
-          value: { chargeId: 38, doctorId: 6843 }
+          value: { chargeId: 38, doctorId: 2306 }
         }
       ]
     };
