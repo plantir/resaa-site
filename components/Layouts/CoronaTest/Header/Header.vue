@@ -31,7 +31,7 @@
       </div>
       <div class="navigation-bar-left">
         <div>
-          <v-btn href="tel:02174471300" color="secondary" outline round>تماس با پشتیبانی</v-btn>
+          <v-btn href="tel:02174471300" color="primary" outline round>تماس با پشتیبانی</v-btn>
         </div>
       </div>
     </div>
@@ -42,6 +42,7 @@
 export default {
   props: ["items"],
   mounted() {
+    this.$store.commit("patient/initialize_user");
     window.addEventListener("scroll", this.handleScroll);
   },
   destroyed() {
