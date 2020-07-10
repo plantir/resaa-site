@@ -42,7 +42,7 @@ p {
       <div class="price-wrapper">
         <div class="item">
           <span>تست آنتی بادی</span>
-          <span>۱۵۰ هزار تومان</span>
+          <span>۲۲۰ هزار تومان</span>
         </div>
         <div class="item">
           <span>تست PCR</span>
@@ -50,7 +50,7 @@ p {
         </div>
         <div class="item">
           <span>تست آنتی بادی + PCR</span>
-          <span>۶۰۰ هزار تومان</span>
+          <span>۶۵۰ هزار تومان</span>
         </div>
       </div>
       <p>برای اطلاعات بیشتر و ثبت تلفنی درخواست تست کرونا می توانید با پشتیبانی رسا صحبت کنید</p>

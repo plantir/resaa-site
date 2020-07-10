@@ -112,21 +112,76 @@
 }
 .reserve-btn {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 16px;
   .v-btn {
     width: 180px;
     background: linear-gradient(to right, #28db9a, #0ec7e5);
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16);
   }
 }
+.price-wrapper {
+  width: 100%;
+  margin: 40px 70px;
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 58px;
+    border-bottom: 2px dashed #aaa;
+    font-size: 16px;
+    font-weight: 500;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
 </style>
 <template>
   <section id="FormBox">
     <div class="wrapper">
-      <h3>فرم رزرو تست کرونا در منزل</h3>
-      <p>برای انجام تست کرونا در منزل لازم است فرم زیر را پر کنید تا پشتیبانی رسا بلافاصله برای هماهنگی بیشتر با شما تماس بگیرد.</p>
+      <template v-if="showFactor">
+        <h3>پیش فاکتور تست کرونا در منزل</h3>
+        <p>با فشردن دکمه پرداخت اینترنتی می توانید هزینه تست انتخابی خود را به صورت آنلاین پرداخت کنید.</p>
+      </template>
+      <template v-else>
+        <h3>فرم رزرو تست کرونا در منزل</h3>
+        <p>برای انجام تست کرونا در منزل لازم است فرم زیر را پر کنید تا پشتیبانی رسا بلافاصله برای هماهنگی بیشتر با شما تماس بگیرد.</p>
+      </template>
       <div class="form-wrapper">
-        <template v-if="!need_verify">
+        <template v-if="showFactor">
+          <div class="price-wrapper">
+            <div class="item">
+              <span>نام و نام خانوادگی</span>
+              <span>{{form.name}}</span>
+            </div>
+            <div class="item">
+              <span>شماره تلفن همراه</span>
+              <span>{{form.mobile | persianDigit}}</span>
+            </div>
+            <div class="item">
+              <span>تست انتخاب شده</span>
+              <span>{{form.type.name}}</span>
+            </div>
+            <div class="item">
+              <span>هزینه تست</span>
+              <span>{{form.type.price | persianDigit}} هزار تومان</span>
+            </div>
+            <div class="item">
+              <span>تاریخ پرداخت</span>
+              <span>{{date | persianDigit}}</span>
+            </div>
+          </div>
+          <div class="d-flex justify-center">
+            <div class="reserve-btn">
+              <v-btn color="success" round @click="goPayment">پرداخت</v-btn>
+            </div>
+            <v-btn class="mt-4" round flat color="gray" @click="showFactor = false">
+              <span>بازگشت</span>
+              <v-icon class="mr-3">la-arrow-left</v-icon>
+            </v-btn>
+          </div>
+        </template>
+        <template v-else-if="!need_verify">
           <div class="form-group">
             <label required>انتخاب نوع تست</label>
             <v-select
@@ -183,7 +238,7 @@
             ></v-textarea>
           </div>
           <div class="reserve-btn">
-            <v-btn color="success" round @click="send">رزرو تست کرونا</v-btn>
+            <v-btn color="success" round @click="submit">رزرو تست کرونا</v-btn>
           </div>
         </template>
         <template v-else>
@@ -251,14 +306,19 @@
   </section>
 </template>
 <script>
+import moment from "moment-jalaali";
 export default {
   computed: {
     user_id() {
       return this.$store.state.patient.user_id;
+    },
+    date() {
+      return moment().format("jYYYY/jMM/jDD");
     }
   },
   data() {
     return {
+      showFactor: false,
       resendSMSCode_timeout: 0,
       registrationToken: null,
       need_verify: false,
@@ -270,22 +330,32 @@ export default {
       testItems: [
         {
           text: "تست PCR",
-          value: { chargeId: 36, doctorId: 2304 }
+          value: { name: "تست PCR", price: 220, chargeId: 36, doctorId: 2304 }
         },
         {
           text: "تست آنتی بادی",
-          value: { chargeId: 37, doctorId: 2305 }
+          value: {
+            name: "تست آنتی بادی",
+            price: 550,
+            chargeId: 37,
+            doctorId: 2305
+          }
         },
         {
-          text: "هر دو",
-          value: { chargeId: 38, doctorId: 2306 }
+          text: "تست آنتی بادی و تست PCR",
+          value: {
+            name: "تست آنتی بادی و تست PCR",
+            price: 650,
+            chargeId: 38,
+            doctorId: 2306
+          }
         }
       ]
     };
   },
   async mounted() {},
   methods: {
-    async send() {
+    async submit() {
       let valid = await this.$validator.validateAll();
       if (valid) {
         this.loading = this.$loader.show("#FormBox");
@@ -319,6 +389,8 @@ export default {
           address,
           submissionParameters: { token }
         } = response.data.result.electronicPaymentVoucher.gateway;
+        this.address = address;
+        this.token = token;
         let cronaTest = await this.$axios.$post(
           process.env.EXTRA_API_URL + "/corona-test",
           {
@@ -341,18 +413,19 @@ export default {
         // localStorage.setItem("cronaTest", JSON.stringify(cronaTest));
         this.$storage.setCookie("cronaTest", JSON.stringify(cronaTest));
         this.$storage.setUniversal("cronaTest", JSON.stringify(cronaTest));
-        this.goPayment(address, token);
+        // this.goPayment(address, token);
+        this.showFactor = true;
       } catch (error) {
         this.$toast.error().showSimple("خطایی رخ داده است");
       }
       this.loading.hide();
     },
-    goPayment(action, token) {
+    goPayment() {
       const form = document.createElement("form");
       form.method = "POST";
-      form.action = action;
+      form.action = this.address;
       const input = document.createElement("input");
-      input.value = token;
+      input.value = this.token;
       input.name = "token";
       form.appendChild(input);
       document.body.appendChild(form);
