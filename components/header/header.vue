@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" >
 #navigation {
   .navigation-bar {
     top: 0;

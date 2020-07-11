@@ -2,9 +2,7 @@ import VuetifyLoaderPlugin from "vuetify-loader/lib/plugin";
 import axios from "axios";
 const related = require("./related_categories");
 // { Orthopaedics: 1, "General-practitioner": 4, psychology: 8 };
-require("dotenv").config({
-  path: process.env.NODE_ENV == "development" ? ".env.development" : ".env"
-});
+require("dotenv").config({});
 // import shrinkRay from 'shrink-ray'
 export default {
   mode: process.env.MODE || "universal",

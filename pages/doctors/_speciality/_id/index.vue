@@ -91,13 +91,13 @@
 </template>
 
 <script>
-import Info from "@/components/doctor_detail/Info";
-import Call from "@/components/doctor_detail/Call";
-import Why from "@/components/doctor_detail/Why";
-import Address from "@/components/doctor_detail/Address";
+import Info from "@/components/doctor_detail/info";
+import Call from "@/components/doctor_detail/call";
+import Why from "@/components/doctor_detail/why";
+import Address from "@/components/doctor_detail/address";
 import RelatedDoctors from "@/components/doctor_detail/RelatedDoctors";
-import Comments from "@/components/doctor_detail/Comments";
-import Social from "@/components/doctor_detail/Social";
+import Comments from "@/components/doctor_detail/comments";
+import Social from "@/components/doctor_detail/social";
 import doctors from "@/components/doctor_detail/doctors.json";
 export default {
   head() {
