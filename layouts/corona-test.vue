@@ -1,10 +1,8 @@
 <style lang="scss" scoped>
 main {
   padding: 0 20px;
-  margin-top: 90px;
   @include media(md-and-up) {
     padding: 0 100px;
-    margin-top: 150px;
   }
 }
 .application {

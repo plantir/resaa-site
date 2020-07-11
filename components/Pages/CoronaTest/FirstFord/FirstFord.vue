@@ -3,7 +3,9 @@
   display: flex;
   flex-direction: column-reverse;
   justify-content: center;
+  margin-top: 90px;
   @include media(md-and-up) {
+    margin-top: 150px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -70,7 +72,7 @@
         <h1>تست ویروس کرونا در منزل</h1>
         <p>
           اگر ساکن تهران هستید همین امروز می توانید در منزل خود تست کرونا دهید. متخصصین
-          <strong>آزمایشگاه میلاد</strong> برای تست آنتی بادی یا تست PCR در محل خودتان نمونه می گیرند و نتیجه را ظرف 24 ساعت به صورت آنلاین به شما اعلام می کنند.
+          <strong>آزمایشگاه</strong> برای تست آنتی بادی یا تست PCR در محل خودتان نمونه می گیرند و نتیجه را ظرف 24 ساعت به صورت آنلاین به شما اعلام می کنند.
         </p>
         <div class="button-wrapper">
           <v-btn

@@ -6,6 +6,11 @@
       box-shadow: 0 1px 5px rgba(0, 0, 0, 0.16);
       border-radius: 10px;
       background: #fff;
+      font-size: 16px;
+      @include media(md-and-up) {
+        font-size: 18px;
+        min-height: 68px;
+      }
     }
     .v-expansion-panel__body {
       padding-top: 20px;
@@ -15,6 +20,8 @@
         overflow: hidden;
         box-shadow: 0 1px 5px rgba(0, 0, 0, 0.16) !important;
         border-radius: 10px;
+        font-size: 16px;
+        line-height: 28px;
       }
     }
     .v-expansion-panel__container {
