@@ -121,7 +121,6 @@
 }
 .price-wrapper {
   width: 100%;
-  margin: 40px 70px;
   .item {
     display: flex;
     justify-content: space-between;
