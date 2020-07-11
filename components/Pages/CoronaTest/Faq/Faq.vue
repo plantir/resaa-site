@@ -7,9 +7,9 @@
       border-radius: 10px;
       background: #fff;
       font-size: 16px;
+      font-weight: 700;
       @include media(md-and-up) {
-        font-size: 18px;
-        min-height: 68px;
+        min-height: 60px;
       }
     }
     .v-expansion-panel__body {
