@@ -121,24 +121,32 @@
 <template>
   <section id="corona-test">
     <v-layout row wrap>
-      <FirstFord />
+      <v-flex xs12>
+        <FirstFord />
+      </v-flex>
       <v-img width="83px" class="virus top-firstford" src="/img/corona-test/virus.png"></v-img>
       <v-img width="95px" class="virus center-firstford" src="/img/corona-test/virus.png"></v-img>
       <v-img width="69px" class="virus bottom-firstford" src="/img/corona-test/virus.png"></v-img>
     </v-layout>
     <v-layout row wrap>
-      <Symptoms />
+      <v-flex xs12>
+        <Symptoms />
+      </v-flex>
       <v-img width="38px" class="virus left-top-symptoms" src="/img/corona-test/virus.png"></v-img>
       <v-img width="52px" class="virus right-top-symptoms" src="/img/corona-test/virus.png"></v-img>
       <v-img width="38px" class="virus left-bottom-symptoms" src="/img/corona-test/virus.png"></v-img>
       <v-img width="116px" class="virus right-bottom-symptoms" src="/img/corona-test/virus.png"></v-img>
     </v-layout>
     <v-layout row wrap>
-      <AntyBody />
+      <v-flex xs12>
+        <AntyBody />
+      </v-flex>
       <v-img width="90px" class="virus left-antybody" src="/img/corona-test/virus.png"></v-img>
     </v-layout>
     <v-layout row wrap>
-      <Pcr />
+      <v-flex xs12>
+        <Pcr />
+      </v-flex>
       <v-img width="90px" class="virus right-pcr" src="/img/corona-test/virus.png"></v-img>
     </v-layout>
     <v-layout row wrap class="coopretaionAndFaq">
