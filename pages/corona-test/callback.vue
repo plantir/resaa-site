@@ -45,7 +45,7 @@ section {
 </style>
 <template>
   <section>
-    <div class="wrapper">
+    <div class="wrapper" v-if="result">
       <div v-if="result.status == 'paid'">
         <v-icon color="green" size="150">la-check-circle</v-icon>
         <span class="title green--text">پرداخت موفق</span>
@@ -76,38 +76,25 @@ section {
 <script>
 export default {
   layout: "corona-test",
-  async asyncData({
-    isDev,
-    route,
-    store,
-    env,
-    params,
-    query,
-    req,
-    res,
-    redirect,
-    error,
-    $storage,
-    $axios
-  }) {
-    let coronaTest = $storage.getUniversal("cronaTest");
-    let result = { test: "test" };
+  data() {
+    return {
+      result: null
+    };
+  },
+  async mounted() {
+    let loader = this.$loader.show("#app");
+    let coronaTest = this.$storage.getUniversal("cronaTest");
     try {
-      result = await $axios.$post(
+      this.result = await this.$axios.$post(
         process.env.EXTRA_API_URL + "/corona-test/callback",
         {
           request_id: coronaTest.id,
-          chargeRequestId: query.chargeRequestId
+          chargeRequestId: this.$route.query.chargeRequestId
         }
       );
       // result.status = "paid";
     } catch (error) {}
-
-    return {
-      result
-    };
-  },
-
-  mounted() {}
+    loader.hide();
+  }
 };
 </script>
