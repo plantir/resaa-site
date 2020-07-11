@@ -132,6 +132,11 @@
     &:last-child {
       border-bottom: none;
     }
+    span:first-child {
+      &:after {
+        content: ":";
+      }
+    }
   }
 }
 </style>

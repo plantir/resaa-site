@@ -31,7 +31,7 @@
       </div>
       <div class="navigation-bar-left">
         <div>
-          <v-btn href="tel:02174471300" color="primary" outline round>تماس با پشتیبانی</v-btn>
+          <v-btn href="tel:02174471200" color="primary" outline round>تماس با پشتیبانی</v-btn>
         </div>
       </div>
     </div>
