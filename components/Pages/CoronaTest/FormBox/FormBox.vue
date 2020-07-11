@@ -333,17 +333,17 @@ export default {
       password: null,
       testItems: [
         {
-          text: "تست PCR",
-          value: { name: "تست PCR", price: 220, chargeId: 36, doctorId: 2304 }
-        },
-        {
           text: "تست آنتی بادی",
           value: {
             name: "تست آنتی بادی",
-            price: 550,
-            chargeId: 37,
+            price: 220,
+            chargeId: 36,
             doctorId: 2305
           }
+        },
+        {
+          text: "تست PCR",
+          value: { name: "تست PCR", price: 550, chargeId: 37, doctorId: 2304 }
         },
         {
           text: "تست آنتی بادی و تست PCR",
