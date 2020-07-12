@@ -114,7 +114,7 @@
   text-align: center;
   margin-top: 16px;
   .v-btn {
-    width: 180px;
+    min-width: 180px;
     background: linear-gradient(to right, #28db9a, #0ec7e5);
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16);
   }
@@ -137,6 +137,14 @@
         content: ":";
       }
     }
+  }
+}
+.checkbox-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  > .v-input {
+    min-width: 33%;
   }
 }
 </style>
@@ -215,6 +223,20 @@
             ></v-text-field>
           </div>
           <div class="form-group">
+            <label required>کد ملی</label>
+            <v-text-field
+              v-model="form.nationalCode"
+              autocomplete="new-password"
+              :error-messages="errors.collect('nationalCode')"
+              data-vv-as="کد ملی"
+              name="nationalCode"
+              v-validate="'required|nationalCode'"
+              single-line
+              outline
+              placeholder="لطفا کد ملی خود را وارد نمایید"
+            ></v-text-field>
+          </div>
+          <div class="form-group">
             <label required>شماره تلفن همراه</label>
             <v-text-field
               v-model="form.mobile"
@@ -245,8 +267,94 @@
               placeholder="لطفا نشانی کامل محل سکونت خود را وارد نمایید"
             ></v-textarea>
           </div>
+          <div class="form-group">
+            <label required>علائم</label>
+            <div class="checkbox-wrapper">
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                v-model="form.symptoms"
+                label="تب"
+                value="تب"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                v-model="form.symptoms"
+                label="لرز"
+                value="لرز"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                v-model="form.symptoms"
+                label="سر درد"
+                value="سر درد"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                v-model="form.symptoms"
+                label="اسهال"
+                value="اسهال"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                v-model="form.symptoms"
+                label="استفراغ"
+                value="استفراغ"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                v-model="form.symptoms"
+                label="گلو درد"
+                value="گلو درد"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                v-model="form.symptoms"
+                label="سرفه"
+                value="سرفه"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                v-model="form.symptoms"
+                label="تنگی نفس"
+                value="تنگی نفس"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                v-model="form.symptoms"
+                label="درد عضلات"
+                value="درد عضلات"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                v-model="form.symptoms"
+                label="ضعف حس بویایی"
+                value="ضعف حس بویایی"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                v-model="form.symptoms"
+                label="ضعف حس چشایی"
+                value="ضعف حس چشایی"
+              ></v-checkbox>
+            </div>
+            <div
+              class="error--text caption pr-2"
+              v-if="errors.collect('symptoms').length"
+            >پر کردن علائم الزامی میباشد</div>
+          </div>
           <div class="reserve-btn">
-            <v-btn color="success" round @click="submit">رزرو تست کرونا</v-btn>
+            <v-btn color="success" round @click="submit">رزرو تست کرونا و پرداخت آنلاین</v-btn>
           </div>
         </template>
         <template v-else>
@@ -332,7 +440,9 @@ export default {
       need_verify: false,
       new_user: false,
       user: {},
-      form: {},
+      form: {
+        symptoms: []
+      },
       activationKey: null,
       password: null,
       testItems: [
