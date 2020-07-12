@@ -86,6 +86,10 @@ section {
             <span>{{result.name}}</span>
           </div>
           <div class="item">
+            <span>کد ملی</span>
+            <span>{{result.nationalCode | persianDigit}}</span>
+          </div>
+          <div class="item">
             <span>شماره تلفن همراه</span>
             <span>{{result.mobile | persianDigit}}</span>
           </div>
@@ -117,6 +121,10 @@ section {
           <div class="item">
             <span>نام و نام خانوادگی</span>
             <span>{{result.name}}</span>
+          </div>
+          <div class="item">
+            <span>کد ملی</span>
+            <span>{{result.nationalCode | persianDigit}}</span>
           </div>
           <div class="item">
             <span>شماره تلفن همراه</span>

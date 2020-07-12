@@ -167,6 +167,10 @@
               <span>{{form.name}}</span>
             </div>
             <div class="item">
+              <span>کد ملی</span>
+              <span>{{form.nationalCode | persianDigit}}</span>
+            </div>
+            <div class="item">
               <span>شماره تلفن همراه</span>
               <span>{{form.mobile | persianDigit}}</span>
             </div>
@@ -479,7 +483,6 @@ export default {
         this.$gtm.push({
           event: "CoronaTestRequest"
         });
-        this.loading = this.$loader.show("#FormBox");
         if (this.user_id) {
           this.chargeRequest();
         } else {
@@ -488,7 +491,7 @@ export default {
       }
     },
     async chargeRequest() {
-      this.ajaxLoading = true;
+      let loader = this.$loader.show("#FormBox");
       try {
         let { result } = await this.$axios.$get(
           `/Accounts/${this.user_id}/Profile`
@@ -520,6 +523,8 @@ export default {
             name: this.form.name,
             mobile: this.form.mobile,
             address: this.form.address,
+            nationalCode: this.form.nationalCode,
+            symptoms: this.form.symptoms,
             paymentRequestId:
               response.data.result.electronicPaymentVoucher.paymentRequestId,
             subscriberNumber:
@@ -536,10 +541,11 @@ export default {
         this.$storage.setUniversal("cronaTest", JSON.stringify(cronaTest));
         // this.goPayment(address, token);
         this.showFactor = true;
+        loader.hide();
       } catch (error) {
         this.$toast.error().showSimple("خطایی رخ داده است");
+        loader.hide();
       }
-      this.loading.hide();
     },
     goPayment() {
       const form = document.createElement("form");
@@ -553,6 +559,7 @@ export default {
       form.submit();
     },
     async register(user) {
+      let loader = this.$loader.show("#FormBox");
       try {
         user.loginOrigin = localStorage.getItem("referrer");
         let res = await this.$axios.post("/Patients/Registration", user);
@@ -571,9 +578,10 @@ export default {
             );
         }
       }
-      this.loading.hide();
+      loader.hide();
     },
     async verifySMSCode() {
+      let loader = this.$loader.show("#FormBox");
       try {
         let response = await this.$axios.patch(
           `/Patients/Registration/${this.registrationToken}`,
@@ -592,6 +600,7 @@ export default {
           this.$toast.error().showSimple("کد وارد شده صحیح نمی باشد");
         }
       } catch (error) {}
+      loader.hide();
     },
     async resendSMSCode() {
       try {
