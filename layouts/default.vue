@@ -5,6 +5,7 @@
 </style>
 <template>
   <v-app>
+    <CoronaToolbar />
     <app-navigation></app-navigation>
     <header>
       <app-header></app-header>
@@ -19,9 +20,10 @@
 </template>
 
 <script>
-import appNavigation from "~/components/navigation.vue";
-import appHeader from "~/components/header/header";
-import appFooter from "~/components/footer/footer";
+import CoronaToolbar from "@/components/Layouts/CoronaTest/Toolbar/Toolbar.vue";
+import appNavigation from "@/components/navigation.vue";
+import appHeader from "@/components/header/header";
+import appFooter from "@/components/footer/footer";
 export default {
   head() {
     return {
@@ -32,6 +34,7 @@ export default {
     };
   },
   components: {
+    CoronaToolbar,
     appNavigation,
     appHeader,
     appFooter

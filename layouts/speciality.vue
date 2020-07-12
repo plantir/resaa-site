@@ -1,4 +1,9 @@
 <style lang="scss">
+.has-corona-toolbar {
+  #speciality {
+    margin-top: 40px;
+  }
+}
 #speciality {
   .v-content {
     background: var(--bg-color);
@@ -11,6 +16,7 @@
 
 <template>
   <v-app dir="rtl" id="speciality">
+    <CoronaToolbar />
     <app-navigation></app-navigation>
     <v-content>
       <header>
@@ -27,6 +33,7 @@
 </template>
 
 <script>
+import CoronaToolbar from "@/components/Layouts/CoronaTest/Toolbar/Toolbar.vue";
 import appNavigation from "~/components/navigation.vue";
 import appHeader from "~/components/header.vue";
 import appFooter from "~/components/footer/footer";
@@ -40,6 +47,7 @@ export default {
     };
   },
   components: {
+    CoronaToolbar,
     appNavigation,
     appHeader,
     appFooter

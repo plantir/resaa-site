@@ -184,8 +184,11 @@ export default {
           path: "/doctors/psychology"
         },
         {
-          name: "کرونا",
           children: [
+            {
+              name: "تست کرونا در منزل",
+              path: "/corona-test"
+            },
             {
               name: "مشاوره رایگان کرونا",
               path: "/categories/medical-consultation-for-coronavirus/1141"
