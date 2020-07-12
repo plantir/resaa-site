@@ -24,24 +24,24 @@ export const mutations = {
 };
 export const actions = {
   async nuxtServerInit({ dispatch, state }, { req, route, $axios, $storage }) {
-    if (process.server) {
-      let ip =
-        req.connection.remoteAddress ||
-        req.socket.remoteAddress || // socket is an alias to connection, just delete this line
-        req.connection.socket.remoteAddress;
-      if (process.env.NODE_ENV == "development" && ip == "127.0.0.1") {
-        ip = "37.40.96.22";
-      }
-      try {
-        const Ip_location = await $axios.get(
-          "https://api.ipgeolocation.io/ipgeo?apiKey=22c7c02d22334a3dbfa13318db2dd9bf&ip=" +
-            ip
-        );
-        state.location = Ip_location.data.country_name;
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    // if (process.server) {
+    //   let ip =
+    //     req.connection.remoteAddress ||
+    //     req.socket.remoteAddress || // socket is an alias to connection, just delete this line
+    //     req.connection.socket.remoteAddress;
+    //   if (process.env.NODE_ENV == "development" && ip == "127.0.0.1") {
+    //     ip = "37.40.96.22";
+    //   }
+    //   try {
+    //     const Ip_location = await $axios.get(
+    //       "https://api.ipgeolocation.io/ipgeo?apiKey=22c7c02d22334a3dbfa13318db2dd9bf&ip=" +
+    //         ip
+    //     );
+    //     state.location = Ip_location.data.country_name;
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
     if (route.query.utm_campaign == "corona_amum") {
       state.is_corona_amum = true;
     }

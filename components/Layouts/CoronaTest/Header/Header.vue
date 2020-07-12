@@ -1,5 +1,6 @@
 <style lang="scss" scoped>
 .navigation-bar {
+  top: 0;
   background-color: #f8fdfd !important;
   box-shadow: none !important;
   &.scrolled {

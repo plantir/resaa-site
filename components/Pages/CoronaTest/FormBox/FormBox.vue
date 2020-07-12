@@ -366,6 +366,9 @@ export default {
     async submit() {
       let valid = await this.$validator.validateAll();
       if (valid) {
+        this.$gtm.push({
+          event: "CoronaTestRequest"
+        });
         this.loading = this.$loader.show("#FormBox");
         if (this.user_id) {
           this.chargeRequest();
