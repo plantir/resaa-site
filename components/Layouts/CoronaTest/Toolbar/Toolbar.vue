@@ -10,7 +10,7 @@
   height: auto;
   background: #056cc4;
   z-index: 999;
-  padding: 8px 16px;
+  padding: 8px 0;
   @include media(md-and-up) {
     justify-content: center;
     height: 40px;
@@ -18,8 +18,10 @@
     bottom: auto;
   }
   div {
-    max-width: 200px;
+    max-width: 150px;
+    margin-right: 50px;
     @include media(md-and-up) {
+      margin-right: 0;
       max-width: 100%;
     }
   }
@@ -42,11 +44,15 @@
       position: relative;
     }
   }
+  .v-btn {
+    border-width: 2px;
+  }
   .v-icon {
     position: absolute;
-    left: 10px;
+    right: 15px;
     @include media(md-and-up) {
       left: 30px;
+      right: auto;
     }
   }
 }
@@ -57,7 +63,8 @@
       v-if="$device.isDesktop"
     >از این پس می توانید با استفاده از سامانه رسا در منزل تست کرونا دهید!</div>
     <div v-else>با استفاده از سامانه رسا در منزل تست کرونا دهید!</div>
-    <nuxt-link to="/corona-test">رزرو تست کرونا</nuxt-link>
+    <nuxt-link v-if="$device.isDesktop" to="/corona-test">رزرو تست کرونا</nuxt-link>
+    <v-btn v-else to="/corona-test" color="#ffd155" outline round>رزرو تست کرونا</v-btn>
     <v-icon color="white" @click="hide">la-times</v-icon>
   </section>
 </template>
