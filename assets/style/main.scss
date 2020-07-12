@@ -1,9 +1,9 @@
-@import "./fonts";
+@import './fonts';
 // @import 'variables';
 // @import 'bootstrap.css';
 // @import '~bootstrap-vue/dist/bootstrap-vue.css';
-@import "./select";
-@import "./typography";
+@import './select';
+@import './typography';
 
 html {
   font-family: IRANSans, tahoma;
@@ -80,7 +80,11 @@ input:required {
 header + main {
   margin-top: 70px;
 }
-
+.has-corona-toolbar {
+  header + main {
+    margin-top: 110px;
+  }
+}
 svg {
   width: 24px;
   height: 24px;

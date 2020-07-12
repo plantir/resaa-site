@@ -64,6 +64,9 @@ export default {
       ]
     };
   },
+  mounted() {
+    document.querySelector("body").classList.remove("has-corona-toolbar");
+  },
   components: {
     appNavigation,
     appHeader,

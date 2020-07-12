@@ -3,9 +3,9 @@
   display: flex;
   flex-direction: column-reverse;
   justify-content: center;
-  margin-top: 90px;
+  margin-top: 10px;
   @include media(md-and-up) {
-    margin-top: 150px;
+    margin-top: 90px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;

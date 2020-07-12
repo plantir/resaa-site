@@ -32,7 +32,7 @@
         margin-top: 0;
       }
       .v-icon {
-        transition: none !important;
+        transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
       }
       &--active {
         .v-expansion-panel__header {
@@ -40,10 +40,10 @@
           color: #fff;
         }
         .v-icon {
-          &:before {
-            content: "\f068";
-            color: #fff;
-          }
+          color: #fff !important;
+          // &:before {
+          // content: "\f28e";
+          // }
         }
       }
     }
@@ -54,7 +54,7 @@
   <section>
     <div class="wrapper">
       <v-expansion-panel v-model="model">
-        <v-expansion-panel-content v-for="(faq,i) in items" :key="i" expand-icon="la-plus">
+        <v-expansion-panel-content v-for="(faq,i) in items" :key="i">
           <div slot="header">{{faq.question}}</div>
           <v-card>
             <v-card-text v-html="faq.answer"></v-card-text>

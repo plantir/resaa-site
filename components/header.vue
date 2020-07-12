@@ -225,8 +225,12 @@ section#header {
               <v-list>
                 <v-list-tile>
                   <v-list-tile-title>
+                    <nuxt-link to="/corona-test" class="navigation-bar-item">تست کرونا در منزل</nuxt-link>
+                  </v-list-tile-title>
+                </v-list-tile>
+                <v-list-tile>
+                  <v-list-tile-title>
                     <nuxt-link
-                      @click.native="closeNav"
                       to="/categories/medical-consultation-for-coronavirus/1141"
                       class="navigation-bar-item"
                     >مشاوره رایگان کرونا</nuxt-link>
@@ -235,7 +239,6 @@ section#header {
                 <v-list-tile>
                   <v-list-tile-title>
                     <nuxt-link
-                      @click.native="closeNav"
                       to="/categories/free-speciality-consultant/1148"
                       class="navigation-bar-item"
                     >تخصص من رایگان</nuxt-link>
@@ -244,7 +247,6 @@ section#header {
                 <v-list-tile>
                   <v-list-tile-title>
                     <nuxt-link
-                      @click.native="closeNav"
                       to="/categories/quarantine-free-psychotherapy/1143"
                       class="navigation-bar-item"
                     >مشاوره روانشناسی قرنطینه</nuxt-link>

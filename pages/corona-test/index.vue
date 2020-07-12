@@ -42,13 +42,13 @@
   .boxAndForm {
     margin-bottom: 40px;
     .flex {
-      &:first-child {
+      &:nth-child(1) {
         order: 1;
         @include media(md-and-up) {
           order: 2;
         }
       }
-      &:last-child {
+      &:nth-child(2) {
         order: 2;
         @include media(md-and-up) {
           order: 1;
@@ -191,6 +191,23 @@ export default {
     Faq,
     FormBox,
     PriceBox
+  },
+
+  head() {
+    return {
+      title: "تست ویروس کرونا در منزل",
+      link: [
+        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
+      ],
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "تست کرونا، تست آنتی بادی و تست PCR در منزل با سامانه رسا. متخصصین آزمایشگاه برای گرفتن انواع تست های کرونا به منزل شما می آیند و دیگر لازم نیست از خانه خود خارج شوید."
+        }
+      ]
+    };
   },
   computed: {
     faqs() {

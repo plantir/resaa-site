@@ -1,4 +1,11 @@
 <style lang="scss" >
+.has-corona-toolbar {
+  #navigation {
+    .navigation-bar {
+      top: 40px;
+    }
+  }
+}
 #navigation {
   .navigation-bar {
     top: 0;
@@ -465,6 +472,11 @@
                 <div>
                   <nuxt-link
                     @click.native="closeNav"
+                    to="/corona-test"
+                    class="navigation-bar-item"
+                  >تست کرونا در منزل</nuxt-link>
+                  <nuxt-link
+                    @click.native="closeNav"
                     to="/categories/medical-consultation-for-coronavirus/1141"
                     class="navigation-bar-item"
                   >مشاوره رایگان کرونا</nuxt-link>
@@ -667,6 +679,10 @@ export default {
       {
         name: "کرونا",
         children: [
+          {
+            name: "تست کرونا در منزل",
+            path: "/corona-test"
+          },
           {
             name: "مشاوره رایگان کرونا",
             path: "/categories/medical-consultation-for-coronavirus/1141"
