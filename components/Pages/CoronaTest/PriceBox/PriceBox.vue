@@ -1,6 +1,8 @@
 <style lang="scss" scoped>
 #PriceBox {
   // height: 100%;
+  position: sticky;
+  top: 80px;
 }
 .wrapper {
   background: #fff;
