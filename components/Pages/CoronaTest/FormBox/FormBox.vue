@@ -11,10 +11,12 @@
     padding: 20px 30px;
   }
   p {
-    max-width: 500px;
     text-align: center;
+    font-size: 14px !important;
     font-weight: 400;
     margin-top: 16px;
+    text-align: center;
+    max-width: 600px;
   }
 }
 .form-wrapper {
@@ -114,7 +116,7 @@
   text-align: center;
   margin-top: 16px;
   .v-btn {
-    width: 180px;
+    min-width: 180px;
     background: linear-gradient(to right, #28db9a, #0ec7e5);
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16);
   }
@@ -139,6 +141,20 @@
     }
   }
 }
+.checkbox-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  > .v-input {
+    min-width: 33%;
+    @include media(md-and-up) {
+      min-width: 25%;
+    }
+  }
+  .error--text {
+    width: 100%;
+  }
+}
 </style>
 <template>
   <section id="FormBox">
@@ -149,7 +165,7 @@
       </template>
       <template v-else>
         <h3>فرم رزرو تست کرونا در منزل</h3>
-        <p>برای انجام تست کرونا در منزل لازم است فرم زیر را پر کنید تا پشتیبانی رسا بلافاصله برای هماهنگی بیشتر با شما تماس بگیرد.</p>
+        <p>برای انجام تست کرونا در منزل لازم است فرم زیر را پر کنید. پس از پرداخت هزینه ی تست، پشتیبانی در کمتر از 2 ساعت در بازه ی 9 الی 22 با شما تماس خواهد گرفت و برای گرفتن تست با شما هماهنگ خواهد کرد.</p>
       </template>
       <div class="form-wrapper">
         <template v-if="showFactor">
@@ -157,6 +173,10 @@
             <div class="item">
               <span>نام و نام خانوادگی</span>
               <span>{{form.name}}</span>
+            </div>
+            <div class="item">
+              <span>کد ملی</span>
+              <span>{{form.nationalCode | persianDigit}}</span>
             </div>
             <div class="item">
               <span>شماره تلفن همراه</span>
@@ -215,6 +235,20 @@
             ></v-text-field>
           </div>
           <div class="form-group">
+            <label required>کد ملی</label>
+            <v-text-field
+              v-model="form.nationalCode"
+              autocomplete="new-password"
+              :error-messages="errors.collect('nationalCode')"
+              data-vv-as="کد ملی"
+              name="nationalCode"
+              v-validate="'required|nationalCode'"
+              single-line
+              outline
+              placeholder="لطفا کد ملی خود را وارد نمایید"
+            ></v-text-field>
+          </div>
+          <div class="form-group">
             <label required>شماره تلفن همراه</label>
             <v-text-field
               v-model="form.mobile"
@@ -239,14 +273,112 @@
               data-vv-as="نشانی"
               name="address"
               v-validate="'required'"
+              rows="2"
               single-line
               outline
               no-resize
               placeholder="لطفا نشانی کامل محل سکونت خود را وارد نمایید"
             ></v-textarea>
           </div>
+          <div class="form-group">
+            <label required>علائم</label>
+            <div class="checkbox-wrapper">
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                hide-details
+                v-model="form.symptoms"
+                label="تب"
+                value="تب"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                hide-details
+                v-model="form.symptoms"
+                label="لرز"
+                value="لرز"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                hide-details
+                v-model="form.symptoms"
+                label="سر درد"
+                value="سر درد"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                hide-details
+                v-model="form.symptoms"
+                label="اسهال"
+                value="اسهال"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                hide-details
+                v-model="form.symptoms"
+                label="استفراغ"
+                value="استفراغ"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                hide-details
+                v-model="form.symptoms"
+                label="گلو درد"
+                value="گلو درد"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                hide-details
+                v-model="form.symptoms"
+                label="سرفه"
+                value="سرفه"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                hide-details
+                v-model="form.symptoms"
+                label="تنگی نفس"
+                value="تنگی نفس"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                hide-details
+                v-model="form.symptoms"
+                label="درد عضلات"
+                value="درد عضلات"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                hide-details
+                v-model="form.symptoms"
+                label="ضعف حس بویایی"
+                value="ضعف حس بویایی"
+              ></v-checkbox>
+              <v-checkbox
+                v-validate="'required'"
+                name="symptoms"
+                hide-details
+                v-model="form.symptoms"
+                label="ضعف حس چشایی"
+                value="ضعف حس چشایی"
+              ></v-checkbox>
+              <div
+                class="error--text caption pr-2"
+                v-if="errors.collect('symptoms').length"
+              >پر کردن علائم الزامی میباشد</div>
+            </div>
+          </div>
           <div class="reserve-btn">
-            <v-btn color="success" round @click="submit">رزرو تست کرونا</v-btn>
+            <v-btn color="success" round @click="submit">پرداخت و رزرو تست کرونا</v-btn>
           </div>
         </template>
         <template v-else>
@@ -332,7 +464,9 @@ export default {
       need_verify: false,
       new_user: false,
       user: {},
-      form: {},
+      form: {
+        symptoms: []
+      },
       activationKey: null,
       password: null,
       testItems: [
@@ -369,7 +503,6 @@ export default {
         this.$gtm.push({
           event: "CoronaTestRequest"
         });
-        this.loading = this.$loader.show("#FormBox");
         if (this.user_id) {
           this.chargeRequest();
         } else {
@@ -378,7 +511,7 @@ export default {
       }
     },
     async chargeRequest() {
-      this.ajaxLoading = true;
+      let loader = this.$loader.show("#FormBox");
       try {
         let { result } = await this.$axios.$get(
           `/Accounts/${this.user_id}/Profile`
@@ -410,6 +543,8 @@ export default {
             name: this.form.name,
             mobile: this.form.mobile,
             address: this.form.address,
+            nationalCode: this.form.nationalCode,
+            symptoms: this.form.symptoms,
             paymentRequestId:
               response.data.result.electronicPaymentVoucher.paymentRequestId,
             subscriberNumber:
@@ -426,10 +561,11 @@ export default {
         this.$storage.setUniversal("cronaTest", JSON.stringify(cronaTest));
         // this.goPayment(address, token);
         this.showFactor = true;
+        loader.hide();
       } catch (error) {
         this.$toast.error().showSimple("خطایی رخ داده است");
+        loader.hide();
       }
-      this.loading.hide();
     },
     goPayment() {
       const form = document.createElement("form");
@@ -443,6 +579,7 @@ export default {
       form.submit();
     },
     async register(user) {
+      let loader = this.$loader.show("#FormBox");
       try {
         user.loginOrigin = localStorage.getItem("referrer");
         let res = await this.$axios.post("/Patients/Registration", user);
@@ -461,9 +598,10 @@ export default {
             );
         }
       }
-      this.loading.hide();
+      loader.hide();
     },
     async verifySMSCode() {
+      let loader = this.$loader.show("#FormBox");
       try {
         let response = await this.$axios.patch(
           `/Patients/Registration/${this.registrationToken}`,
@@ -482,6 +620,7 @@ export default {
           this.$toast.error().showSimple("کد وارد شده صحیح نمی باشد");
         }
       } catch (error) {}
+      loader.hide();
     },
     async resendSMSCode() {
       try {
