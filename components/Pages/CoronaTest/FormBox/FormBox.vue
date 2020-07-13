@@ -11,10 +11,12 @@
     padding: 20px 30px;
   }
   p {
-    max-width: 500px;
     text-align: center;
+    font-size: 14px !important;
     font-weight: 400;
     margin-top: 16px;
+    text-align: center;
+    max-width: 600px;
   }
 }
 .form-wrapper {
@@ -145,6 +147,12 @@
   flex-wrap: wrap;
   > .v-input {
     min-width: 33%;
+    @include media(md-and-up) {
+      min-width: 25%;
+    }
+  }
+  .error--text {
+    width: 100%;
   }
 }
 </style>
@@ -157,7 +165,7 @@
       </template>
       <template v-else>
         <h3>فرم رزرو تست کرونا در منزل</h3>
-        <p>برای انجام تست کرونا در منزل لازم است فرم زیر را پر کنید تا پشتیبانی رسا بلافاصله برای هماهنگی بیشتر با شما تماس بگیرد.</p>
+        <p>برای انجام تست کرونا در منزل لازم است فرم زیر را پر کنید. پس از پرداخت هزینه ی تست، پشتیبانی در کمتر از 2 ساعت در بازه ی 9 الی 22 با شما تماس خواهد گرفت و برای گرفتن تست با شما هماهنگ خواهد کرد.</p>
       </template>
       <div class="form-wrapper">
         <template v-if="showFactor">
@@ -265,6 +273,7 @@
               data-vv-as="نشانی"
               name="address"
               v-validate="'required'"
+              rows="2"
               single-line
               outline
               no-resize
@@ -277,6 +286,7 @@
               <v-checkbox
                 v-validate="'required'"
                 name="symptoms"
+                hide-details
                 v-model="form.symptoms"
                 label="تب"
                 value="تب"
@@ -284,6 +294,7 @@
               <v-checkbox
                 v-validate="'required'"
                 name="symptoms"
+                hide-details
                 v-model="form.symptoms"
                 label="لرز"
                 value="لرز"
@@ -291,6 +302,7 @@
               <v-checkbox
                 v-validate="'required'"
                 name="symptoms"
+                hide-details
                 v-model="form.symptoms"
                 label="سر درد"
                 value="سر درد"
@@ -298,6 +310,7 @@
               <v-checkbox
                 v-validate="'required'"
                 name="symptoms"
+                hide-details
                 v-model="form.symptoms"
                 label="اسهال"
                 value="اسهال"
@@ -305,6 +318,7 @@
               <v-checkbox
                 v-validate="'required'"
                 name="symptoms"
+                hide-details
                 v-model="form.symptoms"
                 label="استفراغ"
                 value="استفراغ"
@@ -312,6 +326,7 @@
               <v-checkbox
                 v-validate="'required'"
                 name="symptoms"
+                hide-details
                 v-model="form.symptoms"
                 label="گلو درد"
                 value="گلو درد"
@@ -319,6 +334,7 @@
               <v-checkbox
                 v-validate="'required'"
                 name="symptoms"
+                hide-details
                 v-model="form.symptoms"
                 label="سرفه"
                 value="سرفه"
@@ -326,6 +342,7 @@
               <v-checkbox
                 v-validate="'required'"
                 name="symptoms"
+                hide-details
                 v-model="form.symptoms"
                 label="تنگی نفس"
                 value="تنگی نفس"
@@ -333,6 +350,7 @@
               <v-checkbox
                 v-validate="'required'"
                 name="symptoms"
+                hide-details
                 v-model="form.symptoms"
                 label="درد عضلات"
                 value="درد عضلات"
@@ -340,6 +358,7 @@
               <v-checkbox
                 v-validate="'required'"
                 name="symptoms"
+                hide-details
                 v-model="form.symptoms"
                 label="ضعف حس بویایی"
                 value="ضعف حس بویایی"
@@ -347,18 +366,19 @@
               <v-checkbox
                 v-validate="'required'"
                 name="symptoms"
+                hide-details
                 v-model="form.symptoms"
                 label="ضعف حس چشایی"
                 value="ضعف حس چشایی"
               ></v-checkbox>
+              <div
+                class="error--text caption pr-2"
+                v-if="errors.collect('symptoms').length"
+              >پر کردن علائم الزامی میباشد</div>
             </div>
-            <div
-              class="error--text caption pr-2"
-              v-if="errors.collect('symptoms').length"
-            >پر کردن علائم الزامی میباشد</div>
           </div>
           <div class="reserve-btn">
-            <v-btn color="success" round @click="submit">رزرو تست کرونا و پرداخت آنلاین</v-btn>
+            <v-btn color="success" round @click="submit">پرداخت و رزرو تست کرونا</v-btn>
           </div>
         </template>
         <template v-else>
