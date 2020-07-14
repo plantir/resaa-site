@@ -71,7 +71,7 @@ section {
 <template>
   <section>
     <div class="wrapper" v-if="result">
-      <div v-if="result.status == 'paid'">
+      <div v-if="result.payment_status == 'paid'">
         <v-icon color="green" size="150">la-check-circle</v-icon>
         <span class="title green--text">پرداخت موفق بود و درخواست شما ثبت شد</span>
         <p>نهایتا طی 2 ساعت آینده جهت هماهنگی برای نمونه گیری از طرف پشتیبانی رسا با شما تماس گرفته خواهد شد. جهت پیگیری سفارش خود در هر مرحله ای می توانید با ذکر شماره موبایل خود به پشتیبانی از وضعیت سفارش آگاه شوید</p>
@@ -184,16 +184,21 @@ export default {
     }
     let loader = this.$loader.show("#app");
     let coronaTest = this.$storage.getUniversal("cronaTest");
-    try {
-      this.result = await this.$axios.$post(
-        process.env.EXTRA_API_URL + "/corona-test/callback",
-        {
-          request_id: coronaTest.id,
-          chargeRequestId: this.$route.query.chargeRequestId
-        }
-      );
-      // result.status = "paid";
-    } catch (error) {}
+    this.result = await this.$axios.$post(
+      process.env.EXTRA_API_URL + "/corona-test/callback",
+      {
+        request_id: coronaTest.id,
+        chargeRequestId: this.$route.query.chargeRequestId
+      }
+    );
+    if (this.result.payment_status == "paid") {
+      this.$gtm.push({
+        event: "coronaPayment",
+        amount: this.result.amount,
+        testType: this.$options.filters.convertToTest(this.result.charge_id)
+      });
+    }
+
     loader.hide();
   }
 };
