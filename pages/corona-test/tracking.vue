@@ -3,6 +3,10 @@
   span.vr-badge {
     letter-spacing: normal !important;
     font-size: 1rem;
+    padding: 0;
+    @include media(md-and-up) {
+      padding: 0.75rem;
+    }
   }
 }
 section {
@@ -14,18 +18,37 @@ section {
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 68px;
+  border-bottom: 1px solid #eee;
 }
 .content {
-  margin-top: 50px;
+  margin-top: 30px;
   display: flex;
+  flex-wrap: wrap;
   .form {
-    flex: 0 0 33.33333%;
+    flex: 0 0 100%;
+    overflow: hidden;
+    @include media(md-and-up) {
+      flex: 0 0 33.33333%;
+    }
   }
   .table {
-    flex: 0 0 calc(66.66666% - 16px);
-    margin-right: 16px;
+    flex: 0 0 100%;
+    margin-top: 16px;
+    width: 100%;
+    overflow: auto;
+
+    @include media(md-and-up) {
+      flex: 0 0 calc(66.66666% - 16px);
+      margin-right: 16px;
+      margin-top: 0;
+    }
     ul {
-      width: 100%;
+      width: 800px;
+      @include media(md-and-up) {
+        width: 100%;
+      }
       li {
         width: 100%;
         display: flex;
@@ -142,6 +165,27 @@ section {
     }
   }
 }
+.test-mobile-wrapper {
+  margin-top: 30px;
+  width: 100%;
+  .test-item {
+    display: flex;
+    width: 100%;
+    background: #fff;
+    flex-direction: column;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.16);
+    padding: 10px 8px;
+    + .test-item {
+      margin-top: 16px;
+    }
+    > div {
+      height: 30px;
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
 </style>
 <template>
   <section>
@@ -178,7 +222,6 @@ section {
               data-vv-as="شماره تلفن همراه"
               name="m"
               v-fix-digit
-              hint="کاربر گرامی لطفا شماره موبایلی را وارد کنید که هم اکنون برای وارد کردن کد تایید به آن دسترسی دارید"
               v-validate="'required|mobile'"
               single-line
               outline
@@ -189,7 +232,7 @@ section {
             <v-btn color="primary" round outline @click="submit">پیگیری</v-btn>
           </div>
         </div>
-        <div class="box table">
+        <div class="box table" v-if="$device.isDesktop">
           <ul>
             <li class="header">
               <span>نوع تست</span>
@@ -208,6 +251,33 @@ section {
               <span>{{item.created_at | persianDate | persianDigit}}</span>
             </li>
           </ul>
+        </div>
+        <div class="test-mobile-wrapper" v-else>
+          <div class="test-item" v-for="(item, index) in items" :key="index">
+            <div>
+              <span>تاریخ ثبت</span>
+              <span>{{item.created_at | persianDate | persianDigit}}</span>
+            </div>
+            <div>
+              <span>نوع تست</span>
+              <span>{{item.doctor_id | translate}}</span>
+            </div>
+            <div>
+              <span>وضعیت</span>
+              <span>
+                <vr-badge type="dot" :color="colors[item.status]">{{item.status | translate}}</vr-badge>
+              </span>
+            </div>
+            <div>
+              <span>وضعیت پرداخت</span>
+              <span>
+                <vr-badge
+                  type="dot"
+                  :color="colors[item.payment_status]"
+                >{{item.payment_status | translate}}</vr-badge>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </v-container>
