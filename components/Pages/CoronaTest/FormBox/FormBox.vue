@@ -165,7 +165,7 @@
       </template>
       <template v-else>
         <h3>فرم رزرو تست کرونا در منزل</h3>
-        <p>برای انجام تست کرونا در منزل لازم است فرم زیر را پر کنید. پس از پرداخت هزینه ی تست، پشتیبانی در کمتر از ۲ ساعت در بازه ی ۹ الی ۲۱ با شما تماس خواهد گرفت و برای گرفتن تست با شما هماهنگ خواهد کرد.</p>
+        <p>اگر ساکن تهران هستید همین امروز می توانید در منزل خود تست کرونا دهید. متخصصین آزمایشگاه های شناخته شده و دارای مجوز از جمله بیمارستان مهراد، آزمایشگاه ظفر و میلاد در کمتر از 24 ساعت اعزام شده و در محل مورد نظر شما نمونه گیری میکنند و نتیجه ی آزمایش را در سریع ترین زمان به صورت آنلاین به شما اعلام می کنند.</p>
       </template>
       <div class="form-wrapper">
         <template v-if="showFactor">
@@ -481,13 +481,13 @@ export default {
         },
         {
           text: "تست PCR",
-          value: { name: "تست PCR", price: 550, chargeId: 37, doctorId: 2305 }
+          value: { name: "تست PCR", price: 600, chargeId: 37, doctorId: 2305 }
         },
         {
           text: "تست آنتی بادی و تست PCR",
           value: {
             name: "تست آنتی بادی و تست PCR",
-            price: 650,
+            price: 700,
             chargeId: 38,
             doctorId: 2306
           }
@@ -619,7 +619,9 @@ export default {
         } else {
           this.$toast.error().showSimple("کد وارد شده صحیح نمی باشد");
         }
-      } catch (error) {}
+      } catch (error) {
+        this.$toast.error().showSimple("کد وارد شده صحیح نمی باشد");
+      }
       loader.hide();
     },
     async resendSMSCode() {

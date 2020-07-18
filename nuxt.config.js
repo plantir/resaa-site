@@ -216,6 +216,7 @@ export default {
     "@nuxtjs/dotenv",
     "vrwebdesign-nuxt/modules/nuxt-toast",
     "vrwebdesign-nuxt/modules/nuxt-dialog",
+    "vrwebdesign-nuxt/modules/nuxt-badge",
     "vrwebdesign-nuxt/modules/nuxt-loader"
     // [
     //   {
