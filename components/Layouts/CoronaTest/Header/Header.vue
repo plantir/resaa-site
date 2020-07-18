@@ -7,6 +7,9 @@
     // background-color: #fff !important;
     box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2) !important;
   }
+  .nuxt-link-active {
+    color: $primary-color !important;
+  }
 }
 </style>
 
@@ -26,6 +29,9 @@
           <ul class="nav">
             <li class="nav-item" v-for="(item, index) in items" :key="index">
               <a v-scroll-to="item.to" class="navigation-bar-item">{{item.name}}</a>
+            </li>
+            <li class="nav-item">
+              <nuxt-link to="/corona-test/tracking">پیگیری تست</nuxt-link>
             </li>
           </ul>
         </div>

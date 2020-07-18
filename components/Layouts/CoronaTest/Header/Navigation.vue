@@ -81,13 +81,20 @@
       </div>
     </div>
     <v-list>
-      <template v-for="(item, index) in items">
-        <v-list-tile :key="index">
-          <v-list-tile-content>
-            <a @click="closeNav" v-scroll-to="item.to" class="nav-main__list-item">{{ item.name }}</a>
-          </v-list-tile-content>
-        </v-list-tile>
-      </template>
+      <v-list-tile v-for="(item, index) in items" :key="index">
+        <v-list-tile-content>
+          <a @click="closeNav" v-scroll-to="item.to" class="nav-main__list-item">{{ item.name }}</a>
+        </v-list-tile-content>
+      </v-list-tile>
+      <v-list-tile>
+        <v-list-tile-content>
+          <nuxt-link
+            @click="closeNav"
+            to="/corona-test/tracking"
+            class="nav-main__list-item"
+          >پیگیری تست</nuxt-link>
+        </v-list-tile-content>
+      </v-list-tile>
     </v-list>
     <div class="footer">
       <span>شماره پشتیبانی</span>
