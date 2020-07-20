@@ -23,7 +23,7 @@
       </div>
       <div class="navigation-bar-right">
         <nuxt-link to="/" class="navigation-bar-logo">
-          <img alt="سامانه رسا" src="./logo.png" />
+          <v-img width="75px" alt="سامانه رسا" src="/img/corona-test/logo.png" />
         </nuxt-link>
         <div class="navigation-bar-items">
           <ul class="nav">
