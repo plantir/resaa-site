@@ -13,10 +13,10 @@
           <li>
             <a v-scroll-to="{ el: '#doctors', offset: -50 }">معرفی پزشکان</a> از طریق وب سایت و اپلیکیشن رِسا
           </li>
-          <li>
+          <!-- <li>
             شارژ آسان حساب از طریق اپلیکیشن رِسا و یا کد
             <a href="tel:*500*25#">USSD</a>
-          </li>
+          </li>-->
           <li>
             شارژ آسان حساب از طریق
             <router-link :to="{name:'charge'}">همین سایت</router-link>

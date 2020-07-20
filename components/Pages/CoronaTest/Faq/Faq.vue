@@ -1,4 +1,8 @@
 <style lang="scss" scoped >
+h2 {
+  margin-bottom: 32px !important;
+  text-align: center;
+}
 .v-expansion-panel {
   box-shadow: none;
   ::v-deep {
@@ -53,11 +57,16 @@
 <template>
   <section>
     <div class="wrapper">
+      <h2>سوالات متداول درباره تست کرونا</h2>
       <v-expansion-panel v-model="model">
         <v-expansion-panel-content v-for="(faq,i) in items" :key="i">
-          <div slot="header">{{faq.question}}</div>
+          <div slot="header">
+            <p class="mb-0">{{faq.question}}</p>
+          </div>
           <v-card>
-            <v-card-text v-html="faq.answer"></v-card-text>
+            <v-card-text>
+              <p class="mb-0" v-html="faq.answer"></p>
+            </v-card-text>
           </v-card>
         </v-expansion-panel-content>
       </v-expansion-panel>
