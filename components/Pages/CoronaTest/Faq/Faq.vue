@@ -13,7 +13,7 @@ h2 {
       font-size: 16px;
       font-weight: 700;
       @include media(md-and-up) {
-        min-height: 50px;
+        min-height: 60px;
       }
     }
     .v-expansion-panel__body {
