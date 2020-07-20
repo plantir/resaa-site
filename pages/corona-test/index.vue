@@ -39,6 +39,22 @@
       }
     }
   }
+  .coopretaionAndFaq {
+    .flex {
+      &:nth-child(1) {
+        order: 1;
+        @include media(md-and-up) {
+          order: 2;
+        }
+      }
+      &:nth-child(2) {
+        order: 2;
+        @include media(md-and-up) {
+          order: 1;
+        }
+      }
+    }
+  }
   .boxAndForm {
     margin-bottom: 40px;
     .flex {
@@ -196,10 +212,10 @@
     </v-layout>
     <v-layout row wrap class="coopretaionAndFaq">
       <v-flex xs12 md6>
-        <Cooperation />
+        <Faq :items="faqs" />
       </v-flex>
       <v-flex xs12 md6>
-        <Faq :items="faqs" />
+        <Cooperation />
       </v-flex>
       <v-img
         :alt="coronaVirusAlt"
