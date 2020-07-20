@@ -20,10 +20,6 @@
     height: auto;
     flex: 0 0 50%;
   }
-  img {
-    max-width: 100%;
-    max-height: 100%;
-  }
 }
 .text {
   margin-top: 20px;
@@ -83,7 +79,7 @@
         </div>
       </div>
       <div class="image">
-        <img v-lazy="'/img/corona-test/top_img.png'" />
+        <v-img alt="تست ویروس کرونا در منزل" :src="'/img/corona-test/top_img.png'" />
       </div>
     </div>
   </section>

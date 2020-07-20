@@ -12,9 +12,7 @@
   }
 }
 .image {
-  img {
-    max-width: 100%;
-  }
+  flex: 0 0 30%;
 }
 .text {
   text-align: center;
@@ -31,7 +29,7 @@
   <section id="Pcr">
     <div class="wrapper">
       <div class="image">
-        <img v-lazy="'/img/corona-test/Pcr.png'" alt />
+        <v-img :src="'/img/corona-test/Pcr.png'" alt="چه کسانی باید تست PCR بدهند؟" />
       </div>
       <div class="text">
         <h2>چه کسانی باید تست PCR بدهند؟</h2>

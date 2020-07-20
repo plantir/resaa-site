@@ -124,30 +124,75 @@
       <v-flex xs12>
         <FirstFord />
       </v-flex>
-      <v-img width="83px" class="virus top-firstford" src="/img/corona-test/virus.png"></v-img>
-      <v-img width="95px" class="virus center-firstford" src="/img/corona-test/virus.png"></v-img>
-      <v-img width="69px" class="virus bottom-firstford" src="/img/corona-test/virus.png"></v-img>
+      <v-img
+        :alt="coronaVirusAlt"
+        width="83px"
+        class="virus top-firstford"
+        src="/img/corona-test/virus.png"
+      ></v-img>
+      <v-img
+        :alt="coronaVirusAlt"
+        width="95px"
+        class="virus center-firstford"
+        src="/img/corona-test/virus.png"
+      ></v-img>
+      <v-img
+        :alt="coronaVirusAlt"
+        width="69px"
+        class="virus bottom-firstford"
+        src="/img/corona-test/virus.png"
+      ></v-img>
     </v-layout>
     <v-layout row wrap>
       <v-flex xs12>
         <Symptoms />
       </v-flex>
-      <v-img width="38px" class="virus left-top-symptoms" src="/img/corona-test/virus.png"></v-img>
-      <v-img width="52px" class="virus right-top-symptoms" src="/img/corona-test/virus.png"></v-img>
-      <v-img width="38px" class="virus left-bottom-symptoms" src="/img/corona-test/virus.png"></v-img>
-      <v-img width="116px" class="virus right-bottom-symptoms" src="/img/corona-test/virus.png"></v-img>
+      <v-img
+        :alt="coronaVirusAlt"
+        width="38px"
+        class="virus left-top-symptoms"
+        src="/img/corona-test/virus.png"
+      ></v-img>
+      <v-img
+        :alt="coronaVirusAlt"
+        width="52px"
+        class="virus right-top-symptoms"
+        src="/img/corona-test/virus.png"
+      ></v-img>
+      <v-img
+        :alt="coronaVirusAlt"
+        width="38px"
+        class="virus left-bottom-symptoms"
+        src="/img/corona-test/virus.png"
+      ></v-img>
+      <v-img
+        :alt="coronaVirusAlt"
+        width="116px"
+        class="virus right-bottom-symptoms"
+        src="/img/corona-test/virus.png"
+      ></v-img>
     </v-layout>
     <v-layout row wrap>
       <v-flex xs12>
         <AntyBody />
       </v-flex>
-      <v-img width="90px" class="virus left-antybody" src="/img/corona-test/virus.png"></v-img>
+      <v-img
+        :alt="coronaVirusAlt"
+        width="90px"
+        class="virus left-antybody"
+        src="/img/corona-test/virus.png"
+      ></v-img>
     </v-layout>
     <v-layout row wrap>
       <v-flex xs12>
         <Pcr />
       </v-flex>
-      <v-img width="90px" class="virus right-pcr" src="/img/corona-test/virus.png"></v-img>
+      <v-img
+        :alt="coronaVirusAlt"
+        width="90px"
+        class="virus right-pcr"
+        src="/img/corona-test/virus.png"
+      ></v-img>
     </v-layout>
     <v-layout row wrap class="coopretaionAndFaq">
       <v-flex xs12 md6>
@@ -156,8 +201,18 @@
       <v-flex xs12 md6>
         <Faq :items="faqs" />
       </v-flex>
-      <v-img width="38px" class="virus left-faq" src="/img/corona-test/virus.png"></v-img>
-      <v-img width="52px" class="virus right-faq" src="/img/corona-test/virus.png"></v-img>
+      <v-img
+        :alt="coronaVirusAlt"
+        width="38px"
+        class="virus left-faq"
+        src="/img/corona-test/virus.png"
+      ></v-img>
+      <v-img
+        :alt="coronaVirusAlt"
+        width="52px"
+        class="virus right-faq"
+        src="/img/corona-test/virus.png"
+      ></v-img>
     </v-layout>
     <v-layout row wrap class="boxAndForm">
       <v-flex xs12 md4>
@@ -166,8 +221,18 @@
       <v-flex xs12 md8>
         <FormBox />
       </v-flex>
-      <v-img width="90px" class="virus left-price" src="/img/corona-test/virus.png"></v-img>
-      <v-img width="42px" class="virus right-price" src="/img/corona-test/virus.png"></v-img>
+      <v-img
+        :alt="coronaVirusAlt"
+        width="90px"
+        class="virus left-price"
+        src="/img/corona-test/virus.png"
+      ></v-img>
+      <v-img
+        :alt="coronaVirusAlt"
+        width="42px"
+        class="virus right-price"
+        src="/img/corona-test/virus.png"
+      ></v-img>
     </v-layout>
   </section>
 </template>
@@ -217,7 +282,8 @@ export default {
   data() {
     return {
       new_user: false,
-      loading: null
+      loading: null,
+      coronaVirusAlt: "ویروس کرونا"
     };
   },
   methods: {}
