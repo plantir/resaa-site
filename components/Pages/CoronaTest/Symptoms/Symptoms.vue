@@ -59,7 +59,7 @@
       color: #4a4a4a;
       padding: 0 12px;
       text-align: center;
-      font-size: 13px;
+      font-size: 13px !important;
     }
   }
 }
@@ -72,10 +72,10 @@
       <div class="item-wrapper">
         <div class="item" v-for="(item, index) in items" :key="index">
           <div class="item--image">
-            <img v-lazy="item.image" :alt="item.title" />
+            <v-img :src="item.image" :alt="item.title" />
           </div>
-          <div class="item--title">{{item.title}}</div>
-          <div class="item--description">{{item.description}}</div>
+          <h3 class="item--title">{{item.title}}</h3>
+          <p class="item--description">{{item.description}}</p>
         </div>
       </div>
     </div>
