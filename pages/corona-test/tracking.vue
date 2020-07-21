@@ -310,10 +310,9 @@ export default {
         unpaid: "پرداخت نشده",
         paid: "پرداخت شده",
         pending: "بررسی نشده",
-        in_process: "در حال رسیدگی",
         cordinated: "هماهنگ شده",
         referred: "مراجعه شده",
-        test_result_posted: "ارسال نتیجه",
+        test_result_posted: "نتیجه تست ارسال شده",
         canceled: "لغو شده"
       };
       return translate[val];
