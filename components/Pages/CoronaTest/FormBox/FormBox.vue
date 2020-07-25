@@ -377,9 +377,9 @@
               >پر کردن علائم الزامی میباشد</div>
             </div>
           </div>
-          <div class="reserve-btn">
+          <!-- <div class="reserve-btn">
             <v-btn color="success" round @click="submit">پرداخت و رزرو تست کرونا</v-btn>
-          </div>
+          </div>-->
         </template>
         <template v-else>
           <div v-if="new_user">
@@ -454,7 +454,7 @@ export default {
     },
     date() {
       return moment().format("jYYYY/jMM/jDD");
-    }
+    },
   },
   data() {
     return {
@@ -465,7 +465,7 @@ export default {
       new_user: false,
       user: {},
       form: {
-        symptoms: []
+        symptoms: [],
       },
       activationKey: null,
       password: null,
@@ -476,12 +476,12 @@ export default {
             name: "تست آنتی بادی",
             price: 220,
             chargeId: 36,
-            doctorId: 2304
-          }
+            doctorId: 2304,
+          },
         },
         {
           text: "تست PCR",
-          value: { name: "تست PCR", price: 600, chargeId: 37, doctorId: 2305 }
+          value: { name: "تست PCR", price: 600, chargeId: 37, doctorId: 2305 },
         },
         {
           text: "تست آنتی بادی و تست PCR",
@@ -489,10 +489,10 @@ export default {
             name: "تست آنتی بادی و تست PCR",
             price: 700,
             chargeId: 38,
-            doctorId: 2306
-          }
-        }
-      ]
+            doctorId: 2306,
+          },
+        },
+      ],
     };
   },
   async mounted() {},
@@ -501,7 +501,7 @@ export default {
       let valid = await this.$validator.validateAll();
       if (valid) {
         this.$gtm.push({
-          event: "CoronaTestRequest"
+          event: "CoronaTestRequest",
         });
         if (this.user_id) {
           this.chargeRequest();
@@ -522,7 +522,7 @@ export default {
           denominationId: this.form.type.chargeId,
           callbackUrl: process.env.SITE_URL + "/corona-test/callback",
           phoneNumber: this.user.phoneNumber,
-          loginOrigin
+          loginOrigin,
         };
         // this.$gtm.push({
         //   event: "PaymentAtempted",
@@ -531,7 +531,7 @@ export default {
         let response = await this.$axios.post("/Charge", data);
         let {
           address,
-          submissionParameters: { token }
+          submissionParameters: { token },
         } = response.data.result.electronicPaymentVoucher.gateway;
         this.address = address;
         this.token = token;
@@ -552,7 +552,7 @@ export default {
             amount:
               response.data.result.electronicPaymentVoucher.chargeDenomination
                 .amount,
-            phoneNumber: this.user.phoneNumber
+            phoneNumber: this.user.phoneNumber,
           }
         );
         console.log(cronaTest);
@@ -606,13 +606,13 @@ export default {
         let response = await this.$axios.patch(
           `/Patients/Registration/${this.registrationToken}`,
           {
-            activationKey: this.activationKey
+            activationKey: this.activationKey,
           }
         );
         if (response.data.status === "OK") {
           this.$toast.success().showSimple("ثبت نام با موفقیت انجام شد");
           this.$store.commit("patient/login", {
-            access_token: response.data.result.token
+            access_token: response.data.result.token,
           });
           this.$store.commit("patient/initialize_user");
           this.chargeRequest();
@@ -650,8 +650,8 @@ export default {
       try {
         let res = await this.$axios.post("/oauth2/token", data, {
           headers: {
-            "Content-type": "application/x-www-form-urlencoded"
-          }
+            "Content-type": "application/x-www-form-urlencoded",
+          },
         });
         this.$store.commit("patient/login", res.data);
         this.$store.commit("patient/initialize_user");
@@ -660,7 +660,7 @@ export default {
         this.$toast.error().showSimple("نام کاربری یا رمز عبور اشتباه است");
       }
       loading.hide();
-    }
-  }
+    },
+  },
 };
 </script>

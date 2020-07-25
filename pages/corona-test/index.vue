@@ -271,37 +271,47 @@ export default {
     Cooperation,
     Faq,
     FormBox,
-    PriceBox
+    PriceBox,
   },
 
   head() {
     return {
       title: "تست ویروس کرونا در منزل",
       link: [
-        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
+        {
+          rel: "canonical",
+          href: `${process.env.SITE_URL}${this.$route.path}`,
+        },
       ],
       meta: [
         {
           hid: "description",
           name: "description",
           content:
-            "تست کرونا، تست آنتی بادی و تست PCR در منزل با سامانه رسا. متخصصین آزمایشگاه برای گرفتن انواع تست های کرونا به منزل شما می آیند و دیگر لازم نیست از خانه خود خارج شوید."
-        }
-      ]
+            "تست کرونا، تست آنتی بادی و تست PCR در منزل با سامانه رسا. متخصصین آزمایشگاه برای گرفتن انواع تست های کرونا به منزل شما می آیند و دیگر لازم نیست از خانه خود خارج شوید.",
+        },
+      ],
     };
   },
   computed: {
     faqs() {
       return this.$store.state.faq.corona;
-    }
+    },
   },
   data() {
     return {
       new_user: false,
       loading: null,
-      coronaVirusAlt: "ویروس کرونا"
+      coronaVirusAlt: "ویروس کرونا",
     };
   },
-  methods: {}
+  mounted() {
+    this.$dialog.alert({
+      message: `با توجه به دستور جدید وزارت بهداشت مبنی بر غیر مجاز بودن نمونه گیری خارج از آزمایشگاه ها برای تست کرونا خدمات نمونه گیری در منزل تا اطلاع ثانوی امکان پذیر نمی باشد.
+شما میتوانید برای تصمیم گیری برای نمونه گیری در آزمایشگاه ها با توجه به شرایط کنونی بیماری و علائم خود از <a href="/categories/medical-consultation-for-coronavirus/1141">مشاوره پزشکان متخصص</a> استفاده نمایید.`,
+      ok_txt: "متوجه شدم",
+    });
+  },
+  methods: {},
 };
 </script>
