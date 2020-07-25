@@ -16,7 +16,7 @@
 
 <template>
   <v-app dir="rtl" id="speciality">
-    <CoronaToolbar />
+    <!-- <CoronaToolbar /> -->
     <app-navigation></app-navigation>
     <v-content>
       <header>
@@ -42,20 +42,20 @@ export default {
     return {
       htmlAttrs: {
         lang: "fa-IR",
-        dir: "rtl"
-      }
+        dir: "rtl",
+      },
     };
   },
   components: {
     CoronaToolbar,
     appNavigation,
     appHeader,
-    appFooter
+    appFooter,
   },
   mounted() {
     if (this.$route.query.utm_campaign == "corona_amum") {
       this.$store.commit("corona_amum");
     }
-  }
+  },
 };
 </script>

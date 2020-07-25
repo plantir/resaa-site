@@ -5,7 +5,7 @@
 </style>
 <template>
   <v-app>
-    <CoronaToolbar />
+    <!-- <CoronaToolbar /> -->
     <app-navigation></app-navigation>
     <header>
       <app-header></app-header>
@@ -29,16 +29,16 @@ export default {
     return {
       htmlAttrs: {
         lang: "fa-IR",
-        dir: "rtl"
-      }
+        dir: "rtl",
+      },
     };
   },
   components: {
     CoronaToolbar,
     appNavigation,
     appHeader,
-    appFooter
-  }
+    appFooter,
+  },
 
   // data() {
   //   return {
