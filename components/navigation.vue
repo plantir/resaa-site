@@ -161,7 +161,7 @@ import Logo from "@/assets/svg/logo.svg?inline";
 export default {
   components: {
     resaaElement,
-    Logo
+    Logo,
   },
   data() {
     return {
@@ -169,11 +169,11 @@ export default {
       itemsList: [
         {
           name: "سامانه رسا",
-          path: { name: "index" }
+          path: { name: "index" },
         },
         {
           name: "لیست پزشکان",
-          path: { name: "doctors" }
+          path: { name: "doctors" },
         },
         // {
         //   name: "قوانین",
@@ -181,45 +181,46 @@ export default {
         // },
         {
           name: "مشاوره روانشناسی",
-          path: "/doctors/psychology"
+          path: "/doctors/psychology",
         },
         {
+          name: "کرونا",
           children: [
             {
               name: "تست کرونا در منزل",
-              path: "/corona-test"
+              path: "/corona-test",
             },
             {
               name: "مشاوره رایگان کرونا",
-              path: "/categories/medical-consultation-for-coronavirus/1141"
+              path: "/categories/medical-consultation-for-coronavirus/1141",
             },
             {
               name: "تخصص من رایگان",
-              path: "/categories/free-speciality-consultant/1148"
+              path: "/categories/free-speciality-consultant/1148",
             },
             {
               name: "مشاوره روانشناسی قرنطینه",
-              path: "/categories/quarantine-free-psychotherapy/1143"
-            }
-          ]
+              path: "/categories/quarantine-free-psychotherapy/1143",
+            },
+          ],
         },
         {
           name: "سوالات متداول",
-          path: { name: "faq" }
+          path: { name: "faq" },
         },
         {
           name: "درباره رسا",
-          path: { name: "about" }
+          path: { name: "about" },
         },
         {
           name: "تماس با ما",
-          path: { name: "contact-us" }
+          path: { name: "contact-us" },
         },
         {
           name: "ثبت نام پزشکان",
-          path: "/doctors/landing"
-        }
-      ]
+          path: "/doctors/landing",
+        },
+      ],
     };
   },
   methods: {
@@ -230,7 +231,7 @@ export default {
       this.$store.commit("patient/logout");
       this.$router.replace({ name: "patient-landing" });
       this.menuActive = false;
-    }
+    },
   },
   computed: {
     showMenu: {
@@ -239,7 +240,7 @@ export default {
       },
       set(val) {
         this.$store.commit("changeMenu", val);
-      }
+      },
     },
     user() {
       return this.$store.state.patient.user;
@@ -250,7 +251,7 @@ export default {
         return referrer && referrer.includes("corona_amum");
       }
       return this.$store.state.is_corona_amum;
-    }
-  }
+    },
+  },
 };
 </script>
