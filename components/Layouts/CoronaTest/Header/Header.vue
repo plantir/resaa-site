@@ -38,7 +38,7 @@
       </div>
       <div class="navigation-bar-left">
         <div>
-          <v-btn href="tel:02174471200" color="primary" outline round>تماس با پشتیبانی</v-btn>
+          <v-btn href="tel:02174471300" color="primary" outline round>تماس با پشتیبانی</v-btn>
         </div>
       </div>
     </div>
@@ -61,25 +61,25 @@ export default {
       itemsList: [
         {
           name: "سامانه رسا",
-          path: { name: "index" }
+          path: { name: "index" },
         },
         {
           name: "لیست پزشکان",
-          path: { name: "doctors" }
+          path: { name: "doctors" },
         },
         {
           name: "مشاوره روانشناسی",
-          path: "/doctors/psychology"
+          path: "/doctors/psychology",
         },
         {
           name: "سوالات متداول",
-          path: { name: "faq" }
+          path: { name: "faq" },
         },
         {
           name: "ثبت نام پزشکان",
-          path: "/doctors/landing"
-        }
-      ]
+          path: "/doctors/landing",
+        },
+      ],
     };
   },
   methods: {
@@ -92,7 +92,7 @@ export default {
       } else {
         this.scrolled = false;
       }
-    }
-  }
+    },
+  },
 };
 </script>
