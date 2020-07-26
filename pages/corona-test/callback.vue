@@ -106,7 +106,7 @@ section {
           </div>
         </div>
         <span>
-          <v-btn href="tel:02174471200" color="primary" round outline block>تماس با پشتیبانی رسا</v-btn>
+          <v-btn href="tel:02174471300" color="primary" round outline block>تماس با پشتیبانی رسا</v-btn>
         </span>
       </div>
       <div v-else>
@@ -148,7 +148,7 @@ section {
           پشتیبانی رسا به شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل نمایید.
         </p>
         <span>
-          <v-btn href="tel:02174471200" color="primary" round outline block>تماس با پشتیبانی رسا</v-btn>
+          <v-btn href="tel:02174471300" color="primary" round outline block>تماس با پشتیبانی رسا</v-btn>
         </span>
       </div>
     </div>
@@ -160,7 +160,7 @@ export default {
   layout: "corona-test",
   data() {
     return {
-      result: null
+      result: null,
     };
   },
   filters: {
@@ -175,7 +175,7 @@ export default {
         return "تست آنتی بادی و تست PCR";
       }
       return value;
-    }
+    },
   },
   async mounted() {
     if (!this.$route.query.chargeRequestId) {
@@ -187,18 +187,18 @@ export default {
       process.env.EXTRA_API_URL + "/corona-test/callback",
       {
         request_id: coronaTest.id,
-        chargeRequestId: this.$route.query.chargeRequestId
+        chargeRequestId: this.$route.query.chargeRequestId,
       }
     );
     if (this.result.payment_status == "paid") {
       this.$gtm.push({
         event: "coronaPayment",
         amount: this.result.amount,
-        testType: this.$options.filters.convertToTest(this.result.charge_id)
+        testType: this.$options.filters.convertToTest(this.result.charge_id),
       });
     }
 
     loader.hide();
-  }
+  },
 };
 </script>
