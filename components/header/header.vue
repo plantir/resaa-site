@@ -479,7 +479,7 @@
                     @click.native="closeNav"
                     to="/categories/medical-consultation-for-coronavirus/1141"
                     class="navigation-bar-item"
-                  >مشاوره رایگان کرونا</nuxt-link>
+                  >مشاوره کرونا</nuxt-link>
                   <nuxt-link
                     @click.native="closeNav"
                     to="/categories/free-speciality-consultant/1148"
@@ -638,7 +638,7 @@ export default {
       isLanding: true,
       menuActive: false,
       show: false,
-      itemsList: []
+      itemsList: [],
     };
   },
   created() {
@@ -653,7 +653,7 @@ export default {
   },
   mounted() {
     let that = this;
-    document.onkeyup = function(e) {
+    document.onkeyup = function (e) {
       if (e.code === "Escape") {
         that.menuActive = false;
       }
@@ -662,11 +662,11 @@ export default {
     this.itemsList = [
       {
         name: "سامانه رسا",
-        path: { name: "index" }
+        path: { name: "index" },
       },
       {
         name: "لیست پزشکان",
-        path: { name: "doctors" }
+        path: { name: "doctors" },
       },
       // {
       //   name: "قوانین",
@@ -674,37 +674,37 @@ export default {
       // },
       {
         name: "مشاوره روانشناسی",
-        path: "/doctors/psychology"
+        path: "/doctors/psychology",
       },
       {
         name: "کرونا",
         children: [
           {
             name: "تست کرونا در منزل",
-            path: "/corona-test"
+            path: "/corona-test",
           },
           {
-            name: "مشاوره رایگان کرونا",
-            path: "/categories/medical-consultation-for-coronavirus/1141"
+            name: "مشاوره کرونا",
+            path: "/categories/medical-consultation-for-coronavirus/1141",
           },
           {
             name: "تخصص من رایگان",
-            path: "/categories/free-speciality-consultant/1148"
+            path: "/categories/free-speciality-consultant/1148",
           },
           {
             name: "مشاوره روانشناسی قرنطینه",
-            path: "/categories/quarantine-free-psychotherapy/1143"
-          }
-        ]
+            path: "/categories/quarantine-free-psychotherapy/1143",
+          },
+        ],
       },
       {
         name: "سوالات متداول",
-        path: { name: "faq" }
+        path: { name: "faq" },
       },
       {
         name: "ثبت نام پزشکان",
-        path: "/doctors/landing"
-      }
+        path: "/doctors/landing",
+      },
       // {
       //   name: "درباره رسا",
       //   path: { name: "about" }
@@ -720,7 +720,7 @@ export default {
     toggleMenu() {
       this.$store.commit("showMenu");
     },
-    activateMenu: function() {
+    activateMenu: function () {
       this.menuActive = !this.menuActive;
     },
     closeNav() {
@@ -730,7 +730,7 @@ export default {
       this.$store.commit("patient/logout");
       this.$router.replace({ name: "patient-landing" });
       this.menuActive = false;
-    }
+    },
   },
   computed: {
     user() {
@@ -742,7 +742,7 @@ export default {
         return referrer && referrer.includes("corona_amum");
       }
       return this.$store.state.is_corona_amum;
-    }
-  }
+    },
+  },
 };
 </script>
