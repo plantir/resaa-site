@@ -233,7 +233,7 @@ section#header {
                     <nuxt-link
                       to="/categories/medical-consultation-for-coronavirus/1141"
                       class="navigation-bar-item"
-                    >مشاوره رایگان کرونا</nuxt-link>
+                    >مشاوره کرونا</nuxt-link>
                   </v-list-tile-title>
                 </v-list-tile>
                 <v-list-tile>
@@ -264,7 +264,7 @@ section#header {
                   @click.native="closeNav"
                   to="/categories/medical-consultation-for-coronavirus/1141"
                   class="navigation-bar-item"
-                >مشاوره رایگان کرونا</nuxt-link>
+                >مشاوره کرونا</nuxt-link>
                 <nuxt-link
                   @click.native="closeNav"
                   to="/categories/free-speciality-consultant/1148"
@@ -316,11 +316,11 @@ import Close from "@/assets/svg/close.svg?inline";
 export default {
   components: {
     Nav,
-    Close
+    Close,
   },
   data() {
     return {
-      isPatient: true
+      isPatient: true,
     };
   },
   mounted() {
@@ -334,7 +334,7 @@ export default {
       this.$store.commit("patient/logout");
       this.$router.replace({ name: "patient-landing" });
       this.menuActive = false;
-    }
+    },
   },
   computed: {
     user() {
@@ -349,7 +349,7 @@ export default {
         return referrer && referrer.includes("corona_amum");
       }
       return this.$store.state.is_corona_amum;
-    }
-  }
+    },
+  },
 };
 </script>
