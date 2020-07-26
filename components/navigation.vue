@@ -191,7 +191,7 @@ export default {
               path: "/corona-test",
             },
             {
-              name: "مشاوره رایگان کرونا",
+              name: "مشاوره کرونا",
               path: "/categories/medical-consultation-for-coronavirus/1141",
             },
             {
