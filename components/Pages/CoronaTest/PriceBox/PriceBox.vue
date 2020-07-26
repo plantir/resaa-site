@@ -59,7 +59,7 @@ p {
       <p
         class="mt-3"
       >شما عزیزان می توانید به جای تکمیل فرم و پرداخت آنلاین با تماس با پشتیبانی و کارت به کارت نیز برای تست کرونا درخواست ثبت کنید.</p>
-      <v-btn href="tel:02174471200" color="primary" round outline>تماس با پشتیبانی</v-btn>
+      <v-btn href="tel:02174471300" color="primary" round outline>تماس با پشتیبانی</v-btn>
     </div>
   </section>
 </template>
