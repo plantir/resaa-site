@@ -173,7 +173,7 @@
         :src="'/api/' + category.mobileBackgroundImagePath"
         :alt="category.pageHeaderTitle"
       />
-      <h1>{{ category.pageHeaderTitle || category.title }}</h1>
+      <h1>{{ category.pageHeaderTitle || pageTitle }}</h1>
       <span v-if="$route.params.id == 1144">تماس اول رایگان</span>
       <transition v-else name="fade" mode="out-in">
         <span :key="text_array[header_text]">{{text_array[header_text]}}</span>
@@ -190,7 +190,7 @@
         </div>
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">لیست متخصصین {{ category.title }}</h2>
+            <h2 class="card-title">لیست متخصصین {{ pageTitle }}</h2>
             <div class="guide hide-md">
               <div class="available">
                 <Available />در دسترس
@@ -201,7 +201,7 @@
             </div>
           </div>
           <p class="card-subtitle">
-            می توانید در این بخش لیست {{ category.title }} سامانه رسا را مشاهده
+            می توانید در این بخش لیست {{ pageTitle }} سامانه رسا را مشاهده
             کنید و مشاور مورد نظر خود را انتخاب کنید.
           </p>
           <div class="guide hide-md-and-up">
@@ -251,7 +251,7 @@
       <h2>
         نظر همراهان رسا در
         <br class="hide-md-and-up" />
-        مورد {{ category.title }}
+        مورد {{ pageTitle }}
       </h2>
       <Comments :comments="category.testimonials" />
     </v-container>
@@ -279,7 +279,7 @@ export default {
     Comments,
     Description,
     Available,
-    NotAvailable
+    NotAvailable,
   },
   props: ["category", "related_doctors", "limit", "totalItems", "requestId"],
   data() {
@@ -293,10 +293,10 @@ export default {
         "بدون نیاز به اینترنت!",
         "هر زمان که بخواهید!",
         "محرمانه و ناشناس!",
-        "بدون نیاز به گوشی هوشمند!"
+        "بدون نیاز به گوشی هوشمند!",
       ],
       page: 1,
-      header_text: 0
+      header_text: 0,
     };
   },
   mounted() {
@@ -319,20 +319,26 @@ export default {
             params: {
               limit: this.limit,
               offset: this.offset,
-              requestId: this.requestId
-            }
+              requestId: this.requestId,
+            },
           }
         );
         this.related_doctors = result.relatedDoctors;
         this.$scrollTo(this.$refs.wrapper, 1000);
       } catch (error) {}
       loader.hide();
-    }
+    },
   },
   computed: {
     offset() {
       return (this.page - 1) * this.limit;
-    }
-  }
+    },
+    pageTitle() {
+      if (this.$route.query.q) {
+        return this.$route.query.q.replace(/-/g, " ");
+      }
+      return this.category.title;
+    },
+  },
 };
 </script>
