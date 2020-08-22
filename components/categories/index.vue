@@ -173,7 +173,7 @@
         :src="'/api/' + category.mobileBackgroundImagePath"
         :alt="category.pageHeaderTitle"
       />
-      <h1>{{ category.pageHeaderTitle || pageTitle }}</h1>
+      <h1>{{ $route.query.q || category.pageHeaderTitle || pageTitle }}</h1>
       <span v-if="$route.params.id == 1144">تماس اول رایگان</span>
       <transition v-else name="fade" mode="out-in">
         <span :key="text_array[header_text]">{{text_array[header_text]}}</span>
@@ -186,7 +186,7 @@
           <span>
             <v-icon>chevron_left</v-icon>
           </span>
-          <nuxt-link :to="$route.fullPath">{{ category.title }}</nuxt-link>
+          <nuxt-link :to="$route.fullPath">{{ pageTitle }}</nuxt-link>
         </div>
         <div class="card">
           <div class="card-header">
