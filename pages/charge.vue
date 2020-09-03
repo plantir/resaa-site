@@ -711,16 +711,19 @@ export default {
     return {
       title: "افزایش اعتبار حساب برای تماس با پزشک",
       link: [
-        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
+        {
+          rel: "canonical",
+          href: `${process.env.SITE_URL}${this.$route.path}`,
+        },
       ],
       meta: [
         {
           hid: "description",
           name: "description",
           content:
-            "برای خرید شارژ جهت مکالمه با پزشک شماره موبایل و مبلغ کارت اعتباری مورد نیاز خود را وارد کنید و اعتبار حساب خود را افزایش دهید"
-        }
-      ]
+            "برای خرید شارژ جهت مکالمه با پزشک شماره موبایل و مبلغ کارت اعتباری مورد نیاز خود را وارد کنید و اعتبار حساب خود را افزایش دهید",
+        },
+      ],
     };
   },
   data() {
@@ -736,7 +739,7 @@ export default {
       userCredit: 0,
       charge: {},
       pre_factor: {},
-      bankReceiptSuccessResponse: true
+      bankReceiptSuccessResponse: true,
     };
   },
   beforeCreate() {
@@ -771,9 +774,9 @@ export default {
   async created() {
     this.$axios
       .get("/Charge/Denominations")
-      .then(response => {
+      .then((response) => {
         this.chargeMenuItems = response.data.result.denominations
-          .filter(item => {
+          .filter((item) => {
             return (
               item.amount == 10000 ||
               item.amount == 20000 ||
@@ -783,12 +786,12 @@ export default {
             );
           })
           .sort((a, b) => a.amount - b.amount)
-          .map(item => {
+          .map((item) => {
             return {
-              text: `کارت شار‍‍‍ ${this.$options.filters.persianDigit(
+              text: `کارت شارژ‍‍‍ ${this.$options.filters.persianDigit(
                 this.$options.filters.currency(item.amount)
               )} تومانی`,
-              value: item.id
+              value: item.id,
             };
           });
         this.ajaxLoading = false;
@@ -802,7 +805,7 @@ export default {
           this.selectedChargeItem = this.chargeMenuItems[0].value;
         }
       })
-      .catch(msg => {
+      .catch((msg) => {
         this.ajaxLoading = false;
         this.$toast.error().showSimple("خطایی در برقراری با سرور رخ داده است");
       });
@@ -810,7 +813,7 @@ export default {
       this.ajaxLoading = true;
       this.$axios
         .get(`/Charge/${this.$route.query.chargeRequestId}/Receipt`)
-        .then(res => {
+        .then((res) => {
           if (res.data.result.chargeReceipt.status === "Successful") {
             this.chargeStep = "success";
             this.charge.amount =
@@ -824,9 +827,9 @@ export default {
                 .post(`https://telegram.resaa.net/chargeNotify`, {
                   chat_id,
                   charge_amount: this.charge.amount,
-                  user_credit: this.userCredit
+                  user_credit: this.userCredit,
                 })
-                .then(res => {
+                .then((res) => {
                   localStorage.removeItem("chat_id");
                 });
             }
@@ -848,7 +851,7 @@ export default {
   },
 
   methods: {
-    onVerify: function(response) {
+    onVerify: function (response) {
       this.ajaxLoading = true;
       this.recaptchaResponse = response;
       this.goToPrereceipt();
@@ -864,11 +867,11 @@ export default {
       // this.$refs.invisibleRecaptcha.execute();
     },
 
-    toggleChargeMenu: function() {
+    toggleChargeMenu: function () {
       this.isMenuOpen = !this.isMenuOpen;
     },
 
-    selectChargeItem: function(item) {
+    selectChargeItem: function (item) {
       this.selectedChargeItem = item;
       this.isMenuOpen = false;
     },
@@ -879,7 +882,7 @@ export default {
         denominationId: this.selectedChargeItem,
         callbackUrl: process.env.BANK_RETURN_URL,
         loginOrigin,
-        phoneNumber: this.mobile
+        phoneNumber: this.mobile,
         // recaptchaResponse: this.recaptchaResponse
       };
       try {
@@ -900,7 +903,7 @@ export default {
       this.ajaxLoading = false;
     },
 
-    goToPaymentPage: function() {
+    goToPaymentPage: function () {
       const form = document.createElement("form");
       form.method = "POST";
       form.action = this.pre_factor.gateway.address;
@@ -912,7 +915,7 @@ export default {
       form.submit();
     },
 
-    goToFinalPage: function() {
+    goToFinalPage: function () {
       if (this.bankReceiptSuccessResponse === true) {
         this.chargeStep = "success";
         this.userCredit = this.userCredit + this.selectedChargeItem.amount;
@@ -921,15 +924,15 @@ export default {
       }
     },
 
-    goToInputPage: function() {
+    goToInputPage: function () {
       this.chargeStep = "input";
       this.$router.replace({ name: "Charge" });
-    }
+    },
   },
   computed: {
     sitekey() {
       return this.$store.state.sitekey;
-    }
-  }
+    },
+  },
 };
 </script>

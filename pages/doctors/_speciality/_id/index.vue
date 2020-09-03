@@ -107,38 +107,38 @@ export default {
       script: [
         {
           innerHTML: JSON.stringify(this.schema),
-          type: "application/ld+json"
-        }
+          type: "application/ld+json",
+        },
       ],
       link: [{ rel: "canonical", href: this.og.canonical }],
       meta: [
         {
           hid: "og:image",
           property: "og:image",
-          content: this.og.image
+          content: this.og.image,
         },
         {
           hid: "og:title",
           property: "og:title",
-          content: this.og.title
+          content: this.og.title,
         },
 
         {
           hid: "og:site_name",
           property: "og:site_name",
-          content: this.og.site_name
+          content: this.og.site_name,
         },
         {
           hid: "og:description",
           property: "og:description",
-          content: this.og.description
+          content: this.og.description,
         },
         {
           hid: "description",
           name: "description",
-          content: this.description
-        }
-      ]
+          content: this.description,
+        },
+      ],
     };
   },
   components: { Info, Call, Why, Address, RelatedDoctors, Comments, Social },
@@ -168,7 +168,7 @@ export default {
       if (address.latitude && address.longitude) {
         locations.push({
           lat: address.latitude,
-          lng: address.longitude
+          lng: address.longitude,
         });
       }
     }
@@ -182,8 +182,9 @@ export default {
     let title = `${doctor.title || ""} ${doctor.firstName} ${
       doctor.lastName
     } | تماس مستقیم با پزشک در سامانه رسا`;
-    let description = `با استفاده از سامانه رسا می توانید در کوتاه ترین زمان ممکن، مستقیما با ${doctor.title ||
-      ""} ${doctor.firstName}  ${doctor.lastName} متخصص ${
+    let description = `با استفاده از سامانه رسا می توانید در کوتاه ترین زمان ممکن، مستقیما با ${
+      doctor.title || ""
+    } ${doctor.firstName}  ${doctor.lastName} متخصص ${
       doctor.specialtyTitle
     } تماس تلفنی برقرار کنید و به پاسخ سوالات خود برسید.`;
     let og = {
@@ -199,7 +200,7 @@ export default {
         process.env.SITE_URL
       }/doctors/${doctor.specialtyEnglishTitle
         .toLowerCase()
-        .replace(/ /g, "-")}/${doctor.subscriberNumber}`
+        .replace(/ /g, "-")}/${doctor.subscriberNumber}`,
     };
     return {
       doctor: doctor,
@@ -221,7 +222,7 @@ export default {
               "@type": "ListItem",
               position: 1,
               name: "سامانه رسا",
-              item: "https:/resaa.net"
+              item: "https:/resaa.net",
             },
             {
               "@type": "ListItem",
@@ -229,7 +230,7 @@ export default {
               name: doctor.specialtyTitle,
               item: `https://resaa.net/doctors/${doctor.specialtyEnglishTitle
                 .toLowerCase()
-                .replace(/ /g, "-")}/`
+                .replace(/ /g, "-")}/`,
             },
             {
               "@type": "ListItem",
@@ -239,13 +240,13 @@ export default {
               }`,
               item: `https://resaa.net/doctors/${doctor.specialtyEnglishTitle
                 .toLowerCase()
-                .replace(/ /g, "-")}/${doctor.subscriberNumber}`
-            }
-          ]
+                .replace(/ /g, "-")}/${doctor.subscriberNumber}`,
+            },
+          ],
         },
         primaryImageOfPage: {
           "@type": "ImageObject",
-          url: `https://webapi.resaa.net/Doctors/${doctor.subscriberNumber}/Image`
+          url: `https://webapi.resaa.net/Doctors/${doctor.subscriberNumber}/Image`,
         },
         // aggregateRating: {
         //   "@type": "aggregateRating",
@@ -254,12 +255,15 @@ export default {
         //   ratingCount: "25"
         // },
         description: doctor.aboutDoctor
-          .concat(doctor.categories.map(item => item.title))
-          .join(",")
-      }
+          .concat(doctor.categories.map((item) => item.title))
+          .join(","),
+      },
     };
   },
   mounted() {
+    // setInterval(() => {
+    //   console.log(window.yektanet);
+    // }, 1000);
     // setTimeout(() => {
     //   if (process.client && !this.hideMap) {
     //     this.$refs.mapRef.$mapPromise.then(map => {
@@ -285,18 +289,39 @@ export default {
     //       this.duration = res.data.result.quote.duration;
     //     });
     // }
+    setTimeout(() => {
+      this.sendToYektanet();
+    }, 200);
   },
   computed: {
+    yektanet() {
+      return window.yektanet;
+    },
     user() {
       return this.$store.state.patient.user;
-    }
+    },
   },
   methods: {
     geo(address) {
       if (process.client) {
         window.location.href = `geo:${address.longitude},${address.latitude}`;
       }
-    }
-  }
+    },
+    sendToYektanet() {
+      try {
+        let productInfo = {
+          category: this.doctor.categories.map((item) => item.title),
+          image: `https://webapi.resaa.net${this.doctor.imagePath}`,
+          price: 25000,
+          sku: this.doctor.subscriberNumber,
+          title: `با سامانه رسا از  ${this.doctor.title} ${this.doctor.firstName} ${this.doctor.lastName} مشاوره تلفنی بگیرید`,
+        };
+        this.yektanet("product", "detail", productInfo);
+      } catch (error) {
+        console.log(error);
+        setTimeout(this.sendToYektanet, 200);
+      }
+    },
+  },
 };
 </script>
