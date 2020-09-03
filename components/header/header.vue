@@ -470,11 +470,11 @@
                   <i class="fa fa-caret-down"></i>
                 </a>
                 <div>
-                  <nuxt-link
+                  <!-- <nuxt-link
                     @click.native="closeNav"
                     to="/corona-test"
                     class="navigation-bar-item"
-                  >تست کرونا در منزل</nuxt-link>
+                  >تست کرونا در منزل</nuxt-link>-->
                   <nuxt-link
                     @click.native="closeNav"
                     to="/categories/medical-consultation-for-coronavirus/1141"
@@ -679,10 +679,10 @@ export default {
       {
         name: "کرونا",
         children: [
-          {
-            name: "تست کرونا در منزل",
-            path: "/corona-test",
-          },
+          // {
+          //   name: "تست کرونا در منزل",
+          //   path: "/corona-test",
+          // },
           {
             name: "مشاوره کرونا",
             path: "/categories/medical-consultation-for-coronavirus/1141",
