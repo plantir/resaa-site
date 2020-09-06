@@ -186,10 +186,10 @@ export default {
         {
           name: "کرونا",
           children: [
-            // {
-            //   name: "تست کرونا در منزل",
-            //   path: "/corona-test",
-            // },
+            {
+              name: "تست کرونا در منزل",
+              path: "/corona-test",
+            },
             {
               name: "مشاوره کرونا",
               path: "/categories/medical-consultation-for-coronavirus/1141",

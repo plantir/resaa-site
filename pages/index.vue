@@ -34,9 +34,12 @@ import PatientVideo from "@/components/patient/video/video";
 export default {
   head() {
     return {
-      title: "سامانه رسا | مشاوره پزشکی تلفنی با بهترین متخصصین",
+      title: "مشاوره پزشکی تلفنی با بهترین متخصصین | سامانه رسا",
       link: [
-        { rel: "canonical", href: `${process.env.SITE_URL}${this.$route.path}` }
+        {
+          rel: "canonical",
+          href: `${process.env.SITE_URL}${this.$route.path}`,
+        },
       ],
 
       meta: [
@@ -44,9 +47,9 @@ export default {
           hid: "description",
           name: "description",
           content:
-            "سامانه رسا بزرگترین بستر مشاوره پزشکی تلفنی با بهترین متخصصین در ایران. با رسا می تونی با کمترین هزینه و در کوتاه ترین زمان ممکن با پزشک در تماس باشی."
-        }
-      ]
+            "مشاوره آنلاین پزشکی و روانشناسی با بهترین متخصصین. با رسا می تونی با کمترین هزینه و در کوتاه ترین زمان ممکن با پزشک در تماس باشی.",
+        },
+      ],
     };
   },
   components: {
@@ -59,18 +62,18 @@ export default {
     Blog,
     PatientTelegram,
     PatientDownload,
-    PatientVideo
+    PatientVideo,
   },
   data() {
     return {
       dialog: true,
-      show_video: false
+      show_video: false,
     };
   },
   computed: {
     user() {
       return this.$store.state.user;
-    }
+    },
   },
   methods: {
     openVideo() {
@@ -78,8 +81,8 @@ export default {
     },
     closeModal() {
       this.show_video = false;
-    }
-  }
+    },
+  },
 };
 </script>
 
