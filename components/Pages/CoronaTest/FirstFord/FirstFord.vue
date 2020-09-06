@@ -68,20 +68,20 @@
         <h1>تست ویروس کرونا در منزل</h1>
         <p>اگر ساکن تهران هستید همین امروز می توانید در منزل خود تست کرونا دهید. متخصصین آزمایشگاه های شناخته شده و دارای مجوز از جمله بیمارستان مهراد، آزمایشگاه ظفر و میلاد در کمتر از 24 ساعت اعزام شده و در محل مورد نظر شما نمونه گیری میکنند و نتیجه ی آزمایش را در سریع ترین زمان به صورت آنلاین به شما اعلام می کنند.</p>
         <div class="button-wrapper">
-          <!-- <v-btn
+          <v-btn
             v-scroll-to="{el:'#FormBox',offset: 0, duration:1000 }"
             class="reserve-btn"
             dark
             round
             depressed
-          >رزرو تست کرونا</v-btn>-->
-          <v-btn
+          >رزرو تست کرونا</v-btn>
+          <!-- <v-btn
             to="/corona-test/tracking"
             class="reserve-btn"
             dark
             round
             depressed
-          >پیگیری تست کرونا</v-btn>
+          >پیگیری تست کرونا</v-btn>-->
           <v-btn href="tel:02174471300" color="primary" outline round>تماس با پشتیبانی</v-btn>
         </div>
       </div>

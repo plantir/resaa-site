@@ -5,7 +5,7 @@
 </style>
 <template>
   <v-app>
-    <!-- <CoronaToolbar /> -->
+    <CoronaToolbar />
     <app-navigation></app-navigation>
     <header>
       <app-header></app-header>
