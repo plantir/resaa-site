@@ -223,11 +223,11 @@ section#header {
                 <a v-on="on">کرونا</a>
               </template>
               <v-list>
-                <!-- <v-list-tile>
+                <v-list-tile>
                   <v-list-tile-title>
                     <nuxt-link to="/corona-test" class="navigation-bar-item">تست کرونا در منزل</nuxt-link>
                   </v-list-tile-title>
-                </v-list-tile>-->
+                </v-list-tile>
                 <v-list-tile>
                   <v-list-tile-title>
                     <nuxt-link

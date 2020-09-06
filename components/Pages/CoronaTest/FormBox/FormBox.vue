@@ -377,9 +377,9 @@
               >پر کردن علائم الزامی میباشد</div>
             </div>
           </div>
-          <!-- <div class="reserve-btn">
+          <div class="reserve-btn">
             <v-btn color="success" round @click="submit">پرداخت و رزرو تست کرونا</v-btn>
-          </div>-->
+          </div>
         </template>
         <template v-else>
           <div v-if="new_user">

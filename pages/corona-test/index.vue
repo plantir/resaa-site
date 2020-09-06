@@ -306,16 +306,16 @@ export default {
     };
   },
   async mounted() {
-    let confirm = await this.$dialog.warning().alert({
-      message: `با توجه به دستور جدید وزارت بهداشت مبنی بر غیر مجاز بودن نمونه گیری خارج از آزمایشگاه ها برای تست کرونا خدمات نمونه گیری در منزل تا اطلاع ثانوی امکان پذیر نمی باشد.
-شما میتوانید برای تصمیم گیری برای نمونه گیری در آزمایشگاه ها با توجه به شرایط کنونی بیماری و علائم خود از <a href="/categories/medical-consultation-for-coronavirus/1141">مشاوره پزشکان متخصص</a> استفاده نمایید.`,
-      ok_txt: "مشاوره تلفنی کرونا",
-    });
-    if (confirm) {
-      this.$router.push(
-        "/categories/medical-consultation-for-coronavirus/1141"
-      );
-    }
+    //     let confirm = await this.$dialog.warning().alert({
+    //       message: `با توجه به دستور جدید وزارت بهداشت مبنی بر غیر مجاز بودن نمونه گیری خارج از آزمایشگاه ها برای تست کرونا خدمات نمونه گیری در منزل تا اطلاع ثانوی امکان پذیر نمی باشد.
+    // شما میتوانید برای تصمیم گیری برای نمونه گیری در آزمایشگاه ها با توجه به شرایط کنونی بیماری و علائم خود از <a href="/categories/medical-consultation-for-coronavirus/1141">مشاوره پزشکان متخصص</a> استفاده نمایید.`,
+    //       ok_txt: "مشاوره تلفنی کرونا",
+    //     });
+    //     if (confirm) {
+    //       this.$router.push(
+    //         "/categories/medical-consultation-for-coronavirus/1141"
+    //       );
+    //     }
   },
   methods: {},
 };
