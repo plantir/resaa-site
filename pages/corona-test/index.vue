@@ -276,7 +276,7 @@ export default {
 
   head() {
     return {
-      title: "تست ویروس کرونا در منزل",
+      title: "تست کرونا در منزل",
       link: [
         {
           rel: "canonical",
