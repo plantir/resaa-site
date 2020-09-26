@@ -187,7 +187,15 @@
               <span>{{form.type.name}}</span>
             </div>
             <div class="item">
-              <span>هزینه تست</span>
+              <span>پرداخت آنلاین جهت تست</span>
+              <span>{{form.type.prepayment | persianDigit}} هزار تومان</span>
+            </div>
+            <div class="item">
+              <span>مبلغ قابل پرداخت در محل</span>
+              <span>{{form.type.price - form.type.prepayment | persianDigit}} هزار تومان</span>
+            </div>
+            <div class="item">
+              <span>هزینه کامل تست</span>
               <span>{{form.type.price | persianDigit}} هزار تومان</span>
             </div>
             <div class="item">
@@ -215,6 +223,8 @@
               data-vv-as="نوع تست"
               v-validate="'required'"
               name="type"
+              item-text="name"
+              return-object
               single-line
               outline
               placeholder="لطفا نوع تستی مورد نظر خود را انتخاب نمایید"
@@ -377,9 +387,9 @@
               >پر کردن علائم الزامی میباشد</div>
             </div>
           </div>
-          <!-- <div class="reserve-btn">
+          <div class="reserve-btn">
             <v-btn color="success" round @click="submit">پرداخت و رزرو تست کرونا</v-btn>
-          </div>-->
+          </div>
         </template>
         <template v-else>
           <div v-if="new_user">
@@ -471,26 +481,25 @@ export default {
       password: null,
       testItems: [
         {
-          text: "تست آنتی بادی",
-          value: {
-            name: "تست آنتی بادی",
-            price: 220,
-            chargeId: 36,
-            doctorId: 2304,
-          },
+          name: "تست آنتی بادی",
+          price: 190,
+          prepayment: 70,
+          chargeId: 36,
+          doctorId: 2304,
         },
         {
-          text: "تست PCR",
-          value: { name: "تست PCR", price: 600, chargeId: 37, doctorId: 2305 },
+          name: "تست PCR",
+          price: 590,
+          prepayment: 83,
+          chargeId: 37,
+          doctorId: 2305,
         },
         {
-          text: "تست آنتی بادی و تست PCR",
-          value: {
-            name: "تست آنتی بادی و تست PCR",
-            price: 700,
-            chargeId: 38,
-            doctorId: 2306,
-          },
+          name: "تست آنتی بادی و تست PCR",
+          price: 725,
+          prepayment: 120,
+          chargeId: 38,
+          doctorId: 2306,
         },
       ],
     };
