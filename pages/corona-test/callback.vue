@@ -75,6 +75,9 @@ section {
         <v-icon color="green" size="150">la-check-circle</v-icon>
         <span class="title green--text">پرداخت موفق بود و درخواست شما ثبت شد</span>
         <p>کاربر گرامی درخواست در کمتر از ۲ ساعت (در بازه ی ۱۰ الی ۲۱) بررسی شده و جهت مراجعه و نمونه گیری با شما تماس گرفته می شود. جهت پیگیری سفارش خود کافیست از بالای صفحه تست کرونا پیگیری تست را انتخاب کرده و در صفحه جدید شماره موبایل و کد ملی خود را وارد نمایید.</p>
+        <p
+          class="red--text"
+        >دقت کنید که مبلغ پرداختی به نمونه گیر باید دقیقا مطابق جدول زیر باشد، در صورتی که نمونه گیر مبلغی متفاوت با عدد ذکر شده درخواست کرد بلافاصله با پشتیبانی به شماره 02174471300 تماس بگیرید.</p>
         <div class="price-wrapper">
           <div class="item">
             <span>کد پیگیری</span>
@@ -103,6 +106,10 @@ section {
           <div class="item">
             <span>هزینه پرداخت شده</span>
             <span>{{result.amount | currency | persianDigit}} تومان</span>
+          </div>
+          <div class="item">
+            <span>هزینه قابل پرداخت به نمونه‌گیر</span>
+            <span>{{remain | currency | persianDigit}} تومان</span>
           </div>
         </div>
         <span>
@@ -162,6 +169,35 @@ export default {
     return {
       result: null,
     };
+  },
+  computed: {
+    remain() {
+      let tests = [
+        {
+          name: "تست آنتی بادی",
+          price: 190,
+          prepayment: 70,
+          chargeId: 36,
+          doctorId: 2304,
+        },
+        {
+          name: "تست PCR",
+          price: 590,
+          prepayment: 83,
+          chargeId: 37,
+          doctorId: 2305,
+        },
+        {
+          name: "تست آنتی بادی و تست PCR",
+          price: 725,
+          prepayment: 120,
+          chargeId: 38,
+          doctorId: 2306,
+        },
+      ];
+      let item = tests.find((item) => item.chargeId == this.result.charge_id);
+      return (item.price - item.prepayment) * 1000;
+    },
   },
   filters: {
     convertToTest(value) {

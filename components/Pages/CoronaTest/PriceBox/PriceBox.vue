@@ -44,15 +44,15 @@ p {
       <div class="price-wrapper">
         <div class="item">
           <span>تست آنتی بادی</span>
-          <span>۲۲۰ هزار تومان</span>
+          <span>۱۹۰ هزار تومان</span>
         </div>
         <div class="item">
           <span>تست PCR</span>
-          <span>۶۰۰ هزار تومان</span>
+          <span>۵۹۰ هزار تومان</span>
         </div>
         <div class="item">
           <span>تست آنتی بادی + PCR</span>
-          <span>۷۰۰ هزار تومان</span>
+          <span>۷۲۵ هزار تومان</span>
         </div>
       </div>
       <p>هزینه های ایاب و ذهاب به محل شما در مبالغ فوق محاسبه شده است.</p>
