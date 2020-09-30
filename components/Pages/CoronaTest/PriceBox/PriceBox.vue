@@ -40,29 +40,35 @@ p {
 <template>
   <section id="PriceBox">
     <div class="wrapper">
-      <h3>هزینه آزمایش ها:</h3>
-      <div class="price-wrapper">
-        <div class="item">
-          <span>تست آنتی بادی</span>
-          <span>۱۹۰ هزار تومان</span>
-        </div>
-        <div class="item">
-          <span>تست PCR</span>
-          <span>۵۹۰ هزار تومان</span>
-        </div>
-        <div class="item">
-          <span>تست آنتی بادی + PCR</span>
-          <span>۷۲۵ هزار تومان</span>
+      <h3>
+        هزینه آزمایش ها:
+        <span class="title secondary--text">{{
+          selectedCity ? selectedCity.name : ""
+        }}</span>
+      </h3>
+      <div v-if="selectedCity" class="price-wrapper">
+        <div
+          v-for="(item, index) in selectedCity.testsItems"
+          :key="index"
+          class="item"
+        >
+          <span>{{ item.name }}</span>
+          <span>{{ (item.price / 1000) | persianDigit }} هزار تومان</span>
         </div>
       </div>
       <p>هزینه های ایاب و ذهاب به محل شما در مبالغ فوق محاسبه شده است.</p>
-      <p
-        class="mt-3"
-      >شما عزیزان می توانید به جای تکمیل فرم و پرداخت آنلاین با تماس با پشتیبانی و کارت به کارت نیز برای تست کرونا درخواست ثبت کنید.</p>
-      <v-btn href="tel:02174471300" color="primary" round outline>تماس با پشتیبانی</v-btn>
+      <p class="mt-3">
+        شما عزیزان می توانید به جای تکمیل فرم و پرداخت آنلاین با تماس با
+        پشتیبانی و کارت به کارت نیز برای تست کرونا درخواست ثبت کنید.
+      </p>
+      <v-btn href="tel:02174471300" color="primary" round outline
+        >تماس با پشتیبانی</v-btn
+      >
     </div>
   </section>
 </template>
 <script>
-export default {};
+export default {
+  props: ["selectedCity"],
+};
 </script>
