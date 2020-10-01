@@ -572,7 +572,7 @@ export default {
         this.user = result.profile;
         let loginOrigin = localStorage.getItem("referrer");
         let data = {
-          denominationId: this.form.type.chargeId,
+          denominationId: +this.form.type.chargeId,
           callbackUrl: process.env.SITE_URL + "/corona-test/callback",
           phoneNumber: this.user.phoneNumber,
           loginOrigin,
