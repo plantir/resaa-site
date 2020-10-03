@@ -161,53 +161,81 @@
     <div class="wrapper">
       <template v-if="showFactor">
         <h3>پیش فاکتور تست کرونا در منزل</h3>
-        <p>با فشردن دکمه پرداخت اینترنتی می توانید هزینه تست انتخابی خود را به صورت آنلاین پرداخت کنید.</p>
+        <p>
+          با فشردن دکمه پرداخت اینترنتی می توانید هزینه تست انتخابی خود را به
+          صورت آنلاین پرداخت کنید.
+        </p>
       </template>
       <template v-else>
         <h3>فرم رزرو تست کرونا در منزل</h3>
-        <p>برای انجام تست کرونا در منزل لازم است فرم زیر را پر کنید. پس از پرداخت هزینه ی تست، پشتیبانی در کمتر از ۲ ساعت در بازه ی ۹ الی ۲۱ با شما تماس خواهد گرفت و برای گرفتن تست با شما هماهنگ خواهد کرد.</p>
+        <p>
+          برای انجام تست کرونا در منزل لازم است فرم زیر را پر کنید. پس از پرداخت
+          هزینه ی تست، پشتیبانی در کمتر از ۲ ساعت در بازه ی ۹ الی ۲۱ با شما تماس
+          خواهد گرفت و برای گرفتن تست با شما هماهنگ خواهد کرد.
+        </p>
       </template>
       <div class="form-wrapper">
         <template v-if="showFactor">
           <div class="price-wrapper">
             <div class="item">
               <span>نام و نام خانوادگی</span>
-              <span>{{form.name}}</span>
+              <span>{{ form.name }}</span>
             </div>
             <div class="item">
               <span>کد ملی</span>
-              <span>{{form.nationalCode | persianDigit}}</span>
+              <span>{{ form.nationalCode | persianDigit }}</span>
             </div>
             <div class="item">
               <span>شماره تلفن همراه</span>
-              <span>{{form.mobile | persianDigit}}</span>
+              <span>{{ form.mobile | persianDigit }}</span>
+            </div>
+            <div class="item">
+              <span>شهر</span>
+              <span>{{ form.city.name }}</span>
             </div>
             <div class="item">
               <span>تست انتخاب شده</span>
-              <span>{{form.type.name}}</span>
+              <span>{{ form.type.name }}</span>
             </div>
             <div class="item">
               <span>پرداخت آنلاین جهت تست</span>
-              <span>{{form.type.prepayment | persianDigit}} هزار تومان</span>
+              <span
+                >{{ (form.type.prepayment / 1000) | persianDigit }} هزار
+                تومان</span
+              >
             </div>
             <div class="item">
               <span>مبلغ قابل پرداخت در محل</span>
-              <span>{{form.type.price - form.type.prepayment | persianDigit}} هزار تومان</span>
+              <span
+                >{{
+                  ((form.type.price - form.type.prepayment) / 1000)
+                    | persianDigit
+                }}
+                هزار تومان</span
+              >
             </div>
             <div class="item">
               <span>هزینه کامل تست</span>
-              <span>{{form.type.price | persianDigit}} هزار تومان</span>
+              <span
+                >{{ (form.type.price / 1000) | persianDigit }} هزار تومان</span
+              >
             </div>
             <div class="item">
               <span>تاریخ پرداخت</span>
-              <span>{{date | persianDigit}}</span>
+              <span>{{ date | persianDigit }}</span>
             </div>
           </div>
           <div class="d-flex justify-center">
             <div class="reserve-btn">
               <v-btn color="success" round @click="goPayment">پرداخت</v-btn>
             </div>
-            <v-btn class="mt-4" round flat color="gray" @click="showFactor = false">
+            <v-btn
+              class="mt-4"
+              round
+              flat
+              color="gray"
+              @click="showFactor = false"
+            >
               <span>بازگشت</span>
               <v-icon class="mr-3">la-arrow-left</v-icon>
             </v-btn>
@@ -215,10 +243,29 @@
         </template>
         <template v-else-if="!need_verify">
           <div class="form-group">
-            <label required>انتخاب نوع تست</label>
+            <label required> استان محل سکونت</label>
+            <v-select
+              @change="$emit('onchangecity', form.city.id)"
+              v-model="form.city"
+              :items="cities"
+              :error-messages="errors.collect('type')"
+              data-vv-as="استان محل سکونت"
+              v-validate="'required'"
+              name="type"
+              item-text="name"
+              item-value="id"
+              return-object
+              single-line
+              outline
+              placeholder="لطفا استان محل سکونت خود را انتخاب نمایید"
+            ></v-select>
+          </div>
+          <div class="form-group">
+            <label required> نوع تست</label>
             <v-select
               v-model="form.type"
-              :items="testItems"
+              :items="testsItems"
+              :disabled="!form.city"
               :error-messages="errors.collect('type')"
               data-vv-as="نوع تست"
               v-validate="'required'"
@@ -384,11 +431,15 @@
               <div
                 class="error--text caption pr-2"
                 v-if="errors.collect('symptoms').length"
-              >پر کردن علائم الزامی میباشد</div>
+              >
+                پر کردن علائم الزامی میباشد
+              </div>
             </div>
           </div>
           <div class="reserve-btn">
-            <v-btn color="success" round @click="submit">پرداخت و رزرو تست کرونا</v-btn>
+            <v-btn color="success" round @click="submit"
+              >پرداخت و رزرو تست کرونا</v-btn
+            >
           </div>
         </template>
         <template v-else>
@@ -412,7 +463,9 @@
               ></v-text-field>
             </div>
             <div class="reserve-btn">
-              <v-btn color="success" round @click="verifySMSCode">ارسال و رزرو تست کرونا</v-btn>
+              <v-btn color="success" round @click="verifySMSCode"
+                >ارسال و رزرو تست کرونا</v-btn
+              >
             </div>
             <div class="input-detail">
               <div v-if="resendSMSCode_timeout == 0">
@@ -429,7 +482,8 @@
           </div>
           <div v-else>
             <v-alert type="info" :value="true" class="mb-3">
-              این شماره موبایل در سیستم رسا موجود میباشد لطفا با وارد کردن رمز عبور به حساب کاربری خود وارد شوید
+              این شماره موبایل در سیستم رسا موجود میباشد لطفا با وارد کردن رمز
+              عبور به حساب کاربری خود وارد شوید
               <br />در صورتیکه رمز عبور خود را ندارید عدد ۱ را به ۱۰۰۰۷۴۴۷۱۱۱۱
               پیامک کنید
             </v-alert>
@@ -447,7 +501,9 @@
               ></v-text-field>
             </div>
             <div class="reserve-btn">
-              <v-btn color="success" round @click="login">ورود و رزرو تست کرونا</v-btn>
+              <v-btn color="success" round @click="login"
+                >ورود و رزرو تست کرونا</v-btn
+              >
             </div>
           </div>
         </template>
@@ -458,12 +514,21 @@
 <script>
 import moment from "moment-jalaali";
 export default {
+  props: ["cities"],
   computed: {
     user_id() {
       return this.$store.state.patient.user_id;
     },
     date() {
       return moment().format("jYYYY/jMM/jDD");
+    },
+    testsItems() {
+      debugger
+      if (!this.form.city) {
+        return [];
+      }
+      let city = this.cities.find((item) => item.id == this.form.city.id);
+      return city.testsItems;
     },
   },
   data() {
@@ -474,34 +539,13 @@ export default {
       need_verify: false,
       new_user: false,
       user: {},
+
       form: {
+        city: null,
         symptoms: [],
       },
       activationKey: null,
       password: null,
-      testItems: [
-        {
-          name: "تست آنتی بادی",
-          price: 190,
-          prepayment: 70,
-          chargeId: 36,
-          doctorId: 2304,
-        },
-        {
-          name: "تست PCR",
-          price: 590,
-          prepayment: 83,
-          chargeId: 37,
-          doctorId: 2305,
-        },
-        {
-          name: "تست آنتی بادی و تست PCR",
-          price: 725,
-          prepayment: 120,
-          chargeId: 38,
-          doctorId: 2306,
-        },
-      ],
     };
   },
   async mounted() {},
@@ -528,7 +572,7 @@ export default {
         this.user = result.profile;
         let loginOrigin = localStorage.getItem("referrer");
         let data = {
-          denominationId: this.form.type.chargeId,
+          denominationId: +this.form.type.chargeId,
           callbackUrl: process.env.SITE_URL + "/corona-test/callback",
           phoneNumber: this.user.phoneNumber,
           loginOrigin,
@@ -547,8 +591,8 @@ export default {
         let cronaTest = await this.$axios.$post(
           process.env.EXTRA_API_URL + "/corona-test",
           {
-            charge_id: this.form.type.chargeId,
-            doctor_id: this.form.type.doctorId,
+            city_id: this.form.city.id,
+            selected_test: this.form.type,
             name: this.form.name,
             mobile: this.form.mobile,
             address: this.form.address,
