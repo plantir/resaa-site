@@ -109,7 +109,7 @@ section {
           </div>
           <div class="item">
             <span>هزینه قابل پرداخت به نمونه‌گیر</span>
-            <span>{{+result.price - +result.prepayment | currency | persianDigit}} تومان</span>
+            <span>{{+result.selected_test.price - +result.selected_test.prepayment | currency | persianDigit}} تومان</span>
           </div>
         </div>
         <span>
