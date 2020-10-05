@@ -587,7 +587,6 @@ export default {
         } = response.data.result.electronicPaymentVoucher.gateway;
         this.address = address;
         this.token = token;
-        debugger
         let cronaTest = await this.$axios.$post(
           process.env.EXTRA_API_URL + "/corona-test",
           {

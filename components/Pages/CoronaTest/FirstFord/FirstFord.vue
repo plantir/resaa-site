@@ -86,7 +86,7 @@
         </div>
       </div>
       <div class="image">
-        <v-img height="100%" position="center top"  alt="تست کرونا در منزل" :src="'/img/corona-test/top_img.png'" />
+        <v-img height="100%" position="center top"  alt="تست کرونا در منزل" :src="$device.isDesktop?'/img/corona-test/top_img@2x.png':'/img/corona-test/top_img@1x.png'" />
       </div>
     </div>
   </section>
