@@ -101,7 +101,7 @@ section {
           </div>
           <div class="item">
             <span>تست انتخاب شده</span>
-            <span>{{result.charge_id | convertToTest}}</span>
+            <span>{{result.selected_test.name}}</span>
           </div>
           <div class="item">
             <span>هزینه پرداخت شده</span>
@@ -109,7 +109,7 @@ section {
           </div>
           <div class="item">
             <span>هزینه قابل پرداخت به نمونه‌گیر</span>
-            <span>{{remain | currency | persianDigit}} تومان</span>
+            <span>{{+result.price - +result.prepayment | currency | persianDigit}} تومان</span>
           </div>
         </div>
         <span>
@@ -142,7 +142,7 @@ section {
           </div>
           <div class="item">
             <span>تست انتخاب شده</span>
-            <span>{{result.charge_id | convertToTest}}</span>
+            <span>{{result.selected_test.name }}</span>
           </div>
           <div class="item">
             <span>هزینه پرداخت شده</span>
@@ -155,7 +155,8 @@ section {
           پشتیبانی رسا به شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل نمایید.
         </p>
         <span>
-          <v-btn href="tel:02174471300" color="primary" round outline block>تماس با پشتیبانی رسا</v-btn>
+          <v-btn href="tel:02174471300" color="primary" round outline >تماس با پشتیبانی رسا</v-btn>
+          <v-btn to="/corona-test" color="secondary" round outline >تلاش مجدد</v-btn>
         </span>
       </div>
     </div>
@@ -169,35 +170,6 @@ export default {
     return {
       result: null,
     };
-  },
-  computed: {
-    remain() {
-      let tests = [
-        {
-          name: "تست آنتی بادی",
-          price: 190,
-          prepayment: 70,
-          chargeId: 36,
-          doctorId: 2304,
-        },
-        {
-          name: "تست PCR",
-          price: 590,
-          prepayment: 83,
-          chargeId: 37,
-          doctorId: 2305,
-        },
-        {
-          name: "تست آنتی بادی و تست PCR",
-          price: 725,
-          prepayment: 120,
-          chargeId: 38,
-          doctorId: 2306,
-        },
-      ];
-      let item = tests.find((item) => item.chargeId == this.result.charge_id);
-      return (item.price - item.prepayment) * 1000;
-    },
   },
   filters: {
     convertToTest(value) {
@@ -219,8 +191,9 @@ export default {
     }
     let loader = this.$loader.show("#app");
     let coronaTest = this.$storage.getUniversal("cronaTest");
-    this.result = await this.$axios.$post(
-      process.env.EXTRA_API_URL + "/corona-test/callback",
+    try {
+      this.result = await this.$axios.$post(
+        process.env.EXTRA_API_URL + "/corona-test/callback",
       {
         request_id: coronaTest.id,
         chargeRequestId: this.$route.query.chargeRequestId,
@@ -230,8 +203,12 @@ export default {
       this.$gtm.push({
         event: "coronaPayment",
         amount: this.result.amount,
-        testType: this.$options.filters.convertToTest(this.result.charge_id),
+        testType: this.result.selected_test.chargeId,
       });
+    }
+
+    } catch (error) {
+        this.$toast.warning().showSimple('عدم ارتباط با سرور')
     }
 
     loader.hide();
