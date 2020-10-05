@@ -523,7 +523,6 @@ export default {
       return moment().format("jYYYY/jMM/jDD");
     },
     testsItems() {
-      debugger
       if (!this.form.city) {
         return [];
       }
@@ -588,12 +587,13 @@ export default {
         } = response.data.result.electronicPaymentVoucher.gateway;
         this.address = address;
         this.token = token;
+        debugger
         let cronaTest = await this.$axios.$post(
           process.env.EXTRA_API_URL + "/corona-test",
           {
             city_id: this.form.city.id,
             selected_test: this.form.type,
-            doctor_id:this.form.doctorId,
+            doctor_id:this.form.type.doctorId,
             name: this.form.name,
             mobile: this.form.mobile,
             address: this.form.address,
