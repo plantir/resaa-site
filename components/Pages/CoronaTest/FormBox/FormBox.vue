@@ -243,13 +243,13 @@
         </template>
         <template v-else-if="!need_verify">
           <div class="form-group">
-            <label required> استان محل سکونت</label>
+            <label required> شهر محل سکونت</label>
             <v-select
               @change="$emit('onchangecity', form.city.id)"
               v-model="form.city"
               :items="cities"
               :error-messages="errors.collect('type')"
-              data-vv-as="استان محل سکونت"
+              data-vv-as="شهر محل سکونت"
               v-validate="'required'"
               name="type"
               item-text="name"
@@ -257,7 +257,7 @@
               return-object
               single-line
               outline
-              placeholder="لطفا استان محل سکونت خود را انتخاب نمایید"
+              placeholder="لطفا شهر محل سکونت خود را انتخاب نمایید"
             ></v-select>
           </div>
           <div class="form-group">
@@ -523,7 +523,6 @@ export default {
       return moment().format("jYYYY/jMM/jDD");
     },
     testsItems() {
-      debugger
       if (!this.form.city) {
         return [];
       }
@@ -593,6 +592,7 @@ export default {
           {
             city_id: this.form.city.id,
             selected_test: this.form.type,
+            // doctor_id:this.form.type.doctorId,
             name: this.form.name,
             mobile: this.form.mobile,
             address: this.form.address,

@@ -798,7 +798,6 @@ export default {
         if (this.$route.query.chat_id) {
           localStorage.setItem("chat_id", this.$route.query.chat_id);
         }
-        debugger;
         if (this.$route.query.chargeId) {
           this.selectedChargeItem = +this.$route.query.chargeId;
         } else {

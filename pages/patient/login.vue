@@ -258,7 +258,6 @@ export default {
       this.error = "فرمت نام کاربری اشتباه است";
     },
     login() {
-      debugger;
       this.ajaxLoading = true;
       let data = `username=${this.user.username}&password=${this.user.password}&grant_type=${this.user.grant_type}`;
       this.$axios
@@ -286,7 +285,6 @@ export default {
               this.ajaxLoading = false;
               this.$store.commit("patient/login", res.data);
               this.$store.commit("patient/initialize_user");
-              debugger;
               let return_url = this.$route.query.return_url;
               if (return_url) {
                 this.$router.push(return_url);
