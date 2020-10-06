@@ -592,7 +592,7 @@ export default {
           {
             city_id: this.form.city.id,
             selected_test: this.form.type,
-            doctor_id:this.form.type.doctorId,
+            // doctor_id:this.form.type.doctorId,
             name: this.form.name,
             mobile: this.form.mobile,
             address: this.form.address,
