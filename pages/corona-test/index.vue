@@ -230,12 +230,12 @@
         src="/img/corona-test/virus.png"
       ></v-img>
     </v-layout>
-    <v-layout row wrap class="boxAndForm">
+    <v-layout row wrap class="boxAndForm" v-if="cities">
       <v-flex xs12 md4>
-        <PriceBox />
+        <PriceBox :selectedCity="selectedCity" />
       </v-flex>
       <v-flex xs12 md8>
-        <FormBox />
+        <FormBox :cities="cities" @onchangecity="onChangeCity" />
       </v-flex>
       <v-img
         :alt="coronaVirusAlt"
@@ -303,6 +303,8 @@ export default {
       new_user: false,
       loading: null,
       coronaVirusAlt: "ویروس کرونا",
+      selectedCity: null,
+      cities: null,
     };
   },
   async mounted() {
@@ -316,7 +318,17 @@ export default {
     //         "/categories/medical-consultation-for-coronavirus/1141"
     //       );
     //     }
+    try {
+      let url = process.env.EXTRA_API_URL + "/corona_cities";
+      this.cities = await this.$axios.$get(url);
+    } catch (error) {
+      this.$toast.warning().showSimple('عدم ارتباط با سرور')
+    }
   },
-  methods: {},
+  methods: {
+    onChangeCity(city_id) {
+      this.selectedCity = this.cities.find((item) => item.id == city_id);
+    },
+  },
 };
 </script>
