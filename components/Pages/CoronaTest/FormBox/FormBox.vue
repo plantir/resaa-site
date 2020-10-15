@@ -554,6 +554,7 @@ export default {
       if (valid) {
         this.$gtm.push({
           event: "CoronaTestRequest",
+          mobile:this.form.mobile
         });
         if (this.user_id) {
           this.chargeRequest();
