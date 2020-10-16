@@ -655,7 +655,7 @@ export default {
         if (this.user_id) {
           this.receiptRequest();
         } else {
-          this.register({ phoneNumber: this.form.mobile });
+          this.register({ phoneNumber: this.form.user_mobile });
         }
       }
     },
