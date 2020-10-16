@@ -214,35 +214,32 @@
                 تومان</span
               >
             </div>
-            <div class="item">
+            <div class="item pink--text">
               <span>پرداخت آنلاین جهت تست</span>
               <span
                 >{{ (receipt.prepay_amount / 1000) | persianDigit }} هزار
                 تومان</span
               >
             </div>
-            <div class="item">
+            <div class="item info--text">
               <span>تخفیف بر روی تعداد</span>
               <span
-                >{{ (receipt.prepay_amount / 1000) | persianDigit }} هزار
+                >{{ (receipt.role_discount_amount / 1000) | persianDigit }} هزار
                 تومان</span
               >
             </div>
-            <div class="item" v-if="receipt.discount">
+            <div class="item info--text" v-if="receipt.discount">
               <span>کد تخفیف</span>
               <span
                 >{{ (receipt.discount.amount / 1000) | persianDigit }} هزار
                 تومان</span
               >
             </div>
-            <div class="item">
+            <div class="item success--text">
               <span>مبلغ قابل پرداخت در محل</span>
               <span
-                >{{
-                  ((receipt.total_amount - receipt.prepay_amount) / 1000)
-                    | persianDigit
-                }}
-                هزار تومان</span
+                >{{ (receipt.payable_amount / 1000) | persianDigit }} هزار
+                تومان</span
               >
             </div>
 
@@ -255,13 +252,7 @@
             <div class="reserve-btn">
               <v-btn color="success" round @click="goPayment">پرداخت</v-btn>
             </div>
-            <v-btn
-              class="mt-4"
-              round
-              flat
-              color="gray"
-              @click="showFactor = false"
-            >
+            <v-btn class="mt-4" round flat color="gray" @click="receipt = null">
               <span>بازگشت</span>
               <v-icon class="mr-3">la-arrow-left</v-icon>
             </v-btn>
@@ -333,10 +324,10 @@
               @input="onCountChange"
             ></v-text-field>
           </div>
-          <div class="form-group info--text" v-if="form.roleDiscount">
+          <div class="form-group info--text" v-if="form.role_discount_amount">
             <label class="info--text">تخفیف خرید گروهی</label>
             <div class="pt-1" style="height: 50px">
-              {{ form.roleDiscount | currency | persianDigit }} تومان
+              {{ form.role_discount_amount | currency | persianDigit }} تومان
             </div>
           </div>
           <div class="form-group">
@@ -648,7 +639,12 @@ export default {
       password: null,
     };
   },
-  async mounted() {},
+  async mounted() {
+    let cronaTest = this.$storage.getUniversal("cronaTest", true);
+    if (cronaTest) {
+      this.receipt = cronaTest;
+    }
+  },
   methods: {
     async submit() {
       let valid = await this.$validator.validateAll();
@@ -657,7 +653,7 @@ export default {
           event: "CoronaTestRequest",
         });
         if (this.user_id) {
-          this.chargeRequest();
+          this.receiptRequest();
         } else {
           this.register({ phoneNumber: this.form.mobile });
         }
@@ -676,7 +672,7 @@ export default {
         }
       }
     },
-    async chargeRequest() {
+    async receiptRequest() {
       let loader = this.$loader.show("#FormBox");
       try {
         let data = _.pick(this.form, [
@@ -686,6 +682,7 @@ export default {
           "user_nationalcode",
           "selected_test",
           "count",
+          "role_discount_amount",
           "discount",
         ]);
         data.test_id = this.form.selected_test.id;
@@ -695,9 +692,7 @@ export default {
           data
         );
         this.receipt = cronaTest;
-        this.$storage.setCookie("cronaTest", JSON.stringify(cronaTest));
-        this.$storage.setUniversal("cronaTest", JSON.stringify(cronaTest));
-        this.showFactor = true;
+        this.$storage.setUniversal("cronaTest", cronaTest, true);
         loader.hide();
       } catch (error) {
         console.error(error);
@@ -705,16 +700,23 @@ export default {
         loader.hide();
       }
     },
-    goPayment() {
-      const form = document.createElement("form");
-      form.method = "POST";
-      form.action = this.address;
-      const input = document.createElement("input");
-      input.value = this.token;
-      input.name = "token";
-      form.appendChild(input);
-      document.body.appendChild(form);
-      form.submit();
+    async goPayment() {
+      try {
+        let url = `${process.env.EXTRA_API_URL}/corona-orders/${this.receipt.id}/paymentRequest`;
+        let { address, token } = await this.$axios.$post(url);
+        const form = document.createElement("form");
+        form.method = "POST";
+        form.action = address;
+        const input = document.createElement("input");
+        input.value = token;
+        input.name = "token";
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+      } catch (error) {
+        console.error(error);
+        this.$toast.error().showSimple("خطایی رخ داده است");
+      }
     },
     onCountChange() {
       if (this.form.selected_test.discount_roles) {
@@ -724,10 +726,10 @@ export default {
             return +b.count - +a.count;
           });
         if (matchDiscount && matchDiscount.length) {
-          this.form.roleDiscount =
+          this.form.role_discount_amount =
             +this.form.count * +matchDiscount[0].discount;
         } else {
-          this.form.roleDiscount = 0;
+          this.form.role_discount_amount = 0;
         }
       }
     },
@@ -782,7 +784,7 @@ export default {
             access_token: response.data.result.token,
           });
           this.$store.commit("patient/initialize_user");
-          this.chargeRequest();
+          this.receiptRequest();
         } else {
           this.$toast.error().showSimple("کد وارد شده صحیح نمی باشد");
         }
@@ -822,7 +824,7 @@ export default {
         });
         this.$store.commit("patient/login", res.data);
         this.$store.commit("patient/initialize_user");
-        this.chargeRequest();
+        this.receiptRequest();
       } catch (error) {
         this.$toast.error().showSimple("نام کاربری یا رمز عبور اشتباه است");
       }

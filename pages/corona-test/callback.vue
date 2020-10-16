@@ -70,50 +70,93 @@ section {
 </style>
 <template>
   <section>
-    <div class="wrapper" v-if="result">
-      <div v-if="result.payment_status == 'paid'">
+    <div class="wrapper" v-if="receipt">
+      <div v-if="receipt.transaction.status == 'paid'">
         <v-icon color="green" size="150">la-check-circle</v-icon>
-        <span class="title green--text">پرداخت موفق بود و درخواست شما ثبت شد</span>
-        <p>کاربر گرامی درخواست در کمتر از ۲ ساعت (در بازه ی ۱۰ الی ۲۱) بررسی شده و جهت مراجعه و نمونه گیری با شما تماس گرفته می شود. جهت پیگیری سفارش خود کافیست از بالای صفحه تست کرونا پیگیری تست را انتخاب کرده و در صفحه جدید شماره موبایل و کد ملی خود را وارد نمایید.</p>
-        <p
-          class="red--text"
-        >دقت کنید که مبلغ پرداختی به نمونه گیر باید دقیقا مطابق جدول زیر باشد، در صورتی که نمونه گیر مبلغی متفاوت با عدد ذکر شده درخواست کرد بلافاصله با پشتیبانی به شماره 02174471300 تماس بگیرید.</p>
+        <span class="title green--text"
+          >پرداخت موفق بود و درخواست شما ثبت شد</span
+        >
+        <p>
+          کاربر گرامی درخواست در کمتر از ۲ ساعت (در بازه ی ۱۰ الی ۲۱) بررسی شده
+          و جهت مراجعه و نمونه گیری با شما تماس گرفته می شود. جهت پیگیری سفارش
+          خود کافیست از بالای صفحه تست کرونا پیگیری تست را انتخاب کرده و در صفحه
+          جدید شماره موبایل و کد ملی خود را وارد نمایید.
+        </p>
+        <p class="red--text">
+          دقت کنید که مبلغ پرداختی به نمونه گیر باید دقیقا مطابق جدول زیر باشد،
+          در صورتی که نمونه گیر مبلغی متفاوت با عدد ذکر شده درخواست کرد بلافاصله
+          با پشتیبانی به شماره 02174471300 تماس بگیرید.
+        </p>
         <div class="price-wrapper">
           <div class="item">
             <span>کد پیگیری</span>
-            <span>{{result.trackingNumber | persianDigit}}</span>
+            <span>{{ receipt.transaction.tracking_code | persianDigit }}</span>
           </div>
           <div class="item">
             <span>نام و نام خانوادگی</span>
-            <span>{{result.name}}</span>
+            <span>{{ receipt.user_fullname }}</span>
           </div>
           <div class="item">
             <span>کد ملی</span>
-            <span>{{result.nationalCode | persianDigit}}</span>
+            <span>{{ receipt.user_nationalcode | persianDigit }}</span>
           </div>
           <div class="item">
             <span>شماره تلفن همراه</span>
-            <span>{{result.mobile | persianDigit}}</span>
+            <span>{{ receipt.user_mobile | persianDigit }}</span>
           </div>
           <div class="item">
-            <span>آدرس</span>
-            <span>{{result.address}}</span>
+            <span>شهر</span>
+            <span>{{ receipt.city.name }}</span>
           </div>
           <div class="item">
             <span>تست انتخاب شده</span>
-            <span>{{result.selected_test.name}}</span>
+            <span>{{ receipt.selected_test.name }}</span>
           </div>
           <div class="item">
-            <span>هزینه پرداخت شده</span>
-            <span>{{result.amount | currency | persianDigit}} تومان</span>
+            <span>هزینه کامل تست</span>
+            <span
+              >{{ (receipt.total_amount / 1000) | persianDigit }} هزار
+              تومان</span
+            >
           </div>
+          <div class="item pink--text">
+            <span>پرداخت آنلاین جهت تست</span>
+            <span
+              >{{ (receipt.prepay_amount / 1000) | persianDigit }} هزار
+              تومان</span
+            >
+          </div>
+          <div class="item info--text">
+            <span>تخفیف بر روی تعداد</span>
+            <span
+              >{{ (receipt.role_discount_amount / 1000) | persianDigit }} هزار
+              تومان</span
+            >
+          </div>
+          <div class="item info--text" v-if="receipt.discount">
+            <span>کد تخفیف</span>
+            <span
+              >{{ (receipt.discount.amount / 1000) | persianDigit }} هزار
+              تومان</span
+            >
+          </div>
+          <div class="item success--text">
+            <span>مبلغ قابل پرداخت در محل</span>
+            <span
+              >{{ (receipt.payable_amount / 1000) | persianDigit }} هزار
+              تومان</span
+            >
+          </div>
+
           <div class="item">
-            <span>هزینه قابل پرداخت به نمونه‌گیر</span>
-            <span>{{+result.selected_test.price - +result.selected_test.prepayment | currency | persianDigit}} تومان</span>
+            <span>تاریخ پرداخت</span>
+            <span>{{ date | persianDigit }}</span>
           </div>
         </div>
         <span>
-          <v-btn href="tel:02174471300" color="primary" round outline block>تماس با پشتیبانی رسا</v-btn>
+          <v-btn href="tel:02174471300" color="primary" round outline block
+            >تماس با پشتیبانی رسا</v-btn
+          >
         </span>
       </div>
       <div v-else>
@@ -122,41 +165,81 @@ section {
         <div class="price-wrapper">
           <div class="item">
             <span>کد پیگیری</span>
-            <span>{{result.trackingNumber | persianDigit}}</span>
+            <span>{{ receipt.transaction.tracking_code | persianDigit }}</span>
           </div>
           <div class="item">
             <span>نام و نام خانوادگی</span>
-            <span>{{result.name}}</span>
+            <span>{{ receipt.user_fullname }}</span>
           </div>
           <div class="item">
             <span>کد ملی</span>
-            <span>{{result.nationalCode | persianDigit}}</span>
+            <span>{{ receipt.user_nationalcode | persianDigit }}</span>
           </div>
           <div class="item">
             <span>شماره تلفن همراه</span>
-            <span>{{result.mobile | persianDigit}}</span>
+            <span>{{ receipt.user_mobile | persianDigit }}</span>
           </div>
           <div class="item">
-            <span>آدرس</span>
-            <span>{{result.address}}</span>
+            <span>شهر</span>
+            <span>{{ receipt.city.name }}</span>
           </div>
           <div class="item">
             <span>تست انتخاب شده</span>
-            <span>{{result.selected_test.name }}</span>
+            <span>{{ receipt.selected_test.name }}</span>
           </div>
           <div class="item">
-            <span>هزینه پرداخت شده</span>
-            <span>{{result.amount | currency | persianDigit}} تومان</span>
+            <span>هزینه کامل تست</span>
+            <span
+              >{{ (receipt.total_amount / 1000) | persianDigit }} هزار
+              تومان</span
+            >
+          </div>
+          <div class="item pink--text">
+            <span>پرداخت آنلاین جهت تست</span>
+            <span
+              >{{ (receipt.prepay_amount / 1000) | persianDigit }} هزار
+              تومان</span
+            >
+          </div>
+          <div class="item info--text">
+            <span>تخفیف بر روی تعداد</span>
+            <span
+              >{{ (receipt.role_discount_amount / 1000) | persianDigit }} هزار
+              تومان</span
+            >
+          </div>
+          <div class="item info--text" v-if="receipt.discount">
+            <span>کد تخفیف</span>
+            <span
+              >{{ (receipt.discount.amount / 1000) | persianDigit }} هزار
+              تومان</span
+            >
+          </div>
+          <div class="item success--text">
+            <span>مبلغ قابل پرداخت در محل</span>
+            <span
+              >{{ (receipt.payable_amount / 1000) | persianDigit }} هزار
+              تومان</span
+            >
+          </div>
+
+          <div class="item">
+            <span>تاریخ پرداخت</span>
+            <span>{{ date | persianDigit }}</span>
           </div>
         </div>
         <p>
-          در صورتی که هزینه ای از حساب بانکی شما کسر شده باشد، طی ۲۴
-          ساعت آینده بازگردانده می‌شود. لطفاً در صورت تکرار این مشکل با
-          پشتیبانی رسا به شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل نمایید.
+          در صورتی که هزینه ای از حساب بانکی شما کسر شده باشد، طی ۲۴ ساعت آینده
+          بازگردانده می‌شود. لطفاً در صورت تکرار این مشکل با پشتیبانی رسا به
+          شماره ۰۲۱۷۴۴۷۱۳۰۰ تماس حاصل نمایید.
         </p>
         <span>
-          <v-btn href="tel:02174471300" color="primary" round outline >تماس با پشتیبانی رسا</v-btn>
-          <v-btn to="/corona-test" color="secondary" round outline >تلاش مجدد</v-btn>
+          <v-btn href="tel:02174471300" color="primary" round outline
+            >تماس با پشتیبانی رسا</v-btn
+          >
+          <v-btn to="/corona-test" color="secondary" round outline
+            >تلاش مجدد</v-btn
+          >
         </span>
       </div>
     </div>
@@ -164,51 +247,41 @@ section {
 </template>
 
 <script>
+import moment from "moment-jalaali";
 export default {
   layout: "corona-test",
+  computed: {
+    date() {
+      return moment().format("jYYYY/jMM/jDD");
+    },
+  },
   data() {
     return {
-      result: null,
+      receipt: null,
     };
-  },
-  filters: {
-    convertToTest(value) {
-      if (value == 36) {
-        return "تست آنتی بادی";
-      }
-      if (value == 37) {
-        return "تست PCR";
-      }
-      if (value == 38) {
-        return "تست آنتی بادی و تست PCR";
-      }
-      return value;
-    },
   },
   async mounted() {
     if (!this.$route.query.chargeRequestId) {
       this.$router.push("/corona-test");
     }
     let loader = this.$loader.show("#app");
-    let coronaTest = this.$storage.getUniversal("cronaTest");
+    this.$storage.removeUniversal("cronaTest");
     try {
-      this.result = await this.$axios.$post(
-        process.env.EXTRA_API_URL + "/corona-test/callback",
-      {
-        request_id: coronaTest.id,
-        chargeRequestId: this.$route.query.chargeRequestId,
+      this.receipt = await this.$axios.$post(
+        process.env.EXTRA_API_URL + "/corona-orders/callback",
+        {
+          chargeRequestId: this.$route.query.chargeRequestId,
+        }
+      );
+      if (this.receipt.transaction.status == "paid") {
+        this.$gtm.push({
+          event: "coronaPayment",
+          amount: this.receipt.prepay_amount,
+          testType: this.receipt.selected_test.name,
+        });
       }
-    );
-    if (this.result.payment_status == "paid") {
-      this.$gtm.push({
-        event: "coronaPayment",
-        amount: this.result.amount,
-        testType: this.result.selected_test.chargeId,
-      });
-    }
-
     } catch (error) {
-        this.$toast.warning().showSimple('عدم ارتباط با سرور')
+      this.$toast.warning().showSimple("عدم ارتباط با سرور");
     }
 
     loader.hide();
