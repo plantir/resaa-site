@@ -210,35 +210,45 @@
             <div class="item">
               <span>هزینه کامل تست</span>
               <span
-                >{{ (receipt.total_amount / 1000) | persianDigit }} هزار
+                >{{
+                  receipt.total_amount | currency | persianDigit
+                }}
                 تومان</span
               >
             </div>
             <div class="item pink--text">
               <span>پرداخت آنلاین جهت تست</span>
               <span
-                >{{ (receipt.prepay_amount / 1000) | persianDigit }} هزار
+                >{{
+                  receipt.prepay_amount | currency | persianDigit
+                }}
                 تومان</span
               >
             </div>
             <div class="item info--text">
               <span>تخفیف بر روی تعداد</span>
               <span
-                >{{ (receipt.role_discount_amount / 1000) | persianDigit }} هزار
+                >{{
+                  receipt.role_discount_amount | currency | persianDigit
+                }}
                 تومان</span
               >
             </div>
             <div class="item info--text" v-if="receipt.discount">
               <span>کد تخفیف</span>
               <span
-                >{{ (receipt.discount.amount / 1000) | persianDigit }} هزار
+                >{{
+                  receipt.discount.amount | currency | persianDigit
+                }}
                 تومان</span
               >
             </div>
             <div class="item success--text">
               <span>مبلغ قابل پرداخت در محل</span>
               <span
-                >{{ (receipt.payable_amount / 1000) | persianDigit }} هزار
+                >{{
+                  receipt.payable_amount | currency | persianDigit
+                }}
                 تومان</span
               >
             </div>
@@ -641,7 +651,7 @@ export default {
   },
   async mounted() {
     let cronaTest = this.$storage.getUniversal("cronaTest", true);
-    if (cronaTest) {
+    if (cronaTest && cronaTest.user_fullname) {
       this.receipt = cronaTest;
     }
   },
