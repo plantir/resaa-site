@@ -225,7 +225,7 @@
                 تومان</span
               >
             </div>
-            <div class="item info--text">
+            <div class="item info--text" v-if="receipt.role_discount_amount">
               <span>تخفیف بر روی تعداد</span>
               <span
                 >{{
