@@ -319,7 +319,7 @@ export default {
     //       );
     //     }
     try {
-      let url = process.env.EXTRA_API_URL + "/corona_cities";
+      let url = process.env.EXTRA_API_URL + "/corona-cities";
       this.cities = await this.$axios.$get(url);
     } catch (error) {
       this.$toast.warning().showSimple('عدم ارتباط با سرور')
