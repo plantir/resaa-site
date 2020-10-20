@@ -6,6 +6,9 @@ section {
   margin: 60px auto 20px;
   padding: 0 20px;
   max-width: 970px;
+  @include media(xs-only){
+    padding: 0;
+  }
 }
 .v-card {
   border-radius: 10px;
@@ -52,6 +55,9 @@ section {
 }
 .mobile-wrapper {
   width: 100%;
+  h3{
+    text-align: center;
+  }
   .test-item {
     padding: 0 36px;
     display: flex;
@@ -69,7 +75,7 @@ section {
   <section>
     <v-card v-if="$device.isDesktop">
       <div class="header">
-        هزینه های انجام تست های کرونا در شهرهای مختلف
+        هزینه‌ی تست های کرونا در شهرهای مختلف
       </div>
       <div class="body">
         <p class="description">
@@ -98,6 +104,9 @@ section {
       </div>
     </v-card>
     <div v-else class="mobile-wrapper">
+      <h3 class="mb-3 text-center">
+        هزینه‌ی تست های کرونا در شهرهای مختلف
+      </h3>
       <v-expansion-panel expand>
         <v-expansion-panel-content v-for="city in cities" :key="city.id">
           <template v-slot:header>
