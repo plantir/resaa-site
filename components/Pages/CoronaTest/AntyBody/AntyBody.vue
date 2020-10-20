@@ -23,6 +23,10 @@
     max-width: 680px;
   }
 }
+svg{
+  width: auto;
+  height: auto;
+}
 </style>
 <template>
   <section id="AntyBody">
@@ -39,11 +43,14 @@
         <p>مثبت بودن همزمان IgMوIgGخون به این معنی است که فرد با ویروس در زمان نه چندان دور در تماس بوده و احتمالا ناقل بیماری می باشد برای این فرد آزمایش PCRتوصیه میشود.</p>
       </div>
       <div class="image">
-        <v-img :src="'/img/corona-test/AntyBody.png'" alt="چه کسانی باید تست آنتی بادی بدهند؟" />
+        <v-img :src="'/img/corona-test/antybody.png'" alt="چه کسانی باید تست آنتی بادی بدهند؟" />
       </div>
     </div>
   </section>
 </template>
 <script>
-export default {};
+export default {
+  components:{
+  }
+};
 </script>

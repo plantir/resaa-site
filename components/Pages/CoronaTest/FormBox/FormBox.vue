@@ -151,6 +151,10 @@
     }
   }
 }
+.discount-input-wrapper {
+  display: flex;
+  width: 100%;
+}
 .checkbox-wrapper {
   display: flex;
   flex-direction: row;
@@ -272,7 +276,6 @@
           <div class="form-group">
             <label required> شهر محل سکونت</label>
             <v-select
-              @change="onCityChange"
               v-model="form.city"
               :items="cities"
               :error-messages="errors.collect('type')"
@@ -295,8 +298,10 @@
               :error-messages="errors.collect('type')"
               data-vv-as="نوع تست"
               v-validate="'required'"
+              item-value="id"
               name="type"
               :disabled="!form.city"
+              return-object
               single-line
               outline
               placeholder="لطفا نوع تستی مورد نظر خود را انتخاب نمایید"
@@ -322,10 +327,11 @@
             <v-text-field
               single-line
               outline
+              min="1"
               type="number"
               v-model="form.count"
               autocomplete="new-password"
-              v-validate="'required'"
+              v-validate="'required|min_value:1'"
               :error-messages="errors.collect('count')"
               data-vv-as="تعداد تست مورد نیاز"
               :disabled="!form.selected_test"
@@ -335,9 +341,11 @@
             ></v-text-field>
           </div>
           <div class="form-group info--text" v-if="form.role_discount_amount">
-            <label class="info--text">تخفیف خرید گروهی</label>
-            <div class="pt-1" style="height: 50px">
-              {{ form.role_discount_amount | currency | persianDigit }} تومان
+            <div class="discount-input-wrapper">
+              <label class="info--text">تخفیف خرید گروهی</label>
+              <div class="pt-1" style="height: 50px">
+                {{ form.role_discount_amount | currency | persianDigit }} تومان
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -400,144 +408,72 @@
               placeholder="لطفا نشانی کامل محل سکونت خود را وارد نمایید"
             ></v-textarea>
           </div>
-          <!-- <div class="form-group">
-            <label required>علائم</label>
-            <div class="checkbox-wrapper">
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="تب"
-                value="تب"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="لرز"
-                value="لرز"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="سر درد"
-                value="سر درد"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="اسهال"
-                value="اسهال"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="استفراغ"
-                value="استفراغ"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="گلو درد"
-                value="گلو درد"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="سرفه"
-                value="سرفه"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="تنگی نفس"
-                value="تنگی نفس"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="درد عضلات"
-                value="درد عضلات"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="ضعف حس بویایی"
-                value="ضعف حس بویایی"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="ضعف حس چشایی"
-                value="ضعف حس چشایی"
-              ></v-checkbox>
-              <div
-                class="error--text caption pr-2"
-                v-if="errors.collect('symptoms').length"
-              >
-                پر کردن علائم الزامی میباشد
-              </div>
-            </div>
-          </div> -->
-
           <div class="form-group" v-if="form.discount.code">
             <label class="info--text">کد تخفیف</label>
-            <v-text-field
-              v-model="form.discount.code"
-              :disabled="true"
-              single-line
-              outline
-            ></v-text-field>
-            <v-btn color="error" @click="form.discount = {}" class="mt-0"
-              >لغو</v-btn
-            >
+            <div class="discount-input-wrapper">
+              <v-text-field
+                v-model="form.discount.code"
+                :disabled="true"
+                single-line
+                outline
+              ></v-text-field>
+              <v-btn color="error" @click="form.discount = {}" class="mt-0"
+                >لغو</v-btn
+              >
+            </div>
           </div>
           <div
             class="form-group success--text"
             style="height: 50px"
             v-if="form.discount.code"
           >
-            <label class="success--text">مقدار تخفیف</label>
-            <div>
-              {{ form.discount.amount | currency | persianDigit }} تومان
+            <div class="discount-input-wrapper">
+              <label class="success--text">مقدار تخفیف</label>
+              <div>
+                {{ form.discount.amount | currency | persianDigit }} تومان
+              </div>
             </div>
           </div>
           <div class="form-group" v-else>
             <label class="info--text">کد تخفیف دارید؟</label>
-            <v-text-field
-              v-model="discount"
-              placeholder="کد تخفیف خود را وارد نمایید"
-              single-line
-              outline
-              @keypress.enter="checkDiscount"
-            ></v-text-field>
-            <v-btn
-              color="info"
-              @click="checkDiscount"
-              class="mt-0"
-              :loading="discountChecking"
-              >بررسی</v-btn
+            <div class="discount-input-wrapper">
+              <v-text-field
+                v-model="discount"
+                placeholder="کد تخفیف خود را وارد نمایید"
+                single-line
+                outline
+                @keypress.enter="checkDiscount"
+              ></v-text-field>
+              <v-btn
+                color="info"
+                @click="checkDiscount"
+                class="mt-0"
+                :loading="discountChecking"
+                >اعمال</v-btn
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <v-checkbox
+              :error-messages="errors.collect('terms')"
+              autocomplete="new-password"
+              data-vv-as="قبول شرایط و قوانین"
+              name="terms"
+              v-validate="'required'"
+              label=""
+              v-model="form.terms"
+              value="value"
             >
+              <template v-slot:label>
+                <div>
+                  قبول
+                  <a @click="showTerms">
+                    شرایط و قوانین
+                  </a>
+                  رسا
+                </div>
+              </template>
+            </v-checkbox>
           </div>
           <div class="reserve-btn">
             <v-btn color="success" round @click="submit"
@@ -617,16 +553,35 @@
 <script>
 import moment from "moment-jalaali";
 import _ from "lodash";
+import TermsComponent from '@/components/Pages/CoronaTest/Terms/Terms.vue'
 export default {
-  props: ["cities"],
+  props: { cities: Array, form: Object },
   computed: {
     user_id() {
       return this.$store.state.patient.user_id;
     },
     date() {
       return moment().format("jYYYY/jMM/jDD");
-    },
+    }
   },
+  watch: {
+    "form.city": {
+      deep: true,
+      handler: function(city) {
+        if (city && city.tests) {
+          this.$emit("onchangecity", this.form.city.id);
+          this.form.selected_test = null;
+          try {
+            this.testsItems = city.tests;
+          } catch (error) {
+            console.error(error);
+            this.$toast.warning().showSimple("عدم ارتباط با سرور");
+          }
+        }
+      }
+    }
+  },
+
   data() {
     return {
       showFactor: false,
@@ -640,13 +595,8 @@ export default {
       user: {},
       testsItems: [],
       receipt: null,
-      form: {
-        discount: {},
-        count: 1,
-        city: null,
-      },
       activationKey: null,
-      password: null,
+      password: null
     };
   },
   async mounted() {
@@ -660,7 +610,7 @@ export default {
       let valid = await this.$validator.validateAll();
       if (valid) {
         this.$gtm.push({
-          event: "CoronaTestRequest",
+          event: "CoronaTestRequest"
         });
         if (this.user_id) {
           this.receiptRequest();
@@ -669,19 +619,21 @@ export default {
         }
       }
     },
-    async onCityChange() {
-      if (this.form.city) {
-        this.$emit("onchangecity", this.form.city.id);
-        try {
-          let url = `${process.env.EXTRA_API_URL}/corona-cities/${this.form.city.id}/tests`;
-          let data = await this.$axios.$get(url);
-          this.testsItems = data;
-        } catch (error) {
-          console.error(error);
-          this.$toast.warning().showSimple("عدم ارتباط با سرور");
-        }
-      }
-    },
+    // async onCityChange() {
+    //   if (this.form.city) {
+    //     this.$emit("onchangecity", this.form.city.id);
+    //     try {
+    //       // let url = `${process.env.EXTRA_API_URL}/corona-cities/${
+    //       //   this.form.city.id
+    //       // }/tests`;
+    //       // let data = await this.$axios.$get(url);
+    //       this.testsItems = this.form.city.tests;
+    //     } catch (error) {
+    //       console.error(error);
+    //       this.$toast.warning().showSimple("عدم ارتباط با سرور");
+    //     }
+    //   }
+    // },
     async receiptRequest() {
       let loader = this.$loader.show("#FormBox");
       try {
@@ -693,7 +645,7 @@ export default {
           "selected_test",
           "count",
           "role_discount_amount",
-          "discount",
+          "discount"
         ]);
         data.test_id = this.form.selected_test.id;
         data.city_id = this.form.city.id;
@@ -712,7 +664,9 @@ export default {
     },
     async goPayment() {
       try {
-        let url = `${process.env.EXTRA_API_URL}/corona-orders/${this.receipt.id}/paymentRequest`;
+        let url = `${process.env.EXTRA_API_URL}/corona-orders/${
+          this.receipt.id
+        }/paymentRequest`;
         let { address, token } = await this.$axios.$post(url);
         const form = document.createElement("form");
         form.method = "POST";
@@ -731,7 +685,7 @@ export default {
     onCountChange() {
       if (this.form.selected_test.discount_roles) {
         let matchDiscount = this.form.selected_test.discount_roles
-          .filter((item) => +this.form.count >= +item.count)
+          .filter(item => +this.form.count >= +item.count)
           .sort((a, b) => {
             return +b.count - +a.count;
           });
@@ -785,13 +739,13 @@ export default {
         let response = await this.$axios.patch(
           `/Patients/Registration/${this.registrationToken}`,
           {
-            activationKey: this.activationKey,
+            activationKey: this.activationKey
           }
         );
         if (response.data.status === "OK") {
           this.$toast.success().showSimple("ثبت نام با موفقیت انجام شد");
           this.$store.commit("patient/login", {
-            access_token: response.data.result.token,
+            access_token: response.data.result.token
           });
           this.$store.commit("patient/initialize_user");
           this.receiptRequest();
@@ -825,12 +779,14 @@ export default {
     },
     async login() {
       let loading = this.$loader.show("#FormBox");
-      let data = `username=${this.form.mobile}&password=${this.password}&grant_type=password`;
+      let data = `username=${this.form.mobile}&password=${
+        this.password
+      }&grant_type=password`;
       try {
         let res = await this.$axios.post("/oauth2/token", data, {
           headers: {
-            "Content-type": "application/x-www-form-urlencoded",
-          },
+            "Content-type": "application/x-www-form-urlencoded"
+          }
         });
         this.$store.commit("patient/login", res.data);
         this.$store.commit("patient/initialize_user");
@@ -840,6 +796,11 @@ export default {
       }
       loading.hide();
     },
-  },
+    showTerms(){
+      this.$dialog.show({
+        component:TermsComponent
+      })
+    }
+  }
 };
 </script>

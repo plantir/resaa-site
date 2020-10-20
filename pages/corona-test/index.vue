@@ -1,4 +1,4 @@
-<style lang="scss" >
+<style lang="scss">
 #corona-test {
   .layout {
     position: relative;
@@ -161,6 +161,11 @@
     </v-layout>
     <v-layout row wrap>
       <v-flex xs12>
+        <TestsPrice @onClick="onTestClick" :cities="cities" />
+      </v-flex>
+    </v-layout>
+    <v-layout row wrap>
+      <v-flex xs12>
         <Symptoms />
       </v-flex>
       <v-img
@@ -231,11 +236,11 @@
       ></v-img>
     </v-layout>
     <v-layout row wrap class="boxAndForm" v-if="cities">
-      <v-flex xs12 md4>
+      <v-flex xs12 md5>
         <PriceBox :selectedCity="selectedCity" />
       </v-flex>
-      <v-flex xs12 md8>
-        <FormBox :cities="cities" @onchangecity="onChangeCity" />
+      <v-flex xs12 md7>
+        <FormBox :form="form" :cities="cities" @onchangecity="onChangeCity" />
       </v-flex>
       <v-img
         :alt="coronaVirusAlt"
@@ -254,6 +259,7 @@
 </template>
 <script>
 import FirstFord from "@/components/Pages/CoronaTest/FirstFord/FirstFord.vue";
+import TestsPrice from "@/components/Pages/CoronaTest/TestsPrice/TestsPrice.vue";
 import Symptoms from "@/components/Pages/CoronaTest/Symptoms/Symptoms.vue";
 import AntyBody from "@/components/Pages/CoronaTest/AntyBody/AntyBody.vue";
 import Pcr from "@/components/Pages/CoronaTest/Pcr/Pcr.vue";
@@ -265,13 +271,14 @@ export default {
   layout: "corona-test",
   components: {
     FirstFord,
+    TestsPrice,
     Symptoms,
     AntyBody,
     Pcr,
     Cooperation,
     Faq,
     FormBox,
-    PriceBox,
+    PriceBox
   },
 
   head() {
@@ -280,23 +287,23 @@ export default {
       link: [
         {
           rel: "canonical",
-          href: `${process.env.SITE_URL}${this.$route.path}`,
-        },
+          href: `${process.env.SITE_URL}${this.$route.path}`
+        }
       ],
       meta: [
         {
           hid: "description",
           name: "description",
           content:
-            "تست کرونا، تست آنتی بادی و تست PCR در منزل با سامانه رسا. متخصصین آزمایشگاه برای گرفتن انواع تست های کرونا به منزل شما می آیند و دیگر لازم نیست از خانه خود خارج شوید.",
-        },
-      ],
+            "تست کرونا، تست آنتی بادی و تست PCR در منزل با سامانه رسا. متخصصین آزمایشگاه برای گرفتن انواع تست های کرونا به منزل شما می آیند و دیگر لازم نیست از خانه خود خارج شوید."
+        }
+      ]
     };
   },
   computed: {
     faqs() {
       return this.$store.state.faq.corona;
-    },
+    }
   },
   data() {
     return {
@@ -305,6 +312,12 @@ export default {
       coronaVirusAlt: "ویروس کرونا",
       selectedCity: null,
       cities: null,
+      form: {
+        discount: {},
+        count: 1,
+        selected_test: null,
+        city: null
+      }
     };
   },
   async mounted() {
@@ -322,13 +335,20 @@ export default {
       let url = process.env.EXTRA_API_URL + "/corona-cities";
       this.cities = await this.$axios.$get(url);
     } catch (error) {
-      this.$toast.warning().showSimple('عدم ارتباط با سرور')
+      this.$toast.warning().showSimple("عدم ارتباط با سرور");
     }
   },
   methods: {
     onChangeCity(city_id) {
-      this.selectedCity = this.cities.find((item) => item.id == city_id);
+      this.selectedCity = this.cities.find(item => item.id == city_id);
     },
-  },
+    onTestClick({ city, test }) {
+      this.form.city = city;
+      setTimeout(() => {
+        this.form.selected_test = test;
+      }, 200);
+      this.$scrollTo("#FormBox", 1000, { offset: -100 });
+    }
+  }
 };
 </script>

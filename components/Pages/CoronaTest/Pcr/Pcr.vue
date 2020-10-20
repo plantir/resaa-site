@@ -5,7 +5,7 @@
   justify-content: center;
   margin-top: 30px;
   @include media(md-and-up) {
-    margin-top: 0px;
+    margin-top: 30px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -29,7 +29,7 @@
   <section id="Pcr">
     <div class="wrapper">
       <div class="image">
-        <v-img :src="'/img/corona-test/Pcr.png'" alt="چه کسانی باید تست PCR بدهند؟" />
+        <v-img :src="'/img/corona-test/pcr.svg'" alt="چه کسانی باید تست PCR بدهند؟" />
       </div>
       <div class="text">
         <h2>چه کسانی باید تست PCR بدهند؟</h2>

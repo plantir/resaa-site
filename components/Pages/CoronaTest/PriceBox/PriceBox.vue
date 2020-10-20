@@ -40,7 +40,7 @@ p {
 <template>
   <section id="PriceBox">
     <div class="wrapper">
-      <h3>
+      <!-- <h3>
         هزینه آزمایش ها:
         <span class="title secondary--text">{{
           selectedCity ? selectedCity.name : ""
@@ -55,12 +55,13 @@ p {
           <span>{{ item.name }}</span>
           <span>{{ (item.price / 1000) | persianDigit }} هزار تومان</span>
         </div>
-      </div>
+      </div> -->
       <p>هزینه های ایاب و ذهاب به محل شما در مبالغ فوق محاسبه شده است.</p>
       <p class="mt-3">
         شما عزیزان می توانید به جای تکمیل فرم و پرداخت آنلاین با تماس با
         پشتیبانی و کارت به کارت نیز برای تست کرونا درخواست ثبت کنید.
       </p>
+      <v-img width="100%" src="/img/corona-test/form-image.svg"></v-img>
       <v-btn href="tel:02174471300" color="primary" round outline
         >تماس با پشتیبانی</v-btn
       >
@@ -69,6 +70,6 @@ p {
 </template>
 <script>
 export default {
-  props: ["selectedCity"],
+  props: ["selectedCity"]
 };
 </script>
