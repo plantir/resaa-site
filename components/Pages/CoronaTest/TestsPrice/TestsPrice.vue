@@ -6,7 +6,7 @@ section {
   margin: 60px auto 20px;
   padding: 0 20px;
   max-width: 970px;
-  @include media(xs-only){
+  @include media(xs-only) {
     padding: 0;
   }
 }
@@ -19,7 +19,7 @@ section {
   color: #fff;
   font-size: 16px;
   font-weight: 500;
-  height: 64px;
+  min-height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,8 +35,7 @@ section {
 .city-item {
   padding: 0 36px;
   display: flex;
-  height: 58px;
-  justify-content: space-between;
+  min-height: 58px;
   align-items: center;
   border-bottom: 2px dashed gray;
   &:last-child {
@@ -45,9 +44,21 @@ section {
   .city-name {
     font-weight: 500;
     font-size: 16px;
+    flex: 0 0 100px;
+  }
+  .test-item-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 12px 0;
   }
   .test-item {
     cursor: pointer;
+    width: calc(33.333% - 16px);
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
     &:hover {
       color: $primary-color;
     }
@@ -55,7 +66,7 @@ section {
 }
 .mobile-wrapper {
   width: 100%;
-  h3{
+  h3 {
     text-align: center;
   }
   .test-item {
@@ -86,18 +97,21 @@ section {
         <div class="content">
           <div class="city-item" v-for="city in cities" :key="city.id">
             <div class="city-name">{{ city.name }}</div>
-            <div
-              class="test-item"
-              v-for="test in city.tests"
-              :key="test.id"
-              @click="goOnForm(city, test)"
-            >
-              <span>
-                {{ test.name }}
-              </span>
-              <span class="mr-3">
-                {{ test.total_amount | currency | persianDigit }} تومان
-              </span>
+            <div class="test-item-wrapper">
+              <v-btn
+                class="test-item"
+                v-for="test in city.tests"
+                :key="test.id"
+                color="blue-grey lighten-5"
+                @click="goOnForm(city, test)"
+              >
+                <span>
+                  {{ test.name }}
+                </span>
+                <span class="mr-3">
+                  {{ test.total_amount | currency | persianDigit }} تومان
+                </span>
+              </v-btn>
             </div>
           </div>
         </div>

@@ -371,6 +371,7 @@
               data-vv-as="کد ملی"
               name="nationalCode"
               v-validate="'required|nationalCode'"
+              v-fix-digit
               single-line
               outline
               placeholder="لطفا کد ملی خود را وارد نمایید"
@@ -495,6 +496,7 @@
                 data-vv-as="کد تایید"
                 name="activationKey"
                 v-validate="'required'"
+                v-fix-digit
                 single-line
                 outline
                 placeholder="کد تایید را وارد نمایید"
@@ -534,6 +536,7 @@
                 data-vv-as="رمز عبور"
                 name="password"
                 v-validate="'required'"
+                v-fix-digit
                 single-line
                 outline
                 placeholder="لطفا رمز عبور خود را وارد نمایید"
@@ -553,7 +556,7 @@
 <script>
 import moment from "moment-jalaali";
 import _ from "lodash";
-import TermsComponent from '@/components/Pages/CoronaTest/Terms/Terms.vue'
+import TermsComponent from "@/components/Pages/CoronaTest/Terms/Terms.vue";
 export default {
   props: { cities: Array, form: Object },
   computed: {
@@ -566,17 +569,17 @@ export default {
   },
   watch: {
     "form.city": {
-      deep: true,
       handler: function(city) {
-        if (city && city.tests) {
-          this.$emit("onchangecity", this.form.city.id);
-          this.form.selected_test = null;
-          try {
+        try {
+          if (city && city.tests) {
+            if (this.form.city && this.form.city.id != city.id) {
+              this.$emit("onchangecity", this.form.city.id);
+              this.form.selected_test = null;
+            }
             this.testsItems = city.tests;
-          } catch (error) {
-            console.error(error);
-            this.$toast.warning().showSimple("عدم ارتباط با سرور");
           }
+        } catch (error) {
+          console.error(error);
         }
       }
     }
@@ -796,10 +799,10 @@ export default {
       }
       loading.hide();
     },
-    showTerms(){
+    showTerms() {
       this.$dialog.show({
-        component:TermsComponent
-      })
+        component: TermsComponent
+      });
     }
   }
 };
