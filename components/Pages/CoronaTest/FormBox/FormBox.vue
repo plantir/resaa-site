@@ -324,21 +324,27 @@
           </div>
           <div class="form-group">
             <label required> تعداد</label>
-            <v-text-field
-              single-line
-              outline
-              min="1"
-              type="number"
-              v-model="form.count"
-              autocomplete="new-password"
-              v-validate="'required|min_value:1'"
-              :error-messages="errors.collect('count')"
-              data-vv-as="تعداد تست مورد نیاز"
-              :disabled="!form.selected_test"
-              name="count"
-              placeholder="لطفا تعداد تست مورد نیاز خود را وارد نمایید"
-              @input="onCountChange"
-            ></v-text-field>
+            <div class="discount-input-wrapper">
+              <v-text-field
+                single-line
+                outline
+                min="1"
+                max="5"
+                type="number"
+                v-model="form.count"
+                autocomplete="new-password"
+                v-validate="'required|min_value:1|max_value:5'"
+                :error-messages="errors.collect('count')"
+                data-vv-as="تعداد تست مورد نیاز"
+                :disabled="!form.selected_test"
+                name="count"
+                placeholder="لطفا تعداد تست مورد نیاز خود را وارد نمایید"
+                @input="onCountChange"
+              ></v-text-field>
+              <v-btn color="cyan" dark href="tel:02174471300" class="mt-0">
+                بالای ۵ عدد</v-btn
+              >
+            </div>
           </div>
           <div class="form-group info--text" v-if="form.role_discount_amount">
             <div class="discount-input-wrapper">

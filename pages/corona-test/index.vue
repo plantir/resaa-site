@@ -25,7 +25,7 @@
   .boxAndForm {
     margin-top: 50px;
     @include media(md-and-up) {
-      margin-top: 30px;
+      margin-top: 50px;
     }
     .flex {
       @include media(md-and-up) {

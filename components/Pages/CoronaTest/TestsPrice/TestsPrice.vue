@@ -54,11 +54,25 @@ section {
   }
   .test-item {
     cursor: pointer;
+    height: auto;
     width: calc(33.333% - 16px);
-    display: flex;
-    height: 40px;
-    align-items: center;
-    justify-content: center;
+    ::v-deep {
+      .v-btn__content {
+        flex-direction: column;
+        align-items: self-start;
+        justify-content: center;
+      }
+    }
+    .v-icon {
+      position: absolute;
+      left: -4px;
+    }
+    div.price-item {
+      display: flex;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+    }
     &:hover {
       color: $primary-color;
     }
@@ -72,10 +86,23 @@ section {
   .test-item {
     padding: 0 36px;
     display: flex;
-    height: 58px;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
     border-bottom: 2px dashed gray;
+    > div {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      height: 38px;
+      > span {
+        flex: 0 0 33.3333%;
+      }
+    }
+    .v-icon {
+      position: absolute;
+      left: 24px;
+    }
     &:last-child {
       border: none;
     }
@@ -105,12 +132,21 @@ section {
                 color="blue-grey lighten-5"
                 @click="goOnForm(city, test)"
               >
-                <span>
-                  {{ test.name }}
-                </span>
-                <span class="mr-3">
-                  {{ test.total_amount | currency | persianDigit }} تومان
-                </span>
+                <div class="price-item">
+                  <span>
+                    {{ test.name }}
+                  </span>
+                  <span class="mr-4">
+                    {{ test.total_amount | currency | persianDigit }} تومان
+                  </span>
+                </div>
+                <div class="price-item">
+                  <span>پیش پرداخت</span>
+                  <span class="mr-4">
+                    {{ test.prepay_amount | currency | persianDigit }} تومان
+                  </span>
+                </div>
+                <v-icon>la-cart-plus</v-icon>
               </v-btn>
             </div>
           </div>
@@ -132,12 +168,22 @@ section {
             :key="test.id"
             @click="goOnForm(city, test)"
           >
-            <span>
-              {{ test.name }}
-            </span>
-            <span class="mr-3">
-              {{ test.total_amount | currency | persianDigit }} تومان
-            </span>
+            <div>
+              <span>
+                {{ test.name }}
+              </span>
+              <span class="mr-4">
+                {{ test.total_amount | currency | persianDigit }} تومان
+              </span>
+              <v-spacer></v-spacer>
+            </div>
+            <div>
+              <span>پیش پرداخت</span>
+              <span class="mr-4">
+                {{ test.prepay_amount | currency | persianDigit }} تومان
+              </span>
+            </div>
+            <v-icon>la-cart-plus</v-icon>
           </div>
         </v-expansion-panel-content>
       </v-expansion-panel>
