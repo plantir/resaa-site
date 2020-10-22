@@ -238,7 +238,7 @@
                 تومان</span
               >
             </div>
-            <div class="item info--text" v-if="receipt.discount">
+            <div class="item info--text" v-if="receipt.discount && receipt.discount.amount">
               <span>کد تخفیف</span>
               <span
                 >{{

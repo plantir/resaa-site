@@ -69,6 +69,12 @@ section {
       position: absolute;
       left: -4px;
     }
+    .total-price {
+      font-size: 14px;
+    }
+    .prepay-price {
+      font-size: 11px;
+    }
     div.price-item {
       display: flex;
       height: 40px;
@@ -90,6 +96,9 @@ section {
   h2 {
     text-align: center;
     font-size: 18px !important;
+  }
+  p{
+    text-align: center;
   }
   .total-price {
     font-size: 14px;
@@ -186,9 +195,9 @@ section {
       </div>
       <div class="body">
         <p class="description">
-          برای انجام تست کرونا در منزل لازم است فرم زیر را پر کنید. پس از پرداخت
-          هزینه ی تست، پشتیبانی در کمتر از ۲ ساعت در بازه ی ۹ الی ۲۱ با شما تماس
-          خواهد
+          شهر های تحت پوشش به همراه انواع تست های هر شهر در جدول زیر نمایش داده
+          شده است. با توجه به شهر محل سکونتتان، تست مورد نظر خود را انتخاب کنید
+          و در ادامه فرم رزرو تست را تکمیل بفرمایید.
         </p>
         <div class="content">
           <div class="city-item" v-for="city in cities" :key="city.id">
@@ -201,7 +210,7 @@ section {
                 color="blue-grey lighten-5"
                 @click="goOnForm(city, test)"
               >
-                <div class="price-item">
+                <div class="price-item total-price">
                   <span>
                     {{ test.name }}
                   </span>
@@ -209,7 +218,7 @@ section {
                     {{ test.total_amount | currency | persianDigit }} تومان
                   </span>
                 </div>
-                <div class="price-item">
+                <div class="price-item prepay-price">
                   <span>پیش پرداخت</span>
                   <span>
                     {{ test.prepay_amount | currency | persianDigit }} تومان
@@ -226,6 +235,11 @@ section {
       <h2 class="mb-3 text-center">
         هزینه‌ی تست های کرونا در شهرهای مختلف
       </h2>
+      <p class="text-center">
+        شهر های تحت پوشش به همراه انواع تست های هر شهر در جدول زیر نمایش داده
+        شده است. با توجه به شهر محل سکونتتان، تست مورد نظر خود را انتخاب کنید و
+        در ادامه فرم رزرو تست را تکمیل بفرمایید.
+      </p>
       <v-expansion-panel expand v-model="model">
         <v-expansion-panel-content v-for="city in cities" :key="city.id">
           <div slot="header">

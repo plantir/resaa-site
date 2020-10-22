@@ -36,7 +36,7 @@
         <v-img
           aspect-ratio="1"
           max-width="600px"
-          :src="'/img/corona-test/pcr.png'"
+          :src="'/img/corona-test/Pcr.png'"
           alt="چه کسانی باید تست PCR بدهند؟"
         />
       </div>
