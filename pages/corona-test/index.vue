@@ -284,6 +284,13 @@ export default {
   head() {
     return {
       title: "تست کرونا در منزل",
+      __dangerouslyDisableSanitizers: ["script"],
+      script: [
+        {
+          innerHTML: JSON.stringify(this.faq_schema),
+          type: "application/ld+json"
+        }
+      ],
       link: [
         {
           rel: "canonical",
@@ -317,6 +324,20 @@ export default {
         count: 1,
         selected_test: null,
         city: null
+      },
+      faq_schema: {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: this.$store.state.faq.corona.map(item => {
+          return {
+            "@type": "Question",
+            name: item.question.replace(/<\/?[a-z0-9]+>/g, ""),
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer.replace(/<.*?>/g, "")
+            }
+          };
+        })
       }
     };
   },
