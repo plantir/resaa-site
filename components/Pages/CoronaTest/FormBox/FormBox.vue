@@ -491,7 +491,7 @@
         <template v-else>
           <div v-if="new_user">
             <v-alert type="info" :value="true" class="mb-3">
-              یک پیامک حاوی کد تایید برای شماره {{ form.mobile }} ارسال شد.
+              یک پیامک حاوی کد تایید برای شماره {{ form.user_mobile }} ارسال شد.
               <div class="caption">لطفا کد ارسال شده را وارد نمایید</div>
             </v-alert>
             <div class="form-group">
@@ -788,7 +788,7 @@ export default {
     },
     async login() {
       let loading = this.$loader.show("#FormBox");
-      let data = `username=${this.form.mobile}&password=${
+      let data = `username=${this.form.user_mobile}&password=${
         this.password
       }&grant_type=password`;
       try {
