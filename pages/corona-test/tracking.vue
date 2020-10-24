@@ -208,6 +208,8 @@ section {
               data-vv-as="کد ملی"
               name="nationalCode"
               v-validate="'required|nationalCode'"
+              @keypress.enter="submit"
+              v-fix-digit
               single-line
               outline
               placeholder="لطفا کد ملی خود را وارد نمایید"
@@ -221,8 +223,9 @@ section {
               :error-messages="errors.collect('m')"
               data-vv-as="شماره تلفن همراه"
               name="m"
-              v-fix-digit
               v-validate="'required|mobile'"
+              @keypress.enter="submit"
+              v-fix-digit
               single-line
               outline
               placeholder="لطفا شماره تلفن همراه خود را وارد نمایید"
@@ -241,14 +244,18 @@ section {
               <span>تاریخ ثبت</span>
             </li>
             <li v-for="(item, index) in items" :key="index">
-              <span>{{item.doctor_id | translate}}</span>
+              <span>{{ item.selected_test.name }}</span>
               <span>
-                <vr-badge type="dot" :color="colors[item.status]">{{item.status | translate}}</vr-badge>
+                <vr-badge type="dot" :color="colors[item.status]">{{
+                  item.status | translate
+                }}</vr-badge>
               </span>
               <span>
-                <vr-badge :color="colors[item.payment_status]">{{item.payment_status | translate}}</vr-badge>
+                <vr-badge :color="colors[item.payment_status]">{{
+                  item.transaction.status | translate
+                }}</vr-badge>
               </span>
-              <span>{{item.created_at | persianDate | persianDigit}}</span>
+              <span>{{ item.created_at | persianDate | persianDigit }}</span>
             </li>
           </ul>
         </div>
@@ -256,25 +263,26 @@ section {
           <div class="test-item" v-for="(item, index) in items" :key="index">
             <div>
               <span>تاریخ ثبت</span>
-              <span>{{item.created_at | persianDate | persianDigit}}</span>
+              <span>{{ item.created_at | persianDate | persianDigit }}</span>
             </div>
             <div>
               <span>نوع تست</span>
-              <span>{{item.doctor_id | translate}}</span>
+              <span>{{ item.selected_test.name }}</span>
             </div>
             <div>
               <span>وضعیت</span>
               <span>
-                <vr-badge type="dot" :color="colors[item.status]">{{item.status | translate}}</vr-badge>
+                <vr-badge type="dot" :color="colors[item.status]">{{
+                  item.status | translate
+                }}</vr-badge>
               </span>
             </div>
             <div>
               <span>وضعیت پرداخت</span>
               <span>
-                <vr-badge
-                  type="dot"
-                  :color="colors[item.payment_status]"
-                >{{item.payment_status | translate}}</vr-badge>
+                <vr-badge type="dot" :color="colors[item.payment_status]">{{
+                  item.transaction.status | translate
+                }}</vr-badge>
               </span>
             </div>
           </div>
@@ -304,12 +312,10 @@ export default {
   filters: {
     translate: function(val) {
       let translate = {
-        2304: "تست AntyBody",
-        2305: "تست PCR",
-        2306: "PCR & AntyBody",
         unpaid: "پرداخت نشده",
         paid: "پرداخت شده",
         pending: "بررسی نشده",
+        negotiated: "مذاکره شده",
         in_process: "در حال رسیدگی",
         cordinated: "هماهنگ شده",
         referred: "مراجعه شده",
@@ -326,15 +332,16 @@ export default {
         let loader = this.$loader.show(".box");
         try {
           this.items = await this.$axios.$get(
-            process.env.EXTRA_API_URL + "/corona-test/tracking",
+            process.env.EXTRA_API_URL + "/corona-orders/tracking",
             { params: this.form }
           );
         } catch (error) {
-          this.$toast.erorr().showSimple("خطایی رخ داده است");
+          this.$toast.error().showSimple("خطایی رخ داده است");
         }
         loader.hide();
       }
     },
+
     statusColor() {},
     paymentStatusColor() {}
   }
