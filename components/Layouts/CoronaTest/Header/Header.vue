@@ -3,6 +3,7 @@
   top: 0;
   background-color: #f8fdfd !important;
   box-shadow: none !important;
+  z-index: 98 !important;
   &.scrolled {
     // background-color: #fff !important;
     box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2) !important;

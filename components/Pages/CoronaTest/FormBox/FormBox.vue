@@ -32,6 +32,16 @@
   @include media(md-and-up) {
     flex-direction: row;
   }
+  ::v-deep {
+    .v-list__tile__title {
+      direction: ltr;
+    }
+    .v-input--is-disabled {
+      .v-input__slot {
+        border-style: dashed;
+      }
+    }
+  }
 
   > label {
     flex: 0 0 100%;
@@ -141,6 +151,10 @@
     }
   }
 }
+.discount-input-wrapper {
+  display: flex;
+  width: 100%;
+}
 .checkbox-wrapper {
   display: flex;
   flex-direction: row;
@@ -175,51 +189,74 @@
         </p>
       </template>
       <div class="form-wrapper">
-        <template v-if="showFactor">
+        <template v-if="receipt">
           <div class="price-wrapper">
             <div class="item">
               <span>نام و نام خانوادگی</span>
-              <span>{{ form.name }}</span>
+              <span>{{ receipt.user_fullname }}</span>
             </div>
             <div class="item">
               <span>کد ملی</span>
-              <span>{{ form.nationalCode | persianDigit }}</span>
+              <span>{{ receipt.user_nationalcode | persianDigit }}</span>
             </div>
             <div class="item">
               <span>شماره تلفن همراه</span>
-              <span>{{ form.mobile | persianDigit }}</span>
+              <span>{{ receipt.user_mobile | persianDigit }}</span>
             </div>
             <div class="item">
               <span>شهر</span>
-              <span>{{ form.city.name }}</span>
+              <span>{{ receipt.city.name }}</span>
             </div>
             <div class="item">
               <span>تست انتخاب شده</span>
-              <span>{{ form.type.name }}</span>
-            </div>
-            <div class="item">
-              <span>پرداخت آنلاین جهت تست</span>
-              <span
-                >{{ (form.type.prepayment / 1000) | persianDigit }} هزار
-                تومان</span
-              >
-            </div>
-            <div class="item">
-              <span>مبلغ قابل پرداخت در محل</span>
-              <span
-                >{{
-                  ((form.type.price - form.type.prepayment) / 1000)
-                    | persianDigit
-                }}
-                هزار تومان</span
-              >
+              <span>{{ receipt.selected_test.name }}</span>
             </div>
             <div class="item">
               <span>هزینه کامل تست</span>
               <span
-                >{{ (form.type.price / 1000) | persianDigit }} هزار تومان</span
+                >{{
+                  receipt.total_amount | currency | persianDigit
+                }}
+                تومان</span
               >
             </div>
+            <div class="item pink--text">
+              <span>پرداخت آنلاین جهت تست</span>
+              <span
+                >{{
+                  receipt.prepay_amount | currency | persianDigit
+                }}
+                تومان</span
+              >
+            </div>
+            <div class="item info--text" v-if="receipt.role_discount_amount">
+              <span>تخفیف بر روی تعداد</span>
+              <span
+                >{{
+                  receipt.role_discount_amount | currency | persianDigit
+                }}
+                تومان</span
+              >
+            </div>
+            <div class="item info--text" v-if="receipt.discount && receipt.discount.amount">
+              <span>کد تخفیف</span>
+              <span
+                >{{
+                  receipt.discount.amount | currency | persianDigit
+                }}
+                تومان</span
+              >
+            </div>
+            <div class="item success--text">
+              <span>مبلغ قابل پرداخت در محل</span>
+              <span
+                >{{
+                  receipt.payable_amount | currency | persianDigit
+                }}
+                تومان</span
+              >
+            </div>
+
             <div class="item">
               <span>تاریخ پرداخت</span>
               <span>{{ date | persianDigit }}</span>
@@ -229,13 +266,7 @@
             <div class="reserve-btn">
               <v-btn color="success" round @click="goPayment">پرداخت</v-btn>
             </div>
-            <v-btn
-              class="mt-4"
-              round
-              flat
-              color="gray"
-              @click="showFactor = false"
-            >
+            <v-btn class="mt-4" round flat color="gray" @click="receipt = null">
               <span>بازگشت</span>
               <v-icon class="mr-3">la-arrow-left</v-icon>
             </v-btn>
@@ -245,7 +276,6 @@
           <div class="form-group">
             <label required> شهر محل سکونت</label>
             <v-select
-              @change="$emit('onchangecity', form.city.id)"
               v-model="form.city"
               :items="cities"
               :error-messages="errors.collect('type')"
@@ -263,28 +293,75 @@
           <div class="form-group">
             <label required> نوع تست</label>
             <v-select
-              v-model="form.type"
+              v-model="form.selected_test"
               :items="testsItems"
-              :disabled="!form.city"
               :error-messages="errors.collect('type')"
               data-vv-as="نوع تست"
               v-validate="'required'"
+              item-value="id"
               name="type"
-              item-text="name"
+              :disabled="!form.city"
               return-object
               single-line
               outline
               placeholder="لطفا نوع تستی مورد نظر خود را انتخاب نمایید"
-            ></v-select>
+            >
+              <template v-slot:item="{ item }">
+                <span class="d-inline-block">{{ item.name }}</span>
+                <span class="d-inline-block mx-2">|</span>
+                <span class="d-inline-block"
+                  >{{ item.total_amount | currency | persianDigit }} تومان</span
+                >
+              </template>
+              <template v-slot:selection="{ item }">
+                <span class="d-inline-block">{{ item.name }}</span>
+                <span class="d-inline-block mx-2">|</span>
+                <span class="d-inline-block"
+                  >{{ item.total_amount | currency | persianDigit }} تومان</span
+                >
+              </template>
+            </v-select>
+          </div>
+          <div class="form-group">
+            <label required> تعداد</label>
+            <div class="discount-input-wrapper">
+              <v-text-field
+                single-line
+                outline
+                min="1"
+                max="5"
+                type="number"
+                v-model="form.count"
+                autocomplete="new-password"
+                v-validate="'required|min_value:1|max_value:5'"
+                :error-messages="errors.collect('count')"
+                data-vv-as="تعداد تست مورد نیاز"
+                :disabled="!form.selected_test"
+                name="count"
+                placeholder="لطفا تعداد تست مورد نیاز خود را وارد نمایید"
+                @input="onCountChange"
+              ></v-text-field>
+              <v-btn color="cyan" dark href="tel:02174471300" class="mt-0">
+                بالای ۵ عدد</v-btn
+              >
+            </div>
+          </div>
+          <div class="form-group info--text" v-if="form.role_discount_amount">
+            <div class="discount-input-wrapper">
+              <label class="info--text">تخفیف خرید گروهی</label>
+              <div class="pt-1" style="height: 50px">
+                {{ form.role_discount_amount | currency | persianDigit }} تومان
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label required>نام و نام خانوادگی</label>
             <v-text-field
-              v-model="form.name"
+              v-model="form.user_fullname"
               autocomplete="new-password"
-              :error-messages="errors.collect('nandf')"
+              :error-messages="errors.collect('user_fullname')"
               data-vv-as="نام و نام خانوادگی"
-              name="nandf"
+              name="user_fullname"
               v-validate="'required'"
               single-line
               outline
@@ -294,12 +371,13 @@
           <div class="form-group">
             <label required>کد ملی</label>
             <v-text-field
-              v-model="form.nationalCode"
+              v-model="form.user_nationalcode"
               autocomplete="new-password"
               :error-messages="errors.collect('nationalCode')"
               data-vv-as="کد ملی"
               name="nationalCode"
               v-validate="'required|nationalCode'"
+              v-fix-digit
               single-line
               outline
               placeholder="لطفا کد ملی خود را وارد نمایید"
@@ -308,7 +386,7 @@
           <div class="form-group">
             <label required>شماره تلفن همراه</label>
             <v-text-field
-              v-model="form.mobile"
+              v-model="form.user_mobile"
               autocomplete="new-password"
               :error-messages="errors.collect('m')"
               data-vv-as="شماره تلفن همراه"
@@ -324,7 +402,7 @@
           <div class="form-group">
             <label required>نشانی</label>
             <v-textarea
-              v-model="form.address"
+              v-model="form.user_address"
               :error-messages="errors.collect('address')"
               autocomplete="new-password"
               data-vv-as="نشانی"
@@ -337,104 +415,72 @@
               placeholder="لطفا نشانی کامل محل سکونت خود را وارد نمایید"
             ></v-textarea>
           </div>
-          <div class="form-group">
-            <label required>علائم</label>
-            <div class="checkbox-wrapper">
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="تب"
-                value="تب"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="لرز"
-                value="لرز"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="سر درد"
-                value="سر درد"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="اسهال"
-                value="اسهال"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="استفراغ"
-                value="استفراغ"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="گلو درد"
-                value="گلو درد"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="سرفه"
-                value="سرفه"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="تنگی نفس"
-                value="تنگی نفس"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="درد عضلات"
-                value="درد عضلات"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="ضعف حس بویایی"
-                value="ضعف حس بویایی"
-              ></v-checkbox>
-              <v-checkbox
-                v-validate="'required'"
-                name="symptoms"
-                hide-details
-                v-model="form.symptoms"
-                label="ضعف حس چشایی"
-                value="ضعف حس چشایی"
-              ></v-checkbox>
-              <div
-                class="error--text caption pr-2"
-                v-if="errors.collect('symptoms').length"
+          <div class="form-group" v-if="form.discount.code">
+            <label class="info--text">کد تخفیف</label>
+            <div class="discount-input-wrapper">
+              <v-text-field
+                v-model="form.discount.code"
+                :disabled="true"
+                single-line
+                outline
+              ></v-text-field>
+              <v-btn color="error" @click="form.discount = {}" class="mt-0"
+                >لغو</v-btn
               >
-                پر کردن علائم الزامی میباشد
+            </div>
+          </div>
+          <div
+            class="form-group success--text"
+            style="height: 50px"
+            v-if="form.discount.code"
+          >
+            <div class="discount-input-wrapper">
+              <label class="success--text">مقدار تخفیف</label>
+              <div>
+                {{ form.discount.amount | currency | persianDigit }} تومان
               </div>
             </div>
+          </div>
+          <div class="form-group" v-else>
+            <label class="info--text">کد تخفیف دارید؟</label>
+            <div class="discount-input-wrapper">
+              <v-text-field
+                v-model="discount"
+                placeholder="کد تخفیف خود را وارد نمایید"
+                single-line
+                outline
+                @keypress.enter="checkDiscount"
+              ></v-text-field>
+              <v-btn
+                color="info"
+                @click="checkDiscount"
+                class="mt-0"
+                :loading="discountChecking"
+                >اعمال</v-btn
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <v-checkbox
+              :error-messages="errors.collect('terms')"
+              autocomplete="new-password"
+              data-vv-as="قبول شرایط و قوانین"
+              name="terms"
+              v-validate="'required'"
+              label=""
+              v-model="form.terms"
+              value="value"
+            >
+              <template v-slot:label>
+                <div>
+                  قبول
+                  <a @click="showTerms">
+                    شرایط و قوانین
+                  </a>
+                  رسا
+                </div>
+              </template>
+            </v-checkbox>
           </div>
           <div class="reserve-btn">
             <v-btn color="success" round @click="submit"
@@ -445,7 +491,7 @@
         <template v-else>
           <div v-if="new_user">
             <v-alert type="info" :value="true" class="mb-3">
-              یک پیامک حاوی کد تایید برای شماره {{ form.mobile }} ارسال شد.
+              یک پیامک حاوی کد تایید برای شماره {{ form.user_mobile }} ارسال شد.
               <div class="caption">لطفا کد ارسال شده را وارد نمایید</div>
             </v-alert>
             <div class="form-group">
@@ -456,6 +502,7 @@
                 data-vv-as="کد تایید"
                 name="activationKey"
                 v-validate="'required'"
+                v-fix-digit
                 single-line
                 outline
                 placeholder="کد تایید را وارد نمایید"
@@ -495,6 +542,7 @@
                 data-vv-as="رمز عبور"
                 name="password"
                 v-validate="'required'"
+                v-fix-digit
                 single-line
                 outline
                 placeholder="لطفا رمز عبور خود را وارد نمایید"
@@ -513,41 +561,59 @@
 </template>
 <script>
 import moment from "moment-jalaali";
+import _ from "lodash";
+import TermsComponent from "@/components/Pages/CoronaTest/Terms/Terms.vue";
 export default {
-  props: ["cities"],
+  props: { cities: Array, form: Object },
   computed: {
     user_id() {
       return this.$store.state.patient.user_id;
     },
     date() {
       return moment().format("jYYYY/jMM/jDD");
-    },
-    testsItems() {
-      if (!this.form.city) {
-        return [];
-      }
-      let city = this.cities.find((item) => item.id == this.form.city.id);
-      return city.testsItems;
-    },
+    }
   },
+  watch: {
+    "form.city": {
+      handler: function(city) {
+        try {
+          if (city && city.tests) {
+            if (this.form.city && this.form.city.id != city.id) {
+              this.$emit("onchangecity", this.form.city.id);
+              this.form.selected_test = null;
+            }
+            this.testsItems = city.tests;
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    }
+  },
+
   data() {
     return {
       showFactor: false,
+      discountChecking: false,
+      haveDiscount: false,
+      discount: null,
       resendSMSCode_timeout: 0,
       registrationToken: null,
       need_verify: false,
       new_user: false,
       user: {},
-
-      form: {
-        city: null,
-        symptoms: [],
-      },
+      testsItems: [],
+      receipt: null,
       activationKey: null,
-      password: null,
+      password: null
     };
   },
-  async mounted() {},
+  async mounted() {
+    let cronaTest = this.$storage.getUniversal("cronaTest", true);
+    if (cronaTest && cronaTest.user_fullname) {
+      this.receipt = cronaTest;
+    }
+  },
   methods: {
     async submit() {
       let valid = await this.$validator.validateAll();
@@ -557,80 +623,103 @@ export default {
           mobile:this.form.mobile
         });
         if (this.user_id) {
-          this.chargeRequest();
+          this.receiptRequest();
         } else {
-          this.register({ phoneNumber: this.form.mobile });
+          this.register({ phoneNumber: this.form.user_mobile });
         }
       }
     },
-    async chargeRequest() {
+    // async onCityChange() {
+    //   if (this.form.city) {
+    //     this.$emit("onchangecity", this.form.city.id);
+    //     try {
+    //       // let url = `${process.env.EXTRA_API_URL}/corona-cities/${
+    //       //   this.form.city.id
+    //       // }/tests`;
+    //       // let data = await this.$axios.$get(url);
+    //       this.testsItems = this.form.city.tests;
+    //     } catch (error) {
+    //       console.error(error);
+    //       this.$toast.warning().showSimple("عدم ارتباط با سرور");
+    //     }
+    //   }
+    // },
+    async receiptRequest() {
       let loader = this.$loader.show("#FormBox");
       try {
-        let { result } = await this.$axios.$get(
-          `/Accounts/${this.user_id}/Profile`
-        );
-        this.user = result.profile;
-        let loginOrigin = localStorage.getItem("referrer");
-        let data = {
-          denominationId: +this.form.type.chargeId,
-          callbackUrl: process.env.SITE_URL + "/corona-test/callback",
-          phoneNumber: this.user.phoneNumber,
-          loginOrigin,
-        };
-        // this.$gtm.push({
-        //   event: "PaymentAtempted",
-        //   amount: this.selected.denomination.amount
-        // });
-        let response = await this.$axios.post("/Charge", data);
-        let {
-          address,
-          submissionParameters: { token },
-        } = response.data.result.electronicPaymentVoucher.gateway;
-        this.address = address;
-        this.token = token;
+        let data = _.pick(this.form, [
+          "user_fullname",
+          "user_mobile",
+          "user_address",
+          "user_nationalcode",
+          "selected_test",
+          "count",
+          "role_discount_amount",
+          "discount"
+        ]);
+        data.test_id = this.form.selected_test.id;
+        data.city_id = this.form.city.id;
         let cronaTest = await this.$axios.$post(
-          process.env.EXTRA_API_URL + "/corona-test",
-          {
-            city_id: this.form.city.id,
-            selected_test: this.form.type,
-            // doctor_id:this.form.type.doctorId,
-            name: this.form.name,
-            mobile: this.form.mobile,
-            address: this.form.address,
-            nationalCode: this.form.nationalCode,
-            symptoms: this.form.symptoms,
-            paymentRequestId:
-              response.data.result.electronicPaymentVoucher.paymentRequestId,
-            subscriberNumber:
-              response.data.result.electronicPaymentVoucher.subscriberNumber,
-            amount:
-              response.data.result.electronicPaymentVoucher.chargeDenomination
-                .amount,
-            phoneNumber: this.user.phoneNumber,
-          }
+          process.env.EXTRA_API_URL + "/corona-orders",
+          data
         );
-        console.log(cronaTest);
-        // localStorage.setItem("cronaTest", JSON.stringify(cronaTest));
-        this.$storage.setCookie("cronaTest", JSON.stringify(cronaTest));
-        this.$storage.setUniversal("cronaTest", JSON.stringify(cronaTest));
-        // this.goPayment(address, token);
-        this.showFactor = true;
+        this.receipt = cronaTest;
+        this.$storage.setUniversal("cronaTest", cronaTest, true);
         loader.hide();
       } catch (error) {
+        console.error(error);
         this.$toast.error().showSimple("خطایی رخ داده است");
         loader.hide();
       }
     },
-    goPayment() {
-      const form = document.createElement("form");
-      form.method = "POST";
-      form.action = this.address;
-      const input = document.createElement("input");
-      input.value = this.token;
-      input.name = "token";
-      form.appendChild(input);
-      document.body.appendChild(form);
-      form.submit();
+    async goPayment() {
+      try {
+        let url = `${process.env.EXTRA_API_URL}/corona-orders/${
+          this.receipt.id
+        }/paymentRequest`;
+        let { address, token } = await this.$axios.$post(url);
+        const form = document.createElement("form");
+        form.method = "POST";
+        form.action = address;
+        const input = document.createElement("input");
+        input.value = token;
+        input.name = "token";
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+      } catch (error) {
+        console.error(error);
+        this.$toast.error().showSimple("خطایی رخ داده است");
+      }
+    },
+    onCountChange() {
+      if (this.form.selected_test.discount_roles) {
+        let matchDiscount = this.form.selected_test.discount_roles
+          .filter(item => +this.form.count >= +item.count)
+          .sort((a, b) => {
+            return +b.count - +a.count;
+          });
+        if (matchDiscount && matchDiscount.length) {
+          this.form.role_discount_amount =
+            +this.form.count * +matchDiscount[0].discount;
+        } else {
+          this.form.role_discount_amount = 0;
+        }
+      }
+    },
+    async checkDiscount() {
+      try {
+        this.discountChecking = true;
+        let url = `${process.env.EXTRA_API_URL}/corona-discounts/check`;
+        let res = await this.$axios.$post(url, { code: this.discount });
+        console.log(res);
+        this.form.discount = res;
+        this.$toast.success().showSimple(`کد تخفیف با موفقیت اعمال شد`);
+      } catch (error) {
+        console.error(error);
+        this.$toast.error().showSimple("کد وارد شده معتبر نمیباشد");
+      }
+      this.discountChecking = false;
     },
     async register(user) {
       let loader = this.$loader.show("#FormBox");
@@ -660,16 +749,16 @@ export default {
         let response = await this.$axios.patch(
           `/Patients/Registration/${this.registrationToken}`,
           {
-            activationKey: this.activationKey,
+            activationKey: this.activationKey
           }
         );
         if (response.data.status === "OK") {
           this.$toast.success().showSimple("ثبت نام با موفقیت انجام شد");
           this.$store.commit("patient/login", {
-            access_token: response.data.result.token,
+            access_token: response.data.result.token
           });
           this.$store.commit("patient/initialize_user");
-          this.chargeRequest();
+          this.receiptRequest();
         } else {
           this.$toast.error().showSimple("کد وارد شده صحیح نمی باشد");
         }
@@ -700,21 +789,28 @@ export default {
     },
     async login() {
       let loading = this.$loader.show("#FormBox");
-      let data = `username=${this.form.mobile}&password=${this.password}&grant_type=password`;
+      let data = `username=${this.form.user_mobile}&password=${
+        this.password
+      }&grant_type=password`;
       try {
         let res = await this.$axios.post("/oauth2/token", data, {
           headers: {
-            "Content-type": "application/x-www-form-urlencoded",
-          },
+            "Content-type": "application/x-www-form-urlencoded"
+          }
         });
         this.$store.commit("patient/login", res.data);
         this.$store.commit("patient/initialize_user");
-        this.chargeRequest();
+        this.receiptRequest();
       } catch (error) {
         this.$toast.error().showSimple("نام کاربری یا رمز عبور اشتباه است");
       }
       loading.hide();
     },
-  },
+    showTerms() {
+      this.$dialog.show({
+        component: TermsComponent
+      });
+    }
+  }
 };
 </script>
