@@ -28,7 +28,7 @@
     "@nuxtjs/universal-storage": "^0.5.4",
     "@nuxtjs/vuetify": "0.5.5",
     "animate.css": "^3.7.2",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "cross-env": "^5.2.0",
     "dotenv": "^8.0.0",
     "fetch": "^1.1.0",
